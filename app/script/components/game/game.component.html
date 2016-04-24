@@ -15,10 +15,10 @@
       <tr *ngFor="#player of _gameService.players; #i=index">
         <td>{{player.name}} {{markMaker(i)}}</td>
         <td>
-          <md-input style="width: 100%" placeholder="Guess stack" autocomplete="off" type="number" [(ngModel)]="buffer.guessBuffer[i]" [disabled]="!guessActive"></md-input>
+          <md-input class="full-width" placeholder="Guess stack" autocomplete="off" type="number" [(ngModel)]="buffer.guessBuffer[i]" [disabled]="!guessActive"></md-input>
         </td>
         <td>
-          <md-input style="width: 100%" placeholder="Actual stack" autocomplete="off" type="number" [(ngModel)]="buffer.actualBuffer[i]" [disabled]="!actualActive"></md-input>
+          <md-input class="full-width" placeholder="Actual stack" autocomplete="off" type="number" [(ngModel)]="buffer.actualBuffer[i]" [disabled]="!actualActive"></md-input>
         </td>
         <td>{{_gameService.score[i]}}</td>
         <td>{{player.totalScore}}</td>

@@ -1,8 +1,6 @@
 <div class="container">
-  <ul class="nav nav-pills">
-    <li *ngFor="#tab of tabs" role="presentation">
-      <a [routerLink]="[tab.routeName]">{{tab.title}}</a>
-    </li>
-  </ul>
+  <nav class="nav nav-inline">
+    <a *ngFor="#tab of tabs" [routerLink]="[tab.routeName]" class="nav-link">{{tab.title}}</a>
+  </nav>
   <router-outlet></router-outlet>
 </div>

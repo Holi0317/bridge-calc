@@ -1,10 +1,10 @@
 <form role="form" class="form-horizontal" (ngSubmit)="onSubmit()">
   <legend>New Game</legend>
 
-  <div class="form-group" *ngFor="#p of model; #i=index">
-    <label for="name" class="control-label col-sm-2">Player {{i+1}} name:</label>
+  <div class="row form-group" *ngFor="#p of model; #i=index">
+    <label for="name" class="form-control-label col-sm-2">Player {{i+1}} name:</label>
     <div class="col-sm-8">
-      <md-input style="width: 100%" placeholder="Player {{i+1}} name" autocomplete="off" [(ngModel)]="model[i].name"></md-input>
+      <md-input class="full-width" placeholder="Player {{i+1}} name" autocomplete="off" [(ngModel)]="model[i].name"></md-input>
     </div>
     <div class="col-sm-2">
       <button md-raised-button color="warn" (click)="removeField(i)">Remove player {{i + 1}}</button>
