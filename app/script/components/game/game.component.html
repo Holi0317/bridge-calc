@@ -1,0 +1,36 @@
+<h1>Round {{_gameService.currentRound}} of {{_gameService.rounds}}</h1>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Guess stack</th>
+        <th>Actual stack</th>
+        <th>Round score</th>
+        <th>Total score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="#player of _gameService.players; #i=index">
+        <td>{{player.name}} {{markMaker(i)}}</td>
+        <td>
+          <md-input style="width: 100%" placeholder="Guess stack" autocomplete="off" type="number" [(ngModel)]="buffer.guessBuffer[i]" [disabled]="!guessActive"></md-input>
+        </td>
+        <td>
+          <md-input style="width: 100%" placeholder="Actual stack" autocomplete="off" type="number" [(ngModel)]="buffer.actualBuffer[i]" [disabled]="!actualActive"></md-input>
+        </td>
+        <td>{{_gameService.score[i]}}</td>
+        <td>{{player.totalScore}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button md-raised-button color="primary" type="button" (click)="submitGuess()" [disabled]="!guessActive">Submit guess</button>
+<button md-raised-button color="primary" type="button" (click)="submitActual()" [disabled]="!actualActive">Submit actual</button>
+<button md-raised-button color="primary" type="button" (click)="nextRound()" [disabled]="!nextRoundActive">Next round</button>
+
+<div *ngIf="_errorMessage" class="alert alert-warning">{{_errorMessage}}</div>
+
+<loading *ngIf="isLoading"></loading>

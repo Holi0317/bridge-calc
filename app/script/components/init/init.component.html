@@ -1,0 +1,24 @@
+<form role="form" class="form-horizontal" (ngSubmit)="onSubmit()">
+  <legend>New Game</legend>
+
+  <div class="form-group" *ngFor="#p of model; #i=index">
+    <label for="name" class="control-label col-sm-2">Player {{i+1}} name:</label>
+    <div class="col-sm-8">
+      <md-input style="width: 100%" placeholder="Player {{i+1}} name" autocomplete="off" [(ngModel)]="model[i].name"></md-input>
+    </div>
+    <div class="col-sm-2">
+      <button md-raised-button color="warn" (click)="removeField(i)">Remove player {{i + 1}}</button>
+    </div>
+  </div>
+
+  <div>
+    <p>Game information:</p>
+    <p>Player count: {{model.length}}</p>
+    <p>Expected rounds: {{roundCount}}</p>
+  </div>
+
+  <button md-raised-button color="primary" type="button" (click)="addField()">Add Player</button>
+  <button md-raised-button color="accent" type="submit" class="pull-right">Start Game</button>
+</form>
+
+<loading *ngIf="isLoading"></loading>

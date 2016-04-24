@@ -1,0 +1,26 @@
+<h1>Scoreboard</h1>
+
+<!-- ngIf: Null protection. If scoreboard is first place to land and players is null, error will be thrown and it brokes. -->
+<div class="table-responsive" *ngIf="_gameService.players">
+  <table class="table table-hover">
+
+    <thead>
+      <tr>
+        <th>Round</th>
+        <th *ngFor="#player of _gameService.players">{{player.name}}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="#_ of _gameService.players[0].score; #round=index">
+        <td>{{round + 1}}</td>
+        <td *ngFor="#player of _gameService.players">{{player.score[round]}}</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td *ngFor="#player of _gameService.players">{{player.totalScore}}</td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

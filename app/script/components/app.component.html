@@ -1,0 +1,8 @@
+<div class="container">
+  <ul class="nav nav-pills">
+    <li *ngFor="#tab of tabs" role="presentation">
+      <a [routerLink]="[tab.routeName]">{{tab.title}}</a>
+    </li>
+  </ul>
+  <router-outlet></router-outlet>
+</div>
