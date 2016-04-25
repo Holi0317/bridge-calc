@@ -23,6 +23,7 @@ export class GameService {
   public maker: number = 0;
   public players: Player[] = null;
   public score: number[] = [];
+  public cardCount: number = 52;  // Number of poker card used in game
 
   private guess: number[];
 
@@ -56,13 +57,26 @@ export class GameService {
    * Start a new Game.
    * Sets states and save player.
    * Therefore, this is a promise as saving is needed.
+   * If validation failes, promise will be rejected with error message.
    */
   start() {
+    if (this.players.length <= 1) {
+      return Promise.reject('A game cannot be started with no none');
+    }
+
+    if (this.cardCount < 52) {
+      return Promise.reject('Poker card is less than 52.');
+    }
+
+    if (this.players.length > this.cardCount) {
+      return Promise.reject('Too many players detected. Or you got too few card.');
+    }
+
     return this.savePlayer()
     .then(() => {
       this.currentRound = 1;
       this.maker = 0;
-      this.rounds = Math.floor(52 / this.players.length);
+      this.rounds = Math.floor(this.cardCount / this.players.length);
       this.state = GameState.guess;
     })
   }

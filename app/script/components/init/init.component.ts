@@ -18,6 +18,7 @@ export class InitComponent implements OnInit {
 
   private isLoading: boolean = false;
   private model: Player[] = [];
+  private err:string = '';
 
   constructor(
     private _router: Router,
@@ -32,12 +33,8 @@ export class InitComponent implements OnInit {
   }
 
   onSubmit() {
-    // Validate
-    if (this.model.length <= 0 || this.model.length >= 52) {
-      return;
-    }
-
     this.isLoading = true;
+    this.err = '';
 
     // Save PlayerService
     this._gameService.start()
@@ -46,6 +43,10 @@ export class InitComponent implements OnInit {
 
       // Route to game and change game state to started
       this._router.navigate(['Game']);
+    })
+    .catch(err => {
+      this.isLoading = false;
+      this.err = err;
     });
 
   }

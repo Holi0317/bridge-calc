@@ -1,18 +1,29 @@
 <form role="form" class="form-horizontal" (ngSubmit)="onSubmit()">
   <legend>New Game</legend>
 
-  <div class="row form-group" *ngFor="#p of model; #i=index">
-    <label for="name" class="form-control-label col-sm-2">Player {{i+1}} name:</label>
-    <div class="col-sm-8">
-      <md-input class="full-width" placeholder="Player {{i+1}} name" autocomplete="off" [(ngModel)]="model[i].name"></md-input>
-    </div>
-    <div class="col-sm-2">
-      <button md-raised-button color="warn" (click)="removeField(i)">Remove player {{i + 1}}</button>
+  <div class="card card-block">
+    <div class="row form-group" *ngFor="#p of model; #i=index">
+      <label for="name" class="form-control-label col-sm-2">Player {{i+1}} name:</label>
+      <div class="col-sm-8">
+        <md-input class="full-width" placeholder="Player {{i+1}} name" autocomplete="off" [(ngModel)]="model[i].name"></md-input>
+      </div>
+      <div class="col-sm-2">
+        <button md-raised-button color="warn" (click)="removeField(i)">Remove player {{i + 1}}</button>
+      </div>
     </div>
   </div>
 
-  <div>
-    <p>Game information:</p>
+  <div class="card card-block">
+    <div class="row form-group">
+      <label for="cardCount" class="form-control-label col-sm-2">Number of poker card</label>
+      <div class="col-sm-10">
+        <md-input class="full-width" placeholder="poker card" autocomplete="off" type="number" [(ngModel)]="_gameService.cardCount"></md-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-block">
+    <h3 class="card-title">Game information</h3>
     <p>Player count: {{model.length}}</p>
     <p>Expected rounds: {{roundCount}}</p>
   </div>
@@ -22,3 +33,4 @@
 </form>
 
 <loading *ngIf="isLoading"></loading>
+<div *ngIf="err" class="alert alert-warning">{{err}}</div>
