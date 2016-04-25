@@ -16,7 +16,7 @@
         <td>{{round + 1}}</td>
         <td *ngFor="#player of _gameService.players">{{player.score[round]}}</td>
       </tr>
-      <tr>
+      <tr class="table-active">
         <td>Total</td>
         <td *ngFor="#player of _gameService.players">{{player.totalScore}}</td>
       </tr>
