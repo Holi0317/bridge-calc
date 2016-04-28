@@ -74,4 +74,16 @@ export class PlayerService {
     });
   }
 
+  reset() {
+    return new Promise((resolve, reject) => {
+      if (this._memcache) {
+        this._memcache = [];
+        return resolve();
+      } else {
+        window.localStorage.removeItem(STORAGE_KEY);
+        return resolve();
+      }
+    })
+  }
+
 }

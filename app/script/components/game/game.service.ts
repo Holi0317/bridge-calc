@@ -129,10 +129,7 @@ export class GameService {
 
       if (this.currentRound === this.rounds) {
         // Was the last round. Proceed to end.
-        this.state = GameState.gameEnd;
-        this.maker = null;
-        this.currentRound = null;
-        this._router.navigate(['Scoreboard']);
+        this.gameEnd();
       } else {
         this.maker += 1;
         if (this.maker === this.players.length) {
@@ -223,5 +220,15 @@ export class GameService {
    */
   private roundEnd() {
     this.state = GameState.waiting;
+  }
+
+  /**
+   * Game has ended. Cleanup for this.
+   */
+  private gameEnd() {
+    this.state = GameState.gameEnd;
+    this.maker = null;
+    this.currentRound = null;
+    this._router.navigate(['Scoreboard']);
   }
 }
