@@ -27,12 +27,13 @@ function webpackConfig() {
       extensions: ['', '.ts', '.js']
     },
     entry: {
-      app: './app/script/index.ts'
+      'script/app': './app/script/index.ts',
+      'sw': './app/sw.ts'
     },
     output: {
       filename: '[name].js',
-      path: '.tmp/script',
-      publicPath: 'http://localhost:3000/script/'
+      path: '.tmp',
+      publicPath: 'http://localhost:3000/'
     },
     plugins: [],
     postcss: function() {
@@ -75,9 +76,13 @@ gulp.task('copy', () => {
   .pipe($.rename('rx.js'))
   .pipe(gulp.dest('.tmp/script'));
 
+  let swToolbox = gulp.src('node_modules/sw-toolbox/*.js')
+  .pipe(gulp.dest('.tmp'));
+
   return merge(
     polyfills,
-    rxjs
+    rxjs,
+    swToolbox
   );
 });
 
@@ -90,9 +95,13 @@ gulp.task('copy:dist', () => {
   .pipe($.rename('rx.js'))
   .pipe(gulp.dest('dist/script'));
 
+  let swToolbox = gulp.src('node_modules/sw-toolbox/*.js')
+  .pipe(gulp.dest('dist'));
+
   return merge(
     polyfills,
-    rxjs
+    rxjs,
+    swToolbox
   );
 });
 
@@ -108,8 +117,8 @@ gulp.task('bundle:dist', cb => {
     }
   }));
   config.plugins.push(new webpack.EnvironmentPlugin(['NODE_ENV']));
-  config.output.path = 'dist/script';
-  config.output.publicPath = '/script';
+  config.output.path = 'dist';
+  config.output.publicPath = '/';
 
   webpack(config, (err, stats) => {
     if(err) throw new gutil.PluginError('webpack', err);

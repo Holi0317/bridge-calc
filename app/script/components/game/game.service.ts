@@ -21,7 +21,7 @@ export class GameService {
   public rounds: number = null;
   public currentRound: number = null;
   public maker: number = 0;
-  public players: Player[] = null;
+  public players: Player[] = [];
   public score: number[] = [];
   public cardCount: number = 52;  // Number of poker card used in game
 
@@ -41,7 +41,8 @@ export class GameService {
   getPlayer() {
     return this._playerService.getPlayer()
     .then(res => {
-      this.players = res;
+      this.players = res.value;
+      return Promise.resolve(res);
     })
   }
 
@@ -141,6 +142,7 @@ export class GameService {
         this.state = GameState.guess;
         this.currentRound += 1;
       }
+
     })
   }
 

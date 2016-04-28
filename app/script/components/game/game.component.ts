@@ -1,7 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {MdInput} from '@angular2-material/input/';
-import {MdButton} from '@angular2-material/button/';
 
 import {LoadingComponent} from '../loading';
 import {GameService, GameState} from './game.service';
@@ -13,7 +11,7 @@ let template: string = require('./game.component.html');
 @Component({
   selector: 'game',
   template: template,
-  directives: [MdInput, MdButton, LoadingComponent]
+  directives: [LoadingComponent]
 })
 export class GameComponent implements OnInit {
 

@@ -1,7 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {MdButton} from '@angular2-material/button/';
-import {MdInput} from '@angular2-material/input/';
 
 import {LoadingComponent} from '../loading';
 import {Player} from '../player.model';
@@ -12,12 +10,11 @@ let template: string = require('./init.component.html');
 @Component({
   selector: 'init',
   template: template,
-  directives: [MdButton, MdInput, LoadingComponent]
+  directives: [LoadingComponent]
 })
 export class InitComponent implements OnInit {
 
   private isLoading: boolean = false;
-  private model: Player[] = [];
   private err:string = '';
 
   constructor(
@@ -27,8 +24,10 @@ export class InitComponent implements OnInit {
 
   ngOnInit() {
     this._gameService.getPlayer()
-    .then(() => {
-      this.model = this._gameService.players;
+    .then(res => {
+      if (res.isNew) {
+        console.log('It is new!');
+      }
     })
   }
 
@@ -52,17 +51,17 @@ export class InitComponent implements OnInit {
   }
 
   addField() {
-    this.model.push(new Player());
+    this._gameService.players.push(new Player());
   }
 
   removeField(index: number) {
-    this.model.splice(index, 1);
+    this._gameService.players.splice(index, 1);
   }
 
   get roundCount() {
-    if (this.model.length === 0) {
+    if (this._gameService.players.length === 0) {
       return 0;
     }
-    return Math.floor(52 / this.model.length);
+    return Math.floor(52 / this._gameService.players.length);
   }
 }
