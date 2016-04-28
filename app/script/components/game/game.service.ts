@@ -1,11 +1,9 @@
 import {Injectable} from 'angular2/core';
 import {Router} from 'angular2/router';
 
-import sum = require('lodash.sum');
-import nth = require('lodash.nth');
-
 import {PlayerService} from '../player.service';
 import {Player} from '../player.model';
+import * as validator from './validator';
 
 export enum GameState {
   notStarted,  // No info is filled in. Game is not yet started.
@@ -61,16 +59,10 @@ export class GameService {
    * If validation failes, promise will be rejected with error message.
    */
   start() {
-    if (this.players.length <= 1) {
-      return Promise.reject('A game cannot be started with no none');
-    }
+    let validate = validator.start(this);
 
-    if (this.cardCount < 52) {
-      return Promise.reject('Poker card is less than 52.');
-    }
-
-    if (this.players.length > this.cardCount) {
-      return Promise.reject('Too many players detected. Or you got too few card.');
+    if (validate) {
+      return Promise.reject(validate);
     }
 
     return this.savePlayer()
@@ -88,7 +80,7 @@ export class GameService {
    * Otherwise, undefined will be returned and state is set to next stage.
    */
   saveGuess(guess: number[]) {
-    let res = this.validateGuess(guess);
+    let res = validator.validateGuess(guess, this);
 
     if (res) {
       return res;
@@ -105,7 +97,7 @@ export class GameService {
    * Otherwise, undefined will be returned and state is set to next stage.
    */
   saveActual(actual: number[]) {
-    let res = this.validateActual(actual);
+    let res = validator.validateActual(actual, this);
 
     if (res) {
       return res;
@@ -131,71 +123,20 @@ export class GameService {
         // Was the last round. Proceed to end.
         this.gameEnd();
       } else {
-        this.maker += 1;
-        if (this.maker === this.players.length) {
-          this.maker = 0;
-        }
-
-        this.state = GameState.guess;
-        this.currentRound += 1;
+        this.setNextRoundState();
       }
 
     })
   }
 
-  private validateGuess(guessBuffer: number[]) {
-    guessBuffer = guessBuffer.map(n => Number(n));
-
-    if (guessBuffer.length !== this.players.length) {
-      let delta = this.players.length - guessBuffer.length;
-      return `Last ${delta} players did not make guess`;
+  private setNextRoundState() {
+    this.maker += 1;
+    if (this.maker === this.players.length) {
+      this.maker = 0;
     }
 
-    // We must use the good old for loop.
-    // Otherwise the undefined check will fail.
-    for (let i = 0; i < guessBuffer.length; i++) {
-      let guess = guessBuffer[i];
-
-      if (typeof guess === 'undefined') {
-        return `${nth(this.players, i).name} did not make a guess`;
-      }
-
-      if (guess > this.currentRound) {
-        return `${nth(this.players, i).name} is kidding me. ಠ_ಠ`;
-      }
-    }
-
-    if (sum(guessBuffer) === this.currentRound) {
-      let dudeID = this.maker - 1;
-      return `${nth(this.players, dudeID).name} cannot choose ${nth(guessBuffer, dudeID)}`
-    }
-  }
-
-  private validateActual(actualBuffer: number[]) {
-    actualBuffer = actualBuffer.map(n => Number(n));
-
-    if (actualBuffer.length !== this.players.length) {
-      let delta = this.players.length - actualBuffer.length;
-      return `Last ${delta} players did not input actual stack`;
-    }
-
-    // We must use the good old for loop.
-    // Otherwise the undefined check will fail.
-    for (let i = 0; i < actualBuffer.length; i++) {
-      let stack = actualBuffer[i];
-
-      if (typeof stack === 'undefined') {
-        return `${nth(this.players, i).name} did not input actual stack`;
-      }
-
-      if (stack > this.currentRound) {
-        return `${nth(this.players, i).name} is kidding me. ಠ_ಠ`;
-      }
-    }
-
-    if (sum(actualBuffer) !== this.currentRound) {
-      return 'Sum of stack is larger than round. Did anyone cheat in cards? ( ͡° ͜ʖ ͡°)';
-    }
+    this.state = GameState.guess;
+    this.currentRound += 1;
   }
 
   private saveActualToPlayer(actual: number[]) {
