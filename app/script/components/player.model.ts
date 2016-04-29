@@ -107,12 +107,9 @@ function randomChoose<T>(a: T[]): T {
 
 export class Player {
   public score: number[] = [];
+  public name: string = randomChoose(PLAYER_NAME);
 
-  constructor(public name?: string) {
-    if (typeof name === 'undefined') {
-      this.name = randomChoose(PLAYER_NAME);
-    }
-  }
+  constructor() {}
 
   get totalScore() {
     return sum(this.score);
