@@ -25,7 +25,7 @@
   <div class="card card-block">
     <h3 class="card-title">Game information</h3>
     <p>Player count: {{_gameService.players.length}}</p>
-    <p>Expected rounds: {{roundCount}}</p>
+    <p>Expected rounds: {{_gameService.countRound()}}</p>
   </div>
 
   <button class="btn btn-info" type="button" (click)="addField()">Add Player</button>

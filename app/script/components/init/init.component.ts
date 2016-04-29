@@ -58,10 +58,4 @@ export class InitComponent implements OnInit {
     this._gameService.players.splice(index, 1);
   }
 
-  get roundCount() {
-    if (this._gameService.players.length === 0) {
-      return 0;
-    }
-    return Math.floor(52 / this._gameService.players.length);
-  }
 }

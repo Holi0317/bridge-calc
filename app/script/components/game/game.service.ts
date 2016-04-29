@@ -53,6 +53,13 @@ export class GameService {
   }
 
   /**
+   * Count the expected number of rounds in the game, with given informations.
+   */
+  countRound() {
+    return Math.floor(this.cardCount / this.players.length);
+  }
+
+  /**
    * Start a new Game.
    * Sets states and save player.
    * Therefore, this is a promise as saving is needed.
@@ -69,7 +76,7 @@ export class GameService {
     .then(() => {
       this.currentRound = 1;
       this.maker = 0;
-      this.rounds = Math.floor(this.cardCount / this.players.length);
+      this.rounds = this.countRound();
       this.state = GameState.guess;
     })
   }
@@ -113,7 +120,7 @@ export class GameService {
    * Maker, state, and round will be set in correct manner.
    */
   nextRound() {
-    return this._playerService.save(this.players)
+    return this.savePlayer()
     .then(() => {
 
       this.score = [];
