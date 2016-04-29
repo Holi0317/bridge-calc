@@ -1,6 +1,6 @@
 <div class="container">
   <nav class="nav nav-inline">
-    <a *ngFor="#tab of tabs" [routerLink]="[tab.routeName]" class="nav-link">{{tab.title}}</a>
+    <a *ngFor="let tab of tabs" [routerLink]="[tab.routeName]" class="nav-link">{{tab.title}}</a>
   </nav>
   <router-outlet></router-outlet>
 </div>

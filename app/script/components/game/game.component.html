@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="#player of _gameService.players; #i=index">
+      <tr *ngFor="let player of _gameService.players; let i=index">
         <td>{{player.name}} {{markMaker(i)}}</td>
         <td>
           <input class="full-width form-control" type="number" autocomplete="off" placeholder="Guess stack" [(ngModel)]="buffer.guessBuffer[i]" [disabled]="!guessActive">

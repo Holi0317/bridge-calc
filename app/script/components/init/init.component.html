@@ -2,7 +2,7 @@
   <legend>New Game</legend>
 
   <div class="card card-block">
-    <div class="row form-group" *ngFor="#p of _gameService.players; #i=index">
+    <div class="row form-group" *ngFor="let p of _gameService.players; let i=index">
       <label for="name" class="form-control-label col-sm-2">Player {{i+1}} name:</label>
       <div class="col-sm-8">
         <input class="full-width form-control" type="text" placeholder="Player {{i + 1}} name" autocomplete="off" [(ngModel)]="_gameService.players[i].name">
