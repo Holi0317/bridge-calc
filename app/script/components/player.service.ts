@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Player} from './player.model';
+import {Player, BasePlayer} from './player.model';
 
 const STORAGE_KEY = 'PlayerService.player';
 
@@ -46,18 +46,23 @@ export class PlayerService {
       });
     } else {
       let value = window.localStorage.getItem(STORAGE_KEY);
-      let parsed: Player[] = JSON.parse(value);
-      let isNew = false;
+      let parsed: BasePlayer[] = JSON.parse(value);
+      let ret: PlayerResponse = {
+        isNew: false,
+        value: null
+      };
 
       if (!parsed) {
-        isNew = true;
-        parsed = makeNewPlayer();
+        // New
+        ret.isNew = true;
+        ret.value = makeNewPlayer();
+      } else {
+        // Upgrade data from localStorage
+        ret.isNew = false;
+        ret.value = parsed.map(base => new Player(base));
       }
 
-      return Promise.resolve({
-        isNew: isNew,
-        value: parsed
-      });
+      return Promise.resolve(ret);
 
     }
   }

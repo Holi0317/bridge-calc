@@ -105,11 +105,25 @@ function randomChoose<T>(a: T[]): T {
   return a[Math.floor(Math.random()*a.length)];
 }
 
-export class Player {
-  public score: number[] = [];
-  public name: string = randomChoose(PLAYER_NAME);
+export interface BasePlayer {
+  score: number[];
+  name: string;
+}
 
-  constructor() {}
+export class Player {
+  public score: number[];
+  public name: string;
+
+  constructor(base?: BasePlayer) {
+    if (typeof base === 'undefined') {
+      // Whole new player.
+      this.score = [];
+      this.name = randomChoose(PLAYER_NAME);
+    } else {
+      this.score = base.score;
+      this.name = base.name;
+    }
+  }
 
   get totalScore() {
     return sum(this.score);
