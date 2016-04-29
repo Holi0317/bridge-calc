@@ -6,7 +6,7 @@ const STORAGE_KEY = 'PlayerService.player';
 /**
  * Create a list of new player object.
  */
-const makeNewPlayer = function() {
+export function makeNewPlayer() {
   return [
     new Player(),
     new Player(),

@@ -58,4 +58,12 @@ export class InitComponent implements OnInit {
     this._gameService.players.splice(index, 1);
   }
 
+  cleanStorage() {
+    this.isLoading = true;
+    this._gameService.resetPlayer()
+    .then(() => {
+      this.isLoading = false;
+    })
+  }
+
 }

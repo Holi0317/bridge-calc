@@ -1,7 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Router} from 'angular2/router';
 
-import {PlayerService} from '../player.service';
+import {PlayerService, makeNewPlayer} from '../player.service';
 import {Player} from '../player.model';
 import * as validator from './validator';
 
@@ -50,6 +50,15 @@ export class GameService {
    */
   savePlayer() {
     return this._playerService.save(this.players);
+  }
+
+  /**
+   * Wrapper for PlayerService.reset
+   *
+   */
+  resetPlayer() {
+    this.players = makeNewPlayer();
+    return this._playerService.reset();
   }
 
   /**
