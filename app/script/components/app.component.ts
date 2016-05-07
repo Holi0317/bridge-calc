@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import { Component } from '@angular/core';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
-import {InitComponent} from './init';
-import {ScoreboardComponent} from './scoreboard';
-import {GameComponent, GameService, BufferService} from './game';
-import {PlayerService} from './player.service';
+import { InitComponent } from './init';
+import { ScoreboardComponent } from './scoreboard';
+import { GameComponent, GameService, BufferService } from './game';
+import { PlayerService } from './player.service';
 
 let template: string = require('./app.component.html');
 

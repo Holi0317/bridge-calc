@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Player, BasePlayer} from './player.model';
+import { Injectable } from '@angular/core';
+import { Player, BasePlayer } from './player.model';
 
 const STORAGE_KEY = 'PlayerService.player';
 

@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 
-import {LoadingComponent} from '../loading';
-import {GameService, GameState} from './game.service';
-import {BufferService} from './buffer.service';
-import {Player} from '../player.model';
+import { LoadingComponent } from '../loading';
+import { GameService, GameState } from './game.service';
+import { BufferService } from './buffer.service';
+import { Player } from '../player.model';
 
 let template: string = require('./game.component.html');
 

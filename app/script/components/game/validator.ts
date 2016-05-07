@@ -1,4 +1,4 @@
-import {GameService} from './game.service';
+import { GameService } from './game.service';
 
 import nth = require('lodash.nth');
 import sum = require('lodash.sum');

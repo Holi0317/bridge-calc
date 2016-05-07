@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 
-import {PlayerService, makeNewPlayer} from '../player.service';
-import {Player} from '../player.model';
+import { PlayerService, makeNewPlayer } from '../player.service';
+import { Player } from '../player.model';
 import * as validator from './validator';
 
 export enum GameState {

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 
-import {GameService, GameState} from '../game';
+import { GameService, GameState } from '../game';
 
 let template = require('./scoreboard.component.html');
 
