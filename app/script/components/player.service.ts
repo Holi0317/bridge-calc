@@ -24,24 +24,24 @@ export interface PlayerResponse {
 export class PlayerService {
 
   /**
-   * If _memcache is null, use localStorage API.
-   * Otherwise, use _memcache.
+   * If memcache is null, use localStorage API.
+   * Otherwise, use memcache.
    */
-  private _memcache: Player[] = null;
+  private memcache: Player[] = null;
 
   constructor() {
     if (!window.localStorage) {
       // No localStorage API supported.
       // Fallback to memcache
-      this._memcache = makeNewPlayer();
+      this.memcache = makeNewPlayer();
       console.log('Player Service is now using memcache');
     }
   }
 
   getPlayer(): Promise<PlayerResponse> {
-    if (this._memcache) {
+    if (this.memcache) {
       return Promise.resolve({
-        value: this._memcache,
+        value: this.memcache,
         isNew: true
       });
     } else {
@@ -69,8 +69,8 @@ export class PlayerService {
 
   save(players: Player[]) {
     return new Promise((resolve, reject) => {
-      if (this._memcache) {
-        this._memcache = players;
+      if (this.memcache) {
+        this.memcache = players;
         return resolve();
       } else {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(players));
@@ -81,8 +81,8 @@ export class PlayerService {
 
   reset() {
     return new Promise((resolve, reject) => {
-      if (this._memcache) {
-        this._memcache = [];
+      if (this.memcache) {
+        this.memcache = [];
         return resolve();
       } else {
         window.localStorage.removeItem(STORAGE_KEY);
