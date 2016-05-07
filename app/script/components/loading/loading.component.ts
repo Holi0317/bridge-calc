@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {MdSpinner} from '@angular2-material/progress-circle/';
 
 let template: string = require('./loading.component.html');

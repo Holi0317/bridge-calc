@@ -1,6 +1,6 @@
-import {enableProdMode} from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
-import {AppComponent} from './components/app.component';
+import { enableProdMode } from '@angular/core';
+import { bootstrap } from '@angular/platform-browser-dynamic';
+import { AppComponent } from './components/app.component';
 
 if (process.env.NODE_ENV === 'production') {
   enableProdMode();

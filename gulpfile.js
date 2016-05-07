@@ -6,7 +6,6 @@ let gutil = require('gulp-util');
 let $ = require('gulp-load-plugins')();
 let del = require('del');
 let runSequence = require('run-sequence');
-let merge = require('merge-stream');
 let webpack = require('webpack');
 let webpackMiddle = require('webpack-dev-middleware');
 
@@ -28,7 +27,8 @@ function webpackConfig() {
     },
     entry: {
       'script/app': './app/script/index.ts',
-      'sw': './app/sw.ts'
+      'sw': './app/sw.ts',
+      'script/polyfills': './app/script/polyfills.js'
     },
     output: {
       filename: '[name].js',
@@ -68,41 +68,13 @@ gulp.task('clean', () => {
 });
 
 gulp.task('copy', () => {
-  let polyfills = gulp.src('node_modules/angular2/bundles/angular2-polyfills.js')
-  .pipe($.rename('polyfills.js'))
-  .pipe(gulp.dest('.tmp/script'));
-
-  let rxjs = gulp.src('node_modules/rxjs/bundles/Rx.js')
-  .pipe($.rename('rx.js'))
-  .pipe(gulp.dest('.tmp/script'));
-
-  let swToolbox = gulp.src('node_modules/sw-toolbox/*.js')
+  return gulp.src('node_modules/sw-toolbox/*.js')
   .pipe(gulp.dest('.tmp'));
-
-  return merge(
-    polyfills,
-    rxjs,
-    swToolbox
-  );
 });
 
 gulp.task('copy:dist', () => {
-  let polyfills = gulp.src('node_modules/angular2/bundles/angular2-polyfills.min.js')
-  .pipe($.rename('polyfills.js'))
-  .pipe(gulp.dest('dist/script'));
-
-  let rxjs = gulp.src('node_modules/rxjs/bundles/Rx.min.js')
-  .pipe($.rename('rx.js'))
-  .pipe(gulp.dest('dist/script'));
-
-  let swToolbox = gulp.src('node_modules/sw-toolbox/*.js')
+  return gulp.src('node_modules/sw-toolbox/*.js')
   .pipe(gulp.dest('dist'));
-
-  return merge(
-    polyfills,
-    rxjs,
-    swToolbox
-  );
 });
 
 gulp.task('bundle:dist', cb => {
@@ -113,7 +85,57 @@ gulp.task('bundle:dist', cb => {
       warnings: false
     },
     mangle: {
-      keep_fnames: true
+      // keep_fnames: true
+      screw_ie8: true,
+      except: [
+        'App',
+        'About',
+        'Contact',
+        'Home',
+        'Menu',
+        'Footer',
+        'XLarge',
+        'RouterActive',
+        'RouterLink',
+        'RouterOutlet',
+        'NgFor',
+        'NgIf',
+        'NgClass',
+        'NgSwitch',
+        'NgStyle',
+        'NgSwitchDefault',
+        'NgControl',
+        'NgControlName',
+        'NgControlGroup',
+        'NgFormControl',
+        'NgModel',
+        'NgFormModel',
+        'NgForm',
+        'NgSelectOption',
+        'DefaultValueAccessor',
+        'NumberValueAccessor',
+        'CheckboxControlValueAccessor',
+        'SelectControlValueAccessor',
+        'RadioControlValueAccessor',
+        'NgControlStatus',
+        'RequiredValidator',
+        'MinLengthValidator',
+        'MaxLengthValidator',
+        'PatternValidator',
+        'AsyncPipe',
+        'DatePipe',
+        'JsonPipe',
+        'NumberPipe',
+        'DecimalPipe',
+        'PercentPipe',
+        'CurrencyPipe',
+        'LowerCasePipe',
+        'UpperCasePipe',
+        'SlicePipe',
+        'ReplacePipe',
+        'I18nPluralPipe',
+        'I18nSelectPipe'
+      ]
     }
   }));
   config.plugins.push(new webpack.EnvironmentPlugin(['NODE_ENV']));
