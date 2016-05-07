@@ -6,7 +6,7 @@ export class BufferService {
   public actualBuffer: number[] = [];
 
   reset() {
-    this.guessBuffer = [];
-    this.actualBuffer = [];
+    this.guessBuffer = this.guessBuffer.map(i => null);
+    this.actualBuffer = this.actualBuffer.map(i => null);
   }
 }
