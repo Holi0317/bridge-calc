@@ -6,18 +6,18 @@
     <thead>
       <tr>
         <th>Round</th>
-        <th *ngFor="let player of _gameService.players">{{player.name}}</th>
+        <th *ngFor="let player of gameService.players">{{player.name}}</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let _ of _gameService.players[0].score; let round=index">
+      <tr *ngFor="let _ of gameService.players[0].score; let round=index">
         <td>{{round + 1}}</td>
-        <td *ngFor="let player of _gameService.players">{{player.score[round]}}</td>
+        <td *ngFor="let player of gameService.players">{{player.score[round]}}</td>
       </tr>
       <tr class="table-active">
         <td>Total</td>
-        <td *ngFor="let player of _gameService.players">{{player.totalScore}}</td>
+        <td *ngFor="let player of gameService.players">{{player.totalScore}}</td>
       </tr>
     </tbody>
 

@@ -15,58 +15,58 @@ let template: string = require('./game.component.html');
 })
 export class GameComponent implements OnInit {
 
-  private _errorMessage: string;
+  private errorMessage: string;
   private isLoading = false;
 
   constructor(
-    private _gameService: GameService,
-    private _router: Router,
+    private gameService: GameService,
+    private router: Router,
     private buffer: BufferService
   ) {}
 
   ngOnInit() {
     // Ensure game info is filled in
-    if (this._gameService.state === GameState.notStarted) {
-      this._router.navigate(['Init']);
+    if (this.gameService.state === GameState.notStarted) {
+      this.router.navigate(['Init']);
     }
     // Game ended. Goto scoreboard.
-    if (this._gameService.state === GameState.gameEnd) {
-      this._router.navigate(['Scoreboard']);
+    if (this.gameService.state === GameState.gameEnd) {
+      this.router.navigate(['Scoreboard']);
     }
   }
 
   markMaker(i: number) {
-    if (i === this._gameService.maker) {
+    if (i === this.gameService.maker) {
       return '(Maker)'
     }
   }
 
   submitGuess() {
-    this._errorMessage = this._gameService.saveGuess(this.buffer.guessBuffer);
+    this.errorMessage = this.gameService.saveGuess(this.buffer.guessBuffer);
   }
 
   submitActual() {
-    this._errorMessage = this._gameService.saveActual(this.buffer.actualBuffer);
+    this.errorMessage = this.gameService.saveActual(this.buffer.actualBuffer);
   }
 
   nextRound() {
     this.buffer.reset();
     this.isLoading = true;
-    this._gameService.nextRound()
+    this.gameService.nextRound()
     .then(() => {
       this.isLoading = false;
     })
   }
 
   get guessActive(): boolean {
-    return this._gameService.state === GameState.guess;
+    return this.gameService.state === GameState.guess;
   }
 
   get actualActive() {
-    return this._gameService.state === GameState.inputActual;
+    return this.gameService.state === GameState.inputActual;
   }
 
   get nextRoundActive() {
-    return this._gameService.state === GameState.waiting;
+    return this.gameService.state === GameState.waiting;
   }
 }

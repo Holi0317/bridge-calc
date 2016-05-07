@@ -11,13 +11,13 @@ let template = require('./scoreboard.component.html');
 })
 export class ScoreboardComponent implements OnInit {
   constructor(
-    private _router: Router,
-    private _gameService: GameService
+    private router: Router,
+    private gameService: GameService
   ) {}
 
   ngOnInit() {
-    if (this._gameService.state === GameState.notStarted) {
-      this._router.navigate(['Init']);
+    if (this.gameService.state === GameState.notStarted) {
+      this.router.navigate(['Init']);
     }
   }
 }

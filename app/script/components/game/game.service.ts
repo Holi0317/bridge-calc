@@ -26,8 +26,8 @@ export class GameService {
   private guess: number[];
 
   constructor(
-    private _playerService: PlayerService,
-    private _router: Router
+    private playerService: PlayerService,
+    private router: Router
   ) {}
 
   /**
@@ -37,7 +37,7 @@ export class GameService {
    * assumes others have mutated that array for input instead of doing complicated stuffs.
    */
   getPlayer() {
-    return this._playerService.getPlayer()
+    return this.playerService.getPlayer()
     .then(res => {
       this.players = res.value;
       return Promise.resolve(res);
@@ -49,7 +49,7 @@ export class GameService {
    * Save this.player to PlayerService, and return its promise.
    */
   savePlayer() {
-    return this._playerService.save(this.players);
+    return this.playerService.save(this.players);
   }
 
   /**
@@ -58,7 +58,7 @@ export class GameService {
    */
   resetPlayer() {
     this.players = makeNewPlayer();
-    return this._playerService.reset();
+    return this.playerService.reset();
   }
 
   /**
@@ -186,6 +186,6 @@ export class GameService {
     this.state = GameState.gameEnd;
     this.maker = null;
     this.currentRound = null;
-    this._router.navigate(['Scoreboard']);
+    this.router.navigate(['Scoreboard']);
   }
 }

@@ -32,8 +32,4 @@ export class AppComponent {
     new Tab('Scoreboard', 'Scoreboard')
   ];
 
-  constructor(
-    private _gameService: GameService
-  ) {}
-
 }

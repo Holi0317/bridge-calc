@@ -18,12 +18,12 @@ export class InitComponent implements OnInit {
   private err:string = '';
 
   constructor(
-    private _router: Router,
-    private _gameService: GameService
+    private router: Router,
+    private gameService: GameService
   ) {}
 
   ngOnInit() {
-    this._gameService.getPlayer()
+    this.gameService.getPlayer()
     .then(res => {
       if (res.isNew) {
         console.log('It is new!');
@@ -36,12 +36,12 @@ export class InitComponent implements OnInit {
     this.err = '';
 
     // Save PlayerService
-    this._gameService.start()
+    this.gameService.start()
     .then(() => {
       this.isLoading = false;
 
       // Route to game and change game state to started
-      this._router.navigate(['Game']);
+      this.router.navigate(['Game']);
     })
     .catch(err => {
       this.isLoading = false;
@@ -51,16 +51,16 @@ export class InitComponent implements OnInit {
   }
 
   addField() {
-    this._gameService.players.push(new Player());
+    this.gameService.players.push(new Player());
   }
 
   removeField(index: number) {
-    this._gameService.players.splice(index, 1);
+    this.gameService.players.splice(index, 1);
   }
 
   cleanStorage() {
     this.isLoading = true;
-    this._gameService.resetPlayer()
+    this.gameService.resetPlayer()
     .then(() => {
       this.isLoading = false;
     })
