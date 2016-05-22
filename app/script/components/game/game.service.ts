@@ -54,7 +54,7 @@ export class GameService {
 
   /**
    * Wrapper for PlayerService.reset
-   *
+   * Flush all players and get a new set of players.
    */
   resetPlayer() {
     this.players = makeNewPlayer();
@@ -143,6 +143,21 @@ export class GameService {
       }
 
     })
+  }
+
+  /**
+   * Reset all state and variables to the one before started.
+   */
+  reset() {
+    this.state = GameState.notStarted;
+    this.rounds = null;
+    this.currentRound = null;
+    this.players = [];
+    this.score = [];
+    this.cardCount = 52;
+    this.guess = undefined;
+
+    return this.resetPlayer();
   }
 
   private setNextRoundState() {
