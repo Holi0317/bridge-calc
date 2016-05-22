@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 import { GameService, GameState } from '../game';
 
@@ -17,7 +17,7 @@ export class ScoreboardComponent implements OnInit {
 
   ngOnInit() {
     if (this.gameService.state === GameState.notStarted) {
-      this.router.navigate(['Init']);
+      this.router.navigateByUrl('/init');
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 import { LoadingComponent } from '../loading';
 import { Player } from '../player.model';
@@ -41,7 +41,7 @@ export class InitComponent implements OnInit {
       this.isLoading = false;
 
       // Route to game and change game state to started
-      this.router.navigate(['Game']);
+      this.router.navigateByUrl('/game');
     })
     .catch(err => {
       this.isLoading = false;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 import { LoadingComponent } from '../loading';
 import { GameService, GameState } from './game.service';
@@ -27,11 +27,11 @@ export class GameComponent implements OnInit {
   ngOnInit() {
     // Ensure game info is filled in
     if (this.gameService.state === GameState.notStarted) {
-      this.router.navigate(['Init']);
+      this.router.navigateByUrl('/init');
     }
     // Game ended. Goto scoreboard.
     if (this.gameService.state === GameState.gameEnd) {
-      this.router.navigate(['Scoreboard']);
+      this.router.navigateByUrl('/scoreboard');
     }
   }
 

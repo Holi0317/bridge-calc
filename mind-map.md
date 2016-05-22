@@ -36,3 +36,11 @@ Display position, name, score, scores in each round.
 4. InputGuess.
 5. InputActual
 6. ScoreBoard (table)
+
+## TODO
+1. Upgrade to angular new router, when document comes out
+2. Precompile templates?
+3. Split game service to even smaller parts
+4. Validation - Use angular one?
+5. Fix localstorage
+6. Use service worker

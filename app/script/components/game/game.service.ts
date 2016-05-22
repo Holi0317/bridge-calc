@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 
 import { PlayerService, makeNewPlayer } from '../player.service';
 import { Player } from '../player.model';
@@ -186,6 +186,6 @@ export class GameService {
     this.state = GameState.gameEnd;
     this.maker = null;
     this.currentRound = null;
-    this.router.navigate(['Scoreboard']);
+    this.router.navigateByUrl('/scoreboard');
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
 import { InitComponent } from './init';
 import { ScoreboardComponent } from './scoreboard';
@@ -21,15 +21,15 @@ class Tab {
   directives: [ROUTER_DIRECTIVES, GameComponent],
   providers: [ROUTER_PROVIDERS, GameService, PlayerService, BufferService]
 })
-@RouteConfig([
-  {path: '/init', name: 'Init', component: InitComponent, useAsDefault: true},
-  {path: '/game', name: 'Game', component: GameComponent},
-  {path: '/scoreboard', name: 'Scoreboard', component: ScoreboardComponent}
+@Routes([
+  {path: '/init', component: InitComponent /* useAsDefault: true */}, // useAsDefault is WIP in RC router
+  {path: '/game', component: GameComponent},
+  {path: '/scoreboard', component: ScoreboardComponent}
 ])
 export class AppComponent {
   private tabs: Tab[] = [
-    new Tab('Game', 'Game'),
-    new Tab('Scoreboard', 'Scoreboard')
+    new Tab('Game', '/game'),
+    new Tab('Scoreboard', '/scoreboard')
   ];
 
 }
