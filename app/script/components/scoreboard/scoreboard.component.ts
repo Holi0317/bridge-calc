@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { GameService, GameState, BufferService } from '../game';
 import { LoadingComponent } from '../loading';
 
+import minilog = require('minilog');
+let log = minilog('ScoreboardComponent');
+
 let template = require('./scoreboard.component.html');
 
 @Component({
@@ -23,6 +26,7 @@ export class ScoreboardComponent implements OnInit {
 
   ngOnInit() {
     if (this.gameService.state === GameState.notStarted) {
+      log.debug('Game not started. Routing to init.')
       this.router.navigateByUrl('/init');
     }
   }
@@ -34,5 +38,9 @@ export class ScoreboardComponent implements OnInit {
       this.bufferService.reset();
       this.router.navigateByUrl('/init');
     })
+  }
+
+  private get gameStarted() {
+    return this.gameService.state !== GameState.notStarted;
   }
 }
