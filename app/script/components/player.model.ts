@@ -108,6 +108,16 @@ function randomChoose<T>(a: T[]): T {
   return a[Math.floor(Math.random()*a.length)];
 }
 
+function comboCalc(score: number[]) {
+  let combo = 0;
+
+  for (let s of score) {
+    if (s > 0) combo++;
+  }
+
+  return combo;
+}
+
 export interface BasePlayer {
   score: number[];
   name: string;
@@ -116,6 +126,9 @@ export interface BasePlayer {
 export class Player {
   public score: number[];
   public name: string;
+
+  private lastRound: number = null;  // Previous round number when invoked functions related to this variable
+  private comboBuf: number = null;
 
   constructor(base?: BasePlayer) {
     if (typeof base === 'undefined') {
@@ -131,5 +144,17 @@ export class Player {
 
   get totalScore() {
     return sum(this.score);
+  }
+
+  get combo() {
+    if (this.lastRound !== this.score.length) {
+      this.lastRound = this.score.length;
+      this.comboBuf = comboCalc(this.score);
+    }
+    return this.comboBuf;
+  }
+
+  get isMaxCombo() {
+    return this.combo === this.score.length;
   }
 }
