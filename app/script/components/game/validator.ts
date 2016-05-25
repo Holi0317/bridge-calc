@@ -32,7 +32,7 @@ export function validateGuess(guessBuffer: number[], that: GameService) {
   for (let i = 0; i < guessBuffer.length; i++) {
     let guess = guessBuffer[i];
 
-    if (typeof guess === 'undefined') {
+    if (guess == undefined) { // Intended to use ==. To make sure null also falls into this if.
       return `${nth(that.players, i).name} did not make a guess`;
     }
 
@@ -62,7 +62,7 @@ export function validateActual(actualBuffer: number[], that: GameService) {
   for (let i = 0; i < actualBuffer.length; i++) {
     let stack = actualBuffer[i];
 
-    if (typeof stack === 'undefined') {
+    if (stack == undefined) {
       return `${nth(that.players, i).name} did not input actual stack`;
     }
 

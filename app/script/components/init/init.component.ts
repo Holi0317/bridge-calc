@@ -5,6 +5,9 @@ import { LoadingComponent } from '../loading';
 import { Player } from '../player.model';
 import { GameService } from '../game';
 
+import minilog = require('minilog');
+let log = minilog('init.component');
+
 let template: string = require('./init.component.html');
 
 @Component({
@@ -26,7 +29,8 @@ export class InitComponent implements OnInit {
     this.gameService.getPlayer()
     .then(res => {
       if (res.isNew) {
-        console.log('It is new!');
+        log.debug('Player data is new.');
+        // TODO: Show dialog asking for resume match.
       }
     })
   }
@@ -46,6 +50,7 @@ export class InitComponent implements OnInit {
     .catch(err => {
       this.isLoading = false;
       this.err = err;
+      log.warn('Validation does not pass for init. Error: ', err);
     });
 
   }

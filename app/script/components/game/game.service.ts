@@ -5,6 +5,9 @@ import { PlayerService, makeNewPlayer } from '../player.service';
 import { Player } from '../player.model';
 import * as validator from './validator';
 
+import minilog = require('minilog');
+let log = minilog('game.service');
+
 export enum GameState {
   notStarted,  // No info is filled in. Game is not yet started.
   guess,  // Guess for stack before each round
@@ -75,6 +78,7 @@ export class GameService {
    * If validation failes, promise will be rejected with error message.
    */
   start() {
+    log.info('Starting new game');
     let validate = validator.start(this);
 
     if (validate) {
@@ -87,7 +91,8 @@ export class GameService {
       this.maker = 0;
       this.rounds = this.countRound();
       this.state = GameState.guess;
-    })
+      log.info('All set. Game can be started.');
+    });
   }
 
   /**

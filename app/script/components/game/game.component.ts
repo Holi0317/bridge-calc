@@ -6,6 +6,9 @@ import { GameService, GameState } from './game.service';
 import { BufferService } from './buffer.service';
 import { Player } from '../player.model';
 
+import minilog = require('minilog');
+let log = minilog('game.component');
+
 let template: string = require('./game.component.html');
 
 @Component({
@@ -50,10 +53,12 @@ export class GameComponent implements OnInit {
   }
 
   nextRound() {
+    log.debug('Proceeding to next round.');
     this.buffer.reset();
     this.isLoading = true;
     this.gameService.nextRound()
     .then(() => {
+      log.debug('Next round loaded.');
       this.isLoading = false;
     })
   }

@@ -1,5 +1,8 @@
 import sum = require('lodash.sum');
 
+import minilog = require('minilog');
+let log = minilog('player.model');
+
 const PLAYER_NAME = [
   'John',
   'Thomas',
@@ -120,6 +123,7 @@ export class Player {
       this.score = [];
       this.name = randomChoose(PLAYER_NAME);
     } else {
+      log.debug('Loading player from BasePlayer. Name: ', base.name);
       this.score = base.score;
       this.name = base.name;
     }

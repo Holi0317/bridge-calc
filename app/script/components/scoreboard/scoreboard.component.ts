@@ -5,7 +5,7 @@ import { GameService, GameState, BufferService } from '../game';
 import { LoadingComponent } from '../loading';
 
 import minilog = require('minilog');
-let log = minilog('ScoreboardComponent');
+let log = minilog('scoreboard.component');
 
 let template = require('./scoreboard.component.html');
 

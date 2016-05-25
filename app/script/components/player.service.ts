@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Player, BasePlayer } from './player.model';
 
+import minilog = require('minilog');
+let log = minilog('player.service');
+
 const STORAGE_KEY = 'PlayerService.player';
 
 /**
@@ -34,7 +37,9 @@ export class PlayerService {
       // No localStorage API supported.
       // Fallback to memcache
       this.memcache = makeNewPlayer();
-      console.log('Player Service is now using memcache');
+      log.debug('localStorage API is not supported. Falling back to memcache');
+    } else {
+      log.debug('localStorage API is supported.');
     }
   }
 
@@ -47,6 +52,8 @@ export class PlayerService {
     } else {
       let value = window.localStorage.getItem(STORAGE_KEY);
       let parsed: BasePlayer[] = JSON.parse(value);
+      log.debug('Parsed localStorage item. Result: ', parsed);
+
       let ret: PlayerResponse = {
         isNew: false,
         value: null
@@ -54,10 +61,12 @@ export class PlayerService {
 
       if (!parsed) {
         // New
+        log.debug('Nothing exists in localStorage. Creating a new instance.');
         ret.isNew = true;
         ret.value = makeNewPlayer();
       } else {
         // Upgrade data from localStorage
+        log.debug('Upgrade data from localStorage');
         ret.isNew = false;
         ret.value = parsed.map(base => new Player(base));
       }
@@ -73,6 +82,7 @@ export class PlayerService {
         this.memcache = players;
         return resolve();
       } else {
+        log.debug('Save players to localStorage. Received data: ', players);
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(players));
         return resolve();
       }
@@ -85,6 +95,7 @@ export class PlayerService {
         this.memcache = [];
         return resolve();
       } else {
+        log.debug('Flush players from localStorage.');
         window.localStorage.removeItem(STORAGE_KEY);
         return resolve();
       }
