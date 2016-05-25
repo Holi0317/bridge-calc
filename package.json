@@ -42,6 +42,7 @@
     "@angular/router": "^2.0.0-rc.1",
     "bootstrap": "^4.0.0-alpha.2",
     "es6-shim": "^0.35.0",
+    "lodash.isinteger": "^4.0.3",
     "lodash.nth": "^4.11.0",
     "lodash.sum": "^4.0.2",
     "minilog": "^3.0.0",

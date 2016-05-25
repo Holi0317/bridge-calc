@@ -2,8 +2,14 @@ import { GameService } from './game.service';
 
 import nth = require('lodash.nth');
 import sum = require('lodash.sum');
+import isInteger = require('lodash.isinteger');
 
 export function start(that: GameService) {
+
+  if (!isInteger(that.cardCount)) {
+    return 'Poker card must be an integer. How do you get 0.5 card?';
+  }
+
   if (that.players.length <= 1) {
     return 'A game cannot be started with no none';
   }
@@ -36,7 +42,11 @@ export function validateGuess(guessBuffer: number[], that: GameService) {
       return `${nth(that.players, i).name} did not make a guess`;
     }
 
-    if (guess > that.currentRound) {
+    if (!isInteger(guess)) {
+      return `${nth(that.players, i).name} did not enter an integer.`;
+    }
+
+    if (guess > that.currentRound || guess < 0) {
       return `${nth(that.players, i).name} is kidding me. ಠ_ಠ`;
     }
   }
@@ -66,7 +76,11 @@ export function validateActual(actualBuffer: number[], that: GameService) {
       return `${nth(that.players, i).name} did not input actual stack`;
     }
 
-    if (stack > that.currentRound) {
+    if (!isInteger(stack)) {
+      return `${nth(that.players, i).name} did not enter an integer.`;
+    }
+
+    if (stack > that.currentRound || stack < 0) {
       return `${nth(that.players, i).name} is kidding me. ಠ_ಠ`;
     }
   }
