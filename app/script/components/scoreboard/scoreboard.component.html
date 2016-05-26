@@ -19,6 +19,10 @@
         <td>Total</td>
         <td *ngFor="let player of gameService.players">{{player.totalScore}}</td>
       </tr>
+      <tr class="table-active">
+        <td>Combo</td>
+        <td *ngFor="let player of gameService.players">{{player.combo}}</td>
+      </tr>
     </tbody>
 
   </table>
