@@ -63,6 +63,28 @@ export class Player {
     return this.missBuf;
   }
 
+  get comment() {
+    this.calcStats();
+
+    if (this.score.length < 3) {
+      return '';
+    }
+
+    if (this.miss === 0) {
+      return '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ PERFECT ✧ﾟ･: *ヽ(◕ヮ◕ヽ)';
+    }
+
+    if (this.miss === 1) {
+      return '(☞ﾟヮﾟ)☞ UCCU ☜(ﾟヮﾟ☜)';
+    }
+
+    if (this.combo === 0) {
+      return 'Achievement get: Never win ಠ_ಠ';
+    }
+
+    return '';
+  }
+
   private calcStats() {
     if (this.lastRound === this.score.length) {
       return;

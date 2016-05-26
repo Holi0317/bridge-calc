@@ -23,6 +23,10 @@
         <td>Combo</td>
         <td *ngFor="let player of gameService.players">{{player.combo}}</td>
       </tr>
+      <tr class="table-active">
+        <td></td>
+        <td *ngFor="let player of gameService.players">{{player.comment}}</td>
+      </tr>
     </tbody>
 
   </table>
