@@ -112,7 +112,11 @@ function comboCalc(score: number[]) {
   let combo = 0;
 
   for (let s of score) {
-    if (s > 0) combo++;
+    if (s > 0) {
+      combo++;
+    } else {
+      combo = 0;
+    };
   }
 
   return combo;
