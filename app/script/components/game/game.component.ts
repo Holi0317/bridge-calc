@@ -44,26 +44,38 @@ export class GameComponent implements OnInit {
     }
   }
 
-  submitGuess() {
-    this.errorMessage = this.gameService.saveGuess(this.buffer.guessBuffer);
+  next() {
+    this.errorMessage = '';
+    if (this.guessActive) {
+      this.errorMessage = this.gameService.saveGuess(this.buffer.guessBuffer);
+    } else if (this.actualActive) {
+      this.errorMessage = this.gameService.saveActual(this.buffer.actualBuffer);
+    } else {
+      log.debug('Proceeding to next round.');
+      this.buffer.reset();
+      this.isLoading = true;
+      this.gameService.nextRound()
+      .then(() => {
+        log.debug('Next round loaded.');
+        this.isLoading = false;
+      })
+    }
   }
 
-  submitActual() {
-    this.errorMessage = this.gameService.saveActual(this.buffer.actualBuffer);
+  prev() {
+    this.gameService.state = this.gameService.state - 1;
+    this.errorMessage = 'Rolling back to previous state may cause many unwanted bugs. This is discouraged. BTW, are you a man?';
   }
 
-  nextRound() {
-    log.debug('Proceeding to next round.');
-    this.buffer.reset();
-    this.isLoading = true;
-    this.gameService.nextRound()
-    .then(() => {
-      log.debug('Next round loaded.');
-      this.isLoading = false;
-    })
+  get canNext() {
+    return true;
   }
 
-  get guessActive(): boolean {
+  get canPrev() {
+    return !this.guessActive;
+  }
+
+  get guessActive() {
     return this.gameService.state === GameState.guess;
   }
 

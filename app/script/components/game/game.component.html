@@ -27,9 +27,8 @@
   </table>
 </div>
 
-<button class="btn btn-primary" type="button" (click)="submitGuess()" [disabled]="!guessActive">Submit guess</button>
-<button class="btn btn-primary" type="button" (click)="submitActual()" [disabled]="!actualActive">Submit actual</button>
-<button class="btn btn-primary" type="button" (click)="nextRound()" [disabled]="!nextRoundActive">Next round</button>
+<button class="btn btn-warning" type="button" (click)="prev()" [disabled]="!canPrev">Previous stage</button>
+<button class="btn btn-primary" type="button" (click)="next()" [disabled]="!canNext">Next stage</button>
 
 <div *ngIf="errorMessage" class="alert alert-warning">{{errorMessage}}</div>
 
