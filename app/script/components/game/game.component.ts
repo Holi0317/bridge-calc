@@ -63,7 +63,7 @@ export class GameComponent implements OnInit {
   }
 
   prev() {
-    this.gameService.state = this.gameService.state - 1;
+    this.gameService.state--;
     this.errorMessage = 'Rolling back to previous state may cause many unwanted bugs. This is discouraged. BTW, are you a man?';
   }
 
