@@ -79,7 +79,11 @@ export class Player {
     }
 
     if (this.miss === this.score.length) {
-      return 'Achievement get: Never win ಠ_ಠ';
+      return 'You might get lucky next time. Unless you are unlucky';
+    }
+
+    if (this.totalScore <= 0) {
+      return 'Negative score. Really?';
     }
 
     return '';
