@@ -11,17 +11,21 @@ function randomChoose<T>(a: T[]): T {
 function calcStats(score: number[]) {
   let combo = 0;
   let miss = 0;
+  let maxCombo = 0;
 
   for (let s of score) {
     if (s > 0) {
       combo++;
     } else {
+      if (maxCombo < combo) {
+        maxCombo = combo;
+      }
       combo = 0;
       miss++;
     };
   }
 
-  return [combo, miss];
+  return [combo, miss, maxCombo];
 }
 
 export interface BasePlayer {
@@ -36,6 +40,7 @@ export class Player {
   private lastRound: number = null;  // Previous round number when invoked functions related to this variable
   private comboBuf: number = null;
   private missBuf: number = null;
+  private maxComboBuf: number = null;
 
   constructor(base?: BasePlayer) {
     if (typeof base === 'undefined') {
@@ -61,6 +66,11 @@ export class Player {
   get miss() {
     this.calcStats();
     return this.missBuf;
+  }
+
+  get maxCombo() {
+    this.calcStats();
+    return this.maxComboBuf;
   }
 
   get comment() {
@@ -95,6 +105,6 @@ export class Player {
     }
     log.debug('Statics is outdated. Calculating the new statics.');
     this.lastRound = this.score.length;
-    [this.comboBuf, this.missBuf] = calcStats(this.score);
+    [this.comboBuf, this.missBuf, this.maxComboBuf] = calcStats(this.score);
   }
 }
