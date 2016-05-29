@@ -78,7 +78,7 @@ export class Player {
       return '(☞ﾟヮﾟ)☞ UCCU ☜(ﾟヮﾟ☜)';
     }
 
-    if (this.combo === 0) {
+    if (this.miss === this.score.length) {
       return 'Achievement get: Never win ಠ_ಠ';
     }
 
