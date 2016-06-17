@@ -1,2 +1,2 @@
 # Bridge calc
-A simple calculator for Contract Bridge
+A simple calculator for German Bridge

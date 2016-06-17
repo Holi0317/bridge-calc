@@ -1,13 +1,17 @@
 {
   "env": {
-    "node": true,
     "es6": true,
-    "browser": false
+    "browser": true
   },
   "extends": "eslint:recommended",
   "rules": {
     "quotes": [2, "single"],
-    "no-console": [0],
-    "strict": [2, "global"]
+    "no-console": [0]
+  },
+  "plugins": [
+    "eslint-plugin-html"
+  ],
+  "globals": {
+    "Polymer": true
   }
 }

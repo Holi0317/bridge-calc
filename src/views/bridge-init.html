@@ -1,0 +1,83 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../my-icons.html">
+
+<dom-module id="bridge-init">
+  <style>
+    :host {
+      display: block;
+    }
+
+    paper-material {
+      background: white;
+      box-sizing: border-box;
+      margin: 8px;
+      padding: 16px;
+      border-radius: 2px;
+    }
+
+    .container {
+      max-width: 80em;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .container:after {
+      content: " ";
+      display: block;
+      clear: both;
+    }
+
+  </style>
+  <style is="custom-style" include="iron-flex iron-flex-factors"></style>
+
+  <template>
+
+    <div class="container">
+      <h1>New Game</h1>
+    </div>
+
+    <paper-material class="container">
+
+      <template is="dom-repeat" items="{{players}}">
+        <div class="layout horizontal warp">
+          <span class="flex-1">Player [[_dispIndex(index)]] name:</span>
+          <paper-input class="flex-5" label="Player [[_dispIndex(index)]] name" no-label-float value={{item.name}}></paper-input>
+          <paper-icon-button class="flex-1" icon="delete" on-click="_deletePlayer"></paper-icon-button>
+        </div>
+      </template>
+
+    </paper-material>
+
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'bridge-init',
+      properties: {
+        players: {
+          type: Array
+        }
+      },
+
+      ready() {
+        this.players = [{
+          name: 'Hello'
+        }, {
+          name: 'hello2'
+        }]
+      },
+
+      _deletePlayer(event) {
+        console.log(event.model);
+      },
+
+      _dispIndex(i) {
+        return i+1;
+      }
+    });
+  </script>
+</dom-module>

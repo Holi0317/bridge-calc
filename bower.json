@@ -1,0 +1,21 @@
+{
+  "name": "bridge-calc",
+  "description": "Webapp for calculating mark in German Bridge",
+  "authors": "Holi0317 <holliswuhollis@gmail.com>",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/holi0317/bridge-calc.git"
+  },
+  "dependencies": {
+    "polymer": "polymer/polymer#^1.4.0",
+    "app-elements": "PolymerElements/app-elements#^0.9.0",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10",
+    "neon-elements": "PolymerElements/neon-elements#^1.0.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "^4.0.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/bridge-shell.html",
+  "fragments": [
+    "src/views/bridge-init.html",
+    "src/views/bridge-game.html",
+    "src/views/bridge-scoreboard.html"
+  ]
+}
