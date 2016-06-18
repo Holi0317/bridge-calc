@@ -18,9 +18,12 @@
       <div class="layout horizontal warp center">
         <span class="flex-1">Player [[_dispIndex(index)]] name:</span>
         <paper-input class="flex-5" label="Player [[_dispIndex(index)]] name" no-label-float value={{item}}></paper-input>
+        <!-- Index value in the following button is a hack to pass through index to event handler -->
         <paper-icon-button icon="delete" alt="Delete" index="[[index]]" on-click="_rm"></paper-icon-button>
       </div>
     </template>
+
+    <paper-icon-button icon="add" alt="Add player" id="add"></paper-icon-button>
 
   </template>
 
@@ -53,12 +56,21 @@
           }
         },
 
+        listeners: {
+          'add.click': '_mkPlayer'
+        },
+
         _dispIndex(i) {
           return i+1;
         },
 
         _rm(event) {
           this.splice('value', event.target.index, 1);
+        },
+
+        _mkPlayer() {
+          this.push('value', randomChoose(PLAYER_NAME));
+          console.log(this.value)
         }
 
       });
