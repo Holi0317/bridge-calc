@@ -1,0 +1,68 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="my-icons.html">
+
+<dom-module is="bridge-input-player">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment"></style>
+
+    <template is="dom-repeat" items="{{value}}">
+      <div class="layout horizontal warp center">
+        <span class="flex-1">Player [[_dispIndex(index)]] name:</span>
+        <paper-input class="flex-5" label="Player [[_dispIndex(index)]] name" no-label-float value={{item}}></paper-input>
+        <paper-icon-button icon="delete" alt="Delete" index="[[index]]" on-click="_rm"></paper-icon-button>
+      </div>
+    </template>
+
+  </template>
+
+  <script>
+    ((Polymer) => {
+      'use strict';
+
+      function randomChoose(a) {
+        return a[Math.floor(Math.random()*a.length)];
+      }
+
+      const PLAYER_NAME=["John","Thomas","William","Richard","Robert","Edward","James","George","Henry","Francis","Nicholas","Samuel","Joseph","Anthony","Matthew","Edmund","Christopher","Andrew","Ralph","Michael","Peter","Philip","Daniel","Roger","Nathaniel","Charles","Walter","Humphrey","Alexander","Benjamin","Hugh","Stephen","Abraham","Bernard","Simon","Miles","Rowland","Arthur","Jonathan","Mark","Allen","Ellis","Martin","Cuthbert","David","Gabriel","Jonas","Lawrence","Elizabeth","Mary","Anne","Margaret","Alice","Jane","Joan","Agnes","Susanna","Dorothy","Catherine","Sarah","Grace","Isabel","Martha","Elinor","Ellen","Frances","Hannah","Bridget","Margery","Rebecca","Joyce","Barbara","Judith","Joanna","Hester","Thomasin","Cecily","Amy","Rachel","Helen","Janet","Christian","Temperance","Abigail","Charity","Deborah","Patience","Esther","Lucy","Ursula","Mabel","Marion","Millicent","Priscilla","Ruth","Faith","Sybil","Winifred"];
+
+      Polymer({
+        is: 'bridge-input-player',
+        behaviours: [Polymer.IronFormElementBehavior],
+
+        properties: {
+          name: {
+            type: String,
+            readOnly: true,
+            value: 'bridge-input-player'
+          },
+          value: {
+            type: Array,
+            notify: true,
+            value() {
+              return [randomChoose(PLAYER_NAME), randomChoose(PLAYER_NAME), randomChoose(PLAYER_NAME), randomChoose(PLAYER_NAME)]
+            }
+          }
+        },
+
+        _dispIndex(i) {
+          return i+1;
+        },
+
+        _rm(event) {
+          this.splice('value', event.target.index, 1);
+        }
+
+      });
+
+    })(Polymer);
+  </script>
+</dom-module>
