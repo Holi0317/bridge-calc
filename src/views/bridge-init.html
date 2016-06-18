@@ -1,6 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bridge-input-player.html">
 
 <dom-module id="bridge-init">
@@ -24,7 +26,7 @@
     }
 
   </style>
-  <style is="custom-style" include="iron-flex iron-flex-factors"></style>
+  <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment"></style>
 
   <template>
 
@@ -34,7 +36,21 @@
 
     <div class="container">
       <paper-material>
-        <bridge-input-player></bridge-input-player>
+        <bridge-input-player value="{{playerNames}}"></bridge-input-player>
+      </paper-material>
+    </div>
+
+    <div class="container">
+      <paper-material>
+        <paper-input class="flex-5" label="Number of cards" value="{{numberOfCard}}"></paper-input>
+      </paper-material>
+    </div>
+
+    <div class="container">
+      <paper-material>
+        <h3>Game Informations</h3>
+        <p>Number of players: [[playerNames.length]]</p>
+        <p>Rounds: [[_countRound(playerNames.length, numberOfCard)]]</p>
       </paper-material>
     </div>
 
@@ -45,24 +61,22 @@
     Polymer({
       is: 'bridge-init',
       properties: {
-        players: {
+        playerNames: {
           type: Array
+        },
+        numberOfCard: {
+          type: Number,
+          value: 52
         }
       },
 
-      ready() {
-        this.players = [{
-          name: 'Hello'
-        }, {
-          name: 'hello2'
-        }]
-      },
+      _countRound() {
+        if (this.numberOfCard && this.playerNames) {
+          return Math.floor(this.numberOfCard / this.playerNames.length);
+        }
+        return '';
+      }
 
-      _deletePlayer(event) {
-        console.log(event.model);
-      },
-
-      
     });
   </script>
 </dom-module>
