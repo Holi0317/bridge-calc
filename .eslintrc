@@ -12,6 +12,8 @@
     "eslint-plugin-html"
   ],
   "globals": {
-    "Polymer": true
+    "Polymer": true,
+    "Bridge": true,
+    "lodash": true
   }
 }
