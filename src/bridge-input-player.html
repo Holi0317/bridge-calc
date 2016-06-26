@@ -17,8 +17,7 @@
 
     <template is="dom-repeat" items="{{value}}">
       <div class="layout horizontal warp center">
-        <span class="flex-1">Player [[_dispIndex(index)]] name:</span>
-        <paper-input class="flex-5" label="Player [[_dispIndex(index)]] name" no-label-float value={{item}}></paper-input>
+        <paper-input class="flex-5" label="Player [[_dispIndex(index)]] name" value={{item}}></paper-input>
         <!-- Index value in the following button is a hack to pass through index to event handler -->
         <paper-icon-button icon="delete" alt="Delete" index="[[index]]" on-click="_rm"></paper-icon-button>
       </div>
