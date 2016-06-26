@@ -73,7 +73,7 @@
       </app-drawer>
 
       <!-- Main content -->
-      <app-header-layout has-scrolling-region>
+      <app-header-layout has-scrolling-region id="headerLayout">
 
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
@@ -121,6 +121,10 @@
       _pageChanged: function(page) {
         // load page import on demand.
         this.importHref(this.resolveUrl(`views/bridge-${page}.html`), null, null, true);
+      },
+
+      ready: function() {
+        Bridge.headerLayout = this.$.headerLayout;
       }
 
     });

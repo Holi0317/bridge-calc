@@ -1,9 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
 <link rel="import" href="../bridge-input-player.html">
+<link rel="import" href="../bridge-player-name.html">
+<link rel="import" href="../bridge-data.html">
+<link rel="import" href="../lodash/isinteger.html">
 
 <dom-module id="bridge-init">
   <style>
@@ -25,8 +29,16 @@
       margin: 0 auto;
     }
 
+    #start {
+      background: var(--paper-green-500);
+      color: white;
+    }
+
+    #redirect {
+      display: none;
+    }
+
   </style>
-  <style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment"></style>
 
   <template>
 
@@ -42,7 +54,7 @@
 
     <div class="container">
       <paper-material>
-        <paper-input class="flex-5" label="Number of cards" value="{{numberOfCard}}"></paper-input>
+        <paper-input label="Number of cards" value="{{numberOfCard}}" type="number"></paper-input>
       </paper-material>
     </div>
 
@@ -51,9 +63,15 @@
         <h3>Game Informations</h3>
         <p>Number of players: [[playerNames.length]]</p>
         <p>Rounds: [[_countRound(playerNames.length, numberOfCard)]]</p>
+        <paper-button raised id="start">Start</paper-button>
       </paper-material>
     </div>
 
+    <paper-toast fit-into=[[headerLayout]] id="toast" text="{{toastMessage}}"></paper-toast>
+
+    <bridge-data id="bridgeData"></bridge-data>
+
+    <a href="/game" id="redirect"></a>
 
   </template>
 
@@ -67,14 +85,59 @@
         numberOfCard: {
           type: Number,
           value: 52
+        },
+        toastMessage: {
+          type: String,
+          value: null
         }
       },
 
+      listeners: {
+        'start.click': '_start'
+      },
+
+      ready() {
+        this.headerLayout = Bridge.headerLayout;
+      },
+
+      _initPlayerNames() {
+        this.playerNames = [Bridge.randomName(),Bridge.randomName(),Bridge.randomName(),Bridge.randomName()];
+      },
+
+      _initNumberOfCard() {
+        this.numberOfCard = 52;
+      },
+
       _countRound() {
-        if (this.numberOfCard && this.playerNames) {
-          return Math.floor(this.numberOfCard / this.playerNames.length);
+        return Math.floor(this.numberOfCard / this.playerNames.length);
+      },
+
+      _validator() {
+        if (!lodash.isInteger(this.numberOfCard)) {
+          return 'Poker card must be an integer larger than 0. How do you get 0.5 card?';
         }
-        return '';
+
+        if (this.playerNames.length <= 1) {
+          return 'A game cannot be started with no none';
+        }
+
+        if (this.playerNames.length > this.numberOfCard) {
+          return 'Too many players detected. Or you got too few card.';
+        }
+
+        return null;
+      },
+
+      _start() {
+        let res = this.$.bridgeData.start(this.numberOfCard, this.playerNames);
+        if (res) {
+          this.toastMessage = res;
+          this.$.toast.open();
+          return
+        } else {
+          // FIXME This is a hacky way to change route
+          this.$.redirect.click();
+        }
       }
 
     });

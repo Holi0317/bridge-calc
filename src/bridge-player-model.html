@@ -1,0 +1,106 @@
+<link rel="import" href="lodash/sum.html">
+<link rel="import" href="bridge-player-name.html">
+
+<script>
+((scope) => {
+
+  function calcStats(score) {
+    let combo = 0;
+    let miss = 0;
+    let maxCombo = 0;
+
+    for (let s of score) {
+      if (s > 0) {
+        combo++;
+      } else {
+        if (maxCombo < combo) {
+          maxCombo = combo;
+        }
+        combo = 0;
+        miss++;
+      };
+    }
+
+    return [combo, miss, maxCombo];
+  }
+
+
+  scope.Player = class PlayerModel {
+
+    constructor(base) {
+
+      this._lastRound = null;  // Previous round number when invoked functions related to this variable
+      this._comboBuf = null;
+      this._missBuf = null;
+      this._maxComboBuf = null;
+
+      if (typeof base === 'undefined') {
+        // Whole new player.
+        this.score = [];
+        this.name = Bridge.randomName();
+      } else if (typeof base === 'string') {
+        // Given a name. Construct a new Player with given name.
+        this.score = [];
+        this.name = base;
+      } else {
+        // Load from parsed JSON object
+        this.score = base.score;
+        this.name = base.name;
+      }
+    }
+
+    get totalScore() {
+      return lodash.sum(this.score);
+    }
+
+    get combo() {
+      this.calcStats();
+      return this._comboBuf;
+    }
+
+    get miss() {
+      this.calcStats();
+      return this._missBuf;
+    }
+
+    get maxCombo() {
+      this.calcStats();
+      return this._maxComboBuf;
+    }
+
+    get comment() {
+      this.calcStats();
+
+      if (this.score.length < 3) {
+        return '';
+      }
+
+      if (this.miss === 0) {
+        return '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ PERFECT ✧ﾟ･: *ヽ(◕ヮ◕ヽ)';
+      }
+
+      if (this.miss === 1) {
+        return '(☞ﾟヮﾟ)☞ UCCU ☜(ﾟヮﾟ☜)';
+      }
+
+      if (this.miss === this.score.length) {
+        return "Add oil (ง'̀-'́)ง";
+      }
+
+      if (this.totalScore <= 0) {
+        return 'Negative score. ಠ_ಠ';
+      }
+
+      return '';
+    }
+
+    calcStats() {
+      if (this._lastRound === this.score.length) {
+        return;
+      }
+      this._lastRound = this.score.length;
+      [this._comboBuf, this._missBuf, this._maxComboBuf] = calcStats(this.score);
+    }
+  }
+})(Bridge);
+</script>
