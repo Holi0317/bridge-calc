@@ -137,7 +137,9 @@
         return res;
       }
 
-      this.state = Bridge.gameState.inputWin;
+      this.set('players', this.players);
+      this.set('state', Bridge.gameState.inputWin);
+
       return null;
     }
 
@@ -154,7 +156,7 @@
         return res;
       }
 
-      this.state = Bridge.gameState.waiting;
+      this.set('state', Bridge.gameState.waiting);
       this._saveWin();
 
       return null;

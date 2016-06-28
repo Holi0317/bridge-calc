@@ -124,6 +124,10 @@
         'more.click': '_next'
       },
 
+      observers: [
+        'toggleDisabled(service.state)'
+      ],
+
       ready() {
         this.headerLayout = Bridge.headerLayout;
       },
@@ -132,6 +136,40 @@
         this.bidDisabled = false;
         this.winDisabled = true;
         this.nextDisabled = true;
+      },
+
+      toggleDisabled(state) {
+        switch (state) {
+          case Bridge.gameState.notStarted:
+          case Bridge.gameState.gameEnd:
+            this.bidDisabled = true;
+            this.winDisabled = true;
+            this.nextDisabled = true;
+            break;
+
+          case Bridge.gameState.bid:
+            this.bidDisabled = false;
+            this.winDisabled = true;
+            this.nextDisabled = true;
+            break;
+
+          case Bridge.gameState.inputWin:
+            this.bidDisabled = true;
+            this.winDisabled = false;
+            this.nextDisabled = true;
+            break;
+
+          case Bridge.gameState.waiting:
+            this.bidDisabled = true;
+            this.winDisabled = true;
+            this.nextDisabled = false;
+            break;
+
+          default:
+            this.bidDisabled = true;
+            this.winDisabled = true;
+            this.nextDisabled = true;
+        }
       },
 
       _makerName(players, maker) {
@@ -146,8 +184,7 @@
           return;
         }
 
-        this.bidDisabled = true;
-        this.winDisabled = false;
+        Bridge.Game.notify(this);
 
         return;
       },
@@ -160,8 +197,6 @@
           return;
         }
 
-        this.winDisabled = true;
-        this.nextDisabled = false;
         Bridge.Game.notify(this);
 
         return;
@@ -173,8 +208,6 @@
         if (Bridge.Game.state === Bridge.gameState.gameEnd) {
           // Game ended. Redirect to scoreboard
           this.$.redirect.redirect('scoreboard');
-        } else {
-          this.reset();
         }
       }
 
