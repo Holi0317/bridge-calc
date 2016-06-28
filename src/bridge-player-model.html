@@ -21,7 +21,7 @@
       };
     }
 
-    return [combo, miss, maxCombo];
+    return [combo, miss, maxCombo, lodash.sum(score)];
   }
 
 
@@ -37,7 +37,8 @@
         lastRound: null,
         combo: null,
         miss: null,
-        maxCombo: null
+        maxCombo: null,
+        sum: null
       }
 
       if (typeof base === 'undefined') {
@@ -58,7 +59,8 @@
     }
 
     get totalScore() {
-      return lodash.sum(this.score);
+      this.calcStats()
+      return this._buffer.sum;
     }
 
     get combo() {
@@ -107,7 +109,7 @@
         return;
       }
       this._buffer.lastRound = this.score.length;
-      [this._buffer.combo, this._buffer.miss, this._buffer.maxCombo] = calcStats(this.score);
+      [this._buffer.combo, this._buffer.miss, this._buffer.maxCombo, this._buffer.sum] = calcStats(this.score);
     }
   }
 })(Bridge);
