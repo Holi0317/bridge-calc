@@ -5,12 +5,37 @@
 <script>
 ((Bridge) => {
 
+  /**
+   * Enum for game state.
+   * @readonly
+   * @enum {number}
+   * @memberof Bridge
+   */
   Bridge.gameState = {
-    notStarted: 0,  // No info is filled in. Game is not yet started.
-    bid: 1,  // bid for stack before each round
-    inputWin: 2,  // Wait for user to input win stack
-    waiting: 3, // This round has ended. Showing this round result and wait for next round to start
-    gameEnd: 4  // Game has end by reaching the last round and ended
+    /**
+     * No info is filled in. Game is not yet started.
+     */
+    notStarted: 0,
+
+    /**
+     * bid for stack before each round
+     */
+    bid: 1,
+
+    /**
+     * Wait for user to input win stack
+     */
+    inputWin: 2,
+
+    /**
+     * This round has ended. Showing this round result and wait for next round to start
+     */
+    waiting: 3,
+
+    /**
+     * Game has end by reaching the last round and ended
+     */
+    gameEnd: 4
   };
 
   /**
@@ -37,6 +62,18 @@
      }
    }
 
+  /**
+   * Game controller logic. (Or service, in Angular2 term).
+   * @namespace Game
+   * @memberof Bridge
+   * @prop {Bridge.gameState} state - Current state of game.
+   * @prop {?number} totalRounds - Total number of rounds.
+   * @prop {?number} currentRound - Current round of the game.
+   * @prop {?number} maker - Index of maker player in current game.
+   * @prop {Bridge.Player[]} players - Players in current game.
+   *
+   * @private @prop {?String} _dirtyProps - Props that need to be notified to polymer in next flush.
+   */
   class Game {
     constructor() {
       this.state = this.get('state', Bridge.gameState.notStarted);
@@ -191,8 +228,8 @@
     }
 
     /**
-     * Notify Polymer for properties change in this object.
-     * Invoke this after every operation that will alter properties.
+     * Flush properties that have updated but Polymer does not know about.
+     * Must be invoked everytime after property is altered.
      * (Otherwise, UI will not update).
      *
      * @param {Object} that - Custom component DOM object powered by Polymer.
