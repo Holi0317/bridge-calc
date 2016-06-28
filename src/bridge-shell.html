@@ -11,6 +11,7 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="my-icons.html">
+<link rel="import" href="game-service.html">
 
 <dom-module id="bridge-shell">
 
@@ -83,9 +84,9 @@
         </app-header>
 
         <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
-          <bridge-init name="init"></bridge-init>
-          <bridge-game name="game"></bridge-game>
-          <bridge-scoreboard name="scoreboard"></bridge-scoreboard>
+          <bridge-init service="{{service}}" name="init"></bridge-init>
+          <bridge-game service="{{service}}" name="game"></bridge-game>
+          <bridge-scoreboard service="{{service}}" name="scoreboard"></bridge-scoreboard>
         </iron-pages>
 
       </app-header-layout>
@@ -106,6 +107,11 @@
           type: String,
           reflectToAttribute: true,
           observer: '_pageChanged'
+        },
+        service: {
+          type: Object,
+          notify: true,
+          value: () => Bridge.Game
         }
 
       },

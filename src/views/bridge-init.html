@@ -6,8 +6,8 @@
 <link rel="import" href="../../bower_components/paper-styles/color.html">
 <link rel="import" href="../bridge-input-player.html">
 <link rel="import" href="../bridge-player-name.html">
-<link rel="import" href="../bridge-data.html">
-<link rel="import" href="../lodash/isinteger.html">
+<link rel="import" href="../bridge-redirect.html">
+<link rel="import" href="../game-service.html">
 
 <dom-module id="bridge-init">
   <style>
@@ -67,11 +67,9 @@
       </paper-material>
     </div>
 
-    <paper-toast fit-into=[[headerLayout]] id="toast" text="{{toastMessage}}"></paper-toast>
+    <paper-toast fit-into=[[headerLayout]] id="toast" text="[[toastMessage]]"></paper-toast>
 
-    <bridge-data id="bridgeData"></bridge-data>
-
-    <a href="/game" id="redirect"></a>
+    <bridge-redirect id="redirect"></bridge-redirect>
 
   </template>
 
@@ -89,6 +87,10 @@
         toastMessage: {
           type: String,
           value: null
+        },
+        service: {
+          type: Object,
+          notify: true
         }
       },
 
@@ -112,31 +114,15 @@
         return Math.floor(this.numberOfCard / this.playerNames.length);
       },
 
-      _validator() {
-        if (!lodash.isInteger(this.numberOfCard)) {
-          return 'Poker card must be an integer larger than 0. How do you get 0.5 card?';
-        }
-
-        if (this.playerNames.length <= 1) {
-          return 'A game cannot be started with no none';
-        }
-
-        if (this.playerNames.length > this.numberOfCard) {
-          return 'Too many players detected. Or you got too few card.';
-        }
-
-        return null;
-      },
-
       _start() {
-        let res = this.$.bridgeData.start(this.numberOfCard, this.playerNames);
+        let res = Bridge.Game.start(this.numberOfCard, this.playerNames);
         if (res) {
           this.toastMessage = res;
           this.$.toast.open();
           return
         } else {
-          // FIXME This is a hacky way to change route
-          this.$.redirect.click();
+          Bridge.Game.notify(this);
+          this.$.redirect.redirect('game');
         }
       }
 

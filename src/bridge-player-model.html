@@ -29,10 +29,16 @@
 
     constructor(base) {
 
-      this._lastRound = null;  // Previous round number when invoked functions related to this variable
-      this._comboBuf = null;
-      this._missBuf = null;
-      this._maxComboBuf = null;
+      // The following two properties are controlled by game service.
+      this.bid = null;  // Bid for current round
+      this.win = null;  // Win Trick for current round
+
+      this._buffer = {
+        lastRound: null,
+        combo: null,
+        miss: null,
+        maxCombo: null
+      }
 
       if (typeof base === 'undefined') {
         // Whole new player.
@@ -46,6 +52,8 @@
         // Load from parsed JSON object
         this.score = base.score;
         this.name = base.name;
+        this.bid = base.bid;
+        this.win = base.win;
       }
     }
 
@@ -55,17 +63,17 @@
 
     get combo() {
       this.calcStats();
-      return this._comboBuf;
+      return this._buffer.combo;
     }
 
     get miss() {
       this.calcStats();
-      return this._missBuf;
+      return this._buffer.miss;
     }
 
     get maxCombo() {
       this.calcStats();
-      return this._maxComboBuf;
+      return this._buffer.maxCombo;
     }
 
     get comment() {
@@ -95,11 +103,11 @@
     }
 
     calcStats() {
-      if (this._lastRound === this.score.length) {
+      if (this._buffer.lastRound === this.score.length) {
         return;
       }
-      this._lastRound = this.score.length;
-      [this._comboBuf, this._missBuf, this._maxComboBuf] = calcStats(this.score);
+      this._buffer.lastRound = this.score.length;
+      [this._buffer.combo, this._buffer.miss, this._buffer.maxCombo] = calcStats(this.score);
     }
   }
 })(Bridge);

@@ -1,17 +1,183 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bridge-redirect.html">
+<link rel="import" href="../lodash/isinteger.html">
+<link rel="import" href="../lodash/nth.html">
+<link rel="import" href="../game-service.html">
+
 <dom-module id="bridge-game">
   <style>
     :host {
       display: block;
+      padding: 0 10px;
+    }
+
+    paper-material {
+      background: white;
+      box-sizing: border-box;
+      margin: 8px;
+      padding: 16px;
+      border-radius: 2px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .input-container {
+      overflow-x: auto;
+      display: flex;
+    }
+
+    paper-input {
+      min-width: 5em;
+      margin-right: 1em;
+    }
+
+    paper-button {
+      background-color: var(--paper-green-500);
+      color: white;
     }
   </style>
 
   <template>
+    <div class="container">
+      <h1>Round [[service.currentRound]] of [[service.totalRounds]]</h1>
+      <h2>Maker: [[_makerName(service.players, service.maker)]]</h2>
+    </div>
 
+    <div class="container">
+      <paper-material>
+        <h3>Bid Trick</h3>
+
+        <div class="input-container">
+          <template is="dom-repeat" items="{{service.players}}">
+
+            <paper-input label="[[item.name]]" value="{{item.bid}}" type="number" disabled="[[bidDisabled]]"></paper-input>
+
+          </template>
+        </div>
+
+        <paper-button id="bid" raised disabled=[[bidDisabled]]>Bid</paper-button>
+
+      </paper-material>
+    </div>
+
+    <div class="container">
+      <paper-material>
+        <h3>Win Trick</h3>
+
+        <div class="input-container">
+          <template is="dom-repeat" items="{{service.players}}">
+
+            <paper-input label="[[item.name]]" value="{{item.win}}" type="number" disabled="[[winDisabled]]"></paper-input>
+
+          </template>
+        </div>
+
+        <paper-button id="end" raised disabled=[[winDisabled]]>Round end</paper-button>
+
+      </paper-material>
+    </div>
+
+    <div class="container">
+      <paper-material>
+        <paper-button raised id="more" disabled=[[nextDisabled]]>Next round</paper-button>
+      </paper-material>
+    </div>
+
+    <paper-toast fit-into=[[headerLayout]] id="toast" text="[[toastMessage]]"></paper-toast>
+    <bridge-redirect id="redirect"></bridge-redirect>
   </template>
 
   <script>
     Polymer({
-      is: 'bridge-game'
+      is: 'bridge-game',
+
+      properties: {
+        bidDisabled: {
+          type: Boolean,
+          value: false
+        },
+        winDisabled: {
+          type: Boolean,
+          value: true
+        },
+        nextDisabled: {
+          type: Boolean,
+          value: true
+        },
+        service: {
+          type: Object,
+          notify: true
+        }
+      },
+
+      listeners: {
+        'bid.click': '_bid',
+        'end.click': '_end',
+        'more.click': '_next'
+      },
+
+      ready() {
+        this.headerLayout = Bridge.headerLayout;
+      },
+
+      reset() {
+        this.bidDisabled = false;
+        this.winDisabled = true;
+        this.nextDisabled = true;
+      },
+
+      _makerName(players, maker) {
+        return players[maker].name
+      },
+
+      _bid() {
+        let res = Bridge.Game.bid();
+        if (res) {
+          this.toastMessage = res;
+          this.$.toast.show();
+          return;
+        }
+
+        this.bidDisabled = true;
+        this.winDisabled = false;
+
+        return;
+      },
+
+      _end() {
+        let res = Bridge.Game.win();
+        if (res) {
+          this.toastMessage = res;
+          this.$.toast.show();
+          return;
+        }
+
+        this.winDisabled = true;
+        this.nextDisabled = false;
+        Bridge.Game.notify(this);
+
+        return;
+      },
+
+      _next() {
+        Bridge.Game.next();
+        Bridge.Game.notify(this);
+        if (Bridge.Game.state === Bridge.gameState.gameEnd) {
+          // Game ended. Redirect to scoreboard
+          this.$.redirect.redirect('scoreboard');
+        } else {
+          this.reset();
+        }
+      }
+
     });
   </script>
 </dom-module>

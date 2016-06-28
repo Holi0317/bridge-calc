@@ -1,0 +1,228 @@
+<link rel="import" href="lodash/isinteger.html">
+<link rel="import" href="bridge-player-model.html">
+<link rel="import" href="validator.html">
+
+<script>
+((Bridge) => {
+
+  Bridge.gameState = {
+    notStarted: 0,  // No info is filled in. Game is not yet started.
+    bid: 1,  // bid for stack before each round
+    inputWin: 2,  // Wait for user to input win stack
+    waiting: 3, // This round has ended. Showing this round result and wait for next round to start
+    gameEnd: 4  // Game has end by reaching the last round and ended
+  };
+
+  /**
+   * Short hand function for creating 4 new players with random names.
+   *
+   * @return {Bridge.Player[]} Exactly 4 player with random names.
+   */
+  function newPlayers() {
+    return [new Bridge.Player(), new Bridge.Player(), new Bridge.Player(), new Bridge.Player()];
+  }
+
+  /**
+   * Calculate score of this round from given parameters.
+   *
+   * @param {number} bid - Number of bid stack given
+   * @param {number} win - Number of win gain stack
+   * @return {number} Score of the player at that round
+   */
+   function calculateScore(bid, win) {
+     if (bid === win) {
+       return Math.pow(bid, 2) + 10;
+     } else {
+       return -Math.pow(win - bid, 2);
+     }
+   }
+
+  class Game {
+    constructor() {
+      this.state = this.get('state', Bridge.gameState.notStarted);
+      this.totalRounds = this.get('totalRounds', null);
+      this.currentRound = this.get('currentRound', null);
+      this.maker = this.get('maker', null);
+      this.players = this.get('players', newPlayers(), v => v.map(el => new Bridge.Player(el)));
+
+      this._dirtyProps = [];
+    }
+
+    /**
+     * Get a value from localstorage.
+     * If key does not exist in localstorage, use default value given.
+     * When upgrader parameter is given, it will be invoked when key exists in localstorage.
+     *
+     * @param {string} key - Key of localstorage item.
+     * @param {any} default_ - Default value of that item.
+     * @param {any => any} [upgrader] - Function invoked with value retrived and parsed form localstorage.
+     * The return value of this function will be returned as value got.
+     * @returns {any} - Value parsed as JSON from localstorage or default value.
+     */
+    get(prop, default_, upgrader) {
+      let value = window.localStorage.getItem(`Bridge.${prop}`);
+      if (value === null) {
+        return default_;
+      } else {
+        if (upgrader) {
+          return upgrader(JSON.parse(value));
+        } else {
+          return JSON.parse(value);
+        }
+      }
+    }
+
+    /**
+     * Set a property to given value and save that value to localstorage.
+     * The key in localstorage is hard-coded as `Bridge.${prop}`.
+     * Value will be JSON-ed befrom saved.
+     * (Yes. This operation is quite expensive as 2 synchronized operation happens)
+     * (If this operation is the performance bottleneck, I will consider move this to web worker).
+     * Property will also be marked as diry.
+     *
+     * @param {string} prop - Property
+     * @param {any} value - description
+     */
+    set(prop, value) {
+      this[prop] = value;
+      this._dirtyProps.push(`service.${prop}`);
+      window.localStorage.setItem(`Bridge.${prop}`, JSON.stringify(value));
+    }
+
+    /**
+     * Reset all state as this is created at first.
+     */
+    reset() {
+      this.set('state', Bridge.gameState.notStarted);
+      this.set('totalRounds', null);
+      this.set('currentRound', null);
+      this.set('maker', null);
+      this.set('players', newPlayers());
+    }
+
+    /**
+     * Start a new game and calculate needed variables.
+     *
+     * @param {number} numberOfCard - Number of card in the game
+     * @param {string[]} playerNames - Name of players
+     * @return {?string} - Error occured if string is returned. The string is error
+     * message. Otherwise, null is returned and variables are set.
+     */
+    start(numberOfCard, playerNames) {
+      let res = Bridge.validator.start(numberOfCard, playerNames);
+
+      if (res) {
+        return res;
+      }
+
+      this.set('totalRounds', Math.floor(numberOfCard / playerNames.length));
+      this.set('currentRound', 1);
+      this.set('maker', 0);
+      this.set('players', playerNames.map(name => new Bridge.Player(name)));
+      this.set('state', Bridge.gameState.bid);
+
+      return null;
+    }
+
+
+    /**
+     * Bid state has ended. Call in validator and enter win trick stage.
+     * If invalid bid is given, a string will be returned as error message.
+     *
+     * @return {?string} - Error message. If no error, null is returned.
+     */
+    bid() {
+      let res = Bridge.validator.bid(this.players, this.currentRound, this.maker);
+      if (res) {
+        return res;
+      }
+
+      this.state = Bridge.gameState.inputWin;
+      return null;
+    }
+
+    /**
+     * Enter win trick state has ended.
+     * Validate data given and save down mark to localstorage.
+     * If invalid data is given, a string will be returned as error message.
+     *
+     * @return {?string} - Error message. If no error, null is returned.
+     */
+    win() {
+      let res = Bridge.validator.win(this.players, this.currentRound);
+      if (res) {
+        return res;
+      }
+
+      this.state = Bridge.gameState.waiting;
+      this._saveWin();
+
+      return null;
+    }
+
+    next() {
+      for (let i = 0; i < this.players.length; i++) {
+        let player = this.players[i];
+        player.win = null;
+        player.bid = null;
+        this._dirtyProps.push(`service.players.#${i}.win`);
+        this._dirtyProps.push(`service.players.#${i}.bid`);
+      }
+      this.set('players', this.players);
+
+      if (this.currentRound === this.totalRounds) {
+        // Game ended
+        this.set('state', Bridge.gameState.gameEnd);
+        this.set('maker', null);
+        this.set('currentRound', null);
+      } else {
+        this.set('currentRound', this.currentRound + 1);
+        this.set('state', Bridge.gameState.bid);
+
+        if (this.maker + 1 === this.players.length) {
+          this.set('maker', 0);
+        } else {
+          this.set('maker', this.maker + 1);
+        }
+      }
+
+    }
+
+    /**
+     * Notify Polymer for properties change in this object.
+     * Invoke this after every operation that will alter properties.
+     * (Otherwise, UI will not update).
+     *
+     * @param {Object} that - Custom component DOM object powered by Polymer.
+     * REQUIREMENT: that.service === Bridge.Game
+     */
+    notify(that) {
+      for (let prop of this._dirtyProps) {
+        that.notifyPath(prop);
+      }
+      this._dirtyProps = [];
+    }
+
+    /**
+     * Calculate this round score and save to localstorage.
+     * @private
+     */
+    _saveWin() {
+      for (let i = 0; i < this.players.length; i++) {
+        let player = this.players[i];
+        let score = calculateScore(player.bid, player.win);
+        player.score[this.currentRound - 1] = score  // this.currentRound is started from 1.
+        this._dirtyProps.push(`service.players.#${i}.score`);
+        this._dirtyProps.push(`service.players.#${i}.win`);
+      }
+
+      window.localStorage.setItem('Bridge.players', JSON.stringify(this.players));
+
+    }
+
+  }
+
+  Bridge.Game = new Game();
+
+})(Bridge);
+</script>

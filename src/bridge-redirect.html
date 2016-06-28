@@ -1,0 +1,25 @@
+<dom-module id="bridge-redirect">
+  <style>
+    :host {
+      display: block;
+    }
+    a {
+      display: none;
+    }
+  </style>
+
+  <template>
+    <a href="/init" id="init"></a>
+    <a href="/game" id="game"></a>
+    <a href="/scoreboard" id="scoreboard"></a>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'bridge-redirect',
+      redirect(name) {
+        this.$[name].click();
+      }
+    });
+  </script>
+</dom-module>

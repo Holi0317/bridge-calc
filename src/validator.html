@@ -1,0 +1,143 @@
+<link rel="import" href="lodash/isinteger.html">
+<link rel="import" href="lodash/nth.html">
+
+<script>
+((Bridge) => {
+  Bridge.validator = {
+    /**
+     * Validator for start values
+     *
+     * @param {number} numberOfCard - Number of card in the game
+     * @param {string[]} playerNames - Name of players
+     * @return {?string} - Error occured if string is returned. The string is error
+     * message. Otherwise, null is returned.
+     */
+    start(numberOfCard, playerNames) {
+      if (!lodash.isInteger(Number(numberOfCard))) {
+        console.log(numberOfCard);
+        return 'Poker card must be an integer larger than 0. How do you get 0.5 card?';
+      }
+
+      if (playerNames.length <= 1) {
+        return 'A game cannot be started with no none';
+      }
+
+      if (playerNames.length > numberOfCard) {
+        return 'Too many players detected. Or you got too few card.';
+      }
+      return null;
+    },
+
+
+    /**
+     * Common validation logic for bid and win.
+     * Allow me to be lazy and do not document this properly.
+     *
+     * @private
+     * @param {type} prop         description
+     * @param {type} players      description
+     * @param {type} currentRound description
+     * @param {type} eachCB       description
+     * @param {type} sumCB        description
+     * @return {type}              description
+     */
+    _common(prop, players, currentRound, eachCB, sumCB) {
+      let sum = 0;
+
+      for (let player of players) {
+        let res = eachCB(player, currentRound);
+        if (res) {
+          return res;
+        }
+        if (player[prop] == null || player[prop] === '') {
+          return `${player.name} did not make a bid`;
+        }
+
+        let num = Number(player[prop]);
+        if (!lodash.isInteger(num)) {
+          return `${player.name} did not bid an integer.`;
+        }
+
+        if (num > currentRound) {
+          return `${player.name} attempted to cheat in more stacks.`;
+        }
+
+        if (num < 0) {
+          return `Dear ${player.name}, how do you get negative stack?`;
+        }
+
+        sum += num;
+      }
+
+      let res = sumCB(sum);
+      if (res) {
+        return res;
+      }
+      return null
+    },
+
+
+    /**
+     * Validator for bid values.
+     *
+     * @description
+     * If all of the following criterias are met, then they are considered as valid.
+     * 1. All player made a bid (All of them have a value but not null/undefined/empty string)
+     * 2. All bid are positive integer.
+     * 3. Bid are less than current round number.
+     * 4. Sum of bid does not equal to current round number.
+     *
+     * @param {Bridge.Player} players - Player models with bid property filled in.
+     * @param {number} currentRound - Current round of game. Should be self explanatory.
+     * @param {number} maker - Array index of Maker in this round.
+     * @return {?string} - Error message. If no error, null is returned.
+     */
+    bid(players, currentRound, maker) {
+      let eachCB = player => {
+        if (player.bid == null || player.bid === '') {
+          return `${player.name} did not make a bid`;
+        }
+      }
+
+      let sumCB = sum => {
+        if (sum === currentRound) {
+          let ggPlayer = lodash.nth(players, maker - 1);
+          return `${ggPlayer.name} cannot choose ${ggPlayer.bid}. Good luck ;)`;
+        }
+      }
+
+      return this._common('bid', players, currentRound, eachCB, sumCB);
+    },
+
+    /**
+     * Validator for win tricks values.
+     *
+     * @description
+     * If all of the following criterias are met, then they are considered as valid.
+     * 1. All bid are positive integer.
+     * 2. Bid are less than current round number.
+     * 3. Sum of stack must match with current round.
+     * Side effect: If win value is falsty, it will be filled with 0. (To save some time).
+     *
+     * @param {Bridge.Player} players - Player models with win property filled in.
+     * @param {number} currentRound - Current round of game. Should be self explanatory.
+     * @return {?string} - Error message. If no error, null is returned.
+     */
+    win(players, currentRound) {
+      let eachCB = player => {
+        if (player.win == null || player.win === '') {
+          player.win = 0;
+        }
+      }
+
+      let sumCB = sum => {
+        if (sum !== currentRound) {
+          return 'Sum of stack does not match round. Did anyone cheat in cards? ( ͡° ͜ʖ ͡°)';
+        }
+      }
+
+      return this._common('win', players, currentRound, eachCB, sumCB);
+    }
+  }
+})(Bridge);
+</script>
