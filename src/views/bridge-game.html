@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bridge-redirect.html">
+<link rel="import" href="../bridge-mini-scoreboard.html">
 <link rel="import" href="../lodash/isinteger.html">
 <link rel="import" href="../lodash/nth.html">
 <link rel="import" href="../game-service.html">
@@ -87,6 +88,7 @@
 
     <div class="container">
       <paper-material>
+        <bridge-mini-scoreboard service="{{service}}"></bridge-mini-scoreboard>
         <paper-button raised id="more" disabled=[[nextDisabled]]>Next round</paper-button>
       </paper-material>
     </div>
