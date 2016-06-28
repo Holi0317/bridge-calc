@@ -1,13 +1,127 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+
 <dom-module id="bridge-scoreboard">
   <style>
     :host {
       display: block;
+      padding: 0 10px;
+    }
+
+    paper-material {
+      background: white;
+      box-sizing: border-box;
+      margin: 8px;
+      padding: 16px;
+      border-radius: 2px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    /* The follow CSS is copied from Bootstrap 4 */
+    table {
+      width: 100%;
+      margin-bottom: 1rem;
+      border-collapse: collapse;
+    }
+
+    table thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #eceeef;
+    }
+
+    table td, table th {
+      padding: .75rem;
+      line-height: 1.5;
+      vertical-align: top;
+      border-top: 1px solid #eceeef;
+    }
+
+    th {
+      text-align: left;
     }
   </style>
 
+  <template>
+
+    <div class="container">
+      <h1>Scoreboard</h1>
+    </div>
+
+    <div class="container table-container">
+      <paper-material class="table-container">
+        <table>
+
+          <thead>
+            <tr>
+              <th></th>
+              <template is="dom-repeat" items="[[service.players]]">
+                <th>[[item.name]]</th>
+              </template>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <template is="dom-repeat" items="[[service.players.0.score]]" index-as="round" id="repeat">
+              <tr>
+                <td>[[_showRound(round)]]</td>
+                <template is="dom-repeat" items="[[service.players]]" index-as="i">
+                  <td>[[_showScore(round, item)]]</td>
+                </template>
+              </tr>
+            </template>
+
+            <tr>
+              <td>Total score</td>
+              <template is="dom-repeat" items="[[service.players]]">
+                <td>[[_getTotalScore(item, item.score)]]</td>
+              </template>
+            </tr>
+          </tbody>
+
+        </table>
+      </paper-material>
+    </div>
+
+  </template>
+
   <script>
     Polymer({
-      is: 'bridge-scoreboard'
+      is: 'bridge-scoreboard',
+
+      properties: {
+        service: {
+          type: Object
+        }
+      },
+
+      observers: [
+        '_roundChanged(service.currentRound)'
+      ],
+
+      _roundChanged() {
+        this.$.repeat.render();
+      },
+
+      _showRound(i) {
+        return i + 1;
+      },
+
+      _showScore(round, player) {
+        return player.score[round];
+      },
+
+      _getTotalScore(player) {
+        return player.totalScore
+      }
     });
   </script>
 </dom-module>

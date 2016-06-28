@@ -175,7 +175,11 @@
       },
 
       _makerName(players, maker) {
-        return players[maker].name
+        if (maker === null) {
+          return ''
+        } else {
+          return players[maker].name
+        }
       },
 
       _bid() {
