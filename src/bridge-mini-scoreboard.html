@@ -50,7 +50,7 @@
           <tr>
             <td>This round score</td>
             <template is="dom-repeat" items="[[service.players]]">
-              <td>[[_roundScore(item.score, service.currentRound)]]</td>
+              <td>[[_roundScore(item.score, service.currentRound, service.state)]]</td>
             </template>
           </tr>
 
@@ -79,9 +79,9 @@
       _roundScore(scores, currentRound) {
         let res = scores[currentRound - 1];
         if (res) {
-          return res
+          return res;
         } else {
-          return 0
+          return 0;
         }
       },
 
