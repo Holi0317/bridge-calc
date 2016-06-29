@@ -236,9 +236,9 @@
      * REQUIREMENT: that.service === Bridge.Game
      */
     notify(that) {
-      for (let prop of this._dirtyProps) {
+      this._dirtyProps.forEach(prop => {
         that.notifyPath(prop);
-      }
+      });
       this._dirtyProps = [];
     }
 

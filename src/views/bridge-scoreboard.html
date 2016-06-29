@@ -132,14 +132,8 @@
 
       _compRank(players) {
         let sortedScore = players.map(p => p.totalScore).sort((a, b) => b - a);
-        let res = [];
 
-        for (let player of players) {
-          let rank = sortedScore.indexOf(player.totalScore) + 1;
-          res.push(rank);
-        }
-
-        return res;
+        return players.map(player => sortedScore.indexOf(player.totalScore) + 1);
       }
     });
   </script>

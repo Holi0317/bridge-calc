@@ -44,7 +44,7 @@
     _common(prop, players, currentRound, eachCB, sumCB) {
       let sum = 0;
 
-      for (let player of players) {
+      players.forEach(player => {
         let res = eachCB(player, currentRound);
         if (res) {
           return res;
@@ -67,7 +67,7 @@
         }
 
         sum += num;
-      }
+      });
 
       let res = sumCB(sum);
       if (res) {
