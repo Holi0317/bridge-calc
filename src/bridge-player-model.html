@@ -1,4 +1,3 @@
-<link rel="import" href="lodash/sum.html">
 <link rel="import" href="bridge-player-name.html">
 
 <script>
@@ -15,6 +14,7 @@
     let combo = 0;
     let miss = 0;
     let maxCombo = 0;
+    let sum = 0;
 
     for (let s of score) {
       if (s > 0) {
@@ -26,9 +26,11 @@
         combo = 0;
         miss++;
       };
+
+      sum += s;
     }
 
-    return [combo, miss, maxCombo, lodash.sum(score)];
+    return [combo, miss, maxCombo, sum];
   }
 
 
