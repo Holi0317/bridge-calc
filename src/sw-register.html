@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+
+<dom-module id="sw-register">
+
+  <template>
+    <paper-toast fit-into="[[headerLayout]]" text="[[toastMessage]]" id="toast"></paper-toast>
+  </template>
+  <script>
+    Polymer({
+      is: 'sw-register',
+
+      ready() {
+        this.headerLayout = Bridge.headerLayout;
+
+        // SW logic are copied from Google IO webapp 2016
+        // Source: https://github.com/GoogleChrome/ioweb2016/blob/master/app/scripts/helper/service-worker-registration.js
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js')
+          .then(res => {
+
+            res.onupdatefound = () => {
+              const installing = res.installing;
+              installing.onstatechange = () => {
+
+                if (installing.state === 'installed' && !navigator.serviceWorker.controller) {
+                  this.toastMessage = "Installation complete. I can now work offline. (Trust me, it's real)";
+                  this.$.toast.show();
+                }
+
+              }
+            }
+
+          })
+          .catch(err => {
+            console.error('Error when registering service worker. Error: ', err);
+          });
+
+          if (navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.onstatechange = event => {
+              if (event.target.state === 'redundant') {
+
+                this.toastMessage = 'Update available. Refresh to get latest content';
+                this.$.toast.show();
+
+              }
+            }
+          }
+
+        }
+      }
+    });
+  </script>
+</dom-module>
