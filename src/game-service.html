@@ -200,13 +200,13 @@
     }
 
     next() {
-      for (let i = 0; i < this.players.length; i++) {
-        let player = this.players[i];
+      this.players.forEach((player, i) => {
         player.win = null;
         player.bid = null;
         this._dirtyProps.push(`service.players.#${i}.win`);
         this._dirtyProps.push(`service.players.#${i}.bid`);
-      }
+      });
+
       this.set('players', this.players);
 
       if (this.currentRound === this.totalRounds) {
@@ -247,13 +247,12 @@
      * @private
      */
     _saveWin() {
-      for (let i = 0; i < this.players.length; i++) {
-        let player = this.players[i];
+      this.players.forEach((player, i) => {
         let score = calculateScore(player.bid, player.win);
         player.score[this.currentRound - 1] = score  // this.currentRound is started from 1.
         this._dirtyProps.push(`service.players.#${i}.score`);
         this._dirtyProps.push(`service.players.#${i}.win`);
-      }
+      });
 
       window.localStorage.setItem('Bridge.players', JSON.stringify(this.players));
 
