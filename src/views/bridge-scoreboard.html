@@ -82,7 +82,7 @@
             <tr>
               <td>Total score</td>
               <template is="dom-repeat" items="[[service.players]]">
-                <td>[[_getTotalScore(item, item.score)]]</td>
+                <td>[[_getTotalScore(item, item.score, service.currentRound)]]</td>
               </template>
             </tr>
 
