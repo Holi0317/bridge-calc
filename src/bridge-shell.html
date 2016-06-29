@@ -131,7 +131,7 @@
 
       _pageChanged: function(page) {
         // load page import on demand.
-        this.importHref(this.resolveUrl(`views/bridge-${page}.html`), null, null, true);
+        this.importHref(this.resolveUrl('views/bridge-' + page + '.html'), null, null, true);
       },
 
       ready: function() {
