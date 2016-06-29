@@ -114,7 +114,9 @@
         service: {
           type: Object,
           notify: true,
-          value: () => Bridge.Game
+          value: function() {
+            return Bridge.Game
+          }
         }
 
       },
