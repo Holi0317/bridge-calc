@@ -130,25 +130,12 @@
         'toggleDisabled(service.state)'
       ],
 
-      ready() {
+      ready: function ready() {
         this.headerLayout = Bridge.headerLayout;
       },
 
-      reset() {
-        this.bidDisabled = false;
-        this.winDisabled = true;
-        this.nextDisabled = true;
-      },
-
-      toggleDisabled(state) {
+      toggleDisabled: function toggleDisabled(state) {
         switch (state) {
-          case Bridge.gameState.notStarted:
-          case Bridge.gameState.gameEnd:
-            this.bidDisabled = true;
-            this.winDisabled = true;
-            this.nextDisabled = true;
-            break;
-
           case Bridge.gameState.bid:
             this.bidDisabled = false;
             this.winDisabled = true;
@@ -167,6 +154,8 @@
             this.nextDisabled = false;
             break;
 
+          case Bridge.gameState.notStarted:
+          case Bridge.gameState.gameEnd:
           default:
             this.bidDisabled = true;
             this.winDisabled = true;
@@ -174,16 +163,16 @@
         }
       },
 
-      _makerName(players, maker) {
+      _makerName: function _makerName(players, maker) {
         if (maker === null) {
-          return ''
+          return '';
         } else {
-          return players[maker].name
+          return players[maker].name;
         }
       },
 
-      _bid() {
-        let res = Bridge.Game.bid();
+      _bid: function _bid() {
+        var res = Bridge.Game.bid();
         if (res) {
           this.toastMessage = res;
           this.$.toast.show();
@@ -195,8 +184,8 @@
         return;
       },
 
-      _end() {
-        let res = Bridge.Game.win();
+      _end: function _end() {
+        var res = Bridge.Game.win();
         if (res) {
           this.toastMessage = res;
           this.$.toast.show();
@@ -208,7 +197,7 @@
         return;
       },
 
-      _next() {
+      _next: function _next() {
         Bridge.Game.next();
         Bridge.Game.notify(this);
         if (Bridge.Game.state === Bridge.gameState.gameEnd) {

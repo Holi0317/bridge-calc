@@ -1,41 +1,19 @@
 <link rel="import" href="bridge-player-name.html">
 
 <script>
-((Bridge) => {
-
-  /**
-   * Calculate statics of the player with given score
-   *
-   * @param {Number[]} score - Array of score gained in previous games.
-   * @return {[Number, Number, Number, Number]} - Tuple of statics.
-   * They are combo, miss, max combo, total score.
-   */
-  function calcStats(score) {
-    let combo = 0;
-    let miss = 0;
-    let maxCombo = 0;
-    let sum = 0;
-
-    score.forEach(s => {
-      if (s > 0) {
-        combo++;
-      } else {
-        if (maxCombo < combo) {
-          maxCombo = combo;
-        }
-        combo = 0;
-        miss++;
-      };
-
-      sum += s;
-    });
-
-    return [combo, miss, maxCombo, sum];
-  }
-
-
+(function(Bridge) {
   /**
    * Model of a player.
+   *
+   * @desc
+   * Given parameter can be in the following form:
+   * 1. null -> Create a new player with random name.
+   * 2. string -> Create a new player with given string as name.
+   * 3. Others -> Treat that as a player object loaded from JSON. Try to
+   * Write in properties according to the object.
+   *
+   * @param {(null|String|Object)} base - Base of the player object to be created.
+   * See description for details.
    *
    * @prop {Number} bid - Bid for the current round.
    * @prop {Number} win - Win for the curren round.
@@ -51,74 +29,58 @@
    *
    * @namespace Player
    * @memberof Bridge
+   * @class
    */
-  Bridge.Player = class PlayerModel {
+  Bridge.Player = function PlayerModel(base) {
+    // The following two properties are controlled by game service.
+    this.bid = null; // Bid for current round
+    this.win = null; // Win Trick for current round
 
-    /**
-     * Constructor of Player object.
-     *
-     * @desc
-     * Given parameter can be in the following form:
-     * 1. null -> Create a new player with random name.
-     * 2. string -> Create a new player with given string as name.
-     * 3. Others -> Treat that as a player object loaded from JSON. Try to
-     * Write in properties according to the object.
-     *
-     * @param {(null|String|Object)} base - Base of the player object to be created.
-     * See description for details.
-     *
-     * @constructor
-     */
-    constructor(base) {
+    this._buffer = {
+      lastRound: null,
+      combo: null,
+      miss: null,
+      maxCombo: null,
+      sum: null
+    };
 
-      // The following two properties are controlled by game service.
-      this.bid = null;  // Bid for current round
-      this.win = null;  // Win Trick for current round
-
-      this._buffer = {
-        lastRound: null,
-        combo: null,
-        miss: null,
-        maxCombo: null,
-        sum: null
-      }
-
-      if (typeof base === 'undefined') {
-        // Whole new player.
-        this.score = [];
-        this.name = Bridge.randomName();
-      } else if (typeof base === 'string') {
-        // Given a name. Construct a new Player with given name.
-        this.score = [];
-        this.name = base;
-      } else {
-        // Load from parsed JSON object
-        this.score = base.score;
-        this.name = base.name;
-        this.bid = base.bid;
-        this.win = base.win;
-      }
+    if (typeof base === 'undefined') {
+      // Whole new player.
+      this.score = [];
+      this.name = Bridge.randomName();
+    } else if (typeof base === 'string') {
+      // Given a name. Construct a new Player with given name.
+      this.score = [];
+      this.name = base;
+    } else {
+      // Load from parsed JSON object
+      this.score = base.score;
+      this.name = base.name;
+      this.bid = base.bid;
+      this.win = base.win;
     }
+  };
 
+  Bridge.Player.prototype = {
     get totalScore() {
-      this._calcStats()
+      this._calcStats();
       return this._buffer.sum;
-    }
+    },
 
     get combo() {
       this._calcStats();
       return this._buffer.combo;
-    }
+    },
 
     get miss() {
       this._calcStats();
       return this._buffer.miss;
-    }
+    },
 
     get maxCombo() {
       this._calcStats();
       return this._buffer.maxCombo;
-    }
+    },
 
     get comment() {
       this._calcStats();
@@ -144,7 +106,7 @@
       }
 
       return '';
-    }
+    },
 
     /**
      * Calculate properties for this object and save them to buffer.
@@ -152,13 +114,36 @@
      *
      * @private
      */
-    _calcStats() {
+    _calcStats: function _calcStats() {
       if (this._buffer.lastRound === this.score.length) {
         return;
       }
       this._buffer.lastRound = this.score.length;
-      [this._buffer.combo, this._buffer.miss, this._buffer.maxCombo, this._buffer.sum] = calcStats(this.score);
+
+      var combo = 0;
+      var miss = 0;
+      var maxCombo = 0;
+      var sum = 0;
+
+      this.score.forEach(function (s) {
+        if (s > 0) {
+          combo++;
+        } else {
+          if (maxCombo < combo) {
+            maxCombo = combo;
+          }
+          combo = 0;
+          miss++;
+        };
+
+        sum += s;
+      });
+
+      this._buffer.combo = combo;
+      this._buffer.miss = miss;
+      this._buffer.maxCombo = maxCombo;
+      this._buffer.sum = sum;
     }
-  }
+  };
 })(Bridge);
 </script>

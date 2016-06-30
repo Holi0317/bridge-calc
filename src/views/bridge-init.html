@@ -98,28 +98,20 @@
         'start.click': '_start'
       },
 
-      ready() {
+      ready: function ready() {
         this.headerLayout = Bridge.headerLayout;
       },
 
-      _initPlayerNames() {
-        this.playerNames = [Bridge.randomName(),Bridge.randomName(),Bridge.randomName(),Bridge.randomName()];
-      },
-
-      _initNumberOfCard() {
-        this.numberOfCard = 52;
-      },
-
-      _countRound() {
+      _countRound: function _countRound() {
         return Math.floor(this.numberOfCard / this.playerNames.length);
       },
 
-      _start() {
-        let res = Bridge.Game.start(this.numberOfCard, this.playerNames);
+      _start: function _start() {
+        var res = Bridge.Game.start(this.numberOfCard, this.playerNames);
         if (res) {
           this.toastMessage = res;
           this.$.toast.open();
-          return
+          return;
         } else {
           Bridge.Game.notify(this);
           this.$.redirect.redirect('game');

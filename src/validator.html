@@ -2,7 +2,8 @@
 <link rel="import" href="lodash/nth.html">
 
 <script>
-((Bridge) => {
+(function(Bridge) {
+  'use strict';
   Bridge.validator = {
     /**
      * Validator for start values
@@ -12,7 +13,7 @@
      * @return {?string} - Error occured if string is returned. The string is error
      * message. Otherwise, null is returned.
      */
-    start(numberOfCard, playerNames) {
+    start: function start(numberOfCard, playerNames) {
       if (!lodash.isInteger(Number(numberOfCard))) {
         console.log(numberOfCard);
         return 'Poker card must be an integer larger than 0. How do you get 0.5 card?';
@@ -41,39 +42,39 @@
      * @param {type} sumCB        description
      * @return {type}              description
      */
-    _common(prop, players, currentRound, eachCB, sumCB) {
-      let sum = 0;
+    _common: function _common(prop, players, currentRound, eachCB, sumCB) {
+      var sum = 0;
 
-      players.forEach(player => {
-        let res = eachCB(player, currentRound);
+      players.forEach(function (player) {
+        var res = eachCB(player, currentRound);
         if (res) {
           return res;
         }
         if (player[prop] == null || player[prop] === '') {
-          return `${player.name} did not make a bid`;
+          return player.name + ' did not make a bid';
         }
 
-        let num = Number(player[prop]);
+        var num = Number(player[prop]);
         if (!lodash.isInteger(num)) {
-          return `${player.name} did not bid an integer.`;
+          return player.name + ' did not bid an integer.';
         }
 
         if (num > currentRound) {
-          return `${player.name} attempted to cheat in more stacks.`;
+          return player.name + ' attempted to cheat in more stacks.';
         }
 
         if (num < 0) {
-          return `Dear ${player.name}, how do you get negative stack?`;
+          return 'Dear ' + player.name + ', how do you get negative stack?';
         }
 
         sum += num;
       });
 
-      let res = sumCB(sum);
+      var res = sumCB(sum);
       if (res) {
         return res;
       }
-      return null
+      return null;
     },
 
 
@@ -92,22 +93,23 @@
      * @param {number} maker - Array index of Maker in this round.
      * @return {?string} - Error message. If no error, null is returned.
      */
-    bid(players, currentRound, maker) {
-      let eachCB = player => {
+    bid: function bid(players, currentRound, maker) {
+      var eachCB = function eachCB(player) {
         if (player.bid == null || player.bid === '') {
-          return `${player.name} did not make a bid`;
+          return player.name + ' did not make a bid';
         }
-      }
+      };
 
-      let sumCB = sum => {
+      var sumCB = function sumCB(sum) {
         if (sum === currentRound) {
-          let ggPlayer = lodash.nth(players, maker - 1);
-          return `${ggPlayer.name} cannot choose ${ggPlayer.bid}. Good luck ;)`;
+          var ggPlayer = lodash.nth(players, maker - 1);
+          return ggPlayer.name + ' cannot choose ' + ggPlayer.bid + '. Good luck ;)';
         }
-      }
+      };
 
       return this._common('bid', players, currentRound, eachCB, sumCB);
     },
+
 
     /**
      * Validator for win tricks values.
@@ -123,21 +125,21 @@
      * @param {number} currentRound - Current round of game. Should be self explanatory.
      * @return {?string} - Error message. If no error, null is returned.
      */
-    win(players, currentRound) {
-      let eachCB = player => {
+    win: function win(players, currentRound) {
+      var eachCB = function eachCB(player) {
         if (player.win == null || player.win === '') {
           player.win = 0;
         }
-      }
+      };
 
-      let sumCB = sum => {
+      var sumCB = function sumCB(sum) {
         if (sum !== currentRound) {
           return 'Sum of stack does not match round. Did anyone cheat in cards? ( ͡° ͜ʖ ͡°)';
         }
-      }
+      };
 
       return this._common('win', players, currentRound, eachCB, sumCB);
     }
-  }
+  };
 })(Bridge);
 </script>

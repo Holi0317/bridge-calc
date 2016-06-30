@@ -76,17 +76,16 @@
         }
       },
 
-      _roundScore(scores, currentRound) {
-        let res = scores[currentRound - 1];
+      _roundScore: function _roundScore(scores, currentRound) {
+        var res = scores[currentRound - 1];
         if (res) {
           return res;
         } else {
           return 0;
         }
       },
-
-      _getTotalScore(player) {
-        return player.totalScore
+      _getTotalScore: function _getTotalScore(player) {
+        return player.totalScore;
       }
     });
   </script>

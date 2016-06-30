@@ -28,46 +28,38 @@
   </template>
 
   <script>
-    ((Polymer) => {
-      'use strict';
+    Polymer({
+      is: 'bridge-input-player',
+      behaviours: [Polymer.IronFormElementBehavior],
 
-      Polymer({
-        is: 'bridge-input-player',
-        behaviours: [Polymer.IronFormElementBehavior],
-
-        properties: {
-          name: {
-            type: String,
-            readOnly: true,
-            value: 'bridge-input-player'
-          },
-          value: {
-            type: Array,
-            notify: true,
-            value() {
-              return [Bridge.randomName(), Bridge.randomName(), Bridge.randomName(), Bridge.randomName()]
-            }
+      properties: {
+        name: {
+          type: String,
+          readOnly: true,
+          value: 'bridge-input-player'
+        },
+        value: {
+          type: Array,
+          notify: true,
+          value: function value() {
+            return [Bridge.randomName(), Bridge.randomName(), Bridge.randomName(), Bridge.randomName()];
           }
-        },
-
-        listeners: {
-          'add.click': '_mkPlayer'
-        },
-
-        _dispIndex(i) {
-          return i+1;
-        },
-
-        _rm(event) {
-          this.splice('value', event.target.index, 1);
-        },
-
-        _mkPlayer() {
-          this.push('value', Bridge.randomName());
         }
+      },
 
-      });
+      listeners: {
+        'add.click': '_mkPlayer'
+      },
 
-    })(Polymer);
+      _dispIndex: function _dispIndex(i) {
+        return i + 1;
+      },
+      _rm: function _rm(event) {
+        this.splice('value', event.target.index, 1);
+      },
+      _mkPlayer: function _mkPlayer() {
+        this.push('value', Bridge.randomName());
+      }
+    });
   </script>
 </dom-module>

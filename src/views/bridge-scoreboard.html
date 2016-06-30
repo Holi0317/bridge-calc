@@ -114,26 +114,32 @@
         '_roundChanged(service.currentRound)'
       ],
 
-      _roundChanged() {
+      _roundChanged: function _roundChanged() {
         this.$.repeat.render();
       },
 
-      _showRound(i) {
+      _showRound: function _showRound(i) {
         return i + 1;
       },
 
-      _showScore(round, player) {
+      _showScore: function _showScore(round, player) {
         return player.score[round];
       },
 
-      _getTotalScore(player) {
-        return player.totalScore
+      _getTotalScore: function _getTotalScore(player) {
+        return player.totalScore;
       },
 
-      _compRank(players) {
-        let sortedScore = players.map(p => p.totalScore).sort((a, b) => b - a);
+      _compRank: function _compRank(players) {
+        var sortedScore = players.map(function (p) {
+          return p.totalScore;
+        }).sort(function (a, b) {
+          return b - a;
+        });
 
-        return players.map(player => sortedScore.indexOf(player.totalScore) + 1);
+        return players.map(function (player) {
+          return sortedScore.indexOf(player.totalScore) + 1;
+        });
       }
     });
   </script>

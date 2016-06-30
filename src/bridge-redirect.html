@@ -17,7 +17,7 @@
   <script>
     Polymer({
       is: 'bridge-redirect',
-      redirect(name) {
+      redirect: function redirect(name) {
         this.$[name].click();
       }
     });
