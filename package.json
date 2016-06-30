@@ -1,0 +1,26 @@
+{
+  "name": "bridge-calc",
+  "version": "0.0.0",
+  "description": "Webapp for calculating mark in German Bridge",
+  "main": "src/index.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Holi0317/bridge-calc.git"
+  },
+  "author": "Holi0317 <holliswuhollis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Holi0317/bridge-calc/issues"
+  },
+  "homepage": "https://github.com/Holi0317/bridge-calc#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4"
+  }
+}
