@@ -3,7 +3,10 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-styles/color.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
 <link rel="import" href="../bridge-input-player.html">
 <link rel="import" href="../bridge-player-name.html">
 <link rel="import" href="../bridge-redirect.html">
@@ -38,6 +41,14 @@
       display: none;
     }
 
+    paper-button [dialog-dismiss] {
+      color: var(--paper-red-500);
+    }
+
+    paper-button [dialog-confirm] {
+      color: var(--paper-green-500);
+    }
+
   </style>
 
   <template>
@@ -70,6 +81,21 @@
     <paper-toast fit-into=[[headerLayout]] id="toast" text="[[toastMessage]]"></paper-toast>
 
     <bridge-redirect id="redirect"></bridge-redirect>
+
+    <paper-dialog id="modal" modal
+                  fit-into=[[headerLayout]]
+                  entry-animation="scale-up-animation"
+                  exit-animation="fade-out-animation"
+                  on-iron-overlay-closed="_modalClosed"
+                  on-iron-overlay-opened="_hackOverlay">
+      <p>Existing game found. You really want to start a new game?</p>
+
+      <div class="buttons">
+        <paper-button dialog-dismiss autofocus>No</paper-button>
+        <paper-button dialog-confirm>Yes</paper-button>
+      </div>
+
+    </paper-dialog>
 
   </template>
 
@@ -107,6 +133,10 @@
       },
 
       _start: function _start() {
+        if (Bridge.Game.state !== Bridge.gameState.notStarted || Bridge.Game.state !== Bridge.gameState.gameEnd) {
+          this.$.modal.open();
+          return;
+        }
         var res = Bridge.Game.start(this.numberOfCard, this.playerNames);
         if (res) {
           this.toastMessage = res;
@@ -116,7 +146,20 @@
           Bridge.Game.notify(this);
           this.$.redirect.redirect('game');
         }
-      }
+      },
+
+      _modalClosed: function _modalClosed(event) {
+        if (event.detail.confirmed) {
+          Bridge.Game.state = Bridge.gameState.notStarted;
+          this._start();
+        }
+      },
+
+      _hackOverlay: function _hackOverlay(e) {
+        if (e.target.withBackdrop) {
+          e.target.parentNode.insertBefore(e.target.backdropElement, e.target);
+        }
+      },
 
     });
   </script>

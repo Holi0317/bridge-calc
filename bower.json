@@ -24,7 +24,9 @@
     "paper-material": "PolymerElements/paper-material#^1.0.0",
     "paper-styles": "PolymerElements/paper-styles#^1.0.0",
     "paper-toast": "PolymerElements/paper-toast#^1.0.0",
-    "platinum-https-redirect": "PolymerElements/platinum-https-redirect#^1.0.2"
+    "platinum-https-redirect": "PolymerElements/platinum-https-redirect#^1.0.2",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.0.4",
+    "neon-animation": "PolymerElements/neon-animation#^1.2.3"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
