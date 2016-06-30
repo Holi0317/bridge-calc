@@ -65,12 +65,12 @@
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
 
-    <app-drawer-layout fullbleed>
+    <app-drawer-layout fullbleed narrow="{{isNarrow}}">
 
       <!-- Drawer content -->
-      <app-drawer>
+      <app-drawer swipe-open id="drawer">
         <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation" on-iron-select="_closeDrawer">
           <a name="init" href="/init">Start new game</a>
           <a name="game" href="/game">Input round</a>
           <a name="scoreboard" href="/scoreboard">Scoreboard</a>
@@ -142,6 +142,12 @@
       ready: function() {
         // Public header layout for paper-toast to fit into it.
         Bridge.headerLayout = this.$.headerLayout;
+      },
+
+      _closeDrawer: function _closeDrawer() {
+        if (this.isNarrow) {
+          this.$.drawer.close();
+        }
       }
 
     });
