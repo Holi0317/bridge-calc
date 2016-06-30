@@ -1,13 +1,48 @@
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 
 <dom-module id="sw-register">
 
+  <style>
+    paper-button {
+      color: #2196F3;
+    }
+  </style>
+
   <template>
-    <paper-toast fit-into="[[headerLayout]]" text="[[toastMessage]]" id="toast"></paper-toast>
+    <paper-toast fit-into="[[headerLayout]]" text="Bridge calculator can now work offline." id="installed">
+      <paper-button id="wut">Wut?</paper-button>
+    </paper-toast>
+    <paper-toast fit-into="[[headerLayout]]" text="Update succeed. Refresh to complete the update" id="updated">
+      <paper-button id="refresh">Refresh</paper-button>
+    </paper-toast>
+
+    <paper-dialog id="modal" modal
+                  entry-animation="scale-up-animation"
+                  exit-animation="fade-out-animation">
+      <h2>Bridge calculator can now work offline.</h2>
+      <paper-dialog-scrollable>
+        <p>Thats right. This website can work offline. Whats more, you can add me to homescreen for an app icon.</p>
+        <p>When you are online, this app only cost you 0 byte of data.</p>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-dismiss>OK</paper-button>
+      </div>
+    </paper-dialog>
   </template>
+
   <script>
     Polymer({
       is: 'sw-register',
+
+      listeners: {
+        'wut.click': '_aboutSW',
+        'refresh.click': '_refresh'
+      },
 
       ready: function ready() {
         var self = this;
@@ -24,8 +59,7 @@
               installing.onstatechange = function () {
 
                 if (installing.state === 'installed' && !navigator.serviceWorker.controller) {
-                  self.toastMessage = "Installation complete. I can now work offline. (Trust me, it's real)";
-                  self.$.toast.show();
+                  self.$.installed.show();
                 }
               };
             };
@@ -37,12 +71,19 @@
             navigator.serviceWorker.controller.onstatechange = function (event) {
               if (event.target.state === 'redundant') {
 
-                self.toastMessage = 'Update available. Refresh to get latest content';
-                self.$.toast.show();
+                self.$.updated.show();
               }
             };
           }
         }
+      },
+
+      _aboutSW: function _aboutSW() {
+        this.$.modal.open();
+      },
+
+      _refresh: function _refresh() {
+        location.reload();
       }
     });
   </script>

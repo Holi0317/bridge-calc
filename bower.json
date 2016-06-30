@@ -26,7 +26,8 @@
     "paper-toast": "PolymerElements/paper-toast#^1.0.0",
     "platinum-https-redirect": "PolymerElements/platinum-https-redirect#^1.0.2",
     "paper-dialog": "PolymerElements/paper-dialog#^1.0.4",
-    "neon-animation": "PolymerElements/neon-animation#^1.2.3"
+    "neon-animation": "PolymerElements/neon-animation#^1.2.3",
+    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^1.1.4"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
