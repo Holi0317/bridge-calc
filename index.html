@@ -6,7 +6,7 @@
 
   <title>Bridge calculator</title>
 
-  <link rel="icon" href="/images/icon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="images/icon-32.png" type="image/png" sizes="32x32">
 
   <meta name="theme-color" content="#3f51b5">
   <link rel="manifest" href="/manifest.json">
@@ -31,7 +31,7 @@
       } else {
         // polyfill web components
         var e = document.createElement('script');
-        e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+        e.src = 'bower_components/webcomponentsjs/webcomponents-lite.min.js';
         document.head.appendChild(e);
         window.Bridge.wcSupported = false;
       }
@@ -39,7 +39,7 @@
 
   </script>
 
-  <link rel="import" href="/src/bridge-shell.html">
+  <link rel="import" href="src/bridge-shell.html">
 
   <style>
 
