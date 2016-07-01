@@ -1,0 +1,18 @@
+{
+  "hosting": {
+    "public": "build/bundled",
+    "ignore": [
+      "test/**/*",
+      "LICENSE",
+      "*.json",
+      "*.md",
+      "sw-precache-config.js"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
