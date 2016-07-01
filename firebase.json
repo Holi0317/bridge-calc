@@ -4,7 +4,9 @@
     "ignore": [
       "test/**/*",
       "LICENSE",
-      "*.json",
+      "bower.json",
+      "firebase.json",
+      "polymer.json",
       "*.md",
       "sw-precache-config.js"
     ],
