@@ -10,11 +10,15 @@
       "*.md",
       "sw-precache-config.js"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "rewrites": [{
+      "source": "/init",
+      "destination": "/index.html"
+    }, {
+      "source": "/game",
+      "destination": "/index.html"
+    }, {
+      "source": "/scoreboard",
+      "destination": "/index.html"
+    }]
   }
 }
