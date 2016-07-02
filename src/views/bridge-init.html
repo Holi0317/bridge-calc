@@ -86,6 +86,7 @@
                   fit-into=[[headerLayout]]
                   entry-animation="scale-up-animation"
                   exit-animation="fade-out-animation"
+                  closing-reason="{{closingReason}}"
                   on-iron-overlay-closed="_modalClosed"
                   on-iron-overlay-opened="_hackOverlay">
       <p>Existing game found. You really want to start a new game?</p>
@@ -117,6 +118,10 @@
         service: {
           type: Object,
           notify: true
+        },
+        closingReason: {
+          type: Object,
+          notify: true
         }
       },
 
@@ -133,7 +138,7 @@
       },
 
       _start: function _start() {
-        if (Bridge.Game.state !== Bridge.gameState.notStarted || Bridge.Game.state !== Bridge.gameState.gameEnd) {
+        if (Bridge.Game.state !== Bridge.gameState.notStarted && Bridge.Game.state !== Bridge.gameState.gameEnd) {
           this.$.modal.open();
           return;
         }
