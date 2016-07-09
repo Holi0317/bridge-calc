@@ -15,7 +15,6 @@
      */
     start: function start(numberOfCard, playerNames) {
       if (!lodash.isInteger(Number(numberOfCard))) {
-        console.log(numberOfCard);
         return 'Poker card must be an integer larger than 0. How do you get 0.5 card?';
       }
 
@@ -45,7 +44,10 @@
     _common: function _common(prop, players, currentRound, eachCB, sumCB) {
       var sum = 0;
 
-      players.forEach(function (player) {
+      // FIXME Replace this with for...of loop when uglify supports ES6 syntax
+      for (var i = 0; i < players.length; i++) {
+        var player = players[i];
+
         var res = eachCB(player, currentRound);
         if (res) {
           return res;
@@ -68,7 +70,7 @@
         }
 
         sum += num;
-      });
+      }
 
       var res = sumCB(sum);
       if (res) {
