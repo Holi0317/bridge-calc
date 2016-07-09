@@ -183,6 +183,15 @@
   * @return {?string} - Error message. If no error, null is returned.
   */
   Game.prototype.win = function win() {
+    var self = this;
+
+    this.players.forEach(function (player, i) {
+      if (player.win == null || player.win === '') {
+        player.win = 0;
+        self._dirtyProps.push('service.players.#' + i + '.win');
+      }
+    });
+
     var res = Bridge.validator.win(this.players, this.currentRound);
     if (res) {
       return res;

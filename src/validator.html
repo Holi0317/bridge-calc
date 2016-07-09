@@ -128,11 +128,7 @@
      * @return {?string} - Error message. If no error, null is returned.
      */
     win: function win(players, currentRound) {
-      var eachCB = function eachCB(player) {
-        if (player.win == null || player.win === '') {
-          player.win = 0;
-        }
-      };
+      var eachCB = function() {};
 
       var sumCB = function sumCB(sum) {
         if (sum !== currentRound) {
