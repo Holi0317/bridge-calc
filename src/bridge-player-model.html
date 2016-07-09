@@ -23,7 +23,6 @@
    * @prop {Number} combo - Current combo of win round.
    * @prop {Number} maxCombo - Maximum combo of all round.
    * @prop {Number} miss - Number of lose round.
-   * @prop {String} comment - Comment for the whole game.
    *
    * @private @prop {Object} _buffer - Buffer for calculated properties.
    *
@@ -80,32 +79,6 @@
     get maxCombo() {
       this._calcStats();
       return this._buffer.maxCombo;
-    },
-
-    get comment() {
-      this._calcStats();
-
-      if (this.score.length < 3) {
-        return '';
-      }
-
-      if (this.miss === 0) {
-        return '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ PERFECT ✧ﾟ･: *ヽ(◕ヮ◕ヽ)';
-      }
-
-      if (this.miss === 1) {
-        return '(☞ﾟヮﾟ)☞ UCCU ☜(ﾟヮﾟ☜)';
-      }
-
-      if (this.miss === this.score.length) {
-        return "Add oil (ง'̀-'́)ง";
-      }
-
-      if (this.totalScore <= 0) {
-        return 'Negative score. ಠ_ಠ';
-      }
-
-      return '';
     },
 
     /**
