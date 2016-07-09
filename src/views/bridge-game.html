@@ -135,32 +135,9 @@
       },
 
       toggleDisabled: function toggleDisabled(state) {
-        switch (state) {
-          case Bridge.gameState.bid:
-            this.bidDisabled = false;
-            this.winDisabled = true;
-            this.nextDisabled = true;
-            break;
-
-          case Bridge.gameState.inputWin:
-            this.bidDisabled = true;
-            this.winDisabled = false;
-            this.nextDisabled = true;
-            break;
-
-          case Bridge.gameState.waiting:
-            this.bidDisabled = true;
-            this.winDisabled = true;
-            this.nextDisabled = false;
-            break;
-
-          case Bridge.gameState.notStarted:
-          case Bridge.gameState.gameEnd:
-          default:
-            this.bidDisabled = true;
-            this.winDisabled = true;
-            this.nextDisabled = true;
-        }
+        this.bidDisabled = (state !== Bridge.gameState.bid);
+        this.winDisabled = (state !== Bridge.gameState.inputWin);
+        this.nextDisabled = (state !== Bridge.gameState.waiting);
       },
 
       _makerName: function _makerName(players, maker) {
