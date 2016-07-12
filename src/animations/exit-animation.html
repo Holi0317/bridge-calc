@@ -1,0 +1,23 @@
+<link rel="import" href="../../bower_components/neon-animation/neon-animation-behavior.html">
+
+<script>
+  Polymer({
+    is: 'bridge-exit-animation',
+
+    behaviors: [Polymer.NeonAnimationBehavior],
+
+    configure: function configure(config) {
+      var node = config.node;
+
+      this._effect = new KeyframeEffect(node, [
+        {'opacity': '1', 'transform': 'translateY(0)', offset: 0},
+        {'opacity': '0', 'transform': 'translateY(15em)', offset: .5},
+        {'opacity': '0', 'transform': 'translateY(15em)', offset: 1}
+      ], {
+        duration: 500,
+        easing: 'ease-in-out'
+      });
+      return this._effect;
+    }
+  })
+</script>

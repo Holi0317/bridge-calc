@@ -7,10 +7,13 @@
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/platinum-https-redirect/platinum-https-redirect.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="animations/entry-animation.html">
+<link rel="import" href="animations/exit-animation.html">
+
 <link rel="import" href="my-icons.html">
 <link rel="import" href="sw-register.html">
 <link rel="import" href="game-service.html">
@@ -91,11 +94,15 @@
 
         <old-warn></old-warn>
 
-        <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
+        <neon-animated-pages role="main"
+                             selected="[[page]]"
+                             attr-for-selected="name"
+                             entry-animation="bridge-entry-animation"
+                             exit-animation="bridge-exit-animation">
           <bridge-init service="{{service}}" name="init"></bridge-init>
           <bridge-game service="{{service}}" name="game"></bridge-game>
           <bridge-scoreboard service="{{service}}" name="scoreboard"></bridge-scoreboard>
-        </iron-pages>
+        </neon-animated-pages>
 
       </app-header-layout>
 

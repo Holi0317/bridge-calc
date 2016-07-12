@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animatable-behavior.html">
 
 <dom-module id="bridge-scoreboard">
   <style>
@@ -103,6 +104,8 @@
   <script>
     Polymer({
       is: 'bridge-scoreboard',
+
+      behaviors: [Polymer.NeonAnimatableBehavior],
 
       properties: {
         service: {
