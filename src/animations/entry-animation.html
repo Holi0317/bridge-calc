@@ -10,12 +10,12 @@
       var node = config.node;
 
       this._effect = new KeyframeEffect(node, [
-        {'opacity': '0', 'transform': 'translateY(15em)', offset: 0},
-        {'opacity': '0', 'transform': 'translateY(15em)', offset: .5},
+        {'opacity': '0', 'transform': 'translateY(10em)', offset: 0},
+        {'opacity': '0', 'transform': 'translateY(10em)', offset: .7},
         {'opacity': '1', 'transform': 'translateY(0)', offset: 1}
       ], {
-        duration: 1000,
-        easing: 'ease-in-out'
+        duration: 700,
+        easing: 'ease-out'
       });
       return this._effect;
     }

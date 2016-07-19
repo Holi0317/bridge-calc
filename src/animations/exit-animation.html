@@ -11,11 +11,11 @@
 
       this._effect = new KeyframeEffect(node, [
         {'opacity': '1', 'transform': 'translateY(0)', offset: 0},
-        {'opacity': '0', 'transform': 'translateY(15em)', offset: .5},
-        {'opacity': '0', 'transform': 'translateY(15em)', offset: 1}
+        {'opacity': '0', 'transform': 'translateY(10em)', offset: .3},
+        {'opacity': '0', 'transform': 'translateY(10em)', offset: 1}
       ], {
-        duration: 1000,
-        easing: 'ease-in-out'
+        duration: 700,
+        easing: 'linear'
       });
       return this._effect;
     }
