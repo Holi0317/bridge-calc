@@ -255,7 +255,7 @@
     var self = this;
 
     this.players.forEach(function (player, i) {
-      var score = calculateScore(player.bid, player.win);
+      var score = calculateScore(Number(player.bid), Number(player.win));
       player.score[self.currentRound - 1] = score; // this.currentRound is started from 1.
       self._dirtyProps.push('service.players.#' + i + '.score');
       self._dirtyProps.push('service.players.#' + i + '.win');
