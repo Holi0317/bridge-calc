@@ -4,3 +4,4 @@ node_modules
 build
 .tmp
 firebase-debug.log
+.idea

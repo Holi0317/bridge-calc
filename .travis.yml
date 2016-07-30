@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+ - "stable"
+branches:
+  only:
+  - master
+
+before_script:
+ - npm install -g polymer-cli firebase-tools
+
+install:
+ - polymer build --html.collapseWhitespace
+
+script:
+ - firebase deploy --token "$FIREBASE_TOKEN"
