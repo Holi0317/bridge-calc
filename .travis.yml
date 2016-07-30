@@ -11,7 +11,7 @@ branches:
   - master
 
 install:
- - npm install polymer-cli firebaes-tools
+ - npm install polymer-cli firebase-tools
  - node_modules/.bin/polymer build --html.collapseWhitespace
 
 script:
