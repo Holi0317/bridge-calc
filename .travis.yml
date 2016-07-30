@@ -5,13 +5,15 @@ node_js:
 cache:
   directories:
   - node_modules
+  - bower_components
 
 branches:
   only:
   - master
 
 install:
- - npm install polymer-cli firebase-tools
+ - npm install polymer-cli firebase-tools bower
+ - bower install
  - node_modules/.bin/polymer build --html.collapseWhitespace
 
 script:
