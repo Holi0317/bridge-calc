@@ -5,5 +5,10 @@
     "src/views/bridge-init.html",
     "src/views/bridge-game.html",
     "src/views/bridge-scoreboard.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "manifest.json",
+    "images/**/*"
   ]
 }
