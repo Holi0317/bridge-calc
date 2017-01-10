@@ -1,60 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-
-  <title>Bridge calculator</title>
-
-  <link rel="icon" href="/images/icon-32.png" type="image/png" sizes="32x32">
-
-  <meta name="theme-color" content="#0D47A1">
-  <link rel="manifest" href="/manifest.json">
-
-  <script>
-
-    // setup Polymer options
-    window.Polymer = {lazyRegister: true, dom: 'shadow'};
-    // Create app global variables
-    window.Bridge = {
-      wcSupported: true  // Support Webcomponents API?
-    };
-
-    // load webcomponents polyfills
-    (function() {
-      if ('registerElement' in document
-          && 'import' in document.createElement('link')
-          && 'content' in document.createElement('template')) {
-        // browser has web components
-      } else {
-        // polyfill web components
-        var e = document.createElement('script');
-        e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-        document.head.appendChild(e);
-        window.Bridge.wcSupported = false;
-      }
-    })();
-
-  </script>
-
-  <link rel="import" href="/src/bridge-shell.html">
-
-  <style>
-
-    body {
-      margin: 0;
-      font-family: 'Roboto', 'Noto', sans-serif;
-      line-height: 1.5;
-      min-height: 100vh;
-      background-color: #eee;
-    }
-
-  </style>
-
-</head>
-<body>
-
-  <bridge-shell></bridge-shell>
-
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%- htmlWebpackPlugin.options.metadata.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- imported CSS are concatenated and added automatically -->
+  </head>
+  <body aurelia-app="main">
+    <div class="splash">
+      <div class="message"><%- htmlWebpackPlugin.options.metadata.title %></div>
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
+  </body>
 </html>

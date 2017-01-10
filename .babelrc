@@ -1,0 +1,40 @@
+{
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-flow-strip-types"
+  ],
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": [
+          "last 2 versions",
+          "not ie <= 11",
+          "not ie_mob <= 11",
+          "not ios_saf < 10",
+          "not Safari < 10"
+        ]
+      },
+      "loose": true,
+      "modules": false,
+      "include": [
+
+      ],
+      "exclude": [
+        "transform-regenerator"
+      ],
+      "useBuiltIns": true
+    }]
+  ],
+  "env": {
+    "development": {
+
+    },
+    "production": {
+
+    },
+    "test": {
+
+    }
+  }
+}

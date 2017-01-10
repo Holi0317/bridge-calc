@@ -1,0 +1,21 @@
+@import "mixins";
+
+tile {
+  cursor: pointer;
+  .mdl-card {
+    width: 100%;
+    transition: box-shadow 0.5s;
+    &:hover {
+      @include shadow-8dp();
+    }
+  }
+  [slot="icon"] {
+    font-size: 3em;
+  }
+  .middle {
+    margin: 0 auto;
+  }
+  .mdl-card__subtitle-text {
+    font-size: 2.5em;
+  }
+}

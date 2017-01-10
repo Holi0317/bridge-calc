@@ -1,0 +1,43 @@
+<template>
+  <require from="./tile.html"></require>
+
+  <!-- Colored FAB button with ripple -->
+  <div class="container mdl-grid">
+    <!--Continue-->
+    <tile class="mdl-cell mdl-cell--12-col"> <!--TODO show.bind for continue logic -->
+      <i class="material-icons" slot="icon">play_arrow</i>
+      <span slot="title">Continue</span>
+    </tile>
+
+    <!--New Game-->
+    <tile class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet" click.delegate="goto('entry')">
+      <i class="material-icons" slot="icon">fiber_new</i>
+      <span slot="title">New game</span>
+    </tile>
+
+    <!--Previous games-->
+    <tile class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
+      <i class="material-icons" slot="icon">skip_previous</i>
+      <span slot="title">Previous games</span>
+    </tile>
+
+    <!--Settings-->
+    <tile class="mdl-cell mdl-cell--4-col">
+      <i class="material-icons" slot="icon">settings</i>
+      <span slot="title">Settings</span>
+    </tile>
+
+    <!--Information-->
+    <tile class="mdl-cell mdl-cell--4-col">
+      <i class="material-icons" slot="icon">info</i>
+      <span slot="title">Information</span>
+    </tile>
+
+    <!--Bug report-->
+    <tile class="mdl-cell mdl-cell--4-col">
+      <i class="material-icons" slot="icon">bug_report</i>
+      <span slot="title">Support/bug</span>
+    </tile>
+
+  </div>
+</template>

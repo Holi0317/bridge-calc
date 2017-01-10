@@ -1,0 +1,40 @@
+@import "mdl";
+@import "animations";
+
+@import "views/tile";
+@import "views/name-input";
+
+.container {
+  width: 90%;
+  max-width: 100em;
+  margin: 0 auto;
+}
+
+.back-nav {
+  padding-right: 0.5em !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .mdl-layout__header-row {
+    height: 56px;
+    padding: 0 16px 0 16px;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.splash {
+  text-align: center;
+  margin: 10% 0 0 0;
+  box-sizing: border-box;
+}
+
+.splash .message {
+  font-size: 72px;
+  line-height: 72px;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 0 15px;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

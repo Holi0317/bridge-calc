@@ -1,0 +1,16 @@
+<template>
+  <require from="./name-input"></require>
+
+  <div class="name-inputs">
+    <name-input repeat.for="i of names.length" name.two-way="names[i]" remove.trigger="remove(i)"></name-input>
+  </div>
+
+  <!--TODO make this a flex-->
+  <div>
+    <button class="mdl-button mdl-js-button mdl-button--icon" click.delegate="add()">
+      <i class="material-icons">add</i>
+    </button>
+    <!--TODO add conditional import button and fire the event. Callback: importNames()-->
+  </div>
+
+</template>

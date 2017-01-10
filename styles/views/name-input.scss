@@ -1,0 +1,20 @@
+name-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  width: 100%;
+
+  .mdl-textfield {
+    flex: 5;
+  }
+  .handle {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+  }
+  &.sortable-ghost {
+    opacity: 0.4;
+  }
+}
