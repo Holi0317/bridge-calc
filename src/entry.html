@@ -1,10 +1,16 @@
 <template>
   <require from="./name-input-list"></require>
+  <require from="./entry-options"></require>
 
   <div class="container">
     <h3>Player names</h3>
     <name-input-list names.bind="players" show-import="true" import.trigger="importNames()"></name-input-list>
     <hr />
+  </div>
+
+  <div class="container">
+    <h3>Options</h3>
+    <entry-options player-length.bind="players.length"></entry-options>
   </div>
 
 </template>
