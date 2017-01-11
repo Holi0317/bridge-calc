@@ -5,12 +5,20 @@
     <name-input repeat.for="i of names.length" name.two-way="names[i]" remove.trigger="remove(i)"></name-input>
   </div>
 
-  <!--TODO make this a flex-->
   <div>
-    <button class="mdl-button mdl-js-button mdl-button--icon" click.delegate="add()">
-      <i class="material-icons">add</i>
-    </button>
-    <!--TODO add conditional import button and fire the event. Callback: importNames()-->
+      <button class="mdl-button mdl-js-button mdl-button--icon" click.delegate="add()" id="name-input-list-add-btn">
+        <i class="material-icons">add</i>
+      </button>
+      <div class="mdl-tooltip mdl-tooltip--large" for="name-input-list-add-btn">
+        Add
+      </div>
+
+      <button class="mdl-button mdl-js-button mdl-button--icon import-btn" click.delegate="importNames()" id="name-input-list-import-btn">
+        <i class="material-icons">file_download</i>
+      </button>
+      <div class="mdl-tooltip mdl-tooltip--large" for="name-input-list-import-btn">
+        Import player list
+      </div>
   </div>
 
 </template>

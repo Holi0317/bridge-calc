@@ -18,4 +18,8 @@ export class Entry {
     this.layoutService.title = 'New game';
   }
 
+  importNames() {
+
+  }
+
 }
