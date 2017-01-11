@@ -47,6 +47,7 @@ export class NameInputList {
   }
 
   importNames() {
+    logger.debug('Firing import event');
     let e = new Event('import');
     this.el.dispatchEvent(e);
   }

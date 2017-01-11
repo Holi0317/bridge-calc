@@ -19,7 +19,7 @@ export class Entry {
   }
 
   importNames() {
-
+    logger.debug('Importing names');
   }
 
 }
