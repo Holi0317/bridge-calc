@@ -5,16 +5,19 @@ node_js:
 cache:
   directories:
   - node_modules
-  - bower_components
 
 branches:
   only:
   - master
 
 install:
- - npm install polymer-cli firebase-tools bower
- - bower install
- - node_modules/.bin/polymer build --html.collapseWhitespace
+ - npm install
+ - npm install firebase-tools
 
 script:
+ - npm run build:prod
+ # TODO run unit test and e2e tests
+
+after_success:
+ - cp dist/index.html dist/404.html  # For Firebase. All 404 should serve the index page.
  - node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"

@@ -1,24 +1,8 @@
 {
   "hosting": {
-    "public": "build/bundled",
+    "public": "dist",
     "ignore": [
-      "test/**/*",
-      "LICENSE",
-      "bower.json",
-      "firebase.json",
-      "polymer.json",
-      "*.md",
-      "sw-precache-config.js"
-    ],
-    "rewrites": [{
-      "source": "/init",
-      "destination": "/index.html"
-    }, {
-      "source": "/game",
-      "destination": "/index.html"
-    }, {
-      "source": "/scoreboard",
-      "destination": "/index.html"
-    }]
+
+    ]
   }
 }
