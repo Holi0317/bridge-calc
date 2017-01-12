@@ -2,7 +2,8 @@
   "plugins": [
     "transform-decorators-legacy",
     "transform-class-properties",
-    "transform-flow-strip-types"
+    "transform-flow-strip-types",
+    "syntax-dynamic-import"
   ],
   "presets": [
     ["env", {
