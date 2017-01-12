@@ -1,6 +1,6 @@
 import {inject, bindable, bindingMode, LogManager} from 'aurelia-framework';
 import Sortable from 'sortablejs';
-import {sampleName} from './services/sample-name';
+import {sampleName} from '../services/sample-name';
 
 function arrayMove(a: Array, from_: number, to: number) {
   a.splice(to, 0, a.splice(from_, 1)[0]);
