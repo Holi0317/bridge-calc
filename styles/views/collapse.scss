@@ -1,0 +1,14 @@
+@import "variables";
+
+collapse {
+  .content {
+    transition: height 0.5s;
+    overflow: hidden;
+  }
+  button.mdl-button {
+    width: 100%;
+  }
+  button.collapse-opened {
+    background-color: $button-active-color;
+  }
+}

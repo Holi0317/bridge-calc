@@ -1,0 +1,10 @@
+<template>
+  <div class="title" click.delegate="toggle()">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" ref="buttonElement">
+      <slot name="title"></slot>
+    </button>
+  </div>
+  <div class="content" ref="contentElement">
+    <slot name="content"></slot>
+  </div>
+</template>

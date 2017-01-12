@@ -1,6 +1,7 @@
 <template>
   <require from="../name-input-list/name-input-list"></require>
   <require from="../entry-options/entry-options"></require>
+  <require from="../collapse/collapse"></require>
 
   <div class="container">
     <h3>Player names</h3>
@@ -9,8 +10,10 @@
   </div>
 
   <div class="container">
-    <h3>Options</h3>
-    <entry-options player-length.bind="players.length"></entry-options>
+    <collapse>
+      <span slot="title">Options</span>
+      <entry-options slot="content" player-length.bind="players.length"></entry-options>
+    </collapse>
   </div>
 
 </template>
