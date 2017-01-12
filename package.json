@@ -90,7 +90,6 @@
     "@easy-webpack/config-json": "^3.1.0",
     "@easy-webpack/config-sass": "^4.0.0",
     "@easy-webpack/config-test-coverage-istanbul": "^3.2.0",
-    "@easy-webpack/config-uglify": "^2.2.3",
     "@easy-webpack/core": "^2.0.1",
     "aurelia-protractor-plugin": "^1.0.1",
     "aurelia-tools": "^1.0.0",
