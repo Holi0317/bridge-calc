@@ -58,6 +58,9 @@ const coreBundles = {
     'aurelia-templating-binding',
     'aurelia-templating-router',
     'aurelia-templating-resources'
+  ],
+  polyfills: [
+    'whatwg-fetch'
   ]
 };
 
@@ -77,7 +80,8 @@ let config = generateConfig(
     entry: {
       'app': ['./src/main' /* this is filled by the aurelia-webpack-plugin */],
       'aurelia-bootstrap': coreBundles.bootstrap,
-      'aurelia': coreBundles.aurelia.filter(pkg => coreBundles.bootstrap.indexOf(pkg) === -1)
+      'aurelia': coreBundles.aurelia.filter(pkg => coreBundles.bootstrap.indexOf(pkg) === -1),
+      'polyfills': coreBundles.polyfills
     },
     output: {
       path: outDir
@@ -90,6 +94,7 @@ let config = generateConfig(
         VERSION: JSON.stringify(require('./package.json').version)
       }),
       new webpack.LoaderOptionsPlugin({
+        minimize: ENV === 'production',
         options: {
           sassLoader: {
             includePaths: [path.resolve('./node_modules/material-design-lite/src')]
@@ -110,10 +115,9 @@ let config = generateConfig(
   sass({
     filename: 'styles.css',
     allChunks: true,
-    sourceMap: ENV !== 'production',
-    outputStyle: ENV === 'production'
-      ? 'compressed'
-      : 'expanded'
+    // sass loader cannot generate sourcemap on webpack 2 YET
+    // sourceMap: ENV !== 'production'
+    sourceMap: false
   }),
   fontAndImages(),
   generateIndexHtml({minify: ENV === 'production'}),
