@@ -16,7 +16,7 @@ export class App {
     config.title = 'Bridge calculator';
     config.options.pushState = !location.host.includes('github'); // GitHub does not support push state
     config.map([
-      { route: '', name: 'menu', moduleId: './menu' },
+      { route: '', name: 'menu', moduleId: './menu/menu' },
       { route: '/entry', name: 'entry', moduleId: './entry/entry', title: 'New Game' }
     ]);
 
