@@ -8,7 +8,8 @@ collapse {
   button.mdl-button {
     width: 100%;
   }
-  button.collapse-opened {
+  button.collapse-opened,
+  button.collapse-opened:hover {
     background-color: $button-active-color;
   }
 }
