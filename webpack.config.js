@@ -92,7 +92,7 @@ let config = generateConfig(
       new webpack.LoaderOptionsPlugin({
         options: {
           sassLoader: {
-            includePaths: [path.resolve(__dirname, './node_modules/material-design-lite/src')]
+            includePaths: [path.resolve('./node_modules/material-design-lite/src')]
           }
         }
       })
@@ -101,7 +101,7 @@ let config = generateConfig(
 
   ENV === 'test' || ENV === 'development' ?
     envDev(ENV !== 'test' ? {} : {devtool: 'inline-source-map'}) :
-    envProd({ /* devtool: '...' */ }),
+    envProd({ devtool: false }),
 
   aurelia({root: rootDir, src: srcDir, title: title, baseUrl: baseUrl}),
 
@@ -110,7 +110,7 @@ let config = generateConfig(
   sass({
     filename: 'styles.css',
     allChunks: true,
-    sourceMap: false,
+    sourceMap: ENV !== 'production',
     outputStyle: ENV === 'production'
       ? 'compressed'
       : 'expanded'
