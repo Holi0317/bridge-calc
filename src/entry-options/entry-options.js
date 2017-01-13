@@ -1,7 +1,19 @@
-import {inject, bindable, bindingMode, LogManager} from 'aurelia-framework';
+import {bindable, bindingMode, LogManager} from 'aurelia-framework';
 import isInteger from 'lodash.isinteger';
 
 const logger = LogManager.getLogger('EntryOptionsComponent');
+
+export interface EntryOptionsData {
+  cards: number,
+  rounds: number,
+  startingRound: number
+}
+
+export interface EntryOptionsError {
+  cards: string,
+  rounds: string,
+  startingRound: string
+}
 
 export class EntryOptions {
   /**
@@ -9,34 +21,30 @@ export class EntryOptions {
    */
   @bindable() playerLength: number;
   /**
-   * Number of cards.
-   * Controlled by this component.
+   * All options for entry.
    */
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) cards: string;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) options: EntryOptionsData;
+
   /**
-   * Number of rounds.
-   * Controlled by this component.
+   * All errors in options.
    */
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) rounds: string;
-  /**
-   * The round to start from.
-   * Controlled by this component.
-   */
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) startingRound: string;
-  /**
-   * Errors of fields controlled by this component
-   */
-  errors: {
-    card: string,
-    round: string,
-    startingRound: string
-  };
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) errors: EntryOptionsError;
+
+  @bindable() _cards: string;
+  @bindable() _rounds: string;
+  @bindable() _startingRound: string;
+
 
   constructor() {
-    this.resetError();
-    this.cards = 52;
-    this.rounds = 13;
-    this.startingRound = 1;
+    this._cards = '52';
+    this._rounds = '13';
+    this._startingRound = '1';
+    this.options = {
+      cards: 52,
+      rounds: 13,
+      startingRound: 1
+    };
+    this.errors = {};
   }
 
   attached() {
@@ -50,60 +58,36 @@ export class EntryOptions {
     if (!this.playerLength) {
       return;
     }
-    this.rounds = Math.floor(this.cards / this.playerLength);
+    this._rounds = Math.floor(this._cards / this.playerLength);
   }
 
   /**
-   * Set all err to empty string.
+   * Is data a positive integer?
+   * @param d
    */
-  resetError() {
-    this.errors = {
-      card: '',
-      round: '',
-      startingRound: ''
-    };
+  isInteger(d: number) {
+    return d > 0 && isInteger(d);
   }
 
   /**
    * Validate if there is any error in entered data.
-   * TODO make this more concise
+   * TODO tidy this mess up again
    */
   validate() {
-    this.resetError();
-    const cards = +this.cards;
-    const playerLength = +this.playerLength;
-    const rounds = +this.rounds;
-    const startingRound = +this.startingRound;
-    if (cards <= 0) {
-      this.errors.card = 'Card number must be larger than 0';
+    const cards = +this._cards;
+    const rounds = +this._rounds;
+    const startingRound = +this._startingRound;
+
+    this.errors.cards = this.isInteger(cards) ? '' : 'Card must be a positive integer';
+    this.errors.rounds = this.isInteger(rounds) ? '' : 'Rounds must be a positive integer';
+    this.errors.startingRound = this.isInteger(startingRound) ? '' : 'Starting round must be a positive integer';
+
+    if (this.playerLength > cards) {
+      this.errors.cards = 'Too less cards';
       return
     }
-    if (!isInteger(cards)) {
-      this.errors.card = 'Card number must be an integer';
-      return
-    }
-    if (playerLength > cards) {
-      this.errors.card = 'Too less cards';
-      return
-    }
-    if (rounds <= 0) {
-      this.errors.round = 'Card number must be larger than 0';
-      return
-    }
-    if (!isInteger(rounds)) {
-      this.errors.round = 'Round must be an integer';
-      return
-    }
-    if (rounds > cards / playerLength) {
-      this.errors.round = 'Insufficient cards for that much rounds';
-      return
-    }
-    if (startingRound <= 0) {
-      this.errors.startingRound = 'Starting round must be larger than 0';
-      return
-    }
-    if (!isInteger(startingRound)) {
-      this.errors.round = 'Starting round must be an integer';
+    if (rounds > cards / this.playerLength) {
+      this.errors.rounds = 'Insufficient cards for that much rounds';
       return
     }
     if (startingRound > rounds) {
@@ -112,21 +96,40 @@ export class EntryOptions {
     }
   }
 
-  cardsChanged(newValue: number, oldValue: number) {
+  /**
+   * Synchronize input data to this.options
+   */
+  sync() {
+    this.options = {
+      cards: +this._cards,
+      rounds: +this._rounds,
+      startingRound: +this._startingRound
+    }
+  }
+
+  changed() {
+    logger.debug('Changed');
+  }
+
+  _cardsChanged(newValue: string, oldValue: string) {
     this.resetRounds();
     this.validate();
+    this.sync();
   }
 
-  roundsChanged(newValue: number, oldValue: number) {
+  _roundsChanged(newValue: string, oldValue: string) {
     this.validate();
+    this.sync();
   }
 
-  playerLengthChanged(newValue: number, oldValue: number) {
+  _startingRoundChanged(newValue: string, oldValue: string) {
+    this.validate();
+    this.sync();
+  }
+
+  playerLengthChanged(newValue: string, oldValue: string) {
     this.resetRounds();
-    this.validate()
-  }
-
-  startingRoundChanged(newValue: number, oldValue: number) {
     this.validate();
+    this.sync();
   }
 }
