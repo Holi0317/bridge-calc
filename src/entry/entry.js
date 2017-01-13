@@ -19,7 +19,12 @@ export class Entry {
   }
 
   importNames() {
+    // TODO Implement import name logic
     logger.debug('Importing names');
+  }
+
+  start() {
+    // TODO Implement start logic
   }
 
 }

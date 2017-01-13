@@ -24,7 +24,7 @@ export class App {
   }
 
   showHelp() {
-
+    // TODO Show help with a dialog
   }
 
   back() {
