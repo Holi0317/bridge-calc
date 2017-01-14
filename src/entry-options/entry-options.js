@@ -83,7 +83,7 @@ export class EntryOptions {
     this.errors.startingRound = this.isInteger(startingRound) ? '' : 'Starting round must be a positive integer';
 
     if (this.playerLength > cards) {
-      this.errors.cards = 'Too less cards';
+      this.errors.cards = 'Too few cards';
       return
     }
     if (rounds > cards / this.playerLength) {
