@@ -96,6 +96,7 @@ let config = generateConfig(
         VERSION: JSON.stringify(require('./package.json').version)
       }),
       new webpack.LoaderOptionsPlugin({
+        test: /\.s[ac]ss$/i,
         minimize: ENV === 'production',
         options: {
           sassLoader: {
