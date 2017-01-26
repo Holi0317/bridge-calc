@@ -1,26 +1,18 @@
-import {inject, LogManager} from 'aurelia-framework';
+import {LogManager} from 'aurelia-framework';
 import {sampleName} from '../services/sample-name';
-import {LayoutService} from '../services/layout-service';
 
 import type {EntryOptionsData, EntryOptionsError} from '../entry-options/entry-options';
 
 const logger = LogManager.getLogger('EntryView');
 
-@inject(LayoutService)
 export class Entry {
-  layoutService: LayoutService;
   players: string[];
   options: EntryOptionsData;
   optionsErrors: EntryOptionsError;
 
-  constructor(layoutService: LayoutService) {
-    this.layoutService = layoutService;
+  constructor() {
     this.players = [sampleName(), sampleName(), sampleName(), sampleName()];
     this.optionsErrors = {};
-  }
-
-  activate() {
-    this.layoutService.title = 'New game';
   }
 
   importNames() {
