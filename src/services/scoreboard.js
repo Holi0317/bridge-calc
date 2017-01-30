@@ -24,7 +24,7 @@ export class Scoreboard {
    * Score map for this player.
    * Format should be round name -> score
    */
-  private _scores: Map<string, number>;
+  _scores: Map<string, number>;
   /**
    * Current bid.
    * See setScore method for details.

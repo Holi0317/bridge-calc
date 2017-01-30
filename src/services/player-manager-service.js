@@ -11,11 +11,11 @@ export class PlayerManagerService {
   /**
    * Used in `next` method
    */
-  private _currentPlayerIndex: number;
+  _currentPlayerIndex: number;
   /**
    * Used in `getPlayerByID` method
    */
-  private _playerMap: Map<PlayerID, Player>;
+  _playerMap: Map<PlayerID, Player>;
 
   constructor() {
     this.reset();
@@ -104,7 +104,7 @@ export class PlayerManagerService {
     return this._playerMap.get(id);
   }
 
-  private _refreshMap() {
+  _refreshMap() {
     this._playerMap = new Map();
     for (const player of this.players) {
       this._playerMap.set(player.ID, player);
