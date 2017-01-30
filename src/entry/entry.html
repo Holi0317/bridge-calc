@@ -12,12 +12,12 @@
   <div class="container">
     <collapse>
       <span slot="title">Options</span>
-      <entry-options slot="content" player-length.bind="players.length" options.bind="options" errors.bind="optionsErrors"></entry-options>
+      <entry-options slot="content" player-length.bind="players.length" options.bind="options" has-error.bind="hasError"></entry-options>
     </collapse>
   </div>
 
   <div class="container">
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" click.delegate="start()">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled.bind="hasError" click.delegate="start()">
       Start
     </button>
   </div>

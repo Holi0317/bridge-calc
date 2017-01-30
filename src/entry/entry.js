@@ -1,18 +1,27 @@
-import {LogManager} from 'aurelia-framework';
+import {inject, LogManager} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
 import {sampleName} from '../services/sample-name';
+import {GameService, StartOptions} from '../services/game-service';
 
-import type {EntryOptionsData, EntryOptionsError} from '../entry-options/entry-options';
+import type {EntryOptionsError} from '../entry-options/entry-options';
 
 const logger = LogManager.getLogger('EntryView');
 
+@inject(Router, GameService)
 export class Entry {
   players: string[];
-  options: EntryOptionsData;
+  options: StartOptions.options;
   optionsErrors: EntryOptionsError;
+  hasError: boolean;
 
-  constructor() {
+  gameService: GameService;
+  router: Router;
+
+  constructor(router: Router, gameService: GameService) {
     this.players = [sampleName(), sampleName(), sampleName(), sampleName()];
     this.optionsErrors = {};
+    this.router = router;
+    this.gameService = gameService;
   }
 
   importNames() {
@@ -21,7 +30,14 @@ export class Entry {
   }
 
   start() {
-    // TODO Implement start logic
+    if (this.hasError) {
+      return
+    }
+    this.gameService.start({
+      players: this.players,
+      options: this.options
+    });
+    this.router.navigateToRoute('game');
   }
 
 }

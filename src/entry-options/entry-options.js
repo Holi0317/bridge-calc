@@ -26,6 +26,8 @@ export class EntryOptions {
    */
   @bindable({ defaultBindingMode: bindingMode.twoWay }) errors: EntryOptionsError;
 
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) hasError: boolean;
+
   @bindable() _cards: string;
   @bindable() _rounds: string;
   @bindable() _startingRound: string;
@@ -40,6 +42,7 @@ export class EntryOptions {
       startingRound: 1
     };
     this.errors = {};
+    this.hasError = false;
   }
 
   attached() {
@@ -99,7 +102,8 @@ export class EntryOptions {
       cards: +this._cards,
       rounds: +this._rounds,
       startingRound: +this._startingRound
-    }
+    };
+    this.hasError = this.errors.cards !== '' || this.errors.rounds !== '' || this.errors.startingRound !== '';
   }
 
   _cardsChanged(newValue: string, oldValue: string) {
