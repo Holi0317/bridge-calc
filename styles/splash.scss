@@ -19,6 +19,10 @@ $width: 100px;
   padding: 5%;
   animation: splash-show 2s linear;
 
+  text-align: center;
+  margin: 10% 0 0 0;
+  box-sizing: border-box;
+
   .loader {
     position: relative;
     margin: 0 auto;
