@@ -5,11 +5,13 @@ collapse {
     transition: height 0.5s;
     overflow: hidden;
   }
-  button.mdl-button {
-    width: 100%;
-  }
-  button.collapse-opened,
-  button.collapse-opened:hover {
-    background-color: $button-active-color;
+  .title {
+    button.mdl-button {
+      width: 100%;
+    }
+    button.collapse-opened,
+    button.collapse-opened:hover {
+      background-color: $button-active-color;
+    }
   }
 }
