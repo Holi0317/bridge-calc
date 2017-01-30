@@ -1,13 +1,9 @@
 import {bindable, bindingMode, LogManager} from 'aurelia-framework';
 import isInteger from 'lodash.isinteger';
 
-const logger = LogManager.getLogger('EntryOptionsComponent');
+import type {StartOptions} from '../services/game-service';
 
-export interface EntryOptionsData {
-  cards: number,
-  rounds: number,
-  startingRound: number
-}
+const logger = LogManager.getLogger('EntryOptionsComponent');
 
 export interface EntryOptionsError {
   cards: string,
@@ -23,7 +19,7 @@ export class EntryOptions {
   /**
    * All options for entry.
    */
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) options: EntryOptionsData;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) options: StartOptions.options;
 
   /**
    * All errors in options.
@@ -33,7 +29,6 @@ export class EntryOptions {
   @bindable() _cards: string;
   @bindable() _rounds: string;
   @bindable() _startingRound: string;
-
 
   constructor() {
     this._cards = '52';
@@ -105,10 +100,6 @@ export class EntryOptions {
       rounds: +this._rounds,
       startingRound: +this._startingRound
     }
-  }
-
-  changed() {
-    logger.debug('Changed');
   }
 
   _cardsChanged(newValue: string, oldValue: string) {
