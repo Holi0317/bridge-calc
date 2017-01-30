@@ -1,31 +1,17 @@
 {
   "plugins": [
+    "transform-flow-strip-types",
+
     "transform-decorators-legacy",
     "transform-class-properties",
-    "transform-flow-strip-types",
-    "syntax-dynamic-import"
-  ],
-  "presets": [
-    ["env", {
-      "targets": {
-        "browsers": [
-          "last 2 versions",
-          "not ie <= 11",
-          "not ie_mob <= 11",
-          "not ios_saf < 10",
-          "not Safari < 10"
-        ]
-      },
-      "loose": true,
-      "modules": false,
-      "include": [
+    "syntax-dynamic-import",
 
-      ],
-      "exclude": [
-        "transform-regenerator"
-      ],
-      "useBuiltIns": true
-    }]
+    "check-es2015-constants",
+    "transform-es2015-literals",
+
+    "transform-exponentiation-operator",
+    "transform-async-to-generator",
+    "syntax-trailing-function-commas"
   ],
   "env": {
     "development": {
