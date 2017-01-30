@@ -10,7 +10,7 @@ export class NameInput {
   }
 
   remove() {
-    let e = new Event('remove');
+    let e = new Event('remove', {bubble: true});
     this.el.dispatchEvent(e);
   }
 

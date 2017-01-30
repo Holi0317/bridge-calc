@@ -2,7 +2,7 @@
   <require from="../name-input/name-input"></require>
 
   <div class="name-inputs">
-    <name-input repeat.for="i of names.length" name.two-way="names[i]" remove.trigger="remove(i)"></name-input>
+    <name-input repeat.for="i of names.length" name.two-way="names[i]" remove.delegate="remove(i)"></name-input>
   </div>
 
   <div>
