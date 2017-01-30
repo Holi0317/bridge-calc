@@ -1,9 +1,8 @@
 {
   "plugins": [
-    "transform-flow-strip-types",
-
     "transform-decorators-legacy",
     "transform-class-properties",
+    "transform-flow-strip-types",
     "syntax-dynamic-import",
 
     "check-es2015-constants",
