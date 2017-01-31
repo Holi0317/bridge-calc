@@ -11,10 +11,21 @@ export class Collapse {
 
   constructor() {
     this.open = false;
+    this.resizeListener = this.resizeListener.bind(this);
   }
 
   attached() {
     // Manually call changed as there was no element received before attached
+    this.openChanged(this.open, null);
+
+    window.addEventListener('resize', this.resizeListener);
+  }
+
+  detached() {
+    window.removeEventListener('resize', this.resizeListener);
+  }
+
+  resizeListener() {
     this.openChanged(this.open, null);
   }
 
