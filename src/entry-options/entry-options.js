@@ -1,5 +1,4 @@
 import {bindable, bindingMode, LogManager} from 'aurelia-framework';
-import isInteger from 'lodash.isinteger';
 
 import type {StartOptions} from '../services/game-service';
 
@@ -64,7 +63,7 @@ export class EntryOptions {
    * @param d
    */
   isInteger(d: number) {
-    return d > 0 && isInteger(d);
+    return d > 0 && Number.isInteger(d);
   }
 
   /**
