@@ -1,0 +1,29 @@
+<template>
+  <div class="mdl-card mdl-shadow--2dp">
+    <div class="input-container">
+      <span>Bid</span>
+      <div repeat.for="player of gameService.playerManager.players" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" value.bind="player.scoreboard.bid" disabled.bind="bidDisabled">
+        <label class="mdl-textfield__label">${player.name}</label>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <span>Win</span>
+      <div repeat.for="player of gameService.playerManager.players" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" value.bind="player.scoreboard.win" disabled.bind="winDisabled">
+        <label class="mdl-textfield__label">${player.name}</label>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" click.delegate="next()">
+        Next
+      </button>
+      <div class="stretch"></div>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" click.delegate="undo()" disabled.bind="winDisabled">
+        Undo
+      </button>
+    </div>
+  </div>
+</template>

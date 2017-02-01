@@ -1,29 +1,12 @@
 <template>
-  <require from="../../collapse/collapse"></require>
+  <require from="../stack-input/stack-input"></require>
 
   <div class="container">
     <span class="pull-right">Time: 00:00</span>
   </div>
 
   <div class="container">
-    <collapse>
-      <span slot="title">Bid trick</span>
-
-      <div slot="content">
-        <div class="mdl-grid">
-          <div for.repeat="player of gameService.playerManager.players" class="mdl-grid mdl-grid--4-col mdl-cell--6-col-phone">
-            ${player.name}
-          </div>
-        </div>
-
-        <div class="mdl-grid">
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" click.delegate="bid()">
-            Bid
-          </button>
-        </div>
-      </div>
-
-    </collapse>
+    <stack-input></stack-input>
   </div>
 
 </template>

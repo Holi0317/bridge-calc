@@ -8,6 +8,10 @@ $color-accent: $palette-teal-A200 !default;
 // https://github.com/google/material-design-lite/issues/4093
 $input-text-label-color: unquote("rgba(#{$color-black}, 0.38)");
 
+// Disabled textbox should have a lighter color
+$input-text-bottom-border-color: unquote("rgba(#{$color-black}, 0.38)");
+$input-text-disabled-color: unquote("rgba(#{$color-black}, 0.12)");
+
 // Variables and mixins
 @import "variables";
 @import "mixins";
@@ -53,5 +57,15 @@ $input-text-label-color: unquote("rgba(#{$color-black}, 0.38)");
   }
   .mdl-textfield--floating-label.is-focused & {
     color: $input-text-highlight-color;
+  }
+}
+
+// Change border-bottom to dashed so that disabled is more visible
+.mdl-textfield__input {
+  fieldset[disabled] .mdl-textfield &,
+  .mdl-textfield.is-disabled & {
+    background-color: transparent;
+    border-bottom: 1px dashed $input-text-disabled-color;
+    color: $input-text-disabled-text-color;
   }
 }
