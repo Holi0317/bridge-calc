@@ -6,7 +6,7 @@
  * @param win - Number of win gain stack
  * @return Score of the player at that round
  */
-function calculateScore(bid: ?number, win: ?number): number {
+function calculateScore(bid: number | null, win: number | null): number {
   if (bid == null && win == null) {
     return 0;
   } else if (bid === win) {
@@ -21,20 +21,21 @@ function calculateScore(bid: ?number, win: ?number): number {
  */
 export class Scoreboard {
   /**
-   * Score map for this player.
-   * Format should be round name -> score
-   */
-  _scores: Map<string, number>;
-  /**
    * Current bid.
    * See setScore method for details.
    */
-  bid: ?number;
+  public bid: number | null;
   /**
    * Current win.
    * See setScore method for details.
    */
-  win: ?number;
+  public win: number | null;
+
+  /**
+   * Score map for this player.
+   * Format should be round name -> score
+   */
+  private _scores: Map<string, number>;
 
   constructor() {
     this.reset();
@@ -44,9 +45,9 @@ export class Scoreboard {
    * Reset and destroy scoreboard data.
    */
   reset() {
-    this._scores = new Map();
     this.bid = null;
     this.win = null;
+    this._scores = new Map();
   }
 
   /**
@@ -55,7 +56,7 @@ export class Scoreboard {
    * @param round
    * @returns ?number
    */
-  getScore(round: string): ?number {
+  getScore(round: string): number | null {
     const score = this._scores.get(round);
     return (score == null) ? null : score;
   }
@@ -73,7 +74,7 @@ export class Scoreboard {
    * @param bid
    * @param win
    */
-  calcScore(round: string, bid: ?number = this.bid, win: ?number = this.win) {
+  calcScore(round: string, bid = this.bid, win = this.win): void {
     this.bid = null;
     this.win = null;
     const score = calculateScore(bid, win);
@@ -84,7 +85,7 @@ export class Scoreboard {
    * Get total score of the player.
    * @returns {number}
    */
-  getTotalScore() {
+  getTotalScore(): number {
     let sum = 0;
     this._scores.forEach(value => sum += value);
     return sum;

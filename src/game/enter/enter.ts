@@ -6,23 +6,21 @@ const logger = LogManager.getLogger('game.inputComponent');
 
 @inject(GameService)
 export class Enter {
-  gameService: GameService;
+  constructor(private _gameService: GameService) {
 
-  constructor(gameService: GameService) {
-    this.gameService = gameService;
   }
 
-  @computedFrom('gameService.state')
+  @computedFrom('_gameService.state')
   get showBid() {
-    return this.gameService.state === GameState.BID;
+    return this._gameService.state === GameState.BID;
   }
   set showBid(val) {
 
   }
 
-  @computedFrom('gameService.state')
+  @computedFrom('_gameService.state')
   get showWin() {
-    return this.gameService.state === GameState.WIN;
+    return this._gameService.state === GameState.WIN;
   }
   set showWin(val) {
 

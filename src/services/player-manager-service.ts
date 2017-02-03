@@ -1,21 +1,25 @@
 import {genID} from '../utils';
 import {Scoreboard} from './scoreboard';
 
+/**
+ * Use this type for representing PlayerID.
+ * This can promote a higher readability of code.
+ */
 export type PlayerID = string;
 
 export class PlayerManagerService {
   /**
    * Array of players in this manager.
    */
-  players: Player[];
+  public players: Player[];
   /**
    * Used in `next` method
    */
-  _currentPlayerIndex: number;
+  public currentPlayerIndex: number;
   /**
    * Used in `getPlayerByID` method
    */
-  _playerMap: Map<PlayerID, Player>;
+  private _playerMap: Map<PlayerID, Player>;
 
   constructor() {
     this.reset();
@@ -25,7 +29,7 @@ export class PlayerManagerService {
     this.players = [];
 
     // Starts from -1 so that the first player will be returned when next() is called.
-    this._currentPlayerIndex = -1;
+    this.currentPlayerIndex = -1;
     this._playerMap = new Map();
   }
 
@@ -47,7 +51,7 @@ export class PlayerManagerService {
    * Ensure all player ID are unique in this manager.
    * Assign of new ID starts from the last element. Therefore it's safe to call this after adding new player.
    * This use recursion to ensure all ID are unique.
-   * If you are in a very bad luck (I mean vary vary bad luck), stackoverflow will occur.
+   * If you are in a very bad luck (I mean vary vary bad luck), StackOverflow will occur.
    */
   ensureUnique() {
     const IDs = this.players.map(p => p.ID);
@@ -59,7 +63,7 @@ export class PlayerManagerService {
       const index = IDs.lastIndexOf(dupe);
       this.players[index].newID();
     }
-    this.ensureUnique(); // Hopefully this won't cause stackoverflow.
+    this.ensureUnique(); // Hopefully this won't cause StackOverflow.
   }
 
   /**
@@ -68,7 +72,7 @@ export class PlayerManagerService {
    * @param playerID
    * @throws ReferenceError - Player ID does not exists.
    */
-  removePlayer(playerID: ?PlayerID) {
+  removePlayer(playerID?: PlayerID) {
     if (playerID == null) {
       this.players = [];
     } else {
@@ -77,8 +81,8 @@ export class PlayerManagerService {
         throw new ReferenceError(`Player ID: ${playerID} not found.`);
       }
 
-      if (index === this._currentPlayerIndex) {
-        this._currentPlayerIndex--;
+      if (index === this.currentPlayerIndex) {
+        this.currentPlayerIndex--;
       }
       this.players.splice(index, 1);
     }
@@ -90,10 +94,10 @@ export class PlayerManagerService {
    * The first time this method is called will return the first player.
    */
   next() {
-    if (++this._currentPlayerIndex === this.players.length) {
-      this._currentPlayerIndex = 0;
+    if (++this.currentPlayerIndex === this.players.length) {
+      this.currentPlayerIndex = 0;
     }
-    return this.players[this._currentPlayerIndex].ID;
+    return this.players[this.currentPlayerIndex].ID;
   }
 
   /**
@@ -104,7 +108,12 @@ export class PlayerManagerService {
     return this._playerMap.get(id);
   }
 
-  _refreshMap() {
+  /**
+   * Refresh internal playerID -> Player object map.
+   * Should be called after any mutation to player array.
+   * @private
+   */
+  private _refreshMap() {
     this._playerMap = new Map();
     for (const player of this.players) {
       this._playerMap.set(player.ID, player);
@@ -116,19 +125,19 @@ export class Player {
   /**
    * Internal ID for the Player
    */
-  ID: PlayerID;
+  public ID: PlayerID;
   /**
    * Name of this player
    */
-  name: string;
+  public name: string;
   /**
    * Scoreboard for this player
    */
-  scoreboard: Scoreboard;
+  public scoreboard: Scoreboard;
 
-  constructor(name: ?string) {
+  constructor(name?: string) {
     this.ID = genID();
-    this.name = name;
+    this.name = name || '';
     this.scoreboard = new Scoreboard();
   }
 

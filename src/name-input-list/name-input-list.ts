@@ -2,7 +2,7 @@ import {inject, bindable, bindingMode, LogManager} from 'aurelia-framework';
 import Sortable from 'sortablejs';
 import {sampleName} from '../services/sample-name';
 
-function arrayMove(a: Array, from_: number, to: number) {
+function arrayMove(a: any[], from_: number, to: number) {
   a.splice(to, 0, a.splice(from_, 1)[0]);
 }
 
@@ -15,22 +15,21 @@ const logger = LogManager.getLogger('NameInputListComponent');
 
 @inject(Element)
 export class NameInputList {
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) names: string[];
-  @bindable showImport: boolean;
-  el: HTMLElement;
-  sortable: Sortable;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public names: string[];
+  @bindable() public showImport: boolean;
+  private _sortable: Sortable | null = null;
+  private _nameInputsElement: HTMLElement;
 
-  constructor(el: HTMLElement) {
-    this.el = el;
-    this.sortable = null;
+  constructor(private _el: HTMLElement) {
+
   }
 
   attached() {
-    this.sortable = new Sortable(this.el.querySelector('.name-inputs'), {
+    this._sortable = new Sortable(this._nameInputsElement, {
       handle: '.handle',
       onEnd: this.onMoveEnd.bind(this)
     });
-    logger.debug('Sortable: ', this.sortable);
+    logger.debug('Sortable: ', this._sortable);
   }
 
   onMoveEnd(e: SortableOnEndEvent) {
@@ -48,6 +47,6 @@ export class NameInputList {
 
   importNames() {
     let e = new Event('import', {bubbles: true});
-    this.el.dispatchEvent(e);
+    this._el.dispatchEvent(e);
   }
 }

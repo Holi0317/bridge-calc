@@ -5,18 +5,17 @@ const logger = LogManager.getLogger('CollapseComponent');
 const openedClass = 'collapse-opened';
 
 export class Collapse {
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) open: boolean;
-  contentElement: HTMLElement;
-  buttonElement: HTMLButtonElement;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public open = false;
+  private _contentElement: HTMLElement;
+  private _buttonElement: HTMLButtonElement;
 
   constructor() {
-    this.open = false;
     this.resizeListener = this.resizeListener.bind(this);
   }
 
   attached() {
     // Manually call changed as there was no element received before attached
-    this.openChanged(this.open, null);
+    this.openChanged(this.open);
 
     window.addEventListener('resize', this.resizeListener);
   }
@@ -26,24 +25,24 @@ export class Collapse {
   }
 
   resizeListener() {
-    this.openChanged(this.open, null);
+    this.openChanged(this.open);
   }
 
   toggle() {
     this.open = !this.open;
   }
 
-  openChanged(newValue: boolean, oldValue: boolean) {
-    if (!this.contentElement) {
+  openChanged(newValue: boolean) {
+    if (!this._contentElement) {
       return
     }
     if (newValue) {
-      const height = this.contentElement.scrollHeight;
-      this.contentElement.style.height = `${height}px`;
-      this.buttonElement.classList.add(openedClass);
+      const height = this._contentElement.scrollHeight;
+      this._contentElement.style.height = `${height}px`;
+      this._buttonElement.classList.add(openedClass);
     } else {
-      this.contentElement.style.height = '0';
-      this.buttonElement.classList.remove(openedClass);
+      this._contentElement.style.height = '0';
+      this._buttonElement.classList.remove(openedClass);
     }
   }
 }

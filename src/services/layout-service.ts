@@ -5,7 +5,7 @@
  * and should layout show back button.
  */
 export class LayoutService {
-  title: string;
+  public title?: string;
 
   constructor() {
     this.title = '';

@@ -1,7 +1,7 @@
 <template>
   <require from="../name-input/name-input"></require>
 
-  <div class="name-inputs">
+  <div class="name-inputs" ref="_nameInputsElement">
     <name-input repeat.for="i of names.length" name.two-way="names[i]" remove.delegate="remove(i)"></name-input>
   </div>
 

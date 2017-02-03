@@ -1,7 +1,7 @@
 /**
  * Generate a (hopefully) unique ID with 4 characters
  */
-export function genID(): string {
+export function genID() {
   return Math.floor((1 + Math.random()) * 0x10000)
     .toString(16)
     .substring(1);
@@ -9,7 +9,7 @@ export function genID(): string {
 
 /**
  * Generate an array form start to end.
- * Inspired by python's range method
+ * Inspired by python's range method.
  *
  * @example
  * range(1, 10)

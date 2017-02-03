@@ -2,16 +2,16 @@ import {bindable, bindingMode, inject} from 'aurelia-framework';
 
 @inject(Element)
 export class NameInput {
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) name: string;
-  el: HTMLElement;
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  public name: string;
 
-  constructor(el: HTMLElement) {
-    this.el = el
+  constructor(private _el: HTMLElement) {
+
   }
 
   remove() {
     let e = new Event('remove', {bubbles: true});
-    this.el.dispatchEvent(e);
+    this._el.dispatchEvent(e);
   }
 
 }

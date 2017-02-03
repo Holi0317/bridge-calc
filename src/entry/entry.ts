@@ -2,26 +2,26 @@ import {inject, LogManager} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {sampleName} from '../services/sample-name';
 import {GameService, StartOptions} from '../services/game-service';
-
-import type {EntryOptionsError} from '../entry-options/entry-options';
+import {EntryOptionsError} from '../entry-options/entry-options';
 
 const logger = LogManager.getLogger('EntryView');
 
 @inject(Router, GameService)
 export class Entry {
-  players: string[];
-  options: StartOptions.options;
-  optionsErrors: EntryOptionsError;
-  hasError: boolean;
+  public players: string[] = [sampleName(), sampleName(), sampleName(), sampleName()];
+  public options: StartOptions;
+  public optionsErrors: EntryOptionsError;
+  public hasError = false;
 
-  gameService: GameService;
-  router: Router;
+  constructor(
+    private router: Router,
+    private gameService: GameService
+  ) {
 
-  constructor(router: Router, gameService: GameService) {
-    this.players = [sampleName(), sampleName(), sampleName(), sampleName()];
-    this.optionsErrors = {};
-    this.router = router;
-    this.gameService = gameService;
+  }
+
+  attached() {
+    logger.debug(this);
   }
 
   importNames() {
@@ -34,8 +34,8 @@ export class Entry {
       return
     }
     this.gameService.start({
-      players: this.players,
-      options: this.options
+      ...this.options,
+      players: this.players
     });
     this.router.navigateToRoute('game');
   }

@@ -6,24 +6,18 @@ const logger = LogManager.getLogger('GameStackInputComponent');
 
 @inject(GameService)
 export class StackInput {
-  gameService: GameService;
+  constructor(private _gameService: GameService) {
 
-  constructor(gameService: GameService) {
-    this.gameService = gameService;
   }
 
-  attached() {
-    logger.debug('Attached');
-  }
-
-  @computedFrom('gameService.state')
+  @computedFrom('_gameService.state')
   get bidDisabled() {
-    return this.gameService.state !== GameState.BID;
+    return this._gameService.state !== GameState.BID;
   }
 
-  @computedFrom('gameService.state')
+  @computedFrom('_gameService.state')
   get winDisabled() {
-    return this.gameService.state !== GameState.WIN;
+    return this._gameService.state !== GameState.WIN;
   }
 
   next() {

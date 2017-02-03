@@ -1,21 +1,19 @@
 import {inject, LogManager} from 'aurelia-framework';
 import {LayoutService} from './services/layout-service';
-
-import type {RouterConfiguration, Router, NavigationInstruction} from 'aurelia-router';
+import {RouterConfiguration, Router, NavigationInstruction} from 'aurelia-router';
 
 const logger = LogManager.getLogger('app');
 
 @inject(LayoutService)
 export class App {
-  router: Router;
-  layoutService: LayoutService;
+  private _router: Router;
 
-  constructor(layoutService: LayoutService) {
-    this.layoutService = layoutService;
+  constructor(private _layoutService: LayoutService) {
+
   }
 
   configureRouter(config: RouterConfiguration, router: Router) {
-    const preActive = new PreActiveStep(this.layoutService);
+    const preActive = new PreActiveStep(this._layoutService);
 
     config.title = 'Bridge calculator';
     config.options.pushState = !location.host.includes('github'); // GitHub does not support push state
@@ -26,7 +24,7 @@ export class App {
       { route: '/game', name: 'game', moduleId: './game/game' }
     ]);
 
-    this.router = router;
+    this._router = router;
   }
 
   showHelp() {
@@ -34,19 +32,17 @@ export class App {
   }
 
   back() {
-    this.router.navigateToRoute('menu');
+    this._router.navigateToRoute('menu');
   }
 }
 
 class PreActiveStep {
-  layoutService: LayoutService;
+  constructor(private _layoutService: LayoutService) {
 
-  constructor(layoutService: LayoutService) {
-    this.layoutService = layoutService;
   }
 
   run(navigationInstruction: NavigationInstruction, next: Function) {
-    this.layoutService.title = navigationInstruction.config.title;
+    this._layoutService.title = navigationInstruction.config.title;
     return next();
   }
 }

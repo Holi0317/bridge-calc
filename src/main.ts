@@ -1,8 +1,7 @@
 import './polyfills';
 import 'material-design-lite/material';
 import '../styles/styles.scss';
-
-import type {Aurelia} from 'aurelia-framework';
+import {Aurelia} from 'aurelia-framework';
 
 export async function configure(aurelia: Aurelia) {
   aurelia.use

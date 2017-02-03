@@ -1,6 +1,5 @@
 import {bindable, bindingMode, LogManager} from 'aurelia-framework';
-
-import type {StartOptions} from '../services/game-service';
+import {StartOptions} from '../services/game-service';
 
 const logger = LogManager.getLogger('EntryOptionsComponent');
 
@@ -14,38 +13,48 @@ export class EntryOptions {
   /**
    * Number of players.
    */
-  @bindable() playerLength: number;
+  @bindable()
+  public playerLength: number;
+
   /**
    * All options for entry.
    */
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) options: StartOptions.options;
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  public options: StartOptions;
 
   /**
    * All errors in options.
    */
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) errors: EntryOptionsError;
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  public errors: EntryOptionsError;
 
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) hasError: boolean;
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  public hasError: boolean;
 
-  @bindable() _cards: string;
-  @bindable() _rounds: string;
-  @bindable() _startingRound: string;
+  @bindable()
+  private _cards = '52';
+  @bindable()
+  private _rounds = '13';
+  @bindable()
+  private _startingRound = '1';
 
   constructor() {
-    this._cards = '52';
-    this._rounds = '13';
-    this._startingRound = '1';
-    this.options = {
-      cards: 52,
-      rounds: 13,
-      startingRound: 1
+    this.errors = {
+      cards: '',
+      rounds: '',
+      startingRound: ''
     };
-    this.errors = {};
     this.hasError = false;
   }
 
   attached() {
     this.resetRounds();
+    this.options = {
+      cards: 52,
+      rounds: 13,
+      startingRound: 1,
+      players: []
+    };
   }
 
   /**
@@ -55,7 +64,7 @@ export class EntryOptions {
     if (!this.playerLength) {
       return;
     }
-    this._rounds = Math.floor(this._cards / this.playerLength);
+    this._rounds = Math.floor(+this._cards / this.playerLength) + '';
   }
 
   /**
@@ -100,7 +109,8 @@ export class EntryOptions {
     this.options = {
       cards: +this._cards,
       rounds: +this._rounds,
-      startingRound: +this._startingRound
+      startingRound: +this._startingRound,
+      players: []
     };
     this.hasError = this.errors.cards !== '' || this.errors.rounds !== '' || this.errors.startingRound !== '';
   }

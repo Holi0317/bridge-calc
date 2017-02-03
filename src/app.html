@@ -3,13 +3,13 @@
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!--Back navigation-->
-        <nav class="mdl-navigation back-nav" show.bind="router.currentInstruction.config.name !== 'menu'">
+        <nav class="mdl-navigation back-nav" show.bind="_router.currentInstruction.config.name !== 'menu'">
           <button class="mdl-button mdl-js-button mdl-button--icon">
             <i class="material-icons" click.delegate="back()">arrow_back</i>
           </button>
         </nav>
         <!-- Title -->
-        <span class="mdl-layout-title">${layoutService.title}</span>
+        <span class="mdl-layout-title">${_layoutService.title}</span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Help button -->

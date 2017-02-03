@@ -1,16 +1,14 @@
 import {inject} from 'aurelia-framework';
 import {GameService} from '../services/game-service';
 import {GameState} from '../services/game-state';
-
-import type {RouterConfiguration, Router} from 'aurelia-router';
+import {RouterConfiguration, Router} from 'aurelia-router';
 
 @inject(GameService)
 export class Game {
-  router: Router;
-  gameService: GameService;
+  private _router: Router;
 
-  constructor(gameService: GameService) {
-    this.gameService = gameService;
+  constructor(private _gameService: GameService) {
+
   }
 
   configureRouter(config: RouterConfiguration, router: Router) {
@@ -21,12 +19,12 @@ export class Game {
       { route: '/settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings' }
     ]);
 
-    this.router = router;
+    this._router = router;
   }
 
   activate() {
-    if (this.gameService.state === GameState.NOT_STARTED) {
-      this.router.parent.navigate('/');
+    if (this._gameService.state === GameState.NOT_STARTED) {
+      this._router.parent.navigate('/');
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
     <div class="mdl-tabs__tab-bar">
-      <a repeat.for="nav of router.navigation"
+      <a repeat.for="nav of _router.navigation"
          class="mdl-tabs__tab ${nav.isActive ? 'is-active' : ''}"
          href.bind="nav.href"
       >${nav.title}</a>

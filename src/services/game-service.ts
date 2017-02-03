@@ -1,28 +1,28 @@
-import {inject} from 'aurelia-framework';
+import {inject, LogManager} from 'aurelia-framework';
 import {GameState} from './game-state';
 import {PlayerID, PlayerManagerService} from './player-manager-service';
 import {range} from '../utils';
+
+const logger = LogManager.getLogger('GameService');
 
 export interface StartOptions {
   /**
    * Name of players
    */
   players: string[];
-  options: {
-    /**
-     * Number of poker cards available.
-     * This is not used in GameService.start. It is used in UI only.
-     */
-    cards: number,
-    /**
-     * Number of rounds in the game.
-     */
-    rounds: number,
-    /**
-     * The starting round
-     */
-    startingRound: number
-  };
+  /**
+   * Number of poker cards available.
+   * This is not used in GameService.start. It is used in UI only.
+   */
+  cards: number,
+  /**
+   * Number of rounds in the game.
+   */
+  rounds: number,
+  /**
+   * The starting round
+   */
+  startingRound: number
 }
 
 /**
@@ -33,17 +33,17 @@ export class GameMeta {
    * Maker player for this round.
    * If null, the player is either deleted or that round is a dummy round.
    */
-  maker: ?PlayerID;
+  public maker: PlayerID | null;
   /**
    * Name of current round.
    */
-  name: string;
+  public name: string;
   /**
    * Number of handheld card for each player in this round.
    */
-  cardPerPlayer: number;
+  public cardPerPlayer: number | null;
 
-  constructor(name: string|number) {
+  constructor(name: string | number) {
     this.name = name + '';
     this.cardPerPlayer = (typeof name === 'number') ? name : null;
     this.maker = null;
@@ -58,41 +58,33 @@ export class GameService {
   /**
    * Game metadata for current round
    */
-  currentGame: ?GameMeta;
+  public currentGame: GameMeta | null = null;
   /**
    * Game metadata for previous rounds
    */
-  prevGames: GameMeta[];
+  public prevGames: GameMeta[] = [];
   /**
    * Game metadata for future rounds.
    * NOTE: These metadata object should have null as maker property as they player list may change in the future.
    */
-  futureGames: GameMeta[];
+  public futureGames: GameMeta[] = [];
   /**
    * Starting time of game
    */
-  startTime: ?Date;
+  public startTime: Date | null = null;
   /**
    * Ending time of game
    */
-  endTime: ?Date;
+  public endTime: Date | null = null;
   /**
    * Current state of game. NOTE: Type should be GameState.
    */
-  state: number;
-  /**
-   * Player manager service
-   */
-  playerManager: PlayerManagerService;
+  public state = GameState.NOT_STARTED;
 
-  constructor(playerManager: PlayerManagerService) {
-    this.currentGame = null;
-    this.prevGames = [];
-    this.futureGames = [];
-    this.startTime = null;
-    this.endTime = null;
-    this.state = GameState.NOT_STARTED;
-    this.playerManager = playerManager;
+  constructor(
+    public playerManager: PlayerManagerService
+  ) {
+
   }
 
   /**
@@ -100,15 +92,16 @@ export class GameService {
    * @param opts - See StartOption interface for documentation.
    */
   start(opts: StartOptions) {
+    logger.debug('Starting a new game with options:', opts);
     this.startTime = new Date();
     this.state = GameState.BID;
     this.playerManager.addPlayer(opts.players);
 
-    this.futureGames = range(1, opts.options.rounds).map(i => new GameMeta(i));
-    this.currentGame = this.futureGames.shift();
+    this.futureGames = range(1, opts.rounds).map(i => new GameMeta(i));
+    this.currentGame = this.futureGames.shift()!;
     this.currentGame.maker = this.playerManager.next();
 
-    for (let i = 1; i < opts.options.startingRound; i++) {
+    for (let i = 1; i < opts.startingRound; i++) {
       this.skip();
     }
   }
@@ -119,10 +112,18 @@ export class GameService {
    * @param bid - A map that should map from playerID -> bid stack.
    */
   bid(bid: Map<PlayerID, number>) {
+    if (this.currentGame == null || this.state === GameState.NOT_STARTED) {
+      logger.warning('No game is started and bid is called');
+      return;
+    }
     this.state = GameState.WIN;
     for (const [ID, b] of bid) {
       const player = this.playerManager.getPlayerByID(ID);
-      player.scoreboard.bid = b;
+      if (player) {
+        player.scoreboard.bid = b;
+      } else {
+        logger.warning(`bid method received player ID that is not found in playerManager. ID: ${ID}`);
+      }
     }
   }
 
@@ -132,10 +133,18 @@ export class GameService {
    * @param win - A map that should map from playerID -> win stack.
    */
   win(win: Map<PlayerID, number>) {
+    if (this.currentGame == null || this.state === GameState.NOT_STARTED) {
+      logger.warning('No game is started and win is called');
+      return;
+    }
     for (const [ID, w] of win) {
       const player = this.playerManager.getPlayerByID(ID);
-      player.scoreboard.win = w;
-      player.scoreboard.calcScore(this.currentGame.name);
+      if (player) {
+        player.scoreboard.win = w;
+        player.scoreboard.calcScore(this.currentGame.name);
+      } else {
+        logger.warning(`win method received player ID that is not found in playerManager. ID: ${ID}`);
+      }
     }
     this.nextRound();
   }
@@ -147,7 +156,7 @@ export class GameService {
   skip() {
     // Set all player's score to 0
     for (const player of this.playerManager.players) {
-      player.scoreboard.calcScore(this.currentGame.name, null, null);
+      player.scoreboard.calcScore(this.currentGame!.name, null, null);
     }
     this.nextRound();
   }
@@ -157,10 +166,10 @@ export class GameService {
    * Prepare states for fulfilling needs of next round.
    */
   nextRound() {
-    this.prevGames.push(this.currentGame);
-    this.currentGame = this.futureGames.shift();
-    if (this.currentGame === undefined) {
-      // Last round has passed
+    this.prevGames.push(this.currentGame!);
+    this.currentGame = this.futureGames.shift()!;
+    if (this.currentGame == null) {
+      // Last round has just ended
       this.currentGame = null;
       this.state = GameState.GAME_END;
       this.endTime = new Date();
@@ -193,6 +202,8 @@ export class GameService {
       for (const player of this.playerManager.players) {
         player.scoreboard.win = null;
       }
+    } else {
+      logger.warning('Revert is called when state is not at WIN.');
     }
   }
 }
