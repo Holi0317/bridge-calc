@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const envProd = require('@easy-webpack/config-env-production');
 const envDev = require('@easy-webpack/config-env-development');
 const aurelia = require('@easy-webpack/config-aurelia');
-const babel = require('@easy-webpack/config-babel');
+const typescript = require('@easy-webpack/config-typescript');
 const html = require('@easy-webpack/config-html');
 const sass = require('@easy-webpack/config-sass');
 const fontAndImages = require('@easy-webpack/config-fonts-and-images');
@@ -113,7 +113,7 @@ let config = generateConfig(
 
   aurelia({root: rootDir, src: srcDir, title: title, baseUrl: baseUrl}),
 
-  babel({ options: { /* uses settings from .babelrc */ } }),
+  typescript(ENV !== 'test' ? {} : { options: { doTypeCheck: false, sourceMap: false, inlineSourceMap: true, inlineSources: true } }),
   html(),
   sass({
     filename: 'styles.css',
@@ -130,7 +130,7 @@ let config = generateConfig(
     copyFiles({patterns: [{ from: 'favicon.ico', to: 'favicon.ico' }]})
   ] : [
     /* ENV === 'test' */
-    generateCoverage({ options: { 'force-sourcemap': true, esModules: true }})
+    generateCoverage({ options: { esModules: true }})
   ]),
 
   ...(ENV === 'production'

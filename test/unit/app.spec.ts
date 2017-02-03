@@ -1,6 +1,9 @@
-import {ChildRouter} from '../../src/child-router';
+import './setup';
+import {App} from '../../src/app';
 
 class RouterStub {
+  routes;
+  
   configure(handler) {
     handler(this);
   }
@@ -10,13 +13,13 @@ class RouterStub {
   }
 }
 
-describe('the Child Router module', () => {
-  var sut;
-  var mockedRouter;
+describe('the App module', () => {
+  let sut;
+  let mockedRouter;
 
   beforeEach(() => {
     mockedRouter = new RouterStub();
-    sut = new ChildRouter();
+    sut = new App();
     sut.configureRouter(mockedRouter, mockedRouter);
   });
 
@@ -24,8 +27,8 @@ describe('the Child Router module', () => {
     expect(sut.router).toBeDefined();
   });
 
-  it('configures the heading', () => {
-    expect(sut.heading).toEqual('Child Router');
+  it('configures the router title', () => {
+    expect(sut.router.title).toEqual('Aurelia');
   });
 
   it('should have a welcome route', () => {
