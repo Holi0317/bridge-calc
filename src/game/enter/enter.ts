@@ -1,29 +1,40 @@
-import {inject, LogManager, computedFrom} from 'aurelia-framework';
+import {inject, LogManager} from 'aurelia-framework';
 import {GameService} from '../../services/game-service';
-import {GameState} from '../../services/game-state';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {LayoutService} from '../../services/layout-service';
 
 const logger = LogManager.getLogger('game.inputComponent');
 
-@inject(GameService)
+@inject(EventAggregator, LayoutService, GameService)
 export class Enter {
-  constructor(private _gameService: GameService) {
+  private _attached = false;
 
+  constructor(private _ea: EventAggregator, private _layout: LayoutService, private _gameService: GameService) {
+    this._ea.subscribe('gameService.stateChanged', this.stateChanged.bind(this));
   }
 
-  @computedFrom('_gameService.state')
-  get showBid() {
-    return this._gameService.state === GameState.BID;
-  }
-  set showBid(val) {
-
+  attached() {
+    this._attached = true;
+    this.stateChanged();
   }
 
-  @computedFrom('_gameService.state')
-  get showWin() {
-    return this._gameService.state === GameState.WIN;
+  detached() {
+    this._attached = false;
   }
-  set showWin(val) {
 
+  stateChanged() {
+    // Because event aggregator does not have unsubscribe :(
+    if (this._attached) {
+      const currentGame = this._gameService.currentGame;
+      if (currentGame == null) {
+        this._layout.title = '';
+      } else if (currentGame.isExtra) {
+        this._layout.title = currentGame.name;
+      } else {
+        const length = this._gameService.futureGames.length;
+        this._layout.title = `Round ${currentGame.name} of ${length}`;
+      }
+    }
   }
 
   bid() {

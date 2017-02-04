@@ -43,11 +43,16 @@ export class GameMeta {
    * Number of handheld card for each player in this round.
    */
   public cardPerPlayer: number | null;
+  /**
+   * Is this round an extra round?
+   */
+  public isExtra: boolean;
 
   constructor(name: string | number) {
     this.name = name + '';
     this.cardPerPlayer = (typeof name === 'number') ? name : null;
     this.maker = null;
+    this.isExtra = typeof name !== 'number';
   }
 }
 
@@ -206,6 +211,7 @@ export class GameService {
   addRound(name: string, cardPerPlayer: number) {
     const meta = new GameMeta(name);
     meta.cardPerPlayer = cardPerPlayer;
+    meta.isExtra = true;
     this.futureGames.push(meta);
   }
 
