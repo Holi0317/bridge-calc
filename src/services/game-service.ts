@@ -1,4 +1,5 @@
 import {inject, LogManager} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameState} from './game-state';
 import {PlayerID, PlayerManagerService} from './player-manager-service';
 import {range} from '../utils';
@@ -52,8 +53,12 @@ export class GameMeta {
 
 /**
  * Game controller logic.
+ * This service will emit the following events in EventAggregator from aurelia:
+ *  - gameService.start - New game has started.
+ *  - gameService.stateChanged - state of game controller has changed. This will emit AFTER all work for controller has completed.
+ *  - gameService.end - Game has reached last round and ended.
  */
-@inject(PlayerManagerService)
+@inject(PlayerManagerService, EventAggregator)
 export class GameService {
   /**
    * Game metadata for current round
@@ -82,7 +87,8 @@ export class GameService {
   public state = GameState.NOT_STARTED;
 
   constructor(
-    public playerManager: PlayerManagerService
+    public playerManager: PlayerManagerService,
+    private _ea: EventAggregator
   ) {
 
   }
@@ -93,17 +99,24 @@ export class GameService {
    */
   start(opts: StartOptions) {
     logger.debug('Starting a new game with options:', opts);
+    // Set const properties
     this.startTime = new Date();
     this.state = GameState.BID;
     this.playerManager.addPlayer(opts.players);
 
+    // Create GameMeta objects
     this.futureGames = range(1, opts.rounds).map(i => new GameMeta(i));
     this.currentGame = this.futureGames.shift()!;
     this.currentGame.maker = this.playerManager.next();
 
+    // Skip rounds, if necessary
     for (let i = 1; i < opts.startingRound; i++) {
       this.skip();
     }
+
+    // Emit event
+    this._ea.publish('gameService.start');
+    this._ea.publish('gameService.stateChanged');
   }
 
   /**
@@ -125,6 +138,7 @@ export class GameService {
         logger.warning(`bid method received player ID that is not found in playerManager. ID: ${ID}`);
       }
     }
+    this._ea.publish('gameService.stateChanged');
   }
 
   /**
@@ -147,6 +161,10 @@ export class GameService {
       }
     }
     this.nextRound();
+    if (this.state === GameState.GAME_END) {
+      this._ea.publish('gameService.end');
+    }
+    this._ea.publish('gameService.stateChanged');
   }
 
   /**
@@ -202,6 +220,7 @@ export class GameService {
       for (const player of this.playerManager.players) {
         player.scoreboard.win = null;
       }
+      this._ea.publish('gameService.stateChanged');
     } else {
       logger.warning('Revert is called when state is not at WIN.');
     }
