@@ -1,23 +1,23 @@
-import {inject, computedFrom, LogManager} from 'aurelia-framework';
+import {inject, LogManager} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameService} from '../../services/game-service';
 import {GameState} from '../../services/game-state';
 
 const logger = LogManager.getLogger('GameStackInputComponent');
 
-@inject(GameService)
+@inject(GameService, EventAggregator)
 export class StackInput {
-  constructor(private _gameService: GameService) {
+  bidDisabled: boolean;
+  winDisabled: boolean;
 
+  constructor(private _gameService: GameService, private _ea: EventAggregator) {
+    this._ea.subscribe('gameService.stateChanged', this.stateChanged.bind(this));
+    this.stateChanged(); // Invoke for the first time to set initial states
   }
 
-  @computedFrom('_gameService.state')
-  get bidDisabled() {
-    return this._gameService.state !== GameState.BID;
-  }
-
-  @computedFrom('_gameService.state')
-  get winDisabled() {
-    return this._gameService.state !== GameState.WIN;
+  stateChanged() {
+    this.bidDisabled = this._gameService.state !== GameState.BID;
+    this.winDisabled = this._gameService.state !== GameState.WIN;
   }
 
   next() {
