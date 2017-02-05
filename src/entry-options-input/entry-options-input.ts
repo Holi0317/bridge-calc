@@ -15,5 +15,9 @@ export class EntryOptionsInput {
       return
     }
     this._inputEl.setCustomValidity(newValue);
+
+    // Fire input event to force MDL to check validity
+    const event = new Event('input', {bubbles: true});
+    this._inputEl.dispatchEvent(event);
   }
 }
