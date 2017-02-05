@@ -101,6 +101,16 @@ export class PlayerManagerService {
   }
 
   /**
+   * Calculate all player's score by implicit bid and win data in player's scoreboard object.
+   * @param round - Name of current round
+   */
+  calcAllScore(round: string) {
+    for (const player of this.players) {
+      player.scoreboard.calcScore(round);
+    }
+  }
+
+  /**
    * Get the player by Player ID
    * @param id
    */

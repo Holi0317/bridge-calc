@@ -128,44 +128,26 @@ export class GameService {
   /**
    * End Bid process.
    * WARNING: no type/value checking will be done here.
-   * @param bid - A map that should map from playerID -> bid stack.
    */
-  bid(bid: Map<PlayerID, number>) {
+  bid() {
     if (this.currentGame == null || this.state === GameState.NOT_STARTED) {
       logger.warn('No game is started and bid is called');
       return;
     }
     this.state = GameState.WIN;
-    for (const [ID, b] of bid) {
-      const player = this.playerManager.getPlayerByID(ID);
-      if (player) {
-        player.scoreboard.bid = b;
-      } else {
-        logger.warn(`bid method received player ID that is not found in playerManager. ID: ${ID}`);
-      }
-    }
     this._ea.publish('gameService.stateChanged');
   }
 
   /**
    * End Win process and proceed to next round.
    * WARNING: no type/value checking will be done here.
-   * @param win - A map that should map from playerID -> win stack.
    */
-  win(win: Map<PlayerID, number>) {
+  win() {
     if (this.currentGame == null || this.state === GameState.NOT_STARTED) {
       logger.warn('No game is started and win is called');
       return;
     }
-    for (const [ID, w] of win) {
-      const player = this.playerManager.getPlayerByID(ID);
-      if (player) {
-        player.scoreboard.win = w;
-        player.scoreboard.calcScore(this.currentGame.name);
-      } else {
-        logger.warn(`win method received player ID that is not found in playerManager. ID: ${ID}`);
-      }
-    }
+    this.playerManager.calcAllScore(this.currentGame.name);
     this.nextRound();
     if (this.state === GameState.GAME_END) {
       this._ea.publish('gameService.end');
