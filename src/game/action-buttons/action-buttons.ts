@@ -6,7 +6,7 @@ import {GameState} from '../../services/game-state';
 const logger = LogManager.getLogger('ActionButtonComponent');
 
 @inject(GameService, EventAggregator)
-export class ActionButton {
+export class ActionButtons {
   undoDisabled: boolean;
 
   constructor(private _gameService: GameService, private _ea: EventAggregator) {
@@ -24,7 +24,7 @@ export class ActionButton {
 
   undo() {
     if (this.undoDisabled) {
-      logger.warning('Undo method is triggered while undo should be disabled')
+      logger.warn('Undo method is triggered while undo should be disabled')
     } else {
       this._gameService.revert();
     }
