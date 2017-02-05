@@ -1,0 +1,11 @@
+<template>
+  <div class="btn-container">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" click.delegate="next()">
+      Next
+    </button>
+    <div class="stretch"></div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" click.delegate="undo()" disabled.bind="undoDisabled">
+      Undo
+    </button>
+  </div>
+</template>

@@ -1,33 +1,14 @@
 @import "mdl";
 @import "animations";
 
+@import "utils";
+
 @import "views/tile";
 @import "views/name-input";
 @import "views/entry-options";
 @import "views/collapse";
 @import "views/stack-input";
-
-.container {
-  width: 90%;
-  max-width: 100em;
-  margin: 0 auto;
-  padding-bottom: 8px;
-}
-
-.pull-right {
-  float: right;
-}
-
-.back-nav {
-  padding-right: 0.5em !important;
-}
-
-@media screen and (max-width: 1024px) {
-  .mdl-layout__header-row {
-    height: 56px;
-    padding: 0 16px 0 16px;
-  }
-}
+@import "views/action-button";
 
 body {
   margin: 0;

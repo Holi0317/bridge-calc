@@ -1,10 +1,4 @@
 stack-input {
-  .mdl-card {
-    width: 100%;
-    padding: 1em;
-    //display: block;
-  }
-
   .input-container {
     overflow-x: auto;
     display: flex;
@@ -16,15 +10,6 @@ stack-input {
     }
     .mdl-textfield {
       margin-right: 1em;
-    }
-  }
-
-  .btn-container {
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
-    padding-top: 1em;
-    display: flex;
-    .stretch {
-      flex-grow: 1;
     }
   }
 }

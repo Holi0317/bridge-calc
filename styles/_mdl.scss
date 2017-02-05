@@ -69,3 +69,10 @@ $input-text-disabled-color: unquote("rgba(#{$color-black}, 0.12)");
     color: $input-text-disabled-text-color;
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .mdl-layout__header-row {
+    height: 56px;
+    padding: 0 16px 0 16px;
+  }
+}
