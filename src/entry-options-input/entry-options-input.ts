@@ -1,6 +1,7 @@
-import {LogManager, bindable, bindingMode} from 'aurelia-framework';
+import {bindable, bindingMode} from 'aurelia-framework';
+import {getLogger} from 'aurelia-logging';
 
-const logger = LogManager.getLogger('EntryOptionsInputComponent');
+const logger = getLogger('EntryOptionsInputComponent');
 
 export class EntryOptionsInput {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: string;

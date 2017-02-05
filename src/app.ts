@@ -1,8 +1,9 @@
-import {inject, LogManager} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {getLogger} from 'aurelia-logging';
 import {LayoutService} from './services/layout-service';
 import {RouterConfiguration, Router, NavigationInstruction} from 'aurelia-router';
 
-const logger = LogManager.getLogger('app');
+const logger = getLogger('app');
 
 @inject(LayoutService)
 export class App {

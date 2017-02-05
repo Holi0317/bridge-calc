@@ -59,6 +59,7 @@
     "aurelia-framework": "^1.0.8",
     "aurelia-history-browser": "^1.0.0",
     "aurelia-loader-webpack": "^2.0.0",
+    "aurelia-logging": "^1.2.0",
     "aurelia-logging-console": "^1.0.0",
     "aurelia-mdl-plugin": "^0.1.16",
     "aurelia-pal-browser": "^1.1.0",

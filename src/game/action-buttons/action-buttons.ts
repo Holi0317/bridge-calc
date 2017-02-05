@@ -1,9 +1,10 @@
-import {inject, LogManager} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {getLogger} from 'aurelia-logging';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameService} from '../../services/game-service';
 import {GameState} from '../../services/game-state';
 
-const logger = LogManager.getLogger('ActionButtonComponent');
+const logger = getLogger('ActionButtonComponent');
 
 @inject(GameService, EventAggregator)
 export class ActionButtons {

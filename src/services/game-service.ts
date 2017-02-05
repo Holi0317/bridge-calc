@@ -1,10 +1,11 @@
-import {inject, LogManager} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {getLogger} from 'aurelia-logging';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameState} from './game-state';
 import {PlayerID, PlayerManagerService} from './player-manager-service';
 import {range} from '../utils';
 
-const logger = LogManager.getLogger('GameService');
+const logger = getLogger('GameService');
 
 export interface StartOptions {
   /**
@@ -131,7 +132,7 @@ export class GameService {
    */
   bid(bid: Map<PlayerID, number>) {
     if (this.currentGame == null || this.state === GameState.NOT_STARTED) {
-      logger.warning('No game is started and bid is called');
+      logger.warn('No game is started and bid is called');
       return;
     }
     this.state = GameState.WIN;
@@ -140,7 +141,7 @@ export class GameService {
       if (player) {
         player.scoreboard.bid = b;
       } else {
-        logger.warning(`bid method received player ID that is not found in playerManager. ID: ${ID}`);
+        logger.warn(`bid method received player ID that is not found in playerManager. ID: ${ID}`);
       }
     }
     this._ea.publish('gameService.stateChanged');
@@ -153,7 +154,7 @@ export class GameService {
    */
   win(win: Map<PlayerID, number>) {
     if (this.currentGame == null || this.state === GameState.NOT_STARTED) {
-      logger.warning('No game is started and win is called');
+      logger.warn('No game is started and win is called');
       return;
     }
     for (const [ID, w] of win) {
@@ -162,7 +163,7 @@ export class GameService {
         player.scoreboard.win = w;
         player.scoreboard.calcScore(this.currentGame.name);
       } else {
-        logger.warning(`win method received player ID that is not found in playerManager. ID: ${ID}`);
+        logger.warn(`win method received player ID that is not found in playerManager. ID: ${ID}`);
       }
     }
     this.nextRound();
@@ -228,7 +229,7 @@ export class GameService {
       }
       this._ea.publish('gameService.stateChanged');
     } else {
-      logger.warning('Revert is called when state is not at WIN.');
+      logger.warn('Revert is called when state is not at WIN.');
     }
   }
 }

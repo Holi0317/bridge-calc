@@ -1,10 +1,11 @@
-import {inject, LogManager} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {getLogger} from 'aurelia-logging';
 import {Router} from 'aurelia-router';
 import {sampleName} from '../services/sample-name';
 import {GameService, StartOptions} from '../services/game-service';
 import {EntryOptionsError} from '../entry-options/entry-options';
 
-const logger = LogManager.getLogger('EntryView');
+const logger = getLogger('EntryView');
 
 @inject(Router, GameService)
 export class Entry {
@@ -18,10 +19,6 @@ export class Entry {
     private gameService: GameService
   ) {
 
-  }
-
-  attached() {
-    logger.debug(this);
   }
 
   importNames() {

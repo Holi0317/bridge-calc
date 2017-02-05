@@ -1,7 +1,8 @@
-import {bindable, bindingMode, LogManager} from 'aurelia-framework';
+import {bindable, bindingMode} from 'aurelia-framework';
+import {getLogger} from 'aurelia-logging';
 import {StartOptions} from '../services/game-service';
 
-const logger = LogManager.getLogger('EntryOptionsComponent');
+const logger = getLogger('EntryOptionsComponent');
 
 export interface EntryOptionsError {
   cards: string,

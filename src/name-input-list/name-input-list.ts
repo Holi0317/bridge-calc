@@ -1,6 +1,9 @@
-import {inject, bindable, bindingMode, LogManager} from 'aurelia-framework';
+import {inject, bindable, bindingMode} from 'aurelia-framework';
+import {getLogger} from 'aurelia-logging';
 import Sortable from 'sortablejs';
 import {sampleName} from '../services/sample-name';
+
+const logger = getLogger('NameInputListComponent');
 
 function arrayMove(a: any[], from_: number, to: number) {
   a.splice(to, 0, a.splice(from_, 1)[0]);
@@ -10,8 +13,6 @@ interface SortableOnEndEvent extends Event {
   oldIndex: number;
   newIndex: number
 }
-
-const logger = LogManager.getLogger('NameInputListComponent');
 
 @inject(Element)
 export class NameInputList {

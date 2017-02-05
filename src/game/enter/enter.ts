@@ -1,9 +1,10 @@
-import {inject, LogManager} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {getLogger} from 'aurelia-logging';
 import {GameService} from '../../services/game-service';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {LayoutService} from '../../services/layout-service';
 
-const logger = LogManager.getLogger('game.inputComponent');
+const logger = getLogger('game.inputComponent');
 
 @inject(EventAggregator, LayoutService, GameService)
 export class Enter {
