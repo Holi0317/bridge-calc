@@ -25,7 +25,8 @@ export class ActionButtons {
 
   undo() {
     if (this.undoDisabled) {
-      logger.warn('Undo method is triggered while undo should be disabled')
+      // We use delegate to bind event. Event will still be triggered even when the button is disabled.
+      return
     } else {
       this._gameService.revert();
     }

@@ -4,6 +4,15 @@ import {StartOptions} from '../services/game-service';
 
 const logger = getLogger('EntryOptionsComponent');
 
+/**
+ * Is given number a positive integer?
+ * @param d
+ * @returns {boolean}
+ */
+function isInteger(d: number) {
+  return d > 0 && Number.isInteger(d);
+}
+
 export interface EntryOptionsError {
   cards: string,
   rounds: string,
@@ -40,11 +49,7 @@ export class EntryOptions {
   private _startingRound = '1';
 
   constructor() {
-    this.errors = {
-      cards: '',
-      rounds: '',
-      startingRound: ''
-    };
+    this.resetError();
     this.hasError = false;
   }
 
@@ -69,11 +74,14 @@ export class EntryOptions {
   }
 
   /**
-   * Is data a positive integer?
-   * @param d
+   * Reset error object to no error.
    */
-  isInteger(d: number) {
-    return d > 0 && Number.isInteger(d);
+  resetError() {
+    this.errors = {
+      cards: '',
+      rounds: '',
+      startingRound: ''
+    };
   }
 
   /**
@@ -85,21 +93,27 @@ export class EntryOptions {
     const rounds = +this._rounds;
     const startingRound = +this._startingRound;
 
-    this.errors.cards = this.isInteger(cards) ? '' : 'Card must be a positive integer';
-    this.errors.rounds = this.isInteger(rounds) ? '' : 'Rounds must be a positive integer';
-    this.errors.startingRound = this.isInteger(startingRound) ? '' : 'Starting round must be a positive integer';
+    this.resetError();
 
-    if (this.playerLength > cards) {
-      this.errors.cards = 'Too few cards';
-      return
-    }
-    if (rounds > cards / this.playerLength) {
-      this.errors.rounds = 'Insufficient cards for that much rounds';
-      return
-    }
-    if (startingRound > rounds) {
-      this.errors.startingRound = 'Impossible to start beyond the end of the game';
-      return
+    this.setError('cards', !isInteger(cards), 'Card must be a positive integer');
+    this.setError('rounds', !isInteger(rounds), 'Rounds must be a positive integer');
+    this.setError('startingRound', !isInteger(startingRound), 'Starting round must be a positive integer');
+
+    this.setError('cards', this.playerLength > cards, 'Too few cards');
+    this.setError('rounds', rounds > cards / this.playerLength, 'Insufficient cards for that much rounds');
+    this.setError('startingRound', startingRound > rounds, 'Impossible to start beyond the end of the game');
+  }
+
+  /**
+   * Set error to the error object.
+   * If there is already a value exist, no operation would be done.
+   * @param prop - Property to be set in this.error object
+   * @param test - If true, attempt to set error. Otherwise, no-op
+   * @param message - Message to be set if test is true.
+   */
+  private setError(prop: 'cards'|'rounds'|'startingRound', test: boolean, message: string) {
+    if (test && !this.errors[prop]) {
+      this.errors[prop] = message;
     }
   }
 
