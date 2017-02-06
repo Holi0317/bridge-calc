@@ -49,7 +49,7 @@ export class Enter {
       } else if (currentGame.isExtra) {
         this._layout.title = currentGame.name;
       } else {
-        const length = this._gameService.futureGames.length;
+        const length = this._gameService.futureGames.length + this._gameService.prevGames.length + 1;
         this._layout.title = `Round ${currentGame.name} of ${length}`;
       }
 
@@ -71,9 +71,9 @@ export class Enter {
     }
 
     const currentGame = this._gameService.currentGame!;
+    const scoreboards = this._gameService.playerManager.players.map(p => p.scoreboard);
 
     if (state === GameState.BID) {
-      const scoreboards = this._gameService.playerManager.players.map(p => p.scoreboard);
       fill(scoreboards, 'bid', '0');
       const res = this._bidValidator.validate({
         players: this._gameService.playerManager.players,
@@ -87,7 +87,6 @@ export class Enter {
       }
     } else {
       // state === GameState.WIN
-      const scoreboards = this._gameService.playerManager.players.map(p => p.scoreboard);
       fill(scoreboards, 'win', '0');
       const res = this._winValidator.validate({
         players: this._gameService.playerManager.players,

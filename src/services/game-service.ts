@@ -131,6 +131,7 @@ export class GameService {
     // Emit event
     this._ea.publish('gameService.start');
     this._ea.publish('gameService.stateChanged');
+    logger.debug('Startup finished. GameService:', this);
   }
 
   /**
