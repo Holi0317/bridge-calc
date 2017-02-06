@@ -24,12 +24,12 @@ export class Scoreboard {
    * Current bid.
    * See setScore method for details.
    */
-  public bid: number | null;
+  public bid: string | null;
   /**
    * Current win.
    * See setScore method for details.
    */
-  public win: number | null;
+  public win: string | null;
 
   /**
    * Score map for this player.
