@@ -3,7 +3,7 @@ import {getLogger} from 'aurelia-logging';
 import {Router} from 'aurelia-router';
 import {sampleName} from '../services/sample-name';
 import {GameService, StartOptions} from '../services/game-service';
-import {EntryOptionsError} from '../entry-options/entry-options';
+import {EntryOptionsError} from '../validators/entry-options';
 
 const logger = getLogger('EntryView');
 
