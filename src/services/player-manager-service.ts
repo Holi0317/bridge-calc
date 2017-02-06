@@ -1,5 +1,8 @@
+import {getLogger} from 'aurelia-logging';
 import {genID} from '../utils';
 import {Scoreboard} from './scoreboard';
+
+const logger = getLogger('PlayerManagerService');
 
 /**
  * Use this type for representing PlayerID.
@@ -115,7 +118,13 @@ export class PlayerManagerService {
    * @param id
    */
   getPlayerByID(id: PlayerID) {
-    return this._playerMap.get(id);
+    const player = this._playerMap.get(id);
+    if (player) {
+      return player;
+    } else {
+      logger.warn(`getPlayerByID: cannot find player ID: ${id}`);
+      return new Player('Null');
+    }
   }
 
   /**
