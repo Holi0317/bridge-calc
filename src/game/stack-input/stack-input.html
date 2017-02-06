@@ -1,7 +1,7 @@
 <template>
   <div class="input-container">
     <span>Bid</span>
-    <div repeat.for="player of _gameService.playerManager.players" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <div repeat.for="player of players" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <input class="mdl-textfield__input" type="text" value.bind="player.scoreboard.bid" disabled.bind="bidDisabled">
       <label class="mdl-textfield__label">${player.name}</label>
     </div>
@@ -9,7 +9,7 @@
 
   <div class="input-container">
     <span>Win</span>
-    <div repeat.for="player of _gameService.playerManager.players" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <div repeat.for="player of players" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <input class="mdl-textfield__input" type="text" value.bind="player.scoreboard.win" disabled.bind="winDisabled">
       <label class="mdl-textfield__label">${player.name}</label>
     </div>

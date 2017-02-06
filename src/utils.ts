@@ -26,3 +26,37 @@ export function range(start: number, end: number) {
   }
   return result;
 }
+
+/**
+ * NOTE: This is NOT lodash.nth method.
+ * Get an element from given array.
+ * If index is in range of array length, this would be identical to array[i].
+ * If index is out of range, reduce it until it is in range of array and get element.
+ * @example
+ * nth(['a', 'b', 'c'], 4)
+ * // -> 'b'
+ * @param array - Array to be operated
+ * @param index - Index of wanted element
+ * @returns {T}
+ */
+export function nth<T>(array: T[], index: number): T {
+  return (index > array.length) ? nth(array, index - array.length) : array[index];
+}
+
+/**
+ * Sort array by putting frontIndex element to the first.
+ * Does NOT mutate the original array.
+ * @example
+ * toFront(['a', 'b', 'c'], 1)
+ * // -> ['b', 'c', 'a']
+ * @param array
+ * @param frontIndex
+ * @returns {T}
+ */
+export function toFront<T>(array: T[], frontIndex: number): T[] {
+  let newArray: T[] = [];
+  for (let i = frontIndex; i < array.length + frontIndex; i++) {
+    newArray[i-frontIndex] = nth(array, i);
+  }
+  return newArray;
+}

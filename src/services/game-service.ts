@@ -3,7 +3,7 @@ import {getLogger} from 'aurelia-logging';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameState} from './game-state';
 import {PlayerID, PlayerManagerService} from './player-manager-service';
-import {range} from '../utils';
+import {range, toFront} from '../utils';
 
 const logger = getLogger('GameService');
 
@@ -48,12 +48,18 @@ export class GameMeta {
    * Is this round an extra round?
    */
   public isExtra: boolean;
+  /**
+   * Order of player ID in the round.
+   * Maker always go first.
+   */
+  public playerOrder: PlayerID[];
 
   constructor(name: string | number) {
     this.name = name + '';
     this.cardPerPlayer = (typeof name === 'number') ? name : null;
     this.maker = null;
     this.isExtra = typeof name !== 'number';
+    this.playerOrder = [];
   }
 }
 
@@ -112,8 +118,9 @@ export class GameService {
 
     // Create GameMeta objects
     this.futureGames = range(1, opts.rounds).map(i => new GameMeta(i));
-    this.currentGame = this.futureGames.shift()!;
-    this.currentGame.maker = this.playerManager.next();
+
+    // Bootstrap first round metadata
+    this.nextRound();
 
     // Skip rounds, if necessary
     for (let i = 1; i < opts.startingRound; i++) {
@@ -172,17 +179,26 @@ export class GameService {
    * Prepare states for fulfilling needs of next round.
    */
   nextRound() {
-    this.prevGames.push(this.currentGame!);
-    this.currentGame = this.futureGames.shift()!;
-    if (this.currentGame == null) {
+    if (this.currentGame != null) {
+      // If this is the first round, currentGame is null.
+      this.prevGames.push(this.currentGame);
+    }
+
+    const nextGame = this.futureGames.shift();
+    if (nextGame == null) {
       // Last round has just ended
       this.currentGame = null;
       this.state = GameState.GAME_END;
       this.endTime = new Date();
     } else {
       // We still have more rounds of game to proceed.
+      this.currentGame = nextGame;
       this.state = GameState.BID;
       this.currentGame.maker = this.playerManager.next();
+
+      // Set currentGame.playerOrder
+      const playerIDs = this.playerManager.players.map(p => p.ID);
+      this.currentGame.playerOrder = toFront(playerIDs, playerIDs.indexOf(this.currentGame.maker));
     }
   }
 
