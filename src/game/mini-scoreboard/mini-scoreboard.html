@@ -1,4 +1,6 @@
 <template bindable="players">
+  <require from="../../converters/ordinal-format"></require>
+
   <div class="table-container mdl-shadow--2dp">
     <table class="mdl-data-table mdl-js-data-table full-width">
 
@@ -20,7 +22,7 @@
       </tr>
       <tr>
         <td class="mdl-data-table__cell--non-numeric">Rank</td>
-        <td repeat.for="player of players">${player.rank}</td>
+        <td repeat.for="player of players">${player.rank | ordinalFormat}</td>
       </tr>
       </tbody>
     </table>
