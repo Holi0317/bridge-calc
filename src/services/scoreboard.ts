@@ -6,13 +6,13 @@
  * @param win - Number of win gain stack
  * @return Score of the player at that round
  */
-function calculateScore(bid: number | null, win: number | null): number {
+function calculateScore(bid: string | null, win: string | null): number {
   if (bid == null && win == null) {
     return 0;
   } else if (bid === win) {
-    return bid ** 2 + 10;
+    return (+bid) ** 2 + 10;
   } else {
-    return -((win-bid) ** 2);
+    return -((+win - +bid) ** 2);
   }
 }
 
