@@ -32,6 +32,18 @@ export class Scoreboard {
   public win: string | null;
 
   /**
+   * Score for the previous round of game.
+   * 0 If there is no previous round.
+   */
+  public prevScore: number;
+
+  /**
+   * Sum of all score.
+   * Call updateTotalScore() if need to recalculate.
+   */
+  public totalScore: number;
+
+  /**
    * Score map for this player.
    * Format should be round name -> score
    */
@@ -48,6 +60,8 @@ export class Scoreboard {
     this.bid = null;
     this.win = null;
     this._scores = new Map();
+    this.prevScore = 0;
+    this.totalScore = 0;
   }
 
   /**
@@ -77,17 +91,16 @@ export class Scoreboard {
   calcScore(round: string, bid = this.bid, win = this.win): void {
     this.bid = null;
     this.win = null;
+
     const score = calculateScore(bid, win);
     this._scores.set(round, score);
+    this.prevScore = score;
+    this.totalScore += score;
   }
 
-  /**
-   * Get total score of the player.
-   * @returns {number}
-   */
-  getTotalScore(): number {
+  updateTotalScore() {
     let sum = 0;
     this._scores.forEach(value => sum += value);
-    return sum;
+    this.totalScore = sum;
   }
 }

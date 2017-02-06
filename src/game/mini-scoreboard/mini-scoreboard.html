@@ -1,0 +1,28 @@
+<template bindable="players">
+  <div class="table-container mdl-shadow--2dp">
+    <table class="mdl-data-table mdl-js-data-table full-width">
+
+      <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th repeat.for="player of players">${player.name}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Previous round score</td>
+        <td repeat.for="player of players">${player.scoreboard.prevScore}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Total score</td>
+        <td repeat.for="player of players">${player.scoreboard.totalScore}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Rank</td>
+        <td repeat.for="player of players">${player.rank}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</template>

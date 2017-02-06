@@ -111,6 +111,17 @@ export class PlayerManagerService {
     for (const player of this.players) {
       player.scoreboard.calcScore(round);
     }
+    this.updateRank();
+  }
+
+  /**
+   * Update rank property of all players
+   */
+  updateRank() {
+    const scores = this.players.map(p => p.scoreboard.totalScore).sort((a, b) => b - a);
+    for (const player of this.players) {
+      player.rank = scores.indexOf(player.scoreboard.totalScore) + 1;
+    }
   }
 
   /**
@@ -153,11 +164,16 @@ export class Player {
    * Scoreboard for this player
    */
   public scoreboard: Scoreboard;
+  /**
+   * Rank of this player
+   */
+  public rank: number;
 
   constructor(name?: string) {
     this.ID = genID();
     this.name = name || '';
     this.scoreboard = new Scoreboard();
+    this.rank = 1;
   }
 
   /**

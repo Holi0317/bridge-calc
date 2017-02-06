@@ -1,6 +1,7 @@
 <template>
   <require from="../stack-input/stack-input.html"></require>
   <require from="../action-buttons/action-buttons"></require>
+  <require from="../mini-scoreboard/mini-scoreboard.html"></require>
 
   <div class="container">
     <span class="pull-right">Time: 00:00</span>
@@ -13,6 +14,10 @@
                    players.bind="players"></stack-input>
       <action-buttons undo-disabled.bind="winDisabled" revert.delegate="revert()" next.delegate="next()"></action-buttons>
     </div>
+  </div>
+
+  <div class="container">
+    <mini-scoreboard players.bind="_gameService.playerManager.players"></mini-scoreboard>
   </div>
 
 </template>
