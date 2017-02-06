@@ -1,9 +1,9 @@
 import {bindable, bindingMode} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 
-const logger = getLogger('EntryOptionsInputComponent');
+const logger = getLogger('MdlInputComponent');
 
-export class EntryOptionsInput {
+export class MdlInput {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: string;
   @bindable() public error: string;
   @bindable() public label: string;
