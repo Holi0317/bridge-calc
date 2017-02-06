@@ -1,24 +1,11 @@
-import {bindable, bindingMode} from 'aurelia-framework';
+import {inject, bindable, bindingMode} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {StartOptions} from '../services/game-service';
+import {EntryOptionsValidator, EntryOptionsError} from '../validators/entry-options';
 
 const logger = getLogger('EntryOptionsComponent');
 
-/**
- * Is given number a positive integer?
- * @param d
- * @returns {boolean}
- */
-function isInteger(d: number) {
-  return d > 0 && Number.isInteger(d);
-}
-
-export interface EntryOptionsError {
-  cards: string,
-  rounds: string,
-  startingRound: string
-}
-
+@inject(EntryOptionsValidator)
 export class EntryOptions {
   /**
    * Number of players.
@@ -27,7 +14,7 @@ export class EntryOptions {
   public playerLength: number;
 
   /**
-   * All options for entry.
+   * All validated options for entry.
    */
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public options: StartOptions;
@@ -35,7 +22,7 @@ export class EntryOptions {
   /**
    * All errors in options.
    */
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  @bindable()
   public errors: EntryOptionsError;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
@@ -48,8 +35,7 @@ export class EntryOptions {
   @bindable()
   private _startingRound = '1';
 
-  constructor() {
-    this.resetError();
+  constructor(private _validator: EntryOptionsValidator) {
     this.hasError = false;
   }
 
@@ -74,81 +60,42 @@ export class EntryOptions {
   }
 
   /**
-   * Reset error object to no error.
-   */
-  resetError() {
-    this.errors = {
-      cards: '',
-      rounds: '',
-      startingRound: ''
-    };
-  }
-
-  /**
-   * Validate if there is any error in entered data.
-   * TODO tidy this mess up again
-   */
-  validate() {
-    const cards = +this._cards;
-    const rounds = +this._rounds;
-    const startingRound = +this._startingRound;
-
-    this.resetError();
-
-    this.setError('cards', !isInteger(cards), 'Card must be a positive integer');
-    this.setError('rounds', !isInteger(rounds), 'Rounds must be a positive integer');
-    this.setError('startingRound', !isInteger(startingRound), 'Starting round must be a positive integer');
-
-    this.setError('cards', this.playerLength > cards, 'Too few cards');
-    this.setError('rounds', rounds > cards / this.playerLength, 'Insufficient cards for that much rounds');
-    this.setError('startingRound', startingRound > rounds, 'Impossible to start beyond the end of the game');
-  }
-
-  /**
-   * Set error to the error object.
-   * If there is already a value exist, no operation would be done.
-   * @param prop - Property to be set in this.error object
-   * @param test - If true, attempt to set error. Otherwise, no-op
-   * @param message - Message to be set if test is true.
-   */
-  private setError(prop: 'cards'|'rounds'|'startingRound', test: boolean, message: string) {
-    if (test && !this.errors[prop]) {
-      this.errors[prop] = message;
-    }
-  }
-
-  /**
-   * Synchronize input data to this.options
+   * Validate and synchronize input data to this.options
    */
   sync() {
+    const res = this._validator.validate({
+      cards: this._cards,
+      rounds: this._rounds,
+      startingRound: this._startingRound,
+      playerLength: this.playerLength
+    });
+
+    this.errors = res.err;
+    this.hasError = !res.ok;
+
     this.options = {
       cards: +this._cards,
       rounds: +this._rounds,
       startingRound: +this._startingRound,
       players: []
     };
-    this.hasError = this.errors.cards !== '' || this.errors.rounds !== '' || this.errors.startingRound !== '';
   }
 
   _cardsChanged(newValue: string, oldValue: string) {
     this.resetRounds();
-    this.validate();
     this.sync();
   }
 
   _roundsChanged(newValue: string, oldValue: string) {
-    this.validate();
     this.sync();
   }
 
   _startingRoundChanged(newValue: string, oldValue: string) {
-    this.validate();
     this.sync();
   }
 
   playerLengthChanged(newValue: string, oldValue: string) {
     this.resetRounds();
-    this.validate();
     this.sync();
   }
 }
