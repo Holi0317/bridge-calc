@@ -23,18 +23,18 @@ export class MdlInput {
       return
     }
     this._inputEl.setCustomValidity(newValue);
-    this._taskQueue.queueMicroTask(() => {
-      if (this._el.MaterialTextfield) {
-        this._el.MaterialTextfield.updateClasses_();
-      }
-    })
+    this._updateClasses();
   }
 
   disabledChanged() {
+    this._updateClasses();
+  }
+
+  private _updateClasses() {
     this._taskQueue.queueMicroTask(() => {
       if (this._el && this._el.MaterialTextfield) {
-        this._el.MaterialTextfield.checkDisabled();
+        this._el.MaterialTextfield.updateClasses_();
       }
-    });
+    })
   }
 }
