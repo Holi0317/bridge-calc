@@ -40,7 +40,7 @@ export function range(start: number, end: number) {
  * @returns {T}
  */
 export function nth<T>(array: T[], index: number): T {
-  return (index > array.length) ? nth(array, index - array.length) : array[index];
+  return (index >= array.length) ? nth(array, index - array.length) : array[index];
 }
 
 /**
