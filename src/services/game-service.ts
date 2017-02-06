@@ -114,6 +114,7 @@ export class GameService {
     // Set const properties
     this.startTime = new Date();
     this.state = GameState.BID;
+    this.playerManager.reset();
     this.playerManager.addPlayer(opts.players);
 
     // Create GameMeta objects
