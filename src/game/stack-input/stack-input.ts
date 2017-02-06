@@ -3,7 +3,7 @@ import {getLogger} from 'aurelia-logging';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameService} from '../../services/game-service';
 import {GameState} from '../../services/game-state';
-import {PlayerID, Player} from '../../services/player-manager-service';
+import {Player} from '../../services/player-manager-service';
 
 const logger = getLogger('GameStackInputComponent');
 
