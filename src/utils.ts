@@ -60,3 +60,21 @@ export function toFront<T>(array: T[], frontIndex: number): T[] {
   }
   return newArray;
 }
+
+/**
+ * Fill in value of given array if original one is null/undefined.
+ * @example
+ * let original = [{ foo: 1 }, { foo: null }]
+ * fill(original, 'foo', 2)
+ * // original will be [{ foo: 1 }, { foo: 2 }]
+ * @param array
+ * @param prop
+ * @param value
+ */
+export function fill(array: any[], prop: string, value: any) {
+  for (const element of array) {
+    if (element[prop] == null) {
+      element[prop] = value;
+    }
+  }
+}

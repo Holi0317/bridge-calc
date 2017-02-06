@@ -7,6 +7,7 @@ import {GameState} from '../../services/game-state';
 import {Player} from '../../services/player-manager-service';
 import {BidValidator} from '../../validators/bid';
 import {WinValidator} from '../../validators/win';
+import {fill} from '../../utils';
 
 const logger = getLogger('game.inputComponent');
 
@@ -72,6 +73,8 @@ export class Enter {
     const currentGame = this._gameService.currentGame!;
 
     if (state === GameState.BID) {
+      const scoreboards = this._gameService.playerManager.players.map(p => p.scoreboard);
+      fill(scoreboards, 'bid', '0');
       const res = this._bidValidator.validate({
         players: this._gameService.playerManager.players,
         cardPerPlayer: currentGame.cardPerPlayer!,
@@ -84,6 +87,8 @@ export class Enter {
       }
     } else {
       // state === GameState.WIN
+      const scoreboards = this._gameService.playerManager.players.map(p => p.scoreboard);
+      fill(scoreboards, 'win', '0');
       const res = this._winValidator.validate({
         players: this._gameService.playerManager.players,
         cardPerPlayer: currentGame.cardPerPlayer!
