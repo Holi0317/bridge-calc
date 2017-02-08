@@ -1,4 +1,4 @@
-import {inject, bindable, bindingMode} from 'aurelia-framework';
+import {autoinject, bindable, bindingMode} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import Sortable from 'sortablejs';
 import {sampleName} from '../services/sample-name';
@@ -14,14 +14,14 @@ interface SortableOnEndEvent extends Event {
   newIndex: number
 }
 
-@inject(Element)
+@autoinject()
 export class NameInputList {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public names: string[];
   @bindable() public showImport: boolean;
   private _sortable: Sortable | null = null;
   private _nameInputsElement: HTMLElement;
 
-  constructor(private _el: HTMLElement) {
+  constructor(private _el: Element) {
 
   }
 

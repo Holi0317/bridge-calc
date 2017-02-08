@@ -1,11 +1,11 @@
-import {bindable, bindingMode, inject} from 'aurelia-framework';
+import {autoinject, bindable, bindingMode} from 'aurelia-framework';
 
-@inject(Element)
+@autoinject()
 export class NameInput {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public name: string;
 
-  constructor(private _el: HTMLElement) {
+  constructor(private _el: Element) {
 
   }
 

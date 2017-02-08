@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {Router} from 'aurelia-router';
 import {sampleName} from '../services/sample-name';
@@ -7,7 +7,7 @@ import {EntryOptionsError} from '../validators/entry-options';
 
 const logger = getLogger('EntryView');
 
-@inject(Router, GameService)
+@autoinject()
 export class Entry {
   public players: string[] = [sampleName(), sampleName(), sampleName(), sampleName()];
   public options: StartOptions;

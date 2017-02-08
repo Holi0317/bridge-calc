@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameState} from './game-state';
@@ -34,7 +34,7 @@ export interface StartOptions {
  *  - gameService.stateChanged - state of game controller has changed. This will emit AFTER all work for controller has completed.
  *  - gameService.end - Game has reached last round and ended.
  */
-@inject(PlayerManagerService, GameMetaService, EventAggregator)
+@autoinject()
 export class GameService {
   /**
    * Starting time of game

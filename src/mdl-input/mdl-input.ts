@@ -1,9 +1,9 @@
-import {bindable, bindingMode, inject, TaskQueue} from 'aurelia-framework';
+import {autoinject, bindable, bindingMode, TaskQueue} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 
 const logger = getLogger('MdlInputComponent');
 
-@inject(TaskQueue)
+@autoinject()
 export class MdlInput {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: string;
   @bindable() public error: string;

@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {GameService} from '../../services/game-service';
 
 function msToTime(milliseconds: number){
@@ -21,7 +21,7 @@ function msToTime(milliseconds: number){
   return h + ':' + m + ':' + s;
 }
 
-@inject(GameService)
+@autoinject()
 export class UsedTimeDisplay {
   intervalID: number | null;
   usedTime: string;

@@ -1,9 +1,9 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {GameMeta} from './game-meta';
 import {range, toFront} from '../utils';
 import {PlayerManagerService} from './player-manager-service';
 
-@inject(PlayerManagerService)
+@autoinject()
 export class GameMetaService {
   /**
    * Game metadata for current round

@@ -1,11 +1,11 @@
-import {inject, bindable, bindingMode} from 'aurelia-framework';
+import {autoinject, bindable, bindingMode} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {StartOptions} from '../services/game-service';
 import {EntryOptionsValidator, EntryOptionsError} from '../validators/entry-options';
 
 const logger = getLogger('EntryOptionsComponent');
 
-@inject(EntryOptionsValidator)
+@autoinject()
 export class EntryOptions {
   /**
    * Number of players.

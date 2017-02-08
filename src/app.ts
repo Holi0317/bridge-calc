@@ -1,11 +1,11 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {LayoutService} from './services/layout-service';
 import {RouterConfiguration, Router, NavigationInstruction} from 'aurelia-router';
 
 const logger = getLogger('app');
 
-@inject(LayoutService)
+@autoinject()
 export class App {
   private _router: Router;
 

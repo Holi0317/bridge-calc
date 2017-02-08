@@ -1,9 +1,9 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {GameService} from '../services/game-service';
 import {GameState} from '../services/game-state';
 import {RouterConfiguration, Router} from 'aurelia-router';
 
-@inject(GameService)
+@autoinject()
 export class Game {
   private _router: Router;
 

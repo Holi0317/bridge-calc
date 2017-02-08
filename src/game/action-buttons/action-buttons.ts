@@ -1,9 +1,9 @@
-import {inject, bindable} from 'aurelia-framework';
+import {autoinject, bindable} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 
 const logger = getLogger('ActionButtonComponent');
 
-@inject(Element)
+@autoinject()
 export class ActionButtons {
   @bindable() undoDisabled: boolean;
 

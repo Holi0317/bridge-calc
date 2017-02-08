@@ -1,8 +1,8 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {LayoutService} from '../services/layout-service';
 
-@inject(LayoutService, Router)
+@autoinject()
 export class Menu {
   constructor(
     private _layoutService: LayoutService,
