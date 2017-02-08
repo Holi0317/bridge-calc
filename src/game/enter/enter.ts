@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {GameService} from '../../services/game-service';
 import {EventAggregator} from 'aurelia-event-aggregator';
@@ -9,10 +9,11 @@ import {BidValidator} from '../../validators/bid';
 import {WinValidator} from '../../validators/win';
 import {fill} from '../../utils';
 import {Player} from '../../services/player';
+import {GameMetaService} from '../../services/game-meta-service';
 
 const logger = getLogger('game.inputComponent');
 
-@inject(EventAggregator, LayoutService, GameService, PlayerManagerService, BidValidator, WinValidator)
+@autoinject()
 export class Enter {
   private _attached = false;
   bidDisabled: boolean;
@@ -25,6 +26,7 @@ export class Enter {
     private _ea: EventAggregator,
     private _layout: LayoutService,
     private _gameService: GameService,
+    private _gameMetaService: GameMetaService,
     private _playerManager: PlayerManagerService,
     private _bidValidator: BidValidator,
     private _winValidator: WinValidator
@@ -45,13 +47,16 @@ export class Enter {
     // Because event aggregator does not have unsubscribe :(
     if (this._attached) {
       // Set title
-      const currentGame = this._gameService.currentGame;
+      const currentGame = this._gameMetaService.currentGame;
       if (currentGame == null) {
+        // No game is available
         this._layout.title = '';
       } else if (currentGame.isExtra) {
+        // Extra round
         this._layout.title = currentGame.name;
       } else {
-        const length = this._gameService.futureGames.length + this._gameService.prevGames.length + 1;
+        // Normal game
+        const length = this._gameMetaService.getAllMetas().length;
         this._layout.title = `Round ${currentGame.name} of ${length}`;
       }
 
@@ -72,7 +77,7 @@ export class Enter {
       return;
     }
 
-    const currentGame = this._gameService.currentGame!;
+    const currentGame = this._gameMetaService.currentGame!;
     const scoreboards = this._playerManager.players.map(p => p.scoreboard);
 
     if (state === GameState.BID) {
