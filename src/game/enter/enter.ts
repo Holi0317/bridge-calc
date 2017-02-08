@@ -4,14 +4,14 @@ import {GameService} from '../../services/game-service';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {LayoutService} from '../../services/layout-service';
 import {GameState} from '../../services/game-state';
-import {Player} from '../../services/player-manager-service';
+import {Player, PlayerManagerService} from '../../services/player-manager-service';
 import {BidValidator} from '../../validators/bid';
 import {WinValidator} from '../../validators/win';
 import {fill} from '../../utils';
 
 const logger = getLogger('game.inputComponent');
 
-@inject(EventAggregator, LayoutService, GameService, BidValidator, WinValidator)
+@inject(EventAggregator, LayoutService, GameService, PlayerManagerService, BidValidator, WinValidator)
 export class Enter {
   private _attached = false;
   bidDisabled: boolean;
@@ -24,6 +24,7 @@ export class Enter {
     private _ea: EventAggregator,
     private _layout: LayoutService,
     private _gameService: GameService,
+    private _playerManager: PlayerManagerService,
     private _bidValidator: BidValidator,
     private _winValidator: WinValidator
   ) {
@@ -57,7 +58,7 @@ export class Enter {
       this.bidDisabled = this._gameService.state !== GameState.BID;
       this.winDisabled = this._gameService.state !== GameState.WIN;
       if (currentGame) {
-        this.players = currentGame.playerOrder.map(id => this._gameService.playerManager.getPlayerByID(id));
+        this.players = currentGame.playerOrder.map(id => this._playerManager.getPlayerByID(id));
       }
     }
   }
@@ -71,12 +72,12 @@ export class Enter {
     }
 
     const currentGame = this._gameService.currentGame!;
-    const scoreboards = this._gameService.playerManager.players.map(p => p.scoreboard);
+    const scoreboards = this._playerManager.players.map(p => p.scoreboard);
 
     if (state === GameState.BID) {
       fill(scoreboards, 'bid', '0');
       const res = this._bidValidator.validate({
-        players: this._gameService.playerManager.players,
+        players: this._playerManager.players,
         cardPerPlayer: currentGame.cardPerPlayer!,
         lastPlayerID: currentGame.playerOrder[currentGame.playerOrder.length - 1]!
       });
@@ -89,7 +90,7 @@ export class Enter {
       // state === GameState.WIN
       fill(scoreboards, 'win', '0');
       const res = this._winValidator.validate({
-        players: this._gameService.playerManager.players,
+        players: this._playerManager.players,
         cardPerPlayer: currentGame.cardPerPlayer!
       });
       logger.debug('Win validate result:', res);

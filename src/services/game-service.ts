@@ -99,7 +99,7 @@ export class GameService {
   public state = GameState.NOT_STARTED;
 
   constructor(
-    public playerManager: PlayerManagerService,
+    private _playerManager: PlayerManagerService,
     private _ea: EventAggregator
   ) {
 
@@ -114,8 +114,8 @@ export class GameService {
     // Set const properties
     this.startTime = new Date();
     this.state = GameState.BID;
-    this.playerManager.reset();
-    this.playerManager.addPlayer(opts.players);
+    this._playerManager.reset();
+    this._playerManager.addPlayer(opts.players);
 
     // Create GameMeta objects
     this.futureGames = range(1, opts.rounds).map(i => new GameMeta(i));
@@ -156,7 +156,7 @@ export class GameService {
       logger.warn('No game is started and win is called');
       return;
     }
-    this.playerManager.calcAllScore(this.currentGame.name);
+    this._playerManager.calcAllScore(this.currentGame.name);
     this.nextRound();
     if (this.state === GameState.GAME_END) {
       this._ea.publish('gameService.end');
@@ -170,7 +170,7 @@ export class GameService {
    */
   skip() {
     // Set all player's score to 0
-    for (const player of this.playerManager.players) {
+    for (const player of this._playerManager.players) {
       player.scoreboard.calcScore(this.currentGame!.name, null, null);
     }
     this.nextRound();
@@ -196,10 +196,10 @@ export class GameService {
       // We still have more rounds of game to proceed.
       this.currentGame = nextGame;
       this.state = GameState.BID;
-      this.currentGame.maker = this.playerManager.next();
+      this.currentGame.maker = this._playerManager.next();
 
       // Set currentGame.playerOrder
-      const playerIDs = this.playerManager.players.map(p => p.ID);
+      const playerIDs = this._playerManager.players.map(p => p.ID);
       this.currentGame.playerOrder = toFront(playerIDs, playerIDs.indexOf(this.currentGame.maker));
     }
   }
@@ -224,7 +224,7 @@ export class GameService {
     if (this.state === GameState.WIN) {
       this.state = GameState.BID;
       // Reset win state
-      for (const player of this.playerManager.players) {
+      for (const player of this._playerManager.players) {
         player.scoreboard.win = null;
       }
       this._ea.publish('gameService.stateChanged');
