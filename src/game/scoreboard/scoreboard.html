@@ -1,3 +1,38 @@
 <template>
+  <require from="../../converters/ordinal-format"></require>
+  <require from="../../converters/round-name-format"></require>
 
+  <div class="container table-container mdl-shadow--2dp">
+    <table class="mdl-data-table mdl-js-data-table full-width">
+
+      <thead>
+      <!-- Player names -->
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th repeat.for="player of _playerManager.players">${player.name}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <!-- Score of each round -->
+      <tr repeat.for="meta of _gameMetaService.prevGames">
+        <td class="mdl-data-table__cell--non-numeric">${meta | roundName}</td>
+        <td repeat.for="player of _playerManager.players">${player.scoreboard.getScore(meta.name)}</td>
+      </tr>
+
+      <!-- Total score -->
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Total score</td>
+        <td repeat.for="player of _playerManager.players">${player.scoreboard.totalScore}</td>
+      </tr>
+
+      <!-- Rank -->
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Rank</td>
+        <td repeat.for="player of _playerManager.players">${player.rank | ordinalFormat}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
