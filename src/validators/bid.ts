@@ -1,5 +1,5 @@
 import {BaseValidateResult, isOk} from './validate-util';
-import {Player, PlayerID} from '../services/player-manager-service';
+import {Player, PlayerID} from '../services/player';
 
 export interface BidValidatorOptions {
   players: Player[]

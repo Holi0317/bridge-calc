@@ -2,8 +2,9 @@ import {inject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameState} from './game-state';
-import {PlayerID, PlayerManagerService} from './player-manager-service';
+import {PlayerManagerService} from './player-manager-service';
 import {range, toFront} from '../utils';
+import {PlayerID} from './player';
 
 const logger = getLogger('GameService');
 

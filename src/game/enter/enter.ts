@@ -4,10 +4,11 @@ import {GameService} from '../../services/game-service';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {LayoutService} from '../../services/layout-service';
 import {GameState} from '../../services/game-state';
-import {Player, PlayerManagerService} from '../../services/player-manager-service';
+import {PlayerManagerService} from '../../services/player-manager-service';
 import {BidValidator} from '../../validators/bid';
 import {WinValidator} from '../../validators/win';
 import {fill} from '../../utils';
+import {Player} from '../../services/player';
 
 const logger = getLogger('game.inputComponent');
 
