@@ -59,7 +59,7 @@ export class EntryOptionsValidator {
     }
   }
 
-  private setError(prop: 'cards' | 'rounds' | 'startingRound', test: boolean, message: string) {
+  private setError(prop: keyof EntryOptionsError, test: boolean, message: string) {
     if (test && !this.err[prop]) {
       this.err[prop] = message;
     }
