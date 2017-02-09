@@ -36,8 +36,12 @@ export class GameMetaService {
    * Return all metadatas of rounds of game. Including past, current and future games.
    * @returns {[any,GameMeta,any]}
    */
-  getAllMetas() {
-    return [...this.prevGames, this.currentGame, ...this.futureGames];
+  getAllMetas(): GameMeta[] {
+    if (this.currentGame) {
+      return [...this.prevGames, this.currentGame, ...this.futureGames];
+    } else {
+      return this.prevGames;
+    }
   }
 
   /**
