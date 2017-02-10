@@ -1,3 +1,10 @@
+import {IDBStorageService} from './idb-storage-service';
+
 /**
- * Created by holi on 2/9/17.
+ * Decide and use storage service depending on environment
  */
+export class StorageManagerService {
+  constructor(private _idbStorage: IDBStorageService) {
+
+  }
+}

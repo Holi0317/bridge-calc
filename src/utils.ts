@@ -78,3 +78,7 @@ export function fill(array: any[], prop: string, value: any) {
     }
   }
 }
+
+export type RecursivePartial<T> = {
+  [P in keyof T]?: RecursivePartial<T[P]>;
+};

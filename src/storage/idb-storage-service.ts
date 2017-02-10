@@ -1,59 +1,73 @@
 import Dexie from 'dexie';
-import {GameState} from './game-state';
-import {PlayerID} from './player';
+import {GameSchema, IStorageService, ISerialized, ISerializedWithID} from './interfaces';
+import {getLogger} from 'aurelia-logging';
+import {RecursivePartial} from '../utils';
 
-export interface GameSchema {
-  id?: number
-  state: GameState
-  startTime: Date
-  endTime: Date | null
-  /**
-   * Index of current game in game meta array
-   */
-  currentGameIndex: number
-}
+const logger = getLogger('IDBStorageService');
 
-export interface PlayerSchema {
+export interface IDBGameSchema extends ISerialized {
   id?: number
-  gameID?: number
-  playerID: PlayerID
-  name: string
-  scoreboard: {
-    bid: string | null
-    win: string | null
-    scores: Map<string, number>
-  }
-}
-
-export interface MetaSchema {
-  id?: number
-  gameID?: number
-  maker: PlayerID | null
-  name: string
-  cardPerPlayer: number
-  isExtra: boolean
-  playerOrder: PlayerID[]
-  index: number  // index of the concat-ed array
 }
 
 class BridgeDatabase extends Dexie {
 
-  public game: Dexie.Table<GameSchema, number>;
-  public player: Dexie.Table<PlayerSchema, number>;
-  public meta: Dexie.Table<MetaSchema, number>;
+  public game: Dexie.Table<IDBGameSchema, number>;
 
   constructor() {
     super('BridgeDatabase');
     this.version(1).stores({
-      game: 'id++',
-      player: 'id++,gameID,playerID',
-      meta: 'id++,gameID'
+      game: 'id++,game.startTime'
     });
   }
 }
 
-export class IDBStorageService {
+export class IDBStorageService implements IStorageService {
+  private db = new BridgeDatabase();
+
   constructor() {
 
   }
+
+  async addGame(data: ISerialized): Promise<number> {
+    const db = this.db;
+    const ID = await db.game.add(data);
+    logger.debug('addGame returned value:', ID);
+    return ID;
+  }
+
+  async getPrevGames(): Promise<ISerializedWithID[]> {
+    const db = this.db;
+    const result = await db.game.orderBy('game.startTime').toArray();
+    logger.debug('getPrevGames result:', result);
+    return result.map(game => {
+      if (!game.id) {
+        // Should not happen
+        logger.warn('Queried game does not have ID attribute.', game);
+      }
+      return {
+        ...game,
+        id: game.id || -1
+      }
+    });
+  }
+
+  async updateGame(gameID: number, data: RecursivePartial<GameSchema>): Promise<boolean> {
+    const count = await this.db.game.where('id').equals(gameID).count();
+    if (count == 0) {
+      return false;
+    }
+    const result = await this.db.game.update(gameID, data);
+    logger.debug('Update result:', result);
+    return true;
+  }
+
+  async deleteGame(gameID: number): Promise<boolean> {
+    const count = await this.db.game.where('id').equals(gameID).count();
+    if (count == 0) {
+      return false;
+    }
+    await this.db.game.delete(gameID);
+    return true;
+  }
+
 }

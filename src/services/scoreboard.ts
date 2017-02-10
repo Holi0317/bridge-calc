@@ -45,9 +45,10 @@ export class Scoreboard {
 
   /**
    * Score map for this player.
-   * Format should be round name -> score
+   * Format should be round name -> score.
+   * Use methods of this class for retrieving score unless there is no other ways to get it
    */
-  private _scores: Map<string, number>;
+  public scores: Map<string, number>;
 
   constructor() {
     this.reset();
@@ -59,7 +60,7 @@ export class Scoreboard {
   reset() {
     this.bid = null;
     this.win = null;
-    this._scores = new Map();
+    this.scores = new Map();
     this.prevScore = 0;
     this.totalScore = 0;
   }
@@ -71,7 +72,7 @@ export class Scoreboard {
    * @returns ?number
    */
   getScore(round: string): number | null {
-    const score = this._scores.get(round);
+    const score = this.scores.get(round);
     return (score == null) ? null : score;
   }
 
@@ -93,14 +94,14 @@ export class Scoreboard {
     this.win = null;
 
     const score = calculateScore(bid, win);
-    this._scores.set(round, score);
+    this.scores.set(round, score);
     this.prevScore = score;
     this.totalScore += score;
   }
 
   updateTotalScore() {
     let sum = 0;
-    this._scores.forEach(value => sum += value);
+    this.scores.forEach(value => sum += value);
     this.totalScore = sum;
   }
 }
