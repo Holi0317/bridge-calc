@@ -1,10 +1,10 @@
 import {autoinject} from 'aurelia-framework';
 import {GameMeta} from './game-meta';
 import {range, toFront} from '../utils';
-import {PlayerManagerService} from './player-manager-service';
+import {PlayerManager} from './player-manager';
 
 @autoinject()
-export class GameMetaService {
+export class GameMetaManager {
   /**
    * Game metadata for current round
    */
@@ -19,14 +19,14 @@ export class GameMetaService {
    */
   public futureGames: GameMeta[] = [];
 
-  constructor(private _playerManager: PlayerManagerService) {
+  constructor(private _playerManager: PlayerManager) {
 
   }
 
   /**
    * Reset states.
    */
-  reset() {
+  reset(): void {
     this.currentGame = null;
     this.prevGames = [];
     this.futureGames = [];
@@ -62,7 +62,7 @@ export class GameMetaService {
     }
 
     this.currentGame = this.futureGames.shift() || null;
-    if (this.currentGame != null) {
+    if (this.currentGame) {
       // Have next game. Do maker and player order logic.
       this.currentGame.maker = this._playerManager.next();
       this.setPlayerOrder();
@@ -75,7 +75,7 @@ export class GameMetaService {
    * retain order of playerManager.player for remaining players.
    * @throws Error - current game or current game maker is not defined.
    */
-  setPlayerOrder() {
+  setPlayerOrder(): void {
     if (!this.currentGame || !this.currentGame.maker) {
       throw new Error('[GameMetaService.setPlayerOrder] current game or maker is not set.');
     }
@@ -84,11 +84,11 @@ export class GameMetaService {
   }
 
   /**
-   * Append a new round for future game
+   * Append a new extra round for future game
    * @param name - Name of the round.
    * @param cardPerPlayer - Number of cards per player on that round.
    */
-  addRound(name: string, cardPerPlayer: number) {
+  addRound(name: string, cardPerPlayer: number): void {
     const meta = new GameMeta(name);
     meta.cardPerPlayer = cardPerPlayer;
     meta.isExtra = true;
@@ -99,7 +99,7 @@ export class GameMetaService {
    * Initiate games by resetting and adding future rounds
    * @param totalRound
    */
-  initiateGames(totalRound: number) {
+  initiateGames(totalRound: number): void {
     this.reset();
     this.futureGames = range(1, totalRound).map(i => new GameMeta(i));
   }

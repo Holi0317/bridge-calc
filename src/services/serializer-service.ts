@@ -1,7 +1,7 @@
 import {lazy} from 'aurelia-framework';
 import {GameService} from './game-service';
-import {PlayerManagerService} from './player-manager-service';
-import {GameMetaService} from './game-meta-service';
+import {PlayerManager} from './player-manager';
+import {GameMetaManager} from './game-meta-manager';
 import {ISerialized} from '../storage/interfaces';
 
 /**
@@ -11,8 +11,8 @@ import {ISerialized} from '../storage/interfaces';
 export class SerializerService {
   constructor(
     @lazy(GameService) private _gameService: () => GameService,
-    @lazy(PlayerManagerService) private _playerManager: () => PlayerManagerService,
-    @lazy(GameMetaService) private _gameMetaService: () => GameMetaService
+    @lazy(PlayerManager) private _playerManager: () => PlayerManager,
+    @lazy(GameMetaManager) private _gameMetaManager: () => GameMetaManager
   ) {
 
   }
@@ -20,13 +20,13 @@ export class SerializerService {
   dump(): ISerialized {
     const gameService = this._gameService();
     const playerManager = this._playerManager();
-    const gameMetaService = this._gameMetaService();
+    const gameMetaManager = this._gameMetaManager();
 
     const game = {
       state: gameService.state,
       startTime: gameService.startTime ? gameService.startTime.getTime() : null,
       endTime: gameService.endTime ? gameService.endTime.getTime() : null,
-      currentGameIndex: gameMetaService.currentGame ? gameMetaService.prevGames.length : null
+      currentGameIndex: gameMetaManager.currentGame ? gameMetaManager.prevGames.length : null
     };
 
     const players = playerManager.players.map(player => {
@@ -41,7 +41,7 @@ export class SerializerService {
       }
     });
 
-    const metas = gameMetaService.getAllMetas().map(meta => {
+    const metas = gameMetaManager.getAllMetas().map(meta => {
       return {
         maker: meta.maker,
         name: meta.name,
@@ -61,6 +61,6 @@ export class SerializerService {
   async load(data: ISerialized) {
     const gameService = this._gameService();
     const playerManager = this._playerManager();
-    const gameMetaService = this._gameMetaService();
+    const gameMetaManager = this._gameMetaManager();
   }
 }

@@ -1,9 +1,9 @@
 import {getLogger} from 'aurelia-logging';
 import {Player, PlayerID} from './player';
 
-const logger = getLogger('PlayerManagerService');
+const logger = getLogger('PlayerManager');
 
-export class PlayerManagerService {
+export class PlayerManager {
   /**
    * Array of players in this manager.
    */
@@ -49,7 +49,7 @@ export class PlayerManagerService {
    * This use recursion to ensure all ID are unique.
    * If you are in a very bad luck (I mean vary vary bad luck), StackOverflow will occur.
    */
-  ensureUnique() {
+  ensureUnique(): void {
     const IDs = this.players.map(p => p.ID);
     const duplicates = IDs.filter((value, index) => IDs.includes(value, index + 1));
     if (duplicates.length === 0) {
@@ -68,7 +68,7 @@ export class PlayerManagerService {
    * @param playerID
    * @throws ReferenceError - Player ID does not exists.
    */
-  removePlayer(playerID?: PlayerID) {
+  removePlayer(playerID?: PlayerID): void {
     if (playerID == null) {
       this.players = [];
     } else {
@@ -89,7 +89,7 @@ export class PlayerManagerService {
    * Get the next player ID.
    * The first time this method is called will return the first player.
    */
-  next() {
+  next(): PlayerID {
     if (++this.currentPlayerIndex === this.players.length) {
       this.currentPlayerIndex = 0;
     }
@@ -98,9 +98,10 @@ export class PlayerManagerService {
 
   /**
    * Calculate all player's score by implicit bid and win data in player's scoreboard object.
+   * Rank will also be updated.
    * @param round - Name of current round
    */
-  calcAllScore(round: string) {
+  calcAllScore(round: string): void {
     for (const player of this.players) {
       player.scoreboard.calcScore(round);
     }
@@ -110,7 +111,7 @@ export class PlayerManagerService {
   /**
    * Update rank property of all players
    */
-  updateRank() {
+  updateRank(): void {
     const scores = this.players.map(p => p.scoreboard.totalScore).sort((a, b) => b - a);
     for (const player of this.players) {
       player.rank = scores.indexOf(player.scoreboard.totalScore) + 1;
@@ -118,10 +119,11 @@ export class PlayerManagerService {
   }
 
   /**
-   * Get the player by Player ID
-   * @param id
+   * Get the player by Player ID.
+   * If no player is found, a dummy player with name `Null` will be returned.
+   * @param id - Desired player ID
    */
-  getPlayerByID(id: PlayerID) {
+  getPlayerByID(id: PlayerID): Player {
     const player = this._playerMap.get(id);
     if (player) {
       return player;
@@ -136,7 +138,7 @@ export class PlayerManagerService {
    * Should be called after any mutation to player array.
    * @private
    */
-  private _refreshMap() {
+  private _refreshMap(): void {
     this._playerMap = new Map();
     for (const player of this.players) {
       this._playerMap.set(player.ID, player);

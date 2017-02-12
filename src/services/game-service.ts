@@ -2,8 +2,8 @@ import {autoinject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameState} from './game-state';
-import {PlayerManagerService} from './player-manager-service';
-import {GameMetaService} from './game-meta-service';
+import {PlayerManager} from './player-manager';
+import {GameMetaManager} from './game-meta-manager';
 
 const logger = getLogger('GameService');
 
@@ -50,8 +50,8 @@ export class GameService {
   public state = GameState.NOT_STARTED;
 
   constructor(
-    private _playerManager: PlayerManagerService,
-    private _gameMetaService: GameMetaService,
+    private _playerManager: PlayerManager,
+    private _gameMetaManager: GameMetaManager,
     private _ea: EventAggregator
   ) {
 
@@ -72,7 +72,7 @@ export class GameService {
     this._playerManager.addPlayer(opts.players);
 
     // Meta manager
-    this._gameMetaService.initiateGames(opts.rounds);
+    this._gameMetaManager.initiateGames(opts.rounds);
 
     // Bootstrap first round metadata
     this._nextRound();
@@ -93,7 +93,7 @@ export class GameService {
    * WARNING: no type/value checking will be done here.
    */
   bid() {
-    if (this._gameMetaService.currentGame == null || this.state === GameState.NOT_STARTED) {
+    if (this._gameMetaManager.currentGame == null || this.state === GameState.NOT_STARTED) {
       logger.warn('No game is started and bid is called');
       return;
     }
@@ -106,11 +106,11 @@ export class GameService {
    * WARNING: no type/value checking will be done here.
    */
   win() {
-    if (this._gameMetaService.currentGame == null || this.state === GameState.NOT_STARTED) {
+    if (this._gameMetaManager.currentGame == null || this.state === GameState.NOT_STARTED) {
       logger.warn('No game is started and win is called');
       return;
     }
-    this._playerManager.calcAllScore(this._gameMetaService.currentGame.name);
+    this._playerManager.calcAllScore(this._gameMetaManager.currentGame.name);
     this._nextRound();
     if (this.state === GameState.GAME_END) {
       this._ea.publish('gameService.end');
@@ -129,7 +129,7 @@ export class GameService {
     }
     // Set all player's score to 0
     for (const player of this._playerManager.players) {
-      player.scoreboard.calcScore(this._gameMetaService.currentGame!.name, null, null);
+      player.scoreboard.calcScore(this._gameMetaManager.currentGame!.name, null, null);
     }
     this._nextRound();
   }
@@ -139,7 +139,7 @@ export class GameService {
    * Prepare states for fulfilling needs of next round.
    */
   private _nextRound() {
-    if (this._gameMetaService.next()) {
+    if (this._gameMetaManager.next()) {
       // Have next round
       this.state = GameState.BID;
     } else {
