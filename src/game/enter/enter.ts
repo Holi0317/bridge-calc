@@ -31,19 +31,24 @@ export class Enter {
     private _bidValidator: BidValidator,
     private _winValidator: WinValidator
   ) {
+    this._ea.subscribe('gameMetaManager.currentGameChanged', this.metaChanged.bind(this));
     this._ea.subscribe('gameService.stateChanged', this.stateChanged.bind(this));
+    this._ea.subscribe('gameMetaManager.playerOrderChanged', this.playerOrderChanged.bind(this));
+    this.stateChanged();
+    this.metaChanged();
+    this.playerOrderChanged();
   }
 
   attached() {
     this._attached = true;
-    this.stateChanged();
+    this.metaChanged();
   }
 
   detached() {
     this._attached = false;
   }
 
-  stateChanged() {
+  metaChanged() {
     // Because event aggregator does not have unsubscribe :(
     if (this._attached) {
       // Set title
@@ -59,17 +64,25 @@ export class Enter {
         const length = this._gameMetaManager.getAllMetas().length;
         this._layout.title = `Round ${currentGame.name} of ${length}`;
       }
+    }
+  }
 
-      // Set states
-      this.bidDisabled = this._gameService.state !== GameState.BID;
-      this.winDisabled = this._gameService.state !== GameState.WIN;
-      if (currentGame) {
-        this.players = currentGame.playerOrder.map(id => this._playerManager.getPlayerByID(id));
-      }
+  stateChanged() {
+    // Set states
+    this.bidDisabled = this._gameService.state !== GameState.BID;
+    this.winDisabled = this._gameService.state !== GameState.WIN;
+
+  }
+
+  playerOrderChanged() {
+    const currentGame = this._gameMetaManager.currentGame;
+    if (currentGame) {
+      this.players = currentGame.playerOrder.map(id => this._playerManager.getPlayerByID(id));
     }
   }
 
   next() {
+    // TODO Clean up this mess
     // Check valid
     const state = this._gameService.state;
     if (state !== GameState.BID && state !== GameState.WIN) {

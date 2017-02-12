@@ -57,7 +57,8 @@ export class GameService {
    */
   start(opts: StartOptions) {
     logger.debug('Starting a new game with options:', opts);
-    // Set const properties
+
+    // Set state
     this.state = GameState.BID;
 
     // Player manager
@@ -124,9 +125,11 @@ export class GameService {
       throw new Error('[GameService.skip] Game is not started or ended')
     }
     // Set all player's score to 0
+    // We don't use playerManager.calcAllScore here as it will emit a event, which is not the desired result.
     for (const player of this._playerManager.players) {
       player.scoreboard.calcScore(this._gameMetaManager.currentGame!.name, null, null);
     }
+    this._playerManager.updateRank();
     this._nextRound();
   }
 

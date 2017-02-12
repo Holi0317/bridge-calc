@@ -2,8 +2,14 @@ import {autoinject} from 'aurelia-framework';
 import {GameMeta, MetaSchema} from './game-meta';
 import {range, toFront} from '../utils';
 import {PlayerManager} from './player-manager';
-import {PlayerID} from './player';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
+/**
+ * Manage game metadata.
+ * This service will emit following event through aurelia event aggregator:
+ *  - gameMetaManager.currentGameChanged - Reference to currentGame has changed. Most likely next round is started.
+ *  - gameMetaManager.playerOrderChanged - currentGame.playerOrder has changed. Next round has started or player list has changed.
+ */
 @autoinject()
 export class GameMetaManager {
   /**
@@ -20,8 +26,11 @@ export class GameMetaManager {
    */
   public futureGames: GameMeta[] = [];
 
-  constructor(private _playerManager: PlayerManager) {
-
+  constructor(
+    private _playerManager: PlayerManager,
+    private _ea: EventAggregator
+  ) {
+    this._ea.subscribe('playerManager.playerListChanged', this._playerListChanged.bind(this));
   }
 
   /**
@@ -55,7 +64,7 @@ export class GameMetaManager {
   next(): GameMeta | null {
     if (this.currentGame == null && !this.futureGames.length /* length === 0 */) {
       // No further round available and already ended game / game is still not started.
-      throw new RangeError('[GameMetaService.next] No further round available and no current game is started.');
+      throw new RangeError('[next] No further round available and no current game is started.');
     }
     if (this.currentGame != null) {
       // If this is the first round, currentGame is null.
@@ -63,11 +72,14 @@ export class GameMetaManager {
     }
 
     this.currentGame = this.futureGames.shift() || null;
+    this._ea.publish('gameMetaManager.currentGameChanged');
+
     if (this.currentGame) {
       // Have next game. Do maker and player order logic.
       this.currentGame.maker = this._playerManager.next();
       this.setPlayerOrder();
     }
+
     return this.currentGame;
   }
 
@@ -82,6 +94,7 @@ export class GameMetaManager {
     }
     const playerIDs = this._playerManager.players.map(p => p.ID);
     this.currentGame.playerOrder = toFront(playerIDs, playerIDs.indexOf(this.currentGame.maker));
+    this._ea.publish('gameMetaManager.playerOrderChanged');
   }
 
   /**
@@ -103,6 +116,11 @@ export class GameMetaManager {
   initiateGames(totalRound: number): void {
     this.reset();
     this.futureGames = range(1, totalRound).map(i => new GameMeta(i));
+  }
+
+  private _playerListChanged() {
+    // TODO implement logic for handling player list changed.
+    this._ea.publish('gameMetaManager.playerOrderChanged');
   }
 
   dump(): MetaSchema[] {

@@ -1,9 +1,17 @@
+import {autoinject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {getLogger} from 'aurelia-logging';
 import {Player, PlayerID, PlayerSchema} from './player';
-import {ScoreboardSchema, Scoreboard} from './scoreboard';
 
 const logger = getLogger('PlayerManager');
 
+/**
+ * Manages player instances.
+ * This service will emit following event through aurelia event aggregator:
+ *  - playerManager.playerListChanged - Player list has changed
+ *  - playerManager.scoreChanged - A round may have ended and score and rank of players have changed.
+ */
+@autoinject()
 export class PlayerManager {
   /**
    * Array of players in this manager.
@@ -18,7 +26,7 @@ export class PlayerManager {
    */
   private _playerMap: Map<PlayerID, Player>;
 
-  constructor() {
+  constructor(private _ea: EventAggregator) {
     this.reset();
   }
 
@@ -41,6 +49,7 @@ export class PlayerManager {
     const newPlayers = names.map(name => new Player(name));
     this.players.push(...newPlayers);
     this._refreshMap();
+    this._ea.publish('playerManager.playerListChanged');
   }
 
   /**
@@ -59,6 +68,7 @@ export class PlayerManager {
     }
     this.players.splice(index, 1);
     this._refreshMap();
+    this._ea.publish('playerManager.playerListChanged');
   }
 
   /**
@@ -82,6 +92,7 @@ export class PlayerManager {
       player.scoreboard.calcScore(round);
     }
     this.updateRank();
+    this._ea.publish('playerManager.scoreChanged');
   }
 
   /**
