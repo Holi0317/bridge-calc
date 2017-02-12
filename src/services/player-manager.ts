@@ -41,15 +41,18 @@ export class PlayerManager {
   /**
    * Add new players to manager.
    * @param names - (Array of) player names to be added.
+   * @param emitEvent - Should this emit an event through aurelia event aggregator?
    */
-  addPlayer(names: string | string[]): void {
+  addPlayer(names: string | string[], emitEvent = true): void {
     if (!Array.isArray(names)) {
       return this.addPlayer([names]);
     }
     const newPlayers = names.map(name => new Player(name));
     this.players.push(...newPlayers);
     this._refreshMap();
-    this._ea.publish('playerManager.playerListChanged');
+    if (emitEvent) {
+      this._ea.publish('playerManager.playerListChanged');
+    }
   }
 
   /**

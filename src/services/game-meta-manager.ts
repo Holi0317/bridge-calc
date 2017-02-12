@@ -3,6 +3,9 @@ import {GameMeta, MetaSchema} from './game-meta';
 import {range, toFront} from '../utils';
 import {PlayerManager} from './player-manager';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {getLogger} from 'aurelia-logging';
+
+const logger = getLogger('GameMetaManager');
 
 /**
  * Manage game metadata.
@@ -94,6 +97,7 @@ export class GameMetaManager {
     }
     const playerIDs = this._playerManager.players.map(p => p.ID);
     this.currentGame.playerOrder = toFront(playerIDs, playerIDs.indexOf(this.currentGame.maker));
+    logger.debug('playerOrder updated.', this.currentGame.playerOrder);
     this._ea.publish('gameMetaManager.playerOrderChanged');
   }
 

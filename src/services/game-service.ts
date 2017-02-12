@@ -63,7 +63,7 @@ export class GameService {
 
     // Player manager
     this._playerManager.reset();
-    this._playerManager.addPlayer(opts.players);
+    this._playerManager.addPlayer(opts.players, false); // Emit event here can cause bug as state is not prepared yet
 
     // Meta manager
     this._gameMetaManager.initiateGames(opts.rounds);
