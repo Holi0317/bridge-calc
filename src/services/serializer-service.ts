@@ -38,7 +38,7 @@ export class SerializerService {
     }
   }
 
-  async load(data: ISerialized) {
+  load(data: ISerialized): void {
     const gameService = this._gameService();
     const playerManager = this._playerManager();
     const gameMetaManager = this._gameMetaManager();

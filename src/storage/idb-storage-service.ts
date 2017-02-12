@@ -43,11 +43,9 @@ export class IDBStorageService implements IStorageService {
       if (!game.id) {
         // Should not happen
         logger.warn('Queried game does not have ID attribute.', game);
+        game.id = -1
       }
-      return {
-        ...game,
-        id: game.id || -1
-      }
+      return game as ISerializedWithID;
     });
   }
 
