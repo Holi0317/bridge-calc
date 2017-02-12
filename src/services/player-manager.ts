@@ -1,6 +1,6 @@
 import {getLogger} from 'aurelia-logging';
 import {Player, PlayerID} from './player';
-import {ScoreboardSchema} from './scoreboard';
+import {ScoreboardSchema, Scoreboard} from './scoreboard';
 
 const logger = getLogger('PlayerManager');
 
@@ -132,7 +132,15 @@ export class PlayerManager {
   }
 
   load(data: PlayerSchema[]) {
-
+    this.reset();
+    this.players = data.map(player => {
+      const playerObject = new Player(player.name);
+      playerObject.ID = player.ID;
+      playerObject.scoreboard.load(player.scoreboard);
+      return playerObject;
+    });
+    this._refreshMap();
+    this.updateRank();
   }
 }
 

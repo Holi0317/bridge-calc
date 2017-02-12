@@ -114,7 +114,13 @@ export class Scoreboard {
   }
 
   load(data: ScoreboardSchema) {
+    this.reset();
 
+    this.bid = data.bid;
+    this.win = data.win;
+    this.scores = new Map(data.scores);
+
+    this.updateTotalScore();
   }
 }
 

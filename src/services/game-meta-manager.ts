@@ -118,6 +118,26 @@ export class GameMetaManager {
   }
 
   load(data: MetaSchema[], currentGameIndex: number | null) {
+    this.reset();
+
+    this.futureGames = data.map(meta => {
+      const metaObject = new GameMeta(meta.name);
+
+      metaObject.maker = meta.maker;
+      metaObject.cardPerPlayer = meta.cardPerPlayer;
+      metaObject.isExtra = meta.isExtra;
+      metaObject.playerOrder = meta.playerOrder;
+
+      return metaObject;
+    });
+
+    if (currentGameIndex) {
+      this.prevGames = this.futureGames.splice(0, currentGameIndex - 1);
+      this.currentGame = this.futureGames.shift()!;
+    } else {
+      this.prevGames = this.futureGames;
+      this.futureGames = [];
+    }
 
   }
 }

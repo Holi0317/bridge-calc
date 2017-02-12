@@ -42,5 +42,11 @@ export class SerializerService {
     const gameService = this._gameService();
     const playerManager = this._playerManager();
     const gameMetaManager = this._gameMetaManager();
+    const timerService = this._timerService();
+
+    gameService.state = data.game.state;
+    playerManager.load(data.players);
+    gameMetaManager.load(data.metas, data.game.currentGameIndex);
+    timerService.load(data.timer);
   }
 }

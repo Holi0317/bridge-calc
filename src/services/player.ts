@@ -31,12 +31,4 @@ export class Player {
     this.scoreboard = new Scoreboard();
     this.rank = 1;
   }
-
-  /**
-   * Generate a new ID for this player.
-   * This should only be used when there is conflict of ID. (Rare case)
-   */
-  newID() {
-    this.ID = genID();
-  }
 }
