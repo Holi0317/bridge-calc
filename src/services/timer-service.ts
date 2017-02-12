@@ -24,4 +24,30 @@ export class TimerService {
       return 0;
     }
   }
+
+  dump(): TimerSchema {
+    function getTimeOrNull(date: Date | null): number | null {
+      return date ? date.getTime() : null;
+    }
+
+    return {
+      startTime: getTimeOrNull(this.startTime),
+      endTime: getTimeOrNull(this.endTime)
+    }
+  }
+
+  load(data: TimerSchema) {
+    function dateOrNull(date: number | null): Date | null {
+      return date ? new Date(date) : null;
+    }
+
+    this.startTime = dateOrNull(data.startTime);
+    this.endTime = dateOrNull(data.endTime);
+
+  }
+}
+
+export interface TimerSchema {
+  startTime: number | null
+  endTime: number | null
 }

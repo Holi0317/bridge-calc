@@ -5,10 +5,6 @@ import {GameMetaManager} from './game-meta-manager';
 import {ISerialized} from '../storage/interfaces';
 import {TimerService} from './timer-service';
 
-function getTimeOrNull(date: Date | null): number | null {
-  return date ? date.getTime() : null;
-}
-
 /**
  * Dump and load gameService, playerManagerService and gameMetaService data to plain object
  * for persistent storage.
@@ -34,38 +30,11 @@ export class SerializerService {
       currentGameIndex: gameMetaManager.currentGame ? gameMetaManager.prevGames.length : null
     };
 
-    const players = playerManager.players.map(player => {
-      return {
-        ID: player.ID,
-        name: player.name,
-        scoreboard: {
-          win: player.scoreboard.win,
-          bid: player.scoreboard.bid,
-          scores: Array.from(player.scoreboard.scores)
-        }
-      }
-    });
-
-    const metas = gameMetaManager.getAllMetas().map(meta => {
-      return {
-        maker: meta.maker,
-        name: meta.name,
-        cardPerPlayer: meta.cardPerPlayer,
-        isExtra: meta.isExtra,
-        playerOrder: meta.playerOrder,
-      }
-    });
-
-    const timer = {
-      startTime: getTimeOrNull(timerService.startTime),
-      endTime: getTimeOrNull(timerService.endTime)
-    }
-
     return {
       game,
-      players,
-      metas,
-      timer
+      players: playerManager.dump(),
+      metas: gameMetaManager.dump(),
+      timer: timerService.dump()
     }
   }
 

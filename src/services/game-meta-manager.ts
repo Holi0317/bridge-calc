@@ -2,6 +2,7 @@ import {autoinject} from 'aurelia-framework';
 import {GameMeta} from './game-meta';
 import {range, toFront} from '../utils';
 import {PlayerManager} from './player-manager';
+import {PlayerID} from './player';
 
 @autoinject()
 export class GameMetaManager {
@@ -103,4 +104,28 @@ export class GameMetaManager {
     this.reset();
     this.futureGames = range(1, totalRound).map(i => new GameMeta(i));
   }
+
+  dump(): MetaSchema[] {
+    return this.getAllMetas().map(meta => {
+      return {
+        maker: meta.maker,
+        name: meta.name,
+        cardPerPlayer: meta.cardPerPlayer,
+        isExtra: meta.isExtra,
+        playerOrder: meta.playerOrder,
+      }
+    });
+  }
+
+  load(data: MetaSchema[], currentGameIndex: number | null) {
+
+  }
+}
+
+export interface MetaSchema {
+  maker: PlayerID | null
+  name: string
+  cardPerPlayer: number | null
+  isExtra: boolean
+  playerOrder: PlayerID[]
 }

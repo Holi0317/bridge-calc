@@ -1,43 +1,23 @@
 import {GameState} from '../services/game-state';
-import {PlayerID} from '../services/player';
 import {RecursivePartial} from '../utils';
+import {TimerSchema} from '../services/timer-service';
+import {MetaSchema} from '../services/game-meta-manager';
+import {PlayerSchema} from '../services/player-manager';
 
 export interface ISerialized {
   game: GameSchema
   players: PlayerSchema[]
   metas: MetaSchema[]
-  timer: TimeSchema
+  timer: TimerSchema
 }
 
 export interface GameSchema {
   state: GameState
   /**
-   * Index of current game in game meta array
+   * Index of current game in game meta array.
+   * If null, all games have finished.
    */
   currentGameIndex: number | null
-}
-
-export interface PlayerSchema {
-  ID: PlayerID
-  name: string
-  scoreboard: {
-    bid: string | null
-    win: string | null
-    scores: [string, number][]  // result of Array.from(Map<string, number>)
-  }
-}
-
-export interface MetaSchema {
-  maker: PlayerID | null
-  name: string
-  cardPerPlayer: number | null
-  isExtra: boolean
-  playerOrder: PlayerID[]
-}
-
-export interface TimeSchema {
-  startTime: number | null
-  endTime: number | null
 }
 
 export interface ISerializedWithID extends ISerialized {

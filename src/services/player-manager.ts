@@ -1,5 +1,6 @@
 import {getLogger} from 'aurelia-logging';
 import {Player, PlayerID} from './player';
+import {ScoreboardSchema} from './scoreboard';
 
 const logger = getLogger('PlayerManager');
 
@@ -39,49 +40,24 @@ export class PlayerManager {
     }
     const newPlayers = names.map(name => new Player(name));
     this.players.push(...newPlayers);
-    this.ensureUnique();
     this._refreshMap();
   }
 
   /**
-   * Ensure all player ID are unique in this manager.
-   * Assign of new ID starts from the last element. Therefore it's safe to call this after adding new player.
-   * This use recursion to ensure all ID are unique.
-   * If you are in a very bad luck (I mean vary vary bad luck), StackOverflow will occur.
-   */
-  ensureUnique(): void {
-    const IDs = this.players.map(p => p.ID);
-    const duplicates = IDs.filter((value, index) => IDs.includes(value, index + 1));
-    if (duplicates.length === 0) {
-      return
-    }
-    for (const dupe of duplicates) {
-      const index = IDs.lastIndexOf(dupe);
-      this.players[index].newID();
-    }
-    this.ensureUnique(); // Hopefully this won't cause StackOverflow.
-  }
-
-  /**
-   * Remove player from manager.
-   * If playerID is null, all players will be removed.
-   * @param playerID
+   * Remove a player from manager.
+   * @param playerID - Player to be removed
    * @throws ReferenceError - Player ID does not exists.
    */
-  removePlayer(playerID?: PlayerID): void {
-    if (playerID == null) {
-      this.players = [];
-    } else {
-      const index = this.players.map(p => p.ID).indexOf(playerID);
-      if (index === -1) {
-        throw new ReferenceError(`Player ID: ${playerID} not found.`);
-      }
-
-      if (index === this.currentPlayerIndex) {
-        this.currentPlayerIndex--;
-      }
-      this.players.splice(index, 1);
+  removePlayer(playerID: PlayerID): void {
+    const index = this.players.map(p => p.ID).indexOf(playerID);
+    if (index === -1) {
+      throw new ReferenceError(`Player ID: ${playerID} not found.`);
     }
+
+    if (index === this.currentPlayerIndex) {
+      this.currentPlayerIndex--;
+    }
+    this.players.splice(index, 1);
     this._refreshMap();
   }
 
@@ -144,4 +120,24 @@ export class PlayerManager {
       this._playerMap.set(player.ID, player);
     }
   }
+
+  dump(): PlayerSchema[] {
+    return this.players.map(player => {
+      return {
+        ID: player.ID,
+        name: player.name,
+        scoreboard: player.scoreboard.dump()
+      }
+    });
+  }
+
+  load(data: PlayerSchema[]) {
+
+  }
+}
+
+export interface PlayerSchema {
+  ID: PlayerID
+  name: string
+  scoreboard: ScoreboardSchema
 }

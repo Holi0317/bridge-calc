@@ -104,4 +104,22 @@ export class Scoreboard {
     this.scores.forEach(value => sum += value);
     this.totalScore = sum;
   }
+
+  dump(): ScoreboardSchema {
+    return {
+      bid: this.bid,
+      win: this.win,
+      scores: Array.from(this.scores)
+    }
+  }
+
+  load(data: ScoreboardSchema) {
+
+  }
+}
+
+export interface ScoreboardSchema {
+  bid: string | null
+  win: string | null
+  scores: [string, number][]  // result of Array.from(Map<string, number>)
 }
