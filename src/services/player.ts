@@ -1,5 +1,5 @@
 import {genID} from '../utils';
-import {Scoreboard} from './scoreboard';
+import {Scoreboard, ScoreboardSchema} from './scoreboard';
 
 /**
  * Use this type for representing PlayerID.
@@ -31,4 +31,25 @@ export class Player {
     this.scoreboard = new Scoreboard();
     this.rank = 1;
   }
+
+  dump(): PlayerSchema {
+    return {
+      ID: this.ID,
+      name: this.name,
+      scoreboard: this.scoreboard.dump()
+    }
+  }
+
+  static fromDumped(data: PlayerSchema) {
+    const playerObject = new Player(data.name);
+    playerObject.ID = data.ID;
+    playerObject.scoreboard.load(data.scoreboard);
+    return playerObject;
+  }
+}
+
+export interface PlayerSchema {
+  ID: PlayerID
+  name: string
+  scoreboard: ScoreboardSchema
 }

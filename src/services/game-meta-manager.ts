@@ -1,5 +1,5 @@
 import {autoinject} from 'aurelia-framework';
-import {GameMeta} from './game-meta';
+import {GameMeta, MetaSchema} from './game-meta';
 import {range, toFront} from '../utils';
 import {PlayerManager} from './player-manager';
 import {PlayerID} from './player';
@@ -106,30 +106,13 @@ export class GameMetaManager {
   }
 
   dump(): MetaSchema[] {
-    return this.getAllMetas().map(meta => {
-      return {
-        maker: meta.maker,
-        name: meta.name,
-        cardPerPlayer: meta.cardPerPlayer,
-        isExtra: meta.isExtra,
-        playerOrder: meta.playerOrder,
-      }
-    });
+    return this.getAllMetas().map(meta => meta.dump());
   }
 
   load(data: MetaSchema[], currentGameIndex: number | null) {
     this.reset();
 
-    this.futureGames = data.map(meta => {
-      const metaObject = new GameMeta(meta.name);
-
-      metaObject.maker = meta.maker;
-      metaObject.cardPerPlayer = meta.cardPerPlayer;
-      metaObject.isExtra = meta.isExtra;
-      metaObject.playerOrder = meta.playerOrder;
-
-      return metaObject;
-    });
+    this.futureGames = data.map(meta => GameMeta.fromDumped(meta));
 
     if (currentGameIndex) {
       this.prevGames = this.futureGames.splice(0, currentGameIndex - 1);
@@ -140,12 +123,4 @@ export class GameMetaManager {
     }
 
   }
-}
-
-export interface MetaSchema {
-  maker: PlayerID | null
-  name: string
-  cardPerPlayer: number | null
-  isExtra: boolean
-  playerOrder: PlayerID[]
 }

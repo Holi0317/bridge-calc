@@ -34,4 +34,33 @@ export class GameMeta {
     this.isExtra = typeof name !== 'number';
     this.playerOrder = [];
   }
+
+  dump(): MetaSchema {
+    return {
+      maker: this.maker,
+      name: this.name,
+      cardPerPlayer: this.cardPerPlayer,
+      isExtra: this.isExtra,
+      playerOrder: this.playerOrder,
+    }
+  }
+
+  static fromDumped(data: MetaSchema) {
+    const metaObject = new GameMeta(data.name);
+
+    metaObject.maker = data.maker;
+    metaObject.cardPerPlayer = data.cardPerPlayer;
+    metaObject.isExtra = data.isExtra;
+    metaObject.playerOrder = data.playerOrder;
+
+    return metaObject;
+  }
+}
+
+export interface MetaSchema {
+  maker: PlayerID | null
+  name: string
+  cardPerPlayer: number | null
+  isExtra: boolean
+  playerOrder: PlayerID[]
 }

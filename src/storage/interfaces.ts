@@ -1,8 +1,8 @@
 import {GameState} from '../services/game-state';
 import {RecursivePartial} from '../utils';
 import {TimerSchema} from '../services/timer-service';
-import {MetaSchema} from '../services/game-meta-manager';
-import {PlayerSchema} from '../services/player-manager';
+import {PlayerSchema} from '../services/player';
+import {MetaSchema} from '../services/game-meta';
 
 export interface ISerialized {
   game: GameSchema
