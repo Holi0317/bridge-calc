@@ -4,6 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameState} from './game-state';
 import {PlayerManager} from './player-manager';
 import {GameMetaManager} from './game-meta-manager';
+import {TimerService} from './timer-service';
 
 const logger = getLogger('GameService');
 
@@ -37,14 +38,6 @@ export interface StartOptions {
 @autoinject()
 export class GameService {
   /**
-   * Starting time of game
-   */
-  public startTime: Date | null = null;
-  /**
-   * Ending time of game
-   */
-  public endTime: Date | null = null;
-  /**
    * Current state of game. NOTE: Type should be GameState.
    */
   public state = GameState.NOT_STARTED;
@@ -52,6 +45,7 @@ export class GameService {
   constructor(
     private _playerManager: PlayerManager,
     private _gameMetaManager: GameMetaManager,
+    private _timer: TimerService,
     private _ea: EventAggregator
   ) {
 
@@ -64,7 +58,6 @@ export class GameService {
   start(opts: StartOptions) {
     logger.debug('Starting a new game with options:', opts);
     // Set const properties
-    this.startTime = new Date();
     this.state = GameState.BID;
 
     // Player manager
@@ -73,6 +66,9 @@ export class GameService {
 
     // Meta manager
     this._gameMetaManager.initiateGames(opts.rounds);
+
+    // Timer
+    this._timer.startTimer();
 
     // Bootstrap first round metadata
     this._nextRound();
@@ -145,7 +141,7 @@ export class GameService {
     } else {
       // Last round has just ended
       this.state = GameState.GAME_END;
-      this.endTime = new Date();
+      this._timer.endTimer();
     }
   }
 

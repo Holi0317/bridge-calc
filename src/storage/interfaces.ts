@@ -6,12 +6,11 @@ export interface ISerialized {
   game: GameSchema
   players: PlayerSchema[]
   metas: MetaSchema[]
+  timer: TimeSchema
 }
 
 export interface GameSchema {
   state: GameState
-  startTime: number | null
-  endTime: number | null
   /**
    * Index of current game in game meta array
    */
@@ -34,6 +33,11 @@ export interface MetaSchema {
   cardPerPlayer: number | null
   isExtra: boolean
   playerOrder: PlayerID[]
+}
+
+export interface TimeSchema {
+  startTime: number | null
+  endTime: number | null
 }
 
 export interface ISerializedWithID extends ISerialized {

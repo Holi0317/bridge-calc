@@ -3,6 +3,11 @@ import {GameService} from './game-service';
 import {PlayerManager} from './player-manager';
 import {GameMetaManager} from './game-meta-manager';
 import {ISerialized} from '../storage/interfaces';
+import {TimerService} from './timer-service';
+
+function getTimeOrNull(date: Date | null): number | null {
+  return date ? date.getTime() : null;
+}
 
 /**
  * Dump and load gameService, playerManagerService and gameMetaService data to plain object
@@ -12,7 +17,8 @@ export class SerializerService {
   constructor(
     @lazy(GameService) private _gameService: () => GameService,
     @lazy(PlayerManager) private _playerManager: () => PlayerManager,
-    @lazy(GameMetaManager) private _gameMetaManager: () => GameMetaManager
+    @lazy(GameMetaManager) private _gameMetaManager: () => GameMetaManager,
+    @lazy(TimerService) private _timerService: () => TimerService
   ) {
 
   }
@@ -21,11 +27,10 @@ export class SerializerService {
     const gameService = this._gameService();
     const playerManager = this._playerManager();
     const gameMetaManager = this._gameMetaManager();
+    const timerService = this._timerService();
 
     const game = {
       state: gameService.state,
-      startTime: gameService.startTime ? gameService.startTime.getTime() : null,
-      endTime: gameService.endTime ? gameService.endTime.getTime() : null,
       currentGameIndex: gameMetaManager.currentGame ? gameMetaManager.prevGames.length : null
     };
 
@@ -51,10 +56,16 @@ export class SerializerService {
       }
     });
 
+    const timer = {
+      startTime: getTimeOrNull(timerService.startTime),
+      endTime: getTimeOrNull(timerService.endTime)
+    }
+
     return {
       game,
       players,
-      metas
+      metas,
+      timer
     }
   }
 
