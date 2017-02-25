@@ -1,5 +1,5 @@
 /* Material Design Lite */
-@import "color-definitions";
+@import "~material-design-lite/src/color-definitions";
 
 $color-primary: $palette-pink-500 !default;
 $color-primary-dark: $palette-pink-700 !default;
@@ -13,41 +13,41 @@ $input-text-bottom-border-color: unquote("rgba(#{$color-black}, 0.38)");
 $input-text-disabled-color: unquote("rgba(#{$color-black}, 0.12)");
 
 // Variables and mixins
-@import "variables";
-@import "mixins";
+@import "~material-design-lite/src/variables";
+@import "~material-design-lite/src/mixins";
 
 // Resets and dependencies
-@import "resets/resets";
-@import "typography/typography";
+@import "~material-design-lite/src/resets/resets";
+@import "~material-design-lite/src/typography/typography";
 
 // Components
-@import "palette/palette";
-@import "ripple/ripple";
-@import "animation/animation";
-@import "badge/badge";
-@import "button/button";
-@import "card/card";
-@import "checkbox/checkbox";
-@import "chip/chip";
-@import "data-table/data-table";
-@import "dialog/dialog";
-@import "footer/mega_footer";
-@import "footer/mini_footer";
-@import "icon-toggle/icon-toggle";
-@import "list/list";
-@import "menu/menu";
-@import "progress/progress";
-@import "layout/layout";
-@import "radio/radio";
-@import "slider/slider";
-@import "snackbar/snackbar";
-@import "spinner/spinner";
-@import "switch/switch";
-@import "tabs/tabs";
-@import "textfield/textfield";
-@import "tooltip/tooltip";
-@import "shadow/shadow";
-@import "grid/grid";
+@import "~material-design-lite/src/palette/palette";
+@import "~material-design-lite/src/ripple/ripple";
+@import "~material-design-lite/src/animation/animation";
+@import "~material-design-lite/src/badge/badge";
+@import "~material-design-lite/src/button/button";
+@import "~material-design-lite/src/card/card";
+@import "~material-design-lite/src/checkbox/checkbox";
+@import "~material-design-lite/src/chip/chip";
+@import "~material-design-lite/src/data-table/data-table";
+@import "~material-design-lite/src/dialog/dialog";
+@import "~material-design-lite/src/footer/mega_footer";
+@import "~material-design-lite/src/footer/mini_footer";
+@import "~material-design-lite/src/icon-toggle/icon-toggle";
+@import "~material-design-lite/src/list/list";
+@import "~material-design-lite/src/menu/menu";
+@import "~material-design-lite/src/progress/progress";
+@import "~material-design-lite/src/layout/layout";
+@import "~material-design-lite/src/radio/radio";
+@import "~material-design-lite/src/slider/slider";
+@import "~material-design-lite/src/snackbar/snackbar";
+@import "~material-design-lite/src/spinner/spinner";
+@import "~material-design-lite/src/switch/switch";
+@import "~material-design-lite/src/tabs/tabs";
+@import "~material-design-lite/src/textfield/textfield";
+@import "~material-design-lite/src/tooltip/tooltip";
+@import "~material-design-lite/src/shadow/shadow";
+@import "~material-design-lite/src/grid/grid";
 
 // mdl overrides
 .mdl-textfield__label {

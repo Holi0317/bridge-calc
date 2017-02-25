@@ -39,7 +39,7 @@ export class BidValidator {
     for (const player of opt.players) {
       err[player.ID] = playerValidation(player.scoreboard.bid, opt.cardPerPlayer);
 
-      sum += +player.scoreboard.bid;
+      sum += +player.scoreboard.bid!;
     }
 
     if (sum === opt.cardPerPlayer && err[opt.lastPlayerID] === '') {

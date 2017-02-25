@@ -37,7 +37,8 @@ export class WinValidator {
 
     for (const player of opt.players) {
       err[player.ID] = playerValidation(player.scoreboard.win, opt.cardPerPlayer);
-      sum += +player.scoreboard.win;
+
+      sum += +player.scoreboard.win!;
     }
 
     if (sum !== opt.cardPerPlayer) {

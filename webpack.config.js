@@ -97,12 +97,7 @@ let config = generateConfig(
       }),
       new webpack.LoaderOptionsPlugin({
         test: /\.s[ac]ss$/i,
-        minimize: ENV === 'production',
-        options: {
-          sassLoader: {
-            includePaths: [path.resolve('./node_modules/material-design-lite/src')]
-          }
-        }
+        minimize: ENV === 'production'
       })
     ]
   },

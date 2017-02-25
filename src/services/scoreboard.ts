@@ -7,7 +7,7 @@
  * @return Score of the player at that round
  */
 function calculateScore(bid: string | null, win: string | null): number {
-  if (bid == null && win == null) {
+  if (bid == null || win == null) {
     return 0;
   } else if (bid === win) {
     return (+bid) ** 2 + 10;
