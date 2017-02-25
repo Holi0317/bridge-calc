@@ -5,6 +5,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictNullChecks": true,
+    "noImplicitThis": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "allowJs": true,
