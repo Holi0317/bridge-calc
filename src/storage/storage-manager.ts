@@ -27,7 +27,10 @@ export class StorageManager {
     this._ea.subscribe('gameService.start', this.add.bind(this));
   }
 
-  add() {
-
+  async add() {
+    const serialized = this._serializer.dump();
+    await this._storage.addGame(serialized);
   }
+
+
 }

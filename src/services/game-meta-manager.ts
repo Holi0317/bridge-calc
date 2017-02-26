@@ -47,7 +47,7 @@ export class GameMetaManager {
 
   /**
    * Return all metadatas of rounds of game. Including past, current and future games.
-   * @returns {[any,GameMeta,any]}
+   * @returns {[GameMeta]}
    */
   getAllMetas(): GameMeta[] {
     if (this.currentGame) {
