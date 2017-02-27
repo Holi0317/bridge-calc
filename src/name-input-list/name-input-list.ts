@@ -1,7 +1,7 @@
 import {autoinject, bindable, bindingMode} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import Sortable from 'sortablejs';
-import {sampleName} from '../services/sample-name';
+import {sampleName} from '../services/game-board/sample-name';
 
 const logger = getLogger('NameInputListComponent');
 

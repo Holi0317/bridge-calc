@@ -1,20 +1,33 @@
-import {autoinject} from 'aurelia-framework';
 import {GameMeta, MetaSchema} from './game-meta';
-import {range, toFront} from '../utils';
-import {PlayerManager} from './player-manager';
-import {EventAggregator} from 'aurelia-event-aggregator';
+import {range, toFront} from '../../utils';
+import {PlayerManager, PlayerManagerEvents} from './player-manager';
+import {EventEmitter} from 'events';
 import {getLogger} from 'aurelia-logging';
 
 const logger = getLogger('GameMetaManager');
 
 /**
- * Manage game metadata.
- * This service will emit following event through aurelia event aggregator:
- *  - gameMetaManager.currentGameChanged - Reference to currentGame has changed. Most likely next round is started.
- *  - gameMetaManager.playerOrderChanged - currentGame.playerOrder has changed. Next round has started or player list has changed.
+ * Events that would be emitted by GameMetaManager. Use NodeJS EventEmitter API to listen these events.
+ * @enum
  */
-@autoinject()
-export class GameMetaManager {
+export const GameMetaManagerEvents = {
+  /**
+   * Emit when reference to currentGame has changed.
+   * Most likely next round is started.
+   */
+  CurrentGameChanged: 'currentGameChanged',
+  /**
+   * Emit when currentGame.playerOrder has changed. Next round has started or player list has changed.
+   */
+  PlayerOrderChanged: 'playerOrderChanged'
+};
+
+/**
+ * Manage game metadata.
+ * This object will emit events. See GameMetaManagerEvents for details.
+ * @see {GameMetaManagerEvents}
+ */
+export class GameMetaManager extends EventEmitter {
   /**
    * Game metadata for current round
    */
@@ -29,11 +42,9 @@ export class GameMetaManager {
    */
   public futureGames: GameMeta[] = [];
 
-  constructor(
-    private _playerManager: PlayerManager,
-    private _ea: EventAggregator
-  ) {
-    this._ea.subscribe('playerManager.playerListChanged', this._playerListChanged.bind(this));
+  constructor(private _playerManager: PlayerManager) {
+    super();
+    this._playerManager.on(PlayerManagerEvents.PlayerListChanged, this._playerListChanged.bind(this));
   }
 
   /**
@@ -75,7 +86,7 @@ export class GameMetaManager {
     }
 
     this.currentGame = this.futureGames.shift() || null;
-    this._ea.publish('gameMetaManager.currentGameChanged');
+    this.emit(GameMetaManagerEvents.CurrentGameChanged);
 
     if (this.currentGame) {
       // Have next game. Do maker and player order logic.
@@ -98,7 +109,7 @@ export class GameMetaManager {
     const playerIDs = this._playerManager.players.map(p => p.ID);
     this.currentGame.playerOrder = toFront(playerIDs, playerIDs.indexOf(this.currentGame.maker));
     logger.debug('playerOrder updated.', this.currentGame.playerOrder);
-    this._ea.publish('gameMetaManager.playerOrderChanged');
+    this.emit(GameMetaManagerEvents.PlayerOrderChanged);
   }
 
   /**
@@ -124,7 +135,13 @@ export class GameMetaManager {
 
   private _playerListChanged() {
     // TODO implement logic for handling player list changed.
-    this._ea.publish('gameMetaManager.playerOrderChanged');
+    // This should update player order before emitting event
+
+    if (this.currentGame) {
+      this.emit(GameMetaManagerEvents.PlayerOrderChanged);
+    } else {
+      // Initialization in process. GameMeta is not initialized yet.
+    }
   }
 
   dump(): MetaSchema[] {

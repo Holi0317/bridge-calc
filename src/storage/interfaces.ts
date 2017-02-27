@@ -1,8 +1,8 @@
-import {GameState} from '../services/game-state';
+import {GameState} from '../services/game-board/game-state';
 import {RecursivePartial} from '../utils';
-import {TimerSchema} from '../services/timer-service';
-import {PlayerSchema} from '../services/player';
-import {MetaSchema} from '../services/game-meta';
+import {TimerSchema} from '../services/game-board/timer';
+import {PlayerSchema} from '../services/game-board/player';
+import {MetaSchema} from '../services/game-board/game-meta';
 
 /**
  * Serialized data for storage.
@@ -32,30 +32,30 @@ export interface ISerializedWithID extends ISerialized {
  * Standard interface for storage system.
  * All storage system implementation must implement this interface for consistency.
  */
-export interface IStorageService {
+export abstract class StorageService {
   /**
    * Add new game to storage.
    * @param data - Data of serialized game meta.
    * @returns ID of the saved game.
    */
-  addGame(data: ISerialized): Promise<number>  // Return ID
+  abstract addGame(data: ISerialized): Promise<number>  // Return ID
 
   /**
    * Get all game saved into the storage.
    * @returns An array of all game saved.
    */
-  getPrevGames(): Promise<ISerializedWithID[]>
+  abstract getPrevGames(): Promise<Map<number, ISerialized>>
 
   /**
    * Update data for saved game.
    * @param gameID - ID of the game desired to update.
    * @param data - Partial data for update. I.E. Object.assign will be executed on saved data.
    */
-  updateGame(gameID: number, data: RecursivePartial<GameSchema>): Promise<boolean>
+  abstract updateGame(gameID: number, data: RecursivePartial<GameSchema>): Promise<boolean>
 
   /**
    * Delete game from saved storage
    * @param gameID - ID of the game desired to be deleted
    */
-  deleteGame(gameID: number): Promise<boolean>
+  abstract deleteGame(gameID: number): Promise<boolean>
 }

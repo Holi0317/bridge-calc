@@ -1,19 +1,27 @@
 import {lazy} from 'aurelia-framework'
+import autobind from 'autobind-decorator'
 import {IDBStorageService} from './idb-storage-service';
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {SerializerService} from '../services/serializer-service';
-import {IStorageService} from './interfaces';
+import {Serializer} from './serializer';
+import {StorageService, ISerializedWithID, ISerialized} from './interfaces';
+import {
+  GameBoardManager, GameBoardManagerEvents,
+  CurrentGameChangedParam
+} from '../services/game-board/game-board-manager';
+import {GameBoardEvents} from '../services/game-board/game-board';
+import {getLogger} from 'aurelia-logging';
+
+const logger = getLogger('StorageManager');
 
 /**
  * Decide and use storage service depending on environment.
- * A high level service for interacting with storage
+ * A high level service for interacting with storage.
+ * Simply call subscribe method once and it will save all changes to storage device automatically on change.
  */
 export class StorageManager {
-  private _storage: IStorageService;
+  private _storage: StorageService;
 
   constructor(
-    private _ea: EventAggregator,
-    private _serializer: SerializerService,
+    private _gameBoardManager: GameBoardManager,
     @lazy(IDBStorageService) _idb: () => IDBStorageService
   ) {
     // TODO Implement more storage engine and decide which to use.
@@ -21,16 +29,50 @@ export class StorageManager {
   }
 
   /**
-   * Subscribe to changes emitted by GameService and save when there is a change.
+   * Subscribe to changes emitted by GameBoard and save when there is a change.
    */
   subscribe() {
-    this._ea.subscribe('gameService.start', this.add.bind(this));
+    this._gameBoardManager.on(GameBoardManagerEvents.CurrentGameChanged, this._currentGameChanged);
+    this._currentGameChanged({
+      oldValue: null,
+      newValue: this._gameBoardManager.currentGame
+    });
   }
 
-  async add() {
-    const serialized = this._serializer.dump();
-    await this._storage.addGame(serialized);
+  /**
+   * Update event subscription to GameBoard object.
+   * This can be used when a new game has started.
+   * @private
+   */
+  @autobind
+  private _currentGameChanged(opt: CurrentGameChangedParam) {
+    const currentGame = this._gameBoardManager.currentGame;
+    if (currentGame) {
+      currentGame.on(GameBoardEvents.Start, this.add);
+    }
   }
 
+  /**
+   * Save current game to storage as a new game.
+   * @returns {Promise<number>}
+   */
+  @autobind
+  async add(): Promise<number|null> {
+    const currentGame = this._gameBoardManager.currentGame;
+    if (!currentGame) {
+      logger.warn('[add] No current game active in GameBoardManager! Saving aborted');
+      return null
+    }
+    const serialized = Serializer.dump(currentGame);
+    const id = await this._storage.addGame(serialized);
+    return id;
+  }
 
+  /**
+   * List all previous games.
+   * @returns {Promise<ISerializedWithID[]>}
+   */
+  async getPrevGames(): Promise<Map<number, ISerialized>> {
+    return await this._storage.getPrevGames();
+  }
 }

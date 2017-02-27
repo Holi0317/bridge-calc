@@ -1,18 +1,30 @@
-import {autoinject} from 'aurelia-framework';
-import {EventAggregator} from 'aurelia-event-aggregator';
 import {getLogger} from 'aurelia-logging';
 import {Player, PlayerID, PlayerSchema} from './player';
+import {EventEmitter} from 'events';
 
 const logger = getLogger('PlayerManager');
 
 /**
- * Manages player instances.
- * This service will emit following event through aurelia event aggregator:
- *  - playerManager.playerListChanged - Player list has changed
- *  - playerManager.scoreChanged - A round may have ended and score and rank of players have changed.
+ * Events that would be emitted by PlayerManager. Use NodeJS EventEmitter API to listen these events.
+ * @enum
  */
-@autoinject()
-export class PlayerManager {
+export const PlayerManagerEvents =  {
+  /**
+   * Emit when player list has changed
+   */
+  PlayerListChanged: 'playerListChanged',
+  /**
+   * Emit when a round may have ended and score and rank of players have changed
+   */
+  ScoreChanged: 'scoreChanged'
+};
+
+/**
+ * Manages player instances.
+ * This object will emit events. See PlayerManagerEvents doc for details.
+ * @see {PlayerManagerEvents}
+ */
+export class PlayerManager extends EventEmitter {
   /**
    * Array of players in this manager.
    */
@@ -26,7 +38,8 @@ export class PlayerManager {
    */
   private _playerMap: Map<PlayerID, Player>;
 
-  constructor(private _ea: EventAggregator) {
+  constructor() {
+    super();
     this.reset();
   }
 
@@ -41,18 +54,15 @@ export class PlayerManager {
   /**
    * Add new players to manager.
    * @param names - (Array of) player names to be added.
-   * @param emitEvent - Should this emit an event through aurelia event aggregator?
    */
-  addPlayer(names: string | string[], emitEvent = true): void {
+  addPlayer(names: string | string[]): void {
     if (!Array.isArray(names)) {
       return this.addPlayer([names]);
     }
     const newPlayers = names.map(name => new Player(name));
     this.players.push(...newPlayers);
     this._refreshMap();
-    if (emitEvent) {
-      this._ea.publish('playerManager.playerListChanged');
-    }
+    this.emit(PlayerManagerEvents.PlayerListChanged);
   }
 
   /**
@@ -63,7 +73,7 @@ export class PlayerManager {
   removePlayer(playerID: PlayerID): void {
     const index = this.players.map(p => p.ID).indexOf(playerID);
     if (index === -1) {
-      throw new ReferenceError(`Player ID: ${playerID} not found.`);
+      throw new ReferenceError(`[removePlayer] Player ID: ${playerID} not found.`);
     }
 
     if (index === this.currentPlayerIndex) {
@@ -71,7 +81,7 @@ export class PlayerManager {
     }
     this.players.splice(index, 1);
     this._refreshMap();
-    this._ea.publish('playerManager.playerListChanged');
+    this.emit(PlayerManagerEvents.PlayerListChanged);
   }
 
   /**
@@ -95,7 +105,7 @@ export class PlayerManager {
       player.scoreboard.calcScore(round);
     }
     this.updateRank();
-    this._ea.publish('playerManager.scoreChanged');
+    this.emit(PlayerManagerEvents.ScoreChanged);
   }
 
   /**
@@ -118,7 +128,7 @@ export class PlayerManager {
     if (player) {
       return player;
     } else {
-      logger.warn(`getPlayerByID: cannot find player ID: ${id}`);
+      logger.warn(`[getPlayerByID] cannot find player ID: ${id}`);
       return new Player('Null');
     }
   }
@@ -139,9 +149,9 @@ export class PlayerManager {
     return this.players.map(player => player.dump());
   }
 
-  load(datas: PlayerSchema[]) {
+  load(data: PlayerSchema[]) {
     this.reset();
-    this.players = datas.map(data => Player.fromDumped(data));
+    this.players = data.map(d => Player.fromDumped(d));
     this._refreshMap();
     this.updateRank();
   }

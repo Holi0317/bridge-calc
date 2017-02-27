@@ -1,6 +1,6 @@
 import {autoinject} from 'aurelia-framework';
 import {GameService} from '../services/game-service';
-import {GameState} from '../services/game-state';
+import {GameState} from '../services/game-board/game-state';
 import {RouterConfiguration, Router} from 'aurelia-router';
 
 @autoinject()

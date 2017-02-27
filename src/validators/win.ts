@@ -1,5 +1,5 @@
 import {BaseValidateResult, isOk} from './validate-util';
-import {Player} from '../services/player';
+import {Player} from '../services/game-board/player';
 
 export interface WinValidatorOptions {
   players: Player[]

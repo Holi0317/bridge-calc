@@ -1,4 +1,4 @@
-export class TimerService {
+export class Timer {
   public startTime: Date | null = null;
   public endTime: Date | null = null;
 

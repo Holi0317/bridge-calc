@@ -1,7 +1,7 @@
 import {autoinject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {Router} from 'aurelia-router';
-import {sampleName} from '../services/sample-name';
+import {sampleName} from '../services/game-board/sample-name';
 import {GameService, StartOptions} from '../services/game-service';
 import {EntryOptionsError} from '../validators/entry-options';
 

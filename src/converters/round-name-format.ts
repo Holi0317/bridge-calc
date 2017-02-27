@@ -1,4 +1,4 @@
-import {GameMeta} from '../services/game-meta';
+import {GameMeta} from '../services/game-board/game-meta';
 
 export class RoundNameValueConverter {
   toView(value: GameMeta) {

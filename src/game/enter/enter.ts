@@ -3,13 +3,13 @@ import {getLogger} from 'aurelia-logging';
 import {GameService} from '../../services/game-service';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {LayoutService} from '../../services/layout-service';
-import {GameState} from '../../services/game-state';
-import {PlayerManager} from '../../services/player-manager';
+import {GameState} from '../../services/game-board/game-state';
+import {PlayerManager} from '../../services/game-board/player-manager';
 import {BidValidator} from '../../validators/bid';
 import {WinValidator} from '../../validators/win';
 import {fill} from '../../utils';
-import {Player} from '../../services/player';
-import {GameMetaManager} from '../../services/game-meta-manager';
+import {Player} from '../../services/game-board/player';
+import {GameMetaManager} from '../../services/game-board/game-meta-manager';
 
 const logger = getLogger('game.inputComponent');
 

@@ -1,4 +1,4 @@
-import {genID} from '../utils';
+import {genID} from '../../utils';
 import {Scoreboard, ScoreboardSchema} from './scoreboard';
 
 /**

@@ -4,10 +4,6 @@
  */
 export enum GameState {
   /**
-   * No info is filled in. Game is not yet started.
-   */
-  NOT_STARTED = 0,
-  /**
    * bid for stack before each round
    */
   BID = 1,

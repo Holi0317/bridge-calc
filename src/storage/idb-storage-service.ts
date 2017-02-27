@@ -1,5 +1,5 @@
 import Dexie from 'dexie';
-import {GameSchema, IStorageService, ISerialized, ISerializedWithID} from './interfaces';
+import {GameSchema, StorageService, ISerialized, ISerializedWithID} from './interfaces';
 import {getLogger} from 'aurelia-logging';
 import {RecursivePartial} from '../utils';
 
@@ -7,6 +7,16 @@ const logger = getLogger('IDBStorageService');
 
 export interface IDBGameSchema extends ISerialized {
   id?: number
+}
+
+/**
+ * Create an iterator that return [GameID, SerializedData] array as set.
+ * @param serializedData - Array of data to be proceed
+ */
+function* serializedToMap(serializedData: ISerializedWithID[]): IterableIterator<[number, ISerializedWithID]> {
+  for (const data of serializedData) {
+    yield [data.id, data]
+  }
 }
 
 class BridgeDatabase extends Dexie {
@@ -21,7 +31,7 @@ class BridgeDatabase extends Dexie {
   }
 }
 
-export class IDBStorageService implements IStorageService {
+export class IDBStorageService implements StorageService {
   private db = new BridgeDatabase();
 
   constructor() {
@@ -35,18 +45,13 @@ export class IDBStorageService implements IStorageService {
     return ID;
   }
 
-  async getPrevGames(): Promise<ISerializedWithID[]> {
+  async getPrevGames(): Promise<Map<number, ISerialized>> {
     const db = this.db;
-    const result = await db.game.orderBy('game.startTime').toArray();
+    const result = (await db.game.orderBy('game.startTime').toArray()) as ISerializedWithID[];
     logger.debug('getPrevGames result:', result);
-    return result.map(game => {
-      if (!game.id) {
-        // Should not happen
-        logger.warn('Queried game does not have ID attribute.', game);
-        game.id = -1
-      }
-      return game as ISerializedWithID;
-    });
+
+    // Create Map. Game ID -> ISerialized
+    return new Map(serializedToMap(result));
   }
 
   async updateGame(gameID: number, data: RecursivePartial<GameSchema>): Promise<boolean> {
