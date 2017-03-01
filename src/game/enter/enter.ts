@@ -105,23 +105,22 @@ export class Enter {
   @bind
   private _metaChanged() {
     // Changing when not activated is not desirable
-    const currentGame = this._gameBoardManager.currentGame;
-    if (this._attached && currentGame) {
+    const gameBoard = this._gameBoardManager.currentGame;
+    if (this._attached && gameBoard) {
       // Set title
-      const metaManager = currentGame.metaManager;
-      const currentMeta = metaManager.currentGame;
+      const meta = gameBoard.metaManager.currentGame;
 
-      if (!currentMeta) {
+      if (!meta) {
         // No game is available.
         logger.warn('No game is available when enter route is activated');
         this._layout.title = '';
-      } else if (currentMeta.isExtra) {
+      } else if (meta.isExtra) {
         // Extra round
-        this._layout.title = currentMeta.name;
+        this._layout.title = meta.name;
       } else {
         // Normal game
-        const length = metaManager.getAllMetas().length;
-        this._layout.title = `Round ${currentMeta.name} of ${length}`;
+        const length = gameBoard.metaManager.getAllMetas().length;
+        this._layout.title = `Round ${meta.name} of ${length}`;
       }
     }
   }
@@ -133,20 +132,15 @@ export class Enter {
    */
   next() {
     // Check for correct state.
-    const currentGame = this._gameBoardManager.currentGame;
-    if (!currentGame) {
+    const gameBoard = this._gameBoardManager.currentGame;
+    if (!gameBoard) {
       logger.warn('[next] Current game is undefined.');
       return;
     }
 
-    const state = currentGame.state;
-    if (state !== GameState.BID && state !== GameState.WIN) {
-      logger.warn('[next] GameService state is not correct.');
-      return;
-    }
-
-    const meta = currentGame.metaManager.currentGame!;
-    const players = currentGame.playerManager.players;
+    const state = gameBoard.state;
+    const meta = gameBoard.metaManager.currentGame!;
+    const players = gameBoard.playerManager.players;
     const scoreboards = players.map(p => p.scoreboard);
 
     // TODO clean up this mess
@@ -162,9 +156,9 @@ export class Enter {
       logger.debug('Bid validate result:', res);
       this.bidError = res.err;
       if (res.ok) {
-        currentGame.bid();
+        gameBoard.bid();
       }
-    } else {
+    } else if (state === GameState.WIN) {
       // state === GameState.WIN
       fill(scoreboards, 'win', '0');
       const res = this._winValidator.validate({
@@ -174,8 +168,10 @@ export class Enter {
       logger.debug('Win validate result:', res);
       this.winError = res.err;
       if (res.ok) {
-        currentGame.win();
+        gameBoard.win();
       }
+    } else {
+      logger.warn('[next] GameService state is not correct.');
     }
 
   }

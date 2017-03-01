@@ -99,6 +99,10 @@ export class Scoreboard {
     this.totalScore += score;
   }
 
+  /**
+   * In usual case, totalScore is directly mutated by calcScore and just add up latest score.
+   * This method refresh total score by recalculating the sum of all score.
+   */
   updateTotalScore() {
     let sum = 0;
     this.scores.forEach(value => sum += value);
