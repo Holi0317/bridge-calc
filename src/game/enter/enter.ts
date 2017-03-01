@@ -12,6 +12,8 @@ import {
   GameBoardManager, CurrentGameChangedParam,
   GameBoardManagerEvents
 } from '../../services/game-board/game-board-manager';
+import {Router} from 'aurelia-router';
+import {GameBoardEvents} from '../../services/game-board/game-board';
 
 const logger = getLogger('game.inputComponent');
 
@@ -25,18 +27,23 @@ export class Enter {
     private _layout: LayoutService,
     private _gameBoardManager: GameBoardManager,
     private _bidValidator: BidValidator,
-    private _winValidator: WinValidator
+    private _winValidator: WinValidator,
+    private _router: Router
   ) {
     this._gameBoardManager.on(GameBoardManagerEvents.CurrentGameChanged, this._currentGameChanged);
   }
 
-  attached() {
+  activate() {
+    const gameBoard = this._gameBoardManager.currentGame;
+    if (gameBoard && gameBoard.state === GameState.GAME_END) {
+      this.toScoreboard();
+      return
+    }
     this._attached = true;
     this._metaChanged();
-    // TODO check if game has ended. If true, redirect to scoreboard.
   }
 
-  detached() {
+  deactivate() {
     this._attached = false;
   }
 
@@ -84,6 +91,7 @@ export class Enter {
     if (newValue) {
       // Attach event listener to new game board.
       newValue.metaManager.on(GameMetaManagerEvents.CurrentGameChanged, this._metaChanged);
+      newValue.on(GameBoardEvents.End, this.toScoreboard);
 
       // Invoke for the first time to set up initial data.
       this._metaChanged();
@@ -167,7 +175,6 @@ export class Enter {
       this.winError = res.err;
       if (res.ok) {
         currentGame.win();
-        // TODO redirect to scoreboard if win
       }
     }
 
@@ -181,6 +188,14 @@ export class Enter {
     if (currentGame && currentGame.state === GameState.WIN) {
       currentGame.revert();
     }
+  }
+
+  /**
+   * Redirect to scoreboard view
+   */
+  @bind
+  toScoreboard() {
+    this._router.navigateToRoute('scoreboard');
   }
 
 }
