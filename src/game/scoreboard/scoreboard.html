@@ -16,7 +16,7 @@
       <tbody>
 
       <!-- Score of each round -->
-      <tr repeat.for="meta of _gameMetaManager.prevGames">
+      <tr repeat.for="meta of _gameBoardManager.currentGame.metaManager.prevGames">
         <td class="mdl-data-table__cell--non-numeric">${meta | roundName}</td>
         <td repeat.for="player of players">${player.scoreboard.getScore(meta.name)}</td>
       </tr>
