@@ -1,128 +1,186 @@
-import {autoinject} from 'aurelia-framework';
+import {autoinject, computedFrom} from 'aurelia-framework';
+import bind from 'autobind-decorator'
 import {getLogger} from 'aurelia-logging';
-import {GameService} from '../../services/game-service';
-import {EventAggregator} from 'aurelia-event-aggregator';
 import {LayoutService} from '../../services/layout-service';
 import {GameState} from '../../services/game-board/game-state';
-import {PlayerManager} from '../../services/game-board/player-manager';
 import {BidValidator} from '../../validators/bid';
 import {WinValidator} from '../../validators/win';
 import {fill} from '../../utils';
 import {Player} from '../../services/game-board/player';
-import {GameMetaManager} from '../../services/game-board/game-meta-manager';
+import {GameMetaManagerEvents} from '../../services/game-board/game-meta-manager';
+import {
+  GameBoardManager, CurrentGameChangedParam,
+  GameBoardManagerEvents
+} from '../../services/game-board/game-board-manager';
 
 const logger = getLogger('game.inputComponent');
 
 @autoinject()
 export class Enter {
   private _attached = false;
-  bidDisabled: boolean;
-  winDisabled: boolean;
   bidError: {[playerID: string ]: string};
   winError: {[playerID: string ]: string};
-  players: Player[];
 
   constructor(
-    private _ea: EventAggregator,
     private _layout: LayoutService,
-    private _gameService: GameService,
-    private _gameMetaManager: GameMetaManager,
-    private _playerManager: PlayerManager,
+    private _gameBoardManager: GameBoardManager,
     private _bidValidator: BidValidator,
     private _winValidator: WinValidator
   ) {
-    this._ea.subscribe('gameMetaManager.currentGameChanged', this.metaChanged.bind(this));
-    this._ea.subscribe('gameService.stateChanged', this.stateChanged.bind(this));
-    this._ea.subscribe('gameMetaManager.playerOrderChanged', this.playerOrderChanged.bind(this));
-    this.stateChanged();
-    this.metaChanged();
-    this.playerOrderChanged();
+    this._gameBoardManager.on(GameBoardManagerEvents.CurrentGameChanged, this._currentGameChanged);
   }
 
   attached() {
     this._attached = true;
-    this.metaChanged();
+    this._metaChanged();
+    // TODO check if game has ended. If true, redirect to scoreboard.
   }
 
   detached() {
     this._attached = false;
   }
 
-  metaChanged() {
-    // Because event aggregator does not have unsubscribe :(
-    if (this._attached) {
+  @computedFrom('_gameBoardManager.currentGame.state')
+  get bidDisabled(): boolean {
+    const gameBoard = this._gameBoardManager.currentGame;
+    if (gameBoard) {
+      return gameBoard.state !== GameState.BID;
+    } else {
+      return false
+    }
+  }
+
+  @computedFrom('_gameBoardManager.currentGame.state')
+  get winDisabled(): boolean {
+    const gameBoard = this._gameBoardManager.currentGame;
+    if (gameBoard) {
+      return gameBoard.state !== GameState.WIN;
+    } else {
+      return true
+    }
+  }
+
+  @computedFrom('_gameBoardManager.currentGame.metaManager.currentGame.playerOrder')
+  get players(): Player[] {
+    const gameBoard = this._gameBoardManager.currentGame;
+    if (gameBoard) {
+      const playerManager = gameBoard.playerManager;
+      const meta = gameBoard.metaManager.currentGame;
+      if (meta) {
+        return meta.playerOrder.map(id => playerManager.getPlayerByID(id));
+      }
+    }
+
+    return [];
+  }
+
+  /**
+   * Handler function when reference to current game has changed.
+   * @private
+   */
+  @bind
+  private _currentGameChanged(opt: CurrentGameChangedParam) {
+    const newValue = opt.newValue;
+    if (newValue) {
+      // Attach event listener to new game board.
+      newValue.metaManager.on(GameMetaManagerEvents.CurrentGameChanged, this._metaChanged);
+
+      // Invoke for the first time to set up initial data.
+      this._metaChanged();
+    }
+  }
+
+  /**
+   * Callback when metadata has changed.
+   * Change title of displayed page through LayoutService.
+   */
+  @bind
+  private _metaChanged() {
+    // Changing when not activated is not desirable
+    const currentGame = this._gameBoardManager.currentGame;
+    if (this._attached && currentGame) {
       // Set title
-      const currentGame = this._gameMetaManager.currentGame;
-      if (currentGame == null) {
-        // No game is available
+      const metaManager = currentGame.metaManager;
+      const currentMeta = metaManager.currentGame;
+
+      if (!currentMeta) {
+        // No game is available.
+        logger.warn('No game is available when enter route is activated');
         this._layout.title = '';
-      } else if (currentGame.isExtra) {
+      } else if (currentMeta.isExtra) {
         // Extra round
-        this._layout.title = currentGame.name;
+        this._layout.title = currentMeta.name;
       } else {
         // Normal game
-        const length = this._gameMetaManager.getAllMetas().length;
-        this._layout.title = `Round ${currentGame.name} of ${length}`;
+        const length = metaManager.getAllMetas().length;
+        this._layout.title = `Round ${currentMeta.name} of ${length}`;
       }
     }
   }
 
-  stateChanged() {
-    // Set states
-    this.bidDisabled = this._gameService.state !== GameState.BID;
-    this.winDisabled = this._gameService.state !== GameState.WIN;
-
-  }
-
-  playerOrderChanged() {
-    const currentGame = this._gameMetaManager.currentGame;
-    if (currentGame) {
-      this.players = currentGame.playerOrder.map(id => this._playerManager.getPlayerByID(id));
-    }
-  }
-
+  /**
+   * Proceed to next step of game.
+   * I.E. bid trick -> win trick
+   * Validate data then submit to GameBoard for it to set game states.
+   */
   next() {
-    // TODO Clean up this mess
-    // Check valid
-    const state = this._gameService.state;
-    if (state !== GameState.BID && state !== GameState.WIN) {
-      logger.warn('GameService state is not correct when calling next().');
+    // Check for correct state.
+    const currentGame = this._gameBoardManager.currentGame;
+    if (!currentGame) {
+      logger.warn('[next] Current game is undefined.');
       return;
     }
 
-    const currentGame = this._gameMetaManager.currentGame!;
-    const scoreboards = this._playerManager.players.map(p => p.scoreboard);
+    const state = currentGame.state;
+    if (state !== GameState.BID && state !== GameState.WIN) {
+      logger.warn('[next] GameService state is not correct.');
+      return;
+    }
 
+    const meta = currentGame.metaManager.currentGame!;
+    const players = currentGame.playerManager.players;
+    const scoreboards = players.map(p => p.scoreboard);
+
+    // TODO clean up this mess
     if (state === GameState.BID) {
       fill(scoreboards, 'bid', '0');
+      const lastPlayerID = meta.playerOrder[meta.playerOrder.length - 1];
+
       const res = this._bidValidator.validate({
-        players: this._playerManager.players,
-        cardPerPlayer: currentGame.cardPerPlayer!,
-        lastPlayerID: currentGame.playerOrder[currentGame.playerOrder.length - 1]!
+        players,
+        cardPerPlayer: meta.cardPerPlayer!,
+        lastPlayerID
       });
       logger.debug('Bid validate result:', res);
       this.bidError = res.err;
       if (res.ok) {
-        this._gameService.bid();
+        currentGame.bid();
       }
     } else {
       // state === GameState.WIN
       fill(scoreboards, 'win', '0');
       const res = this._winValidator.validate({
-        players: this._playerManager.players,
-        cardPerPlayer: currentGame.cardPerPlayer!
+        players,
+        cardPerPlayer: meta.cardPerPlayer!
       });
       logger.debug('Win validate result:', res);
       this.winError = res.err;
       if (res.ok) {
-        this._gameService.win();
+        currentGame.win();
+        // TODO redirect to scoreboard if win
       }
     }
 
   }
 
+  /**
+   * Rollback from win trick state to bid trick state.
+   */
   revert() {
-    this._gameService.revert();
+    const currentGame = this._gameBoardManager.currentGame;
+    if (currentGame && currentGame.state === GameState.WIN) {
+      currentGame.revert();
+    }
   }
 
 }

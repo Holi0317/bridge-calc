@@ -1,9 +1,7 @@
 import {autoinject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
-import {GameService} from '../../services/game-service';
-import {GameMetaManager} from '../../services/game-board/game-meta-manager';
-import {PlayerManager} from '../../services/game-board/player-manager';
 import {LayoutService} from '../../services/layout-service';
+import {GameBoardManager} from '../../services/game-board/game-board-manager';
 
 const logger = getLogger('GameScoreboardView');
 
@@ -11,10 +9,8 @@ const logger = getLogger('GameScoreboardView');
 export class GameScoreboard {
 
   constructor(
-    private _gameService: GameService,
-    private _playerManager: PlayerManager,
-    private _gameMetaManager: GameMetaManager,
-    private _layoutService: LayoutService
+    private _layoutService: LayoutService,
+    private _gameBoardManager: GameBoardManager
   ) {
 
   }

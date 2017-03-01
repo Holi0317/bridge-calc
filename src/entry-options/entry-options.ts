@@ -1,7 +1,7 @@
 import {autoinject, bindable, bindingMode} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
-import {StartOptions} from '../services/game-service';
 import {EntryOptionsValidator, EntryOptionsError} from '../validators/entry-options';
+import {StartOptions} from '../services/game-board/game-board';
 
 const logger = getLogger('EntryOptionsComponent');
 

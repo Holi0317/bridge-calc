@@ -2,8 +2,9 @@ import {autoinject} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import {Router} from 'aurelia-router';
 import {sampleName} from '../services/game-board/sample-name';
-import {GameService, StartOptions} from '../services/game-service';
 import {EntryOptionsError} from '../validators/entry-options';
+import {StartOptions} from '../services/game-board/game-board';
+import {GameBoardManager} from '../services/game-board/game-board-manager';
 
 const logger = getLogger('EntryView');
 
@@ -16,7 +17,7 @@ export class Entry {
 
   constructor(
     private router: Router,
-    private gameService: GameService
+    private _gameBoardManager: GameBoardManager
   ) {
 
   }
@@ -30,7 +31,7 @@ export class Entry {
     if (this.hasError) {
       return
     }
-    this.gameService.start({
+    this._gameBoardManager.start({
       ...this.options,
       players: this.players
     });

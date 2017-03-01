@@ -1,13 +1,12 @@
 import {autoinject} from 'aurelia-framework';
-import {GameService} from '../services/game-service';
-import {GameState} from '../services/game-board/game-state';
 import {RouterConfiguration, Router} from 'aurelia-router';
+import {GameBoardManager} from '../services/game-board/game-board-manager';
 
 @autoinject()
 export class Game {
   private _router: Router;
 
-  constructor(private _gameService: GameService) {
+  constructor(private _gameBoardManager: GameBoardManager) {
 
   }
 
@@ -23,7 +22,7 @@ export class Game {
   }
 
   activate() {
-    if (this._gameService.state === GameState.NOT_STARTED) {
+    if (!this._gameBoardManager.currentGame) {
       this._router.parent.navigate('/');
     }
   }

@@ -1,5 +1,5 @@
 import {lazy} from 'aurelia-framework'
-import autobind from 'autobind-decorator'
+import bind from 'autobind-decorator'
 import {IDBStorageService} from './idb-storage-service';
 import {Serializer} from './serializer';
 import {StorageService, ISerializedWithID, ISerialized} from './interfaces';
@@ -44,7 +44,7 @@ export class StorageManager {
    * This can be used when a new game has started.
    * @private
    */
-  @autobind
+  @bind
   private _currentGameChanged(opt: CurrentGameChangedParam) {
     const currentGame = this._gameBoardManager.currentGame;
     if (currentGame) {
@@ -56,7 +56,7 @@ export class StorageManager {
    * Save current game to storage as a new game.
    * @returns {Promise<number>}
    */
-  @autobind
+  @bind
   async add(): Promise<number|null> {
     const currentGame = this._gameBoardManager.currentGame;
     if (!currentGame) {

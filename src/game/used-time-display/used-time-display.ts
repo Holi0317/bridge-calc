@@ -1,5 +1,5 @@
 import {autoinject} from 'aurelia-framework';
-import {Timer} from '../../services/game-board/timer';
+import {GameBoardManager} from '../../services/game-board/game-board-manager';
 
 function msToTime(milliseconds: number){
   //Get hours from milliseconds
@@ -26,7 +26,7 @@ export class UsedTimeDisplay {
   intervalID: number | null;
   usedTime: string;
 
-  constructor(private _timer: Timer) {
+  constructor(private _gameBoardManager: GameBoardManager) {
     this.tick = this.tick.bind(this);
     this.intervalID = null;
     this.usedTime = '00:00:00';
@@ -45,7 +45,10 @@ export class UsedTimeDisplay {
   }
 
   tick() {
-    const delta = this._timer.getTimeUsed();
-    this.usedTime = msToTime(delta);
+    const currentGame = this._gameBoardManager.currentGame;
+    if (currentGame) {
+      const delta = currentGame.timer.getTimeUsed();
+      this.usedTime = msToTime(delta);
+    }
   }
 }
