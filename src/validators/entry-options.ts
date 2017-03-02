@@ -26,7 +26,7 @@ function isInteger(d: number) {
   return d > 0 && Number.isInteger(d);
 }
 
-export class EntryOptionsValidator {
+class EntryOptionsValidator {
   private err: EntryOptionsError;
 
   validate(opt: EntryOptionsValidatorOptions): EntryOptionsValidationResult {
@@ -64,4 +64,10 @@ export class EntryOptionsValidator {
       this.err[prop] = message;
     }
   }
+}
+
+export function entryOptionsValidator(opts: EntryOptionsValidatorOptions) {
+  // TODO make this a pure function
+  let validator = new EntryOptionsValidator();
+  return validator.validate(opts);
 }

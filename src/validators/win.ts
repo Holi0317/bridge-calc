@@ -29,32 +29,30 @@ function playerValidation(win_: string | null, cardPerPlayer: number) {
   return '';
 }
 
-export class WinValidator {
-  validate(opt: WinValidatorOptions): WinValidatorResult {
-    const err = {};
+export function winValidator(opt: WinValidatorOptions): WinValidatorResult {
+  const err = {};
 
-    let sum = 0;
+  let sum = 0;
 
-    for (const player of opt.players) {
-      err[player.ID] = playerValidation(player.scoreboard.win, opt.cardPerPlayer);
+  for (const player of opt.players) {
+    err[player.ID] = playerValidation(player.scoreboard.win, opt.cardPerPlayer);
 
-      sum += +player.scoreboard.win!;
-    }
+    sum += +player.scoreboard.win!;
+  }
 
-    if (sum !== opt.cardPerPlayer) {
-      // Set empty error
-      for (let key in err) {
-        if (err.hasOwnProperty(key)) {
-          if (err[key] === '') {
-            err[key] = 'Sum of card does not match total stack available.';
-          }
+  if (sum !== opt.cardPerPlayer) {
+    // Set empty error
+    for (let key in err) {
+      if (err.hasOwnProperty(key)) {
+        if (err[key] === '') {
+          err[key] = 'Sum of card does not match total stack available.';
         }
       }
     }
-
-    return {
-      ok: isOk(err),
-      err
-    };
   }
+
+  return {
+    ok: isOk(err),
+    err
+  };
 }

@@ -1,6 +1,6 @@
 import {autoinject, bindable, bindingMode} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
-import {EntryOptionsValidator, EntryOptionsError} from '../validators/entry-options';
+import {entryOptionsValidator, EntryOptionsError} from '../validators/entry-options';
 import {StartOptions} from '../services/game-board/game-board';
 
 const logger = getLogger('EntryOptionsComponent');
@@ -35,7 +35,7 @@ export class EntryOptions {
   @bindable()
   private _startingRound = '1';
 
-  constructor(private _validator: EntryOptionsValidator) {
+  constructor() {
     this.hasError = false;
   }
 
@@ -63,7 +63,7 @@ export class EntryOptions {
    * Validate and synchronize input data to this.options
    */
   sync() {
-    const res = this._validator.validate({
+    const res = entryOptionsValidator({
       cards: this._cards,
       rounds: this._rounds,
       startingRound: this._startingRound,

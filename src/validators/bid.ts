@@ -30,25 +30,23 @@ function playerValidation(bid_: string | null, cardPerPlayer: number) {
   return '';
 }
 
-export class BidValidator {
-  validate(opt: BidValidatorOptions): BidValidatorResult {
-    const err = {};
+export function bidValidator(opt: BidValidatorOptions): BidValidatorResult {
+  const err = {};
 
-    let sum = 0;
+  let sum = 0;
 
-    for (const player of opt.players) {
-      err[player.ID] = playerValidation(player.scoreboard.bid, opt.cardPerPlayer);
+  for (const player of opt.players) {
+    err[player.ID] = playerValidation(player.scoreboard.bid, opt.cardPerPlayer);
 
-      sum += +player.scoreboard.bid!;
-    }
-
-    if (sum === opt.cardPerPlayer && err[opt.lastPlayerID] === '') {
-      err[opt.lastPlayerID] = 'You cannot choose that. Good luck';
-    }
-
-    return {
-      ok: isOk(err),
-      err
-    };
+    sum += +player.scoreboard.bid!;
   }
+
+  if (sum === opt.cardPerPlayer && err[opt.lastPlayerID] === '') {
+    err[opt.lastPlayerID] = 'You cannot choose that. Good luck';
+  }
+
+  return {
+    ok: isOk(err),
+    err
+  };
 }

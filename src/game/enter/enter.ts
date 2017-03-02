@@ -3,8 +3,8 @@ import bind from 'autobind-decorator'
 import {getLogger} from 'aurelia-logging';
 import {LayoutService} from '../../services/layout-service';
 import {GameState} from '../../services/game-board/game-state';
-import {BidValidator} from '../../validators/bid';
-import {WinValidator} from '../../validators/win';
+import {bidValidator} from '../../validators/bid';
+import {winValidator} from '../../validators/win';
 import {fill} from '../../utils';
 import {Player} from '../../services/game-board/player';
 import {GameMetaManagerEvents} from '../../services/game-board/game-meta-manager';
@@ -26,8 +26,6 @@ export class Enter {
   constructor(
     private _layout: LayoutService,
     private _gameBoardManager: GameBoardManager,
-    private _bidValidator: BidValidator,
-    private _winValidator: WinValidator,
     private _router: Router
   ) {
     this._gameBoardManager.on(GameBoardManagerEvents.CurrentGameChanged, this._currentGameChanged);
@@ -148,7 +146,7 @@ export class Enter {
       fill(scoreboards, 'bid', '0');
       const lastPlayerID = meta.playerOrder[meta.playerOrder.length - 1];
 
-      const res = this._bidValidator.validate({
+      const res = bidValidator({
         players,
         cardPerPlayer: meta.cardPerPlayer!,
         lastPlayerID
@@ -161,7 +159,7 @@ export class Enter {
     } else if (state === GameState.WIN) {
       // state === GameState.WIN
       fill(scoreboards, 'win', '0');
-      const res = this._winValidator.validate({
+      const res = winValidator({
         players,
         cardPerPlayer: meta.cardPerPlayer!
       });
