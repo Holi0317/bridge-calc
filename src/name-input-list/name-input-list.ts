@@ -2,6 +2,7 @@ import {autoinject, bindable, bindingMode} from 'aurelia-framework';
 import {getLogger} from 'aurelia-logging';
 import Sortable from 'sortablejs';
 import {sampleName} from '../services/game-board/sample-name';
+import {genID} from '../utils';
 
 const logger = getLogger('NameInputListComponent');
 
@@ -18,6 +19,8 @@ interface SortableOnEndEvent extends Event {
 export class NameInputList {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public names: string[];
   @bindable() public showImport: boolean;
+  private _addID = genID();
+  private _importID = genID();
   private _sortable: Sortable | null = null;
   private _nameInputsElement: HTMLElement;
 

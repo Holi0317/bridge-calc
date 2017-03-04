@@ -6,17 +6,17 @@
   </div>
 
   <div>
-    <button class="mdl-button mdl-js-button mdl-button--icon" click.delegate="add()" id="name-input-list-add-btn">
+    <button class="mdl-button mdl-js-button mdl-button--icon" click.delegate="add()" id.one-time="_addID">
       <i class="material-icons">add</i>
     </button>
-    <div class="mdl-tooltip mdl-tooltip--large" for="name-input-list-add-btn">
+    <div class="mdl-tooltip mdl-tooltip--large" for.one-time="_addID & attr">
       Add
     </div>
 
-    <button class="mdl-button mdl-js-button mdl-button--icon import-btn" click.delegate="importNames()" id="name-input-list-import-btn">
+    <button class="mdl-button mdl-js-button mdl-button--icon import-btn" click.delegate="importNames()" id.one-time="_importID">
       <i class="material-icons">file_download</i>
     </button>
-    <div class="mdl-tooltip mdl-tooltip--large" for="name-input-list-import-btn">
+    <div class="mdl-tooltip mdl-tooltip--large" for.one-time="_importID & attr">
       Import player list
     </div>
   </div>
