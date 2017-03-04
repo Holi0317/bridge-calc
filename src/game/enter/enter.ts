@@ -68,12 +68,9 @@ export class Enter {
   @computedFrom('_gameBoardManager.currentGame.metaManager.currentGame.playerOrder')
   get players(): Player[] {
     const gameBoard = this._gameBoardManager.currentGame;
-    if (gameBoard) {
+    if (gameBoard && gameBoard.metaManager.currentGame) {
       const playerManager = gameBoard.playerManager;
-      const meta = gameBoard.metaManager.currentGame;
-      if (meta) {
-        return meta.playerOrder.map(id => playerManager.getPlayerByID(id));
-      }
+      return gameBoard.metaManager.currentGame.playerOrder.map(id => playerManager.getPlayerByID(id));
     }
 
     return [];
@@ -157,7 +154,6 @@ export class Enter {
         gameBoard.bid();
       }
     } else if (state === GameState.WIN) {
-      // state === GameState.WIN
       fill(scoreboards, 'win', '0');
       const res = winValidator({
         players,

@@ -26,6 +26,7 @@ export class NameInputList {
   }
 
   attached() {
+    // TODO replace Sortable with other libraries that support mobile. Like desandro/draggabilly
     this._sortable = new Sortable(this._nameInputsElement, {
       handle: '.handle',
       onEnd: this.onMoveEnd.bind(this)

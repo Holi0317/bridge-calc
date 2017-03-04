@@ -49,6 +49,8 @@ export class StorageManager {
     const currentGame = this._gameBoardManager.currentGame;
     if (currentGame) {
       currentGame.on(GameBoardEvents.Start, this.add);
+    } else {
+      // TODO Save all data to DB service on game close
     }
   }
 
@@ -65,6 +67,7 @@ export class StorageManager {
     }
     const serialized = Serializer.dump(currentGame);
     const id = await this._storage.addGame(serialized);
+    this._gameBoardManager.currentID = id;
     return id;
   }
 

@@ -28,6 +28,13 @@ export interface CurrentGameChangedParam {
  */
 export class GameBoardManager extends EventEmitter {
   public currentGame: GameBoard | null = null;
+  /**
+   * Storage ID for current Game.
+   * Meant to be used by StorageManager only.
+   * @type {number|null}
+   * @see {StorageManager}
+   */
+  public currentID: number | null = null;
 
   constructor() {
     super();
@@ -42,15 +49,28 @@ export class GameBoardManager extends EventEmitter {
   start(opts: StartOptions) {
     const newValue = new GameBoard();
     newValue.start(opts);
+    this.assignGame(newValue);
+  }
+
+  /**
+   * Dispose the current game.
+   * Equivalent to assignGame(null)
+   */
+  close() {
+    this.assignGame(null);
+  }
+
+  /**
+   * Set currentGame reference to given value.
+   * @param newValue
+   */
+  assignGame(newValue: GameBoard | null) {
+    this.currentID = null;
     const oldValue = this.currentGame;
     this.currentGame = newValue;
     this.emit(GameBoardManagerEvents.CurrentGameChanged, {
       oldValue,
       newValue
     });
-  }
-
-  close() {
-
   }
 }
