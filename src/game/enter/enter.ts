@@ -19,7 +19,6 @@ const logger = getLogger('game.inputComponent');
 
 @autoinject()
 export class Enter {
-  private _attached = false;
   bidError: {[playerID: string ]: string};
   winError: {[playerID: string ]: string};
 
@@ -37,12 +36,7 @@ export class Enter {
       this.toScoreboard();
       return
     }
-    this._attached = true;
     this._metaChanged();
-  }
-
-  deactivate() {
-    this._attached = false;
   }
 
   @computedFrom('_gameBoardManager.currentGame.state')
@@ -76,6 +70,26 @@ export class Enter {
     return [];
   }
 
+  @computedFrom('_gameBoardManager.currentGame.metaManager.currentGame')
+  get layoutTitle(): string {
+    const gameBoard = this._gameBoardManager.currentGame;
+    if (gameBoard) {
+      const meta = gameBoard.metaManager.currentGame;
+      if (!meta) {
+        // No game is available.
+        return ''
+      } else if (meta.isExtra) {
+        // Extra round
+        return meta.name
+      } else {
+        // Normal game
+        const length = gameBoard.metaManager.getAllMetas().length;
+        return `Round ${meta.name} of ${length}`;
+      }
+    }
+    return ''
+  }
+
   /**
    * Handler function when reference to current game has changed.
    * @private
@@ -83,6 +97,7 @@ export class Enter {
   @bind
   private _currentGameChanged(opt: CurrentGameChangedParam) {
     const newValue = opt.newValue;
+    logger.debug('Current game changed. New game:', newValue);
     if (newValue) {
       // Attach event listener to new game board.
       newValue.metaManager.on(GameMetaManagerEvents.CurrentGameChanged, this._metaChanged);
@@ -99,25 +114,10 @@ export class Enter {
    */
   @bind
   private _metaChanged() {
-    // Changing when not activated is not desirable
-    const gameBoard = this._gameBoardManager.currentGame;
-    if (this._attached && gameBoard) {
-      // Set title
-      const meta = gameBoard.metaManager.currentGame;
-
-      if (!meta) {
-        // No game is available.
-        logger.warn('No game is available when enter route is activated');
-        this._layout.title = '';
-      } else if (meta.isExtra) {
-        // Extra round
-        this._layout.title = meta.name;
-      } else {
-        // Normal game
-        const length = gameBoard.metaManager.getAllMetas().length;
-        this._layout.title = `Round ${meta.name} of ${length}`;
-      }
-    }
+    // No attached checking here.
+    // No idea why checking attachment would stop title assignment.
+    // This seems to work as expected. Hopefully there is no leaky case.
+    this._layout.title = this.layoutTitle;
   }
 
   /**
