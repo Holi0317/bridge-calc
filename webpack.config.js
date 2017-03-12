@@ -2,141 +2,56 @@
  * To learn more about how to use Easy Webpack
  * Take a look at the README here: https://github.com/easy-webpack/core
  * */
-const {generateConfig, /* get, */ stripMetadata} = require('@easy-webpack/core')
+const {generateConfig, stripMetadata} = require('@easy-webpack/core')
 const path = require('path')
 const webpack = require('webpack')
-const envProd = require('@easy-webpack/config-env-production')
-const envDev = require('@easy-webpack/config-env-development')
-const aurelia = require('@easy-webpack/config-aurelia')
-const typescript = require('@easy-webpack/config-typescript')
-const html = require('@easy-webpack/config-html')
-const sass = require('@easy-webpack/config-sass')
-const fontAndImages = require('@easy-webpack/config-fonts-and-images')
-const generateIndexHtml = require('@easy-webpack/config-generate-index-html')
-const commonChunksOptimize = require('@easy-webpack/config-common-chunks-simple')
-const copyFiles = require('@easy-webpack/config-copy-files')
+const env = require('./webpack-cfg/env')
+const aurelia = require('./webpack-cfg/aurelia')
+const typescript = require('./webpack-cfg/typescript')
+const htmlLoader = require('./webpack-cfg/html-loader')
+const sassLoader = require('./webpack-cfg/sass-loader')
+const fontsImagesLoader = require('./webpack-cfg/fonts-images-loader')
+const genIndex = require('./webpack-cfg/gen-index')
+const commonChunksOptimize = require('./webpack-cfg/common-chunks-optimize')
+const copyFiles = require('./webpack-cfg/copy-files')
+const babili = require('./webpack-cfg/babili')
 
-const BabiliPlugin = require('babili-webpack-plugin')
-
-const ENV = (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase()) || (process.env.NODE_ENV = 'development')
-
-// basic configuration:
-const title = 'Bridge calculator'
-const baseUrl = '/'
-const rootDir = path.resolve()
-const srcDir = path.resolve('src')
-const outDir = path.resolve('dist')
-
-const coreBundles = {
-  bootstrap: [
-    'aurelia-bootstrapper-webpack',
-    'aurelia-pal',
-    'aurelia-pal-browser'
-  ],
-  // these will be included in the 'aurelia' bundle (except for the above bootstrap packages)
-  aurelia: [
-    'aurelia-bootstrapper-webpack',
-    'aurelia-binding',
-    'aurelia-dependency-injection',
-    'aurelia-event-aggregator',
-    'aurelia-framework',
-    'aurelia-history',
-    'aurelia-history-browser',
-    'aurelia-loader',
-    'aurelia-loader-webpack',
-    'aurelia-logging',
-    'aurelia-logging-console',
-    'aurelia-metadata',
-    'aurelia-pal',
-    'aurelia-pal-browser',
-    'aurelia-path',
-    'aurelia-route-recognizer',
-    'aurelia-router',
-    'aurelia-task-queue',
-    'aurelia-templating',
-    'aurelia-templating-binding',
-    'aurelia-templating-router',
-    'aurelia-templating-resources',
-    'aurelia-mdl-plugin',
-    'material-design-lite/material'
-  ],
-  polyfills: [
-    'whatwg-fetch'
-  ]
-}
-
-const minificationConfig = {
-  plugins: [
-    new BabiliPlugin({
-      comments: false
-    })
-  ]
-}
+const {ENV, entry} = require('./webpack-cfg/paths')
 
 /**
  * Main Webpack Configuration
  */
-let config = generateConfig(
+const config = generateConfig(
   {
-    entry: {
-      app: ['./src/main'],
-      'aurelia-bootstrap': coreBundles.bootstrap,
-      aurelia: coreBundles.aurelia.filter(pkg => coreBundles.bootstrap.indexOf(pkg) === -1),
-      polyfills: coreBundles.polyfills
-    },
+    entry,
     output: {
-      path: outDir
-    },
-    watchOptions: {
-      ignored: /node_modules/
+      path: path.resolve('dist')
     },
     plugins: [
       new webpack.DefinePlugin({
         VERSION: JSON.stringify(require('./package.json').version)
-      }),
-      new webpack.LoaderOptionsPlugin({
-        test: /\.s[ac]ss$/i,
-        minimize: ENV === 'production'
       })
     ]
   },
 
-  ENV === 'test' || ENV === 'development' ?
-    envDev(ENV === 'test' ? {devtool: 'inline-source-map'} : {}) :
-    envProd({devtool: false}),
+  env,
 
-  aurelia({root: rootDir, src: srcDir, title: title, baseUrl: baseUrl}),
+  aurelia,
 
-  typescript(ENV === 'test' ? {
-    options: {
-      doTypeCheck: false,
-      sourceMap: false,
-      inlineSourceMap: true,
-      inlineSources: true
-    }
-  } : {}),
-  html(),
-  sass({
-    filename: 'styles.css',
-    allChunks: true,
-    // sass loader cannot generate sourcemap on webpack 2 YET
-    // sourceMap: ENV !== 'production'
-    sourceMap: false
-  }),
-  fontAndImages(),
-  generateIndexHtml({minify: ENV === 'production'}),
+  typescript,
+  htmlLoader,
+  sassLoader,
+  fontsImagesLoader,
+  genIndex,
 
   ...(ENV === 'production' || ENV === 'development' ? [
-    commonChunksOptimize({appChunkName: 'app', firstChunk: 'aurelia-bootstrap'}),
-    copyFiles({patterns: [{from: 'favicon.ico', to: 'favicon.ico'}]})
+    commonChunksOptimize,
+    copyFiles
   ] : [
     /* ENV === 'test' */
   ]),
 
-  ...(ENV === 'production' ?
-      [minificationConfig] :
-      []
-  )
+  babili
 
 )
 
