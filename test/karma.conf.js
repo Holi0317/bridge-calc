@@ -1,12 +1,11 @@
-const path = require('path');
-const webpackConfig = require('../webpack.config');
+const webpackConfig = require('../webpack.config')
 
 // Fix for tape
 webpackConfig.node = {
   fs: 'empty'
-};
+}
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (e.g. files, exclude)
@@ -20,7 +19,7 @@ module.exports = function(config) {
     frameworks: ['tap'],
 
     // list of files to exclude
-    exclude: [ ],
+    exclude: [],
 
     /*
      * list of files / patterns to load in the browser
@@ -40,7 +39,7 @@ module.exports = function(config) {
     webpack: webpackConfig,
 
     // Webpack please don't spam the console when running in karma!
-    webpackServer: { noInfo: true },
+    webpackServer: {noInfo: true},
 
     /*
      * test results reporter to use
@@ -48,7 +47,7 @@ module.exports = function(config) {
      * possible values: 'dots', 'progress'
      * available reporters: https://npmjs.org/browse/keyword/karma-reporter
      */
-    reporters: [ 'dots' ],
+    reporters: ['dots'],
 
     // web server port
     port: 9876,
@@ -78,6 +77,5 @@ module.exports = function(config) {
      * if true, Karma captures browsers, runs the tests and exits
      */
     singleRun: false
-  });
-
-};
+  })
+}

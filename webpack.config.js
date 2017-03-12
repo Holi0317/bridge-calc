@@ -1,31 +1,31 @@
 /**
  * To learn more about how to use Easy Webpack
  * Take a look at the README here: https://github.com/easy-webpack/core
- **/
-const { generateConfig, /* get, */ stripMetadata, /* EasyWebpackConfig */ } = require('@easy-webpack/core');
-const path = require('path');
-const webpack = require('webpack');
-const envProd = require('@easy-webpack/config-env-production');
-const envDev = require('@easy-webpack/config-env-development');
-const aurelia = require('@easy-webpack/config-aurelia');
-const typescript = require('@easy-webpack/config-typescript');
-const html = require('@easy-webpack/config-html');
-const sass = require('@easy-webpack/config-sass');
-const fontAndImages = require('@easy-webpack/config-fonts-and-images');
-const generateIndexHtml = require('@easy-webpack/config-generate-index-html');
-const commonChunksOptimize = require('@easy-webpack/config-common-chunks-simple');
-const copyFiles = require('@easy-webpack/config-copy-files');
+ * */
+const {generateConfig, /* get, */ stripMetadata} = require('@easy-webpack/core')
+const path = require('path')
+const webpack = require('webpack')
+const envProd = require('@easy-webpack/config-env-production')
+const envDev = require('@easy-webpack/config-env-development')
+const aurelia = require('@easy-webpack/config-aurelia')
+const typescript = require('@easy-webpack/config-typescript')
+const html = require('@easy-webpack/config-html')
+const sass = require('@easy-webpack/config-sass')
+const fontAndImages = require('@easy-webpack/config-fonts-and-images')
+const generateIndexHtml = require('@easy-webpack/config-generate-index-html')
+const commonChunksOptimize = require('@easy-webpack/config-common-chunks-simple')
+const copyFiles = require('@easy-webpack/config-copy-files')
 
-const BabiliPlugin = require('babili-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin')
 
-const ENV = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() || (process.env.NODE_ENV = 'development');
+const ENV = (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase()) || (process.env.NODE_ENV = 'development')
 
 // basic configuration:
-const title = 'Bridge calculator';
-const baseUrl = '/';
-const rootDir = path.resolve();
-const srcDir = path.resolve('src');
-const outDir = path.resolve('dist');
+const title = 'Bridge calculator'
+const baseUrl = '/'
+const rootDir = path.resolve()
+const srcDir = path.resolve('src')
+const outDir = path.resolve('dist')
 
 const coreBundles = {
   bootstrap: [
@@ -63,7 +63,7 @@ const coreBundles = {
   polyfills: [
     'whatwg-fetch'
   ]
-};
+}
 
 const minificationConfig = {
   plugins: [
@@ -71,7 +71,7 @@ const minificationConfig = {
       comments: false
     })
   ]
-};
+}
 
 /**
  * Main Webpack Configuration
@@ -79,10 +79,10 @@ const minificationConfig = {
 let config = generateConfig(
   {
     entry: {
-      'app': ['./src/main' /* this is filled by the aurelia-webpack-plugin */],
+      app: ['./src/main'],
       'aurelia-bootstrap': coreBundles.bootstrap,
-      'aurelia': coreBundles.aurelia.filter(pkg => coreBundles.bootstrap.indexOf(pkg) === -1),
-      'polyfills': coreBundles.polyfills
+      aurelia: coreBundles.aurelia.filter(pkg => coreBundles.bootstrap.indexOf(pkg) === -1),
+      polyfills: coreBundles.polyfills
     },
     output: {
       path: outDir
@@ -102,12 +102,19 @@ let config = generateConfig(
   },
 
   ENV === 'test' || ENV === 'development' ?
-    envDev(ENV !== 'test' ? {} : {devtool: 'inline-source-map'}) :
-    envProd({ devtool: false }),
+    envDev(ENV === 'test' ? {devtool: 'inline-source-map'} : {}) :
+    envProd({devtool: false}),
 
   aurelia({root: rootDir, src: srcDir, title: title, baseUrl: baseUrl}),
 
-  typescript(ENV !== 'test' ? {} : { options: { doTypeCheck: false, sourceMap: false, inlineSourceMap: true, inlineSources: true } }),
+  typescript(ENV === 'test' ? {
+    options: {
+      doTypeCheck: false,
+      sourceMap: false,
+      inlineSourceMap: true,
+      inlineSources: true
+    }
+  } : {}),
   html(),
   sass({
     filename: 'styles.css',
@@ -121,16 +128,16 @@ let config = generateConfig(
 
   ...(ENV === 'production' || ENV === 'development' ? [
     commonChunksOptimize({appChunkName: 'app', firstChunk: 'aurelia-bootstrap'}),
-    copyFiles({patterns: [{ from: 'favicon.ico', to: 'favicon.ico' }]})
+    copyFiles({patterns: [{from: 'favicon.ico', to: 'favicon.ico'}]})
   ] : [
     /* ENV === 'test' */
   ]),
 
-  ...(ENV === 'production'
-      ? [minificationConfig]
-      : []
+  ...(ENV === 'production' ?
+      [minificationConfig] :
+      []
   )
 
-);
+)
 
-module.exports = stripMetadata(config);
+module.exports = stripMetadata(config)
