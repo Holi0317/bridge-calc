@@ -1,4 +1,3 @@
-import './setup'
 import test from 'tape'
 import {GameMetaManager, GameMetaManagerEvents} from '../../src/services/game-board/game-meta-manager'
 import {PlayerManager} from '../../src/services/game-board/player-manager'

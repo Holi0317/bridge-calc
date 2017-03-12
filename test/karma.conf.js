@@ -18,14 +18,11 @@ module.exports = function (config) {
      */
     frameworks: ['tap'],
 
-    // list of files to exclude
-    exclude: [],
-
     /*
      * list of files / patterns to load in the browser
      */
     files: [
-      'unit/**/*.spec.js'
+      'unit/test-bundle.js'
     ],
 
     /*
@@ -33,7 +30,7 @@ module.exports = function (config) {
      * available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
      */
     preprocessors: {
-      '**/*.js': ['webpack']
+      'unit/test-bundle.js': ['webpack']
     },
 
     webpack: webpackConfig,
