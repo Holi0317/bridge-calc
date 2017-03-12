@@ -1,3 +1,4 @@
+import {autoinject} from 'aurelia-framework';
 import {GameMeta, MetaSchema} from './game-meta';
 import {range, toFront} from '../../utils';
 import {PlayerManager, PlayerManagerEvents} from './player-manager';
@@ -27,6 +28,7 @@ export const GameMetaManagerEvents = {
  * This object will emit events. See GameMetaManagerEvents for details.
  * @see {GameMetaManagerEvents}
  */
+@autoinject
 export class GameMetaManager extends EventEmitter {
   /**
    * Game metadata for current round

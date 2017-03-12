@@ -15,7 +15,6 @@ const fontAndImages = require('@easy-webpack/config-fonts-and-images');
 const generateIndexHtml = require('@easy-webpack/config-generate-index-html');
 const commonChunksOptimize = require('@easy-webpack/config-common-chunks-simple');
 const copyFiles = require('@easy-webpack/config-copy-files');
-const generateCoverage = require('@easy-webpack/config-test-coverage-istanbul');
 
 const BabiliPlugin = require('babili-webpack-plugin');
 
@@ -125,7 +124,6 @@ let config = generateConfig(
     copyFiles({patterns: [{ from: 'favicon.ico', to: 'favicon.ico' }]})
   ] : [
     /* ENV === 'test' */
-    generateCoverage({ options: { esModules: true }})
   ]),
 
   ...(ENV === 'production'

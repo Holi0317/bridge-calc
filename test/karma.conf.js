@@ -1,9 +1,10 @@
-/**
- * Inspired by @AngularClass
- * https://github.com/AngularClass/angular2-webpack-starter
- */
-"use strict";
 const path = require('path');
+const webpackConfig = require('../webpack.config');
+
+// Fix for tape
+webpackConfig.node = {
+  fs: 'empty'
+};
 
 module.exports = function(config) {
   config.set({
@@ -16,18 +17,16 @@ module.exports = function(config) {
      *
      * available frameworks: https://npmjs.org/browse/keyword/karma-adapter
      */
-    frameworks: ['jasmine'],
+    frameworks: ['tap'],
 
     // list of files to exclude
     exclude: [ ],
 
     /*
      * list of files / patterns to load in the browser
-     *
-     * we are building the test environment in ./spec-bundle.js
      */
     files: [
-      { pattern: 'spec-bundle.js', watched: false },
+      'unit/**/*.spec.js'
     ],
 
     /*
@@ -35,27 +34,10 @@ module.exports = function(config) {
      * available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
      */
     preprocessors: {
-      'spec-bundle.js': ['coverage', 'webpack', 'sourcemap']
+      '**/*.js': ['webpack']
     },
 
-    webpack: require('../webpack.config'),
-
-    coverageReporter: {
-      reporters: [{
-        type: 'json',
-        subdir: '.', 
-        file: 'coverage-final.json'
-      }]
-    },
-
-    remapIstanbulReporter: {
-      src: path.join(__dirname, 'coverage/coverage-final.json'),
-      reports: {
-        html: path.join(__dirname, 'coverage/')
-      },
-      timeoutNotCreated: 1000,
-      timeoutNoMoreFiles: 1000
-    },
+    webpack: webpackConfig,
 
     // Webpack please don't spam the console when running in karma!
     webpackServer: { noInfo: true },
@@ -66,7 +48,7 @@ module.exports = function(config) {
      * possible values: 'dots', 'progress'
      * available reporters: https://npmjs.org/browse/keyword/karma-reporter
      */
-    reporters: [ 'mocha', 'coverage', 'karma-remap-istanbul' ],
+    reporters: [ 'dots' ],
 
     // web server port
     port: 9876,
@@ -81,22 +63,21 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
     /*
      * start these browsers
      * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
      */
     browsers: [
-      'Chrome',
-      // TODO: https://www.npmjs.com/package/karma-electron
+      'Chrome'
     ],
 
     /*
      * Continuous Integration mode
      * if true, Karma captures browsers, runs the tests and exits
      */
-    singleRun: true
+    singleRun: false
   });
 
 };
