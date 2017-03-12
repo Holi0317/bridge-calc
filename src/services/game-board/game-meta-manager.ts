@@ -1,4 +1,3 @@
-import {autoinject} from 'aurelia-framework';
 import {GameMeta, MetaSchema} from './game-meta';
 import {range, toFront} from '../../utils';
 import {PlayerManager, PlayerManagerEvents} from './player-manager';
@@ -28,7 +27,6 @@ export const GameMetaManagerEvents = {
  * This object will emit events. See GameMetaManagerEvents for details.
  * @see {GameMetaManagerEvents}
  */
-@autoinject
 export class GameMetaManager extends EventEmitter {
   /**
    * Game metadata for current round
@@ -106,7 +104,7 @@ export class GameMetaManager extends EventEmitter {
    */
   setPlayerOrder(): void {
     if (!this.currentGame || !this.currentGame.maker) {
-      throw new Error('[GameMetaService.setPlayerOrder] current game or maker is not set.');
+      throw new Error('[setPlayerOrder] current game or maker is not set.');
     }
     const playerIDs = this._playerManager.players.map(p => p.ID);
     this.currentGame.playerOrder = toFront(playerIDs, playerIDs.indexOf(this.currentGame.maker));
