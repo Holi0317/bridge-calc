@@ -7,8 +7,8 @@ module.exports = {
   },
   plugins: [
     new AureliaPlugin({
-      root: path.resolve(''),
-      src: path.resolve('src'),
+      root: path.resolve(__dirname, '..'),
+      src: path.resolve(__dirname, '../src'),
       title: 'Bridge calculator',
       baseUrl: '/'
     })

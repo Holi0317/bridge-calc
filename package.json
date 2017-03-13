@@ -20,7 +20,7 @@
     "lint:ts": "tslint --project tsconfig.json --type-check",
     "clean": "del-cli dist",
     "build": "npm run build:dev",
-    "prebuild:dev": "npm run clean:dist",
+    "prebuild:dev": "npm run clean",
     "build:dev": "cross-env NODE_ENV=development npm run webpack -- --progress --profile",
     "prebuild:prod": "npm run clean",
     "build:prod": "cross-env NODE_ENV=production npm run webpack -- --progress --profile",

@@ -25,7 +25,7 @@ const config = generateConfig(
   {
     entry,
     output: {
-      path: path.resolve('dist')
+      path: path.resolve(__dirname, 'dist')
     },
     plugins: [
       new webpack.DefinePlugin({
