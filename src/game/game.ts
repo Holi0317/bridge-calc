@@ -1,29 +1,29 @@
-import {autoinject} from 'aurelia-framework';
-import {RouterConfiguration, Router} from 'aurelia-router';
-import {GameBoardManager} from '../services/game-board/game-board-manager';
+import {autoinject} from 'aurelia-framework'
+import {Router, RouterConfiguration} from 'aurelia-router'
+import {GameBoardManager} from '../services/game-board/game-board-manager'
 
 @autoinject()
 export class Game {
-  private _router: Router;
+  private _router: Router
 
   constructor(private _gameBoardManager: GameBoardManager) {
 
   }
 
-  configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = '';
+  public configureRouter(config: RouterConfiguration, router: Router) {
+    config.title = ''
     config.map([
       { route: '', name: 'enter', moduleId: './enter/enter', nav: true, title: 'Input' },
       { route: '/scoreboard', name: 'scoreboard', moduleId: './scoreboard/scoreboard', nav: true, title: 'Scoreboard' },
-      { route: '/settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings' }
-    ]);
+      { route: '/settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings' },
+    ])
 
-    this._router = router;
+    this._router = router
   }
 
-  activate() {
+  public activate() {
     if (!this._gameBoardManager.currentGame) {
-      this._router.parent.navigate('/');
+      this._router.parent.navigate('/')
     }
   }
 }

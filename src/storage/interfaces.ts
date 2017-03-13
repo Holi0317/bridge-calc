@@ -1,21 +1,21 @@
-import {GameState} from '../services/game-board/game-state';
-import {RecursivePartial} from '../utils';
-import {TimerSchema} from '../services/game-board/timer';
-import {PlayerSchema} from '../services/game-board/player';
-import {GameMetaSchema} from '../services/game-board/game-meta-manager'
+import {IGameMetaSchema} from '../services/game-board/game-meta-manager'
+import {GameState} from '../services/game-board/game-state'
+import {IPlayerSchema} from '../services/game-board/player'
+import {ITimerSchema} from '../services/game-board/timer'
+import {RecursivePartial} from '../utils'
 
 /**
  * Serialized data for storage.
  * All serialized data must be composed of JavaScript primitive with plain Object and Array.
  */
 export interface ISerialized {
-  game: GameSchema
-  players: PlayerSchema[]
-  metas: GameMetaSchema
-  timer: TimerSchema
+  game: IGameSchema
+  players: IPlayerSchema[]
+  metas: IGameMetaSchema
+  timer: ITimerSchema
 }
 
-export interface GameSchema {
+export interface IGameSchema {
   state: GameState
 }
 
@@ -33,24 +33,24 @@ export abstract class StorageService {
    * @param data - Data of serialized game meta.
    * @returns ID of the saved game.
    */
-  abstract addGame(data: ISerialized): Promise<number>  // Return ID
+  public abstract addGame(data: ISerialized): Promise<number>  // Return ID
 
   /**
    * Get all game saved into the storage.
    * @returns An array of all game saved.
    */
-  abstract getPrevGames(): Promise<Map<number, ISerialized>>
+  public abstract getPrevGames(): Promise<Map<number, ISerialized>>
 
   /**
    * Update data for saved game.
    * @param gameID - ID of the game desired to update.
    * @param data - Partial data for update. I.E. Object.assign will be executed on saved data.
    */
-  abstract updateGame(gameID: number, data: RecursivePartial<GameSchema>): Promise<boolean>
+  public abstract updateGame(gameID: number, data: RecursivePartial<IGameSchema>): Promise<boolean>
 
   /**
    * Delete game from saved storage
    * @param gameID - ID of the game desired to be deleted
    */
-  abstract deleteGame(gameID: number): Promise<boolean>
+  public abstract deleteGame(gameID: number): Promise<boolean>
 }

@@ -8,11 +8,11 @@
  */
 function calculateScore(bid: string | null, win: string | null): number {
   if (bid == null || win == null) {
-    return 0;
+    return 0
   } else if (bid === win) {
-    return (+bid) ** 2 + 10;
+    return (+bid) ** 2 + 10
   } else {
-    return -((+win - +bid) ** 2);
+    return -((+win - +bid) ** 2)
   }
 }
 
@@ -24,45 +24,45 @@ export class Scoreboard {
    * Current bid.
    * See setScore method for details.
    */
-  public bid: string | null;
+  public bid: string | null
   /**
    * Current win.
    * See setScore method for details.
    */
-  public win: string | null;
+  public win: string | null
 
   /**
    * Score for the previous round of game.
    * 0 If there is no previous round.
    */
-  public prevScore: number;
+  public prevScore: number
 
   /**
    * Sum of all score.
    * Call updateTotalScore() if need to recalculate.
    */
-  public totalScore: number;
+  public totalScore: number
 
   /**
    * Score map for this player.
    * Format should be round name -> score.
    * Use methods of this class for retrieving score unless there is no other ways to get it
    */
-  public scores: Map<string, number>;
+  public scores: Map<string, number>
 
   constructor() {
-    this.reset();
+    this.reset()
   }
 
   /**
    * Reset and destroy scoreboard data.
    */
-  reset() {
-    this.bid = null;
-    this.win = null;
-    this.scores = new Map();
-    this.prevScore = 0;
-    this.totalScore = 0;
+  public reset() {
+    this.bid = null
+    this.win = null
+    this.scores = new Map()
+    this.prevScore = 0
+    this.totalScore = 0
   }
 
   /**
@@ -71,9 +71,9 @@ export class Scoreboard {
    * @param round
    * @returns ?number
    */
-  getScore(round: string): number | null {
-    const score = this.scores.get(round);
-    return (score == null) ? null : score;
+  public getScore(round: string): number | null {
+    const score = this.scores.get(round)
+    return (score == null) ? null : score
   }
 
   /**
@@ -89,47 +89,47 @@ export class Scoreboard {
    * @param bid
    * @param win
    */
-  calcScore(round: string, bid = this.bid, win = this.win): void {
-    this.bid = null;
-    this.win = null;
+  public calcScore(round: string, bid = this.bid, win = this.win): void {
+    this.bid = null
+    this.win = null
 
-    const score = calculateScore(bid, win);
-    this.scores.set(round, score);
-    this.prevScore = score;
-    this.totalScore += score;
+    const score = calculateScore(bid, win)
+    this.scores.set(round, score)
+    this.prevScore = score
+    this.totalScore += score
   }
 
   /**
    * In usual case, totalScore is directly mutated by calcScore and just add up latest score.
    * This method refresh total score by recalculating the sum of all score.
    */
-  updateTotalScore() {
-    let sum = 0;
-    this.scores.forEach(value => sum += value);
-    this.totalScore = sum;
+  public updateTotalScore() {
+    let sum = 0
+    this.scores.forEach((value) => sum += value)
+    this.totalScore = sum
   }
 
-  dump(): ScoreboardSchema {
+  public dump(): IScoreboardSchema {
     return {
       bid: this.bid,
+      scores: Array.from(this.scores),
       win: this.win,
-      scores: Array.from(this.scores)
     }
   }
 
-  load(data: ScoreboardSchema) {
-    this.reset();
+  public load(data: IScoreboardSchema) {
+    this.reset()
 
-    this.bid = data.bid;
-    this.win = data.win;
-    this.scores = new Map(data.scores);
+    this.bid = data.bid
+    this.win = data.win
+    this.scores = new Map(data.scores)
 
-    this.updateTotalScore();
+    this.updateTotalScore()
   }
 }
 
-export interface ScoreboardSchema {
+export interface IScoreboardSchema {
   bid: string | null
   win: string | null
-  scores: [string, number][]  // result of Array.from(Map<string, number>)
+  scores: Array<[string, number]>  // result of Array.from(Map<string, number>)
 }

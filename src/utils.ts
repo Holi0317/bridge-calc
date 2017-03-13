@@ -4,7 +4,7 @@
 export function genID() {
   return Math.floor((1 + Math.random()) * 0x10000)
     .toString(16)
-    .substring(1);
+    .substring(1)
 }
 
 /**
@@ -20,11 +20,11 @@ export function genID() {
  * @returns {number[]}
  */
 export function range(start: number, end: number) {
-  const result: number[] = [];
+  const result: number[] = []
   for (let i = start; i <= end; i++) {
-    result.push(i);
+    result.push(i)
   }
-  return result;
+  return result
 }
 
 /**
@@ -40,7 +40,7 @@ export function range(start: number, end: number) {
  * @returns {T}
  */
 export function nth<T>(array: T[], index: number): T {
-  return (index >= array.length) ? nth(array, index - array.length) : array[index];
+  return (index >= array.length) ? nth(array, index - array.length) : array[index]
 }
 
 /**
@@ -54,11 +54,11 @@ export function nth<T>(array: T[], index: number): T {
  * @returns {T}
  */
 export function toFront<T>(array: T[], frontIndex: number): T[] {
-  let newArray: T[] = [];
+  const newArray: T[] = []
   for (let i = frontIndex; i < array.length + frontIndex; i++) {
-    newArray[i-frontIndex] = nth(array, i);
+    newArray[i - frontIndex] = nth(array, i)
   }
-  return newArray;
+  return newArray
 }
 
 /**
@@ -74,11 +74,26 @@ export function toFront<T>(array: T[], frontIndex: number): T[] {
 export function fill(array: any[], prop: any, value: any) {
   for (const element of array) {
     if (element[prop] == null || element[prop] === '') {
-      element[prop] = value;
+      element[prop] = value
     }
   }
 }
 
+/**
+ * Helper type for recursive partial type.
+ * @example
+ * interface IMyInterface {
+ *   foo: {
+ *     bar: string
+ *   }
+ * }
+ * type partialInterface = RecursivePartial<IMyInterface>
+ * // partialInterface would be interface {
+ * //   foo?: {
+ * //     bar?: string
+ * //   }
+ * // }
+ */
 export type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
-};
+}

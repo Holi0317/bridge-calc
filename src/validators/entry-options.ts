@@ -1,20 +1,20 @@
-import {BaseValidateResult, isOk} from './validate-util';
+import {IBaseValidateResult, isOk} from './validate-util'
 
-export interface EntryOptionsValidatorOptions {
+export interface IEntryOptionsValidatorOptions {
   cards: string
   rounds: string
   startingRound: string
-  playerLength: number;
+  playerLength: number
 }
 
-export interface EntryOptionsError {
+export interface IEntryOptionsError {
   cards: string
   rounds: string
   startingRound: string
 }
 
-export interface EntryOptionsValidationResult extends BaseValidateResult {
-  err: EntryOptionsError
+export interface IEntryOptionsValidationResult extends IBaseValidateResult {
+  err: IEntryOptionsError
 }
 
 /**
@@ -23,51 +23,51 @@ export interface EntryOptionsValidationResult extends BaseValidateResult {
  * @returns {boolean}
  */
 function isInteger(d: number) {
-  return d > 0 && Number.isInteger(d);
+  return d > 0 && Number.isInteger(d)
 }
 
 class EntryOptionsValidator {
-  private err: EntryOptionsError;
+  private err: IEntryOptionsError
 
-  validate(opt: EntryOptionsValidatorOptions): EntryOptionsValidationResult {
-    this._resetError();
+  public validate(opt: IEntryOptionsValidatorOptions): IEntryOptionsValidationResult {
+    this._resetError()
 
-    const cards = +opt.cards;
-    const rounds = +opt.rounds;
-    const startingRound = +opt.startingRound;
-    const playerLength = opt.playerLength;
+    const cards = +opt.cards
+    const rounds = +opt.rounds
+    const startingRound = +opt.startingRound
+    const playerLength = opt.playerLength
 
-    this.setError('cards', !isInteger(cards), 'Card must be a positive integer');
-    this.setError('rounds', !isInteger(rounds), 'Rounds must be a positive integer');
-    this.setError('startingRound', !isInteger(startingRound), 'Starting round must be a positive integer');
+    this.setError('cards', !isInteger(cards), 'Card must be a positive integer')
+    this.setError('rounds', !isInteger(rounds), 'Rounds must be a positive integer')
+    this.setError('startingRound', !isInteger(startingRound), 'Starting round must be a positive integer')
 
-    this.setError('cards', playerLength > cards, 'Too few cards');
-    this.setError('rounds', rounds > cards / playerLength, 'Insufficient cards for that much rounds');
-    this.setError('startingRound', startingRound > rounds, 'Impossible to start beyond the end of the game');
+    this.setError('cards', playerLength > cards, 'Too few cards')
+    this.setError('rounds', rounds > cards / playerLength, 'Insufficient cards for that much rounds')
+    this.setError('startingRound', startingRound > rounds, 'Impossible to start beyond the end of the game')
 
     return {
+      err: this.err,
       ok: isOk(this.err),
-      err: this.err
-    };
+    }
   }
 
   private _resetError() {
     this.err = {
       cards: '',
       rounds: '',
-      startingRound: ''
+      startingRound: '',
     }
   }
 
-  private setError(prop: keyof EntryOptionsError, test: boolean, message: string) {
+  private setError(prop: keyof IEntryOptionsError, test: boolean, message: string) {
     if (test && !this.err[prop]) {
-      this.err[prop] = message;
+      this.err[prop] = message
     }
   }
 }
 
-export function entryOptionsValidator(opts: EntryOptionsValidatorOptions) {
+export function entryOptionsValidator(opts: IEntryOptionsValidatorOptions) {
   // TODO make this a pure function
-  let validator = new EntryOptionsValidator();
-  return validator.validate(opts);
+  const validator = new EntryOptionsValidator()
+  return validator.validate(opts)
 }

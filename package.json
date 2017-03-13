@@ -15,7 +15,7 @@
   "main": "dist/main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test ./node_modules/karma/bin/karma start test/karma.conf.js",
-    "lint": "npm run lint:js",
+    "lint": "npm run lint:js && npm run lint:ts",
     "lint:js": "eslint --cache webpack-cfg test webpack.config.js",
     "lint:ts": "tslint --project tsconfig.json --type-check",
     "clean": "del-cli dist",
@@ -92,6 +92,7 @@
     "style-loader": "0.13.2",
     "tape": "4.6.3",
     "tslint": "4.5.1",
+    "tslint-eslint-rules": "^3.4.0",
     "typescript": "2.2.1",
     "webpack": "2.2.1",
     "webpack-dev-server": "2.4.1",

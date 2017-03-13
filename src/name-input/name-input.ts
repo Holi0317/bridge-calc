@@ -1,17 +1,17 @@
-import {autoinject, bindable, bindingMode} from 'aurelia-framework';
+import {autoinject, bindable, bindingMode} from 'aurelia-framework'
 
 @autoinject()
 export class NameInput {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public name: string;
+  public name: string
 
   constructor(private _el: Element) {
 
   }
 
-  remove() {
-    let e = new Event('remove', {bubbles: true});
-    this._el.dispatchEvent(e);
+  public remove() {
+    const e = new Event('remove', {bubbles: true})
+    this._el.dispatchEvent(e)
   }
 
 }

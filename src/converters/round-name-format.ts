@@ -1,7 +1,7 @@
-import {GameMeta} from '../services/game-board/game-meta';
+import {GameMeta} from '../services/game-board/game-meta'
 
 export class RoundNameValueConverter {
-  toView(value: GameMeta) {
-    return value.isExtra ? `${value.name} (${value.cardPerPlayer})` : `Round ${value.name}`;
+  public toView(value: GameMeta) {
+    return value.isExtra ? `${value.name} (${value.cardPerPlayer})` : `Round ${value.name}`
   }
 }

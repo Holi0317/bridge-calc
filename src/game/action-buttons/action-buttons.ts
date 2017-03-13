@@ -1,26 +1,26 @@
-import {autoinject, bindable} from 'aurelia-framework';
-import {getLogger} from 'aurelia-logging';
+import {autoinject, bindable} from 'aurelia-framework'
+import {getLogger} from 'aurelia-logging'
 
-const logger = getLogger('ActionButtonComponent');
+const logger = getLogger('ActionButtonComponent')
 
 @autoinject()
 export class ActionButtons {
-  @bindable() undoDisabled: boolean;
+  @bindable() public undoDisabled: boolean
 
   constructor(private _el: Element) {
 
   }
 
-  next() {
-    const event = new Event('next', {bubbles: true});
-    this._el.dispatchEvent(event);
+  public next() {
+    const event = new Event('next', {bubbles: true})
+    this._el.dispatchEvent(event)
   }
 
-  revert() {
+  public revert() {
     // We use delegate to bind event. Event will still be triggered even when the button is disabled.
     if (!this.undoDisabled) {
-      const event = new Event('revert', {bubbles: true});
-      this._el.dispatchEvent(event);
+      const event = new Event('revert', {bubbles: true})
+      this._el.dispatchEvent(event)
     }
 
   }

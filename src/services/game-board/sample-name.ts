@@ -48,9 +48,9 @@ export const NAMES = [
   'Bea',
   'Candice',
   'Bernardine',
-  'William'
-];
+  'William',
+]
 
 export function sampleName() {
-  return NAMES[Math.floor(Math.random() * NAMES.length)];
+  return NAMES[Math.floor(Math.random() * NAMES.length)]
 }

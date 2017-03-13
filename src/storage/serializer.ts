@@ -1,36 +1,36 @@
-import {ISerialized} from './interfaces';
-import {GameBoard} from '../services/game-board/game-board';
+import {GameBoard} from '../services/game-board/game-board'
+import {ISerialized} from './interfaces'
 
 /**
  * Dump and load gameService, playerManagerService and gameMetaService data to plain object
  * for persistent storage.
  */
 export class Serializer {
-  static dump(gameBoard: GameBoard): ISerialized {
-    const playerManager = gameBoard.playerManager;
-    const metaManager = gameBoard.metaManager;
-    const timerService = gameBoard.timer;
+  public static dump(gameBoard: GameBoard): ISerialized {
+    const playerManager = gameBoard.playerManager
+    const metaManager = gameBoard.metaManager
+    const timerService = gameBoard.timer
 
     const game = {
-      state: gameBoard.state
-    };
+      state: gameBoard.state,
+    }
 
     return {
       game,
-      players: playerManager.dump(),
       metas: metaManager.dump(),
-      timer: timerService.dump()
+      players: playerManager.dump(),
+      timer: timerService.dump(),
     }
   }
 
-  static load(data: ISerialized): GameBoard {
-    const gameBoard = new GameBoard();
+  public static load(data: ISerialized): GameBoard {
+    const gameBoard = new GameBoard()
 
-    gameBoard.state = data.game.state;
-    gameBoard.playerManager.load(data.players);
-    gameBoard.metaManager.load(data.metas);
-    gameBoard.timer.load(data.timer);
+    gameBoard.state = data.game.state
+    gameBoard.playerManager.load(data.players)
+    gameBoard.metaManager.load(data.metas)
+    gameBoard.timer.load(data.timer)
 
-    return gameBoard;
+    return gameBoard
   }
 }

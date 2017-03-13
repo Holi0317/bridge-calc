@@ -1,16 +1,16 @@
 import {lazy} from 'aurelia-framework'
+import {getLogger} from 'aurelia-logging'
 import bind from 'autobind-decorator'
-import {IDBStorageService} from './idb-storage-service';
-import {Serializer} from './serializer';
-import {StorageService, ISerializedWithID, ISerialized} from './interfaces';
+import {GameBoardEvents} from '../services/game-board/game-board'
 import {
   GameBoardManager, GameBoardManagerEvents,
-  CurrentGameChangedParam
-} from '../services/game-board/game-board-manager';
-import {GameBoardEvents} from '../services/game-board/game-board';
-import {getLogger} from 'aurelia-logging';
+  ICurrentGameChangedParam,
+} from '../services/game-board/game-board-manager'
+import {IDBStorageService} from './idb-storage-service'
+import {ISerialized, ISerializedWithID, StorageService} from './interfaces'
+import {Serializer} from './serializer'
 
-const logger = getLogger('StorageManager');
+const logger = getLogger('StorageManager')
 
 /**
  * Decide and use storage service depending on environment.
@@ -18,25 +18,50 @@ const logger = getLogger('StorageManager');
  * Simply call subscribe method once and it will save all changes to storage device automatically on change.
  */
 export class StorageManager {
-  private _storage: StorageService;
+  private _storage: StorageService
 
   constructor(
     private _gameBoardManager: GameBoardManager,
-    @lazy(IDBStorageService) _idb: () => IDBStorageService
+    @lazy(IDBStorageService) _idb: () => IDBStorageService,
   ) {
     // TODO Implement more storage engine and decide which to use.
-    this._storage = _idb();
+    this._storage = _idb()
   }
 
   /**
    * Subscribe to changes emitted by GameBoard and save when there is a change.
    */
-  subscribe() {
-    this._gameBoardManager.on(GameBoardManagerEvents.CurrentGameChanged, this._currentGameChanged);
+  public subscribe() {
+    this._gameBoardManager.on(GameBoardManagerEvents.CurrentGameChanged, this._currentGameChanged)
     this._currentGameChanged({
+      newValue: this._gameBoardManager.currentGame,
       oldValue: null,
-      newValue: this._gameBoardManager.currentGame
-    });
+    })
+  }
+
+  /**
+   * Save current game to storage as a new game.
+   * @returns {Promise<number>}
+   */
+  @bind
+  public async add(): Promise<number|null> {
+    const currentGame = this._gameBoardManager.currentGame
+    if (!currentGame) {
+      logger.warn('[add] No current game active in GameBoardManager! Saving aborted')
+      return null
+    }
+    const serialized = Serializer.dump(currentGame)
+    const id = await this._storage.addGame(serialized)
+    this._gameBoardManager.currentID = id
+    return id
+  }
+
+  /**
+   * List all previous games.
+   * @returns {Promise<ISerializedWithID[]>}
+   */
+  public async getPrevGames(): Promise<Map<number, ISerialized>> {
+    return await this._storage.getPrevGames()
   }
 
   /**
@@ -45,37 +70,12 @@ export class StorageManager {
    * @private
    */
   @bind
-  private _currentGameChanged(opt: CurrentGameChangedParam) {
-    const currentGame = this._gameBoardManager.currentGame;
+  private _currentGameChanged(opt: ICurrentGameChangedParam) {
+    const currentGame = this._gameBoardManager.currentGame
     if (currentGame) {
-      currentGame.on(GameBoardEvents.Start, this.add);
+      currentGame.on(GameBoardEvents.Start, this.add)
     } else {
       // TODO Save all data to DB service on game close
     }
-  }
-
-  /**
-   * Save current game to storage as a new game.
-   * @returns {Promise<number>}
-   */
-  @bind
-  async add(): Promise<number|null> {
-    const currentGame = this._gameBoardManager.currentGame;
-    if (!currentGame) {
-      logger.warn('[add] No current game active in GameBoardManager! Saving aborted');
-      return null
-    }
-    const serialized = Serializer.dump(currentGame);
-    const id = await this._storage.addGame(serialized);
-    this._gameBoardManager.currentID = id;
-    return id;
-  }
-
-  /**
-   * List all previous games.
-   * @returns {Promise<ISerializedWithID[]>}
-   */
-  async getPrevGames(): Promise<Map<number, ISerialized>> {
-    return await this._storage.getPrevGames();
   }
 }

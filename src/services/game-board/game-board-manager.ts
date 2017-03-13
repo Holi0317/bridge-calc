@@ -1,5 +1,5 @@
-import {GameBoard, StartOptions} from './game-board';
-import {EventEmitter} from 'events';
+import {EventEmitter} from 'events'
+import {GameBoard, IStartOptions} from './game-board'
 
 /**
  * Events that would be emitted by GameBoardManager. Use NodeJS EventEmitter API to listen these events.
@@ -11,12 +11,12 @@ export const GameBoardManagerEvents = {
    * When this is emitted, all work has done internally.
    * Do NOT use observer to observer currentGame property.
    * When this event is emitted, CurrentGameChangedParam would be supplied as paramater.
-   * @see {CurrentGameChangedParam}
+   * @see {ICurrentGameChangedParam}
    */
-  CurrentGameChanged: 'currentGameChanged'
-};
+  CurrentGameChanged: 'currentGameChanged',
+}
 
-export interface CurrentGameChangedParam {
+export interface ICurrentGameChangedParam {
   oldValue: GameBoard | null
   newValue: GameBoard | null
 }
@@ -27,17 +27,17 @@ export interface CurrentGameChangedParam {
  * @see {GameBoardManagerEvents}
  */
 export class GameBoardManager extends EventEmitter {
-  public currentGame: GameBoard | null = null;
+  public currentGame: GameBoard | null = null
   /**
    * Storage ID for current Game.
    * Meant to be used by StorageManager only.
    * @type {number|null}
    * @see {StorageManager}
    */
-  public currentID: number | null = null;
+  public currentID: number | null = null
 
   constructor() {
-    super();
+    super()
   }
 
   /**
@@ -46,31 +46,31 @@ export class GameBoardManager extends EventEmitter {
    * @param opts - Options to be passed into GameBoard object.
    * @see {GameBoard}
    */
-  start(opts: StartOptions) {
-    const newValue = new GameBoard();
-    newValue.start(opts);
-    this.assignGame(newValue);
+  public start(opts: IStartOptions) {
+    const newValue = new GameBoard()
+    newValue.start(opts)
+    this.assignGame(newValue)
   }
 
   /**
    * Dispose the current game.
    * Equivalent to assignGame(null)
    */
-  close() {
-    this.assignGame(null);
+  public close() {
+    this.assignGame(null)
   }
 
   /**
    * Set currentGame reference to given value.
    * @param newValue
    */
-  assignGame(newValue: GameBoard | null) {
-    this.currentID = null;
-    const oldValue = this.currentGame;
-    this.currentGame = newValue;
+  public assignGame(newValue: GameBoard | null) {
+    this.currentID = null
+    const oldValue = this.currentGame
+    this.currentGame = newValue
     this.emit(GameBoardManagerEvents.CurrentGameChanged, {
       oldValue,
-      newValue
-    });
+      newValue,
+    })
   }
 }

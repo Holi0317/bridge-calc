@@ -32,3 +32,9 @@ rules:
    - error
    - 2
   keyword-spacing: error
+  arrow-spacing: error
+  quotes:
+   - error
+   - single
+   - { "allowTemplateLiterals": false }
+  prefer-const: error

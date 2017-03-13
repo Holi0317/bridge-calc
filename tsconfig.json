@@ -18,6 +18,10 @@
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true
   },
+  "include": [
+    "src/**/*",
+    "custom_typings/**/*"
+  ],
   "exclude": [
     "node_modules",
     "dist",

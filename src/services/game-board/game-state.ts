@@ -14,5 +14,5 @@ export enum GameState {
   /**
    * Game has end by reaching the last round and ended
    */
-  GAME_END = 3
+  GAME_END = 3,
 }

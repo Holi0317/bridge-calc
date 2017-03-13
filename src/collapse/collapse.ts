@@ -1,49 +1,49 @@
-import {bindable, bindingMode} from 'aurelia-framework';
-import {getLogger} from 'aurelia-logging';
+import {bindable, bindingMode} from 'aurelia-framework'
+import {getLogger} from 'aurelia-logging'
 
-const logger = getLogger('CollapseComponent');
+const logger = getLogger('CollapseComponent')
 
-const openedClass = 'collapse-opened';
+const openedClass = 'collapse-opened'
 
 export class Collapse {
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) public open = false;
-  private _contentElement: HTMLElement;
-  private _buttonElement: HTMLButtonElement;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public open = false
+  private _contentElement: HTMLElement
+  private _buttonElement: HTMLButtonElement
 
   constructor() {
-    this.resizeListener = this.resizeListener.bind(this);
+    this.resizeListener = this.resizeListener.bind(this)
   }
 
-  attached() {
+  public attached() {
     // Manually call changed as there was no element received before attached
-    this.openChanged(this.open);
+    this.openChanged(this.open)
 
-    window.addEventListener('resize', this.resizeListener);
+    window.addEventListener('resize', this.resizeListener)
   }
 
-  detached() {
-    window.removeEventListener('resize', this.resizeListener);
+  public detached() {
+    window.removeEventListener('resize', this.resizeListener)
   }
 
-  resizeListener() {
-    this.openChanged(this.open);
+  public resizeListener() {
+    this.openChanged(this.open)
   }
 
-  toggle() {
-    this.open = !this.open;
+  public toggle() {
+    this.open = !this.open
   }
 
-  openChanged(newValue: boolean) {
+  public openChanged(newValue: boolean) {
     if (!this._contentElement) {
       return
     }
     if (newValue) {
-      const height = this._contentElement.scrollHeight;
-      this._contentElement.style.height = `${height}px`;
-      this._buttonElement.classList.add(openedClass);
+      const height = this._contentElement.scrollHeight
+      this._contentElement.style.height = `${height}px`
+      this._buttonElement.classList.add(openedClass)
     } else {
-      this._contentElement.style.height = '0';
-      this._buttonElement.classList.remove(openedClass);
+      this._contentElement.style.height = '0'
+      this._buttonElement.classList.remove(openedClass)
     }
   }
 }

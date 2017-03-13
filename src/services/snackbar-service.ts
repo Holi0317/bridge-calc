@@ -1,37 +1,32 @@
-interface SnackbarDataWithoutAction {
-  message: string;
-  timeout?: number;
+interface ISnackbarDataWithoutAction {
+  message: string
+  timeout?: number
 }
 
-interface SnackbarDataWithAction extends SnackbarDataWithoutAction {
-  actionHandler: (event: Event) => void;
-  actionText: string;
+interface ISnackbarDataWithAction extends ISnackbarDataWithoutAction {
+  actionHandler: (event: Event) => void
+  actionText: string
 }
 
-export type SnackbarData = SnackbarDataWithAction | SnackbarDataWithoutAction;
+export type SnackbarData = ISnackbarDataWithAction | ISnackbarDataWithoutAction
 
 export class SnackbarService {
   /**
    * Snackbar element injected into DOM.
    * Because MDL use some magic to upgrade element, it is not possible for TS to check it now.
    * The type should be HTMLElement
-   * @type {any}
    * @private
    */
-  private _snackbar: any | null = null;
+  private _snackbar: any | null = null
 
-  constructor() {
-
-  }
-
-  showSnackbar(data: SnackbarData) {
+  public showSnackbar(data: SnackbarData) {
     if (!this._snackbar) {
-      this._getSnackbar();
+      this._getSnackbar()
     }
-    this._snackbar.MaterialSnackbar.showSnackbar(data);
+    this._snackbar.MaterialSnackbar.showSnackbar(data)
   }
 
   private _getSnackbar() {
-    this._snackbar = document.querySelector('.mdl-snackbar');
+    this._snackbar = document.querySelector('.mdl-snackbar')
   }
 }

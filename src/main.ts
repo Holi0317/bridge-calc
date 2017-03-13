@@ -1,15 +1,15 @@
-import './polyfills';
-import 'material-design-lite/material';
-import '../styles/styles.scss';
-import {Aurelia} from 'aurelia-framework';
+import {Aurelia} from 'aurelia-framework'
+import 'material-design-lite/material'
+import '../styles/styles.scss'
+import './polyfills'
 
 export async function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    .plugin('aurelia-mdl-plugin');
+    .plugin('aurelia-mdl-plugin')
 
   if (process.env.NODE_ENV !== 'production') {
-    aurelia.use.developmentLogging();
+    aurelia.use.developmentLogging()
   }
 
   // Uncomment the line below to enable animation.
@@ -18,15 +18,15 @@ export async function configure(aurelia: Aurelia) {
 
   // Conditionally Load in fetch polyfill
   if (!self.fetch) {
-    await System.import('whatwg-fetch');
+    await System.import('whatwg-fetch')
     // Idea fails at parsing new import() statement.
     // await import('whatwg-fetch');
   }
 
-  await aurelia.start();
-  aurelia.setRoot();
+  await aurelia.start()
+  aurelia.setRoot()
 
-  // if you would like your website to work offline (Service Worker), 
+  // if you would like your website to work offline (Service Worker),
   // install and enable the @easy-webpack/config-offline package in webpack.config.js and uncomment the following code:
   /*
   const offline = await import('offline-plugin/runtime');

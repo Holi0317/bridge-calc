@@ -1,9 +1,9 @@
-import {autoinject, bindable, bindingMode} from 'aurelia-framework';
-import {getLogger} from 'aurelia-logging';
-import {entryOptionsValidator, EntryOptionsError} from '../validators/entry-options';
-import {StartOptions} from '../services/game-board/game-board';
+import {autoinject, bindable, bindingMode} from 'aurelia-framework'
+import {getLogger} from 'aurelia-logging'
+import {IStartOptions} from '../services/game-board/game-board'
+import {entryOptionsValidator, IEntryOptionsError} from '../validators/entry-options'
 
-const logger = getLogger('EntryOptionsComponent');
+const logger = getLogger('EntryOptionsComponent')
 
 @autoinject()
 export class EntryOptions {
@@ -11,91 +11,91 @@ export class EntryOptions {
    * Number of players.
    */
   @bindable()
-  public playerLength: number;
+  public playerLength: number
 
   /**
    * All validated options for entry.
    */
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public options: StartOptions;
+  public options: IStartOptions
 
   /**
    * All errors in options.
    */
   @bindable()
-  public errors: EntryOptionsError;
+  public errors: IEntryOptionsError
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public hasError: boolean;
+  public hasError: boolean
 
   @bindable()
-  private _cards = '52';
+  private _cards = '52'
   @bindable()
-  private _rounds = '13';
+  private _rounds = '13'
   @bindable()
-  private _startingRound = '1';
+  private _startingRound = '1'
 
   constructor() {
-    this.hasError = false;
+    this.hasError = false
   }
 
-  attached() {
-    this.resetRounds();
+  public attached() {
+    this.resetRounds()
     this.options = {
       cards: 52,
+      players: [],
       rounds: 13,
       startingRound: 1,
-      players: []
-    };
+    }
   }
 
   /**
    * Reset rounds by calculating rounds according to length of players.
    */
-  resetRounds() {
+  public resetRounds() {
     if (!this.playerLength) {
-      return;
+      return
     }
-    this._rounds = Math.floor(+this._cards / this.playerLength) + '';
+    this._rounds = Math.floor(+this._cards / this.playerLength) + ''
   }
 
   /**
    * Validate and synchronize input data to this.options
    */
-  sync() {
+  public sync() {
     const res = entryOptionsValidator({
       cards: this._cards,
+      playerLength: this.playerLength,
       rounds: this._rounds,
       startingRound: this._startingRound,
-      playerLength: this.playerLength
-    });
+    })
 
-    this.errors = res.err;
-    this.hasError = !res.ok;
+    this.errors = res.err
+    this.hasError = !res.ok
 
     this.options = {
       cards: +this._cards,
+      players: [],
       rounds: +this._rounds,
       startingRound: +this._startingRound,
-      players: []
-    };
+    }
   }
 
-  _cardsChanged(newValue: string, oldValue: string) {
-    this.resetRounds();
-    this.sync();
+  public _cardsChanged(newValue: string, oldValue: string) {
+    this.resetRounds()
+    this.sync()
   }
 
-  _roundsChanged(newValue: string, oldValue: string) {
-    this.sync();
+  public _roundsChanged(newValue: string, oldValue: string) {
+    this.sync()
   }
 
-  _startingRoundChanged(newValue: string, oldValue: string) {
-    this.sync();
+  public _startingRoundChanged(newValue: string, oldValue: string) {
+    this.sync()
   }
 
-  playerLengthChanged(newValue: string, oldValue: string) {
-    this.resetRounds();
-    this.sync();
+  public playerLengthChanged(newValue: string, oldValue: string) {
+    this.resetRounds()
+    this.sync()
   }
 }
