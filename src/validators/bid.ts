@@ -31,7 +31,7 @@ function playerValidation(bid_: string | null, cardPerPlayer: number) {
 }
 
 export function bidValidator(opt: BidValidatorOptions): BidValidatorResult {
-  const err = {};
+  const err: {[player: string]: string} = {};
 
   let sum = 0;
 

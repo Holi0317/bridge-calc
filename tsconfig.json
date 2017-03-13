@@ -6,6 +6,8 @@
     "experimentalDecorators": true,
     "strictNullChecks": true,
     "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "allowJs": true,
