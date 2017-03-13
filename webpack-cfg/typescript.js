@@ -2,13 +2,13 @@ const {TsConfigPathsPlugin, CheckerPlugin} = require('awesome-typescript-loader'
 const {ENV} = require('./paths')
 
 const options = (ENV === 'test') ? {
-    options: {
-      doTypeCheck: false,
-      sourceMap: false,
-      inlineSourceMap: true,
-      inlineSources: true
-    }
-  } : {}
+  options: {
+    doTypeCheck: false,
+    sourceMap: false,
+    inlineSourceMap: true,
+    inlineSources: true
+  }
+} : {}
 
 module.exports = {
   resolve: {

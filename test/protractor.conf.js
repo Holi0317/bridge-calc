@@ -28,10 +28,10 @@ exports.config = {
   },
 
   onPrepare: function() {
-    require('ts-node').register({ compilerOptions: { module: 'commonjs' }, disableWarnings: true, fast: true });
+    require('ts-node').register({ compilerOptions: { module: 'commonjs' }, disableWarnings: true, fast: true })
   },
 
   plugins: [{
     package: 'aurelia-protractor-plugin'
   }]
-};
+}

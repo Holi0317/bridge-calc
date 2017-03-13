@@ -7,9 +7,9 @@ module.exports = {
       template: 'index.html',
       chunksSortMode: 'dependency',
       minify: (ENV === 'production') ? {
-          removeComments: true,
-          collapseWhitespace: true
-        } : undefined
+        removeComments: true,
+        collapseWhitespace: true
+      } : undefined
     }),
   ]
 }

@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const paths = require('./paths');
+const paths = require('./paths')
 
 const appChunkName = 'app'
 const firstChunk = 'aurelia-bootstrap'

@@ -1,0 +1,34 @@
+---
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+env:
+  browser: true
+  node: true
+  commonjs: true
+
+extends: eslint:recommended
+
+rules:
+  no-template-curly-in-string: warn
+  array-callback-return: error
+  curly: error
+  dot-location:
+   - warn
+   - property
+  dot-notation: error
+  eqeqeq:
+   - error
+   - smart
+  no-return-await: warn
+  yoda:
+   - error
+   - never
+   - {exceptRange: true}
+  semi:
+   - error
+   - never
+  indent:
+   - error
+   - 2
+  keyword-spacing: error
