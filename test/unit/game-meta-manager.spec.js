@@ -199,19 +199,19 @@ test('addRound should append a round meta to the end', t => {
   t.equal(addedRound.cardPerPlayer, 12, 'Assignment of card per player should be in the added meta')
 })
 
-test.skip('dump should work on empty game meta manager', t => {
+test('dump should work on empty game meta manager', t => {
   t.plan(1)
   const manager = getManager()
 
   const actual = manager.dump()
   const expected = {
-    currentIndex: null,
+    currentIndex: -1,
     metas: []
   }
   t.deepEqual(actual, expected, 'Dumped data should equal to expected')
 })
 
-test.skip('dumped data should have currentIndex of -1 if all round has ended', t => {
+test('dumped data should have currentIndex of number of games if all round has ended', t => {
   t.plan(1)
   const manager = getManager()
 
@@ -221,11 +221,11 @@ test.skip('dumped data should have currentIndex of -1 if all round has ended', t
   manager.next()
 
   const actual = manager.dump().currentIndex
-  const expected = -1
+  const expected = 2
   t.equal(actual, expected, 'Dumped data should equal to expected')
 })
 
-test.skip('dump should work on normal situation', t => {
+test('dump should work on normal situation', t => {
   t.plan(1)
   const manager = getManager()
 
@@ -275,11 +275,11 @@ test('load of a single meta should work', t => {
   t.deepEqual(loaded.playerOrder, ['a', 'b', 'c', 'd'], 'Player order should preserve')
 })
 
-test.skip('load for empty game meta manager', t => {
+test('load for empty game meta manager', t => {
   t.plan(3)
   const manager = getManager()
   const dumped = {
-    currentIndex: null,
+    currentIndex: -1,
     metas: []
   }
 
@@ -289,11 +289,11 @@ test.skip('load for empty game meta manager', t => {
   t.equal(manager.currentGame, null, 'Current game should be null')
 })
 
-test.skip('load for ended game metas', t => {
+test('load for ended game metas', t => {
   t.plan(3)
   const manager = getManager()
   const dumped = {
-    currentIndex: -1,
+    currentIndex: 3,
     metas: [1, 2, 3].map(i => new GameMeta(i)).map(m => m.dump())
   }
 
@@ -303,7 +303,7 @@ test.skip('load for ended game metas', t => {
   t.equal(manager.currentGame, null, 'Current game should be null')
 })
 
-test.skip('load for normal situation', t => {
+test('load for normal situation', t => {
   t.plan(3)
   const manager = getManager()
   const dumped = {

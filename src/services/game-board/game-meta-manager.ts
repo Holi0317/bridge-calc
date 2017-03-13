@@ -133,6 +133,19 @@ export class GameMetaManager extends EventEmitter {
     this.futureGames = range(1, totalRound).map(i => new GameMeta(i));
   }
 
+  /**
+   * Compute the index of current game in concatenated array of metas
+   */
+  get currentIndex(): number {
+    if (this.currentGame == null && this.prevGames.length == 0) {
+      // No game has started. initiateGames may have been called or not.
+      return -1
+    } else {
+      // Other situation. Including game ended and running game.
+      return this.prevGames.length
+    }
+  }
+
   private _playerListChanged() {
     // TODO implement logic for handling player list changed.
     // This should update player order before emitting event
@@ -144,22 +157,30 @@ export class GameMetaManager extends EventEmitter {
     }
   }
 
-  dump(): MetaSchema[] {
-    return this.getAllMetas().map(meta => meta.dump());
+  dump(): GameMetaSchema {
+    return {
+      currentIndex: this.currentIndex,
+      metas: this.getAllMetas().map(meta => meta.dump())
+    }
   }
 
-  load(data: MetaSchema[], currentGameIndex: number | null) {
+  load(data: GameMetaSchema) {
     this.reset();
 
-    this.futureGames = data.map(meta => GameMeta.fromDumped(meta));
+    this.futureGames = data.metas.map(meta => GameMeta.fromDumped(meta));
 
-    if (currentGameIndex) {
-      this.prevGames = this.futureGames.splice(0, currentGameIndex - 1);
-      this.currentGame = this.futureGames.shift()!;
-    } else {
-      this.prevGames = this.futureGames;
-      this.futureGames = [];
+    if (data.currentIndex !== -1) {
+      this.prevGames = this.futureGames.splice(0, data.currentIndex);
+      this.currentGame = this.futureGames.shift() || null;
     }
 
+    // If data.currentIndex === -1
+    // NO-OP. Because all metas are still in futureGames
+
   }
+}
+
+export interface GameMetaSchema {
+  currentIndex: number
+  metas: MetaSchema[]
 }

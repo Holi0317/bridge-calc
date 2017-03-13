@@ -2,7 +2,7 @@ import {GameState} from '../services/game-board/game-state';
 import {RecursivePartial} from '../utils';
 import {TimerSchema} from '../services/game-board/timer';
 import {PlayerSchema} from '../services/game-board/player';
-import {MetaSchema} from '../services/game-board/game-meta';
+import {GameMetaSchema} from '../services/game-board/game-meta-manager'
 
 /**
  * Serialized data for storage.
@@ -11,17 +11,12 @@ import {MetaSchema} from '../services/game-board/game-meta';
 export interface ISerialized {
   game: GameSchema
   players: PlayerSchema[]
-  metas: MetaSchema[]
+  metas: GameMetaSchema
   timer: TimerSchema
 }
 
 export interface GameSchema {
   state: GameState
-  /**
-   * Index of current game in game meta array.
-   * If null, all games have finished.
-   */
-  currentGameIndex: number | null
 }
 
 export interface ISerializedWithID extends ISerialized {

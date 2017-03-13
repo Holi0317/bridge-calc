@@ -12,8 +12,7 @@ export class Serializer {
     const timerService = gameBoard.timer;
 
     const game = {
-      state: gameBoard.state,
-      currentGameIndex: metaManager.currentGame ? metaManager.prevGames.length : null
+      state: gameBoard.state
     };
 
     return {
@@ -29,7 +28,7 @@ export class Serializer {
 
     gameBoard.state = data.game.state;
     gameBoard.playerManager.load(data.players);
-    gameBoard.metaManager.load(data.metas, data.game.currentGameIndex);
+    gameBoard.metaManager.load(data.metas);
     gameBoard.timer.load(data.timer);
 
     return gameBoard;
