@@ -40,6 +40,12 @@ export function range(start: number, end: number) {
  * @returns {T}
  */
 export function nth<T>(array: T[], index: number): T {
+  if (index < 0) {
+    throw new Error('Index should be a positive number')
+  }
+  if (!Number.isInteger(index)) {
+    throw new Error('Index should be an integer')
+  }
   return (index >= array.length) ? nth(array, index - array.length) : array[index]
 }
 
@@ -54,6 +60,9 @@ export function nth<T>(array: T[], index: number): T {
  * @returns {T}
  */
 export function toFront<T>(array: T[], frontIndex: number): T[] {
+  if (frontIndex >= array.length) {
+    throw new Error('frontIndex is out of boundary')
+  }
   const newArray: T[] = []
   for (let i = frontIndex; i < array.length + frontIndex; i++) {
     newArray[i - frontIndex] = nth(array, i)
