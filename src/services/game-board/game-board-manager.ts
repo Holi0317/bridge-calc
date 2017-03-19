@@ -5,7 +5,7 @@ import {GameBoard, IStartOptions} from './game-board'
  * Events that would be emitted by GameBoardManager. Use NodeJS EventEmitter API to listen these events.
  * @enum
  */
-export const GameBoardManagerEvents = {
+export class GameBoardManagerEvents {
   /**
    * Emit when reference to currentGame has changed.
    * When this is emitted, all work has done internally.
@@ -13,7 +13,7 @@ export const GameBoardManagerEvents = {
    * When this event is emitted, CurrentGameChangedParam would be supplied as paramater.
    * @see {ICurrentGameChangedParam}
    */
-  CurrentGameChanged: 'currentGameChanged',
+  public static CurrentGameChanged = 'currentGameChanged'
 }
 
 export interface ICurrentGameChangedParam {

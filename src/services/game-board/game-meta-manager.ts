@@ -10,16 +10,16 @@ const logger = getLogger('GameMetaManager')
  * Events that would be emitted by GameMetaManager. Use NodeJS EventEmitter API to listen these events.
  * @enum
  */
-export const GameMetaManagerEvents = {
+export class GameMetaManagerEvents {
   /**
    * Emit when reference to currentGame has changed.
    * Most likely next round is started.
    */
-  CurrentGameChanged: 'currentGameChanged',
+  public static CurrentGameChanged = 'currentGameChanged'
   /**
    * Emit when currentGame.playerOrder has changed. Next round has started or player list has changed.
    */
-  PlayerOrderChanged: 'playerOrderChanged',
+  public static PlayerOrderChanged = 'playerOrderChanged'
 }
 
 /**

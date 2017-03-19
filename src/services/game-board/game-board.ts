@@ -31,21 +31,21 @@ export interface IStartOptions {
  * Events that would be emitted by GameBoard. Use NodeJS EventEmitter API to listen these events.
  * @enum
  */
-export const GameBoardEvents = {
+export class GameBoardEvents {
   /**
    * Emit when game has reached last round and ended.
    */
-  End: 'end',
+  public static End = 'end'
   /**
    * Emit when new game has started.
    */
-  Start: 'start',
+  public static Start = 'start'
   /**
    * Emit when state of game controller has changed.
    * This will emit AFTER all work for controller has completed.
    * Do NOT use observer on state property.
    */
-  StateChanged: 'stateChanged',
+  public static StateChanged = 'stateChanged'
 }
 
 /**

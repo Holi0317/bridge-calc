@@ -8,15 +8,15 @@ const logger = getLogger('PlayerManager')
  * Events that would be emitted by PlayerManager. Use NodeJS EventEmitter API to listen these events.
  * @enum
  */
-export const PlayerManagerEvents =  {
+export class PlayerManagerEvents {
   /**
    * Emit when player list has changed
    */
-  PlayerListChanged: 'playerListChanged',
+  public static PlayerListChanged = 'playerListChanged'
   /**
    * Emit when a round may have ended and score and rank of players have changed
    */
-  ScoreChanged: 'scoreChanged',
+  public static ScoreChanged = 'scoreChanged'
 }
 
 /**
