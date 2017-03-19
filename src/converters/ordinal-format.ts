@@ -1,3 +1,8 @@
+import {getLogger} from 'aurelia-logging'
+
+const suffix = ['th', 'st', 'nd', 'rd']
+const logger = getLogger('OrdinalFormatConverter')
+
 export class OrdinalFormatValueConverter {
   /**
    * Add ordinal suffix to given value.
@@ -10,7 +15,10 @@ export class OrdinalFormatValueConverter {
    * @returns {string} - Formatted string with ordinal suffix
    */
   public toView(value: string) {
-    const suffix = ['th', 'st', 'nd', 'rd']
+    if (isNaN(+value) || !Number.isInteger(+value)) {
+      logger.warn('Received value that is not number or is a float. Value:', value)
+      return value
+    }
     const v = +value % 100
     return value + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
   }
