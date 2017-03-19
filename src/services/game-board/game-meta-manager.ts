@@ -15,11 +15,11 @@ export class GameMetaManagerEvents {
    * Emit when reference to currentGame has changed.
    * Most likely next round is started.
    */
-  public static CurrentGameChanged = 'currentGameChanged'
+  public static CurrentGameChanged = Symbol('currentGameChanged')
   /**
    * Emit when currentGame.playerOrder has changed. Next round has started or player list has changed.
    */
-  public static PlayerOrderChanged = 'playerOrderChanged'
+  public static PlayerOrderChanged = Symbol('playerOrderChanged')
 }
 
 /**

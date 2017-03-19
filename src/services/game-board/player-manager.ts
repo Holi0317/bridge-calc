@@ -12,11 +12,11 @@ export class PlayerManagerEvents {
   /**
    * Emit when player list has changed
    */
-  public static PlayerListChanged = 'playerListChanged'
+  public static PlayerListChanged = Symbol('playerListChanged')
   /**
    * Emit when a round may have ended and score and rank of players have changed
    */
-  public static ScoreChanged = 'scoreChanged'
+  public static ScoreChanged = Symbol('scoreChanged')
 }
 
 /**

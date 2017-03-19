@@ -13,7 +13,7 @@ export class GameBoardManagerEvents {
    * When this event is emitted, CurrentGameChangedParam would be supplied as paramater.
    * @see {ICurrentGameChangedParam}
    */
-  public static CurrentGameChanged = 'currentGameChanged'
+  public static CurrentGameChanged = Symbol('currentGameChanged')
 }
 
 export interface ICurrentGameChangedParam {

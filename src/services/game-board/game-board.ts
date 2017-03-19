@@ -35,17 +35,17 @@ export class GameBoardEvents {
   /**
    * Emit when game has reached last round and ended.
    */
-  public static End = 'end'
+  public static End = Symbol('end')
   /**
    * Emit when new game has started.
    */
-  public static Start = 'start'
+  public static Start = Symbol('start')
   /**
    * Emit when state of game controller has changed.
    * This will emit AFTER all work for controller has completed.
    * Do NOT use observer on state property.
    */
-  public static StateChanged = 'stateChanged'
+  public static StateChanged = Symbol('stateChanged')
 }
 
 /**
