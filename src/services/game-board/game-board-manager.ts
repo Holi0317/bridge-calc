@@ -36,10 +36,6 @@ export class GameBoardManager extends EventEmitter {
    */
   public currentID: number | null = null
 
-  constructor() {
-    super()
-  }
-
   /**
    * Initialize a new game.
    * See GameBoard.start for details on options object.
