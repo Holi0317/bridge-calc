@@ -1,6 +1,6 @@
 import {IGameMetaSchema} from '../services/game-board/game-meta-manager'
 import {GameState} from '../services/game-board/game-state'
-import {IPlayerSchema} from '../services/game-board/player'
+import {IPlayerManagerSchema} from '../services/game-board/player-manager'
 import {ITimerSchema} from '../services/game-board/timer'
 import {RecursivePartial} from '../utils'
 
@@ -10,7 +10,7 @@ import {RecursivePartial} from '../utils'
  */
 export interface ISerialized {
   game: IGameSchema
-  players: IPlayerSchema[]
+  players: IPlayerManagerSchema
   metas: IGameMetaSchema
   timer: ITimerSchema
 }

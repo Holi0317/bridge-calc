@@ -133,13 +133,17 @@ export class PlayerManager extends EventEmitter {
     }
   }
 
-  public dump(): IPlayerSchema[] {
-    return this.players.map((player) => player.dump())
+  public dump(): IPlayerManagerSchema {
+    return {
+      currentPlayerIndex: this.currentPlayerIndex,
+      players: this.players.map((player) => player.dump()),
+    }
   }
 
-  public load(data: IPlayerSchema[]) {
+  public load(data: IPlayerManagerSchema) {
     this.reset()
-    this.players = data.map((d) => Player.fromDumped(d))
+    this.players = data.players.map((d) => Player.fromDumped(d))
+    this.currentPlayerIndex = data.currentPlayerIndex
     this._refreshMap()
     this.updateRank()
   }
@@ -155,4 +159,9 @@ export class PlayerManager extends EventEmitter {
       this._playerMap.set(player.ID, player)
     }
   }
+}
+
+export interface IPlayerManagerSchema {
+  players: IPlayerSchema[]
+  currentPlayerIndex: number
 }

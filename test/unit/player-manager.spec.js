@@ -190,3 +190,84 @@ test('getPlayerByID should return a dummy player when player ID does not exists'
 
   t.equal(actual, expected, 'Player name should be Null')
 })
+
+test('dump() should return empty state object for new manager', t => {
+  t.plan(1)
+  const manager = getManager()
+
+  const actual = manager.dump()
+  const expected = {
+    players: [],
+    currentPlayerIndex: -1
+  }
+
+  t.deepEqual(actual, expected, 'Initial state for dumped is expected')
+})
+
+test('dump() should return array of players', t => {
+  t.plan(5)
+  const manager = getManager()
+
+  manager.addPlayer('John')
+  const actual = manager.dump()
+  const players = actual.players
+
+  t.equal(actual.currentPlayerIndex, -1, 'Dumped should have currentPlayerIndex as -1')
+  t.equal(players.length, 1, 'Dumped players should be an array with 1 as length')
+
+  const john = players[0]
+  t.equal(john.name, 'John', 'Dumped player should named John')
+  t.assert(john.hasOwnProperty('ID'), 'Dumped should have ID property')
+  t.assert(john.hasOwnProperty('scoreboard'), 'Dumped should have scoreboard property')
+})
+
+test('load() should work fine on empty data', t => {
+  t.plan(3)
+  const manager = getManager()
+
+  manager.load({
+    players: [],
+    currentPlayerIndex: -1
+  })
+
+  t.equal(manager.players.length, 0, 'Manager should have stored no player')
+  t.equal(manager.currentPlayerIndex, -1, 'currentPlayerIndex should be -1')
+  t.equal(manager._playerMap.size, 0, 'playerMap should be empty')
+})
+
+test('load() should load serialized data properly', t => {
+  t.plan(6)
+  const manager = getManager()
+  const players = [{
+    ID: 'zero',
+    name: 'John',
+    scoreboard: {
+      bid: null,
+      win: null,
+      scores: [['0', -1]]
+    }
+  }, {
+    ID: 'one',
+    name: 'Mary',
+    scoreboard: {
+      bid: null,
+      win: null,
+      scores: [['1', 10]]
+    }
+  }]
+  const data = {
+    currentPlayerIndex: 1,
+    players
+  }
+
+  manager.load(data)
+
+  const managerPlayers = manager.players
+  t.equal(managerPlayers.length, 2, '2 players should be loaded')
+  t.equal(manager.currentPlayerIndex, 1, 'currentPlayerIndex should be loaded')
+  t.equal(managerPlayers[0].name, 'John', 'First player should name John')
+  t.equal(managerPlayers[1].name, 'Mary', 'Second player should name Mary')
+  t.equal(managerPlayers[0].rank, 2, 'John should ranked second')
+  t.equal(managerPlayers[1].rank, 1, 'Mary should ranked first')
+
+})
