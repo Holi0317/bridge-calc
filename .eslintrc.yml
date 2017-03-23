@@ -24,7 +24,7 @@ rules:
   yoda:
    - error
    - never
-   - {exceptRange: true}
+   - exceptRange: true
   semi:
    - error
    - never
@@ -36,5 +36,6 @@ rules:
   quotes:
    - error
    - single
-   - { "allowTemplateLiterals": false }
+   - allowTemplateLiterals: false
+     avoidEscape: true
   prefer-const: error
