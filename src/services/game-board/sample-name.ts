@@ -48,7 +48,7 @@ export const NAMES = [
   'Bea',
   'Candice',
   'Bernardine',
-  'William',
+  'William'
 ]
 
 export function sampleName() {

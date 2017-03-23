@@ -22,7 +22,7 @@ export class App {
     config.map([
       { route: '', name: 'menu', moduleId: './menu/menu' },
       { route: '/entry', name: 'entry', moduleId: './entry/entry', title: 'New Game' },
-      { route: '/game', name: 'game', moduleId: './game/game' },
+      { route: '/game', name: 'game', moduleId: './game/game' }
     ])
 
     this._router = router

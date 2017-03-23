@@ -28,7 +28,7 @@ export class Timer {
 
     return {
       endTime: getTimeOrNull(this.endTime),
-      startTime: getTimeOrNull(this.startTime),
+      startTime: getTimeOrNull(this.startTime)
     }
   }
 

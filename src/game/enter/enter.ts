@@ -5,7 +5,7 @@ import bind from 'autobind-decorator'
 import {GameBoardEvents} from '../../services/game-board/game-board'
 import {
   GameBoardManager, GameBoardManagerEvents,
-  ICurrentGameChangedParam,
+  ICurrentGameChangedParam
 } from '../../services/game-board/game-board-manager'
 import {GameMetaManagerEvents} from '../../services/game-board/game-meta-manager'
 import {GameState} from '../../services/game-board/game-state'
@@ -25,7 +25,7 @@ export class Enter {
   constructor(
     private _layout: LayoutService,
     private _gameBoardManager: GameBoardManager,
-    private _router: Router,
+    private _router: Router
   ) {
     this._gameBoardManager.on(GameBoardManagerEvents.CurrentGameChanged, this._currentGameChanged)
   }
@@ -116,7 +116,7 @@ export class Enter {
       const res = bidValidator({
         players,
         cardPerPlayer: meta.cardPerPlayer!,
-        lastPlayerID,
+        lastPlayerID
       })
       logger.debug('Bid validate result:', res)
       this.bidError = res.err
@@ -127,7 +127,7 @@ export class Enter {
       fill(scoreboards, 'win', '0')
       const res = winValidator({
         players,
-        cardPerPlayer: meta.cardPerPlayer!,
+        cardPerPlayer: meta.cardPerPlayer!
       })
       logger.debug('Win validate result:', res)
       this.winError = res.err

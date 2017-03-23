@@ -45,7 +45,7 @@ export class EntryOptions {
       cards: 52,
       players: [],
       rounds: 13,
-      startingRound: 1,
+      startingRound: 1
     }
   }
 
@@ -67,7 +67,7 @@ export class EntryOptions {
       cards: this._cards,
       playerLength: this.playerLength,
       rounds: this._rounds,
-      startingRound: this._startingRound,
+      startingRound: this._startingRound
     })
 
     this.errors = res.err
@@ -77,7 +77,7 @@ export class EntryOptions {
       cards: +this._cards,
       players: [],
       rounds: +this._rounds,
-      startingRound: +this._startingRound,
+      startingRound: +this._startingRound
     }
   }
 

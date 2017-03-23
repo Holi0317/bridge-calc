@@ -6,7 +6,7 @@ import {LayoutService} from '../services/layout-service'
 export class Menu {
   constructor(
     private _layoutService: LayoutService,
-    private _router: Router,
+    private _router: Router
   ) {
 
   }

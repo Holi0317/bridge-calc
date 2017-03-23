@@ -10,7 +10,7 @@ export class GameScoreboard {
 
   constructor(
     private _layoutService: LayoutService,
-    private _gameBoardManager: GameBoardManager,
+    private _gameBoardManager: GameBoardManager
   ) {
 
   }

@@ -47,7 +47,7 @@ class EntryOptionsValidator {
 
     return {
       err: this.err,
-      ok: isOk(this.err),
+      ok: isOk(this.err)
     }
   }
 
@@ -55,7 +55,7 @@ class EntryOptionsValidator {
     this.err = {
       cards: '',
       rounds: '',
-      startingRound: '',
+      startingRound: ''
     }
   }
 

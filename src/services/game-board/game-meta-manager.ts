@@ -149,7 +149,7 @@ export class GameMetaManager extends EventEmitter {
   public dump(): IGameMetaSchema {
     return {
       currentIndex: this.currentIndex,
-      metas: this.getAllMetas().map((meta) => meta.dump()),
+      metas: this.getAllMetas().map((meta) => meta.dump())
     }
   }
 

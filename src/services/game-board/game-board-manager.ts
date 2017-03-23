@@ -66,7 +66,7 @@ export class GameBoardManager extends EventEmitter {
     this.currentGame = newValue
     this.emit(GameBoardManagerEvents.CurrentGameChanged, {
       oldValue,
-      newValue,
+      newValue
     })
   }
 }

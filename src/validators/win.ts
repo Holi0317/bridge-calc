@@ -53,6 +53,6 @@ export function winValidator(opt: IWinValidatorOptions): IWinValidatorResult {
 
   return {
     ok: isOk(err),
-    err,
+    err
   }
 }

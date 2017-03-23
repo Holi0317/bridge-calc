@@ -47,6 +47,6 @@ export function bidValidator(opt: IBidValidatorOptions): IBidValidatorResult {
 
   return {
     ok: isOk(err),
-    err,
+    err
   }
 }

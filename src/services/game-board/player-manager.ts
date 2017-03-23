@@ -136,7 +136,7 @@ export class PlayerManager extends EventEmitter {
   public dump(): IPlayerManagerSchema {
     return {
       currentPlayerIndex: this.currentPlayerIndex,
-      players: this.players.map((player) => player.dump()),
+      players: this.players.map((player) => player.dump())
     }
   }
 

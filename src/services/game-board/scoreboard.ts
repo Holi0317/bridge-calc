@@ -113,7 +113,7 @@ export class Scoreboard {
     return {
       bid: this.bid,
       scores: Array.from(this.scores),
-      win: this.win,
+      win: this.win
     }
   }
 

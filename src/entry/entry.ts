@@ -17,7 +17,7 @@ export class Entry {
 
   constructor(
     private router: Router,
-    private _gameBoardManager: GameBoardManager,
+    private _gameBoardManager: GameBoardManager
   ) {
 
   }
@@ -33,7 +33,7 @@ export class Entry {
     }
     this._gameBoardManager.start({
       ...this.options,
-      players: this.players,
+      players: this.players
     })
     this.router.navigateToRoute('game')
   }

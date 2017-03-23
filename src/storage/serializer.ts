@@ -12,14 +12,14 @@ export class Serializer {
     const timerService = gameBoard.timer
 
     const game = {
-      state: gameBoard.state,
+      state: gameBoard.state
     }
 
     return {
       game,
       metas: metaManager.dump(),
       players: playerManager.dump(),
-      timer: timerService.dump(),
+      timer: timerService.dump()
     }
   }
 

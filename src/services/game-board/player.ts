@@ -43,7 +43,7 @@ export class Player {
     return {
       ID: this.ID,
       name: this.name,
-      scoreboard: this.scoreboard.dump(),
+      scoreboard: this.scoreboard.dump()
     }
   }
 }

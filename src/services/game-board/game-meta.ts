@@ -52,7 +52,7 @@ export class GameMeta {
       isExtra: this.isExtra,
       maker: this.maker,
       name: this.name,
-      playerOrder: this.playerOrder,
+      playerOrder: this.playerOrder
     }
   }
 }

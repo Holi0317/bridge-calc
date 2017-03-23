@@ -26,7 +26,7 @@ class BridgeDatabase extends Dexie {
   constructor() {
     super('BridgeDatabase')
     this.version(1).stores({
-      game: 'id++,game.startTime',
+      game: 'id++,game.startTime'
     })
   }
 }

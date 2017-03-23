@@ -4,7 +4,7 @@ import bind from 'autobind-decorator'
 import {GameBoardEvents} from '../services/game-board/game-board'
 import {
   GameBoardManager, GameBoardManagerEvents,
-  ICurrentGameChangedParam,
+  ICurrentGameChangedParam
 } from '../services/game-board/game-board-manager'
 import {IDBStorageService} from './idb-storage-service'
 import {ISerialized, ISerializedWithID, StorageService} from './interfaces'
@@ -22,7 +22,7 @@ export class StorageManager {
 
   constructor(
     private _gameBoardManager: GameBoardManager,
-    @lazy(IDBStorageService) _idb: () => IDBStorageService,
+    @lazy(IDBStorageService) _idb: () => IDBStorageService
   ) {
     // TODO Implement more storage engine and decide which to use.
     this._storage = _idb()
@@ -35,7 +35,7 @@ export class StorageManager {
     this._gameBoardManager.on(GameBoardManagerEvents.CurrentGameChanged, this._currentGameChanged)
     this._currentGameChanged({
       newValue: this._gameBoardManager.currentGame,
-      oldValue: null,
+      oldValue: null
     })
   }
 

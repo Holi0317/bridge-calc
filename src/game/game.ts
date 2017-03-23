@@ -15,7 +15,7 @@ export class Game {
     config.map([
       { route: '', name: 'enter', moduleId: './enter/enter', nav: true, title: 'Input' },
       { route: '/scoreboard', name: 'scoreboard', moduleId: './scoreboard/scoreboard', nav: true, title: 'Scoreboard' },
-      { route: '/settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings' },
+      { route: '/settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings' }
     ])
 
     this._router = router
