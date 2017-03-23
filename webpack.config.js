@@ -1,7 +1,3 @@
-/**
- * To learn more about how to use Easy Webpack
- * Take a look at the README here: https://github.com/easy-webpack/core
- * */
 const {generateConfig, stripMetadata} = require('@easy-webpack/core')
 const path = require('path')
 const webpack = require('webpack')
@@ -15,6 +11,7 @@ const genIndex = require('./webpack-cfg/gen-index')
 const commonChunksOptimize = require('./webpack-cfg/common-chunks-optimize')
 const copyFiles = require('./webpack-cfg/copy-files')
 const babili = require('./webpack-cfg/babili')
+const analyzer = require('./webpack-cfg/analyzer')
 
 const {ENV, entry} = require('./webpack-cfg/paths')
 
@@ -49,6 +46,12 @@ const config = generateConfig(
     copyFiles
   ] : [
     /* ENV === 'test' */
+  ]),
+
+  ...(ENV === 'production' ? [
+    analyzer
+  ]: [
+
   ]),
 
   babili
