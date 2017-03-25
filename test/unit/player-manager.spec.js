@@ -6,7 +6,6 @@ function getManager() {
 }
 
 test('reset should properly reset player manager states', t => {
-  t.plan(3)
   const manager = getManager()
 
   manager.reset()
@@ -14,10 +13,10 @@ test('reset should properly reset player manager states', t => {
   t.equal(manager.players.length, 0, 'Player array should be empty')
   t.equal(manager.currentPlayerIndex, -1, 'Current player index should start from -1')
   t.equal(manager._playerMap.size, 0, 'Player map should be empty')
+  t.end()
 })
 
 test('addPlayer(name) should work', t => {
-  t.plan(1)
   const manager = getManager()
 
   manager.addPlayer('John')
@@ -25,10 +24,10 @@ test('addPlayer(name) should work', t => {
   const expected = 'John'
 
   t.equal(actual, expected, 'New player named John should be added')
+  t.end()
 })
 
 test('addPlayer([name, name]) should work', t => {
-  t.plan(2)
   const manager = getManager()
 
   manager.addPlayer(['John', 'Mary'])
@@ -36,20 +35,20 @@ test('addPlayer([name, name]) should work', t => {
   const players = manager.players
   t.equal(players[0].name, 'John', 'First player should named John')
   t.equal(players[1].name, 'Mary', 'Second player should named Mary')
+  t.end()
 })
 
 test('addPlayer should emit an event', t => {
-  t.plan(1)
   const manager = getManager()
   manager.on(PlayerManagerEvents.PlayerListChanged, () => {
     t.pass('PlayerListChanged event fired')
+    t.end()
   })
 
   manager.addPlayer('John')
 })
 
 test('removePlayer(ID) should remove him from player list', t => {
-  t.plan(2)
   const manager = getManager()
   const players = manager.players
 
@@ -59,19 +58,19 @@ test('removePlayer(ID) should remove him from player list', t => {
 
   t.equal(players[0].name, 'John', 'First player should named John')
   t.equal(players[1].name, 'Joe', 'Second player should named Joe')
+  t.end()
 })
 
 test('removePlayer should throw an error when the ID does not exists', t => {
-  t.plan(1)
   const manager = getManager()
   const nonExistID = 'This ID should not point to any player'
 
   manager.addPlayer('John')
   t.throws(() => manager.removePlayer(nonExistID), `[removePlayer] Player ID: ${nonExistID} not found.`)
+  t.end()
 })
 
 test('removePlayer should properly set currentPlayerIndex', t => {
-  t.plan(1)
   const manager = getManager()
 
   manager.addPlayer(['John', 'Mary', 'Joe'])
@@ -83,22 +82,25 @@ test('removePlayer should properly set currentPlayerIndex', t => {
   const expected = -1
 
   t.equal(actual, expected, 'currentPlayerIndex should minus one when the removed player is current one')
+  t.end()
 })
 
 test('removePlayer should emit an event', t => {
-  t.plan(2)  // addPlayer will also fire an event. 2 Events in total will be fired
   const manager = getManager()
+  let eventFired = 0
   manager.on(PlayerManagerEvents.PlayerListChanged, () => {
-    t.pass('PlayerListChanged event fired')
+    eventFired += 1
   })
 
   manager.addPlayer('John')
   const ID = manager.players[0].ID
   manager.removePlayer(ID)
+
+  t.equal(eventFired, 2, '2 event should be fired in total')
+  t.end()
 })
 
 test('next() should get the first player on first call', t => {
-  t.plan(2)
   const manager = getManager()
 
   manager.addPlayer(['John', 'Mary', 'Joe'])
@@ -107,10 +109,10 @@ test('next() should get the first player on first call', t => {
 
   t.equal(actual, expected, 'The first player ID should be the returned value')
   t.equal(manager.currentPlayerIndex, 0, 'currentPlayerIndex should be 0')
+  t.end()
 })
 
 test('next() should set zero when the last player have reached', t => {
-  t.plan(2)
   const manager = getManager()
 
   manager.addPlayer(['John', 'Mary', 'Joe'])
@@ -122,10 +124,10 @@ test('next() should set zero when the last player have reached', t => {
 
   t.equal(actual, expected, 'The first player ID should be the returned value')
   t.equal(manager.currentPlayerIndex, 0, 'currentPlayerIndex should be 0')
+  t.end()
 })
 
 test('calcAllScore should update players score on their scoreboard', t => {
-  t.plan(3)
   const manager = getManager()
 
   manager.addPlayer(['John', 'Mary', 'Joe'])
@@ -137,20 +139,20 @@ test('calcAllScore should update players score on their scoreboard', t => {
 
     t.equal(actual, expected, 'Score should be 0')
   }
+  t.end()
 })
 
 test('calcAllScore should emit an event', t => {
-  t.plan(1)
   const manager = getManager()
   manager.on(PlayerManagerEvents.ScoreChanged, () => {
     t.pass('ScoreChanged event fired')
+    t.end()
   })
 
   manager.calcAllScore('1')
 })
 
 test('updateRank should update players\' rank property', t => {
-  t.plan(1)
   const manager = getManager()
 
   manager.addPlayer(['John', 'Mary', 'Joe'])
@@ -164,10 +166,11 @@ test('updateRank should update players\' rank property', t => {
   const expected = [1, 3, 1]
 
   t.deepEqual(actual, expected, 'Rank of players should sort accordingly')
+
+  t.end()
 })
 
 test('getPlayerByID should return player by ID', t => {
-  t.plan(1)
   const manager = getManager()
 
   manager.addPlayer(['John', 'Mary', 'Joe'])
@@ -177,10 +180,10 @@ test('getPlayerByID should return player by ID', t => {
   const actual = manager.getPlayerByID(ID).ID
 
   t.equal(actual, ID, 'Should return same ID')
+  t.end()
 })
 
 test('getPlayerByID should return a dummy player when player ID does not exists', t => {
-  t.plan(1)
   const manager = getManager()
 
   manager.addPlayer(['John', 'Mary', 'Joe'])
@@ -189,10 +192,10 @@ test('getPlayerByID should return a dummy player when player ID does not exists'
   const expected = 'Null'
 
   t.equal(actual, expected, 'Player name should be Null')
+  t.end()
 })
 
 test('dump() should return empty state object for new manager', t => {
-  t.plan(1)
   const manager = getManager()
 
   const actual = manager.dump()
@@ -202,10 +205,10 @@ test('dump() should return empty state object for new manager', t => {
   }
 
   t.deepEqual(actual, expected, 'Initial state for dumped is expected')
+  t.end()
 })
 
 test('dump() should return array of players', t => {
-  t.plan(5)
   const manager = getManager()
 
   manager.addPlayer('John')
@@ -219,10 +222,10 @@ test('dump() should return array of players', t => {
   t.equal(john.name, 'John', 'Dumped player should named John')
   t.assert(john.hasOwnProperty('ID'), 'Dumped should have ID property')
   t.assert(john.hasOwnProperty('scoreboard'), 'Dumped should have scoreboard property')
+  t.end()
 })
 
 test('load() should work fine on empty data', t => {
-  t.plan(3)
   const manager = getManager()
 
   manager.load({
@@ -233,10 +236,10 @@ test('load() should work fine on empty data', t => {
   t.equal(manager.players.length, 0, 'Manager should have stored no player')
   t.equal(manager.currentPlayerIndex, -1, 'currentPlayerIndex should be -1')
   t.equal(manager._playerMap.size, 0, 'playerMap should be empty')
+  t.end()
 })
 
 test('load() should load serialized data properly', t => {
-  t.plan(6)
   const manager = getManager()
   const players = [{
     ID: 'zero',
@@ -269,5 +272,5 @@ test('load() should load serialized data properly', t => {
   t.equal(managerPlayers[1].name, 'Mary', 'Second player should name Mary')
   t.equal(managerPlayers[0].rank, 2, 'John should ranked second')
   t.equal(managerPlayers[1].rank, 1, 'Mary should ranked first')
-
+  t.end()
 })

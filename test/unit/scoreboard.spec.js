@@ -6,7 +6,6 @@ function getScoreboard() {
 }
 
 test('reset() should reset its state', t => {
-  t.plan(5)
   const scoreboard = getScoreboard()
   scoreboard.reset()
 
@@ -15,40 +14,40 @@ test('reset() should reset its state', t => {
   t.equal(scoreboard._scores.size, 0, 'Scores map should have nothing in it')
   t.equal(scoreboard.prevScore, 0, 'Score from last round should be 0')
   t.equal(scoreboard.totalScore, 0, 'Total score should be 0')
+  t.end()
 })
 
 test('calcScore() should set 0 mark when both bid and win are null', t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
   scoreboard.calcScore('1', null, null)
 
   const actual = scoreboard.getScore('1')
   const expected = 0
   t.equal(actual, expected, '0 mark is expected')
+  t.end()
 })
 
 test("calcScore('1', 0, 0) should set 10 mark", t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
   scoreboard.calcScore('1', 0, 0)
 
   const actual = scoreboard.getScore('1')
   const expected = 10
   t.equal(actual, expected, '10 mark is expected')
+  t.end()
 })
 
 test("calcScore('1', 0, 1) should set -1 mark", t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
   scoreboard.calcScore('1', 0, 1)
 
   const actual = scoreboard.getScore('1')
   const expected = -1
   t.equal(actual, expected, '-1 mark is expected')
+  t.end()
 })
 
 test('calcScore() should use implicit parameters', t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
   scoreboard.bid = 0
   scoreboard.win = 1
@@ -57,10 +56,10 @@ test('calcScore() should use implicit parameters', t => {
   const actual = scoreboard.getScore('1')
   const expected = -1
   t.equal(actual, expected, '-1 mark is expected')
+  t.end()
 })
 
 test('calcScore() should update total score', t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
   scoreboard.calcScore('1', 0, 1)
   scoreboard.calcScore('2', 0, 1)
@@ -68,10 +67,10 @@ test('calcScore() should update total score', t => {
   const actual = scoreboard.totalScore
   const expected = -2
   t.equal(actual, expected, '-2 mark is expected')
+  t.end()
 })
 
 test('calcScore() should update prev score', t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
   scoreboard.calcScore('1', 0, 1)
   scoreboard.calcScore('2', 0, 0)
@@ -79,19 +78,19 @@ test('calcScore() should update prev score', t => {
   const actual = scoreboard.prevScore
   const expected = 10
   t.equal(actual, expected, '10 mark is expected')
+  t.end()
 })
 
 test('getScore() on non-exist round should return null', t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
 
   const actual = scoreboard.getScore('non-exist-round')
   const expected = null
   t.equal(actual, expected, 'null is expected to return')
+  t.end()
 })
 
 test('updateTotalScore() should update total score', t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
   scoreboard.calcScore('1', 0, 0)
   scoreboard.calcScore('2', 1, 1)
@@ -100,10 +99,10 @@ test('updateTotalScore() should update total score', t => {
   const actual = scoreboard.totalScore
   const expected = 21
   t.equal(actual, expected, '21 mark is expected')
+  t.end()
 })
 
 test('dump() should dump new scoreboard object', t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
 
   const actual = scoreboard.dump()
@@ -113,10 +112,10 @@ test('dump() should dump new scoreboard object', t => {
     win: null
   }
   t.deepEqual(actual, expected, 'Dumped should be default')
+  t.end()
 })
 
 test('dump() should return bid and win properties', t => {
-  t.plan(2)
   const scoreboard = getScoreboard()
   scoreboard.bid = 0
   scoreboard.win = 1
@@ -124,10 +123,10 @@ test('dump() should return bid and win properties', t => {
   const actual = scoreboard.dump()
   t.equal(actual.bid, 0, '0 bid should be dumped')
   t.equal(actual.win, 1, '1 win should be dumped')
+  t.end()
 })
 
 test('dump() should dump scores', t => {
-  t.plan(1)
   const scoreboard = getScoreboard()
   scoreboard.calcScore('1', 0, 0)
   scoreboard.calcScore('2', 1, 1)
@@ -135,10 +134,10 @@ test('dump() should dump scores', t => {
   const actual = scoreboard.dump().scores
   const expected = [['1', 10], ['2', 11]]
   t.deepEqual(actual, expected, 'Score map is expected')
+  t.end()
 })
 
 test('load() should load default state', t => {
-  t.plan(5)
   const scoreboard = getScoreboard()
   const data = {
     bid: null,
@@ -152,10 +151,10 @@ test('load() should load default state', t => {
   t.equal(scoreboard._scores.size, 0, 'Scores should contains nothing')
   t.equal(scoreboard.prevScore, 0, 'Previous score should be 0')
   t.equal(scoreboard.totalScore, 0, 'Total score should be 0')
+  t.end()
 })
 
 test('load() should load sample state', t => {
-  t.plan(7)
   const scoreboard = getScoreboard()
   const data = {
     bid: 1,
@@ -171,4 +170,5 @@ test('load() should load sample state', t => {
   t.equal(scoreboard.totalScore, 9, 'Total score should be 9')
   t.equal(scoreboard.getScore('1'), 10, 'Round 1 should score 10 mark')
   t.equal(scoreboard.getScore('2'), -1, 'Round 2 should score -1 mark')
+  t.end()
 })

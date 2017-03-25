@@ -7,7 +7,12 @@ env:
   node: true
   commonjs: true
 
-extends: eslint:recommended
+plugins:
+ - tape
+
+extends:
+ - eslint:recommended
+ - plugin:tape/recommended
 
 rules:
   no-template-curly-in-string: warn
