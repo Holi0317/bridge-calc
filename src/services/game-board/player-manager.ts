@@ -1,6 +1,7 @@
 import {getLogger} from 'aurelia-logging'
 import {EventEmitter} from 'events'
-import {IPlayerSchema, Player, PlayerID} from './player'
+import {IPlayerManagerSchema} from '../../storage/schema'
+import {Player, PlayerID} from './player'
 
 const logger = getLogger('PlayerManager')
 
@@ -159,9 +160,4 @@ export class PlayerManager extends EventEmitter {
       this._playerMap.set(player.ID, player)
     }
   }
-}
-
-export interface IPlayerManagerSchema {
-  players: IPlayerSchema[]
-  currentPlayerIndex: number
 }

@@ -1,5 +1,5 @@
 import {GameBoard} from '../services/game-board/game-board'
-import {ISerialized} from './interfaces'
+import {ISerialized} from './schema'
 
 /**
  * Dump and load gameService, playerManagerService and gameMetaService data to plain object
@@ -11,12 +11,8 @@ export class Serializer {
     const metaManager = gameBoard.metaManager
     const timerService = gameBoard.timer
 
-    const game = {
-      state: gameBoard.state
-    }
-
     return {
-      game,
+      gameBoard: gameBoard.dump(),
       metas: metaManager.dump(),
       players: playerManager.dump(),
       timer: timerService.dump()
@@ -26,7 +22,7 @@ export class Serializer {
   public static load(data: ISerialized): GameBoard {
     const gameBoard = new GameBoard()
 
-    gameBoard.state = data.game.state
+    gameBoard.load(data.gameBoard)
     gameBoard.playerManager.load(data.players)
     gameBoard.metaManager.load(data.metas)
     gameBoard.timer.load(data.timer)

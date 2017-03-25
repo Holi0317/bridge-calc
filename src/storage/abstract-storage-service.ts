@@ -1,27 +1,5 @@
-import {IGameMetaSchema} from '../services/game-board/game-meta-manager'
-import {GameState} from '../services/game-board/game-state'
-import {IPlayerManagerSchema} from '../services/game-board/player-manager'
-import {ITimerSchema} from '../services/game-board/timer'
 import {RecursivePartial} from '../utils'
-
-/**
- * Serialized data for storage.
- * All serialized data must be composed of JavaScript primitive with plain Object and Array.
- */
-export interface ISerialized {
-  game: IGameSchema
-  players: IPlayerManagerSchema
-  metas: IGameMetaSchema
-  timer: ITimerSchema
-}
-
-export interface IGameSchema {
-  state: GameState
-}
-
-export interface ISerializedWithID extends ISerialized {
-  id: number
-}
+import {ISerialized} from './schema'
 
 /**
  * Standard interface for storage system.
@@ -46,7 +24,7 @@ export abstract class StorageService {
    * @param gameID - ID of the game desired to update.
    * @param data - Partial data for update. I.E. Object.assign will be executed on saved data.
    */
-  public abstract updateGame(gameID: number, data: RecursivePartial<IGameSchema>): Promise<boolean>
+  public abstract updateGame(gameID: number, data: RecursivePartial<ISerialized>): Promise<boolean>
 
   /**
    * Delete game from saved storage

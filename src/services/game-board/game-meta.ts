@@ -1,3 +1,4 @@
+import {IMetaSchema} from '../../storage/schema'
 import {PlayerID} from './player'
 
 /**
@@ -55,12 +56,4 @@ export class GameMeta {
       playerOrder: this.playerOrder
     }
   }
-}
-
-export interface IMetaSchema {
-  maker: PlayerID | null
-  name: string
-  cardPerPlayer: number | null
-  isExtra: boolean
-  playerOrder: PlayerID[]
 }

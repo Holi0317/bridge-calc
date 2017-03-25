@@ -1,5 +1,6 @@
+import {IPlayerSchema} from '../../storage/schema'
 import {genID} from '../../utils'
-import {IScoreboardSchema, Scoreboard} from './scoreboard'
+import {Scoreboard} from './scoreboard'
 
 /**
  * Use this type for representing PlayerID.
@@ -46,10 +47,4 @@ export class Player {
       scoreboard: this.scoreboard.dump()
     }
   }
-}
-
-export interface IPlayerSchema {
-  ID: PlayerID
-  name: string
-  scoreboard: IScoreboardSchema
 }

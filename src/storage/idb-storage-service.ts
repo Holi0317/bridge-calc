@@ -1,7 +1,8 @@
 import {getLogger} from 'aurelia-logging'
 import Dexie from 'dexie'
 import {RecursivePartial} from '../utils'
-import {IGameSchema, ISerialized, ISerializedWithID, StorageService} from './interfaces'
+import {StorageService} from './abstract-storage-service'
+import {ISerialized, ISerializedWithID} from './schema'
 
 const logger = getLogger('IDBStorageService')
 
@@ -31,7 +32,7 @@ class BridgeDatabase extends Dexie {
   }
 }
 
-export class IDBStorageService implements StorageService {
+export class IDBStorageService extends StorageService {
   private db = new BridgeDatabase()
 
   public async addGame(data: ISerialized): Promise<number> {
@@ -50,7 +51,7 @@ export class IDBStorageService implements StorageService {
     return new Map(serializedToMap(result))
   }
 
-  public async updateGame(gameID: number, data: RecursivePartial<IGameSchema>): Promise<boolean> {
+  public async updateGame(gameID: number, data: RecursivePartial<ISerialized>): Promise<boolean> {
     const count = await this.db.game.where('id').equals(gameID).count()
     if (count === 0) {
       return false

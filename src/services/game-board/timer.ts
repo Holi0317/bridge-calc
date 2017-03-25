@@ -1,3 +1,5 @@
+import {ITimerSchema} from '../../storage/schema'
+
 export class Timer {
   public startTime: Date | null = null
   public endTime: Date | null = null
@@ -41,9 +43,4 @@ export class Timer {
     this.endTime = dateOrNull(data.endTime)
 
   }
-}
-
-export interface ITimerSchema {
-  startTime: number | null
-  endTime: number | null
 }

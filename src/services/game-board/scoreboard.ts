@@ -1,4 +1,6 @@
+import {IScoreboardSchema} from '../../storage/schema'
 import {last} from '../../utils'
+
 /**
  * Calculate score of this round from given parameters.
  * Special case: If bid and win are undefined or is null, score would be 0.
@@ -130,10 +132,4 @@ export class Scoreboard {
 
     this.updateTotalScore()
   }
-}
-
-export interface IScoreboardSchema {
-  bid: string | null
-  win: string | null
-  scores: Array<[string, number]>  // result of Array.from(Map<string, number>)
 }

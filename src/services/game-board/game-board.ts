@@ -1,5 +1,6 @@
 import {getLogger} from 'aurelia-logging'
 import {EventEmitter} from 'events'
+import {IGameBoardSchema} from '../../storage/schema'
 import {GameMetaManager} from './game-meta-manager'
 import {GameState} from './game-state'
 import {PlayerManager} from './player-manager'
@@ -55,12 +56,22 @@ export class GameBoardEvents {
  */
 export class GameBoard extends EventEmitter {
   public state: GameState
-  public playerManager = new PlayerManager()
-  public metaManager = new GameMetaManager(this.playerManager)
-  public timer = new Timer()
+  public playerManager: PlayerManager
+  public metaManager: GameMetaManager
+  public timer: Timer
 
   constructor() {
     super()
+    this.reset()
+  }
+
+  /**
+   * Reset all states
+   */
+  public reset() {
+    this.playerManager = new PlayerManager()
+    this.metaManager = new GameMetaManager(this.playerManager)
+    this.timer = new Timer()
   }
 
   /**
@@ -161,6 +172,17 @@ export class GameBoard extends EventEmitter {
     } else {
       logger.warn('[revert] Revert is called when state is not at WIN.')
     }
+  }
+
+  public dump(): IGameBoardSchema {
+    return {
+      state: this.state
+    }
+  }
+
+  public load(data: IGameBoardSchema) {
+    this.reset()
+    this.state = data.state
   }
 
   /**

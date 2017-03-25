@@ -6,8 +6,9 @@ import {
   GameBoardManager, GameBoardManagerEvents,
   ICurrentGameChangedParam
 } from '../services/game-board/game-board-manager'
+import {StorageService} from './abstract-storage-service'
 import {IDBStorageService} from './idb-storage-service'
-import {ISerialized, ISerializedWithID, StorageService} from './interfaces'
+import {ISerialized, ISerializedWithID} from './schema'
 import {Serializer} from './serializer'
 
 const logger = getLogger('StorageManager')

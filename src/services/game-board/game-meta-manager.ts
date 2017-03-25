@@ -1,7 +1,8 @@
 import {getLogger} from 'aurelia-logging'
 import {EventEmitter} from 'events'
+import {IMetaManagerSchema} from '../../storage/schema'
 import {range, toFront} from '../../utils'
-import {GameMeta, IMetaSchema} from './game-meta'
+import {GameMeta} from './game-meta'
 import {PlayerManager, PlayerManagerEvents} from './player-manager'
 
 const logger = getLogger('GameMetaManager')
@@ -146,14 +147,14 @@ export class GameMetaManager extends EventEmitter {
     }
   }
 
-  public dump(): IGameMetaSchema {
+  public dump(): IMetaManagerSchema {
     return {
       currentIndex: this.currentIndex,
       metas: this.getAllMetas().map((meta) => meta.dump())
     }
   }
 
-  public load(data: IGameMetaSchema) {
+  public load(data: IMetaManagerSchema) {
     this.reset()
 
     this.futureGames = data.metas.map((meta) => GameMeta.fromDumped(meta))
@@ -178,9 +179,4 @@ export class GameMetaManager extends EventEmitter {
       // Initialization in process. GameMeta is not initialized yet.
     }
   }
-}
-
-export interface IGameMetaSchema {
-  currentIndex: number
-  metas: IMetaSchema[]
 }
