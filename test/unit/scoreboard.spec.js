@@ -154,7 +154,7 @@ test('load() should load default state', t => {
   t.equal(scoreboard.totalScore, 0, 'Total score should be 0')
 })
 
-test.skip('load() should load sample state', t => {
+test('load() should load sample state', t => {
   t.plan(7)
   const scoreboard = getScoreboard()
   const data = {
