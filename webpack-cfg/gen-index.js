@@ -9,7 +9,8 @@ module.exports = {
       minify: (ENV === 'production') ? {
         removeComments: true,
         collapseWhitespace: true
-      } : undefined
+      } : undefined,
+      baseUrl: '/'
     }),
   ]
 }

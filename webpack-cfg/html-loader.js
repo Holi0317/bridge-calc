@@ -3,6 +3,7 @@ module.exports = {
     rules: [
       {
         test: /\.html$/,
+        exclude: [/index\.html/],
         loader: 'html-loader'
       }
     ]
