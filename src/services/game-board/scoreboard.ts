@@ -1,3 +1,4 @@
+import {last} from '../../utils'
 /**
  * Calculate score of this round from given parameters.
  * Special case: If bid and win are undefined or is null, score would be 0.
@@ -48,7 +49,7 @@ export class Scoreboard {
    * Format should be round name -> score.
    * Use methods of this class for retrieving score unless there is no other ways to get it
    */
-  public scores: Map<string, number>
+  private _scores: Map<string, number>
 
   constructor() {
     this.reset()
@@ -60,7 +61,7 @@ export class Scoreboard {
   public reset() {
     this.bid = null
     this.win = null
-    this.scores = new Map()
+    this._scores = new Map()
     this.prevScore = 0
     this.totalScore = 0
   }
@@ -72,7 +73,7 @@ export class Scoreboard {
    * @returns ?number
    */
   public getScore(round: string): number | null {
-    const score = this.scores.get(round)
+    const score = this._scores.get(round)
     return (score == null) ? null : score
   }
 
@@ -94,7 +95,7 @@ export class Scoreboard {
     this.win = null
 
     const score = calculateScore(bid, win)
-    this.scores.set(round, score)
+    this._scores.set(round, score)
     this.prevScore = score
     this.totalScore += score
   }
@@ -105,14 +106,14 @@ export class Scoreboard {
    */
   public updateTotalScore() {
     let sum = 0
-    this.scores.forEach((value) => sum += value)
+    this._scores.forEach((value) => sum += value)
     this.totalScore = sum
   }
 
   public dump(): IScoreboardSchema {
     return {
       bid: this.bid,
-      scores: Array.from(this.scores),
+      scores: Array.from(this._scores),
       win: this.win
     }
   }
@@ -122,7 +123,10 @@ export class Scoreboard {
 
     this.bid = data.bid
     this.win = data.win
-    this.scores = new Map(data.scores)
+    this._scores = new Map(data.scores)
+
+    const lastRound = last(data.scores)
+    this.prevScore = lastRound ? lastRound[1] : 0
 
     this.updateTotalScore()
   }

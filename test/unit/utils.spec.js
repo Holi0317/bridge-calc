@@ -125,3 +125,23 @@ test('fill should fill up specified properties with value when it is empty strin
 
   t.deepEqual(actual, expected, 'Property should be filled with filled')
 })
+
+test('last should return the last element of an array', t => {
+  t.plan(1)
+
+  const data = [10, 11, 12]
+  const actual = utils.last(data)
+  const expected = 12
+
+  t.equal(actual, expected, 'The last element is expected to return')
+})
+
+test('last should return null for empty array', t => {
+  t.plan(1)
+
+  const data = []
+  const actual = utils.last(data)
+  const expected = null
+
+  t.equal(actual, expected, 'Null should be returned')
+})

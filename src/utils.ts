@@ -89,6 +89,20 @@ export function fill(array: any[], prop: any, value: any) {
 }
 
 /**
+ * Return the last element from an array.
+ * If the array is empty, null will be returned
+ * @param array
+ */
+export function last<T>(array: T[]): T | null {
+  if (array.length === 0) {
+    return null
+  } else {
+    const index = array.length - 1
+    return array[index]
+  }
+}
+
+/**
  * Helper type for recursive partial type.
  * @example
  * interface IMyInterface {
