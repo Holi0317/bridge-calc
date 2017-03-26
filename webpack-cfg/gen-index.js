@@ -4,7 +4,7 @@ const {ENV} = require('./paths')
 module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'index.ejs',
       chunksSortMode: 'dependency',
       minify: (ENV === 'production') ? {
         removeComments: true,

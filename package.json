@@ -29,8 +29,8 @@
     "server": "npm run server:dev",
     "server:dev": "cross-env NODE_ENV=development npm run webpack-dev-server -- --inline --progress --profile --watch",
     "server:prod": "serve -s -p 8080 dist",
-    "webpack": "cross-env ./node_modules/.bin/webpack",
-    "webpack-dev-server": "cross-env ./node_modules/.bin/webpack-dev-server"
+    "webpack": "webpack",
+    "webpack-dev-server": "webpack-dev-server"
   },
   "aurelia": {
     "build": {

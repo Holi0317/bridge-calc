@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2015",
     "module": "es2015",
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictNullChecks": true,

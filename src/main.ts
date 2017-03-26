@@ -19,8 +19,8 @@ export async function configure(aurelia: Aurelia) {
   // Conditionally Load in fetch polyfill
   if (!self.fetch) {
     await System.import('whatwg-fetch')
-    // Idea fails at parsing new import() statement.
-    // await import('whatwg-fetch');
+    // Typescript fails at parsing new import() statement.
+    // await import('whatwg-fetch')
   }
 
   await aurelia.start()

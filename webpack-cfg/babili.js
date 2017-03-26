@@ -1,10 +1,9 @@
 const Babili = require('babili-webpack-plugin')
-const {ENV} = require('./paths')
 
 module.exports = {
-  plugins: ENV === 'production' ? [
+  plugins: [
     new Babili({
       comments: false
     })
-  ] : []
+  ]
 }
