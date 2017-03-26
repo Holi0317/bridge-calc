@@ -59,6 +59,10 @@ export class GameBoard extends EventEmitter {
   public playerManager: PlayerManager
   public metaManager: GameMetaManager
   public timer: Timer
+  /**
+   * The date that this game has started
+   */
+  public startTime: Date
 
   constructor() {
     super()
@@ -73,6 +77,7 @@ export class GameBoard extends EventEmitter {
     this.playerManager = new PlayerManager()
     this.metaManager = new GameMetaManager(this.playerManager)
     this.timer = new Timer()
+    this.startTime = new Date(0)
   }
 
   /**
@@ -85,6 +90,7 @@ export class GameBoard extends EventEmitter {
 
     // Set state
     this.state = GameState.BID
+    this.startTime = new Date()
 
     // Player manager
     this.playerManager.reset()
@@ -176,6 +182,7 @@ export class GameBoard extends EventEmitter {
 
   public dump(): IGameBoardSchema {
     return {
+      startTime: this.startTime.getTime(),
       state: this.state
     }
   }
@@ -183,6 +190,7 @@ export class GameBoard extends EventEmitter {
   public load(data: IGameBoardSchema) {
     this.reset()
     this.state = data.state
+    this.startTime = new Date(data.startTime)
   }
 
   /**

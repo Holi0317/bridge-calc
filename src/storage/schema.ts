@@ -18,6 +18,7 @@ export interface ISerializedWithID extends ISerialized {
 
 export interface IGameBoardSchema {
   state: GameState
+  startTime: number
 }
 
 export interface IPlayerManagerSchema {

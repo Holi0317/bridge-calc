@@ -27,7 +27,7 @@ class BridgeDatabase extends Dexie {
   constructor() {
     super('BridgeDatabase')
     this.version(1).stores({
-      game: 'id++,game.startTime'
+      game: 'id++,gameBoard.startTime'
     })
   }
 }
@@ -44,7 +44,7 @@ export class IDBStorageService extends StorageService {
 
   public async getPrevGames(): Promise<Map<number, ISerialized>> {
     const db = this.db
-    const result = (await db.game.orderBy('game.startTime').toArray()) as ISerializedWithID[]
+    const result = (await db.game.orderBy('gameBoard.startTime').toArray()) as ISerializedWithID[]
     logger.debug('getPrevGames result:', result)
 
     // Create Map. Game ID -> ISerialized

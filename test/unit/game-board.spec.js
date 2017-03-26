@@ -23,6 +23,7 @@ test('reset() should reset all states', t => {
   board.reset()
 
   t.equal(board.state, GameState.NOT_STARTED, 'game state should be NOT_STARTED')
+  t.equal(board.startTime.getTime(), 0, 'Start time should start at 0')
   t.assert(board.playerManager instanceof PlayerManager, 'player manager should be an instance of PlayerManager')
   t.assert(board.metaManager instanceof GameMetaManager, 'meta manager should be an instance of GameMetaManager')
   t.assert(board.timer instanceof Timer, 'timer should be an instance of Timer')
@@ -32,9 +33,11 @@ test('reset() should reset all states', t => {
 test('start() should set state according to parameters', t => {
   const board = getBoard()
   const opts = getStartOpts()
+  const now = new Date().getTime()
   board.start(opts)
 
   t.equal(board.state, GameState.BID, 'Game state should be BID')
+  t.assert((board.startTime.getTime() - now) < 1000, 'Start Time should be set')
   t.equal(board.playerManager.players.length, 2, '2 players should exists')
   t.deepEqual(board.playerManager.players.map(p => p.name), ['John', 'Mary'], '2 players should named John and Mary')
   t.assert(board.timer._startTime !== null, 'Timer should be started')
@@ -208,8 +211,12 @@ test('dump() should dump current state of game board', t => {
   board.start(opts)
 
   const actual = board.dump()
+  // Need to mock out startTime as it varies
+  t.assert(actual.startTime > 0, 'Start time should set on dumped')
+  actual.startTime = 1000
   const expected = {
-    state: GameState.BID
+    state: GameState.BID,
+    startTime: 1000
   }
   t.deepEqual(actual, expected, 'Dumped state should be expected')
   t.end()
@@ -218,10 +225,12 @@ test('dump() should dump current state of game board', t => {
 test('load() should load in state of game board', t => {
   const board = getBoard()
   const dumped = {
-    state: GameState.BID
+    state: GameState.BID,
+    startTime: 1000
   }
   board.load(dumped)
 
   t.equal(board.state, GameState.BID, 'state should be set by load')
+  t.equal(board.startTime.getTime(), 1000, 'startTime should be set by load')
   t.end()
 })
