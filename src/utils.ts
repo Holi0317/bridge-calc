@@ -101,22 +101,3 @@ export function last<T>(array: T[]): T | null {
     return array[index]
   }
 }
-
-/**
- * Helper type for recursive partial type.
- * @example
- * interface IMyInterface {
- *   foo: {
- *     bar: string
- *   }
- * }
- * type partialInterface = RecursivePartial<IMyInterface>
- * // partialInterface would be interface {
- * //   foo?: {
- * //     bar?: string
- * //   }
- * // }
- */
-export type RecursivePartial<T> = {
-  [P in keyof T]?: RecursivePartial<T[P]>;
-}

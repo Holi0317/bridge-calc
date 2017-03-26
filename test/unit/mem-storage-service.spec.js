@@ -128,20 +128,15 @@ test('updateGame() should update memory database base on passed in data', t => {
       scores: []
     }
   }
-  const update = {
-    players: {
-      players: [joe]
-    }
-  }
-  const expected = getData()
-  expected.players.players = [joe]
+  const update = getData()
+  update.players.players = [joe]
 
   storage.addGame(data)
     .then(id => storage.updateGame(id, update))
     .then(res => {
       t.assert(res)
       const actual = storage.db.get(0)
-      t.deepEqual(actual, expected, 'Data should update accordingly')
+      t.deepEqual(actual, update, 'Data should update accordingly')
       t.end()
     })
 })

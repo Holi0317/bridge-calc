@@ -1,6 +1,5 @@
 import {getLogger} from 'aurelia-logging'
 import Dexie from 'dexie'
-import {RecursivePartial} from '../utils'
 import {StorageService} from './abstract-storage-service'
 import {ISerialized, ISerializedWithID} from './schema'
 
@@ -51,7 +50,7 @@ export class IDBStorageService extends StorageService {
     return new Map(serializedToMap(result))
   }
 
-  public async updateGame(gameID: number, data: RecursivePartial<ISerialized>): Promise<boolean> {
+  public async updateGame(gameID: number, data: ISerialized): Promise<boolean> {
     const count = await this.db.game.where('id').equals(gameID).count()
     if (count === 0) {
       return false

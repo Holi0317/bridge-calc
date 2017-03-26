@@ -1,4 +1,3 @@
-import {RecursivePartial} from '../utils'
 import {ISerialized} from './schema'
 
 /**
@@ -22,10 +21,10 @@ export abstract class StorageService {
   /**
    * Update data for saved game.
    * @param gameID - ID of the game desired to update.
-   * @param data - Partial data for update. I.E. Object.assign will be executed on saved data.
+   * @param data - New data to be written into database.
    * @returns false if update fails (No such entry). True otherwise.
    */
-  public abstract updateGame(gameID: number, data: RecursivePartial<ISerialized>): Promise<boolean>
+  public abstract updateGame(gameID: number, data: ISerialized): Promise<boolean>
 
   /**
    * Delete game from saved storage

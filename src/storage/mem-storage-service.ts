@@ -1,6 +1,4 @@
 import {getLogger} from 'aurelia-logging'
-import merge from 'deepmerge'
-import {RecursivePartial} from '../utils'
 import {StorageService} from './abstract-storage-service'
 import {ISerialized} from './schema'
 
@@ -27,15 +25,12 @@ export class MemStorageService extends StorageService {
     return this.db
   }
 
-  public async updateGame(gameID: number, data: RecursivePartial<ISerialized>): Promise<boolean> {
+  public async updateGame(gameID: number, data: ISerialized): Promise<boolean> {
     const oldData = this.db.get(gameID)
     if (oldData == null) {
       return false
     }
-    const newData = merge(oldData, data, {
-      arrayMerge(destinationArray: any, sourceArray: any) { return sourceArray }
-    })
-    this.db.set(gameID, newData)
+    this.db.set(gameID, data)
     return true
   }
 
