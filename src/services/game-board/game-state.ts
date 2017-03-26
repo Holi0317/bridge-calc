@@ -4,6 +4,10 @@
  */
 export enum GameState {
   /**
+   * Shiny new GameBoard that is not initialized
+   */
+  NOT_STARTED = 0,
+  /**
    * bid for stack before each round
    */
   BID = 1,

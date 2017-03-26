@@ -69,6 +69,7 @@ export class GameBoard extends EventEmitter {
    * Reset all states
    */
   public reset() {
+    this.state = GameState.NOT_STARTED
     this.playerManager = new PlayerManager()
     this.metaManager = new GameMetaManager(this.playerManager)
     this.timer = new Timer()
@@ -114,9 +115,8 @@ export class GameBoard extends EventEmitter {
    * WARNING: no type/value checking will be done here.
    */
   public bid() {
-    if (this.metaManager.currentGame == null || !this.state) {
-      logger.warn('[bid] No game is started and bid is called')
-      return
+    if (this.metaManager.currentGame == null || this.state !== GameState.BID) {
+      throw new Error('[bid] No game is started and bid is called')
     }
     this.state = GameState.WIN
     this.emit(GameBoardEvents.StateChanged)
@@ -127,13 +127,13 @@ export class GameBoard extends EventEmitter {
    * WARNING: no type/value checking will be done here.
    */
   public win() {
-    if (this.metaManager.currentGame == null || !this.state) {
-      logger.warn('[win] No game is started and win is called')
-      return
+    if (this.metaManager.currentGame == null || this.state !== GameState.WIN) {
+      throw new Error('[win] No game is started and win is called')
     }
     this.playerManager.calcAllScore(this.metaManager.currentGame.name)
     this._nextRound()
-    if (this.state === GameState.GAME_END) {
+    const state = this.state as GameState // type of this.state here before casting is GameState.WIN
+    if (state === GameState.GAME_END) {
       this.emit(GameBoardEvents.End)
     }
     this.emit(GameBoardEvents.StateChanged)
