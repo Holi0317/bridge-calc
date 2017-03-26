@@ -39,9 +39,9 @@ const config = generateConfig(
   htmlLoader,
   sassLoader,
   fontsImagesLoader,
-  genIndex,
 
   ...(ENV === 'production' || ENV === 'development' ? [
+    genIndex,
     commonChunksOptimize,
     copyFiles
   ] : [
@@ -49,12 +49,11 @@ const config = generateConfig(
   ]),
 
   ...(ENV === 'production' ? [
-    analyzer
+    analyzer,
+    babili
   ]: [
 
-  ]),
-
-  babili
+  ])
 
 )
 
