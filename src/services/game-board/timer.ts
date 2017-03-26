@@ -1,46 +1,32 @@
 import {ITimerSchema} from '../../storage/schema'
 
 export class Timer {
-  public startTime: Date | null = null
-  public endTime: Date | null = null
+  public _startTime: Date | null = null
+  private _timePassed = 0
 
   public startTimer() {
-    this.startTime = new Date()
+    this._startTime = new Date()
   }
 
   public endTimer() {
-    this.endTime = new Date()
+    this._timePassed = this.getTimeUsed()
+    this._startTime = null
   }
 
   public getTimeUsed(): number {
-    if (this.startTime && this.endTime) {
-      return this.endTime.getTime() - this.startTime.getTime()
-    } else if (this.startTime) {
-      const now = new Date()
-      return now.getTime() - this.startTime.getTime()
-    } else {
-      return 0
-    }
+    const now = new Date().getTime()
+    const delta = this._startTime ? now - this._startTime.getTime() : 0
+    return this._timePassed + delta
   }
 
   public dump(): ITimerSchema {
-    function getTimeOrNull(date: Date | null): number | null {
-      return date ? date.getTime() : null
-    }
-
     return {
-      endTime: getTimeOrNull(this.endTime),
-      startTime: getTimeOrNull(this.startTime)
+      timePassed: this.getTimeUsed()
     }
   }
 
   public load(data: ITimerSchema) {
-    function dateOrNull(date: number | null): Date | null {
-      return date ? new Date(date) : null
-    }
-
-    this.startTime = dateOrNull(data.startTime)
-    this.endTime = dateOrNull(data.endTime)
-
+    this._startTime = null
+    this._timePassed = data.timePassed
   }
 }

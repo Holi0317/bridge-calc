@@ -37,7 +37,7 @@ test('start() should set state according to parameters', t => {
   t.equal(board.state, GameState.BID, 'Game state should be BID')
   t.equal(board.playerManager.players.length, 2, '2 players should exists')
   t.deepEqual(board.playerManager.players.map(p => p.name), ['John', 'Mary'], '2 players should named John and Mary')
-  t.assert(board.timer.startTime !== null, 'Timer should be started')
+  t.assert(board.timer._startTime !== null, 'Timer should be started')
   t.assert(board.metaManager.currentGame !== null, 'MetaManager should have a current game')
   t.equal(board.metaManager.currentGame.name, '1', 'The round of name should be 1')
   t.equal(board.metaManager.futureGames.length, 12, 'MetaManager should have 12 games in the future')

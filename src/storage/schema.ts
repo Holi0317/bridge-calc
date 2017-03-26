@@ -51,6 +51,5 @@ export interface IMetaSchema {
 }
 
 export interface ITimerSchema {
-  startTime: number | null
-  endTime: number | null
+  timePassed: number
 }
