@@ -3,9 +3,14 @@ import {GameMetaManager, GameMetaManagerEvents} from '../../src/services/game-bo
 import {PlayerManager} from '../../src/services/game-board/player-manager'
 import {GameMeta} from '../../src/services/game-board/game-meta'
 
-function getManager() {
+function getPlayerManager() {
   const playerManager = new PlayerManager()
   playerManager.addPlayer(['a', 'b', 'c', 'd'])
+  return playerManager
+}
+
+function getManager() {
+  const playerManager = getPlayerManager()
   return new GameMetaManager(playerManager)
 }
 
@@ -275,42 +280,39 @@ test('load of a single meta should work', t => {
   t.end()
 })
 
-test('load for empty game meta manager', t => {
-  const manager = getManager()
+test('fromDumped() for empty game meta manager', t => {
   const dumped = {
     currentIndex: -1,
     metas: []
   }
+  const manager = GameMetaManager.fromDumped(getPlayerManager(), dumped)
 
-  manager.load(dumped)
   t.equal(manager.prevGames.length, 0, 'Previous game array should be empty')
   t.equal(manager.futureGames.length, 0, 'Future game array should be empty')
   t.equal(manager.currentGame, null, 'Current game should be null')
   t.end()
 })
 
-test('load for ended game metas', t => {
-  const manager = getManager()
+test('fromDumped() for ended game metas', t => {
   const dumped = {
     currentIndex: 3,
     metas: [1, 2, 3].map(i => new GameMeta(i)).map(m => m.dump())
   }
 
-  manager.load(dumped)
+  const manager = GameMetaManager.fromDumped(getPlayerManager(), dumped)
   t.equal(manager.prevGames.length, 3, 'Previous game array length should be 3')
   t.equal(manager.futureGames.length, 0, 'Future game array should be empty')
   t.equal(manager.currentGame, null, 'Current game should be null')
   t.end()
 })
 
-test('load for normal situation', t => {
-  const manager = getManager()
+test('fromDumped() for normal situation', t => {
   const dumped = {
     currentIndex: 1,
     metas: [1, 2, 3].map(i => new GameMeta(i)).map(m => m.dump())
   }
 
-  manager.load(dumped)
+  const manager = GameMetaManager.fromDumped(getPlayerManager(), dumped)
   t.equal(manager.prevGames.length, 1, 'Previous game array should have one element')
   t.equal(manager.futureGames.length, 1, 'Future game array should have one element')
   t.equal(manager.currentGame.name, '2', 'Current game should be the 2nd one')

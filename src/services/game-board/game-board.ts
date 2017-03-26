@@ -3,6 +3,7 @@ import {EventEmitter} from 'events'
 import {IGameBoardSchema} from '../../storage/schema'
 import {GameMetaManager} from './game-meta-manager'
 import {GameState} from './game-state'
+import {Player} from './player'
 import {PlayerManager} from './player-manager'
 import {Timer} from './timer'
 
@@ -55,29 +56,24 @@ export class GameBoardEvents {
  * @see {GameBoardEvents}
  */
 export class GameBoard extends EventEmitter {
-  public state: GameState
-  public playerManager: PlayerManager
-  public metaManager: GameMetaManager
-  public timer: Timer
+  public static fromDumped(data: IGameBoardSchema) {
+    const board = new GameBoard()
+    board.state = data.state
+    board.startTime = new Date(data.startTime)
+    return board
+  }
+
+  public state = GameState.NOT_STARTED
+  public playerManager = new PlayerManager()
+  public metaManager = new GameMetaManager(this.playerManager)
+  public timer = new Timer()
   /**
    * The date that this game has started
    */
-  public startTime: Date
+  public startTime = new Date(0)
 
   constructor() {
     super()
-    this.reset()
-  }
-
-  /**
-   * Reset all states
-   */
-  public reset() {
-    this.state = GameState.NOT_STARTED
-    this.playerManager = new PlayerManager()
-    this.metaManager = new GameMetaManager(this.playerManager)
-    this.timer = new Timer()
-    this.startTime = new Date(0)
   }
 
   /**
@@ -88,12 +84,16 @@ export class GameBoard extends EventEmitter {
   public start(opts: IStartOptions) {
     logger.debug('Starting a new game with options:', opts)
 
+    // Reset services
+    this.playerManager = new PlayerManager()
+    this.metaManager = new GameMetaManager(this.playerManager)
+    this.timer = new Timer()
+
     // Set state
     this.state = GameState.BID
     this.startTime = new Date()
 
     // Player manager
-    this.playerManager.reset()
     this.playerManager.addPlayer(opts.players)
 
     // Meta manager
@@ -185,12 +185,6 @@ export class GameBoard extends EventEmitter {
       startTime: this.startTime.getTime(),
       state: this.state
     }
-  }
-
-  public load(data: IGameBoardSchema) {
-    this.reset()
-    this.state = data.state
-    this.startTime = new Date(data.startTime)
   }
 
   /**

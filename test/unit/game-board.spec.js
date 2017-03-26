@@ -18,9 +18,8 @@ function getStartOpts() {
   }
 }
 
-test('reset() should reset all states', t => {
+test('default state of game board', t => {
   const board = getBoard()
-  board.reset()
 
   t.equal(board.state, GameState.NOT_STARTED, 'game state should be NOT_STARTED')
   t.equal(board.startTime.getTime(), 0, 'Start time should start at 0')
@@ -222,13 +221,12 @@ test('dump() should dump current state of game board', t => {
   t.end()
 })
 
-test('load() should load in state of game board', t => {
-  const board = getBoard()
+test('fromDumped() should load in state of game board', t => {
   const dumped = {
     state: GameState.BID,
     startTime: 1000
   }
-  board.load(dumped)
+  const board = GameBoard.fromDumped(dumped)
 
   t.equal(board.state, GameState.BID, 'state should be set by load')
   t.equal(board.startTime.getTime(), 1000, 'startTime should be set by load')

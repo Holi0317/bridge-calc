@@ -5,11 +5,8 @@ function getManager() {
   return new PlayerManager()
 }
 
-test('reset should properly reset player manager states', t => {
+test('default state of player manager', t => {
   const manager = getManager()
-
-  manager.reset()
-
   t.equal(manager.players.length, 0, 'Player array should be empty')
   t.equal(manager.currentPlayerIndex, -1, 'Current player index should start from -1')
   t.equal(manager._playerMap.size, 0, 'Player map should be empty')
@@ -225,13 +222,12 @@ test('dump() should return array of players', t => {
   t.end()
 })
 
-test('load() should work fine on empty data', t => {
-  const manager = getManager()
-
-  manager.load({
+test('fromDumped() should work fine on empty data', t => {
+  const data = {
     players: [],
     currentPlayerIndex: -1
-  })
+  }
+  const manager = PlayerManager.fromDumped(data)
 
   t.equal(manager.players.length, 0, 'Manager should have stored no player')
   t.equal(manager.currentPlayerIndex, -1, 'currentPlayerIndex should be -1')
@@ -239,8 +235,7 @@ test('load() should work fine on empty data', t => {
   t.end()
 })
 
-test('load() should load serialized data properly', t => {
-  const manager = getManager()
+test('fromDumped() should load serialized data properly', t => {
   const players = [{
     ID: 'zero',
     name: 'John',
@@ -263,7 +258,7 @@ test('load() should load serialized data properly', t => {
     players
   }
 
-  manager.load(data)
+  const manager = PlayerManager.fromDumped(data)
 
   const managerPlayers = manager.players
   t.equal(managerPlayers.length, 2, '2 players should be loaded')

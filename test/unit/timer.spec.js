@@ -42,23 +42,21 @@ test('dump() should dump data', t => {
   t.end()
 })
 
-test('load() should load in time passed', t => {
-  const timer = getTimer()
+test('fromDumped() should load in time passed', t => {
   const data = {
     timePassed: 1000
   }
-  timer.load(data)
+  const timer = Timer.fromDumped(data)
 
   t.equal(timer._timePassed, 1000, 'time passed should be the same as the one passed in')
   t.end()
 })
 
 test('getTimeUsed() should consider loaded in time passed data', t => {
-  const timer = getTimer()
   const data = {
     timePassed: 1000
   }
-  timer.load(data)
+  const timer = Timer.fromDumped(data)
   timer.startTimer()
 
   setTimeout(() => {

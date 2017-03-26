@@ -1,4 +1,8 @@
 import {GameBoard} from '../services/game-board/game-board'
+import {GameMetaManager} from '../services/game-board/game-meta-manager'
+import {PlayerManager} from '../services/game-board/player-manager'
+import {Timer} from '../services/game-board/timer'
+import'../services/game-board/timer'
 import {ISerialized} from './schema'
 
 /**
@@ -20,12 +24,11 @@ export class Serializer {
   }
 
   public static load(data: ISerialized): GameBoard {
-    const gameBoard = new GameBoard()
+    const gameBoard = GameBoard.fromDumped(data.gameBoard)
 
-    gameBoard.load(data.gameBoard)
-    gameBoard.playerManager.load(data.players)
-    gameBoard.metaManager.load(data.metas)
-    gameBoard.timer.load(data.timer)
+    gameBoard.playerManager = PlayerManager.fromDumped(data.players)
+    gameBoard.metaManager = GameMetaManager.fromDumped(gameBoard.playerManager, data.metas)
+    gameBoard.timer = Timer.fromDumped(data.timer)
 
     return gameBoard
   }

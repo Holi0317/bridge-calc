@@ -3,6 +3,7 @@ import {EventEmitter} from 'events'
 import {IMetaManagerSchema} from '../../storage/schema'
 import {range, toFront} from '../../utils'
 import {GameMeta} from './game-meta'
+import {Player} from './player'
 import {PlayerManager, PlayerManagerEvents} from './player-manager'
 
 const logger = getLogger('GameMetaManager')
@@ -29,6 +30,21 @@ export class GameMetaManagerEvents {
  * @see {GameMetaManagerEvents}
  */
 export class GameMetaManager extends EventEmitter {
+  public static fromDumped(playerManager: PlayerManager, data: IMetaManagerSchema) {
+    const manager = new GameMetaManager(playerManager)
+
+    manager.futureGames = data.metas.map((meta) => GameMeta.fromDumped(meta))
+
+    if (data.currentIndex !== -1) {
+      manager.prevGames = manager.futureGames.splice(0, data.currentIndex)
+      manager.currentGame = manager.futureGames.shift() || null
+    }
+
+    // If data.currentIndex === -1
+    // NO-OP. Because all metas are still in futureGames
+
+    return manager
+  }
   /**
    * Game metadata for current round
    */
@@ -152,21 +168,6 @@ export class GameMetaManager extends EventEmitter {
       currentIndex: this.currentIndex,
       metas: this.getAllMetas().map((meta) => meta.dump())
     }
-  }
-
-  public load(data: IMetaManagerSchema) {
-    this.reset()
-
-    this.futureGames = data.metas.map((meta) => GameMeta.fromDumped(meta))
-
-    if (data.currentIndex !== -1) {
-      this.prevGames = this.futureGames.splice(0, data.currentIndex)
-      this.currentGame = this.futureGames.shift() || null
-    }
-
-    // If data.currentIndex === -1
-    // NO-OP. Because all metas are still in futureGames
-
   }
 
   private _playerListChanged() {

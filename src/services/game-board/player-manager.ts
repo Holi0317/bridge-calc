@@ -26,30 +26,29 @@ export class PlayerManagerEvents {
  * @see {PlayerManagerEvents}
  */
 export class PlayerManager extends EventEmitter {
+  public static fromDumped(data: IPlayerManagerSchema) {
+    const manager = new PlayerManager()
+    manager.players = data.players.map((d) => Player.fromDumped(d))
+    manager.currentPlayerIndex = data.currentPlayerIndex
+    manager._refreshMap()
+    manager.updateRank()
+    return manager
+  }
   /**
    * Array of players in this manager.
    */
-  public players: Player[]
+  public players: Player[] = []
   /**
    * Used in `next` method
    */
-  public currentPlayerIndex: number
+  public currentPlayerIndex = -1
   /**
    * Used in `getPlayerByID` method
    */
-  private _playerMap: Map<PlayerID, Player>
+  private _playerMap: Map<PlayerID, Player> = new Map()
 
   constructor() {
     super()
-    this.reset()
-  }
-
-  public reset() {
-    this.players = []
-
-    // Starts from -1 so that the first player will be returned when next() is called.
-    this.currentPlayerIndex = -1
-    this._playerMap = new Map()
   }
 
   /**
@@ -139,14 +138,6 @@ export class PlayerManager extends EventEmitter {
       currentPlayerIndex: this.currentPlayerIndex,
       players: this.players.map((player) => player.dump())
     }
-  }
-
-  public load(data: IPlayerManagerSchema) {
-    this.reset()
-    this.players = data.players.map((d) => Player.fromDumped(d))
-    this.currentPlayerIndex = data.currentPlayerIndex
-    this._refreshMap()
-    this.updateRank()
   }
 
   /**

@@ -1,6 +1,13 @@
 import {ITimerSchema} from '../../storage/schema'
 
 export class Timer {
+  public static fromDumped(data: ITimerSchema) {
+    const timer = new Timer()
+    timer._startTime = null
+    timer._timePassed = data.timePassed
+    return timer
+  }
+
   public _startTime: Date | null = null
   private _timePassed = 0
 
@@ -23,10 +30,5 @@ export class Timer {
     return {
       timePassed: this.getTimeUsed()
     }
-  }
-
-  public load(data: ITimerSchema) {
-    this._startTime = null
-    this._timePassed = data.timePassed
   }
 }
