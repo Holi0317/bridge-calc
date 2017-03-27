@@ -12,6 +12,7 @@ const commonChunksOptimize = require('./webpack-cfg/common-chunks-optimize')
 const copyFiles = require('./webpack-cfg/copy-files')
 const babili = require('./webpack-cfg/babili')
 const analyzer = require('./webpack-cfg/analyzer')
+const alias = require('./webpack-cfg/alias')
 
 const {ENV, entry} = require('./webpack-cfg/paths')
 
@@ -32,6 +33,7 @@ const config = generateConfig(
   },
 
   env,
+  alias,
 
   aurelia,
 

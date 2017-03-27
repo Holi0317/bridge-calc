@@ -1,15 +1,11 @@
-import {lazy} from 'aurelia-framework'
+import {autoinject} from 'aurelia-dependency-injection'
 import {getLogger} from 'aurelia-logging'
 import bind from 'autobind-decorator'
-import {GameBoardEvents} from '../services/game-board/game-board'
 import {
   GameBoardManager, GameBoardManagerEvents,
   ICurrentGameChangedParam
 } from '../services/game-board/game-board-manager'
-import {StorageService} from './abstract-storage-service'
-import {IDBStorageService} from './idb-storage-service'
-import {ISerialized, ISerializedWithID} from './schema'
-import {Serializer} from './serializer'
+import {StorageService} from './storage-service'
 
 const logger = getLogger('StorageManager')
 
@@ -17,16 +13,12 @@ const logger = getLogger('StorageManager')
  * Decide and use storage service depending on environment.
  * A high level service for interacting with storage.
  * Simply call subscribe method once and it will save all changes to storage device automatically on change.
+ * @see {StorageManager.subscribe}
  */
+@autoinject
 export class StorageManager {
-  private _storage: StorageService
+  constructor(private _gameBoardManager: GameBoardManager, private _storageService: StorageService) {
 
-  constructor(
-    private _gameBoardManager: GameBoardManager,
-    @lazy(IDBStorageService) _idb: () => IDBStorageService
-  ) {
-    // TODO Implement more storage engine and decide which to use.
-    this._storage = _idb()
   }
 
   /**
@@ -41,42 +33,12 @@ export class StorageManager {
   }
 
   /**
-   * Save current game to storage as a new game.
-   * @returns {Promise<number>}
-   */
-  @bind
-  public async add(): Promise<number|null> {
-    const currentGame = this._gameBoardManager.currentGame
-    if (!currentGame) {
-      logger.warn('[add] No current game active in GameBoardManager! Saving aborted')
-      return null
-    }
-    const serialized = Serializer.dump(currentGame)
-    const id = await this._storage.addGame(serialized)
-    this._gameBoardManager.currentID = id
-    return id
-  }
-
-  /**
-   * List all previous games.
-   * @returns {Promise<ISerializedWithID[]>}
-   */
-  public async getPrevGames(): Promise<Map<number, ISerialized>> {
-    return await this._storage.getPrevGames()
-  }
-
-  /**
    * Update event subscription to GameBoard object.
    * This can be used when a new game has started.
    * @private
    */
   @bind
   private _currentGameChanged(opt: ICurrentGameChangedParam) {
-    const currentGame = this._gameBoardManager.currentGame
-    if (currentGame) {
-      currentGame.on(GameBoardEvents.Start, this.add)
-    } else {
-      // TODO Save all data to DB service on game close
-    }
+    // TODO implement watch magic
   }
 }
