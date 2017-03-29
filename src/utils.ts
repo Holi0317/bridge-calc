@@ -20,11 +20,7 @@ export function genID() {
  * @returns {number[]}
  */
 export function range(start: number, end: number) {
-  const result: number[] = []
-  for (let i = start; i <= end; i++) {
-    result.push(i)
-  }
-  return result
+  return Array.from(Array(end - start + 1)).map((val, index) => index + start)
 }
 
 /**
