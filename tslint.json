@@ -12,6 +12,8 @@
     "no-require-imports": true,
     "max-classes-per-file": [true, 5],
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"],
-    "whitespace": [true, "check-branch", "check-operator", "check-typecast", "check-type", "check-decl", "check-separator"]
+    "whitespace": [true, "check-branch", "check-operator", "check-typecast", "check-type", "check-decl", "check-separator"],
+
+    "object-literal-sort-keys": false
   }
 }

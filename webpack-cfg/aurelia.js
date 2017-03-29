@@ -1,16 +1,13 @@
 const path = require('path')
-const AureliaPlugin = require('aurelia-webpack-plugin')
+const {AureliaPlugin} = require('aurelia-webpack-plugin')
 
 module.exports = {
   resolve: {
-    modules: [path.resolve('src'), 'node_modules']
+    modules: ['src', 'node_modules'].map(x => path.resolve(x))
   },
   plugins: [
     new AureliaPlugin({
-      root: path.resolve(__dirname, '..'),
-      src: path.resolve(__dirname, '../src'),
-      title: 'Bridge calculator',
-      baseUrl: '/'
+
     })
   ]
 }

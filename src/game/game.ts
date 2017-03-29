@@ -1,4 +1,4 @@
-import {autoinject} from 'aurelia-framework'
+import {autoinject, PLATFORM} from 'aurelia-framework'
 import {Router, RouterConfiguration} from 'aurelia-router'
 import {GameBoardManager} from '../services/game-board/game-board-manager'
 
@@ -13,9 +13,25 @@ export class Game {
   public configureRouter(config: RouterConfiguration, router: Router) {
     config.title = ''
     config.map([
-      { route: '', name: 'enter', moduleId: './enter/enter', nav: true, title: 'Input' },
-      { route: '/scoreboard', name: 'scoreboard', moduleId: './scoreboard/scoreboard', nav: true, title: 'Scoreboard' },
-      { route: '/settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings' }
+      {
+        route: '',
+        name: 'enter',
+        moduleId: PLATFORM.moduleName('./enter/enter'),
+        nav: true,
+        title: 'Input'
+      }, {
+        route: '/scoreboard',
+        name: 'scoreboard',
+        moduleId: PLATFORM.moduleName('./scoreboard/scoreboard'),
+        nav: true,
+        title: 'Scoreboard'
+      }, {
+        route: '/settings',
+        name: 'settings',
+        moduleId: PLATFORM.moduleName('./settings/settings'),
+        nav: true,
+        title: 'Settings'
+      }
     ])
 
     this._router = router

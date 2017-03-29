@@ -14,14 +14,14 @@ const babili = require('./webpack-cfg/babili')
 const analyzer = require('./webpack-cfg/analyzer')
 const alias = require('./webpack-cfg/alias')
 
-const {ENV, entry} = require('./webpack-cfg/paths')
+const {ENV} = require('./webpack-cfg/paths')
 
 /**
  * Main Webpack Configuration
  */
 const config = generateConfig(
   {
-    entry,
+    entry: 'aurelia-bootstrapper',
     output: {
       path: path.resolve(__dirname, 'dist')
     },

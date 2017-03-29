@@ -1,4 +1,4 @@
-import {autoinject} from 'aurelia-framework'
+import {autoinject, PLATFORM} from 'aurelia-framework'
 import {getLogger} from 'aurelia-logging'
 import {NavigationInstruction, Router, RouterConfiguration} from 'aurelia-router'
 import {LayoutService} from './services/layout-service'
@@ -20,9 +20,9 @@ export class App {
     config.options.pushState = !location.host.includes('github') // GitHub does not support push state
     config.addPreActivateStep(preActive)
     config.map([
-      { route: '', name: 'menu', moduleId: './menu/menu' },
-      { route: '/entry', name: 'entry', moduleId: './entry/entry', title: 'New Game' },
-      { route: '/game', name: 'game', moduleId: './game/game' }
+      { route: '', name: 'menu', moduleId: PLATFORM.moduleName('./menu/menu')},
+      { route: '/entry', name: 'entry', moduleId: PLATFORM.moduleName('./entry/entry'), title: 'New Game' },
+      { route: '/game', name: 'game', moduleId: PLATFORM.moduleName('./game/game' )}
     ])
 
     this._router = router
