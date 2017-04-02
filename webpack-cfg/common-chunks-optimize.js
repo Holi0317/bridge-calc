@@ -1,16 +1,10 @@
-const webpack = require('webpack')
-const paths = require('./paths')
+// const webpack = require('webpack')
 
-const appChunkName = 'app'
-const firstChunk = 'aurelia-bootstrap'
-
+// Common chunks is disabled because no code-splitting is used now
 module.exports = {
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: [
-        firstChunk,
-        ...Object.keys(paths.entry || {}).filter(entry => entry !== appChunkName && entry !== firstChunk)
-      ].reverse()
-    })
-  ]
+  // plugins: [
+  //   new webpack.optimize.CommonsChunkPlugin({
+  //
+  //   })
+  // ]
 }
