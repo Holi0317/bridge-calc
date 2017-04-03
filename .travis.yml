@@ -31,9 +31,6 @@ script:
  - npm run test -- --single-run
  - npm run build:prod
 
-after_success:
- - cp dist/index.html dist/404.html  # For Firebase. All 404 should serve the index page.
-
 deploy:
  - provider: firebase
    skip_cleanup: true
