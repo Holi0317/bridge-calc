@@ -2,6 +2,7 @@
 @import "animations";
 
 @import "utils";
+@import "flexbox";
 
 @import "views/tile";
 @import "views/name-input";
@@ -9,6 +10,7 @@
 @import "views/collapse";
 @import "views/stack-input";
 @import "views/action-button";
+@import "views/settings.scss";
 
 body {
   margin: 0;

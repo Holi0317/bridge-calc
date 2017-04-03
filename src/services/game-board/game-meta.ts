@@ -39,6 +39,10 @@ export class GameMeta {
    */
   public playerOrder: PlayerID[]
 
+  /**
+   * @param name - If the type is number, the round would be interpreted as a normal round.
+   * Otherwise, it would be an extra round.
+   */
   constructor(name: string | number) {
     this.name = name + ''
     this.cardPerPlayer = (typeof name === 'number') ? name : null

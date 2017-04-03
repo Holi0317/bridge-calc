@@ -40,6 +40,10 @@ export class Player {
     this.rank = 1
   }
 
+  public toString() {
+    return this.name
+  }
+
   public dump(): IPlayerSchema {
     return {
       ID: this.ID,

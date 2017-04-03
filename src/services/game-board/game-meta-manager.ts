@@ -3,7 +3,6 @@ import {EventEmitter} from 'events'
 import {IMetaManagerSchema} from '../../storage/schema'
 import {range, toFront} from '../../utils'
 import {GameMeta} from './game-meta'
-import {Player} from './player'
 import {PlayerManager, PlayerManagerEvents} from './player-manager'
 
 const logger = getLogger('GameMetaManager')
@@ -34,6 +33,7 @@ export class GameMetaManager extends EventEmitter {
     const manager = new GameMetaManager(playerManager)
 
     manager.futureGames = data.metas.map((meta) => GameMeta.fromDumped(meta))
+    manager.extraRoundCount = manager.futureGames.filter((meta) => meta.isExtra).length
 
     if (data.currentIndex !== -1) {
       manager.prevGames = manager.futureGames.splice(0, data.currentIndex)
@@ -58,6 +58,11 @@ export class GameMetaManager extends EventEmitter {
    * NOTE: These metadata object should have null as maker property as they player list may change in the future.
    */
   public futureGames: GameMeta[] = []
+  /**
+   * Number of extra round exists in the game
+   * @type {number}
+   */
+  private extraRoundCount = 0
 
   constructor(private _playerManager: PlayerManager) {
     super()
@@ -130,14 +135,13 @@ export class GameMetaManager extends EventEmitter {
   }
 
   /**
-   * Append a new extra round for future game
-   * @param name - Name of the round.
+   * Append a new extra round for future game.
    * @param cardPerPlayer - Number of cards per player on that round.
    */
-  public addRound(name: string, cardPerPlayer: number): void {
+  public addRound(cardPerPlayer: number): void {
+    const name = (++this.extraRoundCount) + ''
     const meta = new GameMeta(name)
     meta.cardPerPlayer = cardPerPlayer
-    meta.isExtra = true
     this.futureGames.push(meta)
   }
 

@@ -80,7 +80,8 @@ export class Enter {
         return ''
       } else if (meta.isExtra) {
         // Extra round
-        return meta.name
+        const length = gameBoard.metaManager.getAllMetas().length
+        return `Extra round ${meta.name} (Cards: ${meta.cardPerPlayer}) of ${length}`
       } else {
         // Normal game
         const length = gameBoard.metaManager.getAllMetas().length

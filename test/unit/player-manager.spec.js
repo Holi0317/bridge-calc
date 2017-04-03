@@ -1,4 +1,5 @@
 import test from 'tape'
+import {Player} from '../../src/services/game-board/player'
 import {PlayerManager, PlayerManagerEvents} from '../../src/services/game-board/player-manager'
 
 function getManager() {
@@ -43,6 +44,27 @@ test('addPlayer should emit an event', t => {
   })
 
   manager.addPlayer('John')
+})
+
+test('changePlayerList should change player list', t => {
+  const manager = getManager()
+  const newPlayerList = [new Player('John')]
+  manager.changePlayerList(newPlayerList)
+
+  const actual = manager.players
+  t.deepEqual(actual, newPlayerList, 'Player list should be assigned')
+  t.end()
+})
+
+test('changePlayerList should emit event', t => {
+  const manager = getManager()
+  manager.on(PlayerManagerEvents.PlayerListChanged, () => {
+    t.pass('PlayerListChanged event fired')
+    t.end()
+  })
+
+  const player = new Player('John')
+  manager.changePlayerList([player])
 })
 
 test('removePlayer(ID) should remove him from player list', t => {

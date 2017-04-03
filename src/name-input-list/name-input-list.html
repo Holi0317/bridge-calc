@@ -13,10 +13,10 @@
       Add
     </div>
 
-    <button class="mdl-button mdl-js-button mdl-button--icon import-btn" click.delegate="importNames()" id.one-time="_importID">
+    <button class="mdl-button mdl-js-button mdl-button--icon import-btn" click.delegate="importNames()" id.one-time="_importID" if.one-time="showImport">
       <i class="material-icons">file_download</i>
     </button>
-    <div class="mdl-tooltip mdl-tooltip--large" for.one-time="_importID & attr">
+    <div class="mdl-tooltip mdl-tooltip--large" for.one-time="_importID & attr" if.one-time="showImport">
       Import player list
     </div>
   </div>

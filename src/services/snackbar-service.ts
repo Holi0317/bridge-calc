@@ -19,11 +19,17 @@ export class SnackbarService {
    */
   private _snackbar: any | null = null
 
-  public showSnackbar(data: SnackbarData) {
+  /**
+   * Display a anackbar on UI.
+   * See mdl documentation for parameters.
+   * Short hand: If a string is passed in, an normal snackbar will be displayed.
+   * @param data - Data to be displayed
+   */
+  public showSnackbar(data: SnackbarData | string) {
     if (!this._snackbar) {
       this._getSnackbar()
     }
-    this._snackbar.MaterialSnackbar.showSnackbar(data)
+    this._snackbar.MaterialSnackbar.showSnackbar(typeof data === 'string' ? {message: data} : data)
   }
 
   private _getSnackbar() {

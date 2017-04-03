@@ -194,7 +194,7 @@ test('addRound should append a round meta to the end', t => {
   const manager = getManager()
 
   manager.initiateGames(2)
-  manager.addRound('1', 12)
+  manager.addRound(12)
 
   t.equal(manager.futureGames.length, 3, 'A round meta should be appended to the end of futureGames')
   const addedRound = manager.futureGames[2]
@@ -290,6 +290,7 @@ test('fromDumped() for empty game meta manager', t => {
   t.equal(manager.prevGames.length, 0, 'Previous game array should be empty')
   t.equal(manager.futureGames.length, 0, 'Future game array should be empty')
   t.equal(manager.currentGame, null, 'Current game should be null')
+  t.equal(manager.extraRoundCount, 0, 'Number of extra round should be 0')
   t.end()
 })
 
@@ -303,6 +304,7 @@ test('fromDumped() for ended game metas', t => {
   t.equal(manager.prevGames.length, 3, 'Previous game array length should be 3')
   t.equal(manager.futureGames.length, 0, 'Future game array should be empty')
   t.equal(manager.currentGame, null, 'Current game should be null')
+  t.equal(manager.extraRoundCount, 0, 'Number of extra round should be 0')
   t.end()
 })
 
@@ -316,5 +318,17 @@ test('fromDumped() for normal situation', t => {
   t.equal(manager.prevGames.length, 1, 'Previous game array should have one element')
   t.equal(manager.futureGames.length, 1, 'Future game array should have one element')
   t.equal(manager.currentGame.name, '2', 'Current game should be the 2nd one')
+  t.equal(manager.extraRoundCount, 0, 'Number of extra round should be 0')
+  t.end()
+})
+
+test('fromDumped() should fill in extraRoundCount with number of extra round', t => {
+  const dumped = {
+    currentIndex: 1,
+    metas: [1, 2, 3, '1'].map(i => new GameMeta(i)).map(m => m.dump())
+  }
+
+  const manager = GameMetaManager.fromDumped(getPlayerManager(), dumped)
+  t.equal(manager.extraRoundCount, 1, '1 extra round should exists')
   t.end()
 })

@@ -66,6 +66,15 @@ export class PlayerManager extends EventEmitter {
   }
 
   /**
+   * Change player list to parameter and emit an event.
+   * @param players - New player list to be used
+   */
+  public changePlayerList(players: Player[]) {
+    this.players = players
+    this.emit(PlayerManagerEvents.PlayerListChanged)
+  }
+
+  /**
    * Remove a player from manager.
    * @param playerID - Player to be removed
    * @throws ReferenceError - Player ID does not exists.
