@@ -3,7 +3,6 @@ import {EventEmitter} from 'events'
 import {IGameBoardSchema} from '../../storage/schema'
 import {GameMetaManager} from './game-meta-manager'
 import {GameState} from './game-state'
-import {Player} from './player'
 import {PlayerManager} from './player-manager'
 import {Timer} from './timer'
 

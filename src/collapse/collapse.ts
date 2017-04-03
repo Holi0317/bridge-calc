@@ -1,7 +1,4 @@
 import {bindable, bindingMode} from 'aurelia-framework'
-import {getLogger} from 'aurelia-logging'
-
-const logger = getLogger('CollapseComponent')
 
 const openedClass = 'collapse-opened'
 

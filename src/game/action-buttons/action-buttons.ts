@@ -1,7 +1,4 @@
 import {autoinject, bindable} from 'aurelia-framework'
-import {getLogger} from 'aurelia-logging'
-
-const logger = getLogger('ActionButtonComponent')
 
 @autoinject()
 export class ActionButtons {

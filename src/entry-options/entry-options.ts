@@ -1,9 +1,6 @@
 import {autoinject, bindable, bindingMode} from 'aurelia-framework'
-import {getLogger} from 'aurelia-logging'
 import {IStartOptions} from '../services/game-board/game-board'
 import {entryOptionsValidator, IEntryOptionsError} from '../validators/entry-options'
-
-const logger = getLogger('EntryOptionsComponent')
 
 @autoinject()
 export class EntryOptions {
@@ -81,20 +78,20 @@ export class EntryOptions {
     }
   }
 
-  public _cardsChanged(newValue: string, oldValue: string) {
+  public _cardsChanged() {
     this.resetRounds()
     this.sync()
   }
 
-  public _roundsChanged(newValue: string, oldValue: string) {
+  public _roundsChanged() {
     this.sync()
   }
 
-  public _startingRoundChanged(newValue: string, oldValue: string) {
+  public _startingRoundChanged() {
     this.sync()
   }
 
-  public playerLengthChanged(newValue: string, oldValue: string) {
+  public playerLengthChanged() {
     this.resetRounds()
     this.sync()
   }

@@ -1,13 +1,9 @@
 import {autoinject} from 'aurelia-dependency-injection'
-import {getLogger} from 'aurelia-logging'
 import bind from 'autobind-decorator'
 import {
   GameBoardManager, GameBoardManagerEvents,
   ICurrentGameChangedParam
 } from '../services/game-board/game-board-manager'
-import {StorageService} from './storage-service'
-
-const logger = getLogger('StorageManager')
 
 /**
  * Decide and use storage service depending on environment.
@@ -17,7 +13,7 @@ const logger = getLogger('StorageManager')
  */
 @autoinject
 export class StorageManager {
-  constructor(private _gameBoardManager: GameBoardManager, private _storageService: StorageService) {
+  constructor(private _gameBoardManager: GameBoardManager/*, private _storageService: StorageService*/) {
 
   }
 

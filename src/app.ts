@@ -1,9 +1,6 @@
 import {autoinject, PLATFORM} from 'aurelia-framework'
-import {getLogger} from 'aurelia-logging'
 import {NavigationInstruction, Router, RouterConfiguration} from 'aurelia-router'
 import {LayoutService} from './services/layout-service'
-
-const logger = getLogger('app')
 
 @autoinject()
 export class App {

@@ -1,7 +1,4 @@
 import {autoinject, bindable, bindingMode, TaskQueue} from 'aurelia-framework'
-import {getLogger} from 'aurelia-logging'
-
-const logger = getLogger('MdlInputComponent')
 
 @autoinject()
 export class MdlInput {
@@ -18,7 +15,7 @@ export class MdlInput {
 
   }
 
-  public errorChanged(newValue: string, oldValue: string) {
+  public errorChanged(newValue: string) {
     if (!this._inputEl) {
       return
     }
