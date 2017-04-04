@@ -2,16 +2,26 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {DelegateContainer} from 'preact-delegate'
 import {createElement as h} from 'react'
 import {render} from 'react-dom'
+import {Provider} from 'react-redux'
+import {BrowserRouter} from 'react-router-dom'
+import {createStore} from 'redux'
 import {muiTheme} from './mui-theme'
+import {reducer} from './reducer/index'
 
-function App() {
+const store = createStore(reducer)
+
+function Root() {
   return (
-    <DelegateContainer>
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <span>Hello World</span>
-      </MuiThemeProvider>
-    </DelegateContainer>
+    <Provider store={store}>
+      <DelegateContainer>
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <BrowserRouter>
+            <span>Hello World</span>
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </DelegateContainer>
+    </Provider>
   )
 }
 
-render(<App />, document.body)
+render(<Root />, document.body)
