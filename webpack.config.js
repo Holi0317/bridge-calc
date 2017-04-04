@@ -2,7 +2,6 @@ const {generateConfig, stripMetadata} = require('@easy-webpack/core')
 const path = require('path')
 const webpack = require('webpack')
 const env = require('./webpack-cfg/env')
-const aurelia = require('./webpack-cfg/aurelia')
 const typescript = require('./webpack-cfg/typescript')
 const htmlLoader = require('./webpack-cfg/html-loader')
 const sassLoader = require('./webpack-cfg/sass-loader')
@@ -21,7 +20,7 @@ const {ENV} = require('./webpack-cfg/paths')
  */
 const config = generateConfig(
   {
-    entry: 'aurelia-bootstrapper',
+    entry: './src/index',
     output: {
       path: path.resolve(__dirname, 'dist')
     },
@@ -34,8 +33,6 @@ const config = generateConfig(
 
   env,
   alias,
-
-  aurelia,
 
   typescript,
   htmlLoader,
