@@ -9,10 +9,16 @@ import {IState} from './reducer/index'
 
 export interface IAppProps {
   title: string
+  showBack: boolean
 }
 
-function DisconnectedApp({title}: IAppProps) {
-  const backBtn = <IconButton><ArrowBack /></IconButton>
+const emptyBtnStyle = {
+  width: '48px',
+  height: '48px'
+}
+
+function DisconnectedApp({title, showBack}: IAppProps) {
+  const backBtn = showBack ? <IconButton><ArrowBack /></IconButton> : <div style={emptyBtnStyle} />
   const helpBtn = <IconButton><Help /></IconButton>
   return (
     <AppBar
@@ -23,9 +29,10 @@ function DisconnectedApp({title}: IAppProps) {
   )
 }
 
-function stateToProps(state: IState) {
+function stateToProps(state: IState): IAppProps {
   return {
-    title: state.ui.title
+    title: state.ui.title,
+    showBack: state.ui.showBack
   }
 }
 

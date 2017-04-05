@@ -1,11 +1,13 @@
-import {Actions, SET_TITLE} from '../action'
+import {Actions, SET_BACK_DISPLAY, SET_TITLE} from '../action'
 
 export interface IUI {
   title: string
+  showBack: boolean
 }
 
 const defaultState: IUI = {
-  title: 'Bridge calculator'
+  title: 'Bridge calculator',
+  showBack: false
 }
 
 export function ui(state = defaultState, action: Actions): IUI {
@@ -14,6 +16,11 @@ export function ui(state = defaultState, action: Actions): IUI {
     return {
       ...state,
       title: action.payload
+    }
+  case SET_BACK_DISPLAY:
+    return {
+      ...state,
+      showBack: action.payload
     }
   default:
     return state
