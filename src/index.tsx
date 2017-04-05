@@ -8,6 +8,9 @@ import {createStore} from 'redux'
 import {muiTheme} from './mui-theme'
 import {reducer} from './reducer/index'
 
+import '../styles/styles.scss'
+import {App} from './app'
+
 const store = createStore(reducer)
 
 function Root() {
@@ -16,7 +19,7 @@ function Root() {
       <DelegateContainer>
         <MuiThemeProvider muiTheme={muiTheme}>
           <BrowserRouter>
-            <span>Hello World</span>
+            <App />
           </BrowserRouter>
         </MuiThemeProvider>
       </DelegateContainer>

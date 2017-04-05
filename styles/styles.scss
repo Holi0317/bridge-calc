@@ -1,16 +1,6 @@
-@import "mdl";
-@import "animations";
+@import "../node_modules/bootstrap/scss/bootstrap-grid";
 
 @import "utils";
-@import "flexbox";
-
-@import "views/tile";
-@import "views/name-input";
-@import "views/mdl-input";
-@import "views/collapse";
-@import "views/stack-input";
-@import "views/action-button";
-@import "views/settings.scss";
 
 body {
   margin: 0;
