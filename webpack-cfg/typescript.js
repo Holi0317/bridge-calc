@@ -12,7 +12,7 @@ const options = (ENV === 'test') ? {
 
 module.exports = {
   resolve: {
-    extensions: ['.js', '.tsx', '.ts']
+    extensions: ['.js', '.jsx', '.tsx', '.ts']
   },
   module: {
     rules: [{
