@@ -1,12 +1,13 @@
-import TouchRipple from 'material-ui/internal/TouchRipple'
 import {h} from 'preact'
-
+import Ripple from 'react-toolbox/lib/ripple'
 import './tile.scss'
 
 const iconStyle = {
   width: '92px',
   height: '92px'
 }
+
+const RippleWrapper = Ripple()((props) => <div {...props} style={{position: 'relative'}}>{props.children}</div>)
 
 /**
  * A tile represents a block on menu
@@ -16,15 +17,15 @@ const iconStyle = {
  */
 export function Tile(props) {
   const title = props.title
-  const I = props.icon
+  const MyIcon = props.icon
   return (
-    <div className='tile'>
-      <TouchRipple>
+    <div className="tile">
+      <RippleWrapper>
         <div className='icon-container'>
-          <I style={iconStyle} />
+          <MyIcon style={iconStyle} />
         </div>
         <div className='title-container'>{title}</div>
-      </TouchRipple>
+      </RippleWrapper>
     </div>
   )
 }

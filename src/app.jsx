@@ -1,16 +1,10 @@
-import AppBar from 'material-ui/AppBar'
-import IconButton from 'material-ui/IconButton'
-import Help from 'material-ui/svg-icons/action/help'
-import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
+import {AppBar} from 'react-toolbox/lib/app_bar'
+import MdHelp from 'react-icons/lib/md/help'
+import MdArrowBack from 'react-icons/lib/md/arrow-back'
 import {h} from 'preact'
 import {connect} from 'react-redux'
 import {Route} from 'react-router-dom'
 import {Menu} from './menu'
-
-const emptyBtnStyle = {
-  width: '48px',
-  height: '48px'
-}
 
 /**
  * @param title {string} - Title for app bar
@@ -18,14 +12,14 @@ const emptyBtnStyle = {
  * @returns {XML}
  */
 function DisconnectedApp({title, showBack}) {
-  const backBtn = showBack ? <IconButton><ArrowBack /></IconButton> : <div style={emptyBtnStyle} />
-  const helpBtn = <IconButton><Help /></IconButton>
+  const backBtn = showBack ? <MdArrowBack /> : null
+  const helpBtn = <MdHelp />
   return (
     <div>
       <AppBar
         title={title}
-        iconElementLeft={backBtn}
-        iconElementRight={helpBtn}
+        leftIcon={backBtn}
+        rightIcon={helpBtn}
       />
       <Route path='/' component={Menu}/>
     </div>
