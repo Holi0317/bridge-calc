@@ -1,5 +1,5 @@
 import {h} from 'preact'
-import Ripple from 'react-toolbox/lib/ripple'
+import Ripple from 'react-toolbox/components/ripple'
 import style from './tile.css'
 
 const iconStyle = {

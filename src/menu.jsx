@@ -1,9 +1,9 @@
-import ActionBugReport from 'react-icons/lib/md/bug-report'
-import ActionInfo from 'react-icons/lib/md/info'
-import ActionSettings from 'react-icons/lib/md/settings'
-import AvFiberNew from 'react-icons/lib/md/fiber-new'
-import AvPlayArrow from 'react-icons/lib/md/play-arrow'
-import AvSkipPrevious from 'react-icons/lib/md/skip-previous'
+import MdActionBugReport from 'react-icons/md/bug-report'
+import MdActionInfo from 'react-icons/md/info'
+import MdActionSettings from 'react-icons/md/settings'
+import MdAvFiberNew from 'react-icons/md/fiber-new'
+import MdAvPlayArrow from 'react-icons/md/play-arrow'
+import MdAvSkipPrevious from 'react-icons/md/skip-previous'
 import {h} from 'preact'
 import {Tile} from './tile'
 
@@ -12,28 +12,28 @@ export function Menu() {
     <div className='container'>
       <div className='row'>
         <div className='col-12'>
-          <Tile icon={AvPlayArrow} title='Continue' />
+          <Tile icon={MdAvPlayArrow} title='Continue' />
         </div>
       </div>
 
       <div className='row'>
         <div className='col-lg-6 col-md-12'>
-          <Tile icon={AvFiberNew} title='New Game' />
+          <Tile icon={MdAvFiberNew} title='New Game' />
         </div>
         <div className='col-lg-6 col-md-12'>
-          <Tile icon={AvSkipPrevious} title='Previous games' />
+          <Tile icon={MdAvSkipPrevious} title='Previous games' />
         </div>
       </div>
 
       <div className='row'>
         <div className='col-lg-4 col-md-12'>
-          <Tile icon={ActionSettings} title='Settings' />
+          <Tile icon={MdActionSettings} title='Settings' />
         </div>
         <div className='col-lg-4 col-md-12'>
-          <Tile icon={ActionInfo} title='Information' />
+          <Tile icon={MdActionInfo} title='Information' />
         </div>
         <div className='col-lg-4 col-md-12'>
-          <Tile icon={ActionBugReport} title='Support/bug' />
+          <Tile icon={MdActionBugReport} title='Support/bug' />
         </div>
       </div>
 
