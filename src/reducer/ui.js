@@ -1,16 +1,11 @@
-import {Actions, SET_BACK_DISPLAY, SET_TITLE} from '../action'
+import {SET_BACK_DISPLAY, SET_TITLE} from '../action'
 
-export interface IUI {
-  title: string
-  showBack: boolean
-}
-
-const defaultState: IUI = {
+const defaultState = {
   title: 'Bridge calculator',
   showBack: false
 }
 
-export function ui(state = defaultState, action: Actions): IUI {
+export function ui(state = defaultState, action) {
   switch (action.type) {
   case SET_TITLE:
     return {

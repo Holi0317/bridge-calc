@@ -2,6 +2,9 @@
 parserOptions:
   ecmaVersion: 2017
   sourceType: module
+  ecmaFeatures:
+    jsx: true
+    experimentalObjectRestSpread: true
 env:
   browser: true
   node: true
@@ -9,10 +12,16 @@ env:
 
 plugins:
  - tape
+ - react
+
+settings:
+  react:
+    pragma: h
 
 extends:
  - eslint:recommended
  - plugin:tape/recommended
+ - plugin:react/recommended
 
 rules:
   no-template-curly-in-string: warn
@@ -44,3 +53,4 @@ rules:
    - allowTemplateLiterals: false
      avoidEscape: true
   prefer-const: error
+  react/prop-types: off
