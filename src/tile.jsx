@@ -1,6 +1,6 @@
 import {h} from 'preact'
 import Ripple from 'react-toolbox/lib/ripple'
-import './tile.scss'
+import style from './tile.css'
 
 const iconStyle = {
   width: '92px',
@@ -19,12 +19,12 @@ export function Tile(props) {
   const title = props.title
   const MyIcon = props.icon
   return (
-    <div className="tile">
+    <div className={style.tile}>
       <RippleWrapper>
-        <div className='icon-container'>
+        <div className={style['icon-container']}>
           <MyIcon style={iconStyle} />
         </div>
-        <div className='title-container'>{title}</div>
+        <div className={style['title-container']}>{title}</div>
       </RippleWrapper>
     </div>
   )

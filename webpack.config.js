@@ -5,7 +5,6 @@ const env = require('./webpack-cfg/env')
 const babel = require('./webpack-cfg/babel')
 const htmlLoader = require('./webpack-cfg/html-loader')
 const postCssLoader = require('./webpack-cfg/postcss')
-const sassLoader = require('./webpack-cfg/sass-loader')
 const fontsImagesLoader = require('./webpack-cfg/fonts-images-loader')
 const genIndex = require('./webpack-cfg/gen-index')
 const commonChunksOptimize = require('./webpack-cfg/common-chunks-optimize')
@@ -38,7 +37,6 @@ const config = generateConfig(
   babel,
   htmlLoader,
   postCssLoader,
-  sassLoader,
   fontsImagesLoader,
 
   ...(ENV === 'production' || ENV === 'development' ? [

@@ -1,15 +1,18 @@
-// Run `npm run build-splash-css` for compiling this file and output to stdout
-// For any update, inject the compiled css to index.html manually
-// Spinner credit to https://codepen.io/jczimm/pen/vEBpoL
+/*
+Run `npm run build-splash-css` for compiling this file and output to stdout
+For any update, inject the compiled css to index.html manually
+Spinner credit to https://codepen.io/jczimm/pen/vEBpoL
+*/
 
-$green: #008744;
-$blue: #0057e7;
-$red: #d62d20;
-$yellow: #ffa700;
-$white: #eee;
+:root {
+  --green: #008744;
+  --blue: #0057e7;
+  --red: #d62d20;
+  --yellow: #ffa700;
+  --white: #eee;
 
-// scaling... any units
-$width: 100px;
+  --width: 100px;
+}
 
 .splash {
   position: absolute;
@@ -24,10 +27,10 @@ $width: 100px;
   margin: 10% 0 0 0;
   box-sizing: border-box;
 
-  .loader {
+  & .loader {
     position: relative;
     margin: 0 auto;
-    width: $width;
+    width: var(--width);
     &:before {
       content: '';
       display: block;
@@ -35,7 +38,7 @@ $width: 100px;
     }
   }
 
-  .circular {
+  & .circular {
     animation: splash-rotate 2s linear infinite;
     height: 100%;
     transform-origin: center center;
@@ -48,7 +51,7 @@ $width: 100px;
     margin: auto;
   }
 
-  .path {
+  & .path {
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
     animation: splash-dash 1.5s ease-in-out infinite, splash-color 6s ease-in-out infinite;
@@ -80,17 +83,17 @@ $width: 100px;
 @keyframes splash-color {
   100%,
   0% {
-    stroke: $red;
+    stroke: var(--red);
   }
   40% {
-    stroke: $blue;
+    stroke: var(--blue);
   }
   66% {
-    stroke: $green;
+    stroke: var(--green);
   }
   80%,
   90% {
-    stroke: $yellow;
+    stroke: var(--yellow);
   }
 }
 

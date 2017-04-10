@@ -1,0 +1,7 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
+
+@import "utils.css";
+
+body {
+  margin: 0;
+}

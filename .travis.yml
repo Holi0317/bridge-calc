@@ -24,7 +24,6 @@ before_install:
 
 install:
  - yarn
- - npm rebuild node-sass
 
 script:
  - npm run lint

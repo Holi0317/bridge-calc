@@ -4,7 +4,7 @@ import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {createStore} from 'redux'
 import {reducer} from './reducer/index'
-import '../styles/styles.scss'
+import '../styles/styles.css'
 import {App} from './app'
 
 const store = createStore(reducer)

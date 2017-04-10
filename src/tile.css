@@ -11,11 +11,11 @@ div.tile {
   box-sizing: border-box;
   text-align: center;
 
-  .icon-container {
+  & .icon-container {
     margin: 0 auto;
   }
 
-  .title-container {
+  & .title-container {
     display: inline-block;
     padding: 16px 16px;
     font-size: 24px;
