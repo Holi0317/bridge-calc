@@ -1,6 +1,6 @@
 import {DelegateContainer} from 'preact-delegate'
 import {h, render} from 'preact'
-import {Provider} from 'react-redux'
+import {Provider} from 'preact-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {createStore} from 'redux'
 import {reducer} from './reducer/index'

@@ -2,7 +2,7 @@ import {AppBar} from 'react-toolbox/lib/app_bar'
 import MdHelp from 'react-icons/lib/md/help'
 import MdArrowBack from 'react-icons/lib/md/arrow-back'
 import {h} from 'preact'
-import {connect} from 'react-redux'
+import {connect} from 'preact-redux'
 import {Route} from 'react-router-dom'
 import {Menu} from './menu'
 
