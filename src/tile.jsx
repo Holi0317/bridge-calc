@@ -1,27 +1,27 @@
-import {SvgIcon} from 'material-ui'
 import TouchRipple from 'material-ui/internal/TouchRipple'
-import {createElement as h} from 'react'
+import {h} from 'preact'
 
 import './tile.scss'
-
-export interface ITileProps {
-  icon: typeof SvgIcon
-  title: string
-}
 
 const iconStyle = {
   width: '92px',
   height: '92px'
 }
 
-export function Tile(props: ITileProps) {
+/**
+ * A tile represents a block on menu
+ * @param props.title {string} - Title for the tile
+ * @param props.icon {SvgIcon} - Icon for the tile, in SVG JSX format
+ * @returns {XML}
+ */
+export function Tile(props) {
   const title = props.title
-  const Icon = props.icon
+  const I = props.icon
   return (
     <div className='tile'>
       <TouchRipple>
         <div className='icon-container'>
-          <Icon style={iconStyle} />
+          <I style={iconStyle} />
         </div>
         <div className='title-container'>{title}</div>
       </TouchRipple>

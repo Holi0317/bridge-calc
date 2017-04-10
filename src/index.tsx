@@ -1,10 +1,9 @@
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {DelegateContainer} from 'preact-delegate'
-import {h, render} from 'preact'
+import {createElement as h} from 'react'
+import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {createStore} from 'redux'
-import {muiTheme} from './mui-theme'
 import {reducer} from './reducer/index'
 
 import '../styles/styles.scss'
@@ -16,19 +15,14 @@ function Root() {
   return (
     <Provider store={store}>
       <DelegateContainer>
-        <MuiThemeProvider muiTheme={muiTheme}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </MuiThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </DelegateContainer>
     </Provider>
   )
 }
 
-function main() {
-  document.body.innerHTML = ''
-  render(<Root />, document.body)
-}
-
-main()
+render(<Root />, document.body)
+const spinner = document.querySelector('.splash')
+document.body.removeChild(spinner)

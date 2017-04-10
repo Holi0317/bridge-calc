@@ -2,8 +2,9 @@ const {generateConfig, stripMetadata} = require('@easy-webpack/core')
 const path = require('path')
 const webpack = require('webpack')
 const env = require('./webpack-cfg/env')
-const typescript = require('./webpack-cfg/typescript')
+const babel = require('./webpack-cfg/babel')
 const htmlLoader = require('./webpack-cfg/html-loader')
+const postCssLoader = require('./webpack-cfg/postcss')
 const sassLoader = require('./webpack-cfg/sass-loader')
 const fontsImagesLoader = require('./webpack-cfg/fonts-images-loader')
 const genIndex = require('./webpack-cfg/gen-index')
@@ -34,8 +35,9 @@ const config = generateConfig(
   env,
   alias,
 
-  typescript,
+  babel,
   htmlLoader,
+  postCssLoader,
   sassLoader,
   fontsImagesLoader,
 

@@ -4,7 +4,7 @@ import ActionSettings from 'material-ui/svg-icons/action/settings'
 import AvFiberNew from 'material-ui/svg-icons/av/fiber-new'
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow'
 import AvSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
-import {createElement as h} from 'react'
+import {h} from 'preact'
 import {Tile} from './tile'
 
 export function Menu() {

@@ -2,23 +2,22 @@ import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import Help from 'material-ui/svg-icons/action/help'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-import {createElement as h} from 'react'
+import {h} from 'preact'
 import {connect} from 'react-redux'
 import {Route} from 'react-router-dom'
 import {Menu} from './menu'
-import {IState} from './reducer/index'
-
-export interface IAppProps {
-  title: string
-  showBack: boolean
-}
 
 const emptyBtnStyle = {
   width: '48px',
   height: '48px'
 }
 
-function DisconnectedApp({title, showBack}: IAppProps) {
+/**
+ * @param title {string} - Title for app bar
+ * @param showBack {boolean} - Should back button be displayed
+ * @returns {XML}
+ */
+function DisconnectedApp({title, showBack}) {
   const backBtn = showBack ? <IconButton><ArrowBack /></IconButton> : <div style={emptyBtnStyle} />
   const helpBtn = <IconButton><Help /></IconButton>
   return (
@@ -33,9 +32,9 @@ function DisconnectedApp({title, showBack}: IAppProps) {
   )
 }
 
-function stateToProps(state: IState): IAppProps {
+function stateToProps(state) {
   return {
-    title:  state.ui.title,
+    title: state.ui.title,
     showBack: state.ui.showBack
   }
 }
