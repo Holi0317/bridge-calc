@@ -1,19 +1,19 @@
 import {AppBar} from 'react-toolbox/components/app_bar'
 import MdHelp from 'react-icons/md/help'
-import MdArrowBack from 'react-icons/md/arrow-back'
 import {h} from 'preact'
 import {connect} from 'preact-redux'
-import {Route} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
+import MdArrowBack from 'react-icons/md/arrow-back'
 import {Menu} from './menu'
+import {Entry} from './entry'
 
 /**
  * @param title {string} - Title for app bar
- * @param showBack {boolean} - Should back button be displayed
  * @returns {XML}
  */
-function DisconnectedApp({title, showBack}) {
-  const backBtn = showBack ? <MdArrowBack /> : null
+function DisconnectedApp({title, location}) {
   const helpBtn = <MdHelp />
+  const backBtn = location.pathname === '/' ? null : <MdArrowBack />
   return (
     <div>
       <AppBar
@@ -21,16 +21,17 @@ function DisconnectedApp({title, showBack}) {
         leftIcon={backBtn}
         rightIcon={helpBtn}
       />
-      <Route path='/' component={Menu}/>
+      <Route exact path='/' component={Menu}/>
+      <Route path="/entry" component={Entry}/>
     </div>
+
   )
 }
 
 function stateToProps(state) {
   return {
-    title: state.ui.title,
-    showBack: state.ui.showBack
+    title: state.ui.title
   }
 }
 
-export const App = connect(stateToProps)(DisconnectedApp)
+export const App = withRouter(connect(stateToProps)(DisconnectedApp))

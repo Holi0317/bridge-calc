@@ -1,10 +1,10 @@
+import {h} from 'preact'
 import MdActionBugReport from 'react-icons/md/bug-report'
 import MdActionInfo from 'react-icons/md/info'
 import MdActionSettings from 'react-icons/md/settings'
 import MdAvFiberNew from 'react-icons/md/fiber-new'
 import MdAvPlayArrow from 'react-icons/md/play-arrow'
 import MdAvSkipPrevious from 'react-icons/md/skip-previous'
-import {h} from 'preact'
 import {Tile} from './tile'
 
 export function Menu() {
@@ -18,7 +18,7 @@ export function Menu() {
 
       <div className='row'>
         <div className='col-lg-6 col-md-12'>
-          <Tile icon={MdAvFiberNew} title='New Game' />
+          <Tile icon={MdAvFiberNew} title='New Game' to="/entry" />
         </div>
         <div className='col-lg-6 col-md-12'>
           <Tile icon={MdAvSkipPrevious} title='Previous games' />
