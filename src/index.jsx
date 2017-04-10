@@ -24,3 +24,7 @@ function Root() {
 render(<Root />, document.body)
 const spinner = document.querySelector('.splash')
 document.body.removeChild(spinner)
+
+if (process.env.NODE_ENV !== 'production') {
+  require('preact/devtools')
+}
