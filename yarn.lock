@@ -4404,7 +4404,7 @@ pbkdf2@^3.0.3:
   dependencies:
     create-hmac "^1.1.2"
 
-performance-now@^0.2.0:
+performance-now@^0.2.0, performance-now@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
@@ -5167,6 +5167,12 @@ querystringify@0.0.x:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-0.0.4.tgz#0cf7f84f9463ff0ae51c4c4b142d95be37724d9c"
 
+raf@^3.1.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/raf/-/raf-3.3.0.tgz#93845eeffc773f8129039f677f80a36044eee2c3"
+  dependencies:
+    performance-now "~0.2.0"
+
 ramda@^0.23.0:
   version "0.23.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.23.0.tgz#ccd13fff73497a93974e3e86327bfd87bd6e8e2b"
@@ -5210,11 +5216,19 @@ react-addons-css-transition-group@^15.4.2:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
+react-collapse@2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/react-collapse/-/react-collapse-2.3.3.tgz#68c70f1fceeaf375e3599b95710cc51e5dd339a3"
+
 react-css-themr@^1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/react-css-themr/-/react-css-themr-1.7.2.tgz#424701383488f63966677f10a908d40861544ef3"
   dependencies:
     invariant "^2.2.1"
+
+react-height@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-height/-/react-height-2.2.0.tgz#c65de6a7f7245c848f5ec9d3087f0758b90d7a0b"
 
 react-icon-base@2.0.4:
   version "2.0.4"
@@ -5225,6 +5239,13 @@ react-icons@2.2.3:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.3.tgz#3b4847923065ecb09f8ba7f7e422112de0195196"
   dependencies:
     react-icon-base "2.0.4"
+
+react-motion@0.4.7:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.4.7.tgz#f77331ec7920bdb0d0cfc37eb6ffa10571bf42c7"
+  dependencies:
+    performance-now "^0.2.0"
+    raf "^3.1.0"
 
 react-router-dom@4.0.0:
   version "4.0.0"
