@@ -13,6 +13,7 @@ env:
 
 plugins:
  - react
+ - ava
 
 settings:
   react:
@@ -21,6 +22,7 @@ settings:
 extends:
  - eslint:recommended
  - plugin:react/recommended
+ - plugin:ava/recommended
 
 rules:
   no-template-curly-in-string: warn
