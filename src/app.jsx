@@ -8,17 +8,32 @@ import {Menu} from './menu'
 import {Entry} from './entry'
 
 /**
+ * Create a function that will route to specified location.
+ * Think of this as the Link component in react-router. But in function form.
+ * @param history {History} - History object from react-router
+ * @param loc {string} - Path of the desired location
+ * @returns {function()} - Function to redirect to the location above
+ */
+function to(history, loc) {
+  return () => history.push(loc)
+}
+
+/**
  * @param title {string} - Title for app bar
+ * @param location {Location} - Location object injected by react-router
+ * @param history {History} - History object injected by react-router
  * @returns {XML}
  */
-function DisconnectedApp({title, location}) {
+function DisconnectedApp({title, location, history}) {
   const helpBtn = <MdHelp />
   const backBtn = location.pathname === '/' ? null : <MdArrowBack />
+  const backFn = to(history, '/')
   return (
     <div>
       <AppBar
         title={title}
         leftIcon={backBtn}
+        onLeftIconClick={backFn}
         rightIcon={helpBtn}
       />
       <Route exact path='/' component={Menu}/>
