@@ -1,16 +1,15 @@
-import {SET_BACK_DISPLAY} from '../action'
+import {SET_TITLE} from '../action'
 
 const defaultState = {
-  title: 'Bridge calculator',
-  showBack: false
+  title: 'Bridge calculator'
 }
 
 export function ui(state = defaultState, action) {
   switch (action.type) {
-  case SET_BACK_DISPLAY:
+  case SET_TITLE:
     return {
       ...state,
-      showBack: action.payload
+      title: action.payload
     }
   default:
     return state

@@ -1,7 +1,7 @@
 /**
- * Set if back button on app bar should be displayed or not
+ * Set title for app bar
  * Parameter:
- *  - (payload: boolean) If true, the back button will be displayed
+ *  - (payload: string) The title to be set
  * @type {string}
  */
-export const SET_BACK_DISPLAY = 'SET_BACK_DISPLAY'
+export const SET_TITLE = 'SET_TITLE'
