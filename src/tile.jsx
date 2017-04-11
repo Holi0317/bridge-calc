@@ -25,10 +25,10 @@ export function Tile(props) {
     <Link to={to} className={style.link}>
       <div className={style.tile}>
         <RippleWrapper>
-          <div className={style['icon-container']}>
+          <div className={style.iconContainer}>
             <MyIcon style={iconStyle} />
           </div>
-          <div className={style['title-container']}>{title}</div>
+          <div className={style.titleContainer}>{title}</div>
         </RippleWrapper>
       </div>
     </Link>
