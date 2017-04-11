@@ -7,10 +7,9 @@ const defaultState = {
 export function ui(state = defaultState, action) {
   switch (action.type) {
   case SET_TITLE:
-    return {
-      ...state,
+    return Object.assign({}, state, {
       title: action.payload
-    }
+    })
   default:
     return state
   }

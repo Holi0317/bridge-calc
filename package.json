@@ -32,9 +32,6 @@
     "webpack-dev-server": "webpack-dev-server"
   },
   "ava": {
-    "files": [
-      "test/utils.spec.js"
-    ],
     "failFast": true,
     "require": "babel-register",
     "babel": "inherit"
