@@ -5,7 +5,7 @@ module.exports = {
   module: {
     rules: [{
       test: /\.jsx?$/,
-      exclude: /node_modules(?!\/react-(icons|toolbox)\/)/,
+      exclude: /node_modules(?!\/react-.+\/)/,
       use: {
         loader: 'babel-loader',
         options: {
