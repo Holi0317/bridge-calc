@@ -1,5 +1,5 @@
-import test from 'tape'
-import * as utils from '../../src/utils'
+import test from 'ava'
+import * as utils from '../src/utils'
 
 /**
  * Simple object that will set its 'prop' property to given value from constructor
@@ -15,8 +15,7 @@ test('genID generate unique ID', t => {
   const first = utils.genID()
   const second = utils.genID()
 
-  t.notEqual(first, second, 'Two generated ID should not be equal')
-  t.end()
+  t.not(first, second, 'Two generated ID should not be equal')
 })
 
 test('range(1,5) should generates [1,2,3,4,5]', t => {
@@ -24,7 +23,6 @@ test('range(1,5) should generates [1,2,3,4,5]', t => {
   const expected = [1, 2, 3, 4, 5]
 
   t.deepEqual(actual, expected, 'Generated array should equal to [1,2,3,4,5]')
-  t.end()
 })
 
 test('range(5,10) should generates [5,6,7,8,9,10]', t => {
@@ -32,7 +30,6 @@ test('range(5,10) should generates [5,6,7,8,9,10]', t => {
   const expected = [5, 6, 7, 8, 9, 10]
 
   t.deepEqual(actual, expected, 'Generated array should equal to [5,6,7,8,9,10]')
-  t.end()
 })
 
 test('nth should work when given index is below array.length', t => {
@@ -40,8 +37,7 @@ test('nth should work when given index is below array.length', t => {
   const actual = utils.nth(array, 1)
   const expected = 'b'
 
-  t.equal(actual, expected, 'Return element should be the second element in the array')
-  t.end()
+  t.is(actual, expected, 'Return element should be the second element in the array')
 })
 
 test('nth should work when given index is larger than array.length', t => {
@@ -49,8 +45,7 @@ test('nth should work when given index is larger than array.length', t => {
   const actual = utils.nth(array, 10)
   const expected = 'b'
 
-  t.equal(actual, expected, 'Return element should be the second element in the array')
-  t.end()
+  t.is(actual, expected, 'Return element should be the second element in the array')
 })
 
 test('toFront should do no-op when frontIndex is 0', t => {
@@ -59,7 +54,6 @@ test('toFront should do no-op when frontIndex is 0', t => {
   const expected = ['a', 'b', 'c']
 
   t.deepEqual(actual, expected, 'Clone of array should be returned')
-  t.end()
 })
 
 test('toFront should sort array according to frontIndex', t => {
@@ -68,14 +62,12 @@ test('toFront should sort array according to frontIndex', t => {
   const expected = ['c', 'd', 'e', 'a', 'b']
 
   t.deepEqual(actual, expected, 'The first element should be the one specified by frontIndex')
-  t.end()
 })
 
 test('toFront should throw error if frontIndex is out of boundary', t => {
   const array = ['a', 'b', 'c']
 
   t.throws(() => utils.toFront(array, 3), 'frontIndex is out of boundary', 'Error should be thrown when frontIndex is out of boundary')
-  t.end()
 })
 
 test('fill should do nothing if all elements in the array is defined', t => {
@@ -84,7 +76,6 @@ test('fill should do nothing if all elements in the array is defined', t => {
   const expected = ['a', 'b', 'c'].map(el => new SimpleObject(el))
 
   t.deepEqual(actual, expected, 'No mutation should be done on objects in the array')
-  t.end()
 })
 
 test('fill should fill up specified properties with value when it is null', t => {
@@ -93,7 +84,6 @@ test('fill should fill up specified properties with value when it is null', t =>
   const expected = ['a', 'b', 'filled'].map(el => new SimpleObject(el))
 
   t.deepEqual(actual, expected, 'Property should be filled with filled')
-  t.end()
 })
 
 test('fill should fill up specified properties with value when it is undefined', t => {
@@ -102,7 +92,6 @@ test('fill should fill up specified properties with value when it is undefined',
   const expected = ['a', 'b', 'filled'].map(el => new SimpleObject(el))
 
   t.deepEqual(actual, expected, 'Property should be filled with filled')
-  t.end()
 })
 
 test('fill should fill up specified properties with value when it is empty string', t => {
@@ -111,7 +100,6 @@ test('fill should fill up specified properties with value when it is empty strin
   const expected = ['a', 'b', 'filled'].map(el => new SimpleObject(el))
 
   t.deepEqual(actual, expected, 'Property should be filled with filled')
-  t.end()
 })
 
 test('last should return the last element of an array', t => {
@@ -119,8 +107,7 @@ test('last should return the last element of an array', t => {
   const actual = utils.last(data)
   const expected = 12
 
-  t.equal(actual, expected, 'The last element is expected to return')
-  t.end()
+  t.is(actual, expected, 'The last element is expected to return')
 })
 
 test('last should return null for empty array', t => {
@@ -128,6 +115,5 @@ test('last should return null for empty array', t => {
   const actual = utils.last(data)
   const expected = null
 
-  t.equal(actual, expected, 'Null should be returned')
-  t.end()
+  t.is(actual, expected, 'Null should be returned')
 })
