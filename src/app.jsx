@@ -45,7 +45,7 @@ function DisconnectedApp({title, location, history}) {
 
 function stateToProps(state) {
   return {
-    title: state.ui.title
+    title: state.ui.appBar.title
   }
 }
 

@@ -1,15 +1,16 @@
-import {SET_TITLE} from '../action'
+import {SET_TITLE} from '../../action'
 
 const defaultState = {
   title: 'Bridge calculator'
 }
 
-export function ui(state = defaultState, action) {
+export function appBar(state = defaultState, action) {
   switch (action.type) {
   case SET_TITLE:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       title: action.payload
-    })
+    }
   default:
     return state
   }

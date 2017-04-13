@@ -1,12 +1,15 @@
 import test from 'ava'
 import {SET_TITLE} from '../src/action'
-import {ui as reducer} from '../src/reducer/ui'
+import {appBar as reducer} from '../src/reducer/ui/app-bar'
 
 test('Default state', t => {
   const expected = {
     title: 'Bridge calculator'
   }
-  const actual = reducer(undefined, '')
+  const action = {
+    type: undefined
+  }
+  const actual = reducer(undefined, action)
   t.deepEqual(actual, expected, 'Default state tree should equal')
 })
 
