@@ -2,12 +2,22 @@ import {DelegateContainer} from 'preact-delegate'
 import {h, render} from 'preact'
 import {Provider} from 'preact-redux'
 import {BrowserRouter} from 'react-router-dom'
-import {createStore} from 'redux'
+import {createStore, compose, applyMiddleware} from 'redux'
 import {reducer} from './reducer/index'
 import '../styles/styles.css'
 import {App} from './app'
 
-const store = createStore(reducer)
+const middlewares = []
+
+if (process.env.NODE_ENV === 'development') {
+  const { createLogger } = require('redux-logger')
+  const logger = createLogger({
+    collapsed: true
+  })
+  middlewares.push(logger)
+}
+
+const store = compose(applyMiddleware(...middlewares))(createStore)(reducer)
 
 function Root() {
   return (
