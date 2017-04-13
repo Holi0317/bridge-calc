@@ -6,7 +6,7 @@ import MdAdd from 'react-icons/md/add'
 import MdFileDownload from 'react-icons/md/file-download'
 import Collapse from 'react-collapse'
 import {NameInputList} from './name-input-list'
-import {UI_ENTRY_OPTION_OPEN_TOGGLE, UI_ENTRY_ROUNDS_SET, UI_ENTRY_CARDS_SET, UI_ENTRY_PLAYER_NAMES_SET, UI_ENTRY_STARTING_ROUND_SET, UI_ENTRY_ADD_PLAYER} from './action'
+import {UI_ENTRY_OPTION_OPEN_TOGGLE, UI_ENTRY_PLAYER_NAMES_SET, UI_ENTRY_ADD_PLAYER} from './action'
 import {genRandomNames, randomName} from './example-names'
 import style from './entry.css'
 
