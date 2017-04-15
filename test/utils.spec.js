@@ -117,3 +117,15 @@ test('last should return null for empty array', t => {
 
   t.is(actual, expected, 'Null should be returned')
 })
+
+test('isOK should return true when empty object is passed in', t => {
+  const actual = utils.isOk({})
+  const expected = true
+  t.is(actual, expected, 'Empty object should be consider as no error')
+})
+
+test('isOk should fail if non-empty plain object is passed in', t => {
+  const actual = utils.isOk({foo: 'Not filled in'})
+  const expected = false
+  t.is(actual, expected, 'Object with any key should be considered as error')
+})

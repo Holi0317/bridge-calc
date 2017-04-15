@@ -7,7 +7,10 @@ import MdFileDownload from 'react-icons/md/file-download'
 import Collapse from 'react-collapse'
 import {NameInputList} from './name-input-list'
 import {UI_ENTRY_OPTION_OPEN_TOGGLE, UI_ENTRY_PLAYER_NAMES_SET, UI_ENTRY_ADD_PLAYER} from './action'
+import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from './example-names'
+import {entryOptionsValidator} from './validators/entry-options'
+import {isOk} from './utils'
 import style from './entry.css'
 
 const IconButtonTooltip = Tooltip(IconButton)
@@ -39,18 +42,18 @@ class DisconnectedEntry extends Component {
 
         <Button onMouseUp={props.toggleCollapse} label="Options" raised className={style.optionsBtn} />
         <Collapse isOpened={props.optionsOpened}>
-          Entry-options
+          <EntryOptions />
         </Collapse>
 
-        <Button label="Start" raised accent className={style.startBtn} />
+        <Button label="Start" raised accent className={style.startBtn} disabled={!props.valid} />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  ...state.ui.entry
-  // TODO Compute properties. Like error
+  ...state.ui.entry,
+  valid: isOk(entryOptionsValidator(state.ui.entry))
 })
 
 function mapDispatchToProps(dispatch) {

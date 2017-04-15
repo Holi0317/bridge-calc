@@ -97,3 +97,13 @@ export function last(array) {
     return array[index]
   }
 }
+
+/**
+ * Test if there is error in the error object.
+ * If no error, true will be returned. Vice versa for error object with error.
+ * Meant to be used with validator.
+ * @param error {Object} - Error object to be tested
+ */
+export function isOk(error) {
+  return JSON.stringify(error) === '{}'
+}
