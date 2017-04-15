@@ -35,6 +35,12 @@ function validateStartingRound(opts) {
     : {}
 }
 
+function validatePlayerNames(opts) {
+  return opts.playerNames.length < 2
+    ? {playerNames: 'At least 2 players is required for a game'}
+    : {}
+}
+
 /**
  * Validate entry options.
  * If options are valid, an empty object will be returned.
@@ -55,7 +61,8 @@ export function entryOptionsValidator(opts) {
     return {
       ...validateCards(opts),
       ...validateRounds(opts),
-      ...validateStartingRound(opts)
+      ...validateStartingRound(opts),
+      ...validatePlayerNames(opts)
     }
   }
 }

@@ -176,3 +176,27 @@ test('validator should fail when starting round is out of bound', t => {
   }
   t.deepEqual(actual, expected, 'startingRound should include an error message')
 })
+
+test('validator should fail when there is no player', t => {
+  const options = {
+    ...defaultOptions,
+    playerNames: []
+  }
+  const actual = validator(options)
+  const expected = {
+    playerNames: 'At least 2 players is required for a game'
+  }
+  t.deepEqual(actual, expected, 'playerNames should include an error message')
+})
+
+test('validator should fail when there is only 1 player', t => {
+  const options = {
+    ...defaultOptions,
+    playerNames: ['DPGJW']
+  }
+  const actual = validator(options)
+  const expected = {
+    playerNames: 'At least 2 players is required for a game'
+  }
+  t.deepEqual(actual, expected, 'playerNames should include an error message')
+})
