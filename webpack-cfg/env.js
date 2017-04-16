@@ -27,7 +27,7 @@ const productionEnv = {
       'process.env': {
         'ENV': JSON.stringify(ENV),
         'NODE_ENV': JSON.stringify(ENV),
-        'HMR': false,
+        'HMR': false
       }
     })
   ]

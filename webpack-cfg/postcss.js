@@ -27,8 +27,8 @@ function getRule(enableModules) {
 module.exports = {
   module: {
     rules: [
-      Object.assign({}, getRule(true), { exclude: globalStyles }),
-      Object.assign({}, getRule(false), { include: globalStyles }),
+      Object.assign({}, getRule(true), {exclude: globalStyles}),
+      Object.assign({}, getRule(false), {include: globalStyles})
     ]
   },
   plugins: [
