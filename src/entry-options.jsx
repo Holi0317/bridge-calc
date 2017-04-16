@@ -7,22 +7,22 @@ import {entryOptionsValidator, isInteger} from './validators/entry-options'
 function DisconnectedEntryOptions(props) {
   return (
     <div>
-      <Input label="Number of cards" type="number"
+      <Input label="Number of cards" type="number" autocomplete="off"
              value={props.cards} error={props.error.cards}
              onChange={props.disp(UI_ENTRY_CARDS_SET, props.cards)} />
 
-      <Input label="Number of rounds" type="number"
+      <Input label="Number of rounds" type="number" autocomplete="off"
              value={props.rounds} error={props.error.rounds}
              onChange={props.disp(UI_ENTRY_ROUNDS_SET, props.rounds)} />
 
-      <Input label="Starting round" type="number"
+      <Input label="Starting round" type="number" autocomplete="off"
              value={props.startingRound} error={props.error.startingRound}
              onChange={props.disp(UI_ENTRY_STARTING_ROUND_SET, props.startingRound)} />
     </div>
   )
 }
 
-const stateHelper = num => num === 0 ? '' : num
+const stateHelper = num => num === 0 ? '' : num + ''
 
 function mapStateToProps(state) {
   const entry = state.ui.entry
@@ -39,9 +39,10 @@ function mapDispatchToProps(dispatch) {
     disp(action, oldValue) {
       return value => {
         // If old value is invalid, allow user to change value for correction
-        if (isInteger(value) || !isInteger(oldValue)) {
-          return dispatch({type: action, payload: +value})
-        }
+        const payload = value !== '' && (isInteger(value) || !isInteger(oldValue))
+          ? +value
+          : +oldValue
+        dispatch({type: action, payload})
       }
     }
   }
