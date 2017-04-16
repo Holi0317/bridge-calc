@@ -1,4 +1,4 @@
-import {UI_ENTRY_OPTION_OPEN_TOGGLE, UI_ENTRY_ROUNDS_SET, UI_ENTRY_CARDS_SET, UI_ENTRY_PLAYER_NAMES_SET, UI_ENTRY_STARTING_ROUND_SET, UI_ENTRY_ADD_PLAYER} from '../../action'
+import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../../actions/ui/entry'
 
 const defaultState = {
   cards: 52,
@@ -9,7 +9,7 @@ const defaultState = {
 }
 
 /**
- * Action handler for UI_ENTRY_PLAYER_NAMES_SET.
+ * Action handler for PLAYER_NAMES_SET.
  * Because it is fairly complex, this reducer is moved into a separate function.
  * (I don't want to look at this code with 8 space before each line ._.).
  * See test/entry-reducer.spec.js for expected result on this.
@@ -47,33 +47,33 @@ function playerNameAction(state, playerNames) {
 
 export function entry(state = defaultState, action) {
   switch (action.type) {
-  case UI_ENTRY_OPTION_OPEN_TOGGLE:
+  case OPTION_OPEN_TOGGLE:
     return {
       ...state,
       optionsOpened: !state.optionsOpened
     }
-  case UI_ENTRY_ROUNDS_SET:
+  case ROUNDS_SET:
     return {
       ...state,
       rounds: action.payload
     }
-  case UI_ENTRY_CARDS_SET:
+  case CARDS_SET:
     return {
       ...state,
       cards: action.payload,
       rounds: Math.floor(action.payload / state.playerNames.length)
     }
-  case UI_ENTRY_STARTING_ROUND_SET:
+  case STARTING_ROUND_SET:
     return {
       ...state,
       startingRound: action.payload
     }
-  case UI_ENTRY_ADD_PLAYER:
+  case ADD_PLAYER:
     return {
       ...state,
       playerNames: [...state.playerNames, action.payload]
     }
-  case UI_ENTRY_PLAYER_NAMES_SET:
+  case PLAYER_NAMES_SET:
     return playerNameAction(state, action.payload)
   default:
     return state

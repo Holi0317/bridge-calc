@@ -1,5 +1,5 @@
 import test from 'ava'
-import {UI_ENTRY_OPTION_OPEN_TOGGLE, UI_ENTRY_ROUNDS_SET, UI_ENTRY_CARDS_SET, UI_ENTRY_PLAYER_NAMES_SET, UI_ENTRY_STARTING_ROUND_SET, UI_ENTRY_ADD_PLAYER} from '../src/action'
+import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../src/actions/ui/entry'
 import {entry as reducer} from '../src/reducer/ui/entry'
 
 const defaultState = {
@@ -31,7 +31,7 @@ test('Toggle option opened should flip false', t => {
     optionsOpened: true
   }
   const action = {
-    type: UI_ENTRY_OPTION_OPEN_TOGGLE
+    type: OPTION_OPEN_TOGGLE
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'optionsOpened property should flip')
@@ -47,7 +47,7 @@ test('Toggle option opened should flip true', t => {
     optionsOpened: false
   }
   const action = {
-    type: UI_ENTRY_OPTION_OPEN_TOGGLE
+    type: OPTION_OPEN_TOGGLE
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'optionsOpened property should flip')
@@ -59,7 +59,7 @@ test('Rounds should set when its action dispatched', t => {
     rounds: 5
   }
   const action = {
-    type: UI_ENTRY_ROUNDS_SET,
+    type: ROUNDS_SET,
     payload: 5
   }
   const actual = reducer(undefined, action)
@@ -73,7 +73,7 @@ test('Number of cards should re-compute whenever rounds property when it is upda
     rounds: 7
   }
   const action = {
-    type: UI_ENTRY_CARDS_SET,
+    type: CARDS_SET,
     payload: 30
   }
   const actual = reducer(undefined, action)
@@ -86,7 +86,7 @@ test('Starting round should set when its action dispatched', t => {
     startingRound: 13
   }
   const action = {
-    type: UI_ENTRY_STARTING_ROUND_SET,
+    type: STARTING_ROUND_SET,
     payload: 13
   }
   const actual = reducer(undefined, action)
@@ -99,7 +99,7 @@ test('Add player should append the new name to the last', t => {
     playerNames: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW']
   }
   const action = {
-    type: UI_ENTRY_ADD_PLAYER,
+    type: ADD_PLAYER,
     payload: 'DPGJW'
   }
   const actual = reducer(undefined, action)
@@ -112,7 +112,7 @@ test('Rounds should not re-compute on changing player names', t => {
     playerNames: ['John', 'Joe', 'Henry', 'Mary']
   }
   const action = {
-    type: UI_ENTRY_PLAYER_NAMES_SET,
+    type: PLAYER_NAMES_SET,
     payload: ['John', 'Joe', 'Henry', 'Mary']
   }
   const actual = reducer(undefined, action)
@@ -130,7 +130,7 @@ test('Rounds should not re-compute on adding player when rounds < maxAvailableRo
     rounds: 8
   }
   const action = {
-    type: UI_ENTRY_PLAYER_NAMES_SET,
+    type: PLAYER_NAMES_SET,
     payload: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW']
   }
   const actual = reducer(state, action)
@@ -144,7 +144,7 @@ test('Rounds should re-compute on adding player when rounds > maxAvailableRounds
     rounds: 10
   }
   const action = {
-    type: UI_ENTRY_PLAYER_NAMES_SET,
+    type: PLAYER_NAMES_SET,
     payload: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW']
   }
   const actual = reducer(undefined, action)
@@ -158,7 +158,7 @@ test('Rounds should re-compute on removing player when rounds === maxPossibleRou
     rounds: 17
   }
   const action = {
-    type: UI_ENTRY_PLAYER_NAMES_SET,
+    type: PLAYER_NAMES_SET,
     payload: ['John', 'Mary', 'Henry']
   }
   const actual = reducer(undefined, action)
@@ -176,7 +176,7 @@ test('Rounds should not re-compute on removing player when rounds < maxPossibleR
     rounds: 10
   }
   const action = {
-    type: UI_ENTRY_PLAYER_NAMES_SET,
+    type: PLAYER_NAMES_SET,
     payload: ['John', 'Mary', 'Henry']
   }
   const actual = reducer(state, action)

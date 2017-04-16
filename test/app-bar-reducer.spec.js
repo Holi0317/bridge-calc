@@ -1,5 +1,5 @@
 import test from 'ava'
-import {SET_TITLE} from '../src/action'
+import {SET_TITLE} from '../src/actions/ui/app-bar'
 import {appBar as reducer} from '../src/reducer/ui/app-bar'
 
 test('Default state', t => {

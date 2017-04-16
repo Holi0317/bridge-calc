@@ -1,7 +1,7 @@
 import {h} from 'preact'
 import {connect} from 'preact-redux'
 import Input from 'react-toolbox/components/input'
-import {UI_ENTRY_ROUNDS_SET, UI_ENTRY_CARDS_SET, UI_ENTRY_STARTING_ROUND_SET} from './action'
+import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from './actions/ui/entry'
 import {entryOptionsValidator, isInteger} from './validators/entry-options'
 
 function DisconnectedEntryOptions(props) {
@@ -9,15 +9,15 @@ function DisconnectedEntryOptions(props) {
     <div>
       <Input label="Number of cards" type="number" autocomplete="off"
              value={props.cards} error={props.error.cards}
-             onChange={props.disp(UI_ENTRY_CARDS_SET, props.cards)} />
+             onChange={props.disp(CARDS_SET, props.cards)} />
 
       <Input label="Number of rounds" type="number" autocomplete="off"
              value={props.rounds} error={props.error.rounds}
-             onChange={props.disp(UI_ENTRY_ROUNDS_SET, props.rounds)} />
+             onChange={props.disp(ROUNDS_SET, props.rounds)} />
 
       <Input label="Starting round" type="number" autocomplete="off"
              value={props.startingRound} error={props.error.startingRound}
-             onChange={props.disp(UI_ENTRY_STARTING_ROUND_SET, props.startingRound)} />
+             onChange={props.disp(STARTING_ROUND_SET, props.startingRound)} />
     </div>
   )
 }

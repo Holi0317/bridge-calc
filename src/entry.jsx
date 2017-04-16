@@ -6,7 +6,7 @@ import MdAdd from 'react-icons/md/add'
 import MdFileDownload from 'react-icons/md/file-download'
 import Collapse from 'react-collapse'
 import {NameInputList} from './name-input-list'
-import {UI_ENTRY_OPTION_OPEN_TOGGLE, UI_ENTRY_PLAYER_NAMES_SET, UI_ENTRY_ADD_PLAYER} from './action'
+import {OPTION_OPEN_TOGGLE, PLAYER_NAMES_SET, ADD_PLAYER} from './actions/ui/entry'
 import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from './example-names'
 import {entryOptionsValidator} from './validators/entry-options'
@@ -59,17 +59,17 @@ const mapStateToProps = state => ({
 function mapDispatchToProps(dispatch) {
   return {
     toggleCollapse() {
-      dispatch({type: UI_ENTRY_OPTION_OPEN_TOGGLE})
+      dispatch({type: OPTION_OPEN_TOGGLE})
     },
     changePlayerNames(payload) {
-      dispatch({type: UI_ENTRY_PLAYER_NAMES_SET, payload})
+      dispatch({type: PLAYER_NAMES_SET, payload})
     },
     genOptions() {
       const payload = genRandomNames()
-      dispatch({type: UI_ENTRY_PLAYER_NAMES_SET, payload})
+      dispatch({type: PLAYER_NAMES_SET, payload})
     },
     addPlayer() {
-      dispatch({type: UI_ENTRY_ADD_PLAYER, payload: randomName()})
+      dispatch({type: ADD_PLAYER, payload: randomName()})
     },
     importNames() {
       // TODO NYI
