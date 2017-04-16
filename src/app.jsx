@@ -36,7 +36,7 @@ function DisconnectedApp({title, location, history}) {
         onLeftIconClick={backFn}
         rightIcon={helpBtn}
       />
-      <Route exact path='/' component={Menu}/>
+      <Route exact path="/" component={Menu}/>
       <Route path="/entry" component={Entry}/>
     </div>
 

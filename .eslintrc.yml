@@ -64,4 +64,6 @@ rules:
   no-multi-spaces: error
   no-loop-func: error
   no-floating-decimal: error
+
+  jsx-quotes: error
   react/prop-types: off
