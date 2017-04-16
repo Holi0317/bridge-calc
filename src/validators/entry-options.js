@@ -1,6 +1,21 @@
+// @flow
 import {isOk} from '../utils'
 
-function validateType(opts) {
+export type EntryOptions = {
+  cards: number,
+  rounds: number,
+  startingRound: number,
+  playerNames: string[]
+}
+
+type PartialEntryOptions = {
+  cards?: string,
+  rounds?: string,
+  startingRound?: string,
+  playerNames?: string
+}
+
+function validateType(opts: EntryOptions): PartialEntryOptions {
   const checkKeys = ['cards', 'rounds', 'startingRound']
   const names = {
     cards: 'Card',
@@ -8,34 +23,36 @@ function validateType(opts) {
     startingRound: 'Starting round'
   }
   const isInt = d => d > 0 && Number.isInteger(d)
-  return checkKeys.map(k => [k, opts[k]])
-    .map(([key, value]) => [key, isInt(value) ? null : `${names[key]} must be a positive integer`])
-    .filter(k => k[1] != null)
-    .reduce((res, [key, value]) => ({
-      ...res,
-      [key]: value
-    }), {})
+
+  const res: PartialEntryOptions = {}
+  for (const key of checkKeys) {
+    const value = opts[key]
+    if (!isInt(value)) {
+      res[key] = `${names[key]} must be a positive integer`
+    }
+  }
+  return res
 }
 
-function validateCards(opts) {
+function validateCards(opts: EntryOptions): PartialEntryOptions {
   return opts.playerNames.length > opts.cards
     ? {cards: 'Too few cards'}
     : {}
 }
 
-function validateRounds(opts) {
+function validateRounds(opts: EntryOptions): PartialEntryOptions {
   return opts.rounds > opts.cards / opts.playerNames.length
     ? {rounds: 'Insufficient cards for that much rounds'}
     : {}
 }
 
-function validateStartingRound(opts) {
+function validateStartingRound(opts: EntryOptions): PartialEntryOptions {
   return opts.startingRound > opts.rounds
     ? {startingRound: 'Impossible to start beyond the end of the game'}
     : {}
 }
 
-function validatePlayerNames(opts) {
+function validatePlayerNames(opts: EntryOptions): PartialEntryOptions {
   return opts.playerNames.length < 2
     ? {playerNames: 'At least 2 players is required for a game'}
     : {}
@@ -53,7 +70,7 @@ function validatePlayerNames(opts) {
  * @param opts.playerNames {string[]} - List of player names
  * @returns {Object} Error of each property
  */
-export function entryOptionsValidator(opts) {
+export function entryOptionsValidator(opts: EntryOptions): PartialEntryOptions {
   const typeRes = validateType(opts)
   if (!isOk(typeRes)) {
     return typeRes
@@ -73,7 +90,7 @@ export function entryOptionsValidator(opts) {
  * @param str {string}
  * @returns {boolean}
  */
-export function isInteger(str) {
+export function isInteger(str: string) {
   const regex = /^[1-9]\d*$/
   return str === '' || regex.test(str)
 }
