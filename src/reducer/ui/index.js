@@ -1,3 +1,4 @@
+// @flow
 import {combineReducers} from 'redux'
 import {appBar} from './app-bar'
 import {entry} from './entry'

@@ -1,16 +1,6 @@
 import test from 'ava'
 import * as utils from '../src/utils'
 
-/**
- * Simple object that will set its 'prop' property to given value from constructor
- * Used for testing fill function
- */
-class SimpleObject {
-  constructor(val) {
-    this.prop = val
-  }
-}
-
 test('genID generate unique ID', t => {
   const first = utils.genID()
   const second = utils.genID()
@@ -68,38 +58,6 @@ test('toFront should throw error if frontIndex is out of boundary', t => {
   const array = ['a', 'b', 'c']
 
   t.throws(() => utils.toFront(array, 3), 'frontIndex is out of boundary', 'Error should be thrown when frontIndex is out of boundary')
-})
-
-test('fill should do nothing if all elements in the array is defined', t => {
-  const actual = ['a', 'b', 'c'].map(el => new SimpleObject(el))
-  utils.fill(actual, 'prop', 'filled')
-  const expected = ['a', 'b', 'c'].map(el => new SimpleObject(el))
-
-  t.deepEqual(actual, expected, 'No mutation should be done on objects in the array')
-})
-
-test('fill should fill up specified properties with value when it is null', t => {
-  const actual = ['a', 'b', null].map(el => new SimpleObject(el))
-  utils.fill(actual, 'prop', 'filled')
-  const expected = ['a', 'b', 'filled'].map(el => new SimpleObject(el))
-
-  t.deepEqual(actual, expected, 'Property should be filled with filled')
-})
-
-test('fill should fill up specified properties with value when it is undefined', t => {
-  const actual = ['a', 'b', undefined].map(el => new SimpleObject(el))
-  utils.fill(actual, 'prop', 'filled')
-  const expected = ['a', 'b', 'filled'].map(el => new SimpleObject(el))
-
-  t.deepEqual(actual, expected, 'Property should be filled with filled')
-})
-
-test('fill should fill up specified properties with value when it is empty string', t => {
-  const actual = ['a', 'b', ''].map(el => new SimpleObject(el))
-  utils.fill(actual, 'prop', 'filled')
-  const expected = ['a', 'b', 'filled'].map(el => new SimpleObject(el))
-
-  t.deepEqual(actual, expected, 'Property should be filled with filled')
 })
 
 test('last should return the last element of an array', t => {

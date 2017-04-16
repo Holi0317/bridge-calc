@@ -1,6 +1,16 @@
+// @flow
 import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../../actions/ui/entry'
+import type {EntryActions} from '../../actions/ui/entry'
 
-const defaultState = {
+export type EntryState = {
+  cards: number,
+  rounds: number,
+  startingRound: number,
+  playerNames: string[],
+  optionsOpened: boolean
+}
+
+const defaultState: EntryState = {
   cards: 52,
   rounds: 13,
   startingRound: 1,
@@ -13,10 +23,10 @@ const defaultState = {
  * Because it is fairly complex, this reducer is moved into a separate function.
  * (I don't want to look at this code with 8 space before each line ._.).
  * See test/entry-reducer.spec.js for expected result on this.
- * @param state {typeof defaultState} - previous state of reducer
- * @param playerNames {string[]} - New player names passed in as action payload
+ * @param state - previous state of reducer
+ * @param playerNames - New player names passed in as action payload
  */
-function playerNameAction(state, playerNames) {
+function playerNameAction(state: EntryState, playerNames: string[]) {
   const newPlayerNum = playerNames.length
   const newRounds = Math.floor(state.cards / newPlayerNum)
   const playerNum = state.playerNames.length
@@ -45,7 +55,7 @@ function playerNameAction(state, playerNames) {
   }
 }
 
-export function entry(state = defaultState, action) {
+export function entry(state: EntryState = defaultState, action: EntryActions) {
   switch (action.type) {
   case OPTION_OPEN_TOGGLE:
     return {

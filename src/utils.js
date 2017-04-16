@@ -1,7 +1,8 @@
+// @flow
 /**
  * Generate a (hopefully) unique ID with 4 characters
  */
-export function genID() {
+export function genID(): string {
   return Math.floor((1 + Math.random()) * 0x10000)
     .toString(16)
     .substring(1)
@@ -19,7 +20,7 @@ export function genID() {
  * @param end {number} - Ends with (inclusive)
  * @returns {number[]}
  */
-export function range(start, end) {
+export function range(start: number, end: number): number[] {
   return Array.from(new Array(end - start + 1)).map((val, index) => index + start)
 }
 
@@ -31,11 +32,11 @@ export function range(start, end) {
  * @example
  * nth(['a', 'b', 'c'], 4)
  * // -> 'b'
- * @param array {T[]} - Array to be operated
- * @param index {number} - Index of wanted element
- * @returns {T}
+ * @param array - Array to be operated
+ * @param index - Index of wanted element
+ * @returns Element
  */
-export function nth(array, index) {
+export function nth<T>(array: T[], index: number): T {
   if (index < 0) {
     throw new Error('Index should be a positive number')
   }
@@ -51,11 +52,11 @@ export function nth(array, index) {
  * @example
  * toFront(['a', 'b', 'c'], 1)
  * // -> ['b', 'c', 'a']
- * @param array {Array} - The original array
- * @param frontIndex {number} - Index of element that need to be moved to front.
- * @returns {T}
+ * @param array - The original array
+ * @param frontIndex - Index of element that need to be moved to front.
+ * @returns
  */
-export function toFront(array, frontIndex) {
+export function toFront<T>(array: T[], frontIndex: number): T[] {
   if (frontIndex >= array.length) {
     throw new Error('frontIndex is out of boundary')
   }
@@ -67,29 +68,11 @@ export function toFront(array, frontIndex) {
 }
 
 /**
- * Fill in value of given array if original one is null/undefined.
- * @example
- * let original = [{ foo: 1 }, { foo: null }]
- * fill(original, 'foo', 2)
- * // original will be [{ foo: 1 }, { foo: 2 }]
- * @param array {Array} - Array of object to be mutated
- * @param prop {string} - Property path to the desired mutation. Dot notation is not supported
- * @param value {any} - Value to be filled in if original value is null/undefined
- */
-export function fill(array, prop, value) {
-  for (const element of array) {
-    if (element[prop] == null || element[prop] === '') {
-      element[prop] = value
-    }
-  }
-}
-
-/**
  * Return the last element from an array.
  * If the array is empty, null will be returned
- * @param array {Array}
+ * @param array
  */
-export function last(array) {
+export function last<T>(array: T[]): T | null {
   if (array.length === 0) {
     return null
   } else {
@@ -102,8 +85,8 @@ export function last(array) {
  * Test if there is error in the error object.
  * If no error, true will be returned. Vice versa for error object with error.
  * Meant to be used with validator.
- * @param error {Object} - Error object to be tested
+ * @param error - Error object to be tested
  */
-export function isOk(error) {
+export function isOk(error: any): boolean {
   return JSON.stringify(error) === '{}'
 }
