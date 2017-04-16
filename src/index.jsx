@@ -1,4 +1,3 @@
-import {DelegateContainer} from 'preact-delegate'
 import {h, render} from 'preact'
 import {Provider} from 'preact-redux'
 import {BrowserRouter} from 'react-router-dom'
@@ -22,11 +21,9 @@ const store = compose(applyMiddleware(...middlewares))(createStore)(reducer)
 function Root() {
   return (
     <Provider store={store}>
-      <DelegateContainer>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </DelegateContainer>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   )
 }
