@@ -54,4 +54,14 @@ rules:
    - allowTemplateLiterals: false
      avoidEscape: true
   prefer-const: error
+  array-bracket-spacing: error
+  comma-spacing: error
+  capitalized-comments: error
+  brace-style: error
+  no-throw-literal: error
+  no-return-assign: error
+  no-multi-str: error
+  no-multi-spaces: error
+  no-loop-func: error
+  no-floating-decimal: error
   react/prop-types: off

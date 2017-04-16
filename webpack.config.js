@@ -7,7 +7,6 @@ const htmlLoader = require('./webpack-cfg/html-loader')
 const postCssLoader = require('./webpack-cfg/postcss')
 const fontsImagesLoader = require('./webpack-cfg/fonts-images-loader')
 const genIndex = require('./webpack-cfg/gen-index')
-const commonChunksOptimize = require('./webpack-cfg/common-chunks-optimize')
 const copyFiles = require('./webpack-cfg/copy-files')
 const babili = require('./webpack-cfg/babili')
 const analyzer = require('./webpack-cfg/analyzer')
@@ -43,7 +42,6 @@ const config = generateConfig(
 
   ...(ENV === 'production' || ENV === 'development' ? [
     genIndex,
-    commonChunksOptimize,
     copyFiles
   ] : [
     /* ENV === 'test' */
