@@ -6,3 +6,8 @@
 .startBtn {
   margin-top: 1em;
 }
+
+.errorMessage {
+  color: rgb(222, 50, 38);
+  padding-left: 1em;
+}

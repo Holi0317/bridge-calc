@@ -12,6 +12,7 @@ import {OPTION_OPEN_TOGGLE, PLAYER_NAMES_SET, ADD_PLAYER} from '../actions/ui/en
 import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from '../example-names'
 import {entryOptionsValidator} from '../validators/entry-options'
+import {getT} from '../i18n'
 import {isOk} from '../utils'
 import style from './entry.css'
 
@@ -22,6 +23,7 @@ const IconButtonTooltip = Tooltip(IconButton)
 class DisconnectedEntry extends Component {
   props: {
     valid: boolean,
+    playerNamesError: ?string,
     t: (t: string) => string,
     toggleCollapse: () => void,
     genOptions: () => void,
@@ -57,15 +59,21 @@ class DisconnectedEntry extends Component {
         </Collapse>
 
         <Button label={t('Start')} raised accent className={style.startBtn} disabled={!props.valid} />
+        <span className={style.errorMessage}>{props.playerNamesError}</span>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  ...state.ui.entry,
-  valid: isOk(entryOptionsValidator(state.ui.entry))
-})
+function mapStateToProps(state) {
+  const entry = state.ui.entry
+  const validatorResult = entryOptionsValidator(entry, getT())
+  return {
+    ...entry,
+    valid: isOk(validatorResult),
+    playerNamesError: validatorResult.playerNames
+  }
+}
 
 function mapDispatchToProps(dispatch: (action: any) => void) {
   return {
