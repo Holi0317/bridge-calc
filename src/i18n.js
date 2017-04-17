@@ -5,7 +5,7 @@ import LngDetector from 'i18next-browser-languagedetector'
 import XHR from 'i18next-xhr-backend'
 
 function loadLocales(url, options, callback) {
-  System.import(`./locals/${url}.json`)
+  System.import(`./locals/${url}.yml`)
     .then(local => {
       callback(local, {status: '200'})
     })

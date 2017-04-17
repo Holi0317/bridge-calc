@@ -12,6 +12,7 @@ const babili = require('./webpack-cfg/babili')
 const analyzer = require('./webpack-cfg/analyzer')
 const alias = require('./webpack-cfg/alias')
 const provide = require('./webpack-cfg/provide')
+const yaml = require('./webpack-cfg/yaml')
 
 const {ENV} = require('./webpack-cfg/paths')
 
@@ -39,6 +40,7 @@ const config = generateConfig(
   htmlLoader,
   postCssLoader,
   fontsImagesLoader,
+  yaml,
 
   ...(ENV === 'production' || ENV === 'development' ? [
     genIndex,
