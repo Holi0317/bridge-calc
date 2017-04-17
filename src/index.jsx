@@ -5,7 +5,7 @@ import {I18nextProvider} from 'react-i18next'
 import {createStore, compose, applyMiddleware} from 'redux'
 import {reducer} from './reducer/index'
 import '../styles/styles.css'
-import {App} from './app'
+import {App} from './components/app'
 import {i18n} from './i18n'
 
 const middlewares = []

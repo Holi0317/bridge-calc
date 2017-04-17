@@ -2,8 +2,8 @@ import {h} from 'preact'
 import {translate} from 'react-i18next'
 import {connect} from 'preact-redux'
 import Input from 'react-toolbox/components/input'
-import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from './actions/ui/entry'
-import {entryOptionsValidator, isInteger} from './validators/entry-options'
+import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
+import {entryOptionsValidator, isInteger} from '../validators/entry-options'
 
 function DisconnectedEntryOptions(props) {
   const {t} = props
