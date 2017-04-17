@@ -1,5 +1,6 @@
 import {h, Component} from 'preact'
 import {connect} from 'preact-redux'
+import {translate} from 'react-i18next'
 import {Button, IconButton} from 'react-toolbox/components/button'
 import Tooltip from 'react-toolbox/components/tooltip'
 import MdAdd from 'react-icons/md/add'
@@ -30,22 +31,23 @@ class DisconnectedEntry extends Component {
    * @returns {XML}
    */
   render(props) {
+    const {t} = props
     return (
       <div className="container">
-        <h3>Player Names</h3>
+        <h3>{t('Player Names')}</h3>
         <NameInputList names={props.playerNames} onChange={props.changePlayerNames} />
         <div>
-          <IconButtonTooltip icon={<MdAdd />} tooltip="Add player" onMouseUp={props.addPlayer} />
-          <IconButtonTooltip icon={<MdFileDownload />} tooltip="Import names" className="pull-right" onMouseUp={props.importNames} />
+          <IconButtonTooltip icon={<MdAdd />} tooltip={t('Add player')} onMouseUp={props.addPlayer} />
+          <IconButtonTooltip icon={<MdFileDownload />} tooltip={t('Import names')} className="pull-right" onMouseUp={props.importNames} />
         </div>
         <hr />
 
-        <Button onMouseUp={props.toggleCollapse} label="Options" raised className={style.optionsBtn} />
+        <Button onMouseUp={props.toggleCollapse} label={t('Options')} raised className={style.optionsBtn} />
         <Collapse isOpened={props.optionsOpened}>
           <EntryOptions />
         </Collapse>
 
-        <Button label="Start" raised accent className={style.startBtn} disabled={!props.valid} />
+        <Button label={t('Start')} raised accent className={style.startBtn} disabled={!props.valid} />
       </div>
     )
   }
@@ -77,4 +79,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export const Entry = connect(mapStateToProps, mapDispatchToProps)(DisconnectedEntry)
+export const Entry = connect(mapStateToProps, mapDispatchToProps)(translate()(DisconnectedEntry))

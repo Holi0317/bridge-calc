@@ -1,4 +1,5 @@
 import {h} from 'preact'
+import {translate} from 'react-i18next'
 import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc'
 import {IconButton} from 'react-toolbox/components/button'
 import Input from 'react-toolbox/components/input'
@@ -32,13 +33,13 @@ const createSortEndHandler = (items, change) => ({oldIndex, newIndex}) => change
 
 const DragHandle = SortableHandle(() => <MdDragHandle className={style.handle} />)
 
-const SortableItem = SortableElement(({value, onChange, remove}) => (
+const SortableItem = SortableElement(translate()(({value, onChange, remove, t}) => (
   <div className={style.itemContainer}>
     <DragHandle />
-    <Input type="text" label="Player name" value={value} onChange={onChange} className={style.input} />
+    <Input type="text" label={t('Player name')} value={value} onChange={onChange} className={style.input} />
     <IconButton icon={<MdDelete />} onMouseUp={remove} />
   </div>
-))
+)))
 
 export const SortableList = SortableContainer(({names, onChange}) => {
   const changeHandler = createChangeHandler(names)(onChange)

@@ -1,10 +1,12 @@
 import {h, render} from 'preact'
 import {Provider} from 'preact-redux'
 import {BrowserRouter} from 'react-router-dom'
+import {I18nextProvider} from 'react-i18next'
 import {createStore, compose, applyMiddleware} from 'redux'
 import {reducer} from './reducer/index'
 import '../styles/styles.css'
 import {App} from './app'
+import {i18n} from './i18n'
 
 const middlewares = []
 
@@ -21,9 +23,11 @@ const store = compose(applyMiddleware(...middlewares))(createStore)(reducer)
 function Root() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <I18nextProvider i18n={i18n}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </I18nextProvider>
     </Provider>
   )
 }

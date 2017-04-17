@@ -3192,6 +3192,10 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
+hoist-non-react-statics@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -3329,6 +3333,22 @@ hullabaloo-config-manager@^1.0.0:
     package-hash "^2.0.0"
     pkg-dir "^1.0.0"
     resolve-from "^2.0.0"
+
+i18next-browser-languagedetector@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-1.0.1.tgz#73e43aa46fc1c909cac6178b9d1b803d02610faa"
+
+i18next-localstorage-cache@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/i18next-localstorage-cache/-/i18next-localstorage-cache-1.1.0.tgz#b35737b330ec25a53710ddbdc7bf6e215dd6b200"
+
+i18next-xhr-backend@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/i18next-xhr-backend/-/i18next-xhr-backend-1.4.1.tgz#ade99356065f51742da9e4bc79c7bb4905a4b91d"
+
+i18next@7.2.3:
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-7.2.3.tgz#a6c220ac1c8240ff1078aa9bc997fd449e052dc7"
 
 iconv-lite@0.4.15, iconv-lite@~0.4.13:
   version "0.4.15"
@@ -5420,10 +5440,6 @@ preact-compat@3.14.3:
     proptypes "^0.14.3"
     standalone-react-addons-pure-render-mixin "^0.1.1"
 
-preact-delegate@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/preact-delegate/-/preact-delegate-1.1.1.tgz#7047f768e4eae2172884f01196ac0ddf25b68c40"
-
 preact-redux@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/preact-redux/-/preact-redux-2.0.1.tgz#e60df461b1a287f92ad7988fce1fdaffa5e3842e"
@@ -5639,6 +5655,12 @@ react-css-themr@^1.7.2:
 react-height@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-height/-/react-height-2.2.0.tgz#c65de6a7f7245c848f5ec9d3087f0758b90d7a0b"
+
+react-i18next@2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-2.2.3.tgz#cb6ae3ed11f5327fb691a9de277e9c31a8c50d4a"
+  dependencies:
+    hoist-non-react-statics "1.2.0"
 
 react-icon-base@2.0.4:
   version "2.0.4"
