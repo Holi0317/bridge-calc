@@ -93,17 +93,36 @@ test('Starting round should set when its action dispatched', t => {
   t.deepEqual(actual, expected, 'startingRound property should change')
 })
 
-test('Add player should append the new name to the last', t => {
+test('Add player should append the new name to the last and re-compute rounds', t => {
   const expected = {
     ...defaultState,
-    playerNames: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW']
+    playerNames: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW'],
+    rounds: 10
   }
   const action = {
     type: ADD_PLAYER,
     payload: 'DPGJW'
   }
   const actual = reducer(undefined, action)
-  t.deepEqual(actual, expected, 'A name should append to the end of playerNames property')
+  t.deepEqual(actual, expected, 'A name should append to the end of playerNames property and rounds should be re-computed')
+})
+
+test('Add player should not re-compute rounds when rounds < maxAvailableRounds', t => {
+  const state = {
+    ...defaultState,
+    rounds: 8
+  }
+  const expected = {
+    ...defaultState,
+    playerNames: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW'],
+    rounds: 8
+  }
+  const action = {
+    type: ADD_PLAYER,
+    payload: 'DPGJW'
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'Rounds should not re-compute')
 })
 
 test('Rounds should not re-compute on changing player names', t => {

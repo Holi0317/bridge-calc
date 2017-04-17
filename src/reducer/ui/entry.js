@@ -79,10 +79,7 @@ export function entry(state: EntryState = defaultState, action: EntryActions) {
       startingRound: action.payload
     }
   case ADD_PLAYER:
-    return {
-      ...state,
-      playerNames: [...state.playerNames, action.payload]
-    }
+    return playerNameAction(state, [...state.playerNames, action.payload])
   case PLAYER_NAMES_SET:
     return playerNameAction(state, action.payload)
   default:
