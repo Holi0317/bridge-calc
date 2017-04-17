@@ -1,3 +1,4 @@
+// @flow
 import {h} from 'preact'
 import {translate} from 'react-i18next'
 import {connect} from 'preact-redux'
@@ -24,7 +25,7 @@ function DisconnectedEntryOptions(props) {
   )
 }
 
-const stateHelper = num => num === 0 ? '' : num + ''
+const stateHelper = (num: number) => num === 0 ? '' : num + ''
 
 function mapStateToProps(state) {
   const entry = state.ui.entry

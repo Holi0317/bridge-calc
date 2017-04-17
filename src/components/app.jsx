@@ -1,3 +1,4 @@
+// @flow
 import {AppBar} from 'react-toolbox/components/app_bar'
 import MdHelp from 'react-icons/md/help'
 import {h} from 'preact'

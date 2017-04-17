@@ -1,3 +1,4 @@
+// @flow
 import {h} from 'preact'
 import {translate} from 'react-i18next'
 import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc'
@@ -12,7 +13,7 @@ import style from './name-input-list.css'
  * Type signature of this function is:
  * items: string[] -> change: (string[] -> T) -> index: number -> value: string -> T
  */
-const createChangeHandler = items => change => index => value => {
+const createChangeHandler = (items: string[]) => (change: (names: string[]) => void) => (index: number) => (value: string) => {
   const newItems = items.slice()
   newItems[index] = value
   return change(newItems)
@@ -23,7 +24,7 @@ const createChangeHandler = items => change => index => value => {
  * Type signature of this function is:
  * items: string[] -> change: (string[] -> T) -> index: number -> () -> T
  */
-const createRemoveHandler = items => change => index => () => {
+const createRemoveHandler = (items: string[]) => (change: (names: string[]) => void) => (index: number) => () => {
   const newItems = items.slice()
   newItems.splice(index, 1)
   return change(newItems)
@@ -41,7 +42,7 @@ const SortableItem = SortableElement(translate()(({value, onChange, remove, t}) 
   </div>
 )))
 
-export const SortableList = SortableContainer(({names, onChange}) => {
+const SortableList = SortableContainer(({names, onChange}) => {
   const changeHandler = createChangeHandler(names)(onChange)
   const removeHandler = createRemoveHandler(names)(onChange)
   return (
@@ -53,7 +54,12 @@ export const SortableList = SortableContainer(({names, onChange}) => {
   )
 })
 
-export function NameInputList({names, onChange}) {
+export type NameInputListProperties = {
+  names: string[],
+  onChange: (names: string[]) => void
+}
+
+export function NameInputList({names, onChange}: NameInputListProperties) {
   return (
     <SortableList names={names} useDragHandle={true} lockAxis="y" helperClass={style.dragging} onChange={onChange} onSortEnd={createSortEndHandler(names, onChange)} />
   )

@@ -1,3 +1,4 @@
+// @flow
 import {h} from 'preact'
 import {translate} from 'react-i18next'
 import MdActionBugReport from 'react-icons/md/bug-report'
