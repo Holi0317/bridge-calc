@@ -7,11 +7,7 @@ module.exports = {
 
       // Use non-compiled version of the following react libraries
       'react-icon-base': 'react-icon-base/index.js',
-      'react-css-themr': 'react-css-themr/src/index.js',
-
-      // ES2015 version of localforage
-      localforage: 'localforage/src/localforage',
-      'localforage-memoryStorageDriver': 'localforage-memoryStorageDriver/dist/localforage-memoryStorageDriver.es6.js'
+      'react-css-themr': 'react-css-themr/src/index.js'
     }
   }
 }

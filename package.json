@@ -40,13 +40,10 @@
   },
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
-    "decko": "1.2.0",
     "i18next": "7.2.3",
     "i18next-browser-languagedetector": "1.0.1",
     "i18next-localstorage-cache": "1.1.0",
     "i18next-xhr-backend": "1.4.1",
-    "localforage": "1.5.0",
-    "localforage-memoryStorageDriver": "0.9.2",
     "preact": "8.1.0",
     "preact-compat": "3.14.3",
     "preact-redux": "2.0.1",
