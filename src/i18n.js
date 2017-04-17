@@ -47,5 +47,3 @@ export function getT(): T {
 }
 
 export type T = (translate: string, opt?: any) => string
-
-global.i18n = i18n
