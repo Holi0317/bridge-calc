@@ -2,4 +2,5 @@
 [ignore]
 [libs]
 [options]
+module.name_mapper='.*\(.css\)' -> 'CSSModule'
 [version]
