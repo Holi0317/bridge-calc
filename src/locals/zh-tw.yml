@@ -15,3 +15,11 @@ Player name: 玩家名稱
 Number of cards: 卡牌數量
 Number of rounds: 回合數量
 Starting round: 起始回合
+
+Cards: 卡牌
+Rounds: 回合
+"{{property}} must be a positive integer": "{{property}}一定要是大於0的整數"
+Too few cards: 太少卡牌
+Insufficient cards for that much rounds: 卡牌不足
+Impossible to start beyond the end of the game: 不可能在大於遊戲的回合開始遊戲
+At least 2 players is required for a game: 最少需要2位玩家才能開始遊戲

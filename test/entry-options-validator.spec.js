@@ -1,4 +1,5 @@
 import test from 'ava'
+import {t as trans} from './test-utils'
 import {entryOptionsValidator as validator, isInteger} from '../src/validators/entry-options'
 
 const defaultOptions = {
@@ -52,7 +53,7 @@ test('validation should pass with default options', t => {
   const options = {
     ...defaultOptions
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {}
   t.deepEqual(actual, expected, 'No error should exist')
 })
@@ -62,9 +63,9 @@ test('validator should fail if cards is negative', t => {
     ...defaultOptions,
     cards: -1
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
-    cards: 'Card must be a positive integer'
+    cards: 'Cards must be a positive integer'
   }
   t.deepEqual(actual, expected, 'Card property should include an error message')
 })
@@ -74,9 +75,9 @@ test('validator should fail if cards is a float', t => {
     ...defaultOptions,
     cards: 0.5
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
-    cards: 'Card must be a positive integer'
+    cards: 'Cards must be a positive integer'
   }
   t.deepEqual(actual, expected, 'Card property should include an error message')
 })
@@ -86,7 +87,7 @@ test('validator should fail if rounds is negative', t => {
     ...defaultOptions,
     rounds: -1
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     rounds: 'Rounds must be a positive integer'
   }
@@ -98,7 +99,7 @@ test('validator should fail if rounds is a float', t => {
     ...defaultOptions,
     rounds: 0.5
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     rounds: 'Rounds must be a positive integer'
   }
@@ -110,7 +111,7 @@ test('validator should fail if startingRound is negative', t => {
     ...defaultOptions,
     startingRound: -1
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     startingRound: 'Starting round must be a positive integer'
   }
@@ -122,7 +123,7 @@ test('validator should fail if startingRound is a float', t => {
     ...defaultOptions,
     startingRound: 0.5
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     startingRound: 'Starting round must be a positive integer'
   }
@@ -135,7 +136,7 @@ test('validator should pass for minimum round requirement', t => {
     cards: 4,
     rounds: 1
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {}
   t.deepEqual(actual, expected, 'No error should exist')
 })
@@ -145,7 +146,7 @@ test('validator should fail when cards is less than player length', t => {
     ...defaultOptions,
     cards: 3
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     cards: 'Too few cards',
     rounds: 'Insufficient cards for that much rounds'
@@ -158,7 +159,7 @@ test('validator should fail when number of cards is not enough for games', t => 
     ...defaultOptions,
     rounds: 14
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     rounds: 'Insufficient cards for that much rounds'
   }
@@ -170,7 +171,7 @@ test('validator should fail when starting round is out of bound', t => {
     ...defaultOptions,
     startingRound: 14
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     startingRound: 'Impossible to start beyond the end of the game'
   }
@@ -182,7 +183,7 @@ test('validator should fail when there is no player', t => {
     ...defaultOptions,
     playerNames: []
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     playerNames: 'At least 2 players is required for a game'
   }
@@ -194,7 +195,7 @@ test('validator should fail when there is only 1 player', t => {
     ...defaultOptions,
     playerNames: ['DPGJW']
   }
-  const actual = validator(options)
+  const actual = validator(options, trans)
   const expected = {
     playerNames: 'At least 2 players is required for a game'
   }

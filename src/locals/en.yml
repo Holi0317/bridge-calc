@@ -15,3 +15,11 @@ Player name: Player name
 Number of cards: Number of cards
 Number of rounds: Number of rounds
 Starting round: Starting round
+
+Cards: Cards
+Rounds: Rounds
+"{{property}} must be a positive integer": "{{property}} must be a positive integer"
+Too few cards: Too few cards
+Insufficient cards for that much rounds: Insufficient cards for that much rounds
+Impossible to start beyond the end of the game: Impossible to start beyond the end of the game
+At least 2 players is required for a game: At least 2 players is required for a game

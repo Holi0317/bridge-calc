@@ -1,6 +1,8 @@
 // @flow
 import {isOk} from '../utils'
 
+import type {T} from '../i18n'
+
 export type EntryOptions = {
   cards: number,
   rounds: number,
@@ -15,12 +17,12 @@ type PartialEntryOptions = {
   playerNames?: string
 }
 
-function validateType(opts: EntryOptions): PartialEntryOptions {
+function validateType(opts, t): PartialEntryOptions {
   const checkKeys = ['cards', 'rounds', 'startingRound']
   const names = {
-    cards: 'Card',
-    rounds: 'Rounds',
-    startingRound: 'Starting round'
+    cards: t('Cards'),
+    rounds: t('Rounds'),
+    startingRound: t('Starting round')
   }
   const isInt = d => d > 0 && Number.isInteger(d)
 
@@ -28,33 +30,33 @@ function validateType(opts: EntryOptions): PartialEntryOptions {
   for (const key of checkKeys) {
     const value = opts[key]
     if (!isInt(value)) {
-      res[key] = `${names[key]} must be a positive integer`
+      res[key] = t('{{property}} must be a positive integer', {property: names[key]})
     }
   }
   return res
 }
 
-function validateCards(opts: EntryOptions): PartialEntryOptions {
+function validateCards(opts, t): PartialEntryOptions {
   return opts.playerNames.length > opts.cards
-    ? {cards: 'Too few cards'}
+    ? {cards: t('Too few cards')}
     : {}
 }
 
-function validateRounds(opts: EntryOptions): PartialEntryOptions {
+function validateRounds(opts, t): PartialEntryOptions {
   return opts.rounds > opts.cards / opts.playerNames.length
-    ? {rounds: 'Insufficient cards for that much rounds'}
+    ? {rounds: t('Insufficient cards for that much rounds')}
     : {}
 }
 
-function validateStartingRound(opts: EntryOptions): PartialEntryOptions {
+function validateStartingRound(opts, t): PartialEntryOptions {
   return opts.startingRound > opts.rounds
-    ? {startingRound: 'Impossible to start beyond the end of the game'}
+    ? {startingRound: t('Impossible to start beyond the end of the game')}
     : {}
 }
 
-function validatePlayerNames(opts: EntryOptions): PartialEntryOptions {
+function validatePlayerNames(opts, t): PartialEntryOptions {
   return opts.playerNames.length < 2
-    ? {playerNames: 'At least 2 players is required for a game'}
+    ? {playerNames: t('At least 2 players is required for a game')}
     : {}
 }
 
@@ -63,23 +65,24 @@ function validatePlayerNames(opts: EntryOptions): PartialEntryOptions {
  * If options are valid, an empty object will be returned.
  * Otherwise, an object with property -> error message will be returned.
  * Use utils.isOk to check if there is any error during validation process.
- * @param opts {Object} - Entry options to be validated
- * @param opts.cards {number} - Number of cards
- * @param opts.rounds {number} - Number of rounds
- * @param opts.startingRound {number} - Starting round
- * @param opts.playerNames {string[]} - List of player names
+ * @param opts - Entry options to be validated
+ * @param opts.cards - Number of cards
+ * @param opts.rounds - Number of rounds
+ * @param opts.startingRound - Starting round
+ * @param opts.playerNames - List of player names
+ * @param t - i18next translate function
  * @returns {Object} Error of each property
  */
-export function entryOptionsValidator(opts: EntryOptions): PartialEntryOptions {
-  const typeRes = validateType(opts)
+export function entryOptionsValidator(opts: EntryOptions, t: T = (a => a)): PartialEntryOptions {
+  const typeRes = validateType(opts, t)
   if (!isOk(typeRes)) {
     return typeRes
   } else {
     return {
-      ...validateCards(opts),
-      ...validateRounds(opts),
-      ...validateStartingRound(opts),
-      ...validatePlayerNames(opts)
+      ...validateCards(opts, t),
+      ...validateRounds(opts, t),
+      ...validateStartingRound(opts, t),
+      ...validatePlayerNames(opts, t)
     }
   }
 }

@@ -41,3 +41,11 @@ export const i18n = I18next
       enabled: process.env.NODE_ENV === 'production'
     }
   })
+
+export function getT(): T {
+  return i18n.t.bind(i18n)
+}
+
+export type T = (translate: string, opt?: any) => string
+
+global.i18n = i18n
