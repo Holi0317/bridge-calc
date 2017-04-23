@@ -12,7 +12,7 @@ import {OPTION_OPEN_TOGGLE, PLAYER_NAMES_SET, ADD_PLAYER} from '../actions/ui/en
 import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from '../example-names'
 import {entryOptionsValidator} from '../validators/entry-options'
-import {getT} from '../i18n'
+import {t} from '../i18n'
 import {isOk} from '../utils'
 import style from './entry.css'
 
@@ -67,7 +67,7 @@ class DisconnectedEntry extends Component {
 
 function mapStateToProps(state) {
   const entry = state.ui.entry
-  const validatorResult = entryOptionsValidator(entry, getT())
+  const validatorResult = entryOptionsValidator(entry, t)
   return {
     ...entry,
     valid: isOk(validatorResult),
