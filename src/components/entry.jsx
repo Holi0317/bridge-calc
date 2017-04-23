@@ -9,14 +9,27 @@ import MdFileDownload from 'react-icons/md/file-download'
 import Collapse from 'react-collapse'
 import {NameInputList} from './name-input-list'
 import {OPTION_OPEN_TOGGLE, PLAYER_NAMES_SET, ADD_PLAYER} from '../actions/ui/entry'
+import {START} from '../actions/current-game'
 import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from '../example-names'
 import {entryOptionsValidator} from '../validators/entry-options'
 import {t} from '../i18n'
-import {isOk} from '../utils'
+import {isOk, genID} from '../utils'
 import style from './entry.css'
 
 import type {EntryState} from '../reducer/ui/entry'
+
+/**
+ * Change player names array to object with random generated player ID as key.
+ * @param playerNames
+ */
+function namesToObject(playerNames: string[]) {
+  const result = {}
+  playerNames.forEach(name => {
+    result[genID()] = name
+  })
+  return result
+}
 
 const IconButtonTooltip = Tooltip(IconButton)
 
@@ -29,11 +42,26 @@ class DisconnectedEntry extends Component {
     genOptions: () => void,
     changePlayerNames: (payload: string[]) => void,
     addPlayer: () => void,
-    importNames: () => void
+    importNames: () => void,
+    start: () => void
   } & EntryState
 
   componentWillMount() {
     this.props.genOptions()
+  }
+
+  /**
+   * Emit START action to redux.
+   * Not to be confused with this.props.start
+   */
+  start = () => {
+    const {rounds, playerNames, startingRound, start} = this.props
+    start({
+      rounds,
+      startingRound,
+      playerNames: namesToObject(playerNames),
+      startTime: new Date()
+    })
   }
 
   /**
@@ -58,7 +86,7 @@ class DisconnectedEntry extends Component {
           <EntryOptions />
         </Collapse>
 
-        <Button label={t('Start')} raised accent className={style.startBtn} disabled={!props.valid} />
+        <Button label={t('Start')} raised accent className={style.startBtn} disabled={!props.valid} onMouseUp={this.start} />
         <span className={style.errorMessage}>{props.playerNamesError}</span>
       </div>
     )
@@ -92,6 +120,10 @@ function mapDispatchToProps(dispatch: (action: any) => void) {
     },
     importNames() {
       // TODO NYI
+    },
+    start(param) {
+      dispatch({...param, type: START})
+      // TODO Redirect to game view
     }
   }
 }
