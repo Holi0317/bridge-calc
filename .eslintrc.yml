@@ -13,6 +13,7 @@ env:
 
 plugins:
  - react
+ - flowtype
  - ava
 
 settings:
@@ -66,6 +67,10 @@ rules:
   no-floating-decimal: error
   comma-dangle: error
   object-curly-spacing: error
+  no-console: off
 
   jsx-quotes: error
   react/prop-types: off
+
+  flowtype/define-flow-type: warn
+  flowtype/use-flow-type: warn
