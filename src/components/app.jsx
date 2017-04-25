@@ -3,7 +3,7 @@ import {AppBar} from 'react-toolbox/components/app_bar'
 import MdHelp from 'react-icons/md/help'
 import {h} from 'preact'
 import {connect} from 'preact-redux'
-import {Route, withRouter} from 'react-router-dom'
+import {Route, withRouter, Redirect} from 'react-router-dom'
 import MdArrowBack from 'react-icons/md/arrow-back'
 import {Menu} from './menu'
 import {Entry} from './entry'
@@ -26,7 +26,7 @@ function to(history, loc) {
  * @param history {History} - History object injected by react-router
  * @returns {XML}
  */
-function DisconnectedApp({title, location, history}) {
+function DisconnectedApp({title, gameRedirect, location, history}) {
   const helpBtn = <MdHelp />
   const backBtn = location.pathname === '/' ? null : <MdArrowBack />
   const backFn = to(history, '/')
@@ -40,7 +40,9 @@ function DisconnectedApp({title, location, history}) {
       />
       <Route exact path="/" component={Menu} />
       <Route path="/entry" component={Entry} />
-      <Route path="/game" component={Layout} />
+      <Route path="/game" render={() => (
+        gameRedirect ? <Redirect to="/entry" /> : <Layout />
+      )} />
     </div>
 
   )
@@ -48,7 +50,8 @@ function DisconnectedApp({title, location, history}) {
 
 function stateToProps(state) {
   return {
-    title: state.ui.appBar.title
+    title: state.ui.appBar.title,
+    gameRedirect: state.currentGame == null
   }
 }
 
