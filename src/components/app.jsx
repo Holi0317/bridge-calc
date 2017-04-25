@@ -7,6 +7,7 @@ import {Route, withRouter} from 'react-router-dom'
 import MdArrowBack from 'react-icons/md/arrow-back'
 import {Menu} from './menu'
 import {Entry} from './entry'
+import {Layout} from './game/layout'
 
 /**
  * Create a function that will route to specified location.
@@ -37,8 +38,9 @@ function DisconnectedApp({title, location, history}) {
         onLeftIconClick={backFn}
         rightIcon={helpBtn}
       />
-      <Route exact path="/" component={Menu}/>
-      <Route path="/entry" component={Entry}/>
+      <Route exact path="/" component={Menu} />
+      <Route path="/entry" component={Entry} />
+      <Route path="/game" component={Layout} />
     </div>
 
   )

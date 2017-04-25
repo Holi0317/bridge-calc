@@ -2,6 +2,7 @@
 import {h, Component} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
+import {withRouter} from 'react-router-dom'
 import {Button, IconButton} from 'react-toolbox/components/button'
 import Tooltip from 'react-toolbox/components/tooltip'
 import MdAdd from 'react-icons/md/add'
@@ -43,7 +44,8 @@ class DisconnectedEntry extends Component {
     changePlayerNames: (payload: string[]) => void,
     addPlayer: () => void,
     importNames: () => void,
-    start: () => void
+    start: () => void,
+    history: string[] // This is in fact react-router's history object. But mocking it as array works to suppress flow
   } & EntryState
 
   componentWillMount() {
@@ -55,13 +57,14 @@ class DisconnectedEntry extends Component {
    * Not to be confused with this.props.start
    */
   start = () => {
-    const {rounds, playerNames, startingRound, start} = this.props
+    const {rounds, playerNames, startingRound, start, history} = this.props
     start({
       rounds,
       startingRound,
       playerNames: namesToObject(playerNames),
       startTime: new Date()
     })
+    history.push('/game')
   }
 
   /**
@@ -123,9 +126,8 @@ function mapDispatchToProps(dispatch: (action: any) => void) {
     },
     start(param) {
       dispatch({...param, type: START})
-      // TODO Redirect to game view
     }
   }
 }
 
-export const Entry = connect(mapStateToProps, mapDispatchToProps)(translate()(DisconnectedEntry))
+export const Entry = withRouter(connect(mapStateToProps, mapDispatchToProps)(translate()(DisconnectedEntry)))
