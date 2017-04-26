@@ -35,8 +35,8 @@ declare module 'react-router-dom' {
       style?: Object,
       isActive?: (match: Match, location: Location) => boolean,
       children?: React$Element<*>,
-      exact?: bool,
-      strict?: bool,
+      exact?: boolean,
+      strict?: boolean,
     }
   }
 
@@ -69,7 +69,7 @@ declare module 'react-router-dom' {
     go(n: number): void,
     goBack(): void,
     goForward(): void,
-    canGo?: (n: number) => bool,
+    canGo?: (n: number) => boolean,
     block(callback: (location: Location, action: HistoryAction) => boolean): void,
     // createMemoryHistory
     index?: number,
@@ -141,8 +141,8 @@ declare module 'react-router-dom' {
       render?: (router: ContextRouter) => React$Element<*>,
       children?: (router: ContextRouter) => React$Element<*>,
       path?: string,
-      exact?: bool,
-      strict?: bool,
+      exact?: boolean,
+      strict?: boolean,
     }
   }
 
