@@ -42,10 +42,4 @@ export const i18n = I18next
     }
   })
 
-export function getT(): T {
-  return i18n.t.bind(i18n)
-}
-
-export const t: T = i18n.t.bind(i18n)
-
 export type T = (translate: string, opt?: any) => string

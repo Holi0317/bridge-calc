@@ -14,7 +14,6 @@ import {START} from '../actions/current-game'
 import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from '../example-names'
 import {entryOptionsValidator} from '../validators/entry-options'
-import {t} from '../i18n'
 import {isOk, genID} from '../utils'
 import style from './entry.css'
 
@@ -96,7 +95,7 @@ class DisconnectedEntry extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, {t}) {
   const entry = state.ui.entry
   const validatorResult = entryOptionsValidator(entry, t)
   return {
