@@ -5,6 +5,7 @@ import {h} from 'preact'
 import {connect} from 'preact-redux'
 import {Route, withRouter, Redirect} from 'react-router-dom'
 import MdArrowBack from 'react-icons/md/arrow-back'
+import {Titles} from './titles'
 import {Menu} from './menu'
 import {Entry} from './entry'
 import {Layout} from './game/layout'
@@ -21,19 +22,19 @@ function to(history, loc) {
 }
 
 /**
- * @param title {string} - Title for app bar
+ * @param gameRedirect {boolean} - Should /game route be redirected?
  * @param location {Location} - Location object injected by react-router
  * @param history {History} - History object injected by react-router
  * @returns {XML}
  */
-function DisconnectedApp({title, gameRedirect, location, history}) {
+function DisconnectedApp({gameRedirect, location, history}) {
   const helpBtn = <MdHelp />
   const backBtn = location.pathname === '/' ? null : <MdArrowBack />
   const backFn = to(history, '/')
   return (
     <div>
       <AppBar
-        title={title}
+        title={<Titles />}
         leftIcon={backBtn}
         onLeftIconClick={backFn}
         rightIcon={helpBtn}
@@ -50,7 +51,6 @@ function DisconnectedApp({title, gameRedirect, location, history}) {
 
 function stateToProps(state) {
   return {
-    title: state.ui.appBar.title,
     gameRedirect: state.currentGame == null
   }
 }

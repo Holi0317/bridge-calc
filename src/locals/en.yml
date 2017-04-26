@@ -1,4 +1,9 @@
 Bridge calculator: Bridge calculator
+Entry: Entry
+Scoreboard: Scoreboard
+Game over: Game over
+Round {{currentRound}} of {{rounds}}: Round {{currentRound}} of {{rounds}}
+
 Continue: Continue
 New Game: New Game
 Previous games: Previous games
