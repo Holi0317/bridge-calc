@@ -1,10 +1,12 @@
 // @flow
 import {h, Component} from 'preact'
 import {Route, withRouter, matchPath} from 'react-router-dom'
+import {translate} from 'react-i18next'
 import {Tabs, Tab} from 'react-toolbox/components/tabs'
 import {routes} from './routes'
 
 import type {WithRouterProps} from 'react-router-dom'
+import type {T} from '../../i18n'
 
 function getActive(pathname: string): number {
   // Create a matches array.
@@ -14,7 +16,9 @@ function getActive(pathname: string): number {
 }
 
 class DisconnectedLayout extends Component {
-  props: WithRouterProps
+  props: WithRouterProps & {
+    t: T
+  }
   state: {
     active: number
   }
@@ -23,10 +27,11 @@ class DisconnectedLayout extends Component {
 
   constructor(props) {
     super(props)
+    const {t, location} = props
     this._tabs = routes.map((route, index) => (
-      <Tab key={index} to={route.path} exact={route.exact} label={route.name} onClick={this._createClickCB(route.path)} />
+      <Tab key={index} to={route.path} exact={route.exact} label={t(route.name)} onClick={this._createClickCB(route.path)} />
     ))
-    this._setActive(props.location.pathname)
+    this._setActive(location.pathname)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,4 +68,4 @@ class DisconnectedLayout extends Component {
   }
 }
 
-export const Layout = withRouter(DisconnectedLayout)
+export const Layout = withRouter(translate()(DisconnectedLayout))
