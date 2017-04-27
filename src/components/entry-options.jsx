@@ -51,4 +51,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export const EntryOptions = connect(mapStateToProps, mapDispatchToProps)(translate()(DisconnectedEntryOptions))
+export const EntryOptions = translate()(connect(mapStateToProps, mapDispatchToProps)(DisconnectedEntryOptions))

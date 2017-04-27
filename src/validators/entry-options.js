@@ -83,7 +83,7 @@ function validatePlayerName(opts, t): EntryError {
  * @param t - i18next translate function
  * @returns {Object} Error of each property
  */
-export function entryOptionsValidator(opts: EntryOptions, t: T = (a => a)): EntryError {
+export function entryOptionsValidator(opts: EntryOptions, t: T): EntryError {
   const typeRes = validateType(opts, t)
   if (!isOk(typeRes)) {
     return typeRes
