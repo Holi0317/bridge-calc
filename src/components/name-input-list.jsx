@@ -34,21 +34,21 @@ const createSortEndHandler = (items, change) => ({oldIndex, newIndex}) => change
 
 const DragHandle = SortableHandle(() => <MdDragHandle className={style.handle} />)
 
-const SortableItem = SortableElement(translate()(({value, onChange, remove, t}) => (
+const SortableItem = SortableElement(translate()(({value, onChange, remove, error, t}) => (
   <div className={style.itemContainer}>
     <DragHandle />
-    <Input type="text" label={t('Player name')} value={value} onChange={onChange} className={style.input} />
+    <Input type="text" label={t('Player name')} value={value} error={error} onChange={onChange} className={style.input} />
     <IconButton icon={<MdDelete />} onMouseUp={remove} />
   </div>
 )))
 
-const SortableList = SortableContainer(({names, onChange}) => {
+const SortableList = SortableContainer(({names, error, onChange}) => {
   const changeHandler = createChangeHandler(names)(onChange)
   const removeHandler = createRemoveHandler(names)(onChange)
   return (
     <div>
       {names.map((name, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={name} onChange={changeHandler(index)} remove={removeHandler(index)} />
+        <SortableItem key={`item-${index}`} index={index} value={name} error={error[index] || ''} onChange={changeHandler(index)} remove={removeHandler(index)} />
       ))}
     </div>
   )
@@ -56,11 +56,12 @@ const SortableList = SortableContainer(({names, onChange}) => {
 
 export type NameInputListProperties = {
   names: string[],
-  onChange: (names: string[]) => void
+  onChange: (names: string[]) => void,
+  error: ?string[]
 }
 
-export function NameInputList({names, onChange}: NameInputListProperties) {
+export function NameInputList({names, onChange, error}: NameInputListProperties) {
   return (
-    <SortableList names={names} useDragHandle={true} lockAxis="y" helperClass={style.dragging} onChange={onChange} onSortEnd={createSortEndHandler(names, onChange)} />
+    <SortableList names={names} error={error || []} useDragHandle={true} lockAxis="y" helperClass={style.dragging} onChange={onChange} onSortEnd={createSortEndHandler(names, onChange)} />
   )
 }

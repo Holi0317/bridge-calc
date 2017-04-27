@@ -10,14 +10,15 @@ export type EntryOptions = {
   playerNames: string[]
 }
 
-type PartialEntryOptions = {
+type EntryError = {
   cards?: string,
   rounds?: string,
   startingRound?: string,
-  playerNames?: string
+  playerNames?: string[],
+  misc?: string
 }
 
-function validateType(opts, t): PartialEntryOptions {
+function validateType(opts, t): EntryError {
   const checkKeys = ['cards', 'rounds', 'startingRound']
   const names = {
     cards: t('Cards'),
@@ -26,7 +27,7 @@ function validateType(opts, t): PartialEntryOptions {
   }
   const isInt = d => d > 0 && Number.isInteger(d)
 
-  const res: PartialEntryOptions = {}
+  const res: EntryError = {}
   for (const key of checkKeys) {
     const value = opts[key]
     if (!isInt(value)) {
@@ -36,28 +37,37 @@ function validateType(opts, t): PartialEntryOptions {
   return res
 }
 
-function validateCards(opts, t): PartialEntryOptions {
+function validateCards(opts, t): EntryError {
   return opts.playerNames.length > opts.cards
     ? {cards: t('Too few cards')}
     : {}
 }
 
-function validateRounds(opts, t): PartialEntryOptions {
+function validateRounds(opts, t): EntryError {
   return opts.rounds > opts.cards / opts.playerNames.length
     ? {rounds: t('Insufficient cards for that much rounds')}
     : {}
 }
 
-function validateStartingRound(opts, t): PartialEntryOptions {
+function validateStartingRound(opts, t): EntryError {
   return opts.startingRound > opts.rounds
     ? {startingRound: t('Impossible to start beyond the end of the game')}
     : {}
 }
 
-function validatePlayerNames(opts, t): PartialEntryOptions {
+function validateMisc(opts, t): EntryError {
   return opts.playerNames.length < 2
-    ? {playerNames: t('At least 2 players is required for a game')}
+    ? {misc: t('At least 2 players is required for a game')}
     : {}
+}
+
+function validatePlayerName(opts, t): EntryError {
+  const playerNames = opts.playerNames
+    .map(p => p == null || p === '' ? t('Name cannot be empty') : '')
+  const isEmpty = playerNames.filter(p => p !== '').length === 0
+  return isEmpty
+    ? {}
+    : {playerNames}
 }
 
 /**
@@ -73,7 +83,7 @@ function validatePlayerNames(opts, t): PartialEntryOptions {
  * @param t - i18next translate function
  * @returns {Object} Error of each property
  */
-export function entryOptionsValidator(opts: EntryOptions, t: T = (a => a)): PartialEntryOptions {
+export function entryOptionsValidator(opts: EntryOptions, t: T = (a => a)): EntryError {
   const typeRes = validateType(opts, t)
   if (!isOk(typeRes)) {
     return typeRes
@@ -82,7 +92,8 @@ export function entryOptionsValidator(opts: EntryOptions, t: T = (a => a)): Part
       ...validateCards(opts, t),
       ...validateRounds(opts, t),
       ...validateStartingRound(opts, t),
-      ...validatePlayerNames(opts, t)
+      ...validateMisc(opts, t),
+      ...validatePlayerName(opts, t)
     }
   }
 }

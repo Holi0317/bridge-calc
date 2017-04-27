@@ -36,7 +36,8 @@ const IconButtonTooltip = Tooltip(IconButton)
 class DisconnectedEntry extends Component {
   props: {
     valid: boolean,
-    playerNamesError: ?string,
+    miscError: ?string,
+    playerNamesError: ?string[],
     t: (t: string) => string,
     toggleCollapse: () => void,
     genOptions: () => void,
@@ -76,7 +77,7 @@ class DisconnectedEntry extends Component {
     return (
       <div className="container">
         <h3>{t('Player Names')}</h3>
-        <NameInputList names={props.playerNames} onChange={props.changePlayerNames} />
+        <NameInputList names={props.playerNames} error={props.playerNamesError} onChange={props.changePlayerNames} />
         <div>
           <IconButtonTooltip icon={<MdAdd />} tooltip={t('Add player')} onMouseUp={props.addPlayer} />
           <IconButtonTooltip icon={<MdFileDownload />} tooltip={t('Import names')} className="pull-right" onMouseUp={props.importNames} />
@@ -89,7 +90,7 @@ class DisconnectedEntry extends Component {
         </Collapse>
 
         <Button label={t('Start')} raised accent className={style.startBtn} disabled={!props.valid} onMouseUp={this.start} />
-        <span className={style.errorMessage}>{props.playerNamesError}</span>
+        <span className={style.errorMessage}>{props.miscError}</span>
       </div>
     )
   }
@@ -101,6 +102,7 @@ function mapStateToProps(state, {t}) {
   return {
     ...entry,
     valid: isOk(validatorResult),
+    miscError: validatorResult.misc,
     playerNamesError: validatorResult.playerNames
   }
 }
@@ -129,4 +131,4 @@ function mapDispatchToProps(dispatch: (action: any) => void) {
   }
 }
 
-export const Entry = withRouter(connect(mapStateToProps, mapDispatchToProps)(translate()(DisconnectedEntry)))
+export const Entry = withRouter(translate()(connect(mapStateToProps, mapDispatchToProps)(DisconnectedEntry)))
