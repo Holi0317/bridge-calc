@@ -29,3 +29,5 @@ Insufficient cards for that much rounds: 卡牌不足
 Impossible to start beyond the end of the game: 不可能在大於遊戲的回合開始遊戲
 At least 2 players is required for a game: 最少需要2位玩家才能開始遊戲
 Name cannot be empty: 名字必需被填上
+
+"Time: {{time}}": "已用時間: {{time}}"
