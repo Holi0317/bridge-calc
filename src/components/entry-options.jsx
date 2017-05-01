@@ -44,7 +44,7 @@ function mapDispatchToProps(dispatch) {
     disp(action, oldValue: string) {
       return (value: string, valid: boolean) => {
         // If old value is invalid, allow user to change value for correction
-        const payload = (isInteger(value) && valid) || !isInteger(oldValue)
+        const payload = (valid && isInteger(value)) || !isInteger(oldValue)
           ? +value
           : +oldValue
         dispatch({type: action, payload})

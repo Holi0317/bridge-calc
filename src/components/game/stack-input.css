@@ -1,0 +1,22 @@
+.inputContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  & > span {
+    width: 4em;
+    padding-right: 1em;
+    font-weight: 600;
+    font-size: large;
+  }
+}
+
+.input {
+  margin-right: 1em;
+  width: auto;
+  min-width: 6em;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
