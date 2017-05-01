@@ -24,9 +24,9 @@ test('isInteger should fail if given a negative', t => {
   t.false(actual, 'Test should fail on negative number')
 })
 
-test('isInteger should fail if given 0', t => {
+test('isInteger should pass if given 0', t => {
   const actual = isInteger('0')
-  t.false(actual, 'Test should fail on 0')
+  t.true(actual, 'Test should fail on 0')
 })
 
 test('isInteger should fail if the first char is 0', t => {
