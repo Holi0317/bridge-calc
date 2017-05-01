@@ -30,5 +30,10 @@ Insufficient cards for that much rounds: Insufficient cards for that much rounds
 Impossible to start beyond the end of the game: Impossible to start beyond the end of the game
 At least 2 players is required for a game: At least 2 players is required for a game
 Name cannot be empty: Name cannot be empty
+"{{property}} must be an integer": "{{property}} must be an integer"
+Cannot choose that: Cannot choose that
+Way too many cards: Way too many cards
+Too many stacks: Too many stacks
+Too less stacks: Too less stacks
 
 "Time: {{time}}": "Time: {{time}}"

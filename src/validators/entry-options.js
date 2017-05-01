@@ -18,20 +18,21 @@ type EntryError = {
   misc?: string
 }
 
+const validateKeys = ['cards', 'rounds', 'startingRound']
+const isInt = d => d > 0 && Number.isInteger(d)
+
 function validateType(opts, t): EntryError {
-  const checkKeys = ['cards', 'rounds', 'startingRound']
-  const names = {
+  const propNames = {
     cards: t('Cards'),
     rounds: t('Rounds'),
     startingRound: t('Starting round')
   }
-  const isInt = d => d > 0 && Number.isInteger(d)
 
   const res: EntryError = {}
-  for (const key of checkKeys) {
+  for (const key of validateKeys) {
     const value = opts[key]
     if (!isInt(value)) {
-      res[key] = t('{{property}} must be a positive integer', {property: names[key]})
+      res[key] = t('{{property}} must be a positive integer', {property: propNames[key]})
     }
   }
   return res

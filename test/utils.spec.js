@@ -87,3 +87,38 @@ test('isOk should fail if non-empty plain object is passed in', t => {
   const expected = false
   t.is(actual, expected, 'Object with any key should be considered as error')
 })
+
+test('isOk should pass if value is undefined', t => {
+  const opt = {a: undefined}
+  const actual = utils.isOk(opt)
+  const expected = true
+  t.is(actual, expected, 'undefined should be considered as pass')
+})
+
+test('removeUndef should not mutate original object', t => {
+  const obj = {a: undefined, b: 'yo'}
+  utils.removeUndef(obj)
+  const expected = {a: undefined, b: 'yo'}
+  t.deepEqual(obj, expected, 'Original object should not be mutated')
+})
+
+test('removeUndef should remove undefined properties', t => {
+  const obj = {a: undefined, b: 'yo'}
+  const actual = utils.removeUndef(obj)
+  const expected = {b: 'yo'}
+  t.deepEqual(actual, expected, 'undefined properties should be removed')
+})
+
+test('removeUndef should remove null properties', t => {
+  const obj = {a: null, b: 'yo'}
+  const actual = utils.removeUndef(obj)
+  const expected = {b: 'yo'}
+  t.deepEqual(actual, expected, 'null properties should be removed')
+})
+
+test('removeUndef should remove empty string properties', t => {
+  const obj = {a: '', b: 'yo'}
+  const actual = utils.removeUndef(obj)
+  const expected = {b: 'yo'}
+  t.deepEqual(actual, expected, 'empty string should be removed')
+})

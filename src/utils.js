@@ -90,3 +90,14 @@ export function last<T>(array: T[]): T | null {
 export function isOk(error: any): boolean {
   return JSON.stringify(error) === '{}'
 }
+
+/**
+ * Remove any undefined value from the object given.
+ * Does NOT mutate the original object. Instead, a shallow clone will be returned.
+ * @param obj
+ */
+export function removeUndef(obj: any): any {
+  const cloned = Object.assign({}, obj)
+  Object.entries(cloned).forEach(([key, value]) => (value == null || value === '') && delete cloned[key])
+  return cloned
+}

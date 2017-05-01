@@ -45,6 +45,7 @@
     "i18next-localstorage-cache": "1.1.0",
     "i18next-xhr-backend": "1.4.1",
     "lodash.mapvalues": "4.6.0",
+    "lodash.sumby": "4.6.0",
     "lodash.topairs": "4.3.0",
     "preact": "8.1.0",
     "preact-compat": "3.15.0",
