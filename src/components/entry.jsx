@@ -18,6 +18,9 @@ import {isOk, genID} from '../utils'
 import style from './entry.css'
 
 import type {EntryState} from '../reducer/ui/entry'
+import type {Dispatch, RootState} from '../types'
+import type {START_ACTION} from '../actions/current-game'
+import type {PLAYER_NAMES_SET_ACTION, ADD_PLAYER_ACTION} from '../actions/ui/entry'
 
 /**
  * Change player names array to object with random generated player ID as key.
@@ -96,7 +99,7 @@ class DisconnectedEntry extends Component {
   }
 }
 
-function mapStateToProps(state, {t}) {
+function mapStateToProps(state: RootState, {t}) {
   const entry = state.ui.entry
   const validatorResult = entryOptionsValidator(entry, t)
   return {
@@ -107,26 +110,29 @@ function mapStateToProps(state, {t}) {
   }
 }
 
-function mapDispatchToProps(dispatch: (action: any) => void) {
+function mapDispatchToProps(dispatch: Dispatch) {
   return {
     toggleCollapse() {
       dispatch({type: OPTION_OPEN_TOGGLE})
     },
     changePlayerNames(payload: string[]) {
-      dispatch({type: PLAYER_NAMES_SET, payload})
+      const action: PLAYER_NAMES_SET_ACTION = {type: PLAYER_NAMES_SET, payload}
+      dispatch(action)
     },
     genOptions() {
-      const payload = genRandomNames()
-      dispatch({type: PLAYER_NAMES_SET, payload})
+      const action: PLAYER_NAMES_SET_ACTION = {type: PLAYER_NAMES_SET, payload: genRandomNames()}
+      dispatch(action)
     },
     addPlayer() {
-      dispatch({type: ADD_PLAYER, payload: randomName()})
+      const action: ADD_PLAYER_ACTION = {type: ADD_PLAYER, payload: randomName()}
+      dispatch(action)
     },
     importNames() {
       // TODO NYI
     },
-    start(param) {
-      dispatch({...param, type: START})
+    start(param: START_ACTION) {
+      const action: START_ACTION = {...param, type: START}
+      dispatch(action)
     }
   }
 }

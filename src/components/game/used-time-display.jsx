@@ -3,7 +3,7 @@ import {h, Component} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
 
-import type {T} from '../../i18n'
+import type {T} from '../../types'
 
 function msToTime(milliseconds: number) {
   // Get hours from milliseconds

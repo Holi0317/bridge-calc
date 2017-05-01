@@ -1,14 +1,16 @@
 // @flow
-import {AppBar} from 'react-toolbox/components/app_bar'
-import MdHelp from 'react-icons/md/help'
 import {h} from 'preact'
 import {connect} from 'preact-redux'
 import {Route, withRouter, Redirect} from 'react-router-dom'
+import {AppBar} from 'react-toolbox/components/app_bar'
+import MdHelp from 'react-icons/md/help'
 import MdArrowBack from 'react-icons/md/arrow-back'
 import {Titles} from './titles'
 import {Menu} from './menu'
 import {Entry} from './entry'
 import {Layout} from './game/layout'
+
+import type {RootState} from '../types'
 
 /**
  * Create a function that will route to specified location.
@@ -49,7 +51,7 @@ function DisconnectedApp({gameRedirect, location, history}) {
   )
 }
 
-function stateToProps(state) {
+function stateToProps(state: RootState) {
   return {
     gameRedirect: state.currentGame == null
   }

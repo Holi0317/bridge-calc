@@ -6,7 +6,7 @@ import {Tabs, Tab} from 'react-toolbox/components/tabs'
 import {routes} from './routes'
 
 import type {WithRouterProps} from 'react-router-dom'
-import type {T} from '../../i18n'
+import type {T} from '../../types'
 
 function getActive(pathname: string): number {
   // Create a matches array.

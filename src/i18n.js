@@ -41,5 +41,3 @@ export const i18n = I18next
       enabled: process.env.NODE_ENV === 'production'
     }
   })
-
-export type T = (translate: string, opt?: any) => string

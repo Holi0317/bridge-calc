@@ -4,9 +4,7 @@ import mapValues from 'lodash.mapvalues'
 import toPairs from 'lodash.topairs'
 import sumBy from 'lodash.sumby'
 
-import type {T} from '../i18n'
-
-type PlayerMap<T> = {[playerID: string]: T}
+import type {T, PlayerMap} from '../types'
 
 export type StackInput = {
   bid?: PlayerMap<number>,

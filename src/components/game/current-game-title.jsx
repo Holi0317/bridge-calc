@@ -6,7 +6,7 @@ import {gameStage} from '../../game-stage'
 import style from '../titles.css'
 
 import type {GameState} from '../../reducer/current-game'
-import type {T} from '../../i18n'
+import type {T} from '../../types'
 
 function DisconnectedCurrentGameTitle({title}) {
   return <h1 className={style.title}>{title}</h1>

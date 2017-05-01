@@ -1,7 +1,7 @@
 // @flow
 import {isOk} from '../utils'
 
-import type {T} from '../i18n'
+import type {T} from '../types'
 
 export type EntryOptions = {
   cards: number,

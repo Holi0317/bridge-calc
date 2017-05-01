@@ -11,12 +11,9 @@ export type CurrentGameActions =
  * Start a new game that overrides existing game.
  * @type {string}
  */
-export const START = 'CURRENT_GAME/START'
-/**
- * Parameter for START action
- */
+export const START: 'CURRENT_GAME/START' = 'CURRENT_GAME/START'
 export type START_ACTION = {
-  type: 'CURRENT_GAME/START',
+  type: typeof START,
   /**
    * Total number of rounds in the whole game
    */
@@ -40,9 +37,9 @@ export type START_ACTION = {
  * Skip n round(s).
  * @type {string}
  */
-export const SKIP = 'CURRENT_GAME/SKIP'
+export const SKIP: 'CURRENT_GAME/SKIP' = 'CURRENT_GAME/SKIP'
 export type SKIP_ACTION = {
-  type: 'CURRENT_GAME/SKIP',
+  type: typeof SKIP,
   /**
    * Number of rounds to be skip.
    * If not provided, current round will be skip.
@@ -60,9 +57,9 @@ export type SKIP_ACTION = {
  * Not to be confused with BID action.
  * @type {string}
  */
-export const SET_BID = 'CURRENT_GAME/SET_BID'
+export const SET_BID: 'CURRENT_GAME/SET_BID' = 'CURRENT_GAME/SET_BID'
 export type SET_BID_ACTION = {
-  type: 'CURRENT_GAME/SET_BID',
+  type: typeof SET_BID,
   payload: {
     /**
      * A map that maps player ID to their bid choice
@@ -75,9 +72,9 @@ export type SET_BID_ACTION = {
  * End bidding process in bridge game
  * @type {string}
  */
-export const BID = 'CURRENT_GAME/BID'
+export const BID: 'CURRENT_GAME/BID' = 'CURRENT_GAME/BID'
 export type BID_ACTION = {
-  type: 'CURRENT_GAME/BID',
+  type: typeof BID,
   payload: {
     /**
      * A map that maps player ID to their bid choice
@@ -91,9 +88,9 @@ export type BID_ACTION = {
  * Not to be confused with WIN action.
  * @type {string}
  */
-export const SET_WIN = 'CURRENT_GAME/SET_WIN'
+export const SET_WIN: 'CURRENT_GAME/SET_WIN' = 'CURRENT_GAME/SET_WIN'
 export type SET_WIN_ACTION = {
-  type: 'CURRENT_GAME/SET_WIN',
+  type: typeof SET_WIN,
   payload: {
     /**
      * A map that maps player ID to their win choice
@@ -106,9 +103,9 @@ export type SET_WIN_ACTION = {
  * End winning process in bridge game.
  * I.e. End one round
  */
-export const WIN = 'CURRENT_GAME/WIN'
+export const WIN: 'CURRENT_GAME/WIN' = 'CURRENT_GAME/WIN'
 export type WIN_ACTION = {
-  type: 'CURRENT_GAME/WIN',
+  type: typeof WIN,
   /**
    * A map that maps player ID to their win choice
    */

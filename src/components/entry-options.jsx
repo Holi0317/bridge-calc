@@ -6,6 +6,8 @@ import Input from 'react-toolbox/components/input'
 import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
 import {entryOptionsValidator, isInteger} from '../validators/entry-options'
 
+import type {RootState} from '../types'
+
 function DisconnectedEntryOptions(props) {
   const {t} = props
   return (
@@ -27,7 +29,7 @@ function DisconnectedEntryOptions(props) {
 
 const stateHelper = (num: number) => num === 0 ? '' : num + ''
 
-function mapStateToProps(state, {t}) {
+function mapStateToProps(state: RootState, {t}) {
   const entry = state.ui.entry
   return {
     cards: stateHelper(entry.cards),
@@ -39,7 +41,7 @@ function mapStateToProps(state, {t}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    disp(action, oldValue) {
+    disp(action, oldValue: string) {
       return value => {
         // If old value is invalid, allow user to change value for correction
         const payload = isInteger(value) || !isInteger(oldValue)

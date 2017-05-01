@@ -12,9 +12,9 @@ export type EntryActions =
  * No parameter required.
  * @type {string}
  */
-export const OPTION_OPEN_TOGGLE = 'UI/ENTRY/OPTION_OPEN_TOGGLE'
+export const OPTION_OPEN_TOGGLE: 'UI/ENTRY/OPTION_OPEN_TOGGLE' = 'UI/ENTRY/OPTION_OPEN_TOGGLE'
 export type OPTION_OPEN_TOGGLE_ACTION = {
-  type: 'UI/ENTRY/OPTION_OPEN_TOGGLE'
+  type: typeof OPTION_OPEN_TOGGLE
 }
 
 /**
@@ -23,9 +23,9 @@ export type OPTION_OPEN_TOGGLE_ACTION = {
  *  - (payload: integer) The rounds to be set
  * @type {string}
  */
-export const ROUNDS_SET = 'UI/ENTRY/ROUNDS_SET'
+export const ROUNDS_SET: 'UI/ENTRY/ROUNDS_SET' = 'UI/ENTRY/ROUNDS_SET'
 export type ROUNDS_SET_ACTION = {
-  type: 'UI/ENTRY/ROUNDS_SET',
+  type: typeof ROUNDS_SET,
   payload: number
 }
 
@@ -35,9 +35,9 @@ export type ROUNDS_SET_ACTION = {
  *  - (payload: integer) The number of cards to be set
  * @type {string}
  */
-export const CARDS_SET = 'UI/ENTRY/CARDS_SET'
+export const CARDS_SET: 'UI/ENTRY/CARDS_SET' = 'UI/ENTRY/CARDS_SET'
 export type CARDS_SET_ACTION = {
-  type: 'UI/ENTRY/CARDS_SET',
+  type: typeof CARDS_SET,
   payload: number
 }
 
@@ -47,9 +47,9 @@ export type CARDS_SET_ACTION = {
  *  - (payload: integer) The starting round to be set
  * @type {string}
  */
-export const STARTING_ROUND_SET = 'UI/ENTRY/STARTING_ROUND_SET'
+export const STARTING_ROUND_SET: 'UI/ENTRY/STARTING_ROUND_SET' = 'UI/ENTRY/STARTING_ROUND_SET'
 export type STARTING_ROUND_SET_ACTION = {
-  type: 'UI/ENTRY/STARTING_ROUND_SET',
+  type: typeof STARTING_ROUND_SET,
   payload: number
 }
 
@@ -61,9 +61,9 @@ export type STARTING_ROUND_SET_ACTION = {
  *  - (payload: string[]) The array of player names to be set
  * @type {string}
  */
-export const PLAYER_NAMES_SET = 'UI/ENTRY/PLAYER_NAMES_SET'
+export const PLAYER_NAMES_SET: 'UI/ENTRY/PLAYER_NAMES_SET' = 'UI/ENTRY/PLAYER_NAMES_SET'
 export type PLAYER_NAMES_SET_ACTION = {
-  type: 'UI/ENTRY/PLAYER_NAMES_SET',
+  type: typeof PLAYER_NAMES_SET,
   payload: string[]
 }
 
@@ -73,8 +73,8 @@ export type PLAYER_NAMES_SET_ACTION = {
  *  - (payload: string) The name of new player
  * @type {string}
  */
-export const ADD_PLAYER = 'UI/ENTRY/ADD_PLAYER'
+export const ADD_PLAYER: 'UI/ENTRY/ADD_PLAYER' = 'UI/ENTRY/ADD_PLAYER'
 export type ADD_PLAYER_ACTION = {
-  type: 'UI/ENTRY/ADD_PLAYER',
+  type: typeof ADD_PLAYER,
   payload: string
 }
