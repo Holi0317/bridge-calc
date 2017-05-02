@@ -16,20 +16,23 @@ function loadLocales(url, options, callback) {
 
 function missingKey(lng, ns, key, fallbackValue) {
   const data = {lng, ns, key, fallbackValue}
-  // eslint-disable-next-line no-console
   console.warn('[i18next] Missing translation key.', data)
 }
+
+const languages = ['en', 'zh-tw']
 
 export const i18n = I18next
   .use(XHR)
   .use(Cache)
   .use(LngDetector)
   .init({
+    debug: process.env.NODE_ENV === 'development',
     nsSeparator: false,
     keySeparator: false,
     ns: 'default',
     defaultNS: 'default',
     fallbackLng: 'en',
+    whitelist: languages,
     lowerCaseLng: true,
     missingKeyHandler: missingKey,
     backend: {

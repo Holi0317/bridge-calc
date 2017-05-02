@@ -37,3 +37,8 @@ Too many stacks: 太少墩
 Too less stacks: 太多墩
 
 "Time: {{time}}": "已用時間: {{time}}"
+
+Bid: 估計墩數
+Win: 贏取墩數
+Next: 下一步
+Undo: 還原
