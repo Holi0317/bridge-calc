@@ -1,4 +1,6 @@
 // @flow
+import type {PlayerMap} from '../types'
+
 export type CurrentGameActions =
   | START_ACTION
   | SKIP_ACTION
@@ -60,12 +62,10 @@ export type SKIP_ACTION = {
 export const SET_BID: 'CURRENT_GAME/SET_BID' = 'CURRENT_GAME/SET_BID'
 export type SET_BID_ACTION = {
   type: typeof SET_BID,
-  payload: {
-    /**
-     * A map that maps player ID to their bid choice
-     */
-    [playerID: string]: number
-  }
+  /**
+   * A map that maps player ID to their bid choice
+   */
+  payload: PlayerMap<number>
 }
 
 /**
@@ -75,12 +75,11 @@ export type SET_BID_ACTION = {
 export const BID: 'CURRENT_GAME/BID' = 'CURRENT_GAME/BID'
 export type BID_ACTION = {
   type: typeof BID,
-  payload: {
-    /**
-     * A map that maps player ID to their bid choice
-     */
-    [playerID: string]: number
-  }
+  /**
+   * A map that maps player ID to their bid choice.
+   * If this is not defined, bid property in currentGame state will be used.
+   */
+  payload?: PlayerMap<number>
 }
 
 /**
@@ -91,12 +90,10 @@ export type BID_ACTION = {
 export const SET_WIN: 'CURRENT_GAME/SET_WIN' = 'CURRENT_GAME/SET_WIN'
 export type SET_WIN_ACTION = {
   type: typeof SET_WIN,
-  payload: {
-    /**
-     * A map that maps player ID to their win choice
-     */
-    [playerID: string]: number
-  }
+  /**
+   * A map that maps player ID to their win choice
+   */
+  payload: PlayerMap<number>
 }
 
 /**
@@ -107,9 +104,10 @@ export const WIN: 'CURRENT_GAME/WIN' = 'CURRENT_GAME/WIN'
 export type WIN_ACTION = {
   type: typeof WIN,
   /**
-   * A map that maps player ID to their win choice
+   * A map that maps player ID to their win choice.
+   * If this is not defined, win property in currentGame state will be used as win.
    */
-  win: {[playerID: string]: number},
+  win?: PlayerMap<number>,
   /**
    * Time when this round ends
    */
