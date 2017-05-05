@@ -122,3 +122,35 @@ test('removeUndef should remove empty string properties', t => {
   const expected = {b: 'yo'}
   t.deepEqual(actual, expected, 'empty string should be removed')
 })
+
+test('fill should not mutate passed in argument', t => {
+  const obj = {a: 'yo', b: 'bar'}
+  const keys = ['a', 'b', 'c', 'd']
+  utils.fill(obj, keys, 'filled')
+  const expected = {a: 'yo', b: 'bar'}
+  t.deepEqual(obj, expected, 'Object passed in should not be mutated')
+})
+
+test('fill should fill up null property', t => {
+  const obj = {a: 'yo', b: 'bar', c: null}
+  const keys = ['a', 'b', 'c']
+  const actual = utils.fill(obj, keys, 'filled')
+  const expected = {a: 'yo', b: 'bar', c: 'filled'}
+  t.deepEqual(actual, expected, 'null property should be filled')
+})
+
+test('fill should fill up undefined property', t => {
+  const obj = {a: 'yo', c: 'bar'}
+  const keys = ['a', 'b', 'c']
+  const actual = utils.fill(obj, keys, 'filled')
+  const expected = {a: 'yo', b: 'filled', c: 'bar'}
+  t.deepEqual(actual, expected, 'undefined property should be filled')
+})
+
+test('fill should not keep unlisted property unmodified', t => {
+  const obj = {a: 'yo', b: 'aaa', c: 'bar'}
+  const keys = ['a', 'c']
+  const actual = utils.fill(obj, keys, 'filled')
+  const expected = {a: 'yo', b: 'aaa', c: 'bar'}
+  t.deepEqual(actual, expected, 'undefined property should be filled')
+})
