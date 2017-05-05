@@ -1,20 +1,19 @@
+// @flow
 /**
  * Game stages
  * @enum
  */
-export const gameStage = {
+export class GameStage {
   /**
    * Waiting for bid result in this round.
    */
-  waitingBid: 'waitingBid',
+  static waitingBid: 'waitingBid' = 'waitingBid'
   /**
    * Waiting for win result in this round.
    */
-  waitingWin: 'waitingWin',
+  static waitingWin: 'waitingWin' = 'waitingWin'
   /**
    * Whole game has ended.
    */
-  ended: 'ended'
+  static ended: 'ended' = 'ended'
 }
-
-export type GameStage = $Enum<gameStage>

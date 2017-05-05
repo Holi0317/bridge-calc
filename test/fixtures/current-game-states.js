@@ -1,4 +1,4 @@
-import {gameStage} from '../../src/game-stage'
+import {GameStage} from '../../src/game-stage'
 
 export const startParams = {
   rounds: 13,
@@ -32,7 +32,7 @@ export const baseGameState = {
 
 export const waitingBidState = {
   ...baseGameState,
-  stage: gameStage.waitingBid,
+  stage: GameStage.waitingBid,
   currentPlayerOrder: ['a', 'b', 'c', 'd'],
   currentRound: 1,
   bid: {}
@@ -40,12 +40,12 @@ export const waitingBidState = {
 
 export const waitingWinState = {
   ...waitingBidState,
-  stage: gameStage.waitingWin,
+  stage: GameStage.waitingWin,
   win: {}
 }
 
 export const endedState = {
   ...baseGameState,
-  stage: gameStage.ended,
+  stage: GameStage.ended,
   endTime: new Date(1)
 }

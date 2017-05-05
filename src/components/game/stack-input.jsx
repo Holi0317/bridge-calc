@@ -7,7 +7,7 @@ import {NumberInput} from '../number-input'
 import {last} from '../../utils'
 import {stackInputValidator} from '../../validators/stack-input'
 import {isInteger} from '../../validators/entry-options'
-import {gameStage} from '../../game-stage'
+import {GameStage} from '../../game-stage'
 import {SET_BID, SET_WIN} from '../../actions/current-game'
 import style from './stack-input.css'
 
@@ -61,7 +61,7 @@ function mapToNum(map: PlayerMap<string>): PlayerMap<number> {
 
 function mapStateToProps(state: any, {t}) {  // Marking this as RootState only make things too complicated
   const currentGame = state.currentGame
-  if (currentGame === null || currentGame.stage === gameStage.ended) {
+  if (currentGame === null || currentGame.stage === GameStage.ended) {
     return {
       bidDisabled: true,
       winDisabled: true,
@@ -80,8 +80,8 @@ function mapStateToProps(state: any, {t}) {  // Marking this as RootState only m
     lastPlayerID: lastPlayerID ? lastPlayerID : ''
   }
   return {
-    bidDisabled: currentGame.stage !== gameStage.waitingBid,
-    winDisabled: currentGame.stage !== gameStage.waitingWin,
+    bidDisabled: currentGame.stage !== GameStage.waitingBid,
+    winDisabled: currentGame.stage !== GameStage.waitingWin,
     bid: mapToString(currentGame.bid),
     win: mapToString(currentGame.win),
     names: currentGame.names || {},

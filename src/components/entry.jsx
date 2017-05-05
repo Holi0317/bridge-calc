@@ -20,7 +20,7 @@ import style from './entry.css'
 import type {EntryState} from '../reducer/ui/entry'
 import type {Dispatch, RootState} from '../types'
 import type {START_ACTION} from '../actions/current-game'
-import type {PLAYER_NAMES_SET_ACTION, ADD_PLAYER_ACTION} from '../actions/ui/entry'
+import type {PLAYER_NAMES_SET_ACTION, ADD_PLAYER_ACTION, OPTION_OPEN_TOGGLE_ACTION} from '../actions/ui/entry'
 
 /**
  * Change player names array to object with random generated player ID as key.
@@ -113,7 +113,8 @@ function mapStateToProps(state: RootState, {t}) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     toggleCollapse() {
-      dispatch({type: OPTION_OPEN_TOGGLE})
+      const action: OPTION_OPEN_TOGGLE_ACTION = {type: OPTION_OPEN_TOGGLE}
+      dispatch(action)
     },
     changePlayerNames(payload: string[]) {
       const action: PLAYER_NAMES_SET_ACTION = {type: PLAYER_NAMES_SET, payload}

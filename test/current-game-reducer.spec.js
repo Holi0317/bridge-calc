@@ -265,6 +265,22 @@ test('Bid should change stage to waitingWin', t => {
   t.deepEqual(actual, expected, 'WaitingWin object should be returned')
 })
 
+test('Bid should use data from currentGame.bid when bid is not given in payload', t => {
+  const expected = {
+    ...waitingWinState,
+    bid: {a: 0, b: 1, c: 0, d: 1}
+  }
+  const state = {
+    ...waitingBidState,
+    bid: {a: 0, b: 1, c: 0, d: 1}
+  }
+  const action = {
+    type: BID
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'WaitingWin object should be returned')
+})
+
 test('Win should do no-op when state is null', t => {
   const expected = null
   const state = null
@@ -341,4 +357,29 @@ test('Win should change stage to ended for last round', t => {
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'game should be ended')
+})
+
+test('Win should use data from gameStage.win if win is not given in action', t => {
+  const expected = {
+    ...waitingBidState,
+    currentPlayerOrder: ['b', 'c', 'd', 'a'],
+    currentRound: 2,
+    scores: {
+      a: [11],
+      b: [10],
+      c: [10],
+      d: [-1]
+    }
+  }
+  const state = {
+    ...waitingWinState,
+    bid: {a: 1, b: 0, c: 0, d: 1},
+    win: {a: 1, b: 0, c: 0, d: 0}
+  }
+  const action = {
+    type: WIN,
+    time: new Date(1)
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'waitingBid object for new round should be returned')
 })

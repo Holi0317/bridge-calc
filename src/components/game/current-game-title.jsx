@@ -2,7 +2,7 @@
 import {h} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
-import {gameStage} from '../../game-stage'
+import {GameStage} from '../../game-stage'
 import style from '../titles.css'
 
 import type {GameState} from '../../reducer/current-game'
@@ -15,10 +15,10 @@ function DisconnectedCurrentGameTitle({title}) {
 function computeTitle(currentGame: GameState, t: T): string {
   if (currentGame == null) {
     return ''
-  } else if (currentGame.stage === gameStage.waitingBid || currentGame.stage === gameStage.waitingWin) {
+  } else if (currentGame.stage === GameStage.waitingBid || currentGame.stage === GameStage.waitingWin) {
     const {currentRound, rounds} = (currentGame: any)  // If not type cast this, flow will throw error
     return t('Round {{currentRound}} of {{rounds}}', {currentRound, rounds})
-  } else if (currentGame.stage === gameStage.ended) {
+  } else if (currentGame.stage === GameStage.ended) {
     return t('Game over')
   } else {
     return ''
