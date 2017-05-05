@@ -17,7 +17,7 @@
     "test": "cross-env NODE_ENV=test ava",
     "lint": "npm run lint:js",
     "lint:js": "eslint --ext .jsx --ext .js --cache webpack-cfg test webpack.config.js src",
-    "flow": "flow",
+    "flow": "flow check",
     "clean": "del-cli dist",
     "build": "npm run build:dev",
     "prebuild:dev": "npm run clean",
