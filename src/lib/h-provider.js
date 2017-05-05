@@ -1,3 +1,4 @@
+// @flow
 /**
  * Re-export preact's h method as default export
  * This is used for provide plugin in webpack

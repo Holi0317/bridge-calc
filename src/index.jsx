@@ -1,3 +1,4 @@
+// @flow
 import {h, render} from 'preact'
 import {Provider} from 'preact-redux'
 import {BrowserRouter} from 'react-router-dom'
@@ -34,7 +35,9 @@ function Root() {
 
 render(<Root />, document.body)
 const spinner = document.querySelector('.splash')
-document.body.removeChild(spinner)
+if (spinner && document.body) {
+  document.body.removeChild(spinner)
+}
 
 if (process.env.NODE_ENV !== 'production') {
   require('preact/devtools')
