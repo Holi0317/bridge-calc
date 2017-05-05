@@ -155,3 +155,23 @@ test('validator should fail both bid and win when both of them have error data',
   }
   t.deepEqual(actual, expected, 'Error message should exist in all players')
 })
+
+test('validator should pass on empty bid object', t => {
+  const options = {
+    ...baseOptions,
+    bid: {}
+  }
+  const actual = validator(options, trans)
+  const expected = {}
+  t.deepEqual(actual, expected, 'No error should exist')
+})
+
+test('validator should pass on empty win object', t => {
+  const options = {
+    ...baseOptions,
+    win: {}
+  }
+  const actual = validator(options, trans)
+  const expected = {}
+  t.deepEqual(actual, expected, 'No error should exist')
+})

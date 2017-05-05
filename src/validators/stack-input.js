@@ -66,7 +66,7 @@ function validateBid(opts: StackInput, t: T): PlayerMap<string> | null {
 }
 
 function validateWin(opts: StackInput, t: T): PlayerMap<string> | null {
-  if (!opts.win) {
+  if (!opts.win || /* Is empty? */isOk(opts.win)) {
     return null
   }
   const sum: number = sumBy(toPairs(opts.win), ([, value]) => value)
