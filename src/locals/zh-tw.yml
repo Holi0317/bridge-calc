@@ -33,8 +33,8 @@ Name cannot be empty: 名字必需被填上
 "{{property}} must be an integer": "{{property}}一定要是整數"
 Cannot choose that: 不能選擇這個
 Way too many cards: 太多卡牌了
-Too many stacks: 太少墩
-Too less stacks: 太多墩
+Too many stacks: 太多墩
+Too less stacks: 太少墩
 
 "Time: {{time}}": "已用時間: {{time}}"
 
