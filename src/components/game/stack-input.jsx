@@ -17,6 +17,7 @@ type StackInputProps = {
   t: T,
   bidDisabled: boolean,
   winDisabled: boolean,
+  playerOrder: string[],
   names: PlayerMap<string>,
   bid: PlayerMap<string>,
   win: PlayerMap<string>,
@@ -28,21 +29,21 @@ type StackInputProps = {
   disp: (action: string, playerID: string, oldValue: PlayerMap<string>) => () => void
 }
 
-function DisconnectStackInput({t, bidDisabled, winDisabled, names, bid, win, error, disp}: StackInputProps) {
+function DisconnectStackInput({t, bidDisabled, winDisabled, playerOrder, names, bid, win, error, disp}: StackInputProps) {
   return (
     <div>
       <div className={style.inputContainer}>
         <span>{t('Bid')}</span>
-        {Object.entries(names).map(([playerID, name]) => (
-          <NumberInput className={style.input} label={name} autocomplete="off" disabled={bidDisabled}
+        {playerOrder.map(playerID => (
+          <NumberInput className={style.input} label={names[playerID]} autocomplete="off" disabled={bidDisabled}
                  value={bid[playerID]} error={error.bid[playerID]}
                  onChange={disp(SET_BID, playerID, bid)} />
         ))}
       </div>
       <div className={style.inputContainer}>
         <span>{t('Win')}</span>
-        {Object.entries(names).map(([playerID, name]) => (
-          <NumberInput className={style.input} label={name} autocomplete="off" disabled={winDisabled}
+        {playerOrder.map(playerID => (
+          <NumberInput className={style.input} label={names[playerID]} autocomplete="off" disabled={winDisabled}
                  value={win[playerID]} error={error.win[playerID]}
                  onChange={disp(SET_WIN, playerID, win)} />
         ))}
@@ -65,6 +66,7 @@ function mapStateToProps(state: any, {t}) {  // Marking this as RootState only m
     return {
       bidDisabled: true,
       winDisabled: true,
+      playerOrder: [],
       bid: {},
       win: {},
       names: {},
@@ -82,6 +84,7 @@ function mapStateToProps(state: any, {t}) {  // Marking this as RootState only m
   return {
     bidDisabled: currentGame.stage !== GameStage.waitingBid,
     winDisabled: currentGame.stage !== GameStage.waitingWin,
+    playerOrder: currentGame.currentPlayerOrder,
     bid: mapToString(currentGame.bid),
     win: mapToString(currentGame.win),
     names: currentGame.names || {},
