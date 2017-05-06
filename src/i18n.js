@@ -14,12 +14,7 @@ function loadLocales(url, options, callback) {
     })
 }
 
-function missingKey(lng, ns, key, fallbackValue) {
-  const data = {lng, ns, key, fallbackValue}
-  console.warn('[i18next] Missing translation key.', data)
-}
-
-const languages = ['en', 'zh-tw']
+const languages = ['en', 'zh', 'zh-tw']
 
 export const i18n = I18next
   .use(XHR)
@@ -34,7 +29,6 @@ export const i18n = I18next
     fallbackLng: 'en',
     whitelist: languages,
     lowerCaseLng: true,
-    missingKeyHandler: missingKey,
     backend: {
       loadPath: '{{lng}}',
       parse: data => data,

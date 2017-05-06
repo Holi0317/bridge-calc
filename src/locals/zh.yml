@@ -1,0 +1,44 @@
+Bridge calculator: 橋牌計分器
+Entry: 開始遊戲
+Scoreboard: 計分板
+Game over: 遊戲終了
+Round {{currentRound}} of {{rounds}}: "{{rounds}} 回合之 {{currentRound}}"
+
+Continue: 繼續遊戲
+New Game: 新增遊戲
+Previous games: 之前的遊戲
+Settings: 設定
+Information: 資訊
+Support/bug: 支援/回報Bug
+Input: 輸入
+
+Player Names: 玩家名稱
+Add player: 新增玩家
+Import names: 匯入名稱
+Options: 遊戲選項
+Start: 開始
+Player name: 玩家名稱
+Number of cards: 卡牌數量
+Number of rounds: 回合數量
+Starting round: 起始回合
+
+Cards: 卡牌
+Rounds: 回合
+"{{property}} must be a positive integer": "{{property}}一定要是大於0的整數"
+Too few cards: 太少卡牌
+Insufficient cards for that much rounds: 卡牌不足
+Impossible to start beyond the end of the game: 不可能在大於遊戲的回合開始遊戲
+At least 2 players is required for a game: 最少需要2位玩家才能開始遊戲
+Name cannot be empty: 名字必需被填上
+"{{property}} must be an integer": "{{property}}一定要是整數"
+Cannot choose that: 不能選擇這個
+Way too many cards: 太多卡牌了
+Too many stacks: 太多墩
+Too less stacks: 太少墩
+
+"Time: {{time}}": "已用時間: {{time}}"
+
+Bid: 估計墩數
+Win: 贏取墩數
+Next: 下一步
+Undo: 還原
