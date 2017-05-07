@@ -8,33 +8,34 @@ import MdAvFiberNew from 'react-icons/md/fiber-new'
 import MdAvPlayArrow from 'react-icons/md/play-arrow'
 import MdAvSkipPrevious from 'react-icons/md/skip-previous'
 import {Tile} from './tile'
+import grid from '../styles/grid.css'
 
 function Menu_({t}) {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-12">
+    <div className={grid.container}>
+      <div className={grid.row}>
+        <div className={grid.col12}>
           <Tile icon={MdAvPlayArrow} title={t('Continue')} />
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-lg-6 col-md-12">
+      <div className={grid.row}>
+        <div className={`${grid.colLg6} ${grid.colMd12}`}>
           <Tile icon={MdAvFiberNew} title={t('New Game')} to="/entry" />
         </div>
-        <div className="col-lg-6 col-md-12">
+        <div className={`${grid.colLg6} ${grid.colMd12}`}>
           <Tile icon={MdAvSkipPrevious} title={t('Previous games')} />
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-lg-4 col-md-12">
+      <div className={grid.row}>
+        <div className={`${grid.colLg4} ${grid.colMd12}`}>
           <Tile icon={MdActionSettings} title={t('Settings')} />
         </div>
-        <div className="col-lg-4 col-md-12">
+        <div className={`${grid.colLg4} ${grid.colMd12}`}>
           <Tile icon={MdActionInfo} title={t('Information')} />
         </div>
-        <div className="col-lg-4 col-md-12">
+        <div className={`${grid.colLg4} ${grid.colMd12}`}>
           <Tile icon={MdActionBugReport} title={t('Support/bug')} />
         </div>
       </div>

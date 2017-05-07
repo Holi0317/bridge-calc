@@ -17,6 +17,7 @@ import {entryOptionsValidator} from '../validators/entry-options'
 import {isOk, genID} from '../utils'
 import style from './entry.css'
 import utilsCSS from '../utils.css'
+import grid from '../styles/grid.css'
 
 import type {EntryState} from '../reducer/ui/entry'
 import type {Dispatch, RootState} from '../types'
@@ -79,7 +80,7 @@ class DisconnectedEntry extends Component {
     const {t} = this.props
     const props = this.props
     return (
-      <div className="container">
+      <div className={grid.container}>
         <h3>{t('Player Names')}</h3>
         <NameInputList names={props.playerNames} error={props.playerNamesError} onChange={props.changePlayerNames} />
         <div>
