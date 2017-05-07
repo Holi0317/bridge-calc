@@ -9,23 +9,24 @@ import {translate} from 'react-i18next'
 import styles from './mini-scoreboard.css'
 import {toPairs} from '../../utils'
 
-import type {PlayerMap, RootState} from '../../types'
+import type {PlayerMap, RootState, T} from '../../types'
 
 type MiniScoreboardProps = {
   names: PlayerMap<string>,
   prevScores: PlayerMap<number>,
   totalScores: PlayerMap<number>,
-  ranks: PlayerMap<string>
+  ranks: PlayerMap<string>,
+  t: T
 }
 
-function DisconnectMiniScoreboard({names, prevScores, totalScores, ranks}: MiniScoreboardProps) {
+function DisconnectMiniScoreboard({names, prevScores, totalScores, ranks, t}: MiniScoreboardProps) {
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
 
         <thead>
         <tr>
-          <th>Name</th>
+          <th>{t('Name')}</th>
           {toPairs(names).map(([playerID, name]) => (
             <th key={playerID}>{name}</th>
           ))}
@@ -34,19 +35,19 @@ function DisconnectMiniScoreboard({names, prevScores, totalScores, ranks}: MiniS
 
         <tbody>
         <tr>
-          <td>Previous round score</td>
+          <td>{t('Previous round score')}</td>
           {toPairs(prevScores).map(([playerID, score]) => (
             <td key={playerID}>{score}</td>
           ))}
         </tr>
         <tr>
-          <td>Total score</td>
+          <td>{t('Total score')}</td>
           {toPairs(totalScores).map(([playerID, score]) => (
             <td key={playerID}>{score}</td>
           ))}
         </tr>
         <tr>
-          <td>Rank</td>
+          <td>{t('Rank')}</td>
           {toPairs(ranks).map(([playerID, rank]) => (
             <td key={playerID}>{rank}</td>
           ))}
