@@ -16,6 +16,7 @@ import {genRandomNames, randomName} from '../example-names'
 import {entryOptionsValidator} from '../validators/entry-options'
 import {isOk, genID} from '../utils'
 import style from './entry.css'
+import utilsCSS from '../utils.css'
 
 import type {EntryState} from '../reducer/ui/entry'
 import type {Dispatch, RootState} from '../types'
@@ -83,7 +84,7 @@ class DisconnectedEntry extends Component {
         <NameInputList names={props.playerNames} error={props.playerNamesError} onChange={props.changePlayerNames} />
         <div>
           <IconButtonTooltip icon={<MdAdd />} tooltip={t('Add player')} onMouseUp={props.addPlayer} />
-          <IconButtonTooltip icon={<MdFileDownload />} tooltip={t('Import names')} className="pull-right" onMouseUp={props.importNames} />
+          <IconButtonTooltip icon={<MdFileDownload />} tooltip={t('Import names')} className={utilsCSS.pullRight} onMouseUp={props.importNames} />
         </div>
         <hr />
 

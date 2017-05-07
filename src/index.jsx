@@ -34,6 +34,8 @@ function Root() {
 }
 
 render(<Root />, document.body)
+
+// Remove splash spinner
 const spinner = document.querySelector('.splash')
 if (spinner && document.body) {
   document.body.removeChild(spinner)

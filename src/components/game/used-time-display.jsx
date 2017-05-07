@@ -2,6 +2,7 @@
 import {h, Component} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
+import utilsCSS from '../../utils.css'
 
 import type {T} from '../../types'
 
@@ -75,7 +76,7 @@ class DisconnectUsedTimeDisplay extends Component {
   render() {
     const {t} = this.props
     const {time} = this.state
-    return <span className="pull-right">{t('Time: {{time}}', {time})}</span>
+    return <span className={utilsCSS.pullRight}>{t('Time: {{time}}', {time})}</span>
   }
 }
 
