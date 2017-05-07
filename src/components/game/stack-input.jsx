@@ -36,7 +36,7 @@ function DisconnectStackInput({t, bidDisabled, winDisabled, playerOrder, names, 
         <span>{t('Bid')}</span>
         {playerOrder.map(playerID => (
           <NumberInput className={style.input} label={names[playerID]} autocomplete="off" disabled={bidDisabled}
-                 value={bid[playerID]} error={error.bid[playerID]}
+                 key={playerID} value={bid[playerID]} error={error.bid[playerID]}
                  onChange={disp(SET_BID, playerID, bid)} />
         ))}
       </div>
@@ -44,7 +44,7 @@ function DisconnectStackInput({t, bidDisabled, winDisabled, playerOrder, names, 
         <span>{t('Win')}</span>
         {playerOrder.map(playerID => (
           <NumberInput className={style.input} label={names[playerID]} autocomplete="off" disabled={winDisabled}
-                 value={win[playerID]} error={error.win[playerID]}
+                 key={playerID} value={win[playerID]} error={error.win[playerID]}
                  onChange={disp(SET_WIN, playerID, win)} />
         ))}
       </div>

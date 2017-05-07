@@ -7,7 +7,7 @@ export function GameTitle() {
   return (
     <span>
       {routes.map(route => (
-        <Route exact={route.exact} path={route.path} component={route.titleComponent} />
+        <Route key={route} exact={route.exact} path={route.path} component={route.titleComponent} />
       ))}
     </span>
   )

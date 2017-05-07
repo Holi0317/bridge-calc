@@ -14,8 +14,8 @@ const titles = {
 export function Titles() {
   return (
     <span>
-      {toPairs(titles).map(([key, value]) => (
-        <Route exact={key === '/'} path={key} component={value} />
+      {toPairs(titles).map(([route, comp]) => (
+        <Route exact={route === '/'} key={route} path={route} component={comp} />
       ))}
     </span>
   )
