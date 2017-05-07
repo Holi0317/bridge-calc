@@ -2,7 +2,7 @@
 import {h, Component} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
-import utilsCSS from '../../utils.css'
+import utilsCSS from '../../styles/utils.css'
 
 import type {T} from '../../types'
 

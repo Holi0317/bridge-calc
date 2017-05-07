@@ -16,7 +16,7 @@ import {genRandomNames, randomName} from '../example-names'
 import {entryOptionsValidator} from '../validators/entry-options'
 import {isOk, genID} from '../utils'
 import style from './entry.css'
-import utilsCSS from '../utils.css'
+import utilsCSS from '../styles/utils.css'
 import grid from '../styles/grid.css'
 
 import type {EntryState} from '../reducer/ui/entry'
