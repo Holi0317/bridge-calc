@@ -1,6 +1,6 @@
 import test from 'ava'
-import {t as trans} from './test-utils'
-import {stackInputValidator as validator} from '../src/validators/stack-input'
+import {t as trans} from '../test-utils'
+import {stackInputValidator as validator} from '../../src/validators/stack-input'
 
 function genMap(a, b, c, d) {
   return {a, b, c, d}

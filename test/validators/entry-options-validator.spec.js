@@ -1,6 +1,6 @@
 import test from 'ava'
-import {t as trans} from './test-utils'
-import {entryOptionsValidator as validator, isInteger} from '../src/validators/entry-options'
+import {t as trans} from '../test-utils'
+import {entryOptionsValidator as validator, isInteger} from '../../src/validators/entry-options'
 
 const defaultOptions = {
   cards: 52,

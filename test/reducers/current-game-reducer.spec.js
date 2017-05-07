@@ -1,7 +1,7 @@
 import test from 'ava'
-import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO} from '../src/actions/current-game'
-import {currentGame as reducer} from '../src/reducer/current-game'
-import {startParams, waitingBidState, waitingWinState, endedState} from './fixtures/current-game-states'
+import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO} from '../../src/actions/current-game'
+import {currentGame as reducer} from '../../src/reducer/current-game/index'
+import {startParams, waitingBidState, waitingWinState, endedState} from '../fixtures/current-game-states'
 
 test('Default state should be null', t => {
   const expected = null
