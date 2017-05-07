@@ -1,5 +1,5 @@
 // @flow
-import mapValues from 'lodash.mapvalues'
+import mapValues from 'lodash/mapValues'
 import {GameStage} from '../../game-stage'
 import {toFront} from '../../utils'
 import {toEndedState} from './converter'

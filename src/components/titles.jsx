@@ -1,9 +1,9 @@
 // @flow
 import {h} from 'preact'
-import toPairs from 'lodash.topairs'
 import {Route} from 'react-router-dom'
 import {GameTitle} from './game/title'
 import {createTitle} from './create-title'
+import {toPairs} from '../utils'
 
 const titles = {
   '/': createTitle('Bridge calculator'),

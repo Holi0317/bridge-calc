@@ -123,3 +123,11 @@ export function fill<T>(obj: {[key: string]: T}, keys: string[], value: T): {[ke
   }
   return cloned
 }
+
+/**
+ * Typed Object.entries.
+ * This is just a helper function to mock out flow's type checking
+ */
+export function toPairs(obj: any): any[] {
+  return (Object: any).entries(obj)
+}
