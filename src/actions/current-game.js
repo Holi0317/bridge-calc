@@ -8,6 +8,7 @@ export type CurrentGameActions =
   | BID_ACTION
   | SET_WIN_ACTION
   | WIN_ACTION
+  | UNDO_ACTION
 
 /**
  * Start a new game that overrides existing game.
@@ -112,4 +113,12 @@ export type WIN_ACTION = {
    * Time when this round ends
    */
   time: Date
+}
+
+/**
+ * Roll back from waitingWin stage to waitingBid stage.
+ */
+export const UNDO: 'CURRENT_GAME/UNDO' = 'CURRENT_GAME/UNDO'
+export type UNDO_ACTION = {
+  type: typeof UNDO
 }

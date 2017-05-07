@@ -4,13 +4,13 @@ import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
 import {Button} from 'react-toolbox/components/button'
 import {GameStage} from '../../game-stage'
-import {BID, SET_BID, SET_WIN, SKIP, WIN} from '../../actions/current-game'
+import {BID, SET_BID, SET_WIN, UNDO, WIN} from '../../actions/current-game'
 import {stackInputValidator} from '../../validators/stack-input'
 import {isOk, last, fill} from '../../utils'
 import style from './action-buttons.css'
 
 import type {Dispatch, PlayerMap, T} from '../../types'
-import type {BID_ACTION, WIN_ACTION, SKIP_ACTION, SET_BID_ACTION, SET_WIN_ACTION} from '../../actions/current-game'
+import type {BID_ACTION, WIN_ACTION, UNDO_ACTION, SET_BID_ACTION, SET_WIN_ACTION} from '../../actions/current-game'
 import type {GameState} from '../../reducer/current-game'
 
 type ActionButtonsProps = {
@@ -132,7 +132,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     undo(stage: string) {
       return () => {
         if (stage === GameStage.waitingWin) {
-          const action: SKIP_ACTION = {type: SKIP, time: new Date()}
+          const action: UNDO_ACTION = {type: UNDO}
           dispatch(action)
         }
       }

@@ -1,5 +1,5 @@
 import test from 'ava'
-import {START, SKIP, SET_BID, BID, SET_WIN, WIN} from '../src/actions/current-game'
+import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO} from '../src/actions/current-game'
 import {currentGame as reducer} from '../src/reducer/current-game'
 import {startParams, waitingBidState, waitingWinState, endedState} from './fixtures/current-game-states'
 
@@ -382,4 +382,58 @@ test('Win should use data from gameStage.win if win is not given in action', t =
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'waitingBid object for new round should be returned')
+})
+
+test('Undo should do no-op when state is null', t => {
+  const expected = null
+  const state = null
+  const action = {
+    type: UNDO
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'No-op should be done')
+})
+
+test('Undo should do no-op when stage is ended', t => {
+  const expected = {
+    ...endedState
+  }
+  const state = {
+    ...endedState
+  }
+  const action = {
+    type: UNDO
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'No-op should be done')
+})
+
+test('Undo should do no-op when stage is waitingBid', t => {
+  const expected = {
+    ...waitingBidState
+  }
+  const state = {
+    ...waitingBidState
+  }
+  const action = {
+    type: UNDO
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'No-op should be done')
+})
+
+test('Undo should roll back stage is waitingWin', t => {
+  const expected = {
+    ...waitingBidState,
+    bid: {a: 0, b: 0, c: 0, d: 0}
+  }
+  const state = {
+    ...waitingWinState,
+    bid: {a: 0, b: 0, c: 0, d: 0}
+  }
+  const action = {
+    type: UNDO
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'Stage should be waitingWin')
 })

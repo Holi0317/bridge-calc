@@ -1,9 +1,10 @@
 // @flow
-import {START, SKIP, SET_BID, BID, SET_WIN, WIN} from '../../actions/current-game'
+import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO} from '../../actions/current-game'
 import {GameStage} from '../../game-stage'
 import {skip} from './skip'
 import {start} from './start'
 import {winHandler} from './win-handler'
+import {toWaitingBidState} from './converter'
 
 import type {EndedState, GameState, WaitingBidState} from './types'
 import type {CurrentGameActions} from '../../actions/current-game'
@@ -46,6 +47,11 @@ export function currentGame(state: GameState = defaultState, action: CurrentGame
     }
   case WIN:
     return winHandler(state, action)
+  case UNDO:
+    if (state.stage === GameStage.waitingBid) {
+      return state
+    }
+    return toWaitingBidState(state)
   default:
     return state
   }
