@@ -7,7 +7,8 @@ const cssLoader = {
     modules: true,
     sourceMap: true,
     importLoaders: 1,
-    minimize: ENV === 'production'
+    minimize: ENV === 'production',
+    camelCase: 'dashesOnly'
   }
 }
 
