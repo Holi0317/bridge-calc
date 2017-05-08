@@ -4,7 +4,8 @@ import {translate} from 'react-i18next'
 import {connect} from 'preact-redux'
 import {NumberInput} from './number-input'
 import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
-import {entryOptionsValidator, isInteger} from '../validators/entry-options'
+import {isInteger} from '../validators/entry-options'
+import {entryOptionsValidatorSelector} from '../selectors/entry-options-validator'
 
 import type {RootState} from '../types'
 
@@ -27,15 +28,16 @@ function DisconnectedEntryOptions(props) {
   )
 }
 
-const stateHelper = (num: number) => num + ''
+const toStr = (num: number) => num + ''
 
 function mapStateToProps(state: RootState, {t}) {
   const entry = state.ui.entry
+  const error = entryOptionsValidatorSelector(state, t)
   return {
-    cards: stateHelper(entry.cards),
-    rounds: stateHelper(entry.rounds),
-    startingRound: stateHelper(entry.startingRound),
-    error: entryOptionsValidator(entry, t)
+    cards: toStr(entry.cards),
+    rounds: toStr(entry.rounds),
+    startingRound: toStr(entry.startingRound),
+    error
   }
 }
 
