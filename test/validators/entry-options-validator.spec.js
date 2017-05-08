@@ -1,5 +1,5 @@
 import test from 'ava'
-import {t as trans} from '../test-utils'
+import {t as trans} from '../helpers/test-utils'
 import {entryOptionsValidator as validator, isInteger} from '../../src/validators/entry-options'
 
 const defaultOptions = {

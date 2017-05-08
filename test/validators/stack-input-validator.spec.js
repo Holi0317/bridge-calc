@@ -1,5 +1,5 @@
 import test from 'ava'
-import {t as trans} from '../test-utils'
+import {t as trans} from '../helpers/test-utils'
 import {genMap} from '../fixtures/current-game-states'
 import {stackInputValidator as validator} from '../../src/validators/stack-input'
 
