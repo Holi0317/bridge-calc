@@ -3,7 +3,6 @@ import {h, Component} from 'preact'
 import Input from 'react-toolbox/components/input'
 
 export class NumberInput extends Component {
-  inputNode: ?HTMLInputElement
   ref: ?any
   props: any
 
