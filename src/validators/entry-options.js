@@ -10,7 +10,7 @@ export type EntryOptions = {
   playerNames: string[]
 }
 
-type EntryError = {
+export type EntryError = {
   cards?: string,
   rounds?: string,
   startingRound?: string,
