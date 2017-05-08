@@ -1,13 +1,7 @@
 import test from 'ava'
 import {t as trans} from '../helpers/test-utils'
+import {defaultOptions} from '../fixtures/entry-options'
 import {entryOptionsValidator as validator, isInteger} from '../../src/validators/entry-options'
-
-const defaultOptions = {
-  cards: 52,
-  rounds: 13,
-  startingRound: 1,
-  playerNames: ['John', 'Mary', 'Henry', 'Joe']
-}
 
 test('isInteger should pass if given string is an integer', t => {
   const actual = isInteger('10')
