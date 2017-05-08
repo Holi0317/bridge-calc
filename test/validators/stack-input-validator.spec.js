@@ -1,10 +1,7 @@
 import test from 'ava'
 import {t as trans} from '../test-utils'
+import {genMap} from '../fixtures/current-game-states'
 import {stackInputValidator as validator} from '../../src/validators/stack-input'
-
-function genMap(a, b, c, d) {
-  return {a, b, c, d}
-}
 
 const baseOptions = {
   currentRound: 1,

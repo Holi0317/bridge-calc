@@ -1,7 +1,7 @@
 import test from 'ava'
 import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO} from '../../src/actions/current-game'
+import {startParams, waitingBidState, waitingWinState, endedState, genMap} from '../fixtures/current-game-states'
 import {currentGame as reducer} from '../../src/reducer/current-game/index'
-import {startParams, waitingBidState, waitingWinState, endedState} from '../fixtures/current-game-states'
 
 test('Default state should be null', t => {
   const expected = null
@@ -24,12 +24,7 @@ test('Production of default basic state after start', t => {
 test('Start on second round should work', t => {
   const expected = {
     ...waitingBidState,
-    scores: {
-      a: [0],
-      b: [0],
-      c: [0],
-      d: [0]
-    },
+    scores: genMap([0], [0], [0], [0]),
     currentPlayerOrder: ['b', 'c', 'd', 'a'],
     currentRound: 2
   }
@@ -55,12 +50,7 @@ test('Skip should do no-op when the state is null', t => {
 test('Skip should skip 1 round if no payload is supplied', t => {
   const expected = {
     ...waitingBidState,
-    scores: {
-      a: [0],
-      b: [0],
-      c: [0],
-      d: [0]
-    },
+    scores: genMap([0], [0], [0], [0]),
     currentPlayerOrder: ['b', 'c', 'd', 'a'],
     currentRound: 2
   }
@@ -78,19 +68,14 @@ test('Skip should skip 1 round if no payload is supplied', t => {
 test('Skip should reset bid and win data', t => {
   const expected = {
     ...waitingBidState,
-    scores: {
-      a: [0],
-      b: [0],
-      c: [0],
-      d: [0]
-    },
+    scores: genMap([0], [0], [0], [0]),
     currentPlayerOrder: ['b', 'c', 'd', 'a'],
     currentRound: 2
   }
   const state = {
     ...waitingWinState,
-    bid: {a: 0, b: 1, c: 0, d: 1},
-    win: {a: 0, b: 1, c: 0, d: 0}
+    bid: genMap(0, 1, 0, 1),
+    win: genMap(0, 1, 0, 0)
   }
   const action = {
     type: SKIP,
@@ -105,12 +90,7 @@ test('Skip on last round should change state to ended', t => {
   const expected = {
     ...endedState,
     rounds: 2,
-    scores: {
-      a: [0],
-      b: [0],
-      c: [0],
-      d: [0]
-    }
+    scores: genMap([0], [0], [0], [0])
   }
   const state = {
     ...waitingBidState,
@@ -227,7 +207,7 @@ test('Bid should do no-op when the state is null', t => {
   const expected = null
   const action = {
     type: BID,
-    payload: {a: 0, b: 1, c: 0, d: 1}
+    payload: genMap(0, 1, 0, 1)
   }
   const actual = reducer(null, action)
   t.is(actual, expected, 'Null should be the new state')
@@ -242,7 +222,7 @@ test('Bid should do no-op when game stage is ended', t => {
   }
   const action = {
     type: BID,
-    payload: {a: 0, b: 1, c: 0, d: 1}
+    payload: genMap(0, 1, 0, 1)
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'No-op should be done')
@@ -251,7 +231,7 @@ test('Bid should do no-op when game stage is ended', t => {
 test('Bid should change stage to waitingWin', t => {
   const expected = {
     ...waitingWinState,
-    bid: {a: 0, b: 1, c: 0, d: 1}
+    bid: genMap(0, 1, 0, 1)
   }
   const state = {
     ...waitingBidState,
@@ -259,7 +239,7 @@ test('Bid should change stage to waitingWin', t => {
   }
   const action = {
     type: BID,
-    payload: {a: 0, b: 1, c: 0, d: 1}
+    payload: genMap(0, 1, 0, 1)
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'WaitingWin object should be returned')
@@ -268,11 +248,11 @@ test('Bid should change stage to waitingWin', t => {
 test('Bid should use data from currentGame.bid when bid is not given in payload', t => {
   const expected = {
     ...waitingWinState,
-    bid: {a: 0, b: 1, c: 0, d: 1}
+    bid: genMap(0, 1, 0, 1)
   }
   const state = {
     ...waitingBidState,
-    bid: {a: 0, b: 1, c: 0, d: 1}
+    bid: genMap(0, 1, 0, 1)
   }
   const action = {
     type: BID
@@ -286,7 +266,7 @@ test('Win should do no-op when state is null', t => {
   const state = null
   const action = {
     type: WIN,
-    win: {a: 0, b: 1, c: 0, d: 0},
+    win: genMap(0, 1, 0, 0),
     time: new Date(1)
   }
   const actual = reducer(state, action)
@@ -302,7 +282,7 @@ test('Win should do no-op when game stage is ended', t => {
   }
   const action = {
     type: WIN,
-    win: {a: 0, b: 1, c: 0, d: 0},
+    win: genMap(0, 1, 0, 0),
     time: new Date(1)
   }
   const actual = reducer(state, action)
@@ -314,20 +294,15 @@ test('Win should change stage to waitingBid', t => {
     ...waitingBidState,
     currentPlayerOrder: ['b', 'c', 'd', 'a'],
     currentRound: 2,
-    scores: {
-      a: [11],
-      b: [10],
-      c: [10],
-      d: [-1]
-    }
+    scores: genMap([11], [10], [10], [-1])
   }
   const state = {
     ...waitingWinState,
-    bid: {a: 1, b: 0, c: 0, d: 1}
+    bid: genMap(1, 0, 0, 1)
   }
   const action = {
     type: WIN,
-    win: {a: 1, b: 0, c: 0, d: 0},
+    win: genMap(1, 0, 0, 0),
     time: new Date(1)
   }
   const actual = reducer(state, action)
@@ -338,21 +313,16 @@ test('Win should change stage to ended for last round', t => {
   const expected = {
     ...endedState,
     rounds: 1,
-    scores: {
-      a: [11],
-      b: [10],
-      c: [10],
-      d: [-1]
-    }
+    scores: genMap([11], [10], [10], [-1])
   }
   const state = {
     ...waitingWinState,
     rounds: 1,
-    bid: {a: 1, b: 0, c: 0, d: 1}
+    bid: genMap(1, 0, 0, 1)
   }
   const action = {
     type: WIN,
-    win: {a: 1, b: 0, c: 0, d: 0},
+    win: genMap(1, 0, 0, 0),
     time: new Date(1)
   }
   const actual = reducer(state, action)
@@ -364,17 +334,12 @@ test('Win should use data from gameStage.win if win is not given in action', t =
     ...waitingBidState,
     currentPlayerOrder: ['b', 'c', 'd', 'a'],
     currentRound: 2,
-    scores: {
-      a: [11],
-      b: [10],
-      c: [10],
-      d: [-1]
-    }
+    scores: genMap([11], [10], [10], [-1])
   }
   const state = {
     ...waitingWinState,
-    bid: {a: 1, b: 0, c: 0, d: 1},
-    win: {a: 1, b: 0, c: 0, d: 0}
+    bid: genMap(1, 0, 0, 1),
+    win: genMap(1, 0, 0, 0)
   }
   const action = {
     type: WIN,
@@ -425,11 +390,11 @@ test('Undo should do no-op when stage is waitingBid', t => {
 test('Undo should roll back stage is waitingWin', t => {
   const expected = {
     ...waitingBidState,
-    bid: {a: 0, b: 0, c: 0, d: 0}
+    bid: genMap(0, 0, 0, 0)
   }
   const state = {
     ...waitingWinState,
-    bid: {a: 0, b: 0, c: 0, d: 0}
+    bid: genMap(0, 0, 0, 0)
   }
   const action = {
     type: UNDO
