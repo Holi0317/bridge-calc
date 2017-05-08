@@ -13,8 +13,9 @@ import {OPTION_OPEN_TOGGLE, PLAYER_NAMES_SET, ADD_PLAYER} from '../actions/ui/en
 import {START} from '../actions/current-game'
 import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from '../example-names'
-import {entryOptionsValidator} from '../validators/entry-options'
-import {isOk, genID} from '../utils'
+import {entryOptionsValidatorSelector} from '../selectors/entry-options-validator'
+import {validEntryOptionsSelector} from '../selectors/valid-entry-options'
+import {genID} from '../utils'
 import style from './entry.css'
 import utilsCSS from '../styles/utils.css'
 import grid from '../styles/grid.css'
@@ -102,11 +103,11 @@ class DisconnectedEntry extends Component {
 }
 
 function mapStateToProps(state: RootState, {t}) {
-  const entry = state.ui.entry
-  const validatorResult = entryOptionsValidator(entry, t)
+  const validatorResult = entryOptionsValidatorSelector(state, t)
+  const valid = validEntryOptionsSelector(state, t)
   return {
-    ...entry,
-    valid: isOk(validatorResult),
+    ...state.ui.entry,
+    valid,
     miscError: validatorResult.misc,
     playerNamesError: validatorResult.playerNames
   }
