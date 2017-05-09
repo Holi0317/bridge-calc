@@ -74,7 +74,7 @@ function updater(opts: UpdaterOpts) {
   if (Object.keys(opts.buffer).length !== playerIDs.length) {
     buffer = fill(opts.buffer, playerIDs, 0)
     if (opts.bufferName === 'bid') {
-      const action: SET_BID_ACTION= {type: SET_BID, payload: buffer}
+      const action: SET_BID_ACTION = {type: SET_BID, payload: buffer}
       opts.dispatch(action)
     } else if (opts.bufferName === 'win') {
       const action: SET_WIN_ACTION = {type: SET_WIN, payload: buffer}
