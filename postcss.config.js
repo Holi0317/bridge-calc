@@ -21,6 +21,9 @@ module.exports = {
           variables: reactToolboxVariables
         }
       }
+    },
+    'postcss-reporter': {
+      clearReportedMessages: true
     }
   }
 }
