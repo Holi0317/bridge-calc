@@ -1,6 +1,6 @@
 import test from 'ava'
 import {defaultOptions} from '../fixtures/entry-options'
-import {t as trans} from '../helpers/test-utils'
+import {t as trans} from '../helpers/translate'
 import {entryOptionsValidatorSelector} from '../../src/selectors/entry-options-validator'
 
 test('empty object should be selected for entry options with no error', t => {
