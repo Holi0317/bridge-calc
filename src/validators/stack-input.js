@@ -12,7 +12,7 @@ export type StackInput = {
   lastPlayerID: string
 }
 
-type StackInputError = {
+export type StackInputError = {
   bid?: PlayerMap<string>,
   win?: PlayerMap<string>
 }
