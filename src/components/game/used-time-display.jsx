@@ -4,7 +4,8 @@ import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
 import utilsCSS from '../../styles/utils.css'
 
-import type {T} from '../../types'
+import type {RootState, T} from '../../types'
+import {endTimeSelector, startTimeSelector} from '../../selectors/time'
 
 function msToTime(milliseconds: number) {
   // Get hours from milliseconds
@@ -80,10 +81,10 @@ class DisconnectUsedTimeDisplay extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
-    startTime: state.currentGame.startTime || null,
-    endTime: state.currentGame.endTime || null
+    startTime: startTimeSelector(state),
+    endTime: endTimeSelector(state)
   }
 }
 
