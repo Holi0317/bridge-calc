@@ -4,14 +4,18 @@ import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
 import mapValues from 'lodash/mapValues'
 import {NumberInput} from '../number-input'
-import {last} from '../../utils'
-import {stackInputValidator} from '../../validators/stack-input'
 import {isInteger} from '../../validators/entry-options'
 import {GameStage} from '../../game-stage'
+import {stageSelector} from '../../selectors/stage'
+import {namesSelector} from '../../selectors/names'
+import {strBidSelector} from '../../selectors/bid'
+import {strWinSelector} from '../../selectors/win'
+import {playerOrderSelector} from '../../selectors/player-order'
+import {withErrorProp} from '../../selectors/stack-input-validator'
 import {SET_BID, SET_WIN} from '../../actions/current-game'
 import style from './stack-input.css'
 
-import type {T, PlayerMap} from '../../types'
+import type {T, PlayerMap, RootState} from '../../types'
 
 type StackInputProps = {
   t: T,
@@ -52,48 +56,20 @@ function DisconnectStackInput({t, bidDisabled, winDisabled, playerOrder, names, 
   )
 }
 
-function mapToString(map: PlayerMap<number>): PlayerMap<string> {
-  return mapValues(map, value => value + '')
+function mapStateToProps(state: RootState, {t}) {
+  return {
+    bidDisabled: stageSelector(state) !== GameStage.waitingBid,
+    winDisabled: stageSelector(state) !== GameStage.waitingWin,
+    playerOrder: playerOrderSelector(state),
+    bid: strBidSelector(state),
+    win: strWinSelector(state),
+    names: namesSelector(state),
+    error: withErrorProp(state, t)
+  }
 }
 
 function mapToNum(map: PlayerMap<string>): PlayerMap<number> {
   return mapValues(map, value => +value)
-}
-
-function mapStateToProps(state: any, {t}) {  // Marking this as RootState only make things too complicated
-  const currentGame = state.currentGame
-  if (currentGame === null || currentGame.stage === GameStage.ended) {
-    return {
-      bidDisabled: true,
-      winDisabled: true,
-      playerOrder: [],
-      bid: {},
-      win: {},
-      names: {},
-      error: {
-        bid: {},
-        win: {}
-      }
-    }
-  }
-  const lastPlayerID = last(currentGame.currentPlayerOrder)
-  const opts = {
-    ...currentGame,
-    lastPlayerID: lastPlayerID ? lastPlayerID : ''
-  }
-  return {
-    bidDisabled: currentGame.stage !== GameStage.waitingBid,
-    winDisabled: currentGame.stage !== GameStage.waitingWin,
-    playerOrder: currentGame.currentPlayerOrder,
-    bid: mapToString(currentGame.bid),
-    win: mapToString(currentGame.win),
-    names: currentGame.names || {},
-    error: {
-      bid: {},
-      win: {},
-      ...stackInputValidator(opts, t)
-    }
-  }
 }
 
 function mapDispatchToProps(dispatch) {
