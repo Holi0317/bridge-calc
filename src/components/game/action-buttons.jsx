@@ -6,12 +6,14 @@ import {Button} from 'react-toolbox/components/button'
 import {GameStage} from '../../game-stage'
 import {BID, SET_BID, SET_WIN, UNDO, WIN} from '../../actions/current-game'
 import {stackInputValidator} from '../../validators/stack-input'
-import {isOk, last, fill} from '../../utils'
+import {isOk, fill} from '../../utils'
 import style from './action-buttons.css'
 
-import type {Dispatch, PlayerMap, T} from '../../types'
+import type {Dispatch, PlayerMap, RootState, T} from '../../types'
 import type {BID_ACTION, WIN_ACTION, UNDO_ACTION, SET_BID_ACTION, SET_WIN_ACTION} from '../../actions/current-game'
 import type {GameState} from '../../reducer/current-game'
+import {stageSelector} from '../../selectors/stage'
+import {validStackInput} from '../../selectors/stack-input-validator'
 
 type ActionButtonsProps = {
   t: T,
@@ -33,25 +35,11 @@ function DisconnectActionButtons({t, nextDisabled, undoDisabled, currentGame, ne
   )
 }
 
-function mapStateToProps(state: any, {t}) {
-  const currentGame = state.currentGame
-  if (!currentGame || currentGame.stage === GameStage.ended) {
-    return {
-      undoDisabled: true,
-      nextDisabled: true,
-      currentGame
-    }
-  }
-  const lastPlayerID = last(currentGame.currentPlayerOrder)
-  const opts = {
-    ...currentGame,
-    lastPlayerID: lastPlayerID ? lastPlayerID : ''
-  }
-  const ok = isOk(stackInputValidator(opts, t))
+function mapStateToProps(state: RootState, {t}) {
   return {
-    undoDisabled: currentGame.stage !== GameStage.waitingWin,
-    nextDisabled: !ok,
-    currentGame
+    undoDisabled: stageSelector(state) !== GameStage.waitingWin,
+    nextDisabled: !validStackInput(state, t),
+    currentGame: state.currentGame
   }
 }
 
