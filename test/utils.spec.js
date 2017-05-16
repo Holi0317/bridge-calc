@@ -124,3 +124,14 @@ test('fill should not keep unlisted property unmodified', t => {
   const expected = {a: 'yo', b: 'aaa', c: 'bar'}
   t.deepEqual(actual, expected, 'undefined property should be filled')
 })
+
+test('createSource should create source according to input', t => {
+  const values = [1, 2, 3]
+  const expected = [
+    {label: '1', value: 1},
+    {label: '2', value: 2},
+    {label: '3', value: 3}
+  ]
+  const actual = utils.createSource(values)
+  t.deepEqual(actual, expected, 'Source should be created')
+})

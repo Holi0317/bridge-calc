@@ -8,6 +8,11 @@ export type PlayerMap<T> = {[playerID: string]: T}
 
 export type T = (translate: string, opt: ?any) => string
 
+export type DropdownSource<T> = {
+  value: T,
+  label: string
+}
+
 export type RootState = {
   currentGame: GameState,
   ui: {

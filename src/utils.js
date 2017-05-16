@@ -1,4 +1,5 @@
 // @flow
+import type {DropdownSource} from './types'
 /**
  * Generate a (hopefully) unique ID with 4 characters
  */
@@ -100,4 +101,15 @@ export function fill<T>(obj: {[key: string]: T}, keys: string[], value: T): {[ke
  */
 export function toPairs(obj: any): any[] {
   return (Object: any).entries(obj)
+}
+
+/**
+ * Create sources for react-toolbox's dropdown component.
+ * The given array will be used as value in sources.
+ * The label generated will be the stringfied version of value.
+ * @param values - Array of value that will be source's value when generated.
+ * @returns {Array} - Source array to be used in React-toolbox dropdown
+ */
+export function createSource(values: number[]): DropdownSource<number>[] {
+  return values.map(s => ({value: s, label: s + ''}))
 }
