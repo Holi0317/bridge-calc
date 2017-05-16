@@ -2,53 +2,54 @@
 import {h} from 'preact'
 import {translate} from 'react-i18next'
 import {connect} from 'preact-redux'
-import {NumberInput} from './number-input'
+import {Dropdown} from 'react-toolbox/components/dropdown'
 import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
-import {isInteger} from '../validators/entry-options'
-import {entryOptionsValidatorSelector} from '../selectors/entry-options-validator'
+import {entrySourceSelector} from '../selectors/entry-source'
 
-import type {RootState} from '../types'
+import type {RootState, T} from '../types'
+import type {EntrySource} from '../selectors/entry-source'
 
-function DisconnectedEntryOptions(props) {
-  const {t} = props
+type EntryOptionsProps = {
+  t: T,
+  cards: number,
+  rounds: number,
+  startingRound: number,
+  sources: EntrySource,
+  disp: (action: string) => (value: number) => void
+}
+
+function DisconnectedEntryOptions({t, sources, cards, rounds, startingRound, disp}: EntryOptionsProps) {
   return (
     <div>
-      <NumberInput label={t('Number of cards')} autocomplete="off"
-             value={props.cards} error={props.error.cards}
-             onChange={props.disp(CARDS_SET, props.cards)} />
+      <Dropdown label={t('Number of cards')} allowBlank={false}
+             value={cards} source={sources.cards}
+             onChange={disp(CARDS_SET)} />
 
-      <NumberInput label={t('Number of rounds')} autocomplete="off"
-             value={props.rounds} error={props.error.rounds}
-             onChange={props.disp(ROUNDS_SET, props.rounds)} />
+      <Dropdown label={t('Number of rounds')} allowBlank={false}
+             value={rounds} source={sources.rounds}
+             onChange={disp(ROUNDS_SET)} />
 
-      <NumberInput label={t('Starting round')} autocomplete="off"
-             value={props.startingRound} error={props.error.startingRound}
-             onChange={props.disp(STARTING_ROUND_SET, props.startingRound)} />
+      <Dropdown label={t('Starting round')} allowBlank={false}
+             value={startingRound} source={sources.startingRound}
+             onChange={disp(STARTING_ROUND_SET)} />
     </div>
   )
 }
 
-const toStr = (num: number) => num + ''
-
-function mapStateToProps(state: RootState, {t}) {
+function mapStateToProps(state: RootState) {
   const entry = state.ui.entry
-  const error = entryOptionsValidatorSelector(state, t)
   return {
-    cards: toStr(entry.cards),
-    rounds: toStr(entry.rounds),
-    startingRound: toStr(entry.startingRound),
-    error
+    sources: entrySourceSelector(state),
+    cards: entry.cards,
+    rounds: entry.rounds,
+    startingRound: entry.startingRound
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    disp(action, oldValue: string) {
-      return (value: string, valid: boolean) => {
-        // If old value is invalid, allow user to change value for correction
-        const payload = (valid && isInteger(value)) || !isInteger(oldValue)
-          ? +value
-          : +oldValue
+    disp(action) {
+      return (payload: number) => {
         dispatch({type: action, payload})
       }
     }
