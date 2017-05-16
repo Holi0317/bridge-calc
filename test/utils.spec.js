@@ -8,20 +8,6 @@ test('genID generate unique ID', t => {
   t.not(first, second, 'Two generated ID should not be equal')
 })
 
-test('range(1,5) should generates [1,2,3,4,5]', t => {
-  const actual = utils.range(1, 5)
-  const expected = [1, 2, 3, 4, 5]
-
-  t.deepEqual(actual, expected, 'Generated array should equal to [1,2,3,4,5]')
-})
-
-test('range(5,10) should generates [5,6,7,8,9,10]', t => {
-  const actual = utils.range(5, 10)
-  const expected = [5, 6, 7, 8, 9, 10]
-
-  t.deepEqual(actual, expected, 'Generated array should equal to [5,6,7,8,9,10]')
-})
-
 test('nth should work when given index is below array.length', t => {
   const array = ['a', 'b', 'c']
   const actual = utils.nth(array, 1)

@@ -9,22 +9,6 @@ export function genID(): string {
 }
 
 /**
- * Generate an array form start to end.
- * Inspired by python's range method.
- *
- * @example
- * range(1, 10)
- * // -> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
- *
- * @param start {number} -  Start from
- * @param end {number} - Ends with (inclusive)
- * @returns {number[]}
- */
-export function range(start: number, end: number): number[] {
-  return Array.from(new Array(end - start + 1)).map((val, index) => index + start)
-}
-
-/**
  * NOTE: This is NOT lodash.nth method.
  * Get an element from given array.
  * If index is in range of array length, this would be identical to array[i].
