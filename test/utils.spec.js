@@ -46,22 +46,6 @@ test('toFront should throw error if frontIndex is out of boundary', t => {
   t.throws(() => utils.toFront(array, 3), 'frontIndex is out of boundary', 'Error should be thrown when frontIndex is out of boundary')
 })
 
-test('last should return the last element of an array', t => {
-  const data = [10, 11, 12]
-  const actual = utils.last(data)
-  const expected = 12
-
-  t.is(actual, expected, 'The last element is expected to return')
-})
-
-test('last should return null for empty array', t => {
-  const data = []
-  const actual = utils.last(data)
-  const expected = null
-
-  t.is(actual, expected, 'Null should be returned')
-})
-
 test('isOK should return true when empty object is passed in', t => {
   const actual = utils.isOk({})
   const expected = true

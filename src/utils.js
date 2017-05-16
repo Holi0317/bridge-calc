@@ -52,20 +52,6 @@ export function toFront<T>(array: T[], frontIndex: number): T[] {
 }
 
 /**
- * Return the last element from an array.
- * If the array is empty, null will be returned
- * @param array
- */
-export function last<T>(array: T[]): T | null {
-  if (array.length === 0) {
-    return null
-  } else {
-    const index = array.length - 1
-    return array[index]
-  }
-}
-
-/**
  * Test if there is error in the error object.
  * If no error, true will be returned. Vice versa for error object with error.
  * Meant to be used with validator.

@@ -1,7 +1,8 @@
 // @flow
 import {createSelector} from 'reselect'
 import {GameStage} from '../game-stage'
-import {isOk, last} from '../utils'
+import {isOk} from '../utils'
+import last from 'lodash/last'
 import {stackInputValidator} from '../validators/stack-input'
 
 import type {RootState, T} from '../types'
