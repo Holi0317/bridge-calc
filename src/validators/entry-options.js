@@ -1,59 +1,13 @@
 // @flow
-import {isOk} from '../utils'
-
 import type {T} from '../types'
 
 export type EntryOptions = {
-  cards: number,
-  rounds: number,
-  startingRound: number,
   playerNames: string[]
 }
 
 export type EntryError = {
-  cards?: string,
-  rounds?: string,
-  startingRound?: string,
   playerNames?: string[],
   misc?: string
-}
-
-const validateKeys = ['cards', 'rounds', 'startingRound']
-const isInt = d => d > 0 && Number.isInteger(d)
-
-function validateType(opts, t): EntryError {
-  const propNames = {
-    cards: t('Cards'),
-    rounds: t('Rounds'),
-    startingRound: t('Starting round')
-  }
-
-  const res: EntryError = {}
-  for (const key of validateKeys) {
-    const value = opts[key]
-    if (!isInt(value)) {
-      res[key] = t('{{property}} must be a positive integer', {property: propNames[key]})
-    }
-  }
-  return res
-}
-
-function validateCards(opts, t): EntryError {
-  return opts.playerNames.length > opts.cards
-    ? {cards: t('Too few cards')}
-    : {}
-}
-
-function validateRounds(opts, t): EntryError {
-  return opts.rounds > opts.cards / opts.playerNames.length
-    ? {rounds: t('Insufficient cards for that much rounds')}
-    : {}
-}
-
-function validateStartingRound(opts, t): EntryError {
-  return opts.startingRound > opts.rounds
-    ? {startingRound: t('Impossible to start beyond the end of the game')}
-    : {}
 }
 
 function validateMisc(opts, t): EntryError {
@@ -77,25 +31,14 @@ function validatePlayerName(opts, t): EntryError {
  * Otherwise, an object with property -> error message will be returned.
  * Use utils.isOk to check if there is any error during validation process.
  * @param opts - Entry options to be validated
- * @param opts.cards - Number of cards
- * @param opts.rounds - Number of rounds
- * @param opts.startingRound - Starting round
  * @param opts.playerNames - List of player names
  * @param t - i18next translate function
  * @returns {Object} Error of each property
  */
 export function entryOptionsValidator(opts: EntryOptions, t: T): EntryError {
-  const typeRes = validateType(opts, t)
-  if (!isOk(typeRes)) {
-    return typeRes
-  } else {
-    return {
-      ...validateCards(opts, t),
-      ...validateRounds(opts, t),
-      ...validateStartingRound(opts, t),
-      ...validateMisc(opts, t),
-      ...validatePlayerName(opts, t)
-    }
+  return {
+    ...validateMisc(opts, t),
+    ...validatePlayerName(opts, t)
   }
 }
 
