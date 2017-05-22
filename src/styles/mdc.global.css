@@ -1,0 +1,7 @@
+@import "mdc-theme.global.css";
+@import "../../node_modules/@material/button/dist/mdc.button.css";
+
+/* TODO Explore possibility to use CSS variable here once postcss variable is removed */
+.mdc-button--accent {
+  color: white !important;
+}

@@ -2,7 +2,7 @@
 import {h} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
-import {Button} from 'react-toolbox/components/button'
+import Button from 'preact-material-components/Button/Button'
 import {GameStage} from '../../game-stage'
 import {BID, SET_BID, SET_WIN, UNDO, WIN} from '../../actions/current-game'
 import {stackInputValidator} from '../../validators/stack-input'
@@ -28,9 +28,9 @@ function DisconnectActionButtons({t, nextDisabled, undoDisabled, currentGame, ne
   const undoHandler = currentGame == null ? null : undo(currentGame.stage)
   return (
     <div className={style.btnContainer}>
-      <Button label={t('Next')} accent raised disabled={nextDisabled} onMouseUp={next(currentGame)} />
+      <Button accent raised disabled={nextDisabled} onClick={next(currentGame)}>{t('Next')}</Button>
       <div className={style.stretch} />
-      <Button label={t('Undo')} raised disabled={undoDisabled} onMouseUp={undoHandler} />
+      <Button raised disabled={undoDisabled} onClick={undoHandler}>{t('Undo')}</Button>
     </div>
   )
 }

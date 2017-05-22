@@ -13,13 +13,26 @@ const cssLoader = {
   }
 }
 
+const globalCssLoader = Object.assign({}, cssLoader, {
+  options: Object.assign({}, cssLoader.options, {
+    modules: false
+  })
+})
+
 module.exports = {
   module: {
     rules: [{
       test: /\.css$/,
+      exclude: /\.global\.css$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [cssLoader, 'postcss-loader']
+      })
+    }, {
+      test: /\.global\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [globalCssLoader, 'postcss-loader']
       })
     }]
   },
