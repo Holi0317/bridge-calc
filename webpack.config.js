@@ -52,7 +52,7 @@ const config = generateConfig(
   ...(ENV === 'production' ? [
     analyzer,
     babili
-  ]: [
+  ] : [
 
   ])
 
