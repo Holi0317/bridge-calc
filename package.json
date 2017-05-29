@@ -46,6 +46,7 @@
     "lodash-es": "4.17.4",
     "preact": "8.1.0",
     "preact-compat": "3.16.0",
+    "preact-material-components": "1.0.7",
     "preact-redux": "2.0.1",
     "react-collapse": "4.0.2",
     "react-height": "3.0.0",
@@ -55,7 +56,6 @@
     "react-router": "4.1.1",
     "react-router-dom": "4.1.1",
     "react-sortable-hoc": "0.6.3",
-    "react-toolbox": "2.0.0-beta.12",
     "redux": "3.6.0",
     "reselect": "3.0.1"
   },
@@ -94,7 +94,6 @@
     "postcss-import": "10.0.0",
     "postcss-loader": "2.0.5",
     "postcss-reporter": "3.0.0",
-    "preact-material-components": "1.0.7",
     "redux-logger": "3.0.6",
     "serve": "5.1.5",
     "style-loader": "0.18.1",
