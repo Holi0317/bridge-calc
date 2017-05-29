@@ -3,8 +3,8 @@ import {h, Component} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
 import {withRouter} from 'react-router-dom'
-import {Button, IconButton} from 'react-toolbox/components/button'
-import Tooltip from 'react-toolbox/components/tooltip'
+import Button from 'preact-material-components/Button/Button'
+import {IconButton} from './icon-button'
 import MdAdd from 'react-icons/md/add'
 import MdFileDownload from 'react-icons/md/file-download'
 import Collapse from 'react-collapse'
@@ -35,8 +35,6 @@ function namesToObject(playerNames: string[]) {
   })
   return result
 }
-
-const IconButtonTooltip = Tooltip(IconButton)
 
 class DisconnectedEntry extends Component {
   props: {
@@ -84,17 +82,18 @@ class DisconnectedEntry extends Component {
         <h3>{t('Player Names')}</h3>
         <NameInputList names={props.playerNames} error={props.playerNamesError} onChange={props.changePlayerNames} />
         <div>
-          <IconButtonTooltip icon={<MdAdd />} tooltip={t('Add player')} onMouseUp={props.addPlayer} />
-          <IconButtonTooltip icon={<MdFileDownload />} tooltip={t('Import names')} className={utilsCSS.pullRight} onMouseUp={props.importNames} />
+          {/* TODO the following two have tooltip */}
+          <IconButton icon={<MdAdd />} tooltip={t('Add player')} onClick={props.addPlayer} />
+          <IconButton icon={<MdFileDownload />} tooltip={t('Import names')} className={utilsCSS.pullRight} onClick={props.importNames} />
         </div>
         <hr />
 
-        <Button onMouseUp={props.toggleCollapse} label={t('Options')} raised className={style.optionsBtn} />
+        <Button onClick={props.toggleCollapse} raised className={style.optionsBtn}>{t('Options')}</Button>
         <Collapse isOpened={props.optionsOpened}>
           <EntryOptions />
         </Collapse>
 
-        <Button label={t('Start')} raised accent className={style.startBtn} disabled={!props.valid} onMouseUp={this.start} />
+        <Button raised accent className={style.startBtn} disabled={!props.valid} onClick={this.start}>{t('Start')}</Button>
         <span className={style.errorMessage}>{props.miscError}</span>
       </div>
     )
