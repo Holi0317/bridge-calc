@@ -2,7 +2,7 @@
 import {h} from 'preact'
 import {connect} from 'preact-redux'
 import {Route, withRouter, Redirect} from 'react-router-dom'
-import {AppBar} from 'react-toolbox/components/app_bar'
+import Toolbar from 'preact-material-components/Toolbar/Toolbar'
 import MdHelp from 'react-icons/md/help'
 import MdArrowBack from 'react-icons/md/arrow-back'
 import {Titles} from './titles'
@@ -31,16 +31,23 @@ function to(history, loc) {
  */
 function DisconnectedApp({gameRedirect, location, history}) {
   const helpBtn = <MdHelp />
-  const backBtn = location.pathname === '/' ? null : <MdArrowBack />
   const backFn = to(history, '/')
+  const backBtn = location.pathname === '/' ? null : <MdArrowBack onClick={backFn} />
   return (
     <div>
-      <AppBar
-        title={<Titles />}
-        leftIcon={backBtn}
-        onLeftIconClick={backFn}
-        rightIcon={helpBtn}
-      />
+      <Toolbar className="toolbar">
+        <Toolbar.Row>
+          <Toolbar.Section align-start={true}>
+            {backBtn}
+            <Toolbar.Title>
+              <Titles />
+            </Toolbar.Title>
+          </Toolbar.Section>
+          <Toolbar.Section align-end={true}>
+            {helpBtn}
+          </Toolbar.Section>
+        </Toolbar.Row>
+      </Toolbar>
       <Route exact path="/" component={Menu} />
       <Route path="/entry" component={Entry} />
       <Route path="/game" render={() => (
