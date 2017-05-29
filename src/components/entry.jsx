@@ -47,7 +47,7 @@ class DisconnectedEntry extends Component {
     changePlayerNames: (payload: string[]) => void,
     addPlayer: () => void,
     importNames: () => void,
-    start: () => void,
+    start: (param: START_ACTION) => void,
     history: string[] // This is in fact react-router's history object. But mocking it as array works to suppress flow
   } & EntryState
 
@@ -61,12 +61,14 @@ class DisconnectedEntry extends Component {
    */
   start = () => {
     const {rounds, playerNames, startingRound, start, history} = this.props
-    start({
+    const startParam: START_ACTION = {
       rounds,
       startingRound,
       playerNames: namesToObject(playerNames),
-      startTime: new Date()
-    })
+      startTime: new Date(),
+      type: START
+    }
+    start(startParam)
     history.push('/game')
   }
 
