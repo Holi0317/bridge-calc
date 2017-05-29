@@ -1,6 +1,6 @@
 // @flow
 import {h, Component} from 'preact'
-import Input from 'react-toolbox/components/input'
+import Textfield from 'preact-material-components/Textfield/Textfield'
 
 export class NumberInput extends Component {
   ref: ?any
@@ -23,6 +23,6 @@ export class NumberInput extends Component {
   }
 
   render() {
-    return <Input {...this.props} type="number" ref={this.setRef} onChange={this.onChange} />
+    return <Textfield {...this.props} type="number" ref={this.setRef} onChange={this.onChange} />
   }
 }
