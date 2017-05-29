@@ -5,6 +5,7 @@
 @import "../../node_modules/@material/menu/dist/mdc.menu.css";
 @import "../../node_modules/@material/select/dist/mdc.select.css";
 @import "../../node_modules/@material/toolbar/dist/mdc.toolbar.css";
+@import "../../node_modules/@material/tabs/dist/mdc.tabs.css";
 
 /* TODO Explore possibility to use CSS variable here once postcss variable is removed */
 .mdc-button--accent {

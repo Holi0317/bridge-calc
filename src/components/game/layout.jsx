@@ -2,7 +2,7 @@
 import {h, Component} from 'preact'
 import {Route, withRouter, matchPath} from 'react-router-dom'
 import {translate} from 'react-i18next'
-import {Tabs, Tab} from 'react-toolbox/components/tabs'
+import Tabs from 'preact-material-components/Tabs/Tabs'
 import {routes} from './routes'
 
 import type {WithRouterProps} from 'react-router-dom'
@@ -22,16 +22,10 @@ class DisconnectedLayout extends Component {
   state: {
     active: number
   }
-  // Only compute tabs once as it will not change and there is cost for binding onClick handler
-  _tabs: Tab[]
 
   constructor(props) {
     super(props)
-    const {t, location} = props
-    this._tabs = routes.map((route, index) => (
-      <Tab key={index} to={route.path} exact={route.exact} label={t(route.name)} onClick={this._createClickCB(route.path)} />
-    ))
-    this._setActive(location.pathname)
+    this._setActive(props.location.pathname)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -54,11 +48,14 @@ class DisconnectedLayout extends Component {
   }
 
   render() {
+    const {t} = this.props
     const {active} = this.state
     return (
       <div>
-        <Tabs index={active} fixed>
-          {this._tabs}
+        <Tabs indicator-accent={true}>
+          {routes.map((route, index) => (
+            <Tabs.Tab key={index} active={index === active} onClick={this._createClickCB(route.path)}>{t(route.name)}</Tabs.Tab>
+          ))}
         </Tabs>
         {routes.map((route, index) => (
           <Route key={index} path={route.path} component={route.component} exact={route.exact} />
