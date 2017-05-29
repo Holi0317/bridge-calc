@@ -2,12 +2,12 @@
 import {h} from 'preact'
 import {translate} from 'react-i18next'
 import {connect} from 'preact-redux'
-import {Dropdown} from 'react-toolbox/components/dropdown'
 import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
 import {entrySourceSelector} from '../selectors/entry-source'
 
 import type {RootState, T} from '../types'
 import type {EntrySource} from '../selectors/entry-source'
+import {Dropdown} from './mdc/dropdown'
 
 type EntryOptionsProps = {
   t: T,
