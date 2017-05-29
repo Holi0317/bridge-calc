@@ -1,6 +1,6 @@
 // @flow
 import {h} from 'preact'
-import Ripple from 'react-toolbox/components/ripple'
+import MaterialComponent from 'preact-material-components/MaterialComponent'
 import {Link} from 'react-router-dom'
 import style from './tile.css'
 
@@ -9,7 +9,25 @@ const iconStyle = {
   height: '92px'
 }
 
-const RippleWrapper = Ripple()((props) => <div {...props} style={{position: 'relative'}}>{props.children}</div>)
+class RippleWrapper extends MaterialComponent {
+  control: HTMLElement
+  static defaultProps = {
+    ripple: true
+  }
+
+  componentDidMount() {
+    this.attachRipple()
+  }
+
+  render(props) {
+    return (
+      <div ref={control => (this.control = control)}>
+        <div className="mdc-ripple-surface" />
+        {props.children}
+      </div>
+    )
+  }
+}
 
 export type TileProperties = {
   title: string,
