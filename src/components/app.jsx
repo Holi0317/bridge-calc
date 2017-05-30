@@ -33,7 +33,7 @@ function to(history, loc) {
 function DisconnectedApp({gameRedirect, location, history}) {
   const helpBtn = <IconButton icon={<MdHelp width="24px" height="24px" />} />
   const backFn = to(history, '/')
-  const backBtn = location.pathname === '/' ? null : <MdArrowBack onClick={backFn} />
+  const backBtn = location.pathname === '/' ? null : <IconButton icon={<MdArrowBack onClick={backFn} width="24px" height="24px" />} />
   return (
     <div>
       <Toolbar className="toolbar">
