@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const {ENV} = require('./paths')
 
 const cssLoader = {
   loader: 'css-loader',
@@ -7,7 +8,7 @@ const cssLoader = {
     modules: true,
     sourceMap: true,
     importLoaders: 1,
-    minimize: false,
+    minimize: ENV === 'production',
     localIdentName: '[hash:base64:5]',
     camelCase: 'dashesOnly'
   }
