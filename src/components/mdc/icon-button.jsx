@@ -1,9 +1,11 @@
 // @flow
 import {h} from 'preact'
 import MaterialComponent from 'preact-material-components/MaterialComponent'
+import style from './icon-button.css'
 
 export type IconButtonProps = {
-  icon: React$Element<any>
+  icon: React$Element<any>,
+  onClick: ?() => void
 }
 
 export class IconButton extends MaterialComponent {
@@ -18,8 +20,10 @@ export class IconButton extends MaterialComponent {
   }
 
   render() {
+    const {onClick} = this.props
+    const className = `mdc-ripple-surface ${style.iconButton}`
     return (
-      <div ref={control => (this.control = control)} className="mdc-ripple-surface">
+      <div ref={control => (this.control = control)} className={className} onClick={onClick}>
         {this.props.icon}
       </div>
     )
