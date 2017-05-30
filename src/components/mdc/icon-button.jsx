@@ -19,8 +19,7 @@ export class IconButton extends MaterialComponent {
 
   render() {
     return (
-      <div ref={control => (this.control = control)}>
-        <div className="mdc-ripple-surface" />
+      <div ref={control => (this.control = control)} className="mdc-ripple-surface">
         {this.props.icon}
       </div>
     )
