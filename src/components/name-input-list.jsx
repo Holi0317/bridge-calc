@@ -37,7 +37,7 @@ const DragHandle = SortableHandle(() => <MdDragHandle className={style.handle} /
 const SortableItem = SortableElement(translate()(({value, onChange, remove, error, t}) => (
   <div className={style.itemContainer}>
     <DragHandle />
-    <Textfield type="text" label={t('Player name')} value={value} error={error} fullwidth onChange={onChange} className={style.input} />
+    <Textfield type="text" label={t('Player name')} value={value} error={error} onChange={onChange} className={style.input} />
     <IconButton icon={<MdDelete />} onClick={remove} />
   </div>
 )))
