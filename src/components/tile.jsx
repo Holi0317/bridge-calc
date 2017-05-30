@@ -20,9 +20,9 @@ class RippleWrapper extends MaterialComponent {
   }
 
   render(props) {
+    const className = `mdc-ripple-surface ${style.rippleContainer}`
     return (
-      <div ref={control => (this.control = control)}>
-        <div className="mdc-ripple-surface" />
+      <div ref={control => (this.control = control)} className={className}>
         {props.children}
       </div>
     )
