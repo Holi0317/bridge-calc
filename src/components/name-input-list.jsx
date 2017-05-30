@@ -2,7 +2,7 @@
 import {h} from 'preact'
 import {translate} from 'react-i18next'
 import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc'
-import {IconButton} from './icon-button'
+import {IconButton} from './mdc/icon-button'
 import Textfield from 'preact-material-components/Textfield/Textfield'
 import MdDragHandle from 'react-icons/md/drag-handle'
 import MdDelete from 'react-icons/md/delete'

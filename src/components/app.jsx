@@ -5,6 +5,7 @@ import {Route, withRouter, Redirect} from 'react-router-dom'
 import Toolbar from 'preact-material-components/Toolbar/Toolbar'
 import MdHelp from 'react-icons/md/help'
 import MdArrowBack from 'react-icons/md/arrow-back'
+import {IconButton} from './mdc/icon-button'
 import {Titles} from './titles'
 import {Menu} from './menu'
 import {Entry} from './entry'
@@ -30,7 +31,7 @@ function to(history, loc) {
  * @returns {XML}
  */
 function DisconnectedApp({gameRedirect, location, history}) {
-  const helpBtn = <MdHelp />
+  const helpBtn = <IconButton icon={<MdHelp width="24px" height="24px" />} />
   const backFn = to(history, '/')
   const backBtn = location.pathname === '/' ? null : <MdArrowBack onClick={backFn} />
   return (
