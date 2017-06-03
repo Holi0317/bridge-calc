@@ -85,8 +85,8 @@ class DisconnectedEntry extends Component {
         <NameInputList names={props.playerNames} error={props.playerNamesError} onChange={props.changePlayerNames} />
         <div>
           {/* TODO the following two have tooltip */}
-          <IconButton icon={<MdAdd />} tooltip={t('Add player')} onClick={props.addPlayer} />
-          <IconButton icon={<MdFileDownload />} tooltip={t('Import names')} className={utilsCSS.pullRight} onClick={props.importNames} />
+          <IconButton icon={<MdAdd width="24px" height="24px" />} tooltip={t('Add player')} onClick={props.addPlayer} />
+          <IconButton icon={<MdFileDownload width="24px" height="24px" />} tooltip={t('Import names')} className={utilsCSS.pullRight} onClick={props.importNames} />
         </div>
         <hr />
 

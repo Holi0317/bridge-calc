@@ -38,7 +38,7 @@ const SortableItem = SortableElement(translate()(({value, onChange, remove, erro
   <div className={style.itemContainer}>
     <DragHandle />
     <Textfield type="text" label={t('Player name')} value={value} error={error} onChange={onChange} className={style.input} />
-    <IconButton icon={<MdDelete />} onClick={remove} />
+    <IconButton icon={<MdDelete width="24px" height="24px" />} onClick={remove} />
   </div>
 )))
 
