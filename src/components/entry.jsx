@@ -83,10 +83,10 @@ class DisconnectedEntry extends Component {
       <div className={grid.container}>
         <h3>{t('Player Names')}</h3>
         <NameInputList names={props.playerNames} error={props.playerNamesError} onChange={props.changePlayerNames} />
-        <div>
+        <div className={style.actionButtonContainer}>
           {/* TODO the following two have tooltip */}
-          <IconButton icon={<MdAdd width="24px" height="24px" />} tooltip={t('Add player')} onClick={props.addPlayer} />
-          <IconButton icon={<MdFileDownload width="24px" height="24px" />} tooltip={t('Import names')} className={utilsCSS.pullRight} onClick={props.importNames} />
+          <IconButton icon={<MdAdd width="28px" height="28px" />} tooltip={t('Add player')} onClick={props.addPlayer} />
+          <IconButton icon={<MdFileDownload width="28px" height="28px" />} tooltip={t('Import names')} onClick={props.importNames} />
         </div>
         <hr />
 

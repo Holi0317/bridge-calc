@@ -11,3 +11,11 @@
   color: rgb(222, 50, 38);
   padding-left: 1em;
 }
+
+.action-button-container {
+  display: flex;
+}
+
+.action-button-container > div:last-child {
+  margin-left: auto;
+}
