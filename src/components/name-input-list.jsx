@@ -3,7 +3,7 @@ import {h} from 'preact'
 import {translate} from 'react-i18next'
 import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc'
 import {IconButton} from './mdc/icon-button'
-import Textfield from 'preact-material-components/Textfield/Textfield'
+import {Input} from './mdc/input'
 import MdDragHandle from 'react-icons/md/drag-handle'
 import MdDelete from 'react-icons/md/delete'
 import style from './name-input-list.css'
@@ -37,7 +37,7 @@ const DragHandle = SortableHandle(() => <MdDragHandle className={style.handle} /
 const SortableItem = SortableElement(translate()(({value, onChange, remove, error, t}) => (
   <div className={style.itemContainer}>
     <DragHandle />
-    <Textfield type="text" label={t('Player name')} value={value} error={error} onChange={onChange} className={style.input} />
+    <Input type="text" fullWidth={true} label={t('Player name')} value={value} errorMsg={error} onKeyUp={onChange} />
     <IconButton icon={<MdDelete width="24px" height="24px" />} onClick={remove} />
   </div>
 )))

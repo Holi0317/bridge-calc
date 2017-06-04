@@ -4,11 +4,6 @@
   align-items: center;
 }
 
-.input,
-.input input{
-  width: 100%;
-}
-
 .handle {
   width: 24px;
   height: 24px;
