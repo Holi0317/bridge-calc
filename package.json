@@ -93,6 +93,7 @@
     "postcss-cli": "4.0.0",
     "postcss-import": "10.0.0",
     "postcss-loader": "2.0.5",
+    "postcss-nesting": "4.0.1",
     "postcss-reporter": "3.0.0",
     "redux-logger": "3.0.6",
     "serve": "5.2.1",
