@@ -14,8 +14,7 @@
 
 .action-button-container {
   display: flex;
-}
-
-.action-button-container > div:last-child {
-  margin-left: auto;
+  & > div:last-child {
+    margin-left: auto;
+  }
 }
