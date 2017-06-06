@@ -2,25 +2,22 @@
 @import "../../node_modules/@material/button/dist/mdc.button.css";
 @import "../../node_modules/@material/ripple/dist/mdc.ripple.css";
 @import "../../node_modules/@material/textfield/dist/mdc.textfield.css";
-@import "../../node_modules/@material/menu/dist/mdc.menu.css";
 @import "../../node_modules/@material/select/dist/mdc.select.css";
 @import "../../node_modules/@material/toolbar/dist/mdc.toolbar.css";
 @import "../../node_modules/@material/tabs/dist/mdc.tabs.css";
 
-/* TODO Explore possibility to use CSS variable here once postcss variable is removed */
+/* Use white color as default is black and cannot be seen easily */
 .mdc-button--accent {
   color: white !important;
 }
 
-.mdc-select__menu .mdc-list-item {
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  /* Important is used here as MDC will add transition-delay for delaying showing text inside select */
-  transition-delay: 0s !important;
-  &:hover {
-    background-color: rgba(0, 0, 0, .1);
-  }
-}
-
+/* Add some margin for toolbar title */
 .mdc-toolbar__title {
   margin-left: .5em;
+}
+
+/* Hide arrow from mdc-select component */
+.mdc-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }

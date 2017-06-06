@@ -4,6 +4,7 @@ import {translate} from 'react-i18next'
 import {connect} from 'preact-redux'
 import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
 import {entrySourceSelector} from '../selectors/entry-source'
+import style from './entry-options.css'
 
 import type {RootState, T} from '../types'
 import type {EntrySource} from '../selectors/entry-source'
@@ -20,18 +21,27 @@ type EntryOptionsProps = {
 
 function DisconnectedEntryOptions({t, sources, cards, rounds, startingRound, disp}: EntryOptionsProps) {
   return (
-    <div>
-      <Dropdown label={t('Number of cards')} allowBlank={false}
-             value={cards} source={sources.cards}
-             onChange={disp(CARDS_SET)} />
+    <div className={style.rootContainer}>
+      <div className={style.selectContainer}>
+        <span>{t('Number of cards')}</span>
+        <Dropdown label={t('Number of cards')} allowBlank={false}
+                  value={cards} source={sources.cards}
+                  onChange={disp(CARDS_SET)} />
+      </div>
 
-      <Dropdown label={t('Number of rounds')} allowBlank={false}
-             value={rounds} source={sources.rounds}
-             onChange={disp(ROUNDS_SET)} />
+      <div className={style.selectContainer}>
+        <span>{t('Number of rounds')}</span>
+        <Dropdown label={t('Number of rounds')} allowBlank={false}
+                  value={rounds} source={sources.rounds}
+                  onChange={disp(ROUNDS_SET)} />
+      </div>
 
-      <Dropdown label={t('Starting round')} allowBlank={false}
-             value={startingRound} source={sources.startingRound}
-             onChange={disp(STARTING_ROUND_SET)} />
+      <div className={style.selectContainer}>
+        <span>{t('Starting round')}</span>
+        <Dropdown label={t('Starting round')} allowBlank={false}
+                  value={startingRound} source={sources.startingRound}
+                  onChange={disp(STARTING_ROUND_SET)} />
+      </div>
     </div>
   )
 }

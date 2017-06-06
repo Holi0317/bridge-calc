@@ -1,10 +1,9 @@
 // @flow
 import {h, Component} from 'preact'
-import Select from 'preact-material-components/Select/Select'
 import type {DropdownSource} from '../../types'
 
 export type DropdownProps<T> = {
-  label: string,
+  label?: string,
   value: T,
   source: DropdownSource<T>[],
   onChange: (value: T) => void
@@ -32,22 +31,35 @@ export class Dropdown<SourceType> extends Component<void, DropdownProps<SourceTy
     this._refreshProps(nextProps)
   }
 
-  _refreshProps({onChange, source, value}: DropdownProps<SourceType>) {
+  _handler = (event: Event) => {
+    const {onChange} = this.props
+    if (onChange) {
+      const el: HTMLSelectElement = (event.target: any)
+      const selected = el.selectedIndex - 1
+      const index = selected < 0 ? 0 : selected
+      const src = this.props.source[index]
+      onChange(src.value)
+    }
+  }
+
+  _refreshProps({source, value}: DropdownProps<SourceType>) {
     this.setState(() => ({
-      handler: (e: ChangedParam) => onChange && onChange(source[e.selectedIndex].value),
       index: source.map(s => s.value).indexOf(value)
     }))
   }
 
   render() {
     const {label, source} = this.props
-    const {handler, index} = this.state
+    const {index} = this.state
     return (
-      <Select hintText={label} onChange={handler} selectedIndex={index}>
-        {source.map(s => (
-          <Select.Item key={s.label}>{s.label}</Select.Item>
+      <select className="mdc-select" onChange={this._handler}>
+        { label
+          ? <option value="" default disabled>{label}</option>
+          : null }
+        {source.map((s, i) => (
+          <option key={i} value={s.value} selected={i === index}>{s.label}</option>
         ))}
-      </Select>
+      </select>
     )
   }
 }
