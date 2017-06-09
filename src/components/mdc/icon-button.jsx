@@ -5,7 +5,7 @@ import style from './icon-button.css'
 
 export type IconButtonProps = {
   icon: React$Element<any>,
-  onClick: ?() => void
+  onClick?: () => void
 }
 
 export class IconButton extends MaterialComponent {
