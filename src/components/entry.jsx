@@ -18,6 +18,7 @@ import {genID} from '../utils'
 import style from './entry.css'
 import grid from '../styles/grid.css'
 
+import type {WithRouterProps} from 'react-router-dom'
 import type {EntryState} from '../reducer/ui/entry'
 import type {Dispatch, RootState} from '../types'
 import type {START_ACTION} from '../actions/current-game'
@@ -46,9 +47,8 @@ class DisconnectedEntry extends Component {
     changePlayerNames: (payload: string[]) => void,
     addPlayer: () => void,
     importNames: () => void,
-    start: (param: START_ACTION) => void,
-    history: string[] // This is in fact react-router's history object. But mocking it as array works to suppress flow
-  } & EntryState
+    start: (param: START_ACTION) => void
+  } & WithRouterProps & EntryState
 
   componentWillMount() {
     this.props.genOptions()
