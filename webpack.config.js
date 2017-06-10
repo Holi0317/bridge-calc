@@ -1,4 +1,4 @@
-const {generateConfig, stripMetadata} = require('@easy-webpack/core')
+const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
 const env = require('./webpack-cfg/env')
@@ -16,10 +16,7 @@ const yaml = require('./webpack-cfg/yaml')
 
 const {ENV} = require('./webpack-cfg/paths')
 
-/**
- * Main Webpack Configuration
- */
-const config = generateConfig(
+module.exports = merge.smart(
   {
     entry: './src/index',
     output: {
@@ -57,5 +54,3 @@ const config = generateConfig(
   ])
 
 )
-
-module.exports = stripMetadata(config)
