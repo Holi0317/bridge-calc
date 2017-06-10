@@ -7,5 +7,6 @@
 
 [options]
 module.name_mapper='.*\(.css\)' -> 'CSSModule'
+module.ignore_non_literal_requires=true
 
 [version]

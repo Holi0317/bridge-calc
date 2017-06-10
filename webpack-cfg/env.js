@@ -7,7 +7,7 @@ const productionEnv = {
   output: {
     filename: '[name].[chunkhash].bundle.js',
     sourceMapFilename: '[name].[chunkhash].bundle.map',
-    chunkFilename: '[id].[chunkhash].chunk.js'
+    chunkFilename: '[name].[chunkhash].chunk.js'
   },
 
   plugins: [
@@ -38,7 +38,7 @@ const developmentEnv = {
   output: {
     filename: '[name].bundle.js',
     sourceMapFilename: '[name].bundle.map',
-    chunkFilename: '[id].chunk.js'
+    chunkFilename: '[name].chunk.js'
   },
   devServer: {
     port: 9000,

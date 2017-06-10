@@ -7,9 +7,9 @@ import MdHelp from 'react-icons/md/help'
 import MdArrowBack from 'react-icons/md/arrow-back'
 import {IconButton} from './mdc/icon-button'
 import {Titles} from './titles'
-import {Menu} from './menu'
-import {Entry} from './entry'
-import {Layout} from './game/layout'
+import {Menu} from './lazy-views/menu'
+import {Entry} from './lazy-views/entry'
+import {Layout} from './lazy-views/game-layout'
 
 import type {RootState} from '../types'
 

@@ -58,7 +58,10 @@ rules:
   prefer-const: error
   array-bracket-spacing: error
   comma-spacing: error
-  capitalized-comments: error
+  capitalized-comments:
+   - error
+   - always
+   - {ignorePattern: webpackChunkName}
   brace-style: error
   no-throw-literal: error
   no-return-assign: error
