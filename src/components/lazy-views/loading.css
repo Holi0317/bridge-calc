@@ -1,0 +1,13 @@
+.container {
+  animation: show 1s linear;
+}
+
+@keyframes show {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
