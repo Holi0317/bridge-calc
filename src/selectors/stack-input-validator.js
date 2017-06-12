@@ -3,10 +3,14 @@ import {createSelector} from 'reselect'
 import {GameStage} from '../game-stage'
 import {isOk} from '../utils'
 import last from 'lodash/last'
+import {stageSelector} from './stage'
+import {playerOrderSelector} from './player-order'
+import {bidSelector} from './bid'
+import {winSelector} from './win'
+import {currentRoundSelector} from './current-round'
 import {stackInputValidator} from '../validators/stack-input'
 
-import type {RootState, T} from '../types'
-import type {GameState} from '../reducer/current-game'
+import type {PlayerMap, RootState, T} from '../types'
 import type {StackInputError} from '../validators/stack-input'
 
 /**
@@ -14,17 +18,21 @@ import type {StackInputError} from '../validators/stack-input'
  * Additional argument: i18next T object must be passed in as second argument.
  */
 export const stackInputValidatorSelector = createSelector(
-  (state: RootState) => state.currentGame,
+  stageSelector,
+  playerOrderSelector,
+  bidSelector,
+  winSelector,
+  currentRoundSelector,
   (state: RootState, t: T) => t,
-  (currentGame: GameState, t: T) => {
-    if (!currentGame || currentGame.stage === GameStage.ended) {
+  (stage: ?string, playerOrder: string[], bid: PlayerMap<number>, win: PlayerMap<number>, currentRound: number, t: T) => {
+    if (!stage || stage === GameStage.ended) {
       return {}
     }
-    const lastPlayerID = last(currentGame.currentPlayerOrder)
+    const lastPlayerID = last(playerOrder)
     const opts = {
-      bid: currentGame.bid,
-      win: currentGame.stage === GameStage.waitingWin ? currentGame.win : {},
-      currentRound: currentGame.currentRound,
+      bid: bid,
+      win: stage === GameStage.waitingWin ? win : {},
+      currentRound: currentRound,
       lastPlayerID: lastPlayerID || ''
     }
     return stackInputValidator(opts, t)
