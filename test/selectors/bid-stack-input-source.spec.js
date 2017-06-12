@@ -72,7 +72,7 @@ test('Invalid bid should be disabled for last player', t => {
   const state = {
     currentGame: {
       ...waitingBidState,
-      bid: {a: 0, b: 1}
+      bid: genMap(0, 1, 0, 0)
     }
   }
   const source = [
@@ -95,7 +95,7 @@ test('Invalid bid should be disabled for last player -- Second round', t => {
       scores: genMap([0], [0], [0], [0]),
       currentPlayerOrder: ['b', 'c', 'd', 'a'],
       currentRound: 2,
-      bid: {b: 0, c: 1}
+      bid: genMap(0, 0, 1, 0)
     }
   }
   const source = [

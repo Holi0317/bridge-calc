@@ -1,9 +1,11 @@
 // @flow
 import {GameStage} from '../../game-stage'
 import {computeScores} from './compute-scores'
+import {toEndedState} from './converter'
+import {bidWinGenerator} from './bid-win-generator'
 import {toFront} from '../../utils'
 
-import type {GameState, WaitingBidState, WaitingWinState, EndedState} from './types'
+import type {GameState, WaitingBidState, WaitingWinState} from './types'
 import type {WIN_ACTION} from '../../actions/current-game'
 
 /**
@@ -16,22 +18,16 @@ export function winHandler(state: WaitingBidState | WaitingWinState, action: WIN
   const win = action.win || state.win
   if (state.rounds === state.currentRound) {
     // Last round
-    const newState: EndedState = {
+    const newState: WaitingWinState = {
       ...state,
-      stage: GameStage.ended,
-      scores: computeScores(state.bid, win, state.scores),
-      endTime: action.time
+      scores: computeScores(state.bid, win, state.scores)
     }
-    delete (newState: any).bid
-    delete (newState: any).win
-    delete (newState: any).currentPlayerOrder
-    delete (newState: any).currentRound
-    return newState
+    return toEndedState(newState, action.time)
   } else {
     const newState: WaitingBidState = {
       ...state,
       stage: GameStage.waitingBid,
-      bid: {},
+      bid: bidWinGenerator(Object.keys(state.names)),
       currentRound: state.currentRound + 1,
       currentPlayerOrder: toFront(state.currentPlayerOrder, 1),
       scores: computeScores(state.bid, win, state.scores)

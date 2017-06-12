@@ -63,8 +63,8 @@ test('Win should be disabled if selections that will exceed win', t => {
   const state = {
     currentGame: {
       ...waitingWinState,
-      bid: {a: 0, b: 1, c: 0, d: 1},
-      win: {a: 1}
+      bid: genMap(0, 1, 0, 1),
+      win: genMap(1, 0, 0, 0)
     }
   }
   const source = [
@@ -87,8 +87,8 @@ test('Win should be disabled if the selection will exceed than win -- Second rou
       scores: genMap([0], [0], [0], [0]),
       currentPlayerOrder: ['b', 'c', 'd', 'a'],
       currentRound: 2,
-      bid: {a: 0, b: 1, c: 1, d: 1},
-      win: {a: 1, b: 0, c: 0}
+      bid: genMap(0, 1, 1, 1),
+      win: genMap(1, 0, 0, 0)
     }
   }
   const source = [

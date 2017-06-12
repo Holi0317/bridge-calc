@@ -1,10 +1,11 @@
 // @flow
 import {GameStage} from '../../game-stage'
+import {bidWinGenerator} from './bid-win-generator'
 import type {WaitingBidState, WaitingWinState, EndedState} from './types'
 
 export function toWaitingBidState(state: WaitingBidState | WaitingWinState): WaitingBidState {
   const cloned: WaitingBidState = {
-    bid: {},
+    bid: bidWinGenerator(Object.keys(state.names)),
     ...state,
     stage: GameStage.waitingBid
   }
@@ -14,23 +15,20 @@ export function toWaitingBidState(state: WaitingBidState | WaitingWinState): Wai
 
 export function toWaitingWinState(state: WaitingBidState | WaitingWinState): WaitingWinState {
   return {
-    bid: {},
-    win: {},
+    bid: bidWinGenerator(Object.keys(state.names)),
+    win: bidWinGenerator(Object.keys(state.names)),
     ...state,
     stage: GameStage.waitingWin
   }
 }
 
 export function toEndedState(state: WaitingBidState | WaitingWinState, endTime: Date): EndedState {
-  const cloned: EndedState = {
+  return {
+    stage: GameStage.ended,
     endTime,
-    ...state,
-    stage: GameStage.ended
+    rounds: state.rounds,
+    startTime: state.startTime,
+    names: state.names,
+    scores: state.scores
   }
-
-  delete (cloned: any).bid
-  delete (cloned: any).currentPlayerOrder
-  delete (cloned: any).currentRound
-
-  return cloned
 }

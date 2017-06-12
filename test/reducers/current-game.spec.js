@@ -123,7 +123,7 @@ test('Set bid should do no-op when state is null', t => {
   const expected = null
   const action = {
     type: SET_BID,
-    payload: {a: 0}
+    payload: genMap(0, 0, 0, 0)
   }
   const actual = reducer(null, action)
   t.is(actual, expected, 'Null should be the new state')
@@ -138,7 +138,7 @@ test('Set bid should do no-op when stage is ended', t => {
   }
   const action = {
     type: SET_BID,
-    payload: {a: 0}
+    payload: genMap(0, 0, 0, 0)
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'State should not be modified')
@@ -147,15 +147,15 @@ test('Set bid should do no-op when stage is ended', t => {
 test('Set bid should set bid property', t => {
   const expected = {
     ...waitingBidState,
-    bid: {a: 0, b: 1}
+    bid: genMap(0, 1, 0, 0)
   }
   const state = {
     ...waitingBidState,
-    bid: {a: 0}
+    bid: genMap(0, 0, 0, 0)
   }
   const action = {
     type: SET_BID,
-    payload: {a: 0, b: 1}
+    payload: genMap(0, 1, 0, 0)
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'Bid property should be set')
@@ -165,7 +165,7 @@ test('Set win should do no-op when state is null', t => {
   const expected = null
   const action = {
     type: SET_WIN,
-    payload: {a: 0}
+    payload: genMap(0, 0, 0, 0)
   }
   const actual = reducer(null, action)
   t.is(actual, expected, 'Null should be the new state')
@@ -180,7 +180,7 @@ test('Set win should do no-op when stage is ended', t => {
   }
   const action = {
     type: SET_WIN,
-    payload: {a: 0}
+    payload: genMap(0, 0, 0, 0)
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'State should not be modified')
@@ -189,15 +189,15 @@ test('Set win should do no-op when stage is ended', t => {
 test('Set win should set win property', t => {
   const expected = {
     ...waitingWinState,
-    win: {a: 0, b: 1}
+    win: genMap(0, 1, 0, 0)
   }
   const state = {
     ...waitingWinState,
-    win: {a: 0}
+    win: genMap(0, 0, 0, 0)
   }
   const action = {
     type: SET_WIN,
-    payload: {a: 0, b: 1}
+    payload: genMap(0, 1, 0, 0)
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'Win property should be set')
@@ -235,7 +235,7 @@ test('Bid should change stage to waitingWin', t => {
   }
   const state = {
     ...waitingBidState,
-    bid: {a: 0}
+    bid: genMap(0, 0, 0, 0)
   }
   const action = {
     type: BID,

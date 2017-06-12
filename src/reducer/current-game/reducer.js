@@ -5,6 +5,7 @@ import {skip} from './skip'
 import {start} from './start'
 import {winHandler} from './win-handler'
 import {toWaitingBidState} from './converter'
+import {bidWinGenerator} from './bid-win-generator'
 
 import type {EndedState, GameState, WaitingBidState} from './types'
 import type {CurrentGameActions} from '../../actions/current-game'
@@ -43,7 +44,7 @@ export function currentGame(state: GameState = defaultState, action: CurrentGame
       ...state,
       stage: GameStage.waitingWin,
       bid: action.payload || (state: WaitingBidState).bid,
-      win: {}
+      win: bidWinGenerator(Object.keys(state.names))
     }
   case WIN:
     return winHandler(state, action)

@@ -1,6 +1,8 @@
 // @flow
 import {GameStage} from '../../game-stage'
 import {skip} from './skip'
+import {bidWinGenerator} from './bid-win-generator'
+import {fillObj} from '../../utils'
 
 import type {START_ACTION} from '../../actions/current-game'
 import type {WaitingBidState} from './types'
@@ -11,18 +13,16 @@ import type {WaitingBidState} from './types'
  * @param action
  */
 export function start(action: START_ACTION) {
-  // Create an array of playerID -> empty array
-  const scores_ = Object.keys(action.playerNames)
-    .map(id => ({[id]: []}))
+  const playerIDs = Object.keys(action.playerNames)
 
   const firstState: WaitingBidState = {
     stage: GameStage.waitingBid,
     rounds: action.rounds,
     startTime: action.startTime,
     names: action.playerNames,
-    scores: Object.assign({}, ...scores_),
-    bid: {},
-    currentPlayerOrder: Object.keys(action.playerNames),
+    scores: fillObj({}, playerIDs, []),
+    bid: bidWinGenerator(playerIDs),
+    currentPlayerOrder: playerIDs,
     currentRound: 1
   }
   return skip(firstState, action.startingRound - 1, action.startTime)

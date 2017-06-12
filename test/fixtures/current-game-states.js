@@ -25,13 +25,13 @@ export const waitingBidState = deepFreeze({
   stage: GameStage.waitingBid,
   currentPlayerOrder: ['a', 'b', 'c', 'd'],
   currentRound: 1,
-  bid: {}
+  bid: {a: 0, b: 0, c: 0, d: 0}
 })
 
 export const waitingWinState = deepFreeze({
   ...waitingBidState,
   stage: GameStage.waitingWin,
-  win: {}
+  win: {a: 0, b: 0, c: 0, d: 0}
 })
 
 export const endedState = deepFreeze({

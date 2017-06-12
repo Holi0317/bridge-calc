@@ -3,6 +3,7 @@ import mapValues from 'lodash/mapValues'
 import {GameStage} from '../../game-stage'
 import {toFront} from '../../utils'
 import {toEndedState} from './converter'
+import {bidWinGenerator} from './bid-win-generator'
 
 import type {EndedState, WaitingBidState, WaitingWinState} from './types'
 
@@ -27,7 +28,7 @@ export function skip(state: WaitingBidState | WaitingWinState, n: number, time: 
   const newState: WaitingBidState = {
     ...state,
     stage: GameStage.waitingBid,
-    bid: {},
+    bid: bidWinGenerator(Object.keys(state.names)),
     scores: mapValues(state.scores, score => [...score, 0]),
     currentPlayerOrder: toFront(state.currentPlayerOrder, 1),
     currentRound: state.currentRound + 1
