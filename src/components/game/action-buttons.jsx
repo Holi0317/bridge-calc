@@ -6,7 +6,7 @@ import Button from 'preact-material-components/Button/Button'
 import {GameStage} from '../../game-stage'
 import {BID, SET_BID, SET_WIN, UNDO, WIN} from '../../actions/current-game'
 import {stackInputValidator} from '../../validators/stack-input'
-import {isOk, fill} from '../../utils'
+import {isOk, fillObj} from '../../utils'
 import style from './action-buttons.css'
 
 import type {Dispatch, PlayerMap, RootState, T} from '../../types'
@@ -60,7 +60,7 @@ function updater(opts: UpdaterOpts) {
 
   // Check if 0 need to be filled
   if (Object.keys(opts.buffer).length !== playerIDs.length) {
-    buffer = fill(opts.buffer, playerIDs, 0)
+    buffer = fillObj(opts.buffer, playerIDs, 0)
     if (opts.bufferName === 'bid') {
       const action: SET_BID_ACTION = {type: SET_BID, payload: buffer}
       opts.dispatch(action)
