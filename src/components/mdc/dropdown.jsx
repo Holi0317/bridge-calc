@@ -6,6 +6,8 @@ export type DropdownProps<T> = {
   label?: string,
   value: T,
   source: DropdownSource<T>[],
+  disabled?: boolean,
+  className?: string,
   onChange: (value: T) => void
 }
 
@@ -49,15 +51,16 @@ export class Dropdown<SourceType> extends Component<void, DropdownProps<SourceTy
   }
 
   render() {
-    const {label, source} = this.props
+    const {label, source, disabled, className} = this.props
     const {index} = this.state
+    const class_ = `mdc-select ${className || ''}`
     return (
-      <select className="mdc-select" onChange={this._handler}>
+      <select className={class_} onChange={this._handler} disabled={disabled}>
         { label
           ? <option value="" default disabled>{label}</option>
           : null }
         {source.map((s, i) => (
-          <option key={i} value={s.value} selected={i === index}>{s.label}</option>
+          <option key={i} value={s.value} selected={i === index} disabled={s.disabled}>{s.label}</option>
         ))}
       </select>
     )

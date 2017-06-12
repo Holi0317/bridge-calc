@@ -41,25 +41,3 @@ export function entryOptionsValidator(opts: EntryOptions, t: T): EntryError {
     ...validatePlayerName(opts, t)
   }
 }
-
-/**
- * Regex for isInteger test
- * @type {RegExp}
- */
-const regex = /^\d*$/
-
-/**
- * Test if the give argument is a positive integer or not.
- * Exception: empty string is consider as a valid integer.
- * Because empty string should be allowed in input field.
- * @param str {string}
- * @returns {boolean}
- */
-export function isInteger(str: string) {
-  if (str === '' || str === '0') {
-    return true
-  } else if (str.startsWith('0')) {
-    return false
-  }
-  return regex.test(str)
-}

@@ -47,3 +47,6 @@ Name: Name
 Previous round score: Previous round score
 Total score: Total score
 Rank: Rank
+
+"Bid for {{name}}": "Bid for {{name}}"
+"Win for {{name}}": "Win for {{name}}"

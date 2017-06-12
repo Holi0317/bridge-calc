@@ -47,3 +47,6 @@ Name: 名稱
 Previous round score: 上一回合分數
 Total score: 總分
 Rank: 名次
+
+"Bid for {{name}}": "{{name}}的估計墩數"
+"Win for {{name}}": "{{name}}的贏取墩數"
