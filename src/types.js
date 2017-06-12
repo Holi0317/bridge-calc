@@ -10,7 +10,8 @@ export type T = (translate: string, opt: ?any) => string
 
 export type DropdownSource<T> = {
   value: T,
-  label: string
+  label: string,
+  disabled?: boolean
 }
 
 export type RootState = {

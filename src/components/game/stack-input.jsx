@@ -19,6 +19,7 @@ import type {T, PlayerMap, RootState} from '../../types'
 
 type StackInputProps = {
   t: T,
+
   bidDisabled: boolean,
   winDisabled: boolean,
   playerOrder: string[],
