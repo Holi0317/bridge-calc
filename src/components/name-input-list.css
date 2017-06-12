@@ -1,4 +1,4 @@
-.itemContainer {
+.item-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,16 +12,16 @@
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
-}
 
-.dragging .handle {
-  cursor: move;
-  cursor: grabbing;
-  cursor: -moz-grabbing;
-  cursor: -webkit-grabbing;
-  /*
-   * No idea why react-sortable-hoc add pointer-events: none
-   * Add this to enable changing the grab cursor
-   */
-  pointer-events: auto !important;
+  .dragging & {
+    cursor: move;
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+    /*
+     * No idea why react-sortable-hoc add pointer-events: none
+     * Add this to enable changing the grab cursor
+     */
+    pointer-events: auto !important;
+  }
 }
