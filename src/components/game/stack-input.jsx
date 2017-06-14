@@ -41,38 +41,38 @@ function DisconnectStackInput({t, bidDisabled, winDisabled, playerOrder, names, 
     <div className={style.tableContainer}>
       <table className={style.table}>
         <thead className={style.head}>
-        <tr>
-          <th />
-          {playerOrder.map(playerID => (
-            <th key={playerID}>{names[playerID]}</th>
-          ))}
-        </tr>
+          <tr>
+            <th />
+            {playerOrder.map(playerID => (
+              <th key={playerID}>{names[playerID]}</th>
+            ))}
+          </tr>
         </thead>
         <tbody className={style.body}>
 
-        <tr>
-          <td>{t('Bid')}</td>
-          {playerOrder.map(playerID => (
-            <td key={playerID}>
-              <Dropdown value={bid[playerID]} source={bidStackInput[playerID]}
-                        label={t('Bid for {{name}}', {name: names[playerID]})}
-                        disabled={bidDisabled} error={error.bid[playerID]}
-                        onChange={disp(SET_BID, playerID, bid)} />
-            </td>
-          ))}
-        </tr>
+          <tr>
+            <td>{t('Bid')}</td>
+            {playerOrder.map(playerID => (
+              <td key={playerID}>
+                <Dropdown value={bid[playerID]} source={bidStackInput[playerID]}
+                  label={t('Bid for {{name}}', {name: names[playerID]})}
+                  disabled={bidDisabled} error={error.bid[playerID]}
+                  onChange={disp(SET_BID, playerID, bid)} />
+              </td>
+            ))}
+          </tr>
 
-        <tr>
-          <td>{t('Win')}</td>
-          {playerOrder.map(playerID => (
-            <td key={playerID}>
-              <Dropdown value={win[playerID]} source={winStackInput[playerID]}
-                        label={t('Win for {{name}}', {name: names[playerID]})}
-                        disabled={winDisabled} error={error.win[playerID]}
-                        onChange={disp(SET_WIN, playerID, win)} />
-            </td>
-          ))}
-        </tr>
+          <tr>
+            <td>{t('Win')}</td>
+            {playerOrder.map(playerID => (
+              <td key={playerID}>
+                <Dropdown value={win[playerID]} source={winStackInput[playerID]}
+                  label={t('Win for {{name}}', {name: names[playerID]})}
+                  disabled={winDisabled} error={error.win[playerID]}
+                  onChange={disp(SET_WIN, playerID, win)} />
+              </td>
+            ))}
+          </tr>
 
         </tbody>
       </table>

@@ -25,33 +25,33 @@ function DisconnectMiniScoreboard({names, prevScores, totalScores, ranks, t}: Mi
       <table className={styles.table}>
 
         <thead>
-        <tr>
-          <th>{t('Name')}</th>
-          {toPairs(names).map(([playerID, name]) => (
-            <th key={playerID}>{name}</th>
-          ))}
-        </tr>
+          <tr>
+            <th>{t('Name')}</th>
+            {toPairs(names).map(([playerID, name]) => (
+              <th key={playerID}>{name}</th>
+            ))}
+          </tr>
         </thead>
 
         <tbody>
-        <tr>
-          <td>{t('Previous round score')}</td>
-          {toPairs(prevScores).map(([playerID, score]) => (
-            <td key={playerID}>{score}</td>
-          ))}
-        </tr>
-        <tr>
-          <td>{t('Total score')}</td>
-          {toPairs(totalScores).map(([playerID, score]) => (
-            <td key={playerID}>{score}</td>
-          ))}
-        </tr>
-        <tr>
-          <td>{t('Rank')}</td>
-          {toPairs(ranks).map(([playerID, rank]) => (
-            <td key={playerID}>{rank}</td>
-          ))}
-        </tr>
+          <tr>
+            <td>{t('Previous round score')}</td>
+            {toPairs(prevScores).map(([playerID, score]) => (
+              <td key={playerID}>{score}</td>
+            ))}
+          </tr>
+          <tr>
+            <td>{t('Total score')}</td>
+            {toPairs(totalScores).map(([playerID, score]) => (
+              <td key={playerID}>{score}</td>
+            ))}
+          </tr>
+          <tr>
+            <td>{t('Rank')}</td>
+            {toPairs(ranks).map(([playerID, rank]) => (
+              <td key={playerID}>{rank}</td>
+            ))}
+          </tr>
         </tbody>
       </table>
     </div>

@@ -97,9 +97,9 @@ export class Input extends Component {
       <div className={this._rootClass()}>
         <div className={this._containerClass()} ref={ref => (this.el = ref)}>
           <input className="mdc-textfield__input" id={id}
-                 type={type} value={value} aria-controls={helpTextID}
-                 onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
-                 ref={ref => (this.inputEl = ref)} />
+            type={type} value={value} aria-controls={helpTextID}
+            onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
+            ref={ref => (this.inputEl = ref)} />
           <label className={this._labelClass()} htmlFor={id}>
             {label}
           </label>

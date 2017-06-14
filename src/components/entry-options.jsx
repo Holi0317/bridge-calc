@@ -25,22 +25,22 @@ function DisconnectedEntryOptions({t, sources, cards, rounds, startingRound, dis
       <div className={style.selectContainer}>
         <span>{t('Number of cards')}</span>
         <Dropdown label={t('Number of cards')} allowBlank={false}
-                  value={cards} source={sources.cards}
-                  onChange={disp(CARDS_SET)} />
+          value={cards} source={sources.cards}
+          onChange={disp(CARDS_SET)} />
       </div>
 
       <div className={style.selectContainer}>
         <span>{t('Number of rounds')}</span>
         <Dropdown label={t('Number of rounds')} allowBlank={false}
-                  value={rounds} source={sources.rounds}
-                  onChange={disp(ROUNDS_SET)} />
+          value={rounds} source={sources.rounds}
+          onChange={disp(ROUNDS_SET)} />
       </div>
 
       <div className={style.selectContainer}>
         <span>{t('Starting round')}</span>
         <Dropdown label={t('Starting round')} allowBlank={false}
-                  value={startingRound} source={sources.startingRound}
-                  onChange={disp(STARTING_ROUND_SET)} />
+          value={startingRound} source={sources.startingRound}
+          onChange={disp(STARTING_ROUND_SET)} />
       </div>
     </div>
   )
