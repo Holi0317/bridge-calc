@@ -8,7 +8,10 @@
   & > span {
     flex-grow: 1;
   }
-  & > select {
+  & > div {
     flex-grow: 5;
+  }
+  & select {
+    width: 100%;
   }
 }

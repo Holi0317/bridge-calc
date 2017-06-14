@@ -1,6 +1,7 @@
 // @flow
 import {h, Component} from 'preact'
 import type {DropdownSource} from '../../types'
+import style from './dropdown.css'
 
 export type DropdownProps<T> = {
   label?: string,
@@ -8,6 +9,7 @@ export type DropdownProps<T> = {
   source: DropdownSource<T>[],
   disabled?: boolean,
   className?: string,
+  error?: string,
   onChange: (value: T) => void
 }
 
@@ -51,18 +53,22 @@ export class Dropdown<SourceType> extends Component<void, DropdownProps<SourceTy
   }
 
   render() {
-    const {label, source, disabled, className} = this.props
+    const {label, source, disabled, className, error} = this.props
     const {index} = this.state
     const class_ = `mdc-select ${className || ''}`
+    const errClass = style.error + (error ? ' ' + style.hasError : '')
     return (
-      <select className={class_} onChange={this._handler} disabled={disabled}>
-        { label
-          ? <option value="" default disabled>{label}</option>
-          : null }
-        {source.map((s, i) => (
-          <option key={i} value={s.value} selected={i === index} disabled={s.disabled}>{s.label}</option>
-        ))}
-      </select>
+      <div className={style.container}>
+        <select className={class_} onChange={this._handler} disabled={disabled} aria-disabled={disabled}>
+          { label
+            ? <option value="" default disabled>{label}</option>
+            : null }
+          {source.map((s, i) => (
+            <option key={i} value={s.value} selected={i === index} disabled={s.disabled} aria-disabled={s.disabled}>{s.label}</option>
+          ))}
+        </select>
+        <span className={errClass}>{error}</span>
+      </div>
     )
   }
 }

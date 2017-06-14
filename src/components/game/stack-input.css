@@ -1,26 +1,38 @@
+/* The div that contains whole table */
 .table-container {
   overflow-x: auto;
   overflow-y: hidden;
 }
 
+/* Table element. Contains some general styling */
 .table {
-  width: 100%;
+  /*width: 100%;*/
+  table-layout: fixed;
+  white-space: nowrap;
+
+  & tr {
+    height: 3.5em;
+  }
 }
 
-.player-name {
+/* Heading styling */
+.head th {
   text-align: left;
-}
-
-.dropdown {
-  width: 100%;
+  width: 300px;
   min-width: 100px;
 }
 
-.caption {
-  white-space: nowrap;
-  padding-right: 0.5em;
-}
+.body td {
+  width: 300px;
+  min-width: 100px;
 
-.row {
-  height: 3em;
+  /* Style for caption */
+  &:first-of-type {
+    padding-right: 0.5em;
+  }
+
+  /* Maximize width of select component */
+  & select {
+    width: 100%;
+  }
 }

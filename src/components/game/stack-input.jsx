@@ -40,35 +40,35 @@ function DisconnectStackInput({t, bidDisabled, winDisabled, playerOrder, names, 
   return (
     <div className={style.tableContainer}>
       <table className={style.table}>
-        <thead>
-        <tr className={style.row}>
+        <thead className={style.head}>
+        <tr>
           <th />
           {playerOrder.map(playerID => (
-            <th key={playerID} className={style.playerName}>{names[playerID]}</th>
+            <th key={playerID}>{names[playerID]}</th>
           ))}
         </tr>
         </thead>
-        <tbody>
+        <tbody className={style.body}>
 
-        <tr className={style.row}>
-          <td className={style.caption}>{t('Bid')}</td>
+        <tr>
+          <td>{t('Bid')}</td>
           {playerOrder.map(playerID => (
             <td key={playerID}>
-              <Dropdown className={style.dropdown} value={bid[playerID]} source={bidStackInput[playerID]}
+              <Dropdown value={bid[playerID]} source={bidStackInput[playerID]}
                         label={t('Bid for {{name}}', {name: names[playerID]})}
-                        disabled={bidDisabled}
+                        disabled={bidDisabled} error={error.bid[playerID]}
                         onChange={disp(SET_BID, playerID, bid)} />
             </td>
           ))}
         </tr>
 
-        <tr className={style.row}>
-          <td className={style.caption}>{t('Win')}</td>
+        <tr>
+          <td>{t('Win')}</td>
           {playerOrder.map(playerID => (
             <td key={playerID}>
-              <Dropdown className={style.dropdown} value={win[playerID]} source={winStackInput[playerID]}
+              <Dropdown value={win[playerID]} source={winStackInput[playerID]}
                         label={t('Win for {{name}}', {name: names[playerID]})}
-                        disabled={winDisabled}
+                        disabled={winDisabled} error={error.win[playerID]}
                         onChange={disp(SET_WIN, playerID, win)} />
             </td>
           ))}
