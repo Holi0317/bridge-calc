@@ -18,11 +18,11 @@ export function winHandler(state: WaitingBidState | WaitingWinState, action: WIN
   const win = action.win || state.win
   if (state.rounds === state.currentRound) {
     // Last round
-    const newState: WaitingWinState = {
-      ...state,
+    const newState = toEndedState(state, action.time)
+    return {
+      ...newState,
       scores: computeScores(state.bid, win, state.scores)
     }
-    return toEndedState(newState, action.time)
   } else {
     const newState: WaitingBidState = {
       ...state,
