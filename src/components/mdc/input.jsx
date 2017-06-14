@@ -3,7 +3,7 @@ import {h, Component} from 'preact'
 import {MDCTextfield} from '@material/textfield'
 import {cssClasses} from '@material/textfield/constants'
 import {genID} from '../../utils'
-import styles from './input.css'
+import style from './input.css'
 
 export type InputProps = {
   value: string,
@@ -69,12 +69,12 @@ export class Input extends Component {
 
   _rootClass() {
     const {className, fullWidth} = this.props
-    return `${className || ''} ${fullWidth ? styles.fullWidth : ''}`
+    return `${className || ''} ${fullWidth ? style.fullWidth : ''}`
   }
 
   _containerClass() {
     const {disabled, preFilled, fullWidth} = this.props
-    return `${cssClasses.ROOT} ${disabled ? cssClasses.DISABLED : ''} ${preFilled ? cssClasses.UPGRADED : ''} ${fullWidth ? styles.fullWidth : ''}`
+    return `${cssClasses.ROOT} ${disabled ? cssClasses.DISABLED : ''} ${preFilled ? cssClasses.UPGRADED : ''} ${fullWidth ? style.fullWidth : ''}`
   }
 
   _labelClass() {
