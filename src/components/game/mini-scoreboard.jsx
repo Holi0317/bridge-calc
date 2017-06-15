@@ -1,15 +1,15 @@
 // @flow
 import {h} from 'preact'
-import mapValues from 'lodash/mapValues'
-import last from 'lodash/last'
-import sum from 'lodash/sum'
-import values from 'lodash/values'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
-import styles from './mini-scoreboard.css'
+import {namesSelector} from '../../selectors/names'
 import {toPairs} from '../../utils'
+import style from './mini-scoreboard.css'
 
 import type {PlayerMap, RootState, T} from '../../types'
+import {playerPrevScoreSelector} from '../../selectors/player-prev-score'
+import {playerTotalScoreSelector} from '../../selectors/player-total-score'
+import {playerRankSelector} from '../../selectors/player-rank'
 
 type MiniScoreboardProps = {
   names: PlayerMap<string>,
@@ -21,8 +21,8 @@ type MiniScoreboardProps = {
 
 function DisconnectMiniScoreboard({names, prevScores, totalScores, ranks, t}: MiniScoreboardProps) {
   return (
-    <div className={styles.tableContainer}>
-      <table className={styles.table}>
+    <div className={style.tableContainer}>
+      <table className={style.table}>
 
         <thead>
           <tr>
@@ -58,33 +58,12 @@ function DisconnectMiniScoreboard({names, prevScores, totalScores, ranks, t}: Mi
   )
 }
 
-function toOrdinal(value: number): string {
-  const suffix = ['th', 'st', 'nd', 'rd']
-  const v = value % 100
-  return value + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
-}
-
-function compRank(scores: PlayerMap<number>): PlayerMap<string> {
-  const sortedScores: number[] = values(scores).sort((a, b) => b - a)
-  return mapValues(scores, score => toOrdinal(sortedScores.indexOf(score) + 1))
-}
-
 function mapStateToProps(state: RootState) {
-  const currentGame = state.currentGame
-  if (!currentGame) {
-    return {
-      names: {},
-      prevScores: {},
-      totalScores: {},
-      rank: {}
-    }
-  }
-  const totalScores = mapValues(currentGame.scores, score => sum(score))
   return {
-    names: currentGame.names,
-    prevScores: mapValues(currentGame.scores, score => last(score) || 0),
-    totalScores,
-    ranks: compRank(totalScores)
+    names: namesSelector(state),
+    prevScores: playerPrevScoreSelector(state),
+    totalScores: playerTotalScoreSelector(state),
+    rank: playerRankSelector(state)
   }
 }
 
