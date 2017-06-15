@@ -49,6 +49,7 @@ class DisconnectUsedTimeDisplay extends Component {
       clearInterval(this._timerID)
     }
     this._timerID = setInterval(this.tick, 1000)
+    this.tick()
   }
 
   componentWillUnmount() {
