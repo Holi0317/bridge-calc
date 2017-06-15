@@ -4,7 +4,7 @@ import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
 import {namesSelector} from '../../selectors/names'
 import {toPairs} from '../../utils'
-import style from './mini-scoreboard.css'
+import style from './scoreboard.css'
 
 import type {PlayerMap, RootState, T} from '../../types'
 import {playerPrevScoreSelector} from '../../selectors/player-prev-score'
@@ -63,7 +63,7 @@ function mapStateToProps(state: RootState) {
     names: namesSelector(state),
     prevScores: playerPrevScoreSelector(state),
     totalScores: playerTotalScoreSelector(state),
-    rank: playerRankSelector(state)
+    ranks: playerRankSelector(state)
   }
 }
 
