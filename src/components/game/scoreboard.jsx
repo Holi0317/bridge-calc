@@ -25,7 +25,6 @@ type ScoreboardProps = {
 }
 
 function DisconnectScoreboard({t, names, scores, endedRounds, totalScores, ranks}: ScoreboardProps) {
-  console.log(scores)
   return (
     <div className={grid.container}>
       <div className={style.tableContainer}>
