@@ -12,9 +12,12 @@ function toOrdinal(value: number): string {
   return value + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
 }
 
+/**
+ * Select player's ranks. With ordinal suffix.
+ */
 export const playerRankSelector = createSelector(
   playerTotalScoreSelector,
-  (scores: PlayerMap<number[]>) => {
+  (scores: PlayerMap<number[]>): PlayerMap<string> => {
     const sortedScores: number[] = values(scores).sort((a, b) => b - a)
     return mapValues(scores, score => toOrdinal(sortedScores.indexOf(score) + 1))
   }

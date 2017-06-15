@@ -9,7 +9,7 @@ import type {PlayerMap, RootState} from '../types'
  */
 export const playerIDSelector = createSelector(
   (state: RootState) => state.currentGame ? state.currentGame.names : null,
-  (names: ?PlayerMap<string>) => {
+  (names: ?PlayerMap<string>): string[] => {
     if (!names) {
       return []
     }

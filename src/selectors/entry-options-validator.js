@@ -14,7 +14,8 @@ import type {EntryError} from '../validators/entry-options'
 export const entryOptionsValidatorSelector = createSelector(
   (state: RootState) => state.ui.entry,
   (state: RootState, t: T) => t,
-  (entry: EntryState, t: T) => entryOptionsValidator(entry, t)
+  (entry: EntryState, t: T): EntryError =>
+    entryOptionsValidator(entry, t)
 )
 
 /**
@@ -24,5 +25,6 @@ export const entryOptionsValidatorSelector = createSelector(
  */
 export const validEntryOptionsSelector = createSelector(
   entryOptionsValidatorSelector,
-  (error: EntryError) => isOk(error)
+  (error: EntryError): boolean =>
+    isOk(error)
 )

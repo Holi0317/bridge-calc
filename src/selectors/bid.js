@@ -9,10 +9,11 @@ import mapValues from 'lodash/mapValues'
  * If it is not available, empty object will be returned.
  */
 export function bidSelector(state: RootState): PlayerMap<number> {
-  if (!state.currentGame || state.currentGame.stage === GameStage.ended) {
+  const currentGame = state.currentGame
+  if (!currentGame || currentGame.stage === GameStage.ended) {
     return {}
   }
-  return state.currentGame.bid
+  return currentGame.bid
 }
 
 /**
@@ -22,5 +23,6 @@ export function bidSelector(state: RootState): PlayerMap<number> {
  */
 export const strBidSelector = createSelector(
   bidSelector,
-  (bid: PlayerMap<number>) => mapValues(bid, value => value + '')
+  (bid: PlayerMap<number>): PlayerMap<string> =>
+    mapValues(bid, value => value + '')
 )

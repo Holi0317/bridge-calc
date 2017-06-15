@@ -23,5 +23,6 @@ export function winSelector(state: RootState): PlayerMap<number> {
  */
 export const strWinSelector = createSelector(
   winSelector,
-  (win: PlayerMap<number>) => mapValues(win, value => value + '')
+  (win: PlayerMap<number>) =>
+    mapValues(win, value => value + '')
 )

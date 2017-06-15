@@ -18,7 +18,7 @@ export const endedRoundsArraySelector = createSelector(
   stageSelector,
   roundsSelector,
   currentRoundSelector,
-  (stage: ?string, rounds: number, currentRound: number) => {
+  (stage: ?string, rounds: number, currentRound: number): number[] => {
     if (!stage) {
       return []
     }

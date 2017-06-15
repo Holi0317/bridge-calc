@@ -16,7 +16,7 @@ export const gameTitleSelector = createSelector(
   currentRoundSelector,
   roundsSelector,
   (state: RootState, t: T) => t,
-  (stage: ?string, currentRound: ?number, rounds: ?number, t: T) => {
+  (stage: ?string, currentRound: ?number, rounds: ?number, t: T): string => {
     if (stage == null) {
       return ''
     } else if (stage === GameStage.waitingBid || stage === GameStage.waitingWin) {
