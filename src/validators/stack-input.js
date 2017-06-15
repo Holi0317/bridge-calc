@@ -17,43 +17,6 @@ export type StackInputError = {
   win?: PlayerMap<string>
 }
 
-const validateKeys = ['bid', 'win']
-
-function validateType(opts: StackInput, t: T): StackInputError {
-  const propNames = {
-    bid: 'Bid',
-    win: 'Win'
-  }
-
-  const res: StackInputError = {}
-  for (const key of validateKeys) {
-    const value = opts[key]
-    if (value) {
-      const typeRes = _typeValidator(value, t, opts.currentRound, propNames[key])
-      if (!isOk(typeRes)) {
-        res[key] = typeRes
-      }
-    }
-  }
-  return res
-}
-
-/**
- * Validate type of player map.
- * @private
- */
-function _typeValidator(obj: PlayerMap<number>, t: T, currentRound: number, property: string): PlayerMap<string> {
-  const res = {}
-  for (const [playerID, value] of toPairs(obj)) {
-    if (!Number.isInteger(value) || value < 0) {
-      res[playerID] = t('{{property}} must be an integer', {property})
-    } else if (value > currentRound) {
-      res[playerID] = t('Way too many cards')
-    }
-  }
-  return res
-}
-
 function validateBid(opts: StackInput, t: T): PlayerMap<string> | null {
   if (!opts.bid) {
     return null
@@ -92,14 +55,9 @@ function validateWin(opts: StackInput, t: T): PlayerMap<string> | null {
  * @returns {Object} Error of each property
  */
 export function stackInputValidator(opts: StackInput, t: T): StackInputError {
-  const typeRes = validateType(opts, t)
-  if (!isOk(typeRes)) {
-    return typeRes
-  } else {
-    const res = {
-      bid: validateBid(opts, t),
-      win: validateWin(opts, t)
-    }
-    return removeUndef(res)
+  const res = {
+    bid: validateBid(opts, t),
+    win: validateWin(opts, t)
   }
+  return removeUndef(res)
 }
