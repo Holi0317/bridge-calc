@@ -1,5 +1,6 @@
 // @flow
 import type {DropdownSource} from './types'
+
 /**
  * Generate a (hopefully) unique ID with 4 characters
  */
@@ -97,7 +98,7 @@ export function fillObj<T>(obj: {[key: string]: T}, keys: string[], value: T): {
 
 /**
  * Typed Object.entries.
- * This is just a helper function to mock out flow's type checking
+ * This is just a helper function to bypass out flow's type checking
  */
 export function toPairs(obj: any): any[] {
   return (Object: any).entries(obj)
@@ -113,3 +114,16 @@ export function toPairs(obj: any): any[] {
 export function createSource(values: number[]): DropdownSource<number>[] {
   return values.map(s => ({value: s, label: s + ''}))
 }
+
+/**
+ * Convert a number to its ordinal format.
+ * The ordinal suffix will be appended to it.
+ * Like 1 -> 1st, 2 -> 2nd.
+ * @param value - Number to be converted
+ */
+export function toOrdinal(value: number): string {
+  const suffix = ['th', 'st', 'nd', 'rd']
+  const v = value % 100
+  return value + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
+}
+

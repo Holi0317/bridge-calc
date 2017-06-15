@@ -3,14 +3,9 @@ import {createSelector} from 'reselect'
 import values from 'lodash/values'
 import mapValues from 'lodash/mapValues'
 import {playerTotalScoreSelector} from './player-total-score'
+import {toOrdinal} from '../utils'
 
 import type {PlayerMap} from '../types'
-
-function toOrdinal(value: number): string {
-  const suffix = ['th', 'st', 'nd', 'rd']
-  const v = value % 100
-  return value + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
-}
 
 /**
  * Select player's ranks. With ordinal suffix.

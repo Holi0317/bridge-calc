@@ -135,3 +135,24 @@ test('createSource should create source according to input', t => {
   const actual = utils.createSource(values)
   t.deepEqual(actual, expected, 'Source should be created')
 })
+
+test('toOrdinal should work on 1', t => {
+  const value = 1
+  const expected = '1st'
+  const actual = utils.toOrdinal(value)
+  t.is(actual, expected, '1 should be converted')
+})
+
+test('toOrdinal should work on 4', t => {
+  const value = 4
+  const expected = '4th'
+  const actual = utils.toOrdinal(value)
+  t.is(actual, expected, '4 should be converted')
+})
+
+test('toOrdinal should work on 11', t => {
+  const value = 11
+  const expected = '11th'
+  const actual = utils.toOrdinal(value)
+  t.is(actual, expected, '11 should be converted')
+})
