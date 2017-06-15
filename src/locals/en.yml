@@ -1,9 +1,12 @@
 Bridge calculator: Bridge calculator
+
+# Title messages
 Entry: Entry
 Scoreboard: Scoreboard
 Game over: Game over
 Round {{currentRound}} of {{rounds}}: Round {{currentRound}} of {{rounds}}
 
+# Main menu tiles messages
 Continue: Continue
 New Game: New Game
 Previous games: Previous games
@@ -12,6 +15,7 @@ Information: Information
 Support/bug: Support/bug
 Input: Input
 
+# For entry view. The form need to be filled
 Player Names: Player Names
 Add player: Add player
 Import names: Import names
@@ -22,32 +26,27 @@ Number of cards: Number of cards
 Number of rounds: Number of rounds
 Starting round: Starting round
 
-Cards: Cards
-Rounds: Rounds
-"{{property}} must be a positive integer": "{{property}} must be a positive integer"
-Too few cards: Too few cards
-Insufficient cards for that much rounds: Insufficient cards for that much rounds
-Impossible to start beyond the end of the game: Impossible to start beyond the end of the game
+# Validation messages
 At least 2 players is required for a game: At least 2 players is required for a game
 Name cannot be empty: Name cannot be empty
-"{{property}} must be an integer": "{{property}} must be an integer"
 Cannot choose that: Cannot choose that
-Way too many cards: Way too many cards
 Too many stacks: Too many stacks
 Too less stacks: Too less stacks
 
+# Time used in the game
 "Time: {{time}}": "Time: {{time}}"
 
+# Main game view. The form need to be filled in
 Bid: Bid
 Win: Win
 Next: Next
 Undo: Undo
+"Bid for {{name}}": "Bid for {{name}}"
+"Win for {{name}}": "Win for {{name}}"
 
+# Scoreboard messages
 Name: Name
 Previous round score: Previous round score
 Total score: Total score
 Rank: Rank
-
-"Bid for {{name}}": "Bid for {{name}}"
-"Win for {{name}}": "Win for {{name}}"
 "Round {{n}}": "Round {{n}}"
