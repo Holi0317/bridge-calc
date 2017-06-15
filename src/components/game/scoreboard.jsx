@@ -42,7 +42,7 @@ function DisconnectScoreboard({t, names, scores, endedRounds, totalScores, ranks
             {/* Scores for each round */}
             {endedRounds.map(i => (
               <tr key={i}>
-                <td>{i}</td>
+                <td>{t('Round {{n}}', {n: i})}</td>
                 {toPairs(scores).map(([playerID, scores]) => (
                   <td key={playerID}>{scores[i - 1]}</td>
                 ))}

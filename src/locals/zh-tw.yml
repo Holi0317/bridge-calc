@@ -50,3 +50,4 @@ Rank: 名次
 
 "Bid for {{name}}": "{{name}}的估計墩數"
 "Win for {{name}}": "{{name}}的贏取墩數"
+"Round {{n}}": "第{{n}}回合"
