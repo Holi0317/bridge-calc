@@ -19,7 +19,6 @@ type ScoreboardProps = {
   scores: PlayerMap<number[]>,
   totalScores: PlayerMap<number>,
   ranks: PlayerMap<string>,
-  currentRound: number,
   endedRounds: number[],
   t: T
 }
@@ -80,7 +79,6 @@ function mapStateToProps(state: RootState) {
     scores: playerScoresSelector(state),
     totalScores: playerTotalScoreSelector(state),
     ranks: playerRankSelector(state),
-    currentRound: currentRoundSelector(state),
     endedRounds: endedRoundsArraySelector(state)
   }
 }
