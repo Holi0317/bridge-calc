@@ -13,7 +13,7 @@ type Setter<DataType> = (newVal: string, oldVal: DataType) => DataType
 export type NameInputListProps<DataType> = {
   values: DataType[],
   onChange: (names: string[]) => void,
-  error: ?string[],
+  error?: string[],
   getter: (data: DataType) => string,
   setter: Setter<DataType>
 }
