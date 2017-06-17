@@ -8,7 +8,7 @@ import {IconButton} from './mdc/icon-button'
 import MdAdd from 'react-icons/md/add'
 import MdFileDownload from 'react-icons/md/file-download'
 import Collapse from 'react-collapse'
-import {NameInputList} from './name-input-list'
+import {NameInputList, strGetter, strSetter} from './name-input-list'
 import {OPTION_OPEN_TOGGLE, PLAYER_NAMES_SET, ADD_PLAYER} from '../actions/ui/entry'
 import {START} from '../actions/current-game'
 import {EntryOptions} from './entry-options'
@@ -81,7 +81,9 @@ class DisconnectedEntry extends Component {
     return (
       <div className={grid.container}>
         <h3>{t('Player Names')}</h3>
-        <NameInputList names={props.playerNames} error={props.playerNamesError} onChange={props.changePlayerNames} />
+        <NameInputList values={props.playerNames} error={props.playerNamesError}
+          onChange={props.changePlayerNames}
+          getter={strGetter} setter={strSetter} />
         <div className={style.actionButtonContainer}>
           {/* TODO the following two have tooltip */}
           <IconButton icon={<MdAdd width="28px" height="28px" />} tooltip={t('Add player')} onClick={props.addPlayer} />
