@@ -4,9 +4,12 @@ import {genMap} from '../fixtures/current-game-states'
 import {playerEditorValidator} from '../../src/validators/player-editor'
 
 test('No error for normal names', t => {
-  const expected = {}
+  const expected = {
+    names: {},
+    misc: ''
+  }
   const opts = {
-    names: genMap('John', 'Mary', 'Henry', 'Joe')
+    names: genMap('John', 'Mary', 'Henry', 'Joe'),
   }
   const actual = playerEditorValidator(opts, trans)
   t.deepEqual(actual, expected, 'No error should exist on normal player names')
@@ -14,7 +17,8 @@ test('No error for normal names', t => {
 
 test('Error on repeated names', t => {
   const expected = {
-    names: {a: 'Name cannot be repeated', b: 'Name cannot be repeated'}
+    names: {a: 'Name cannot be repeated', b: 'Name cannot be repeated'},
+    misc: ''
   }
   const opts = {
     names: genMap('John', 'John', 'Henry', 'Joe')
@@ -25,7 +29,8 @@ test('Error on repeated names', t => {
 
 test('Error on Names that is empty', t => {
   const expected = {
-    names: {c: 'Name cannot be empty', d: 'Name cannot be empty'}
+    names: {c: 'Name cannot be empty', d: 'Name cannot be empty'},
+    misc: ''
   }
   const opts = {
     names: genMap('John', 'Mary', '', '')
@@ -36,6 +41,7 @@ test('Error on Names that is empty', t => {
 
 test('Error on misc when there is no player', t => {
   const expected = {
+    names: {},
     misc: 'At least 2 players is required for a game'
   }
   const opts = {
@@ -47,6 +53,7 @@ test('Error on misc when there is no player', t => {
 
 test('Error on misc when there is 1 player', t => {
   const expected = {
+    names: {},
     misc: 'At least 2 players is required for a game'
   }
   const opts = {

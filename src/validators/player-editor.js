@@ -1,7 +1,7 @@
 // @flow
 import mapValues from 'lodash/mapValues'
 import values from 'lodash/values'
-import {dupe, isOk, removeUndef} from '../utils'
+import {dupe, removeUndef} from '../utils'
 
 import type {PlayerMap, T} from '../types'
 
@@ -15,18 +15,18 @@ export type PlayerEditorOpts = {
 export type PlayerEditorError = {
   /**
    * Error of each name given.
-   * If this property is not defined, no error exist in player names.
+   * If this is an empty object, no error exist in player names.
    */
-  names?: PlayerMap<string>,
+  names: PlayerMap<string>,
   /**
    * Error found in player names but could not be displayed on a specific player.
-   * If this property is not defined, no such error exist.
+   * If this is an empty string, no such error exist.
    * Only too few player error will use this property.
    */
-  misc?: string
+  misc: string
 }
 
-function namesValid(opts: PlayerEditorOpts, t: T): ?PlayerMap<string> {
+function namesValid(opts: PlayerEditorOpts, t: T): PlayerMap<string> {
   const names = opts.names
   const dupedNames = dupe(values(names))
   const validatedNames = mapValues(names, (name: ?string) => {
@@ -38,24 +38,22 @@ function namesValid(opts: PlayerEditorOpts, t: T): ?PlayerMap<string> {
     }
     return ''
   })
-  const purged = removeUndef(validatedNames)
-  return isOk(purged) ? null : purged
+  return removeUndef(validatedNames) // Remove no error players.
 }
 
-function miscValid(opts: PlayerEditorOpts, t: T): ?string {
-  return Object.keys(opts.names).length < 2 ? t('At least 2 players is required for a game') : null
+function miscValid(opts: PlayerEditorOpts, t: T): string {
+  return Object.keys(opts.names).length < 2 ? t('At least 2 players is required for a game') : ''
 }
 
 /**
  * Validate player editor parameters.
- * If arguments are valid, empty object will be returned.
- * Otherwise, an object that maps field -> error message will be returned.
- * Use utils.isOk to check for error.
+ * An object that maps field -> error message will be returned.
+ * _ATTENTION_: Unlike other validators, empty values will be preserved.
+ * Look for error interface definition for no error case.
  */
 export function playerEditorValidator(opts: PlayerEditorOpts, t: T): PlayerEditorError {
-  const res = {
+  return {
     names: namesValid(opts, t),
     misc: miscValid(opts, t)
   }
-  return removeUndef(res)
 }
