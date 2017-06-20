@@ -156,3 +156,31 @@ test('toOrdinal should work on 11', t => {
   const actual = utils.toOrdinal(value)
   t.is(actual, expected, '11 should be converted')
 })
+
+test('dupe should return empty array for empty array input', t => {
+  const input = []
+  const expected = []
+  const actual = utils.dupe(input)
+  t.deepEqual(actual, expected, 'Empty array should be the output')
+})
+
+test('dupe should return empty array for all unique items', t => {
+  const input = [1, 2, 3, 4, 5]
+  const expected = []
+  const actual = utils.dupe(input)
+  t.deepEqual(actual, expected, 'No duplicate element should be found')
+})
+
+test('dupe should not mutate the input array', t => {
+  const input = [1, 2, 3]
+  const expected = [1, 2, 3]
+  utils.dupe(input)
+  t.deepEqual(input, expected, 'Input array should not be mutated')
+})
+
+test('dupe should return only 1 duplicated item for duplicated element', t => {
+  const input = [1, 2, 3, 2, 1, 2]
+  const expected = [2, 1] // 2 is repeated first
+  const actual = utils.dupe(input)
+  t.deepEqual(actual, expected, 'Duplicated elements should exist in result')
+})
