@@ -36,6 +36,7 @@ function validatePlayerName(opts, t): EntryError {
  * @returns {Object} Error of each property
  */
 export function entryOptionsValidator(opts: EntryOptions, t: T): EntryError {
+  // TODO Do not use spread for validator. Use pattern from player editor validator
   return {
     ...validateMisc(opts, t),
     ...validatePlayerName(opts, t)
