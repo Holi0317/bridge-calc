@@ -8,7 +8,7 @@ import {IconButton} from './mdc/icon-button'
 import MdAdd from 'react-icons/md/add'
 import MdFileDownload from 'react-icons/md/file-download'
 import Collapse from 'react-collapse'
-import {NameInputList, strGetter, strSetter} from './name-input-list'
+import {NameInputList} from './name-input-list'
 import {OPTION_OPEN_TOGGLE, PLAYER_NAMES_SET, ADD_PLAYER} from '../actions/ui/entry'
 import {START} from '../actions/current-game'
 import {EntryOptions} from './entry-options'
@@ -35,6 +35,13 @@ function namesToObject(playerNames: string[]) {
   })
   return result
 }
+
+// Getters and setters for name input list element
+export const getter = (val: string) => val
+
+export const setter = (newVal: string) => newVal
+
+export const errorGetter = (error: string[], value: string, index: number) => error[index]
 
 class DisconnectedEntry extends Component {
   props: {
@@ -81,9 +88,9 @@ class DisconnectedEntry extends Component {
     return (
       <div className={grid.container}>
         <h3>{t('Player Names')}</h3>
-        <NameInputList values={props.playerNames} error={props.playerNamesError}
+        <NameInputList values={props.playerNames} error={props.playerNamesError || []}
           onChange={props.changePlayerNames}
-          getter={strGetter} setter={strSetter} />
+          getter={getter} setter={setter} errorGetter={errorGetter} />
         <div className={style.actionButtonContainer}>
           {/* TODO the following two have tooltip */}
           <IconButton icon={<MdAdd width="28px" height="28px" />} tooltip={t('Add player')} onClick={props.addPlayer} />
