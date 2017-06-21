@@ -32,6 +32,7 @@ Name cannot be empty: 名字必需被填上
 Cannot choose that: 不能選擇這個
 Too many stacks: 太多墩
 Too less stacks: 太少墩
+Name cannot be repeated: 名字不可以重複
 
 # Time used in the game
 "Time: {{time}}": "已用時間: {{time}}"

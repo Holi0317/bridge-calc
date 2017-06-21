@@ -29,15 +29,13 @@ export type PlayerEditorError = {
 function namesValid(opts: PlayerEditorOpts, t: T): PlayerMap<string> {
   const names = opts.names
   const dupedNames = dupe(values(names))
-  const validatedNames = mapValues(names, (name: ?string) => {
-    if (name == null || name === '') {
-      return t('Name cannot be empty')
-    }
-    if (dupedNames.includes(name)) {
-      return t('Name cannot be repeated')
-    }
-    return ''
-  })
+  const validatedNames = mapValues(names, (name: ?string) => (
+    (name == null || name === '')
+      ? t('Name cannot be empty')
+      : (dupedNames.includes(name))
+        ? t('Name cannot be repeated')
+        : ''
+  ))
   return removeUndef(validatedNames) // Remove no error players.
 }
 

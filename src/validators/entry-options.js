@@ -1,5 +1,6 @@
 // @flow
 import type {T} from '../types'
+import {dupe, removeUndef} from '../utils'
 
 export type EntryOptions = {
   playerNames: string[]
@@ -10,19 +11,26 @@ export type EntryError = {
   misc?: string
 }
 
-function validateMisc(opts, t): EntryError {
+function validateMisc(opts, t): ?string {
   return opts.playerNames.length < 2
-    ? {misc: t('At least 2 players is required for a game')}
-    : {}
+    ? t('At least 2 players is required for a game')
+    : null
 }
 
-function validatePlayerName(opts, t): EntryError {
+function validatePlayerName(opts, t): ?string[] {
+  const duplicates = dupe(opts.playerNames)
   const playerNames = opts.playerNames
-    .map(p => p == null || p === '' ? t('Name cannot be empty') : '')
+    .map(p => (
+      (p == null || p === '')
+        ? t('Name cannot be empty')
+        : (duplicates.includes(p))
+          ? t('Name cannot be repeated')
+          : ''
+    ))
   const isEmpty = playerNames.filter(p => p !== '').length === 0
   return isEmpty
-    ? {}
-    : {playerNames}
+    ? null
+    : playerNames
 }
 
 /**
@@ -36,9 +44,9 @@ function validatePlayerName(opts, t): EntryError {
  * @returns {Object} Error of each property
  */
 export function entryOptionsValidator(opts: EntryOptions, t: T): EntryError {
-  // TODO Do not use spread for validator. Use pattern from player editor validator
-  return {
-    ...validateMisc(opts, t),
-    ...validatePlayerName(opts, t)
+  const res = {
+    misc: validateMisc(opts, t),
+    playerNames: validatePlayerName(opts, t)
   }
+  return removeUndef(res)
 }

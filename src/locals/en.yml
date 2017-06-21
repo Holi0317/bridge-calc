@@ -32,6 +32,7 @@ Name cannot be empty: Name cannot be empty
 Cannot choose that: Cannot choose that
 Too many stacks: Too many stacks
 Too less stacks: Too less stacks
+Name cannot be repeated: Name cannot be repeated
 
 # Time used in the game
 "Time: {{time}}": "Time: {{time}}"

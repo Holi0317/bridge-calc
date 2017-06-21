@@ -9,7 +9,7 @@ test('No error for normal names', t => {
     misc: ''
   }
   const opts = {
-    names: genMap('John', 'Mary', 'Henry', 'Joe'),
+    names: genMap('John', 'Mary', 'Henry', 'Joe')
   }
   const actual = playerEditorValidator(opts, trans)
   t.deepEqual(actual, expected, 'No error should exist on normal player names')
