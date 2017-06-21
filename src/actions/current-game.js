@@ -9,6 +9,7 @@ export type CurrentGameActions =
   | SET_WIN_ACTION
   | WIN_ACTION
   | UNDO_ACTION
+  | CHANGE_PLAYERS_ACTION
 
 /**
  * Start a new game that overrides existing game.
@@ -117,8 +118,43 @@ export type WIN_ACTION = {
 
 /**
  * Roll back from waitingWin stage to waitingBid stage.
+ * If the stage is not waitingWin, no-op will be done.
  */
 export const UNDO: 'CURRENT_GAME/UNDO' = 'CURRENT_GAME/UNDO'
 export type UNDO_ACTION = {
   type: typeof UNDO
+}
+
+/**
+ * Change players of current game.
+ * Change can include: Change name, add player or remove player.
+ * After this action is dispatched, the stage will revert to waitingBid if original stage is waitingWin. (To avoid invalid bid after changing player)
+ *
+ * This action can also be used to change maker. Just pass in original name map, original rounds and specify new maker in `maker` property.
+ *
+ * This action can also be used to change number of rounds. Similar to change maker, only update rounds property.
+ */
+export const CHANGE_PLAYERS: 'CURRENT_GAME/CHANGE_PLAYERS' = 'CURRENT_GAME/CHANGE_PLAYERS'
+export type CHANGE_PLAYERS_ACTION = {
+  type: typeof CHANGE_PLAYERS,
+  /**
+   * New PlayerMap for the names.
+   * Order of this map represent the new player order.
+   * If new player is added, generate a new unique ID for him/her.
+   */
+  newNames: PlayerMap<string>,
+  /**
+   * As order may have changed, new maker must be selected.
+   * This property represent the ID of new maker.
+   * The player order will be sorted by this property and newNames property.
+   * This can also be used to change maker.
+   */
+  maker: string,
+  /**
+   * Number of rounds after dispatching this action.
+   * If the given rounds is less than current round, the game will end immediately.
+   * If the above case happens, endTime of the game will be starting time + 1 min.
+   * Because providing such round is invalid and validation should not be done in reducer.
+   */
+  rounds: number
 }

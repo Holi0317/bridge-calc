@@ -1,5 +1,5 @@
 import test from 'ava'
-import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO} from '../../src/actions/current-game'
+import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../src/actions/current-game'
 import {startParams, waitingBidState, waitingWinState, endedState, genMap} from '../fixtures/current-game-states'
 import {currentGame as reducer} from '../../src/reducer/current-game/index'
 
@@ -401,4 +401,228 @@ test('Undo should roll back stage is waitingWin', t => {
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'Stage should be waitingWin')
+})
+
+test('Change players should do no-op in null state', t => {
+  const expected = null
+  const state = null
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
+    maker: 'a',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.is(actual, expected, 'no-op should be done on null state')
+})
+
+test('Change players should do no-op in ended state', t => {
+  const expected = {
+    ...endedState
+  }
+  const state = {
+    ...endedState
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
+    maker: 'a',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'no-op should be done on ended state')
+})
+
+test('Change players should do no-op when given names are same as original map and maker is the current one', t => {
+  const expected = {
+    ...waitingBidState
+  }
+  const state = {
+    ...waitingBidState
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
+    maker: 'a',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'State should not be changed')
+})
+
+test('Change players should revert stage to waitingBid for waitingWin stage', t => {
+  const expected = {
+    ...waitingBidState
+  }
+  const state = {
+    ...waitingWinState
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
+    maker: 'a',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'Stage should be reverted to waitingBid')
+})
+
+test("Change players should change player's names from given map", t => {
+  const expected = {
+    ...waitingBidState,
+    names: genMap('John', 'DPGJW', 'Henry', 'Joe')
+  }
+  const state = {
+    ...waitingBidState
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genMap('John', 'DPGJW', 'Henry', 'Joe'),
+    maker: 'a',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'player names should be changed')
+})
+
+test('Change players should change all maps order from given map (For no addition nor deletion)', t => {
+  function genReorderedMap(b, c, d, a) {
+    return {b, c, d, a}
+  }
+
+  const expected = {
+    ...waitingBidState,
+    names: genReorderedMap('Mary', 'Henry', 'Joe', 'John'),
+    scores: genReorderedMap([], [], [], []),
+    currentPlayerOrder: ['b', 'c', 'd', 'a'],
+    bid: genReorderedMap(1, 0, 1, 0)
+  }
+  const state = {
+    ...waitingBidState,
+    bid: genMap(0, 1, 0, 1)
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genReorderedMap('Mary', 'Henry', 'Joe', 'John'),
+    maker: 'b',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'All maps should be re-ordered')
+})
+
+test('Change players should re-order players by given maker', t => {
+  const expected = {
+    ...waitingBidState,
+    currentPlayerOrder: ['c', 'd', 'a', 'b']
+  }
+  const state = {
+    ...waitingBidState
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
+    maker: 'c',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'currentPlayerOrder should be re-ordered')
+})
+
+test('Change players should change rounds from given payload', t => {
+  const expected = {
+    ...waitingBidState,
+    rounds: 12
+  }
+  const state = {
+    ...waitingBidState
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
+    maker: 'a',
+    rounds: 12
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'Rounds should be changed')
+})
+
+test('Change players should remove all data from removed player', t => {
+  function genSmallMap(a, b, c) {
+    return {a, b, c}
+  }
+
+  const expected = {
+    ...waitingBidState,
+    names: genSmallMap('John', 'Mary', 'Henry'),
+    scores: genSmallMap([], [], []),
+    currentPlayerOrder: ['a', 'b', 'c'],
+    bid: genSmallMap(0, 1, 0)
+  }
+  const state = {
+    ...waitingBidState,
+    bid: genMap(0, 1, 0, 1)
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genSmallMap('John', 'Mary', 'Henry'),
+    maker: 'a',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'All data related to removed player should be removed')
+})
+
+test('Change players should assign 0 mark for ended rounds of new player', t => {
+  function genNewMap(a, b, c, d, e) {
+    return {b, c, d, a, e}
+  }
+
+  const expected = {
+    ...waitingBidState,
+    currentRound: 2,
+    names: genNewMap('John', 'Mary', 'Henry', 'Joe', 'DPGJW'),
+    currentPlayerOrder: ['b', 'c', 'd', 'a', 'e'],
+    scores: genNewMap([10], [11], [10], [-1], [0]),
+    bid: genNewMap(0, 0, 0, 0, 0)
+  }
+  const state = {
+    ...waitingBidState,
+    currentRound: 2,
+    currentPlayerOrder: ['b', 'c', 'd', 'a'],
+    scores: genMap([10], [11], [10], [-1])
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genNewMap('John', 'Mary', 'Henry', 'Joe', 'DPGJW'),
+    maker: 'b',
+    rounds: 13
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'New player should be added')
+})
+
+test('Change players should end game when given rounds is less than current round', t => {
+  const expected = {
+    ...endedState,
+    rounds: 1,
+    scores: genMap([0], [0], [0], [0]),
+    names: genMap('Mary', 'John', 'Henry', 'Joe'),
+    endTime: new Date(60000) // 1 minute in ms
+  }
+  const s = [0, 0] // Short hand for score
+  const state = {
+    ...waitingBidState,
+    currentRound: 3,
+    currentPlayerOrder: ['c', 'd', 'a', 'b'],
+    scores: genMap(s, s, s, s)
+  }
+  const action = {
+    type: CHANGE_PLAYERS,
+    newNames: genMap('Mary', 'John', 'Henry', 'Joe'),
+    maker: 'a',
+    rounds: 1
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'Game should be ended')
 })

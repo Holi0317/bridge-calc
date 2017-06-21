@@ -1,9 +1,10 @@
 // @flow
-import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO} from '../../actions/current-game'
+import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../actions/current-game'
 import {GameStage} from '../../game-stage'
 import {skip} from './skip'
 import {start} from './start'
 import {winHandler} from './win-handler'
+import {changePlayersHandler} from './change-players-handler'
 import {toWaitingBidState} from './converter'
 import {bidWinGenerator} from './bid-win-generator'
 
@@ -53,6 +54,8 @@ export function currentGame(state: GameState = defaultState, action: CurrentGame
       return state
     }
     return toWaitingBidState(state)
+  case CHANGE_PLAYERS:
+    return changePlayersHandler(state, action)
   default:
     return state
   }
