@@ -4,22 +4,23 @@ import {bidWinGenerator} from './bid-win-generator'
 import type {WaitingBidState, WaitingWinState, EndedState} from './types'
 
 export function toWaitingBidState(state: WaitingBidState | WaitingWinState): WaitingBidState {
-  const cloned: WaitingBidState = {
-    bid: bidWinGenerator(Object.keys(state.names)),
-    ...state,
-    stage: GameStage.waitingBid
+  return {
+    stage: GameStage.waitingBid,
+    rounds: state.rounds,
+    startTime: state.startTime,
+    names: state.names,
+    scores: state.scores,
+    currentPlayerOrder: state.currentPlayerOrder,
+    currentRound: state.currentRound,
+    bid: state.bid
   }
-  delete (cloned: any).win
-  return cloned
 }
 
 export function toWaitingWinState(state: WaitingBidState | WaitingWinState): WaitingWinState {
-  return {
-    bid: bidWinGenerator(Object.keys(state.names)),
-    win: bidWinGenerator(Object.keys(state.names)),
-    ...state,
-    stage: GameStage.waitingWin
-  }
+  const newState = (toWaitingBidState(state): any) // Just to remove some whitelist boilerplate
+  newState.stage = GameStage.waitingWin
+  newState.win = (state: any).win || bidWinGenerator(Object.keys(state.names))
+  return newState
 }
 
 export function toEndedState(state: WaitingBidState | WaitingWinState, endTime: Date): EndedState {
