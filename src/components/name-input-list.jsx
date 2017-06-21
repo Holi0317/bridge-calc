@@ -10,11 +10,31 @@ import style from './name-input-list.css'
 
 type Setter<DataType> = (newVal: string, oldVal: DataType) => DataType
 
-export type NameInputListProps<DataType> = {
+export type NameInputListProps<DataType, ErrorType> = {
+  /**
+   * Values of data to be filled.
+   */
   values: DataType[],
-  onChange: (names: string[]) => void,
-  error?: string[],
+  /**
+   * When data is changed (modified, renamed, deleted), this will be called with new data array.
+   */
+  onChange: (values: DataType[]) => void,
+  /**
+   * Optional. Error to be displayed under name input.
+   */
+  error: ErrorType,
+  /**
+   * Get error from given data.
+   * If returned is empty string or null, that implies no error exist.
+   */
+  errorGetter: (error: ErrorType, value: DataType, index: number) => ?string,
+  /**
+   * Getter to transform data into string displayed in input field.
+   */
   getter: (data: DataType) => string,
+  /**
+   * This function transform old data to new one with given new value in input field.
+   */
   setter: Setter<DataType>
 }
 
@@ -55,29 +75,25 @@ const SortableItem = SortableElement(translate()(({value, onChange, remove, erro
   </div>
 )))
 
-const SortableList = SortableContainer(({values, error, getter, setter, onChange}) => {
+const SortableList = SortableContainer(({values, error, getter, setter, errorGetter, onChange}) => {
   const changeHandler = createChangeHandler(values, setter, onChange)
   const removeHandler = createRemoveHandler(values, onChange)
   return (
     <div>
       {values.map((value, index) => (
         <SortableItem key={`item-${index}`}
-          index={index} value={getter(value)} error={error[index] || ''}
+          index={index} value={getter(value)} error={errorGetter(error, value, index)}
           onChange={changeHandler(index)} remove={removeHandler(index)} />
       ))}
     </div>
   )
 })
 
-export function NameInputList<T>({values, onChange, error, getter, setter}: NameInputListProps<T>) {
+export function NameInputList<T, V>({values, onChange, error, getter, setter, errorGetter}: NameInputListProps<T, V>) {
   return (
     <SortableList useDragHandle={true} lockAxis="y" helperClass={style.dragging}
-      values={values} error={error || []}
-      getter={getter} setter={setter}
+      values={values} error={error}
+      getter={getter} setter={setter} errorGetter={errorGetter}
       onChange={onChange} onSortEnd={createSortEndHandler(values, onChange)} />
   )
 }
-
-export const strGetter = (val: string) => val
-
-export const strSetter = (newVal: string) => newVal
