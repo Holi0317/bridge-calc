@@ -3,6 +3,7 @@ import type {CurrentGameActions} from './actions/current-game'
 import type {EntryActions} from './actions/ui/entry'
 import type {GameState} from './reducer/current-game'
 import type {EntryState} from './reducer/ui/entry'
+import type {SettingsState} from './reducer/ui/settings'
 
 export type PlayerMap<T> = {[playerID: string]: T}
 
@@ -17,7 +18,8 @@ export type DropdownSource<T> = {
 export type RootState = {
   currentGame: GameState,
   ui: {
-    entry: EntryState
+    entry: EntryState,
+    settings: SettingsState
   }
 }
 
