@@ -5,7 +5,7 @@ import style from './dropdown.css'
 
 export type DropdownProps<T> = {
   label?: string,
-  value: T,
+  value: ?T,
   source: DropdownSource<T>[],
   disabled?: boolean,
   className?: string,
