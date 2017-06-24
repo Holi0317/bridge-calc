@@ -26,5 +26,6 @@ export type RootState = {
 export type Actions =
   | CurrentGameActions
   | EntryActions
+  | SettingsActions
 
 export type Dispatch = (action: Actions) => void
