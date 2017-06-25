@@ -21,3 +21,10 @@
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+
+/* No idea why but since material-components 0.13.0,
+  toolbar do not have padding and height:auto will cause too high toolbar */
+.mdc-toolbar__row {
+  padding: 20px 28px;
+  height: 24px;
+}
