@@ -4,6 +4,7 @@ import type {EntryActions} from './actions/ui/entry'
 import type {GameState} from './reducer/current-game'
 import type {EntryState} from './reducer/ui/entry'
 import type {SettingsState} from './reducer/ui/settings'
+import type {SettingsActions} from './actions/ui/settings'
 
 export type PlayerMap<T> = {[playerID: string]: T}
 
