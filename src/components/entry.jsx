@@ -103,8 +103,10 @@ class DisconnectedEntry extends Component {
           <EntryOptions />
         </Collapse>
 
-        <Button raised accent className={style.startBtn} disabled={!props.valid} onClick={this.start}>{t('Start')}</Button>
-        <span className={style.errorMessage}>{props.miscError}</span>
+        <div className={style.startBtnContainer}>
+          <Button raised accent disabled={!props.valid} onClick={this.start}>{t('Start')}</Button>
+          <span className={style.errorMessage}>{props.miscError}</span>
+        </div>
       </div>
     )
   }

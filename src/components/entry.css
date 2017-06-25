@@ -3,8 +3,11 @@
   width: 100%;
 }
 
-.start-btn {
+.start-btn-container {
   margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .error-message {
