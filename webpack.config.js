@@ -31,7 +31,6 @@ module.exports = merge.smart(
   },
 
   env,
-  scopeHoisting,
   alias,
   provide,
 
@@ -50,6 +49,7 @@ module.exports = merge.smart(
 
   ...(ENV === 'production' ? [
     analyzer,
+    scopeHoisting,
     babili
   ] : [
 
