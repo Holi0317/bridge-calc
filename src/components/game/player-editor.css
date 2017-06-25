@@ -3,6 +3,10 @@
   align-items: center;
 }
 
+.add-container {
+  display: flex;
+}
+
 .error-message {
   color: rgb(222, 50, 38);
   padding-left: 1em;

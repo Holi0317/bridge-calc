@@ -3,7 +3,7 @@ import {h, Component} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
 import Button from 'preact-material-components/Button/Button'
-import {SET_BY_GAME_STATE, SET_NAMES} from '../../actions/ui/settings'
+import {ADD_NAME, SET_BY_GAME_STATE, SET_NAMES} from '../../actions/ui/settings'
 import {NameInputList} from '../name-input-list'
 import {nameInputListSourceSelector, revert} from '../../selectors/ui/settings/name-input-list-source'
 import {isValidPlayerEditor, playerEditorValidatorSelector} from '../../selectors/validators/player-editor'
@@ -12,8 +12,12 @@ import style from './player-editor.css'
 import type {Dispatch, PlayerMap, RootState, T} from '../../types'
 import type {PlayerEditorError} from '../../validators/player-editor'
 import type {PlayerName} from '../../selectors/ui/settings/name-input-list-source'
-import type {SET_BY_GAME_STATE_ACTION, SET_NAMES_ACTION} from '../../actions/ui/settings'
+import type {SET_BY_GAME_STATE_ACTION, SET_NAMES_ACTION, ADD_NAME_ACTION} from '../../actions/ui/settings'
 import type {GameState} from '../../reducer/current-game/types'
+import {IconButton} from '../mdc/icon-button'
+import MdAdd from 'react-icons/md/add'
+import {randomName} from '../../example-names'
+import {genID} from '../../utils'
 
 /**
  * Get player name from PlayerName type.
@@ -44,6 +48,7 @@ class DisconnectPlayerEditor extends Component {
 
     init: (state: GameState) => void,
     changeNames: (newNames: PlayerName[]) => void,
+    addPlayer: () => void,
     t: T
   }
 
@@ -53,19 +58,21 @@ class DisconnectPlayerEditor extends Component {
   }
 
   dispatch = () => {
-    // TODO Allow add player
     // TODO Show maker chooser, max rounds chooser in a dialog.
     // TODO Validation: Will added player cause insufficient rounds?
   }
 
   render() {
-    const {names, error, isValid, changeNames, t} = this.props
+    const {names, error, isValid, changeNames, addPlayer, t} = this.props
     return (
       <div>
         <h4>{t('Edit players')}</h4>
         <NameInputList values={names} error={error.names}
           getter={getter} setter={setter} errorGetter={errorGetter}
           onChange={changeNames} />
+        <div className={style.addContainer}>
+          <IconButton icon={<MdAdd width="28px" height="28px" />} tooltip={t('Add player')} onClick={addPlayer} />
+        </div>
         <div className={style.btnContainer}>
           <Button raised accent className={style.startBtn} disabled={!isValid} onClick={this.dispatch}>{t('Change names')}</Button>
           <span className={style.errorMessage}>{error.misc}</span>
@@ -95,6 +102,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     const action: SET_NAMES_ACTION = {
       type: SET_NAMES,
       newNames
+    }
+    dispatch(action)
+  },
+  addPlayer() {
+    const action: ADD_NAME_ACTION = {
+      type: ADD_NAME,
+      name: randomName(),
+      ID: genID()
     }
     dispatch(action)
   },
