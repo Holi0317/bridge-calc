@@ -13,6 +13,7 @@ const analyzer = require('./webpack-cfg/analyzer')
 const alias = require('./webpack-cfg/alias')
 const provide = require('./webpack-cfg/provide')
 const yaml = require('./webpack-cfg/yaml')
+const scopeHoisting = require('./webpack-cfg/scope-hoisting')
 
 const {ENV} = require('./webpack-cfg/paths')
 
@@ -30,6 +31,7 @@ module.exports = merge.smart(
   },
 
   env,
+  scopeHoisting,
   alias,
   provide,
 
