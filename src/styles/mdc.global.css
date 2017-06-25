@@ -5,6 +5,7 @@
 @import "../../node_modules/@material/select/dist/mdc.select.css";
 @import "../../node_modules/@material/toolbar/dist/mdc.toolbar.css";
 @import "../../node_modules/@material/tabs/dist/mdc.tabs.css";
+@import "../../node_modules/@material/snackbar/dist/mdc.snackbar.css";
 
 /* Use white color as default is black and cannot be seen easily */
 .mdc-button--accent {
