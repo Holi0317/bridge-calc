@@ -6,6 +6,7 @@ export type SettingsActions =
   | SET_BY_GAME_STATE_ACTION
   | SET_MAKER_ACTION
   | SET_NAMES_ACTION
+  | ADD_NAME_ACTION
 
 /**
  * Set state of settings section by given game state.
@@ -44,4 +45,20 @@ export type SET_NAMES_ACTION = {
    * New name map to be set.
    */
   newNames: PlayerMap<string>
+}
+
+/**
+ * Add a name to settings UI state and append to the end of the list.
+ */
+export const ADD_NAME: 'UI/SETTING/ADD_NAME' = 'UI/SETTING/ADD_NAME'
+export type ADD_NAME_ACTION = {
+  type: typeof ADD_NAME,
+  /**
+   * Name of the new player
+   */
+  name: string,
+  /**
+   * A new ID for him/her.
+   */
+  ID: string
 }

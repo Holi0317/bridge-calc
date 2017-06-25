@@ -1,6 +1,6 @@
 // @flow
 import {GameStage} from '../../game-stage'
-import {SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../actions/ui/settings'
+import {ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../actions/ui/settings'
 
 import type {SettingsActions} from '../../actions/ui/settings'
 import type {PlayerMap} from '../../types'
@@ -43,6 +43,14 @@ export function settings(state: SettingsState = defaultState, action: SettingsAc
     return {
       ...state,
       names: action.newNames
+    }
+  case ADD_NAME:
+    return {
+      ...state,
+      names: {
+        ...state.names,
+        [action.ID]: action.name
+      }
     }
   default:
     return state

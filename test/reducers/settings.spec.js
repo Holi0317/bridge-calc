@@ -1,7 +1,7 @@
 import test from 'ava'
 import {settings as reducer} from '../../src/reducer/ui/settings'
 import {defaultState} from '../fixtures/settings-state'
-import {SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../src/actions/ui/settings'
+import {ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../src/actions/ui/settings'
 import {endedState, genMap, waitingBidState} from '../fixtures/current-game-states'
 
 test('Default state', t => {
@@ -90,4 +90,23 @@ test('SET_NAMES should set names', t => {
   }
   const actual = reducer(state, action)
   t.deepEqual(actual, expected, 'Names should be changed')
+})
+
+test('ADD_NAME should append new name to the end', t => {
+  const state = {
+    ...defaultState
+  }
+  const expected = {
+    ...defaultState,
+    names: {
+      e: 'DPGJW'
+    }
+  }
+  const action = {
+    type: ADD_NAME,
+    name: 'DPGJW',
+    ID: 'e'
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'New name should be appended to the end of the list')
 })
