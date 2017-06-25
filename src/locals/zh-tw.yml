@@ -51,3 +51,10 @@ Previous round score: 上一回合分數
 Total score: 總分
 Rank: 名次
 "Round {{n}}": "第{{n}}回合"
+
+# Settings messages
+Edit players: 更改玩家
+Change names: 更改名字
+Change maker: 更改莊家
+Maker changed!: 莊家已經更改!
+Maker: 莊家
