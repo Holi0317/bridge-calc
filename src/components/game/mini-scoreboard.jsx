@@ -2,14 +2,14 @@
 import {h} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
-import {namesSelector} from '../../selectors/names'
+import {namesSelector} from '../../selectors/current-game/names'
 import {toPairs} from '../../utils'
 import style from './scoreboard.css'
 
 import type {PlayerMap, RootState, T} from '../../types'
-import {playerPrevScoreSelector} from '../../selectors/player-prev-score'
-import {playerTotalScoreSelector} from '../../selectors/player-total-score'
-import {playerRankSelector} from '../../selectors/player-rank'
+import {playerPrevScoreSelector} from '../../selectors/current-game/player-prev-score'
+import {playerTotalScoreSelector} from '../../selectors/current-game/player-total-score'
+import {playerRankSelector} from '../../selectors/current-game/player-rank'
 
 type MiniScoreboardProps = {
   names: PlayerMap<string>,

@@ -3,11 +3,11 @@ import {h} from 'preact'
 import {translate} from 'react-i18next'
 import {connect} from 'preact-redux'
 import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
-import {entrySourceSelector} from '../selectors/entry-source'
+import {entrySourceSelector} from '../selectors/ui/entry/entry-source'
 import style from './entry-options.css'
 
 import type {RootState, T} from '../types'
-import type {EntrySource} from '../selectors/entry-source'
+import type {EntrySource} from '../selectors/ui/entry/entry-source'
 import {Dropdown} from './mdc/dropdown'
 
 type EntryOptionsProps = {

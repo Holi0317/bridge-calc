@@ -13,7 +13,7 @@ import {OPTION_OPEN_TOGGLE, PLAYER_NAMES_SET, ADD_PLAYER} from '../actions/ui/en
 import {START} from '../actions/current-game'
 import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from '../example-names'
-import {entryOptionsValidatorSelector, validEntryOptionsSelector} from '../selectors/entry-options-validator'
+import {entryOptionsValidatorSelector, validEntryOptionsSelector} from '../selectors/validators/entry-options-validator'
 import {genID} from '../utils'
 import style from './entry.css'
 import grid from '../styles/grid.css'

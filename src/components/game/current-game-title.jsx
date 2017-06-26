@@ -2,7 +2,7 @@
 import {h} from 'preact'
 import {connect} from 'preact-redux'
 import {translate} from 'react-i18next'
-import {gameTitleSelector} from '../../selectors/game-title'
+import {gameTitleSelector} from '../../selectors/current-game/game-title'
 
 function DisconnectedCurrentGameTitle({title}) {
   return <span>{title}</span>

@@ -10,8 +10,8 @@ import style from './action-buttons.css'
 import type {Dispatch, RootState, T} from '../../types'
 import type {BID_ACTION, WIN_ACTION, UNDO_ACTION} from '../../actions/current-game'
 import type {GameState} from '../../reducer/current-game'
-import {stageSelector} from '../../selectors/stage'
-import {validStackInput} from '../../selectors/stack-input-validator'
+import {stageSelector} from '../../selectors/current-game/stage'
+import {validStackInput} from '../../selectors/validators/stack-input-validator'
 
 type ActionButtonsProps = {
   t: T,

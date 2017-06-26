@@ -5,7 +5,7 @@ import {translate} from 'react-i18next'
 import utilsCSS from '../../styles/utils.css'
 
 import type {RootState, T} from '../../types'
-import {endTimeSelector, startTimeSelector} from '../../selectors/time'
+import {endTimeSelector, startTimeSelector} from '../../selectors/current-game/time'
 
 function msToTime(milliseconds: number) {
   // Get hours from milliseconds
