@@ -1,7 +1,7 @@
 // @flow
 import {isOk, removeUndef, toPairs} from '../utils'
-import mapValues from 'lodash/mapValues'
-import sumBy from 'lodash/sumBy'
+import mapValues from 'lodash-es/mapValues'
+import sumBy from 'lodash-es/sumBy'
 
 import type {T, PlayerMap} from '../types'
 

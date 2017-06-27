@@ -2,7 +2,7 @@
 import {GameStage} from '../../game-stage'
 import type {PlayerMap, RootState} from '../../types'
 import {createSelector} from 'reselect'
-import mapValues from 'lodash/mapValues'
+import mapValues from 'lodash-es/mapValues'
 
 /**
  * Select win object from current game.

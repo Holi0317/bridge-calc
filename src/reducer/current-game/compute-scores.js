@@ -1,5 +1,5 @@
 // @flow
-import mapValues from 'lodash/mapValues'
+import mapValues from 'lodash-es/mapValues'
 import {calculateScore} from './calculate-score'
 
 import type {PlayerMap} from '../../types'

@@ -1,6 +1,6 @@
 // @flow
-import mapValues from 'lodash/mapValues'
-import values from 'lodash/values'
+import mapValues from 'lodash-es/mapValues'
+import values from 'lodash-es/values'
 import {dupe, removeUndef} from '../utils'
 
 import type {PlayerMap, T} from '../types'

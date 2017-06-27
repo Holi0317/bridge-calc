@@ -1,6 +1,6 @@
 // @flow
 import {createSelector} from 'reselect'
-import toPairs from 'lodash/toPairs'
+import toPairs from 'lodash-es/toPairs'
 import {namesSelector} from './names'
 
 import type {DropdownSource, PlayerMap} from '../../../types'

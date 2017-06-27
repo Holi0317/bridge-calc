@@ -20,7 +20,14 @@
     },
     "test": {
       "presets": ["@ava/transform-test-files"],
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "lodash-es": "lodash"
+          }
+        }],
+        "transform-es2015-modules-commonjs"
+      ]
     }
   }
 }

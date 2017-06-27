@@ -1,9 +1,9 @@
 // @flow
 import {createSelector} from 'reselect'
-import range from 'lodash/range'
-import sum from 'lodash/sum'
-import values from 'lodash/values'
-import last from 'lodash/last'
+import range from 'lodash-es/range'
+import sum from 'lodash-es/sum'
+import values from 'lodash-es/values'
+import last from 'lodash-es/last'
 import {stackInputSourceCommonSelector} from './stack-input-source-common'
 import {currentRoundSelector} from './current-round'
 import {bidSelector} from './bid'

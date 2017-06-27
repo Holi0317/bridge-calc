@@ -1,7 +1,7 @@
 // @flow
 import {createSelector} from 'reselect'
-import values from 'lodash/values'
-import mapValues from 'lodash/mapValues'
+import values from 'lodash-es/values'
+import mapValues from 'lodash-es/mapValues'
 import {playerTotalScoreSelector} from './player-total-score'
 import {toOrdinal} from '../../utils'
 

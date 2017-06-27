@@ -1,8 +1,6 @@
 module.exports = {
   resolve: {
     alias: {
-      // Use lodash-es instead of lodash
-      'lodash': 'lodash-es',
       // Use preact instead of react
       'react': 'preact-compat',
       'react-dom': 'preact-compat',

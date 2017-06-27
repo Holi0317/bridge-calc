@@ -1,7 +1,7 @@
 // @flow
 import {createSelector} from 'reselect'
-import mapValues from 'lodash/mapValues'
-import sum from 'lodash/sum'
+import mapValues from 'lodash-es/mapValues'
+import sum from 'lodash-es/sum'
 import {playerScoresSelector} from './player-scores'
 
 import type {PlayerMap} from '../../types'

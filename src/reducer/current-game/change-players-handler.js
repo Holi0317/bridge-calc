@@ -1,6 +1,6 @@
 // @flow
-import mapValues from 'lodash/mapValues'
-import range from 'lodash/range'
+import mapValues from 'lodash-es/mapValues'
+import range from 'lodash-es/range'
 import {toEndedState, toWaitingBidState} from './converter'
 import {toFront} from '../../utils'
 

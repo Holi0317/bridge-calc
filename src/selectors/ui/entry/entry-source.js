@@ -1,6 +1,6 @@
 // @flow
 import {createSelector} from 'reselect'
-import range from 'lodash/range'
+import range from 'lodash-es/range'
 import {createSource} from '../../../utils'
 
 import type {DropdownSource, RootState} from '../../../types'

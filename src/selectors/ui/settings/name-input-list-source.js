@@ -1,8 +1,8 @@
 // @flow
 import {createSelector} from 'reselect'
-import fromPairs from 'lodash/fromPairs'
+import fromPairs from 'lodash-es/fromPairs'
 import {namesSelector} from './names'
-import toPairs from 'lodash/toPairs'
+import toPairs from 'lodash-es/toPairs'
 
 import type {PlayerMap} from '../../../types'
 
