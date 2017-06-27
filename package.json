@@ -14,17 +14,20 @@
   "homepage": "https://github.com/Holi0317/bridge-calc#readme",
   "main": "dist/main.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test ava",
+    "pretest": "npm run build:test",
+    "test": "cross-env NODE_ENV=test ava .tmp/test",
     "lint": "npm run lint:js",
     "lint:js": "eslint --ext .jsx,.js --cache webpack-cfg test webpack.config.js src",
     "lint:js:fix": "eslint --ext .jsx,.js --fix --cache webpack-cfg test webpack.config.js src",
     "flow": "flow check",
-    "clean": "del-cli dist",
+    "clean": "del-cli dist .tmp",
     "build": "npm run build:dev",
     "prebuild:dev": "npm run clean",
     "build:dev": "cross-env NODE_ENV=development npm run webpack -- --progress --profile",
     "prebuild:prod": "npm run clean",
     "build:prod": "cross-env NODE_ENV=production npm run webpack -- --progress --profile",
+    "prebuild:test": "npm run clean",
+    "build:test": "cross-env NODE_ENV=test babel . --ignore=node_modules,flow-typed,webpack-cfg,*.config.js --out-dir .tmp",
     "build-splash-css": "postcss splash.css --no-map -u cssnano postcss-cssnext",
     "start": "npm run server:dev",
     "server": "npm run server:dev",
@@ -35,9 +38,7 @@
     "ci": "npm run lint && npm run flow && npm test"
   },
   "ava": {
-    "failFast": true,
-    "require": "babel-register",
-    "babel": "inherit"
+    "failFast": true
   },
   "dependencies": {
     "@material/textfield": "0.2.11",
@@ -64,6 +65,7 @@
   "devDependencies": {
     "autoprefixer": "7.1.1",
     "ava": "0.19.1",
+    "babel-cli": "6.24.1",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
     "babel-loader": "7.1.0",
