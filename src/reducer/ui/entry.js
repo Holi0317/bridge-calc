@@ -62,11 +62,16 @@ export function entry(state: EntryState = defaultState, action: EntryActions) {
       ...state,
       optionsOpened: !state.optionsOpened
     }
-  case ROUNDS_SET:
+  case ROUNDS_SET: {
+    const startingRound = state.startingRound > action.payload
+      ? 1
+      : state.startingRound
     return {
       ...state,
-      rounds: action.payload
+      rounds: action.payload,
+      startingRound
     }
+  }
   case CARDS_SET:
     return {
       ...state,

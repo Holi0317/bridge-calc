@@ -23,6 +23,7 @@ test('Source should change according to player number', t => {
     ui: {
       entry: {
         ...defaultOptions,
+        rounds: 17,
         playerNames: ['John', 'Mary', 'Henry']
       }
     }
@@ -48,6 +49,7 @@ test('Sources should change according to card number', t => {
     ui: {
       entry: {
         ...defaultOptions,
+        rounds: 26,
         cards: 104
       }
     }
@@ -93,4 +95,33 @@ test('0 player should give 1 value in rounds and startingRound', t => {
   }
   const actual = entrySourceSelector(state)
   t.deepEqual(actual, expected, 'Source with 1 rounds should be selected')
+})
+
+test('startingRound should decrease according to number of rounds', t => {
+  const state = {
+    ui: {
+      entry: {
+        ...defaultOptions,
+        rounds: 10
+      }
+    }
+  }
+  const startingRound = [
+    {value: 1, label: '1'},
+    {value: 2, label: '2'},
+    {value: 3, label: '3'},
+    {value: 4, label: '4'},
+    {value: 5, label: '5'},
+    {value: 6, label: '6'},
+    {value: 7, label: '7'},
+    {value: 8, label: '8'},
+    {value: 9, label: '9'},
+    {value: 10, label: '10'}
+  ]
+  const expected = {
+    ...defaultSource,
+    startingRound
+  }
+  const actual = entrySourceSelector(state)
+  t.deepEqual(actual, expected, 'startingRound should decrease according to rounds selected')
 })

@@ -66,6 +66,23 @@ test('Rounds should set when its action dispatched', t => {
   t.deepEqual(actual, expected, 'rounds property should set')
 })
 
+test('Setting rounds should reset startingRound if the new state will cause startingRound invalid', t => {
+  const state = {
+    ...defaultState,
+    startingRound: 13
+  }
+  const expected = {
+    ...defaultState,
+    rounds: 10
+  }
+  const action = {
+    type: ROUNDS_SET,
+    payload: 10
+  }
+  const actual = reducer(state, action)
+  t.deepEqual(actual, expected, 'startingRound should be set to valid value')
+})
+
 test('Number of cards should re-compute whenever rounds property when it is updated', t => {
   const expected = {
     ...defaultState,
