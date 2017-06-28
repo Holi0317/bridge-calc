@@ -43,7 +43,6 @@ export class Snackbar extends Component {
   }
 
   transitionEnd = () => {
-    console.log('transition end')
     const {onClosed} = this.props
     onClosed && onClosed()
   }

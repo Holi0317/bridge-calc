@@ -43,6 +43,7 @@
     "failFast": true
   },
   "dependencies": {
+    "@material/snackbar": "0.2.2",
     "@material/textfield": "0.2.11",
     "i18next": "8.4.2",
     "i18next-browser-languagedetector": "2.0.0",

@@ -49,6 +49,10 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@material/base/-/base-0.2.0.tgz#685e2c344aa037e42be7978e1f365ff183b9f3a1"
 
+"@material/base@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@material/base/-/base-0.2.1.tgz#1206df65da0bcde5df46e78b4d60a1e09fdc41cb"
+
 "@material/button@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@material/button/-/button-0.3.7.tgz#3912791322f7f7129a5a2239c3098e8b10a4ceb8"
@@ -56,6 +60,16 @@
     "@material/animation" "^0.2.3"
     "@material/elevation" "^0.1.8"
     "@material/ripple" "^0.6.2"
+    "@material/theme" "^0.1.5"
+    "@material/typography" "^0.2.2"
+
+"@material/button@^0.3.8":
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/@material/button/-/button-0.3.8.tgz#47874a4879832da49890bc2a16c6cbf8eb0dc118"
+  dependencies:
+    "@material/animation" "^0.2.3"
+    "@material/elevation" "^0.1.9"
+    "@material/ripple" "^0.7.0"
     "@material/theme" "^0.1.5"
     "@material/typography" "^0.2.2"
 
@@ -105,6 +119,12 @@
 "@material/elevation@^0.1.8":
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/@material/elevation/-/elevation-0.1.8.tgz#57a1f3541a330d035633db7f5db82c462d0ccad0"
+  dependencies:
+    "@material/animation" "^0.2.3"
+
+"@material/elevation@^0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@material/elevation/-/elevation-0.1.9.tgz#d54c11b9c57855072ab7c59636b8b6a8787c76f4"
   dependencies:
     "@material/animation" "^0.2.3"
 
@@ -191,9 +211,20 @@
     "@material/base" "^0.2.0"
     "@material/theme" "^0.1.5"
 
+"@material/ripple@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@material/ripple/-/ripple-0.7.0.tgz#ea784a6c54f8d493d3df21440dcfaba706fb0caa"
+  dependencies:
+    "@material/base" "^0.2.1"
+    "@material/theme" "^0.1.5"
+
 "@material/rtl@^0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@material/rtl/-/rtl-0.1.5.tgz#062b88eac42e925d5b052e04925121505e62ff44"
+
+"@material/rtl@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@material/rtl/-/rtl-0.1.6.tgz#64897f3050b2c53c378c6b4a7d2998cf61b2445b"
 
 "@material/select@^0.3.8":
   version "0.3.8"
@@ -215,6 +246,17 @@
     "@material/base" "^0.2.0"
     "@material/rtl" "^0.1.5"
     "@material/theme" "^0.1.5"
+
+"@material/snackbar@0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@material/snackbar/-/snackbar-0.2.2.tgz#c9b2841386d5586f90344b57fb9c2204a89f16a2"
+  dependencies:
+    "@material/animation" "^0.2.3"
+    "@material/base" "^0.2.1"
+    "@material/button" "^0.3.8"
+    "@material/rtl" "^0.1.6"
+    "@material/theme" "^0.1.5"
+    "@material/typography" "^0.2.2"
 
 "@material/snackbar@^0.2.1":
   version "0.2.1"
