@@ -1,8 +1,8 @@
-const Babili = require('babili-webpack-plugin')
+const MinifyPlugin = require('babel-minify-webpack-plugin')
 
 module.exports = {
   plugins: [
-    new Babili({
+    new MinifyPlugin({
       removeConsole: true,
       removeDebugger: true
     })
