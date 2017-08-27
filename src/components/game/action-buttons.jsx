@@ -8,8 +8,8 @@ import {BID, UNDO, WIN} from '../../actions/current-game'
 import style from './action-buttons.css'
 
 import type {Dispatch, RootState, I18nT} from '../../types'
-import type {BID_ACTION, WIN_ACTION, UNDO_ACTION} from '../../actions/current-game'
-import type {GameState} from '../../reducer/current-game'
+import type {IBidAction, IWinAction, IUndoAction} from '../../actions/current-game'
+import type {GameState} from '../../reducer/current-game/index'
 import {stageSelector} from '../../selectors/current-game/stage'
 import {validStackInput} from '../../selectors/validators/stack-input-validator'
 
@@ -48,10 +48,10 @@ function mapDispatchToProps(dispatch: Dispatch) {
         if (!state) {
           // Just to eliminate state is null case
         } else if (state.stage === GameStage.waitingBid) {
-          const action: BID_ACTION = {type: BID, payload: state.bid}
+          const action: IBidAction = {type: BID, payload: state.bid}
           dispatch(action)
         } else if (state.stage === GameStage.waitingWin) {
-          const action: WIN_ACTION = {type: WIN, payload: state.win, time: new Date()}
+          const action: IWinAction = {type: WIN, payload: state.win, time: new Date()}
           dispatch(action)
         }
 
@@ -60,7 +60,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     undo(stage: string) {
       return () => {
         if (stage === GameStage.waitingWin) {
-          const action: UNDO_ACTION = {type: UNDO}
+          const action: IUndoAction = {type: UNDO}
           dispatch(action)
         }
       }

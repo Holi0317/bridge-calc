@@ -1,9 +1,8 @@
-// @flow
 import {GameStage} from '../../game-stage'
 import {bidWinGenerator} from './bid-win-generator'
-import type {WaitingBidState, WaitingWinState, EndedState} from './types'
+import {IWaitingBidState, IWaitingWinState, IEndedState} from './types'
 
-export function toWaitingBidState(state: WaitingBidState | WaitingWinState): WaitingBidState {
+export function toWaitingBidState(state: IWaitingBidState | IWaitingWinState): IWaitingBidState {
   return {
     stage: GameStage.waitingBid,
     rounds: state.rounds,
@@ -16,14 +15,14 @@ export function toWaitingBidState(state: WaitingBidState | WaitingWinState): Wai
   }
 }
 
-export function toWaitingWinState(state: WaitingBidState | WaitingWinState): WaitingWinState {
-  const newState = (toWaitingBidState(state): any) // Just to remove some whitelist boilerplate
+export function toWaitingWinState(state: IWaitingBidState | IWaitingWinState): IWaitingWinState {
+  const newState = toWaitingBidState(state) as any // Just to remove some whitelist boilerplate
   newState.stage = GameStage.waitingWin
-  newState.win = (state: any).win || bidWinGenerator(Object.keys(state.names))
+  newState.win = (state as any).win || bidWinGenerator(Object.keys(state.names))
   return newState
 }
 
-export function toEndedState(state: WaitingBidState | WaitingWinState, endTime: Date): EndedState {
+export function toEndedState(state: IWaitingBidState | IWaitingWinState, endTime: Date): IEndedState {
   return {
     stage: GameStage.ended,
     endTime,

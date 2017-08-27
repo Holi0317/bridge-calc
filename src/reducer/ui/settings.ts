@@ -1,28 +1,25 @@
-// @flow
 import {GameStage} from '../../game-stage'
-import {ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../actions/ui/settings'
+import {SettingsActions, ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../actions/ui/settings'
+import {IPlayerMap} from '../../types'
 
-import type {SettingsActions} from '../../actions/ui/settings'
-import type {IPlayerMap} from '../../types'
-
-export type SettingsState = {
+export interface ISettingsState {
   /**
    * Player ID of currently selected maker.
    * If null, no maker is selected or the game is not running.
    */
-  maker: ?string,
+  maker: string | null,
   /**
    * New player map.
    */
   names: IPlayerMap<string>
 }
 
-const defaultState: SettingsState = {
+const defaultState: ISettingsState = {
   maker: null,
   names: {}
 }
 
-export function settings(state: SettingsState = defaultState, action: SettingsActions): SettingsState {
+export function settings(state: ISettingsState = defaultState, action: SettingsActions): ISettingsState {
   switch (action.type) {
   case SET_BY_GAME_STATE: {
     const gameState = action.state
@@ -30,8 +27,8 @@ export function settings(state: SettingsState = defaultState, action: SettingsAc
       return defaultState
     }
     return {
-      names: gameState.names,
-      maker: gameState.currentPlayerOrder[0]
+      maker: gameState.currentPlayerOrder[0],
+      names: gameState.names
     }
   }
   case SET_MAKER:

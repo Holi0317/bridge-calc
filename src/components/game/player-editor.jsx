@@ -12,7 +12,7 @@ import style from './player-editor.css'
 import type {Dispatch, IPlayerMap, RootState, I18nT} from '../../types'
 import type {IPlayerEditorError} from '../../validators/player-editor'
 import type {PlayerName} from '../../selectors/ui/settings/name-input-list-source'
-import type {SET_BY_GAME_STATE_ACTION, SET_NAMES_ACTION, ADD_NAME_ACTION} from '../../actions/ui/settings'
+import type {ISetByGameStateAction, ISetNamesAction, IAddNameAction} from '../../actions/ui/settings'
 import type {GameState} from '../../reducer/current-game/types'
 import {IconButton} from '../mdc/icon-button'
 import MdAdd from 'react-icons/md/add'
@@ -91,7 +91,7 @@ const mapStateToProps = (state: RootState, {t}) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   init(state: GameState) {
-    const action: SET_BY_GAME_STATE_ACTION = {
+    const action: ISetByGameStateAction = {
       type: SET_BY_GAME_STATE,
       state
     }
@@ -99,14 +99,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   changeNames(newNames_: PlayerName[]) {
     const newNames = revert(newNames_)
-    const action: SET_NAMES_ACTION = {
+    const action: ISetNamesAction = {
       type: SET_NAMES,
       newNames
     }
     dispatch(action)
   },
   addPlayer() {
-    const action: ADD_NAME_ACTION = {
+    const action: IAddNameAction = {
       type: ADD_NAME,
       name: randomName(),
       ID: genID()

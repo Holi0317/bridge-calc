@@ -1,4 +1,3 @@
-// @flow
 import {fillObj} from '../../utils'
 
 /**

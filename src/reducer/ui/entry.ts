@@ -1,8 +1,6 @@
-// @flow
-import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../../actions/ui/entry'
-import type {EntryActions} from '../../actions/ui/entry'
+import {EntryActions, OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../../actions/ui/entry'
 
-export type EntryState = {
+export interface IEntryState {
   cards: number,
   rounds: number,
   startingRound: number,
@@ -10,12 +8,12 @@ export type EntryState = {
   optionsOpened: boolean
 }
 
-const defaultState: EntryState = {
+const defaultState: IEntryState = {
   cards: 52,
-  rounds: 13,
-  startingRound: 1,
+  optionsOpened: false,
   playerNames: ['John', 'Mary', 'Henry', 'Joe'],
-  optionsOpened: false
+  rounds: 13,
+  startingRound: 1
 }
 
 /**
@@ -26,7 +24,7 @@ const defaultState: EntryState = {
  * @param state - previous state of reducer
  * @param playerNames - New player names passed in as action payload
  */
-function playerNameAction(state: EntryState, playerNames: string[]) {
+function playerNameAction(state: IEntryState, playerNames: string[]) {
   const newPlayerNum = playerNames.length
   const newRounds = Math.floor(state.cards / newPlayerNum)
   const playerNum = state.playerNames.length
@@ -36,26 +34,26 @@ function playerNameAction(state: EntryState, playerNames: string[]) {
     // Rename
     return {
       ...state,
-      playerNames: playerNames
+      playerNames
     }
   } else if (newPlayerNum > playerNum) {
     // Add player
     return {
       ...state,
-      playerNames: playerNames,
+      playerNames,
       rounds: newRounds > state.rounds ? state.rounds : newRounds
     }
   } else {
     // Remove player
     return {
       ...state,
-      playerNames: playerNames,
+      playerNames,
       rounds: state.rounds === oldRounds ? newRounds : state.rounds
     }
   }
 }
 
-export function entry(state: EntryState = defaultState, action: EntryActions) {
+export function entry(state: IEntryState = defaultState, action: EntryActions) {
   switch (action.type) {
   case OPTION_OPEN_TOGGLE:
     return {

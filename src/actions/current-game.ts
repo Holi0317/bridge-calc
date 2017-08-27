@@ -1,22 +1,21 @@
-// @flow
-import type {IPlayerMap} from '../types'
+import {IPlayerMap} from '../types'
 
 export type CurrentGameActions =
-  | START_ACTION
-  | SKIP_ACTION
-  | SET_BID_ACTION
-  | BID_ACTION
-  | SET_WIN_ACTION
-  | WIN_ACTION
-  | UNDO_ACTION
-  | CHANGE_PLAYERS_ACTION
+  | IStartAction
+  | ISkipAction
+  | ISetBidAction
+  | IBidAction
+  | ISetWinAction
+  | IWinAction
+  | IUndoAction
+  | IChangePlayersAction
 
 /**
  * Start a new game that overrides existing game.
  * @type {string}
  */
 export const START: 'CURRENT_GAME/START' = 'CURRENT_GAME/START'
-export type START_ACTION = {
+export interface IStartAction {
   type: typeof START,
   /**
    * Total number of rounds in the whole game
@@ -42,7 +41,7 @@ export type START_ACTION = {
  * @type {string}
  */
 export const SKIP: 'CURRENT_GAME/SKIP' = 'CURRENT_GAME/SKIP'
-export type SKIP_ACTION = {
+export interface ISkipAction {
   type: typeof SKIP,
   /**
    * Number of rounds to be skip.
@@ -62,7 +61,7 @@ export type SKIP_ACTION = {
  * @type {string}
  */
 export const SET_BID: 'CURRENT_GAME/SET_BID' = 'CURRENT_GAME/SET_BID'
-export type SET_BID_ACTION = {
+export interface ISetBidAction {
   type: typeof SET_BID,
   /**
    * A map that maps player ID to their bid choice
@@ -75,7 +74,7 @@ export type SET_BID_ACTION = {
  * @type {string}
  */
 export const BID: 'CURRENT_GAME/BID' = 'CURRENT_GAME/BID'
-export type BID_ACTION = {
+export interface IBidAction {
   type: typeof BID,
   /**
    * A map that maps player ID to their bid choice.
@@ -90,7 +89,7 @@ export type BID_ACTION = {
  * @type {string}
  */
 export const SET_WIN: 'CURRENT_GAME/SET_WIN' = 'CURRENT_GAME/SET_WIN'
-export type SET_WIN_ACTION = {
+export interface ISetWinAction {
   type: typeof SET_WIN,
   /**
    * A map that maps player ID to their win choice
@@ -103,7 +102,7 @@ export type SET_WIN_ACTION = {
  * I.e. End one round
  */
 export const WIN: 'CURRENT_GAME/WIN' = 'CURRENT_GAME/WIN'
-export type WIN_ACTION = {
+export interface IWinAction {
   type: typeof WIN,
   /**
    * A map that maps player ID to their win choice.
@@ -121,7 +120,7 @@ export type WIN_ACTION = {
  * If the stage is not waitingWin, no-op will be done.
  */
 export const UNDO: 'CURRENT_GAME/UNDO' = 'CURRENT_GAME/UNDO'
-export type UNDO_ACTION = {
+export interface IUndoAction {
   type: typeof UNDO
 }
 
@@ -135,7 +134,7 @@ export type UNDO_ACTION = {
  * This action can also be used to change number of rounds. Similar to change maker, only update rounds property.
  */
 export const CHANGE_PLAYERS: 'CURRENT_GAME/CHANGE_PLAYERS' = 'CURRENT_GAME/CHANGE_PLAYERS'
-export type CHANGE_PLAYERS_ACTION = {
+export interface IChangePlayersAction {
   type: typeof CHANGE_PLAYERS,
   /**
    * New PlayerMap for the names.

@@ -19,10 +19,10 @@ import style from './entry.css'
 import grid from '../styles/grid.css'
 
 import type {WithRouterProps} from 'react-router-dom'
-import type {EntryState} from '../reducer/ui/entry'
+import type {IEntryState} from '../reducer/ui/entry'
 import type {Dispatch, RootState} from '../types'
-import type {START_ACTION} from '../actions/current-game'
-import type {PLAYER_NAMES_SET_ACTION, ADD_PLAYER_ACTION, OPTION_OPEN_TOGGLE_ACTION} from '../actions/ui/entry'
+import type {IStartAction} from '../actions/current-game'
+import type {IPlayerNamesSetAction, IAddPlayerAction, IOptionOpenToggleAction} from '../actions/ui/entry'
 
 /**
  * Change player names array to object with random generated player ID as key.
@@ -54,8 +54,8 @@ class DisconnectedEntry extends Component {
     changePlayerNames: (payload: string[]) => void,
     addPlayer: () => void,
     importNames: () => void,
-    start: (param: START_ACTION) => void
-  } & WithRouterProps & EntryState
+    start: (param: IStartAction) => void
+  } & WithRouterProps & IEntryState
 
   componentWillMount() {
     this.props.genOptions()
@@ -67,7 +67,7 @@ class DisconnectedEntry extends Component {
    */
   start = () => {
     const {rounds, playerNames, startingRound, start, history} = this.props
-    const startParam: START_ACTION = {
+    const startParam: IStartAction = {
       rounds,
       startingRound,
       playerNames: namesToObject(playerNames),
@@ -126,26 +126,26 @@ function mapStateToProps(state: RootState, {t}) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     toggleCollapse() {
-      const action: OPTION_OPEN_TOGGLE_ACTION = {type: OPTION_OPEN_TOGGLE}
+      const action: IOptionOpenToggleAction = {type: OPTION_OPEN_TOGGLE}
       dispatch(action)
     },
     changePlayerNames(payload: string[]) {
-      const action: PLAYER_NAMES_SET_ACTION = {type: PLAYER_NAMES_SET, payload}
+      const action: IPlayerNamesSetAction = {type: PLAYER_NAMES_SET, payload}
       dispatch(action)
     },
     genOptions() {
-      const action: PLAYER_NAMES_SET_ACTION = {type: PLAYER_NAMES_SET, payload: genRandomNames()}
+      const action: IPlayerNamesSetAction = {type: PLAYER_NAMES_SET, payload: genRandomNames()}
       dispatch(action)
     },
     addPlayer() {
-      const action: ADD_PLAYER_ACTION = {type: ADD_PLAYER, payload: randomName()}
+      const action: IAddPlayerAction = {type: ADD_PLAYER, payload: randomName()}
       dispatch(action)
     },
     importNames() {
       // TODO NYI
     },
-    start(param: START_ACTION) {
-      const action: START_ACTION = {...param, type: START}
+    start(param: IStartAction) {
+      const action: IStartAction = {...param, type: START}
       dispatch(action)
     }
   }

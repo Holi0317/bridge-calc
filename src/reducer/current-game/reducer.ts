@@ -1,5 +1,4 @@
-// @flow
-import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../actions/current-game'
+import {CurrentGameActions, START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../actions/current-game'
 import {GameStage} from '../../game-stage'
 import {skip} from './skip'
 import {start} from './start'
@@ -7,9 +6,7 @@ import {winHandler} from './win-handler'
 import {changePlayersHandler} from './change-players-handler'
 import {toWaitingBidState} from './converter'
 import {bidWinGenerator} from './bid-win-generator'
-
-import type {EndedState, GameState, WaitingBidState} from './types'
-import type {CurrentGameActions} from '../../actions/current-game'
+import {GameState} from './types'
 
 const defaultState: GameState = null
 
@@ -24,7 +21,7 @@ export function currentGame(state: GameState = defaultState, action: CurrentGame
   }
   if (state.stage === GameStage.ended) {
     // Ended game is read only. No action other than START can mutate it.
-    return (state: EndedState)
+    return state
   }
 
   switch (action.type) {
@@ -44,7 +41,7 @@ export function currentGame(state: GameState = defaultState, action: CurrentGame
     return {
       ...state,
       stage: GameStage.waitingWin,
-      bid: action.payload || (state: WaitingBidState).bid,
+      bid: action.payload || state.bid,
       win: bidWinGenerator(Object.keys(state.names))
     }
   case WIN:

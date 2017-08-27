@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * Helper function for reducer.
  * Calculate score of this round from given parameters.

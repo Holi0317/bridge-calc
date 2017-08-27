@@ -1,8 +1,7 @@
-// @flow
 import mapValues from 'lodash-es/mapValues'
 import {calculateScore} from './calculate-score'
 
-import type {IPlayerMap} from '../../types'
+import {IPlayerMap} from '../../types'
 
 /**
  * Helper function for reducer.

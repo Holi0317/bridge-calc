@@ -1,24 +1,23 @@
-// @flow
 import mapValues from 'lodash-es/mapValues'
 import range from 'lodash-es/range'
 import {toEndedState, toWaitingBidState} from './converter'
 import {toFront} from '../../utils'
+import {IEndedState, IWaitingBidState, IWaitingWinState} from './types'
+import {IChangePlayersAction} from '../../actions/current-game'
 
-import type {EndedState, WaitingBidState, WaitingWinState} from './types'
-import type {CHANGE_PLAYERS_ACTION} from '../../actions/current-game'
-
-export function changePlayersHandler(state_: WaitingBidState | WaitingWinState, {newNames, rounds, maker}: CHANGE_PLAYERS_ACTION): WaitingBidState | EndedState {
+export function changePlayersHandler(rawState: IWaitingBidState | IWaitingWinState, {newNames, rounds, maker}: IChangePlayersAction): IWaitingBidState | IEndedState {
   // Short circuit. When action.rounds is less than current round
-  if (rounds < state_.currentRound) {
-    const endTime = new Date(state_.startTime.getTime() + 60000)
-    const state = toEndedState(state_, endTime)
+  if (rounds < rawState.currentRound) {
+    const endTime = new Date(rawState.startTime.getTime() + 60000)
+    // tslint:disable-next-line: no-shadowed-variable
+    const state = toEndedState(rawState, endTime)
     state.names = newNames
     state.rounds = rounds
     state.scores = mapValues(state.scores, (score: number[]) => score.slice(0, rounds))
     return state
   }
 
-  const state = toWaitingBidState(state_)
+  const state = toWaitingBidState(rawState)
   state.rounds = rounds
 
   // Set currentPlayerOrder

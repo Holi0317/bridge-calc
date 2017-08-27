@@ -1,19 +1,18 @@
-// @flow
-import type {GameState} from '../../reducer/current-game/types'
-import type {IPlayerMap} from '../../types'
+import {GameState} from '../../reducer/current-game/types'
+import {IPlayerMap} from '../../types'
 
 export type SettingsActions =
-  | SET_BY_GAME_STATE_ACTION
-  | SET_MAKER_ACTION
-  | SET_NAMES_ACTION
-  | ADD_NAME_ACTION
+  | ISetByGameStateAction
+  | ISetMakerAction
+  | ISetNamesAction
+  | IAddNameAction
 
 /**
  * Set state of settings section by given game state.
  * If the state is null or stage is end, settings state will return to default.
  */
 export const SET_BY_GAME_STATE: 'UI/SETTINGS/SET_BY_GAME_STATE' = 'UI/SETTINGS/SET_BY_GAME_STATE'
-export type SET_BY_GAME_STATE_ACTION = {
+export interface ISetByGameStateAction {
   type: typeof SET_BY_GAME_STATE,
   /**
    * Game state to be followed for setting settings state.
@@ -26,7 +25,7 @@ export type SET_BY_GAME_STATE_ACTION = {
  * This does NOT change anything in currentGame state of our store.
  */
 export const SET_MAKER: 'UI/SETTINGS/SET_MAKER' = 'UI/SETTINGS/SET_MAKER'
-export type SET_MAKER_ACTION = {
+export interface ISetMakerAction {
   type: typeof SET_MAKER,
   /**
    * The Player ID of maker to be set.
@@ -39,7 +38,7 @@ export type SET_MAKER_ACTION = {
  * This does NOT change anything in currentGame state of our store
  */
 export const SET_NAMES: 'UI/SETTINGS/SET_NAMES' = 'UI/SETTINGS/SET_NAMES'
-export type SET_NAMES_ACTION = {
+export interface ISetNamesAction {
   type: typeof SET_NAMES,
   /**
    * New name map to be set.
@@ -51,7 +50,7 @@ export type SET_NAMES_ACTION = {
  * Add a name to settings UI state and append to the end of the list.
  */
 export const ADD_NAME: 'UI/SETTING/ADD_NAME' = 'UI/SETTING/ADD_NAME'
-export type ADD_NAME_ACTION = {
+export interface IAddNameAction {
   type: typeof ADD_NAME,
   /**
    * Name of the new player

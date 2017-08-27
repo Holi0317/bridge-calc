@@ -4,7 +4,7 @@ import {entryOptionsValidator} from '../../validators/entry-options'
 import {isOk} from '../../utils'
 
 import type {RootState, I18nT} from '../../types'
-import type {EntryState} from '../../reducer/ui/entry'
+import type {IEntryState} from '../../reducer/ui/entry'
 import type {IEntryError} from '../../validators/entry-options'
 
 /**
@@ -14,7 +14,7 @@ import type {IEntryError} from '../../validators/entry-options'
 export const entryOptionsValidatorSelector = createSelector(
   (state: RootState) => state.ui.entry,
   (state: RootState, t: I18nT) => t,
-  (entry: EntryState, t: I18nT): IEntryError =>
+  (entry: IEntryState, t: I18nT): IEntryError =>
     entryOptionsValidator(entry, t)
 )
 

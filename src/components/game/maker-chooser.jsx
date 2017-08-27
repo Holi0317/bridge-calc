@@ -8,7 +8,7 @@ import {makerSourceSelector} from '../../selectors/ui/settings/maker-source'
 import {SET_MAKER} from '../../actions/ui/settings'
 import type {Dispatch, IDropdownSource, RootState, I18nT} from '../../types'
 import {makerSelector} from '../../selectors/ui/settings/maker'
-import type {SET_MAKER_ACTION} from '../../actions/ui/settings'
+import type {ISetMakerAction} from '../../actions/ui/settings'
 
 type MakerChooserProps = {
   names: IDropdownSource<string>[],
@@ -32,7 +32,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onChange(ID: string) {
-    const action: SET_MAKER_ACTION = {
+    const action: ISetMakerAction = {
       type: SET_MAKER,
       maker: ID
     }

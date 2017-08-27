@@ -12,7 +12,7 @@ import {MakerChooser} from './maker-chooser'
 import style from './maker-editor.css'
 
 import type {Dispatch, IPlayerMap, RootState, I18nT} from '../../types'
-import type {CHANGE_PLAYERS_ACTION} from '../../actions/current-game'
+import type {IChangePlayersAction} from '../../actions/current-game'
 
 class DisconnectMakerEditor extends Component {
   props: {
@@ -71,7 +71,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   commit(names: IPlayerMap<string>, rounds: number, maker: string) {
-    const action: CHANGE_PLAYERS_ACTION = {
+    const action: IChangePlayersAction = {
       type: CHANGE_PLAYERS,
       newNames: names,
       maker,

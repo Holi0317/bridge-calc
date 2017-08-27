@@ -1,11 +1,10 @@
-// @flow
 export type EntryActions =
-  | OPTION_OPEN_TOGGLE_ACTION
-  | ROUNDS_SET_ACTION
-  | CARDS_SET_ACTION
-  | STARTING_ROUND_SET_ACTION
-  | PLAYER_NAMES_SET_ACTION
-  | ADD_PLAYER_ACTION
+  | IOptionOpenToggleAction
+  | IRoundsSetAction
+  | ICardsSetAction
+  | IStartingRoundSetAction
+  | IPlayerNamesSetAction
+  | IAddPlayerAction
 
 /**
  * Toggle open state for entry options.
@@ -13,7 +12,7 @@ export type EntryActions =
  * @type {string}
  */
 export const OPTION_OPEN_TOGGLE: 'UI/ENTRY/OPTION_OPEN_TOGGLE' = 'UI/ENTRY/OPTION_OPEN_TOGGLE'
-export type OPTION_OPEN_TOGGLE_ACTION = {
+export interface IOptionOpenToggleAction {
   type: typeof OPTION_OPEN_TOGGLE
 }
 
@@ -24,7 +23,7 @@ export type OPTION_OPEN_TOGGLE_ACTION = {
  * @type {string}
  */
 export const ROUNDS_SET: 'UI/ENTRY/ROUNDS_SET' = 'UI/ENTRY/ROUNDS_SET'
-export type ROUNDS_SET_ACTION = {
+export interface IRoundsSetAction {
   type: typeof ROUNDS_SET,
   payload: number
 }
@@ -36,7 +35,7 @@ export type ROUNDS_SET_ACTION = {
  * @type {string}
  */
 export const CARDS_SET: 'UI/ENTRY/CARDS_SET' = 'UI/ENTRY/CARDS_SET'
-export type CARDS_SET_ACTION = {
+export interface ICardsSetAction {
   type: typeof CARDS_SET,
   payload: number
 }
@@ -48,7 +47,7 @@ export type CARDS_SET_ACTION = {
  * @type {string}
  */
 export const STARTING_ROUND_SET: 'UI/ENTRY/STARTING_ROUND_SET' = 'UI/ENTRY/STARTING_ROUND_SET'
-export type STARTING_ROUND_SET_ACTION = {
+export interface IStartingRoundSetAction {
   type: typeof STARTING_ROUND_SET,
   payload: number
 }
@@ -62,7 +61,7 @@ export type STARTING_ROUND_SET_ACTION = {
  * @type {string}
  */
 export const PLAYER_NAMES_SET: 'UI/ENTRY/PLAYER_NAMES_SET' = 'UI/ENTRY/PLAYER_NAMES_SET'
-export type PLAYER_NAMES_SET_ACTION = {
+export interface IPlayerNamesSetAction {
   type: typeof PLAYER_NAMES_SET,
   payload: string[]
 }
@@ -74,7 +73,7 @@ export type PLAYER_NAMES_SET_ACTION = {
  * @type {string}
  */
 export const ADD_PLAYER: 'UI/ENTRY/ADD_PLAYER' = 'UI/ENTRY/ADD_PLAYER'
-export type ADD_PLAYER_ACTION = {
+export interface IAddPlayerAction {
   type: typeof ADD_PLAYER,
   payload: string
 }
