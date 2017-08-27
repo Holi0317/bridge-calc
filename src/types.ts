@@ -1,9 +1,9 @@
-// import {CurrentGameActions} from './actions/current-game'
-// import {EntryActions} from './actions/ui/entry'
-// import {GameState} from './reducer/current-game'
-// import {EntryState} from './reducer/ui/entry'
-// import {SettingsState} from './reducer/ui/settings'
-// import {SettingsActions} from './actions/ui/settings'
+import {CurrentGameActions} from './actions/current-game'
+import {EntryActions} from './actions/ui/entry'
+import {GameState} from './reducer/current-game'
+import {IEntryState} from './reducer/ui/entry'
+import {ISettingsState} from './reducer/ui/settings'
+import {SettingsActions} from './actions/ui/settings'
 
 export interface IPlayerMap<T> {[playerID: string]: T}
 
@@ -16,18 +16,16 @@ export interface IDropdownSource<T> {
 }
 
 export interface IRootState {
-  currentGame: null
-  // currentGame: GameState,
-  // ui: {
-  //   entry: EntryState,
-  //   settings: SettingsState
-  // }
+  currentGame: GameState,
+  ui: {
+    entry: IEntryState,
+    settings: ISettingsState
+  }
 }
 
 export type Actions =
-  null
-  // | CurrentGameActions
-  // | EntryActions
-  // | SettingsActions
+  | CurrentGameActions
+  | EntryActions
+  | SettingsActions
 
 export type Dispatch = (action: Actions) => void
