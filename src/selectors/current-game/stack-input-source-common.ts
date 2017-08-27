@@ -4,7 +4,7 @@ import {stageSelector} from './stage'
 import {playerIDSelector} from './player-id'
 import {GameStage} from '../../game-stage'
 import {fillObj} from '../../utils'
-import type {IDropdownSource, IPlayerMap} from '../../types'
+import {IDropdownSource, IPlayerMap} from '../../types'
 
 /**
  * A common base for input source selector.
@@ -13,7 +13,7 @@ import type {IDropdownSource, IPlayerMap} from '../../types'
 export const stackInputSourceCommonSelector = createSelector(
   stageSelector,
   playerIDSelector,
-  (stage: ?string, playerID: string[]) => {
+  (stage: GameStage | null, playerID: string[]) => {
     // No option for null state
     if (stage == null) {
       return {}
@@ -29,4 +29,4 @@ export const stackInputSourceCommonSelector = createSelector(
   }
 )
 
-export type StackInputSourceCommon = ?IPlayerMap<IDropdownSource<number>[]>
+export type StackInputSourceCommon = IPlayerMap<Array<IDropdownSource<number>>> | null

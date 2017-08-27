@@ -7,7 +7,7 @@ import {entrySourceSelector} from '../selectors/ui/entry/entry-source'
 import style from './entry-options.css'
 
 import type {RootState, I18nT} from '../types'
-import type {EntrySource} from '../selectors/ui/entry/entry-source'
+import type {IEntrySource} from '../selectors/ui/entry/entry-source'
 import {Dropdown} from './mdc/dropdown'
 
 type EntryOptionsProps = {
@@ -15,7 +15,7 @@ type EntryOptionsProps = {
   cards: number,
   rounds: number,
   startingRound: number,
-  sources: EntrySource,
+  sources: IEntrySource,
   disp: (action: string) => (value: number) => void
 }
 

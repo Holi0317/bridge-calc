@@ -1,4 +1,3 @@
-// @flow
 import {createSelector} from 'reselect'
 import {GameStage} from '../../game-stage'
 import {isOk} from '../../utils'
@@ -8,10 +7,8 @@ import {playerOrderSelector} from '../current-game/player-order'
 import {bidSelector} from '../current-game/bid'
 import {winSelector} from '../current-game/win'
 import {currentRoundSelector} from '../current-game/current-round'
-import {stackInputValidator} from '../../validators/stack-input'
-
-import type {IPlayerMap, RootState, I18nT} from '../../types'
-import type {StackInputError} from '../../validators/stack-input'
+import {IStackInputError, stackInputValidator} from '../../validators/stack-input'
+import {IRootState, I18nT, IPlayerMap} from '../../types'
 
 /**
  * Select validation result of entry options.
@@ -23,16 +20,16 @@ export const stackInputValidatorSelector = createSelector(
   bidSelector,
   winSelector,
   currentRoundSelector,
-  (state: RootState, t: I18nT) => t,
-  (stage: ?string, playerOrder: string[], bid: IPlayerMap<number>, win: IPlayerMap<number>, currentRound: number, t: I18nT) => {
+  (state: IRootState, t: I18nT) => t,
+  (stage: GameStage | null, playerOrder: string[], bid: IPlayerMap<number>, win: IPlayerMap<number>, currentRound: number, t: I18nT) => {
     if (!stage || stage === GameStage.ended) {
       return {}
     }
     const lastPlayerID = last(playerOrder)
     const opts = {
-      bid: bid,
+      bid,
       win: stage === GameStage.waitingWin ? win : {},
-      currentRound: currentRound,
+      currentRound,
       lastPlayerID: lastPlayerID || ''
     }
     return stackInputValidator(opts, t)
@@ -46,7 +43,7 @@ export const stackInputValidatorSelector = createSelector(
  */
 export const validStackInput = createSelector(
   stackInputValidatorSelector,
-  (error: StackInputError) => isOk(error)
+  (error: IStackInputError) => isOk(error)
 )
 
 /**
@@ -58,7 +55,7 @@ export const validStackInput = createSelector(
  */
 export const withErrorProp = createSelector(
   stackInputValidatorSelector,
-  (error: StackInputError) => ({
+  (error: IStackInputError) => ({
     bid: {},
     win: {},
     ...error

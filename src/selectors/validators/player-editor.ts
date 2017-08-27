@@ -1,10 +1,7 @@
-// @flow
 import {createSelector} from 'reselect'
 import {namesSelector} from '../ui/settings/names'
-import {playerEditorValidator} from '../../validators/player-editor'
-
-import type {IPlayerMap, RootState, I18nT} from '../../types'
-import type {IPlayerEditorError} from '../../validators/player-editor'
+import {playerEditorValidator, IPlayerEditorError} from '../../validators/player-editor'
+import {IPlayerMap, IRootState, I18nT} from '../../types'
 
 /**
  * Select validation result from player editor validator using state.
@@ -12,7 +9,7 @@ import type {IPlayerEditorError} from '../../validators/player-editor'
  */
 export const playerEditorValidatorSelector = createSelector(
   namesSelector,
-  (state: RootState, t: I18nT) => t,
+  (state: IRootState, t: I18nT) => t,
   (names: IPlayerMap<string>, t) => (
     playerEditorValidator({names}, t)
   )

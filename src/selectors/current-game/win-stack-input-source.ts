@@ -1,10 +1,9 @@
-// @flow
 import {createSelector} from 'reselect'
 import range from 'lodash-es/range'
 import sum from 'lodash-es/sum'
 import values from 'lodash-es/values'
 import fromPairs from 'lodash-es/fromPairs'
-import {stackInputSourceCommonSelector} from './stack-input-source-common'
+import {StackInputSourceCommon, stackInputSourceCommonSelector} from './stack-input-source-common'
 import {currentRoundSelector} from './current-round'
 import {playerIDSelector} from './player-id'
 import {stageSelector} from './stage'
@@ -12,8 +11,7 @@ import {winSelector} from './win'
 import {createSource, fillObj} from '../../utils'
 import {GameStage} from '../../game-stage'
 
-import type {StackInputSourceCommon} from './stack-input-source-common'
-import type {IDropdownSource, IPlayerMap} from '../../types'
+import {IDropdownSource, IPlayerMap} from '../../types'
 
 /**
  * Select input source for MDC's dropdown on win stack.
@@ -24,7 +22,7 @@ export const winStackInputSourceSelector = createSelector(
   playerIDSelector,
   currentRoundSelector,
   winSelector,
-  (common: StackInputSourceCommon, stage: string, playerID: string[], currentRound: number, winMap: IPlayerMap<number>): IPlayerMap<IDropdownSource<number>[]> => {
+  (common: StackInputSourceCommon, stage: GameStage | null, playerID: string[], currentRound: number, winMap: IPlayerMap<number>): IPlayerMap<Array<IDropdownSource<number>>> => {
     if (common) {
       return common
     }

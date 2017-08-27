@@ -1,10 +1,8 @@
-// @flow
 import {createSelector} from 'reselect'
 import mapValues from 'lodash-es/mapValues'
 import sum from 'lodash-es/sum'
 import {playerScoresSelector} from './player-scores'
-
-import type {IPlayerMap} from '../../types'
+import {IPlayerMap} from '../../types'
 
 /**
  * Select player's total scores.

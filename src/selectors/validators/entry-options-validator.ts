@@ -1,19 +1,16 @@
-// @flow
 import {createSelector} from 'reselect'
-import {entryOptionsValidator} from '../../validators/entry-options'
+import {entryOptionsValidator, IEntryError} from '../../validators/entry-options'
 import {isOk} from '../../utils'
-
-import type {RootState, I18nT} from '../../types'
-import type {IEntryState} from '../../reducer/ui/entry'
-import type {IEntryError} from '../../validators/entry-options'
+import {IRootState, I18nT} from '../../types'
+import {IEntryState} from '../../reducer/ui/entry'
 
 /**
  * Select validation result of entry options.
  * Additional argument: i18next T object must be passed in as second argument.
  */
 export const entryOptionsValidatorSelector = createSelector(
-  (state: RootState) => state.ui.entry,
-  (state: RootState, t: I18nT) => t,
+  (state: IRootState) => state.ui.entry,
+  (state: IRootState, t: I18nT) => t,
   (entry: IEntryState, t: I18nT): IEntryError =>
     entryOptionsValidator(entry, t)
 )

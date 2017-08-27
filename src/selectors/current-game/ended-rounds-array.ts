@@ -1,4 +1,3 @@
-// @flow
 import {createSelector} from 'reselect'
 import range from 'lodash-es/range'
 import {stageSelector} from './stage'
@@ -18,7 +17,7 @@ export const endedRoundsArraySelector = createSelector(
   stageSelector,
   roundsSelector,
   currentRoundSelector,
-  (stage: ?string, rounds: number, currentRound: number): number[] => {
+  (stage: GameStage | null, rounds: number, currentRound: number): number[] => {
     if (!stage) {
       return []
     }

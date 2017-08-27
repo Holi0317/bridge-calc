@@ -1,6 +1,5 @@
-// @flow
 import {GameStage} from '../../game-stage'
-import type {IPlayerMap, RootState} from '../../types'
+import {IPlayerMap, IRootState} from '../../types'
 import {createSelector} from 'reselect'
 import mapValues from 'lodash-es/mapValues'
 
@@ -8,7 +7,7 @@ import mapValues from 'lodash-es/mapValues'
  * Select win object from current game.
  * If it is not available, empty object will be returned.
  */
-export function winSelector(state: RootState): IPlayerMap<number> {
+export function winSelector(state: IRootState): IPlayerMap<number> {
   const currentGame = state.currentGame
   if (currentGame && currentGame.stage === GameStage.waitingWin) {
     return currentGame.win

@@ -1,11 +1,10 @@
-// @flow
 import {createSelector} from 'reselect'
 import {stageSelector} from './stage'
 import {currentRoundSelector} from './current-round'
 import {roundsSelector} from './rounds'
 import {GameStage} from '../../game-stage'
 
-import type {RootState, I18nT} from '../../types'
+import {IRootState, I18nT} from '../../types'
 
 /**
  * Compute title to be displayed on app bar for current game.
@@ -15,8 +14,8 @@ export const gameTitleSelector = createSelector(
   stageSelector,
   currentRoundSelector,
   roundsSelector,
-  (state: RootState, t: I18nT) => t,
-  (stage: ?string, currentRound: ?number, rounds: ?number, t: I18nT): string => {
+  (state: IRootState, t: I18nT) => t,
+  (stage: GameStage | null, currentRound: number | null, rounds: number | null, t: I18nT): string => {
     if (stage == null) {
       return ''
     } else if (stage === GameStage.waitingBid || stage === GameStage.waitingWin) {
