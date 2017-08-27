@@ -16,9 +16,10 @@
   "scripts": {
     "pretest": "npm run build:test",
     "test": "cross-env NODE_ENV=test ava .tmp/test",
-    "lint": "npm run lint:js",
+    "lint": "npm run lint:js && npm run lint:ts",
     "lint:js": "eslint --ext .jsx,.js --cache webpack-cfg test webpack.config.js src",
     "lint:js:fix": "eslint --ext .jsx,.js --fix --cache webpack-cfg test webpack.config.js src",
+    "lint:ts": "tslint src test",
     "flow": "flow check",
     "clean": "del-cli dist .tmp",
     "build": "npm run build:dev",
