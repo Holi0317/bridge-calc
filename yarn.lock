@@ -307,6 +307,32 @@
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@material/typography/-/typography-0.3.0.tgz#f828c2d3215bfd66c58072709b4260c64125390a"
 
+"@types/i18next-browser-languagedetector@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/i18next-browser-languagedetector/-/i18next-browser-languagedetector-2.0.0.tgz#b6c1b87d2de4213414290efd4af1f45ed9fbdb1a"
+
+"@types/i18next-xhr-backend@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@types/i18next-xhr-backend/-/i18next-xhr-backend-1.4.0.tgz#196742adb5767d8fccb4a1146512c6da8fca9a22"
+
+"@types/i18next@^8.4.1":
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-8.4.1.tgz#8aebc08c757167105d1fefa8fbd1b89942e5f40e"
+
+"@types/lodash-es@^4.14.6":
+  version "4.14.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash-es/-/lodash-es-4.14.6.tgz#c11d48d77f46b0aa9fae2a152b8259c23891efd1"
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.74"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.74.tgz#ac3bd8db988e7f7038e5d22bd76a7ba13f876168"
+
+"@types/node@^8.0.25":
+  version "8.0.25"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.25.tgz#66ecaf4df93f5281b48427ee96fbcdfc4f0cdce1"
+
 abab@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"

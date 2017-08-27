@@ -12,7 +12,7 @@ import {playerOrderSelector} from './player-order'
 import {createSource, fillObj} from '../../utils'
 
 import type {StackInputSourceCommon} from './stack-input-source-common'
-import type {DropdownSource, PlayerMap} from '../../types'
+import type {IDropdownSource, IPlayerMap} from '../../types'
 
 /**
  * Select input source for MDC's dropdown on bid stack.
@@ -23,7 +23,7 @@ export const bidStackInputSourceSelector = createSelector(
   currentRoundSelector,
   bidSelector,
   playerOrderSelector,
-  (common: StackInputSourceCommon, playerID: string[], currentRound: number, bidMap: PlayerMap<number>, playerOrder: string[]): PlayerMap<DropdownSource<number>[]> => {
+  (common: StackInputSourceCommon, playerID: string[], currentRound: number, bidMap: IPlayerMap<number>, playerOrder: string[]): IPlayerMap<IDropdownSource<number>[]> => {
     if (common) {
       return common
     }

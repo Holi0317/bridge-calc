@@ -1,23 +1,22 @@
-// @flow
 import {isOk, removeUndef, toPairs} from '../utils'
 import mapValues from 'lodash-es/mapValues'
 import sumBy from 'lodash-es/sumBy'
 
-import type {T, PlayerMap} from '../types'
+import {I18nT, IPlayerMap} from '../types'
 
-export type StackInput = {
-  bid?: PlayerMap<number>,
-  win?: PlayerMap<number>,
+export interface IStackInput {
+  bid?: IPlayerMap<number>,
+  win?: IPlayerMap<number>,
   currentRound: number,
   lastPlayerID: string
 }
 
-export type StackInputError = {
-  bid?: PlayerMap<string>,
-  win?: PlayerMap<string>
+export interface IStackInputError {
+  bid?: IPlayerMap<string>,
+  win?: IPlayerMap<string>
 }
 
-function validateBid(opts: StackInput, t: T): PlayerMap<string> | null {
+function validateBid(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
   if (!opts.bid) {
     return null
   }
@@ -27,7 +26,7 @@ function validateBid(opts: StackInput, t: T): PlayerMap<string> | null {
     : null
 }
 
-function validateWin(opts: StackInput, t: T): PlayerMap<string> | null {
+function validateWin(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
   if (!opts.win || /* Is empty? */isOk(opts.win)) {
     return null
   }
@@ -54,7 +53,7 @@ function validateWin(opts: StackInput, t: T): PlayerMap<string> | null {
  * @param t - i18next translate function
  * @returns {Object} Error of each property
  */
-export function stackInputValidator(opts: StackInput, t: T): StackInputError {
+export function stackInputValidator(opts: IStackInput, t: I18nT): IStackInputError {
   const res = {
     bid: validateBid(opts, t),
     win: validateWin(opts, t)

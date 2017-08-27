@@ -1,23 +1,22 @@
-// @flow
-import type {T} from '../types'
+import {I18nT} from '../types'
 import {dupe, removeUndef} from '../utils'
 
-export type EntryOptions = {
+export interface IEntryOptions {
   playerNames: string[]
 }
 
-export type EntryError = {
+export interface IEntryError {
   playerNames?: string[],
   misc?: string
 }
 
-function validateMisc(opts, t): ?string {
+function validateMisc(opts: IEntryOptions, t: I18nT): string | null {
   return opts.playerNames.length < 2
     ? t('At least 2 players is required for a game')
     : null
 }
 
-function validatePlayerName(opts, t): ?string[] {
+function validatePlayerName(opts: IEntryOptions, t: I18nT): string[] | null {
   const duplicates = dupe(opts.playerNames)
   const playerNames = opts.playerNames
     .map(p => (
@@ -43,7 +42,7 @@ function validatePlayerName(opts, t): ?string[] {
  * @param t - i18next translate function
  * @returns {Object} Error of each property
  */
-export function entryOptionsValidator(opts: EntryOptions, t: T): EntryError {
+export function entryOptionsValidator(opts: IEntryOptions, t: I18nT): IEntryError {
   const res = {
     misc: validateMisc(opts, t),
     playerNames: validatePlayerName(opts, t)

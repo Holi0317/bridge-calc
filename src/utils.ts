@@ -1,5 +1,4 @@
-// @flow
-import type {DropdownSource} from './types'
+import {IDropdownSource} from './types'
 
 /**
  * Generate a (hopefully) unique ID with 4 characters
@@ -69,7 +68,7 @@ export function isOk(error: any): boolean {
  * @param obj
  */
 export function removeUndef(obj: any): any {
-  const cloned = Object.assign({}, obj)
+  const cloned = {...obj}
   Object.entries(cloned).forEach(([key, value]) => (value == null || value === '') && delete cloned[key])
   return cloned
 }
@@ -87,7 +86,7 @@ export function removeUndef(obj: any): any {
  * @param value - Value to be filled if filling action need to be done
  */
 export function fillObj<T>(obj: {[key: string]: T}, keys: string[], value: T): {[key: string]: T} {
-  const cloned = Object.assign({}, obj)
+  const cloned = {...obj}
   for (const key of keys) {
     if (cloned[key] == null) {
       cloned[key] = value
@@ -101,7 +100,7 @@ export function fillObj<T>(obj: {[key: string]: T}, keys: string[], value: T): {
  * This is just a helper function to bypass out flow's type checking
  */
 export function toPairs(obj: any): any[] {
-  return (Object: any).entries(obj)
+  return Object.entries(obj)
 }
 
 /**
@@ -111,7 +110,7 @@ export function toPairs(obj: any): any[] {
  * @param values - Array of value that will be source's value when generated.
  * @returns {Array} - Source array to be used in React-toolbox dropdown
  */
-export function createSource(values: number[]): DropdownSource<number>[] {
+export function createSource(values: number[]): Array<IDropdownSource<number>> {
   return values.map(s => ({value: s, label: s + ''}))
 }
 
@@ -134,8 +133,8 @@ export function toOrdinal(value: number): string {
  * @param array
  */
 export function dupe<T>(array: T[]): T[] {
-  const seen = new Set()
-  const res = []
+  const seen = new Set<T>()
+  const res: T[] = []
   array.forEach(element => {
     if (seen.has(element) && !res.includes(element)) {
       res.push(element)

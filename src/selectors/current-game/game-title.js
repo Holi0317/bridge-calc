@@ -5,7 +5,7 @@ import {currentRoundSelector} from './current-round'
 import {roundsSelector} from './rounds'
 import {GameStage} from '../../game-stage'
 
-import type {RootState, T} from '../../types'
+import type {RootState, I18nT} from '../../types'
 
 /**
  * Compute title to be displayed on app bar for current game.
@@ -15,8 +15,8 @@ export const gameTitleSelector = createSelector(
   stageSelector,
   currentRoundSelector,
   roundsSelector,
-  (state: RootState, t: T) => t,
-  (stage: ?string, currentRound: ?number, rounds: ?number, t: T): string => {
+  (state: RootState, t: I18nT) => t,
+  (stage: ?string, currentRound: ?number, rounds: ?number, t: I18nT): string => {
     if (stage == null) {
       return ''
     } else if (stage === GameStage.waitingBid || stage === GameStage.waitingWin) {

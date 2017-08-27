@@ -9,8 +9,8 @@ import {nameInputListSourceSelector, revert} from '../../selectors/ui/settings/n
 import {isValidPlayerEditor, playerEditorValidatorSelector} from '../../selectors/validators/player-editor'
 import style from './player-editor.css'
 
-import type {Dispatch, PlayerMap, RootState, T} from '../../types'
-import type {PlayerEditorError} from '../../validators/player-editor'
+import type {Dispatch, IPlayerMap, RootState, I18nT} from '../../types'
+import type {IPlayerEditorError} from '../../validators/player-editor'
 import type {PlayerName} from '../../selectors/ui/settings/name-input-list-source'
 import type {SET_BY_GAME_STATE_ACTION, SET_NAMES_ACTION, ADD_NAME_ACTION} from '../../actions/ui/settings'
 import type {GameState} from '../../reducer/current-game/types'
@@ -34,7 +34,7 @@ const setter = (newVal: string, [ID]: PlayerName): PlayerName => ([ID, newVal])
 /**
  * Error getter for name-input-list component
  */
-const errorGetter = (error: PlayerMap<string>, value: PlayerName) => error[value[0]]
+const errorGetter = (error: IPlayerMap<string>, value: PlayerName) => error[value[0]]
 
 /**
  * Edit player's names, order and delete them
@@ -42,14 +42,14 @@ const errorGetter = (error: PlayerMap<string>, value: PlayerName) => error[value
 class DisconnectPlayerEditor extends Component {
   props: {
     names: PlayerName[],
-    error: PlayerEditorError,
+    error: IPlayerEditorError,
     isValid: boolean,
     currentGame: GameState,
 
     init: (state: GameState) => void,
     changeNames: (newNames: PlayerName[]) => void,
     addPlayer: () => void,
-    t: T
+    t: I18nT
   }
 
   componentWillMount() {

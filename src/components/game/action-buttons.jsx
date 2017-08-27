@@ -7,14 +7,14 @@ import {GameStage} from '../../game-stage'
 import {BID, UNDO, WIN} from '../../actions/current-game'
 import style from './action-buttons.css'
 
-import type {Dispatch, RootState, T} from '../../types'
+import type {Dispatch, RootState, I18nT} from '../../types'
 import type {BID_ACTION, WIN_ACTION, UNDO_ACTION} from '../../actions/current-game'
 import type {GameState} from '../../reducer/current-game'
 import {stageSelector} from '../../selectors/current-game/stage'
 import {validStackInput} from '../../selectors/validators/stack-input-validator'
 
 type ActionButtonsProps = {
-  t: T,
+  t: I18nT,
   currentGame: GameState,
   nextDisabled: boolean,
   undoDisabled: boolean,

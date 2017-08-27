@@ -3,8 +3,8 @@ import {createSelector} from 'reselect'
 import {namesSelector} from '../ui/settings/names'
 import {playerEditorValidator} from '../../validators/player-editor'
 
-import type {PlayerMap, RootState, T} from '../../types'
-import type {PlayerEditorError} from '../../validators/player-editor'
+import type {IPlayerMap, RootState, I18nT} from '../../types'
+import type {IPlayerEditorError} from '../../validators/player-editor'
 
 /**
  * Select validation result from player editor validator using state.
@@ -12,8 +12,8 @@ import type {PlayerEditorError} from '../../validators/player-editor'
  */
 export const playerEditorValidatorSelector = createSelector(
   namesSelector,
-  (state: RootState, t: T) => t,
-  (names: PlayerMap<string>, t) => (
+  (state: RootState, t: I18nT) => t,
+  (names: IPlayerMap<string>, t) => (
     playerEditorValidator({names}, t)
   )
 )
@@ -26,7 +26,7 @@ export const playerEditorValidatorSelector = createSelector(
  */
 export const isValidPlayerEditor = createSelector(
   playerEditorValidatorSelector,
-  (error: PlayerEditorError) => (
+  (error: IPlayerEditorError) => (
     error.misc === '' && (Object.keys(error.names).length === 0)
   )
 )

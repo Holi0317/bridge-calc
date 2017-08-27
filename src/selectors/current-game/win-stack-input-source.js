@@ -13,7 +13,7 @@ import {createSource, fillObj} from '../../utils'
 import {GameStage} from '../../game-stage'
 
 import type {StackInputSourceCommon} from './stack-input-source-common'
-import type {DropdownSource, PlayerMap} from '../../types'
+import type {IDropdownSource, IPlayerMap} from '../../types'
 
 /**
  * Select input source for MDC's dropdown on win stack.
@@ -24,7 +24,7 @@ export const winStackInputSourceSelector = createSelector(
   playerIDSelector,
   currentRoundSelector,
   winSelector,
-  (common: StackInputSourceCommon, stage: string, playerID: string[], currentRound: number, winMap: PlayerMap<number>): PlayerMap<DropdownSource<number>[]> => {
+  (common: StackInputSourceCommon, stage: string, playerID: string[], currentRound: number, winMap: IPlayerMap<number>): IPlayerMap<IDropdownSource<number>[]> => {
     if (common) {
       return common
     }

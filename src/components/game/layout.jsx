@@ -6,7 +6,7 @@ import Tabs from 'preact-material-components/Tabs/Tabs'
 import {routes} from './routes'
 
 import type {WithRouterProps} from 'react-router-dom'
-import type {T} from '../../types'
+import type {I18nT} from '../../types'
 
 function getActive(pathname: string): number {
   // Create a matches array.
@@ -17,7 +17,7 @@ function getActive(pathname: string): number {
 
 class DisconnectedLayout extends Component {
   props: WithRouterProps & {
-    t: T
+    t: I18nT
   }
   state: {
     active: number

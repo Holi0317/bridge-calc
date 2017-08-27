@@ -6,12 +6,12 @@ import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
 import {entrySourceSelector} from '../selectors/ui/entry/entry-source'
 import style from './entry-options.css'
 
-import type {RootState, T} from '../types'
+import type {RootState, I18nT} from '../types'
 import type {EntrySource} from '../selectors/ui/entry/entry-source'
 import {Dropdown} from './mdc/dropdown'
 
 type EntryOptionsProps = {
-  t: T,
+  t: I18nT,
   cards: number,
   rounds: number,
   startingRound: number,

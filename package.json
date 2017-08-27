@@ -72,6 +72,11 @@
     "reselect": "3.0.1"
   },
   "devDependencies": {
+    "@types/i18next": "^8.4.1",
+    "@types/i18next-browser-languagedetector": "^2.0.0",
+    "@types/i18next-xhr-backend": "^1.4.0",
+    "@types/lodash-es": "^4.14.6",
+    "@types/node": "^8.0.25",
     "ajv": "^5.2.2",
     "autoprefixer": "7.1.2",
     "ava": "0.22.0",

@@ -1,5 +1,5 @@
 // @flow
-import type {PlayerMap} from '../types'
+import type {IPlayerMap} from '../types'
 
 export type CurrentGameActions =
   | START_ACTION
@@ -67,7 +67,7 @@ export type SET_BID_ACTION = {
   /**
    * A map that maps player ID to their bid choice
    */
-  payload: PlayerMap<number>
+  payload: IPlayerMap<number>
 }
 
 /**
@@ -81,7 +81,7 @@ export type BID_ACTION = {
    * A map that maps player ID to their bid choice.
    * If this is not defined, bid property in currentGame state will be used.
    */
-  payload?: PlayerMap<number>
+  payload?: IPlayerMap<number>
 }
 
 /**
@@ -95,7 +95,7 @@ export type SET_WIN_ACTION = {
   /**
    * A map that maps player ID to their win choice
    */
-  payload: PlayerMap<number>
+  payload: IPlayerMap<number>
 }
 
 /**
@@ -109,7 +109,7 @@ export type WIN_ACTION = {
    * A map that maps player ID to their win choice.
    * If this is not defined, win property in currentGame state will be used as win.
    */
-  win?: PlayerMap<number>,
+  win?: IPlayerMap<number>,
   /**
    * Time when this round ends
    */
@@ -142,7 +142,7 @@ export type CHANGE_PLAYERS_ACTION = {
    * Order of this map represent the new player order.
    * If new player is added, generate a new unique ID for him/her.
    */
-  newNames: PlayerMap<string>,
+  newNames: IPlayerMap<string>,
   /**
    * As order may have changed, new maker must be selected.
    * This property represent the ID of new maker.

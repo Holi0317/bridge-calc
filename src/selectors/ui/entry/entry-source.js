@@ -3,7 +3,7 @@ import {createSelector} from 'reselect'
 import range from 'lodash-es/range'
 import {createSource} from '../../../utils'
 
-import type {DropdownSource, RootState} from '../../../types'
+import type {IDropdownSource, RootState} from '../../../types'
 
 // This is a constant
 const cardsSource = [
@@ -38,7 +38,7 @@ export const entrySourceSelector = createSelector(
 )
 
 export type EntrySource = {
-  cards: DropdownSource<number>[],
-  rounds: DropdownSource<number>[],
-  startingRound: DropdownSource<number>[]
+  cards: IDropdownSource<number>[],
+  rounds: IDropdownSource<number>[],
+  startingRound: IDropdownSource<number>[]
 }

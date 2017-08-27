@@ -1,7 +1,7 @@
 // @flow
 import {GameStage} from '../../game-stage'
 
-import type {PlayerMap} from '../../types'
+import type {IPlayerMap} from '../../types'
 
 /**
  * States that must have regardless of current stage.
@@ -14,15 +14,15 @@ type BaseGameState = {
   startTime: Date,
 
   /** Player name map */
-  names: PlayerMap<string>,
+  names: IPlayerMap<string>,
   /** Player score map */
-  scores: PlayerMap<number[]>
+  scores: IPlayerMap<number[]>
 }
 
 export type WaitingBidState = BaseGameState & {
   stage: typeof GameStage.waitingBid,
   /** Current bid */
-  bid: PlayerMap<number>,
+  bid: IPlayerMap<number>,
   /** Order of players for current round */
   currentPlayerOrder: string[],
   /** Current round */
@@ -32,7 +32,7 @@ export type WaitingBidState = BaseGameState & {
 export type WaitingWinState = WaitingBidState & {
   stage: typeof GameStage.waitingWin,
   /** Current win */
-  win: PlayerMap<number>
+  win: IPlayerMap<number>
 }
 
 export type EndedState = BaseGameState & {

@@ -11,15 +11,15 @@ import {toPairs} from '../../utils'
 import style from './scoreboard.css'
 import grid from '../../styles/grid.css'
 
-import type {PlayerMap, RootState, T} from '../../types'
+import type {IPlayerMap, RootState, I18nT} from '../../types'
 
 type ScoreboardProps = {
-  names: PlayerMap<string>,
-  scores: PlayerMap<number[]>,
-  totalScores: PlayerMap<number>,
-  ranks: PlayerMap<string>,
+  names: IPlayerMap<string>,
+  scores: IPlayerMap<number[]>,
+  totalScores: IPlayerMap<number>,
+  ranks: IPlayerMap<string>,
   endedRounds: number[],
-  t: T
+  t: I18nT
 }
 
 function DisconnectScoreboard({t, names, scores, endedRounds, totalScores, ranks}: ScoreboardProps) {

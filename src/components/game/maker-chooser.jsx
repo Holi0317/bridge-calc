@@ -6,17 +6,17 @@ import {Dropdown} from '../mdc/dropdown'
 import {makerSourceSelector} from '../../selectors/ui/settings/maker-source'
 
 import {SET_MAKER} from '../../actions/ui/settings'
-import type {Dispatch, DropdownSource, RootState, T} from '../../types'
+import type {Dispatch, IDropdownSource, RootState, I18nT} from '../../types'
 import {makerSelector} from '../../selectors/ui/settings/maker'
 import type {SET_MAKER_ACTION} from '../../actions/ui/settings'
 
 type MakerChooserProps = {
-  names: DropdownSource<string>[],
+  names: IDropdownSource<string>[],
   maker: ?string,
 
   onChange: (ID: string) => void,
 
-  t: T
+  t: I18nT
 }
 
 function DisconnectMakerChooser({names, maker, onChange, t}: MakerChooserProps) {

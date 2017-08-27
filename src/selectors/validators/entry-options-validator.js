@@ -3,9 +3,9 @@ import {createSelector} from 'reselect'
 import {entryOptionsValidator} from '../../validators/entry-options'
 import {isOk} from '../../utils'
 
-import type {RootState, T} from '../../types'
+import type {RootState, I18nT} from '../../types'
 import type {EntryState} from '../../reducer/ui/entry'
-import type {EntryError} from '../../validators/entry-options'
+import type {IEntryError} from '../../validators/entry-options'
 
 /**
  * Select validation result of entry options.
@@ -13,8 +13,8 @@ import type {EntryError} from '../../validators/entry-options'
  */
 export const entryOptionsValidatorSelector = createSelector(
   (state: RootState) => state.ui.entry,
-  (state: RootState, t: T) => t,
-  (entry: EntryState, t: T): EntryError =>
+  (state: RootState, t: I18nT) => t,
+  (entry: EntryState, t: I18nT): IEntryError =>
     entryOptionsValidator(entry, t)
 )
 
@@ -25,6 +25,6 @@ export const entryOptionsValidatorSelector = createSelector(
  */
 export const validEntryOptionsSelector = createSelector(
   entryOptionsValidatorSelector,
-  (error: EntryError): boolean =>
+  (error: IEntryError): boolean =>
     isOk(error)
 )

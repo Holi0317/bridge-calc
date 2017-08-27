@@ -4,7 +4,7 @@ import mapValues from 'lodash-es/mapValues'
 import sum from 'lodash-es/sum'
 import {playerScoresSelector} from './player-scores'
 
-import type {PlayerMap} from '../../types'
+import type {IPlayerMap} from '../../types'
 
 /**
  * Select player's total scores.
@@ -12,7 +12,7 @@ import type {PlayerMap} from '../../types'
  */
 export const playerTotalScoreSelector = createSelector(
   playerScoresSelector,
-  (scores: PlayerMap<number[]>): PlayerMap<number> => (
+  (scores: IPlayerMap<number[]>): IPlayerMap<number> => (
     mapValues(scores, score => sum(score))
   )
 )

@@ -1,7 +1,7 @@
 // @flow
 import {createSelector} from 'reselect'
 
-import type {PlayerMap, RootState} from '../../types'
+import type {IPlayerMap, RootState} from '../../types'
 
 /**
  * Select all player ID as an array.
@@ -9,7 +9,7 @@ import type {PlayerMap, RootState} from '../../types'
  */
 export const playerIDSelector = createSelector(
   (state: RootState) => state.currentGame ? state.currentGame.names : null,
-  (names: ?PlayerMap<string>): string[] => {
+  (names: ?IPlayerMap<string>): string[] => {
     if (!names) {
       return []
     }

@@ -1,6 +1,6 @@
 // @flow
 import type {GameState} from '../../reducer/current-game/types'
-import type {PlayerMap} from '../../types'
+import type {IPlayerMap} from '../../types'
 
 export type SettingsActions =
   | SET_BY_GAME_STATE_ACTION
@@ -44,7 +44,7 @@ export type SET_NAMES_ACTION = {
   /**
    * New name map to be set.
    */
-  newNames: PlayerMap<string>
+  newNames: IPlayerMap<string>
 }
 
 /**

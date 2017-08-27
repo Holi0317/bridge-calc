@@ -11,17 +11,17 @@ import {Snackbar} from '../mdc/snackbar'
 import {MakerChooser} from './maker-chooser'
 import style from './maker-editor.css'
 
-import type {Dispatch, PlayerMap, RootState, T} from '../../types'
+import type {Dispatch, IPlayerMap, RootState, I18nT} from '../../types'
 import type {CHANGE_PLAYERS_ACTION} from '../../actions/current-game'
 
 class DisconnectMakerEditor extends Component {
   props: {
-    names: PlayerMap<string>,
+    names: IPlayerMap<string>,
     rounds: number,
     maker: string,
 
-    commit: (names: PlayerMap<string>, rounds: number, maker: string) => void,
-    t: T
+    commit: (names: IPlayerMap<string>, rounds: number, maker: string) => void,
+    t: I18nT
   }
   state: {
     snackbarOpen: boolean
@@ -70,7 +70,7 @@ const mapStateToProps = (state: RootState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  commit(names: PlayerMap<string>, rounds: number, maker: string) {
+  commit(names: IPlayerMap<string>, rounds: number, maker: string) {
     const action: CHANGE_PLAYERS_ACTION = {
       type: CHANGE_PLAYERS,
       newNames: names,

@@ -1,12 +1,12 @@
 // @flow
 import {h, Component} from 'preact'
-import type {DropdownSource} from '../../types'
+import type {IDropdownSource} from '../../types'
 import style from './dropdown.css'
 
 export type DropdownProps<T> = {
   label?: string,
   value: ?T,
-  source: DropdownSource<T>[],
+  source: IDropdownSource<T>[],
   disabled?: boolean,
   className?: string,
   error?: string,

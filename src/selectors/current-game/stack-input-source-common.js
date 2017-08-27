@@ -4,7 +4,7 @@ import {stageSelector} from './stage'
 import {playerIDSelector} from './player-id'
 import {GameStage} from '../../game-stage'
 import {fillObj} from '../../utils'
-import type {DropdownSource, PlayerMap} from '../../types'
+import type {IDropdownSource, IPlayerMap} from '../../types'
 
 /**
  * A common base for input source selector.
@@ -29,4 +29,4 @@ export const stackInputSourceCommonSelector = createSelector(
   }
 )
 
-export type StackInputSourceCommon = ?PlayerMap<DropdownSource<number>[]>
+export type StackInputSourceCommon = ?IPlayerMap<IDropdownSource<number>[]>

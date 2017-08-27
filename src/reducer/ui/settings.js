@@ -3,7 +3,7 @@ import {GameStage} from '../../game-stage'
 import {ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../actions/ui/settings'
 
 import type {SettingsActions} from '../../actions/ui/settings'
-import type {PlayerMap} from '../../types'
+import type {IPlayerMap} from '../../types'
 
 export type SettingsState = {
   /**
@@ -14,7 +14,7 @@ export type SettingsState = {
   /**
    * New player map.
    */
-  names: PlayerMap<string>
+  names: IPlayerMap<string>
 }
 
 const defaultState: SettingsState = {

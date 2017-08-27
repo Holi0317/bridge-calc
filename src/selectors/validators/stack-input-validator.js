@@ -10,7 +10,7 @@ import {winSelector} from '../current-game/win'
 import {currentRoundSelector} from '../current-game/current-round'
 import {stackInputValidator} from '../../validators/stack-input'
 
-import type {PlayerMap, RootState, T} from '../../types'
+import type {IPlayerMap, RootState, I18nT} from '../../types'
 import type {StackInputError} from '../../validators/stack-input'
 
 /**
@@ -23,8 +23,8 @@ export const stackInputValidatorSelector = createSelector(
   bidSelector,
   winSelector,
   currentRoundSelector,
-  (state: RootState, t: T) => t,
-  (stage: ?string, playerOrder: string[], bid: PlayerMap<number>, win: PlayerMap<number>, currentRound: number, t: T) => {
+  (state: RootState, t: I18nT) => t,
+  (stage: ?string, playerOrder: string[], bid: IPlayerMap<number>, win: IPlayerMap<number>, currentRound: number, t: I18nT) => {
     if (!stage || stage === GameStage.ended) {
       return {}
     }

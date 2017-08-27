@@ -5,14 +5,14 @@ import mapValues from 'lodash-es/mapValues'
 import {playerTotalScoreSelector} from './player-total-score'
 import {toOrdinal} from '../../utils'
 
-import type {PlayerMap} from '../../types'
+import type {IPlayerMap} from '../../types'
 
 /**
  * Select player's ranks. With ordinal suffix.
  */
 export const playerRankSelector = createSelector(
   playerTotalScoreSelector,
-  (scores: PlayerMap<number[]>): PlayerMap<string> => {
+  (scores: IPlayerMap<number[]>): IPlayerMap<string> => {
     const sortedScores: number[] = values(scores).sort((a, b) => b - a)
     return mapValues(scores, score => toOrdinal(sortedScores.indexOf(score) + 1))
   }

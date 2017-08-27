@@ -4,7 +4,7 @@ import fromPairs from 'lodash-es/fromPairs'
 import {namesSelector} from './names'
 import toPairs from 'lodash-es/toPairs'
 
-import type {PlayerMap} from '../../../types'
+import type {IPlayerMap} from '../../../types'
 
 /**
  * PlayerName structure to be passed into name-input-list component.
@@ -13,7 +13,7 @@ import type {PlayerMap} from '../../../types'
  */
 export type PlayerName = [string, string]
 
-export function revert(data: PlayerName[]): PlayerMap<string> {
+export function revert(data: PlayerName[]): IPlayerMap<string> {
   return fromPairs(data)
 }
 
@@ -22,7 +22,7 @@ export function revert(data: PlayerName[]): PlayerMap<string> {
  */
 export const nameInputListSourceSelector = createSelector(
   namesSelector,
-  (names: PlayerMap<string>): PlayerName[] => (
+  (names: IPlayerMap<string>): PlayerName[] => (
     toPairs(names)
   )
 )

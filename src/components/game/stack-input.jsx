@@ -15,25 +15,25 @@ import {bidStackInputSourceSelector} from '../../selectors/current-game/bid-stac
 import {winStackInputSourceSelector} from '../../selectors/current-game/win-stack-input-source'
 import style from './stack-input.css'
 
-import type {T, PlayerMap, RootState, DropdownSource} from '../../types'
+import type {I18nT, IPlayerMap, RootState, IDropdownSource} from '../../types'
 
 type StackInputProps = {
-  t: T,
+  t: I18nT,
 
   bidDisabled: boolean,
   winDisabled: boolean,
   playerOrder: string[],
-  names: PlayerMap<string>,
-  bid: PlayerMap<number>,
-  win: PlayerMap<number>,
+  names: IPlayerMap<string>,
+  bid: IPlayerMap<number>,
+  win: IPlayerMap<number>,
   error: {
-    bid: PlayerMap<string>,
-    win: PlayerMap<string>
+    bid: IPlayerMap<string>,
+    win: IPlayerMap<string>
   },
-  bidStackInput: PlayerMap<DropdownSource<number>[]>,
-  winStackInput: PlayerMap<DropdownSource<number>[]>,
+  bidStackInput: IPlayerMap<IDropdownSource<number>[]>,
+  winStackInput: IPlayerMap<IDropdownSource<number>[]>,
 
-  disp: (action: string, playerID: string, oldValue: PlayerMap<string>) => () => void
+  disp: (action: string, playerID: string, oldValue: IPlayerMap<string>) => () => void
 }
 
 function DisconnectStackInput({t, bidDisabled, winDisabled, playerOrder, names, bid, win, error, bidStackInput, winStackInput, disp}: StackInputProps) {
@@ -96,7 +96,7 @@ function mapStateToProps(state: RootState, {t}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    disp(action, playerID: string, oldMap: PlayerMap<string>) {
+    disp(action, playerID: string, oldMap: IPlayerMap<string>) {
       return (value: number) => {
         const payload = {
           ...oldMap,

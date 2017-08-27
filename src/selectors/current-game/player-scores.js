@@ -1,9 +1,9 @@
 // @flow
-import type {PlayerMap, RootState} from '../../types'
+import type {IPlayerMap, RootState} from '../../types'
 
 /**
  * Select all player's scores.
  * Empty object will be produced for null state
  */
-export const playerScoresSelector = (state: RootState): PlayerMap<number[]> =>
+export const playerScoresSelector = (state: RootState): IPlayerMap<number[]> =>
   state.currentGame ? state.currentGame.scores : {}

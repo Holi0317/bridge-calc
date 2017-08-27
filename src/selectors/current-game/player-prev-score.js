@@ -4,7 +4,7 @@ import mapValues from 'lodash-es/mapValues'
 import last from 'lodash-es/last'
 import {playerScoresSelector} from './player-scores'
 
-import type {PlayerMap} from '../../types'
+import type {IPlayerMap} from '../../types'
 
 /**
  * Select previous score of all players.
@@ -12,6 +12,6 @@ import type {PlayerMap} from '../../types'
  */
 export const playerPrevScoreSelector = createSelector(
   playerScoresSelector,
-  (scores: PlayerMap<number[]>): PlayerMap<number> =>
+  (scores: IPlayerMap<number[]>): IPlayerMap<number> =>
     mapValues(scores, score => last(score) || 0)
 )

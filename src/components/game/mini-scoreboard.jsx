@@ -6,17 +6,17 @@ import {namesSelector} from '../../selectors/current-game/names'
 import {toPairs} from '../../utils'
 import style from './scoreboard.css'
 
-import type {PlayerMap, RootState, T} from '../../types'
+import type {IPlayerMap, RootState, I18nT} from '../../types'
 import {playerPrevScoreSelector} from '../../selectors/current-game/player-prev-score'
 import {playerTotalScoreSelector} from '../../selectors/current-game/player-total-score'
 import {playerRankSelector} from '../../selectors/current-game/player-rank'
 
 type MiniScoreboardProps = {
-  names: PlayerMap<string>,
-  prevScores: PlayerMap<number>,
-  totalScores: PlayerMap<number>,
-  ranks: PlayerMap<string>,
-  t: T
+  names: IPlayerMap<string>,
+  prevScores: IPlayerMap<number>,
+  totalScores: IPlayerMap<number>,
+  ranks: IPlayerMap<string>,
+  t: I18nT
 }
 
 function DisconnectMiniScoreboard({names, prevScores, totalScores, ranks, t}: MiniScoreboardProps) {
