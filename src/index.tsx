@@ -4,23 +4,9 @@ import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {I18nextProvider} from 'react-i18next'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {createStore, compose, applyMiddleware} from 'redux'
-import {reducer} from './reducer/index'
 import {App} from './components/app'
 import {i18n} from './i18n'
-
-const middlewares = []
-
-if (process.env.NODE_ENV === 'development') {
-  // tslint:disable-next-line:no-var-requires
-  const {createLogger} = require('redux-logger')
-  const logger = createLogger({
-    collapsed: true
-  })
-  middlewares.push(logger)
-}
-
-const store = compose(applyMiddleware(...middlewares))(createStore)(reducer)
+import {store} from './redux-store'
 
 function Root() {
   return (
