@@ -9,11 +9,10 @@ import {SortableItem} from './item'
  * (Yes, this curries 2 times)
  */
 function createChangeHandler<T>(items: T[], setter: Setter<T>, change: (newItems: T[]) => void) {
-  return (index: number) => (event: React.KeyboardEvent<{}>) => {
-    console.log(event)
+  return (index: number) => (event: React.KeyboardEvent<{}>, newValue: string) => {
     const newItems = items.slice()
     // TODO uncomment below
-    // newItems[index] = setter(value, items[index])
+    newItems[index] = setter(newValue, items[index])
     return change(newItems)
   }
 }

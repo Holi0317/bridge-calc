@@ -5,7 +5,8 @@ import {returntypeof} from 'react-redux-typescript'
 import {Route, withRouter, Redirect} from 'react-router-dom'
 import {RouteComponentProps} from 'react-router'
 import {History} from 'history'
-import {IconButton} from 'material-ui/IconButton'
+import AppBar from 'material-ui/AppBar'
+import IconButton from 'material-ui/IconButton'
 import ActionHelp from 'material-ui/svg-icons/action/help'
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import {Titles} from './titles'
@@ -13,7 +14,6 @@ import {Menu} from './lazy-views/menu'
 import {Entry} from './lazy-views/entry'
 import {Layout} from './lazy-views/game-layout'
 import {IRootState} from '../types'
-import {AppBar} from 'material-ui/AppBar'
 
 /**
  * Create a function that will route to specified location.
@@ -26,11 +26,9 @@ function to(history: History, loc: string) {
   return () => history.push(loc)
 }
 
-function mapStateToProps(state: IRootState) {
-  return {
-    gameRedirect: state.currentGame == null
-  }
-}
+const mapStateToProps = (state: IRootState) => ({
+  gameRedirect: state.currentGame == null
+})
 
 const stateType = returntypeof(mapStateToProps)
 
@@ -48,10 +46,10 @@ function AppImpl({gameRedirect, location, history}: AppProps) {
   return (
     <div>
       <AppBar
-        title={<Titles />}
+        iconElementRight={helpBtn}
         iconElementLeft={backBtn}
         onLeftIconButtonTouchTap={backFn}
-        iconElementRight={helpBtn}
+        title={<Titles />}
       />
 
       <Route exact path="/" component={Menu} />

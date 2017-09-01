@@ -18,11 +18,11 @@ export class Dropdown<SourceType> extends React.Component {
   public props: IDropdownProps<SourceType>
 
   public render() {
-    const {source} = this.props
+    const {source, ...rest} = this.props
     return (
-      <DropDownMenu {...this.props} onChange={this.handleChange}>
+      <DropDownMenu {...rest} onChange={this.handleChange}>
         {source.map(item => (
-          <MenuItem value={item.value} label={item.label} disabled={item.disabled} />
+          <MenuItem key={item.label} value={item.value} label={item.label} disabled={item.disabled} />
         ))}
       </DropDownMenu>
     )
