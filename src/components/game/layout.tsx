@@ -21,9 +21,8 @@ class LayoutImpl extends React.Component {
     active: number
   }
 
-  constructor(props: LayoutProps) {
-    super(props)
-    this._setActive(props.location.pathname)
+  public componentWillMount() {
+    this._setActive(this.props.location.pathname)
   }
 
   public componentWillReceiveProps(nextProps: LayoutProps) {
