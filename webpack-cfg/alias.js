@@ -1,10 +1,6 @@
 module.exports = {
   resolve: {
     alias: {
-      // Use preact instead of react
-      'react': 'preact-compat',
-      'react-dom': 'preact-compat',
-
       // Use non-compiled version of the following libraries
       'reselect': 'reselect/src/index.js',
 

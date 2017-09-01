@@ -8,7 +8,6 @@ import {createStore, compose, applyMiddleware} from 'redux'
 import {reducer} from './reducer/index'
 import {App} from './components/app'
 import {i18n} from './i18n'
-import './styles/mdc.global.css'
 
 const middlewares = []
 
