@@ -5,25 +5,11 @@
     "react",
     "stage-1"
   ],
-  "plugins": [
-    "transform-decorators-legacy"
-  ],
 
   "env": {
     "production": {
       "plugins": [
         "transform-react-remove-prop-types"
-      ]
-    },
-    "test": {
-      "presets": ["@ava/transform-test-files"],
-      "plugins": [
-        ["module-resolver", {
-          "alias": {
-            "lodash-es": "lodash"
-          }
-        }],
-        "transform-es2015-modules-commonjs"
       ]
     }
   }
