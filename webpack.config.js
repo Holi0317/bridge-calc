@@ -12,7 +12,6 @@ const copyFiles = require('./webpack-cfg/copy-files')
 const babelMinify = require('./webpack-cfg/babel-minify')
 const analyzer = require('./webpack-cfg/analyzer')
 const alias = require('./webpack-cfg/alias')
-const provide = require('./webpack-cfg/provide')
 const yaml = require('./webpack-cfg/yaml')
 const scopeHoisting = require('./webpack-cfg/scope-hoisting')
 
@@ -33,7 +32,6 @@ module.exports = merge.smart(
 
   env,
   alias,
-  provide,
 
   babel,
   typescript,

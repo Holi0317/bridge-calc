@@ -4,10 +4,15 @@ import {GameState} from './reducer/current-game'
 import {IEntryState} from './reducer/ui/entry'
 import {ISettingsState} from './reducer/ui/settings'
 import {SettingsActions} from './actions/ui/settings'
+import {TranslationFunction} from 'i18next'
 
 export interface IPlayerMap<T> {[playerID: string]: T}
 
-export type I18nT = (translate: string, opt?: any) => string
+export type I18nT = TranslationFunction
+
+export interface ITranslateMixin {
+  t: TranslationFunction
+}
 
 export interface IDropdownSource<T> {
   value: T,

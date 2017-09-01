@@ -5,7 +5,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.tsx?$/,
       loader: 'awesome-typescript-loader'
     }]

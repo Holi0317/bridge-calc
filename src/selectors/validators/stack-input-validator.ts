@@ -55,9 +55,13 @@ export const validStackInput = createSelector(
  */
 export const withErrorProp = createSelector(
   stackInputValidatorSelector,
-  (error: IStackInputError) => ({
-    bid: {},
-    win: {},
-    ...error
-  })
+  (error: IStackInputError) => {
+    const bid: IPlayerMap<string> = {}
+    const win: IPlayerMap<string> = {}
+    return ({
+      bid,
+      win,
+      ...error
+    })
+  }
 )
