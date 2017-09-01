@@ -1,4 +1,5 @@
 import * as React from 'react'
+import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import {Route, withRouter, Redirect} from 'react-router-dom'
@@ -43,7 +44,7 @@ type AppProps = typeof stateType & RouteComponentProps<any>
 function AppImpl({gameRedirect, location, history}: AppProps) {
   const helpBtn = <IconButton><ActionHelp width="24px" height="24px" /></IconButton>
   const backFn = to(history, '/')
-  const backBtn = location.pathname === '/' ? null : <IconButton><NavigationArrowBack width="24px" height="24px" /></IconButton>
+  const backBtn = location.pathname === '/' ? undefined : <IconButton><NavigationArrowBack width="24px" height="24px" /></IconButton>
   return (
     <div>
       <AppBar
@@ -62,4 +63,7 @@ function AppImpl({gameRedirect, location, history}: AppProps) {
   )
 }
 
-export const App = withRouter(connect(mapStateToProps)(AppImpl as any))
+export const App = flowRight(
+  withRouter,
+  connect(mapStateToProps)
+)(AppImpl)

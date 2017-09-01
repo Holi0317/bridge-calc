@@ -14,7 +14,7 @@ import {EntryOptions} from './entry-options'
 import {genRandomNames, randomName} from '../example-names'
 import {entryOptionsValidatorSelector, validEntryOptionsSelector} from '../selectors/validators/entry-options-validator'
 import {genID} from '../utils'
-import {Dispatch, IRootState, ITranslateMixin} from '../types'
+import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../types'
 import {returntypeof} from 'react-redux-typescript'
 import {RouteComponentProps} from 'react-router'
 import style from './entry.css'
@@ -25,7 +25,7 @@ import grid from '../styles/grid.css'
  * @param playerNames
  */
 function namesToObject(playerNames: string[]) {
-  const result = {}
+  const result: IPlayerMap<string> = {}
   playerNames.forEach(name => {
     result[genID()] = name
   })
@@ -39,7 +39,7 @@ export const setter = (newVal: string) => newVal
 
 export const errorGetter = (error: string[], value: string, index: number) => error[index]
 
-function mapStateToProps(state: IRootState, {t}) {
+function mapStateToProps(state: IRootState, {t}: ITranslateMixin) {
   const validatorResult = entryOptionsValidatorSelector(state, t)
   const valid = validEntryOptionsSelector(state, t)
   return {

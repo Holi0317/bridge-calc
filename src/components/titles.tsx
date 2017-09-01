@@ -3,7 +3,9 @@ import {Route} from 'react-router-dom'
 import {GameTitle} from './game/title'
 import {createTitle} from './create-title'
 
-const titles = [
+type Title = [string, React.ComponentType<any>]
+
+const titles: Title[] = [
   ['/', createTitle('Bridge calculator')],
   ['/entry', createTitle('Entry')],
   ['/game', GameTitle]

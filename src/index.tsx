@@ -36,4 +36,4 @@ function Root() {
   )
 }
 
-render(<Root />, document.body)
+render(<Root />, document.querySelector('.root'))

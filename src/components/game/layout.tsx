@@ -13,18 +13,20 @@ function getActive(pathname: string): number {
   return matches.indexOf(1) || 0
 }
 
+type LayoutProps = RouteComponentProps<any> & ITranslateMixin
+
 class LayoutImpl extends React.Component {
-  public props: RouteComponentProps<any> & ITranslateMixin
+  public props: LayoutProps
   public state: {
     active: number
   }
 
-  constructor(props) {
+  constructor(props: LayoutProps) {
     super(props)
     this._setActive(props.location.pathname)
   }
 
-  public componentWillReceiveProps(nextProps) {
+  public componentWillReceiveProps(nextProps: LayoutProps) {
     if (nextProps.location !== this.props.location) {
       this._setActive(nextProps.location.pathname)
     }
