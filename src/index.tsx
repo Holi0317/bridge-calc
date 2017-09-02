@@ -7,13 +7,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {App} from './components/app'
 import {i18n} from './i18n'
 import {store} from './redux-store'
+import {muiTheme} from './mui-theme'
 
 function Root() {
   return (
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
         <BrowserRouter>
-          <MuiThemeProvider>
+          <MuiThemeProvider muiTheme={muiTheme}>
             <App />
           </MuiThemeProvider>
         </BrowserRouter>
