@@ -17,7 +17,5 @@
 
 .action-button-container {
   display: flex;
-  & > div:last-child {
-    margin-left: auto;
-  }
+  justify-content: space-between;
 }
