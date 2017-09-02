@@ -1,16 +1,17 @@
 import * as React from 'react'
 import {Link} from 'react-router-dom'
-import RaisedButton from 'material-ui/RaisedButton'
+import SvgIcon from 'material-ui/SvgIcon'
+import TouchRipple from 'material-ui/internal/TouchRipple'
 import style from './tile.css'
 
 const iconStyle = {
-  width: '92px',
-  height: '92px'
+  width: 92,
+  height: 92
 }
 
 export interface ITileProps {
   title: string,
-  icon: any,
+  icon: typeof SvgIcon,
   to?: string
 }
 
@@ -26,7 +27,12 @@ export function Tile(props: ITileProps) {
   const to = props.to || '/'
   return (
     <Link to={to} className={style.link}>
-      <RaisedButton label={title} />
+      <TouchRipple>
+        <div className={style.tile}>
+          <div className={style.iconContainer}><MyIcon style={iconStyle} /></div>
+          <div className={style.titleContainer}>{title}</div>
+        </div>
+      </TouchRipple>
     </Link>
   )
 }
