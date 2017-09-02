@@ -9,8 +9,8 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 function getActive(pathname: string): number {
   // Create a matches array.
   // If match, it will be marked as 1 in the array. null otherwise
-  const matches = routes.map(route => matchPath(pathname, route) && 1)
-  return matches.indexOf(1) || 0
+  const index = routes.findIndex(route => matchPath(pathname, route) != null)
+  return index === -1 ? 0 : index
 }
 
 type LayoutProps = RouteComponentProps<any> & ITranslateMixin
@@ -22,12 +22,12 @@ class LayoutImpl extends React.Component {
   }
 
   public componentWillMount() {
-    this._setActive(this.props.location.pathname)
+    this.setActive(this.props.location.pathname)
   }
 
   public componentWillReceiveProps(nextProps: LayoutProps) {
     if (nextProps.location !== this.props.location) {
-      this._setActive(nextProps.location.pathname)
+      this.setActive(nextProps.location.pathname)
     }
   }
 
@@ -36,9 +36,9 @@ class LayoutImpl extends React.Component {
     const {active} = this.state
     return (
       <div>
-        <Tabs value={active}>
+        <Tabs value={active} onChange={this.tabChange}>
           {routes.map((route, index) => (
-            <Tab key={index} value={index} onClick={this._createClickCB(route.path)}>{t(route.name)}</Tab>
+            <Tab key={index} label={t(route.name)} value={index} />
           ))}
         </Tabs>
         {routes.map((route, index) => (
@@ -48,14 +48,14 @@ class LayoutImpl extends React.Component {
     )
   }
 
-  private _createClickCB(to: string) {
-    const {history} = this.props
-    return () => {
-      history.push(to)
+  private tabChange = (routeIndex: number) => {
+    const {path} = routes[routeIndex]
+    if (path) {
+      this.props.history.push(path)
     }
   }
 
-  private _setActive(pathname: string) {
+  private setActive(pathname: string) {
     this.setState(() => ({
       active: getActive(pathname)
     }))
