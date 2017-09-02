@@ -22,7 +22,7 @@ export class Dropdown<SourceType> extends React.Component {
     return (
       <DropDownMenu {...rest} onChange={this.handleChange}>
         {source.map(item => (
-          <MenuItem key={item.label} value={item.value} label={item.label} disabled={item.disabled} />
+          <MenuItem key={item.label} value={item.value} primaryText={item.label} disabled={item.disabled} />
         ))}
       </DropDownMenu>
     )
