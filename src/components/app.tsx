@@ -42,12 +42,13 @@ type AppProps = typeof stateType & RouteComponentProps<any>
 function AppImpl({gameRedirect, location, history}: AppProps) {
   const helpBtn = <IconButton><ActionHelp width="24px" height="24px" /></IconButton>
   const backFn = to(history, '/')
-  const backBtn = location.pathname === '/' ? undefined : <IconButton><NavigationArrowBack width="24px" height="24px" /></IconButton>
+  const backBtn = <IconButton><NavigationArrowBack width="24px" height="24px" /></IconButton>
   return (
     <div>
       <AppBar
         iconElementRight={helpBtn}
         iconElementLeft={backBtn}
+        showMenuIconButton={location.pathname !== '/'}
         onLeftIconButtonTouchTap={backFn}
         title={<Titles />}
       />
