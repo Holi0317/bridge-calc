@@ -4,7 +4,7 @@ import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {I18nextProvider} from 'react-i18next'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {App} from './components/app'
+import {Shell} from './components/shell'
 import {i18n} from './i18n'
 import {store} from './redux-store'
 import {muiTheme} from './mui-theme'
@@ -15,7 +15,7 @@ function Root() {
       <I18nextProvider i18n={i18n}>
         <BrowserRouter>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <App />
+            <Shell />
           </MuiThemeProvider>
         </BrowserRouter>
       </I18nextProvider>
