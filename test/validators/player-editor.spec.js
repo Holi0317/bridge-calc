@@ -1,9 +1,8 @@
-import test from 'ava'
 import {t as trans} from '../helpers/translate'
 import {genMap} from '../fixtures/current-game-states'
 import {playerEditorValidator} from '../../src/validators/player-editor'
 
-test('No error for normal names', t => {
+test('No error for normal names', () => {
   const expected = {
     names: {},
     misc: ''
@@ -12,10 +11,10 @@ test('No error for normal names', t => {
     names: genMap('John', 'Mary', 'Henry', 'Joe')
   }
   const actual = playerEditorValidator(opts, trans)
-  t.deepEqual(actual, expected, 'No error should exist on normal player names')
+  expect(actual).toEqual(expected)
 })
 
-test('Error on repeated names', t => {
+test('Error on repeated names', () => {
   const expected = {
     names: {a: 'Name cannot be repeated', b: 'Name cannot be repeated'},
     misc: ''
@@ -24,10 +23,10 @@ test('Error on repeated names', t => {
     names: genMap('John', 'John', 'Henry', 'Joe')
   }
   const actual = playerEditorValidator(opts, trans)
-  t.deepEqual(actual, expected, 'Error should exist in repeated name')
+  expect(actual).toEqual(expected)
 })
 
-test('Error on Names that is empty', t => {
+test('Error on Names that is empty', () => {
   const expected = {
     names: {c: 'Name cannot be empty', d: 'Name cannot be empty'},
     misc: ''
@@ -36,10 +35,10 @@ test('Error on Names that is empty', t => {
     names: genMap('John', 'Mary', '', '')
   }
   const actual = playerEditorValidator(opts, trans)
-  t.deepEqual(actual, expected, 'Empty name should cause error')
+  expect(actual).toEqual(expected)
 })
 
-test('Error on misc when there is no player', t => {
+test('Error on misc when there is no player', () => {
   const expected = {
     names: {},
     misc: 'At least 2 players is required for a game'
@@ -48,10 +47,10 @@ test('Error on misc when there is no player', t => {
     names: {}
   }
   const actual = playerEditorValidator(opts, trans)
-  t.deepEqual(actual, expected, 'Error should be deployed on misc property')
+  expect(actual).toEqual(expected)
 })
 
-test('Error on misc when there is 1 player', t => {
+test('Error on misc when there is 1 player', () => {
   const expected = {
     names: {},
     misc: 'At least 2 players is required for a game'
@@ -60,10 +59,10 @@ test('Error on misc when there is 1 player', t => {
     names: {a: 'DPGJW'}
   }
   const actual = playerEditorValidator(opts, trans)
-  t.deepEqual(actual, expected, 'Error should be deployed on misc property')
+  expect(actual).toEqual(expected)
 })
 
-test('Error on both misc and player when the only player have empty name', t => {
+test('Error on both misc and player when the only player have empty name', () => {
   const expected = {
     names: {a: 'Name cannot be empty'},
     misc: 'At least 2 players is required for a game'
@@ -72,5 +71,5 @@ test('Error on both misc and player when the only player have empty name', t => 
     names: {a: ''}
   }
   const actual = playerEditorValidator(opts, trans)
-  t.deepEqual(actual, expected, 'Both error should exist')
+  expect(actual).toEqual(expected)
 })

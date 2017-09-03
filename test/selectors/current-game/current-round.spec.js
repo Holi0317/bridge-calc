@@ -1,17 +1,16 @@
-import test from 'ava'
 import {currentRoundSelector} from '../../../src/selectors/current-game/current-round'
 import {endedState, waitingBidState} from '../../fixtures/current-game-states'
 
-test('null should be selected if currentGame is null', t => {
+test('null should be selected if currentGame is null', () => {
   const expected = null
   const state = {
     currentGame: null
   }
   const actual = currentRoundSelector(state)
-  t.is(actual, expected, 'null should be returned')
+  expect(actual).toBe(expected)
 })
 
-test('null should be selected if currentRound does not exist', t => {
+test('null should be selected if currentRound does not exist', () => {
   const expected = null
   const state = {
     currentGame: {
@@ -19,10 +18,10 @@ test('null should be selected if currentRound does not exist', t => {
     }
   }
   const actual = currentRoundSelector(state)
-  t.is(actual, expected, 'null should be selected')
+  expect(actual).toBe(expected)
 })
 
-test('currentRound should be selected', t => {
+test('currentRound should be selected', () => {
   const expected = 1
   const state = {
     currentGame: {
@@ -30,5 +29,5 @@ test('currentRound should be selected', t => {
     }
   }
   const actual = currentRoundSelector(state)
-  t.is(actual, expected, 'current round should be selected')
+  expect(actual).toBe(expected)
 })

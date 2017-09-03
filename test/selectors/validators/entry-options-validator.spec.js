@@ -1,9 +1,8 @@
-import test from 'ava'
 import {defaultOptions} from '../../fixtures/entry-options'
 import {t as trans} from '../../helpers/translate'
 import {entryOptionsValidatorSelector, validEntryOptionsSelector} from '../../../src/selectors/validators/entry-options-validator'
 
-test('empty object should be selected for entry options with no error', t => {
+test('empty object should be selected for entry options with no error', () => {
   const expected = {}
   const state = {
     ui: {
@@ -13,10 +12,10 @@ test('empty object should be selected for entry options with no error', t => {
     }
   }
   const actual = entryOptionsValidatorSelector(state, trans)
-  t.deepEqual(actual, expected, 'No error should exist in the selected')
+  expect(actual).toEqual(expected)
 })
 
-test('true should be selected for entry options with no error', t => {
+test('true should be selected for entry options with no error', () => {
   const expected = true
   const state = {
     ui: {
@@ -26,5 +25,5 @@ test('true should be selected for entry options with no error', t => {
     }
   }
   const actual = validEntryOptionsSelector(state, trans)
-  t.is(actual, expected, 'true should be selected as no error should exist')
+  expect(actual).toBe(expected)
 })

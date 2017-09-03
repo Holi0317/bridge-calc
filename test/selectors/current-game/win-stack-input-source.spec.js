@@ -1,17 +1,16 @@
-import test from 'ava'
 import {endedState, genMap, waitingBidState, waitingWinState} from '../../fixtures/current-game-states'
 import {winStackInputSourceSelector} from '../../../src/selectors/current-game/win-stack-input-source'
 
-test('Source for null state should have no option', t => {
+test('Source for null state should have no option', () => {
   const state = {
     currentGame: null
   }
   const expected = {}
   const actual = winStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, 'No option should be generated')
+  expect(actual).toEqual(expected)
 })
 
-test('Source for ended state should have 1 disabled option', t => {
+test('Source for ended state should have 1 disabled option', () => {
   const state = {
     currentGame: {
       ...endedState
@@ -22,10 +21,10 @@ test('Source for ended state should have 1 disabled option', t => {
   ]
   const expected = genMap(source, source, source, source)
   const actual = winStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, '1 option should be generated')
+  expect(actual).toEqual(expected)
 })
 
-test('Sources for 1st round', t => {
+test('Sources for 1st round', () => {
   const state = {
     currentGame: {
       ...waitingBidState
@@ -37,10 +36,10 @@ test('Sources for 1st round', t => {
   ]
   const expected = genMap(source, source, source, source)
   const actual = winStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, '2 options should be generated')
+  expect(actual).toEqual(expected)
 })
 
-test('Sources for 2nd round', t => {
+test('Sources for 2nd round', () => {
   const state = {
     currentGame: {
       ...waitingBidState,
@@ -56,10 +55,10 @@ test('Sources for 2nd round', t => {
   ]
   const expected = genMap(source, source, source, source)
   const actual = winStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, '3 options should be generated')
+  expect(actual).toEqual(expected)
 })
 
-test('Win should be disabled if selections that will exceed win', t => {
+test('Win should be disabled if selections that will exceed win', () => {
   const state = {
     currentGame: {
       ...waitingWinState,
@@ -77,10 +76,10 @@ test('Win should be disabled if selections that will exceed win', t => {
   ]
   const expected = genMap(source, restWin, restWin, restWin)
   const actual = winStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, 'Exceed win should be disabled')
+  expect(actual).toEqual(expected)
 })
 
-test('Win should be disabled if the selection will exceed than win -- Second round', t => {
+test('Win should be disabled if the selection will exceed than win -- Second round', () => {
   const state = {
     currentGame: {
       ...waitingWinState,
@@ -103,5 +102,5 @@ test('Win should be disabled if the selection will exceed than win -- Second rou
   ]
   const expected = genMap(source, restWin, restWin, restWin)
   const actual = winStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, 'Exceed win should be disabled')
+  expect(actual).toEqual(expected)
 })

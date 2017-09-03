@@ -1,10 +1,9 @@
-import test from 'ava'
 import {settings as reducer} from '../../src/reducer/ui/settings'
 import {defaultState} from '../fixtures/settings-state'
 import {ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../src/actions/ui/settings'
 import {endedState, genMap, waitingBidState} from '../fixtures/current-game-states'
 
-test('Default state', t => {
+test('Default state', () => {
   const state = undefined
   const expected = {
     ...defaultState
@@ -13,10 +12,10 @@ test('Default state', t => {
     type: '#NULL'
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Default state should match')
+  expect(actual).toEqual(expected)
 })
 
-test('SET_BY_GAME_STATE should return default state on null game state', t => {
+test('SET_BY_GAME_STATE should return default state on null game state', () => {
   const state = null
   const expected = {
     ...defaultState
@@ -26,10 +25,10 @@ test('SET_BY_GAME_STATE should return default state on null game state', t => {
     state: null
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Default state should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('SET_BY_GAME_STATE should return default state on ended game stage', t => {
+test('SET_BY_GAME_STATE should return default state on ended game stage', () => {
   const state = null
   const expected = {
     ...defaultState
@@ -41,10 +40,10 @@ test('SET_BY_GAME_STATE should return default state on ended game stage', t => {
     }
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Default state should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('SET_BY_GAME_STATE should work on running game state', t => {
+test('SET_BY_GAME_STATE should work on running game state', () => {
   const state = null
   const expected = {
     maker: 'a',
@@ -57,10 +56,10 @@ test('SET_BY_GAME_STATE should work on running game state', t => {
     }
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Settings state should be populated according to given state')
+  expect(actual).toEqual(expected)
 })
 
-test('SET_MAKER should set maker', t => {
+test('SET_MAKER should set maker', () => {
   const state = {
     ...defaultState
   }
@@ -73,10 +72,10 @@ test('SET_MAKER should set maker', t => {
     maker: 'b'
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Maker property should be changed')
+  expect(actual).toEqual(expected)
 })
 
-test('SET_NAMES should set names', t => {
+test('SET_NAMES should set names', () => {
   const state = {
     ...defaultState
   }
@@ -89,10 +88,10 @@ test('SET_NAMES should set names', t => {
     newNames: genMap('Mary', 'John', 'Henry', 'Joe')
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Names should be changed')
+  expect(actual).toEqual(expected)
 })
 
-test('ADD_NAME should append new name to the end', t => {
+test('ADD_NAME should append new name to the end', () => {
   const state = {
     ...defaultState
   }
@@ -108,5 +107,5 @@ test('ADD_NAME should append new name to the end', t => {
     ID: 'e'
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'New name should be appended to the end of the list')
+  expect(actual).toEqual(expected)
 })

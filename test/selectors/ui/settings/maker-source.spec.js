@@ -1,8 +1,7 @@
-import test from 'ava'
 import {makerSourceSelector} from '../../../../src/selectors/ui/settings/maker-source'
 import {genMap} from '../../../fixtures/current-game-states'
 
-test('Empty array should be selected for empty names', t => {
+test('Empty array should be selected for empty names', () => {
   const state = {
     ui: {
       settings: {
@@ -13,10 +12,10 @@ test('Empty array should be selected for empty names', t => {
   }
   const expected = []
   const actual = makerSourceSelector(state)
-  t.deepEqual(actual, expected, 'Emtpy array should be selected for empty names')
+  expect(actual).toEqual(expected)
 })
 
-test('Array of dropdown source should be selected for normal names', t => {
+test('Array of dropdown source should be selected for normal names', () => {
   const state = {
     ui: {
       settings: {
@@ -32,5 +31,5 @@ test('Array of dropdown source should be selected for normal names', t => {
     {value: 'd', label: 'Joe'}
   ]
   const actual = makerSourceSelector(state)
-  t.deepEqual(actual, expected, 'Dropdown source should be selected for normal names')
+  expect(actual).toEqual(expected)
 })

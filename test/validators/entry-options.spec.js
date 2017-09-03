@@ -1,18 +1,17 @@
-import test from 'ava'
 import {t as trans} from '../helpers/translate'
 import {defaultOptions} from '../fixtures/entry-options'
 import {entryOptionsValidator as validator} from '../../src/validators/entry-options'
 
-test('validation should pass with default options', t => {
+test('validation should pass with default options', () => {
   const options = {
     ...defaultOptions
   }
   const actual = validator(options, trans)
   const expected = {}
-  t.deepEqual(actual, expected, 'No error should exist')
+  expect(actual).toEqual(expected)
 })
 
-test('validator should fail when there is no player', t => {
+test('validator should fail when there is no player', () => {
   const options = {
     ...defaultOptions,
     playerNames: []
@@ -21,10 +20,10 @@ test('validator should fail when there is no player', t => {
   const expected = {
     misc: 'At least 2 players is required for a game'
   }
-  t.deepEqual(actual, expected, 'misc should include an error message')
+  expect(actual).toEqual(expected)
 })
 
-test('validator should fail when there is only 1 player', t => {
+test('validator should fail when there is only 1 player', () => {
   const options = {
     ...defaultOptions,
     playerNames: ['DPGJW']
@@ -33,10 +32,10 @@ test('validator should fail when there is only 1 player', t => {
   const expected = {
     misc: 'At least 2 players is required for a game'
   }
-  t.deepEqual(actual, expected, 'misc should include an error message')
+  expect(actual).toEqual(expected)
 })
 
-test('validator should fail when a player name is empty', t => {
+test('validator should fail when a player name is empty', () => {
   const options = {
     ...defaultOptions,
     playerNames: ['John', 'Mary', '', 'Joe']
@@ -45,10 +44,10 @@ test('validator should fail when a player name is empty', t => {
   const expected = {
     playerNames: ['', '', 'Name cannot be empty', '']
   }
-  t.deepEqual(actual, expected, 'playerNames should include an error message')
+  expect(actual).toEqual(expected)
 })
 
-test('validator should fail when there is repeated name', t => {
+test('validator should fail when there is repeated name', () => {
   const options = {
     ...defaultOptions,
     playerNames: ['', 'John', 'John', 'Mary']
@@ -57,5 +56,5 @@ test('validator should fail when there is repeated name', t => {
   const expected = {
     playerNames: ['Name cannot be empty', 'Name cannot be repeated', 'Name cannot be repeated', '']
   }
-  t.deepEqual(actual, expected, 'playerNames should include error messages')
+  expect(actual).toEqual(expected)
 })

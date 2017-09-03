@@ -1,8 +1,7 @@
-import test from 'ava'
 import {defaultState} from '../../../fixtures/settings-state'
 import {namesSelector} from '../../../../src/selectors/ui/settings/names'
 
-test('names property should be selected from ui/settings', t => {
+test('names property should be selected from ui/settings', () => {
   const state = {
     ui: {
       settings: {
@@ -12,5 +11,5 @@ test('names property should be selected from ui/settings', t => {
   }
   const expected = {}
   const actual = namesSelector(state)
-  t.deepEqual(actual, expected, 'Names should be selected')
+  expect(actual).toEqual(expected)
 })

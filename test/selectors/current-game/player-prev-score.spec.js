@@ -1,17 +1,16 @@
-import test from 'ava'
 import {playerPrevScoreSelector} from '../../../src/selectors/current-game/player-prev-score'
 import {genMap, waitingBidState} from '../../fixtures/current-game-states'
 
-test('null state should produce empty object', t => {
+test('null state should produce empty object', () => {
   const expected = {}
   const state = {
     currentGame: null
   }
   const actual = playerPrevScoreSelector(state)
-  t.deepEqual(actual, expected, 'empty object should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('First round should produce 0 score', t => {
+test('First round should produce 0 score', () => {
   const expected = genMap(0, 0, 0, 0)
   const state = {
     currentGame: {
@@ -19,10 +18,10 @@ test('First round should produce 0 score', t => {
     }
   }
   const actual = playerPrevScoreSelector(state)
-  t.deepEqual(actual, expected, 'All player should have 0 as previous score')
+  expect(actual).toEqual(expected)
 })
 
-test('Successful selection on second round', t => {
+test('Successful selection on second round', () => {
   const expected = genMap(-1, -1, 10, 10)
   const state = {
     currentGame: {
@@ -33,5 +32,5 @@ test('Successful selection on second round', t => {
     }
   }
   const actual = playerPrevScoreSelector(state)
-  t.deepEqual(actual, expected, 'Previous score should be selected')
+  expect(actual).toEqual(expected)
 })

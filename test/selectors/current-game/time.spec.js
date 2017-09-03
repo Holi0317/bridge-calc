@@ -1,17 +1,16 @@
-import test from 'ava'
 import {endedState, waitingBidState} from '../../fixtures/current-game-states'
 import {endTimeSelector, startTimeSelector} from '../../../src/selectors/current-game/time'
 
-test('Start time selector should select null for null state', t => {
+test('Start time selector should select null for null state', () => {
   const expected = null
   const state = {
     currentGame: null
   }
   const actual = startTimeSelector(state)
-  t.is(actual, expected, 'null should be selected')
+  expect(actual).toBe(expected)
 })
 
-test('Start time selector should select start time', t => {
+test('Start time selector should select start time', () => {
   const expected = new Date(0)
   const state = {
     currentGame: {
@@ -19,19 +18,19 @@ test('Start time selector should select start time', t => {
     }
   }
   const actual = startTimeSelector(state)
-  t.deepEqual(actual, expected, 'start time should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('End time selector should select null for null state', t => {
+test('End time selector should select null for null state', () => {
   const expected = null
   const state = {
     currentGame: null
   }
   const actual = endTimeSelector(state)
-  t.is(actual, expected, 'null should be selected')
+  expect(actual).toBe(expected)
 })
 
-test('End time selector should select null for running state', t => {
+test('End time selector should select null for running state', () => {
   const expected = null
   const state = {
     currentGame: {
@@ -39,10 +38,10 @@ test('End time selector should select null for running state', t => {
     }
   }
   const actual = endTimeSelector(state)
-  t.is(actual, expected, 'null should be selected')
+  expect(actual).toBe(expected)
 })
 
-test('End time selector should select time for ended state', t => {
+test('End time selector should select time for ended state', () => {
   const expected = new Date(1)
   const state = {
     currentGame: {
@@ -50,5 +49,5 @@ test('End time selector should select time for ended state', t => {
     }
   }
   const actual = endTimeSelector(state)
-  t.deepEqual(actual, expected, 'null should be selected')
+  expect(actual).toEqual(expected)
 })

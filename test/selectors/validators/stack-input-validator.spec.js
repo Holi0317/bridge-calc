@@ -1,18 +1,17 @@
-import test from 'ava'
 import {t as trans} from '../../helpers/translate'
 import {endedState, genMap, waitingBidState} from '../../fixtures/current-game-states'
 import {stackInputValidatorSelector, validStackInput, withErrorProp} from '../../../src/selectors/validators/stack-input-validator'
 
-test('null currentGame should be considered as no error', t => {
+test('null currentGame should be considered as no error', () => {
   const expected = {}
   const state = {
     currentGame: null
   }
   const actual = stackInputValidatorSelector(state, trans)
-  t.deepEqual(actual, expected, 'Empty object should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('Ended currentGame should be considered as no error', t => {
+test('Ended currentGame should be considered as no error', () => {
   const expected = {}
   const state = {
     currentGame: {
@@ -20,10 +19,10 @@ test('Ended currentGame should be considered as no error', t => {
     }
   }
   const actual = stackInputValidatorSelector(state, trans)
-  t.deepEqual(actual, expected, 'Empty object should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('Error should be selected', t => {
+test('Error should be selected', () => {
   const expected = {
     bid: {d: 'Cannot choose that'}
   }
@@ -34,19 +33,19 @@ test('Error should be selected', t => {
     }
   }
   const actual = stackInputValidatorSelector(state, trans)
-  t.deepEqual(actual, expected, 'Error object should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('validStackInput should work', t => {
+test('validStackInput should work', () => {
   const expected = true
   const state = {
     currentGame: null
   }
   const actual = validStackInput(state, trans)
-  t.is(actual, expected, 'Null current game should be considered as valid')
+  expect(actual).toBe(expected)
 })
 
-test('withErrorProp should work', t => {
+test('withErrorProp should work', () => {
   const expected = {
     bid: {},
     win: {}
@@ -55,5 +54,5 @@ test('withErrorProp should work', t => {
     currentGame: null
   }
   const actual = withErrorProp(state, trans)
-  t.deepEqual(actual, expected, 'Empty object should be returned')
+  expect(actual).toEqual(expected)
 })

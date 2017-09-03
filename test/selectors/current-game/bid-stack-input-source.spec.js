@@ -1,17 +1,16 @@
-import test from 'ava'
 import {endedState, genMap, waitingBidState} from '../../fixtures/current-game-states'
 import {bidStackInputSourceSelector} from '../../../src/selectors/current-game/bid-stack-input-source'
 
-test('Source for null state should have no option', t => {
+test('Source for null state should have no option', () => {
   const state = {
     currentGame: null
   }
   const expected = {}
   const actual = bidStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, 'No option should be generated')
+  expect(actual).toEqual(expected)
 })
 
-test('Source for ended state should have 1 disabled option', t => {
+test('Source for ended state should have 1 disabled option', () => {
   const state = {
     currentGame: {
       ...endedState
@@ -22,10 +21,10 @@ test('Source for ended state should have 1 disabled option', t => {
   ]
   const expected = genMap(source, source, source, source)
   const actual = bidStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, '1 option should be generated')
+  expect(actual).toEqual(expected)
 })
 
-test('Sources for 1st round', t => {
+test('Sources for 1st round', () => {
   const state = {
     currentGame: {
       ...waitingBidState
@@ -41,10 +40,10 @@ test('Sources for 1st round', t => {
   ]
   const expected = genMap(source, source, source, lastBid)
   const actual = bidStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, '2 options should be generated')
+  expect(actual).toEqual(expected)
 })
 
-test('Sources for 2nd round', t => {
+test('Sources for 2nd round', () => {
   const state = {
     currentGame: {
       ...waitingBidState,
@@ -65,10 +64,10 @@ test('Sources for 2nd round', t => {
   ]
   const expected = genMap(lastBid, source, source, source)
   const actual = bidStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, '3 options should be generated')
+  expect(actual).toEqual(expected)
 })
 
-test('Invalid bid should be disabled for last player', t => {
+test('Invalid bid should be disabled for last player', () => {
   const state = {
     currentGame: {
       ...waitingBidState,
@@ -85,10 +84,10 @@ test('Invalid bid should be disabled for last player', t => {
   ]
   const expected = genMap(source, source, source, lastBid)
   const actual = bidStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, '0 option in d should be disabled in bid')
+  expect(actual).toEqual(expected)
 })
 
-test('Invalid bid should be disabled for last player -- Second round', t => {
+test('Invalid bid should be disabled for last player -- Second round', () => {
   const state = {
     currentGame: {
       ...waitingBidState,
@@ -110,5 +109,5 @@ test('Invalid bid should be disabled for last player -- Second round', t => {
   ]
   const expected = genMap(lastBid, source, source, source)
   const actual = bidStackInputSourceSelector(state)
-  t.deepEqual(actual, expected, '1 option in a should be disabled')
+  expect(actual).toEqual(expected)
 })

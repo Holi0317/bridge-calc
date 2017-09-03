@@ -1,9 +1,8 @@
-import test from 'ava'
 import {defaultOptions} from '../../../fixtures/entry-options'
 import {defaultRound, defaultSource} from '../../../fixtures/entry-source'
 import {entrySourceSelector} from '../../../../src/selectors/ui/entry/entry-source'
 
-test('Default state should work', t => {
+test('Default state should work', () => {
   const state = {
     ui: {
       entry: {
@@ -15,10 +14,10 @@ test('Default state should work', t => {
     ...defaultSource
   }
   const actual = entrySourceSelector(state)
-  t.deepEqual(actual, expected, 'Default source should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('Source should change according to player number', t => {
+test('Source should change according to player number', () => {
   const state = {
     ui: {
       entry: {
@@ -41,10 +40,10 @@ test('Source should change according to player number', t => {
     startingRound: rounds
   }
   const actual = entrySourceSelector(state)
-  t.deepEqual(actual, expected, 'More rounds should be added')
+  expect(actual).toEqual(expected)
 })
 
-test('Sources should change according to card number', t => {
+test('Sources should change according to card number', () => {
   const state = {
     ui: {
       entry: {
@@ -76,10 +75,10 @@ test('Sources should change according to card number', t => {
     startingRound: rounds
   }
   const actual = entrySourceSelector(state)
-  t.deepEqual(actual, expected, 'More rounds should be added')
+  expect(actual).toEqual(expected)
 })
 
-test('0 player should give 1 value in rounds and startingRound', t => {
+test('0 player should give 1 value in rounds and startingRound', () => {
   const state = {
     ui: {
       entry: {
@@ -94,10 +93,10 @@ test('0 player should give 1 value in rounds and startingRound', t => {
     startingRound: [{value: 1, label: '1'}]
   }
   const actual = entrySourceSelector(state)
-  t.deepEqual(actual, expected, 'Source with 1 rounds should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('startingRound should decrease according to number of rounds', t => {
+test('startingRound should decrease according to number of rounds', () => {
   const state = {
     ui: {
       entry: {
@@ -123,5 +122,5 @@ test('startingRound should decrease according to number of rounds', t => {
     startingRound
   }
   const actual = entrySourceSelector(state)
-  t.deepEqual(actual, expected, 'startingRound should decrease according to rounds selected')
+  expect(actual).toEqual(expected)
 })

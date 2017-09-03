@@ -1,8 +1,7 @@
-import test from 'ava'
 import {defaultState} from '../../../fixtures/settings-state'
 import {makerSelector} from '../../../../src/selectors/ui/settings/maker'
 
-test('selector should select maker', t => {
+test('selector should select maker', () => {
   const state = {
     ui: {
       settings: {
@@ -12,10 +11,10 @@ test('selector should select maker', t => {
   }
   const expected = null
   const actual = makerSelector(state)
-  t.is(actual, expected, 'Maker should be selected')
+  expect(actual).toBe(expected)
 })
 
-test('selector should select maker 2', t => {
+test('selector should select maker 2', () => {
   const state = {
     ui: {
       settings: {
@@ -26,5 +25,5 @@ test('selector should select maker 2', t => {
   }
   const expected = 'b'
   const actual = makerSelector(state)
-  t.is(actual, expected, 'Maker should be selected')
+  expect(actual).toBe(expected)
 })

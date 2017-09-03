@@ -1,8 +1,7 @@
-import test from 'ava'
 import {nameInputListSourceSelector} from '../../../../src/selectors/ui/settings/name-input-list-source'
 import {genMap} from '../../../fixtures/current-game-states'
 
-test('Empty array should be selected when player names are empty', t => {
+test('Empty array should be selected when player names are empty', () => {
   const state = {
     ui: {
       settings: {
@@ -13,10 +12,10 @@ test('Empty array should be selected when player names are empty', t => {
   }
   const expected = []
   const actual = nameInputListSourceSelector(state)
-  t.deepEqual(actual, expected, 'Empty array should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('Array of player names should be selected from settings state', t => {
+test('Array of player names should be selected from settings state', () => {
   const state = {
     ui: {
       settings: {
@@ -32,5 +31,5 @@ test('Array of player names should be selected from settings state', t => {
     ['d', 'Joe']
   ]
   const actual = nameInputListSourceSelector(state)
-  t.deepEqual(actual, expected, 'Array of player names should be selected')
+  expect(actual).toEqual(expected)
 })

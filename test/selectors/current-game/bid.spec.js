@@ -1,17 +1,16 @@
-import test from 'ava'
 import {bidSelector, strBidSelector} from '../../../src/selectors/current-game/bid'
 import {genMap, waitingWinState} from '../../fixtures/current-game-states'
 
-test('Empty object should be selected for null state', t => {
+test('Empty object should be selected for null state', () => {
   const expected = {}
   const state = {
     currentGame: null
   }
   const actual = bidSelector(state)
-  t.deepEqual(actual, expected, 'empty object should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('Bid object should be selected', t => {
+test('Bid object should be selected', () => {
   const expected = genMap(0, 1, 0, 1)
   const state = {
     currentGame: {
@@ -20,19 +19,19 @@ test('Bid object should be selected', t => {
     }
   }
   const actual = bidSelector(state)
-  t.deepEqual(actual, expected, 'bid object should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('Empty object should be selected for null state in string selector', t => {
+test('Empty object should be selected for null state in string selector', () => {
   const expected = {}
   const state = {
     currentGame: null
   }
   const actual = strBidSelector(state)
-  t.deepEqual(actual, expected, 'empty object should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('Bid object in string form should be selected in string selector', t => {
+test('Bid object in string form should be selected in string selector', () => {
   const expected = genMap('0', '1', '0', '1')
   const state = {
     currentGame: {
@@ -41,5 +40,5 @@ test('Bid object in string form should be selected in string selector', t => {
     }
   }
   const actual = strBidSelector(state)
-  t.deepEqual(actual, expected, 'string-ed bid object should be selected')
+  expect(actual).toEqual(expected)
 })

@@ -1,17 +1,16 @@
-import test from 'ava'
 import {playerOrderSelector} from '../../../src/selectors/current-game/player-order'
 import {endedState, waitingBidState} from '../../fixtures/current-game-states'
 
-test('empty array should be selected for null state', t => {
+test('empty array should be selected for null state', () => {
   const expected = []
   const state = {
     currentGame: null
   }
   const actual = playerOrderSelector(state)
-  t.deepEqual(actual, expected, 'empty array should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('empty array should be selected for ended state', t => {
+test('empty array should be selected for ended state', () => {
   const expected = []
   const state = {
     currentGame: {
@@ -19,10 +18,10 @@ test('empty array should be selected for ended state', t => {
     }
   }
   const actual = playerOrderSelector(state)
-  t.deepEqual(actual, expected, 'empty array should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('player order should be selected', t => {
+test('player order should be selected', () => {
   const expected = ['a', 'b', 'c', 'd']
   const state = {
     currentGame: {
@@ -30,5 +29,5 @@ test('player order should be selected', t => {
     }
   }
   const actual = playerOrderSelector(state)
-  t.deepEqual(actual, expected, 'empty array should be selected')
+  expect(actual).toEqual(expected)
 })

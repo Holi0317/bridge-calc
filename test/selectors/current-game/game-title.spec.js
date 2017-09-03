@@ -1,18 +1,17 @@
-import test from 'ava'
 import {t as trans} from '../../helpers/translate'
 import {endedState, waitingBidState} from '../../fixtures/current-game-states'
 import {gameTitleSelector} from '../../../src/selectors/current-game/game-title'
 
-test('empty string should be computed for null current game state', t => {
+test('empty string should be computed for null current game state', () => {
   const expected = ''
   const state = {
     currentGame: null
   }
   const actual = gameTitleSelector(state, trans)
-  t.is(actual, expected, 'Empty string should be selected')
+  expect(actual).toBe(expected)
 })
 
-test('Ended game should have proper title', t => {
+test('Ended game should have proper title', () => {
   const expected = 'Game over'
   const state = {
     currentGame: {
@@ -20,10 +19,10 @@ test('Ended game should have proper title', t => {
     }
   }
   const actual = gameTitleSelector(state, trans)
-  t.is(actual, expected, 'Game over should be selected')
+  expect(actual).toBe(expected)
 })
 
-test('Running state should have title consist of current round and max round', t => {
+test('Running state should have title consist of current round and max round', () => {
   const expected = 'Round 2 of 5'
   const state = {
     currentGame: {
@@ -33,5 +32,5 @@ test('Running state should have title consist of current round and max round', t
     }
   }
   const actual = gameTitleSelector(state, trans)
-  t.is(actual, expected, 'Round x of y should be selected')
+  expect(actual).toBe(expected)
 })

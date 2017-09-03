@@ -1,9 +1,8 @@
-import test from 'ava'
 import {isValidPlayerEditor, playerEditorValidatorSelector} from '../../../src/selectors/validators/player-editor'
 import {genMap} from '../../fixtures/current-game-states'
 import {t as trans} from '../../helpers/translate'
 
-test('Validation result should be returned', t => {
+test('Validation result should be returned', () => {
   const state = {
     ui: {
       settings: {
@@ -17,10 +16,10 @@ test('Validation result should be returned', t => {
     misc: ''
   }
   const actual = playerEditorValidatorSelector(state, trans)
-  t.deepEqual(actual, expected, 'Validation result should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('isValidPlayerEditor should be true for valid data', t => {
+test('isValidPlayerEditor should be true for valid data', () => {
   const state = {
     ui: {
       settings: {
@@ -31,10 +30,10 @@ test('isValidPlayerEditor should be true for valid data', t => {
   }
   const expected = true
   const actual = isValidPlayerEditor(state, trans)
-  t.is(actual, expected, 'True should be selected for valid data')
+  expect(actual).toBe(expected)
 })
 
-test('isValidPlayerEditor should be false for invalid data in misc', t => {
+test('isValidPlayerEditor should be false for invalid data in misc', () => {
   const state = {
     ui: {
       settings: {
@@ -45,10 +44,10 @@ test('isValidPlayerEditor should be false for invalid data in misc', t => {
   }
   const expected = false
   const actual = isValidPlayerEditor(state, trans)
-  t.is(actual, expected, 'False should be selected for invalid data')
+  expect(actual).toBe(expected)
 })
 
-test('isValidPlayerEditor should be false for invalid data in names', t => {
+test('isValidPlayerEditor should be false for invalid data in names', () => {
   const state = {
     ui: {
       settings: {
@@ -59,5 +58,5 @@ test('isValidPlayerEditor should be false for invalid data in names', t => {
   }
   const expected = false
   const actual = isValidPlayerEditor(state, trans)
-  t.is(actual, expected, 'False should be selected for valid data')
+  expect(actual).toBe(expected)
 })

@@ -1,17 +1,16 @@
-import test from 'ava'
 import {playerRankSelector} from '../../../src/selectors/current-game/player-rank'
 import {genMap, waitingBidState} from '../../fixtures/current-game-states'
 
-test('null state should produce empty object', t => {
+test('null state should produce empty object', () => {
   const expected = {}
   const state = {
     currentGame: null
   }
   const actual = playerRankSelector(state)
-  t.deepEqual(actual, expected, 'Empty object should be produced')
+  expect(actual).toEqual(expected)
 })
 
-test('1st round should produce all 1st place', t => {
+test('1st round should produce all 1st place', () => {
   const expected = genMap('1st', '1st', '1st', '1st')
   const state = {
     currentGame: {
@@ -19,10 +18,10 @@ test('1st round should produce all 1st place', t => {
     }
   }
   const actual = playerRankSelector(state)
-  t.deepEqual(actual, expected, 'All players should be ranked first')
+  expect(actual).toEqual(expected)
 })
 
-test('3rd round should rank properly', t => {
+test('3rd round should rank properly', () => {
   const expected = genMap('2nd', '4th', '1st', '2nd')
   const state = {
     currentGame: {
@@ -33,5 +32,5 @@ test('3rd round should rank properly', t => {
     }
   }
   const actual = playerRankSelector(state)
-  t.deepEqual(actual, expected, 'All players should be ranked first')
+  expect(actual).toEqual(expected)
 })

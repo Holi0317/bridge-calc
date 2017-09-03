@@ -4,27 +4,15 @@ parserOptions:
   ecmaVersion: 2017
   sourceType: module
   ecmaFeatures:
-    jsx: true
     experimentalObjectRestSpread: true
 env:
   browser: true
   node: true
   commonjs: true
-
-plugins:
- - react
- - flowtype
- - ava
-
-settings:
-  react:
-    pragma: h
+  jest: true
 
 extends:
  - eslint:recommended
- - plugin:react/recommended
- - plugin:ava/recommended
- - plugin:flowtype/recommended
 
 rules:
   no-template-curly-in-string: warn
@@ -74,11 +62,3 @@ rules:
   comma-dangle: error
   object-curly-spacing: error
   no-console: off
-
-  jsx-quotes: error
-  react/prop-types: off
-
-  flowtype/delimiter-dangle: error
-  flowtype/semi:
-   - error
-   - never

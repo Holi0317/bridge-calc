@@ -1,15 +1,14 @@
-import test from 'ava'
 import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../src/actions/current-game'
 import {startParams, waitingBidState, waitingWinState, endedState, genMap} from '../fixtures/current-game-states'
 import {currentGame as reducer} from '../../src/reducer/current-game/index'
 
-test('Default state should be null', t => {
+test('Default state should be null', () => {
   const expected = null
   const actual = reducer(undefined, {type: ''})
-  t.is(expected, actual, 'Default state should be null')
+  expect(expected).toBe(actual)
 })
 
-test('Production of default basic state after start', t => {
+test('Production of default basic state after start', () => {
   const expected = {
     ...waitingBidState
   }
@@ -18,10 +17,10 @@ test('Production of default basic state after start', t => {
     ...startParams
   }
   const actual = reducer(null, action)
-  t.deepEqual(actual, expected, 'Default state of entry options should produce basic state')
+  expect(actual).toEqual(expected)
 })
 
-test('Start on second round should work', t => {
+test('Start on second round should work', () => {
   const expected = {
     ...waitingBidState,
     scores: genMap([0], [0], [0], [0]),
@@ -34,20 +33,20 @@ test('Start on second round should work', t => {
     startingRound: 2
   }
   const actual = reducer(null, action)
-  t.deepEqual(actual, expected, 'Start should be able to handle starting from second round')
+  expect(actual).toEqual(expected)
 })
 
-test('Skip should do no-op when the state is null', t => {
+test('Skip should do no-op when the state is null', () => {
   const expected = null
   const action = {
     type: SKIP,
     time: new Date(1)
   }
   const actual = reducer(null, action)
-  t.is(actual, expected, 'Null should be the new state')
+  expect(actual).toBe(expected)
 })
 
-test('Skip should skip 1 round if no payload is supplied', t => {
+test('Skip should skip 1 round if no payload is supplied', () => {
   const expected = {
     ...waitingBidState,
     scores: genMap([0], [0], [0], [0]),
@@ -62,10 +61,10 @@ test('Skip should skip 1 round if no payload is supplied', t => {
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, '1 round should be skipped')
+  expect(actual).toEqual(expected)
 })
 
-test('Skip should reset bid and win data', t => {
+test('Skip should reset bid and win data', () => {
   const expected = {
     ...waitingBidState,
     scores: genMap([0], [0], [0], [0]),
@@ -83,10 +82,10 @@ test('Skip should reset bid and win data', t => {
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Win and bid properties should reset')
+  expect(actual).toEqual(expected)
 })
 
-test('Skip on last round should change state to ended', t => {
+test('Skip on last round should change state to ended', () => {
   const expected = {
     ...endedState,
     rounds: 2,
@@ -101,10 +100,10 @@ test('Skip on last round should change state to ended', t => {
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Stage should be ended')
+  expect(actual).toEqual(expected)
 })
 
-test('Skip on ended state should do no-op', t => {
+test('Skip on ended state should do no-op', () => {
   const expected = {
     ...endedState
   }
@@ -116,20 +115,20 @@ test('Skip on ended state should do no-op', t => {
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'State should not be modified')
+  expect(actual).toEqual(expected)
 })
 
-test('Set bid should do no-op when state is null', t => {
+test('Set bid should do no-op when state is null', () => {
   const expected = null
   const action = {
     type: SET_BID,
     payload: genMap(0, 0, 0, 0)
   }
   const actual = reducer(null, action)
-  t.is(actual, expected, 'Null should be the new state')
+  expect(actual).toBe(expected)
 })
 
-test('Set bid should do no-op when stage is ended', t => {
+test('Set bid should do no-op when stage is ended', () => {
   const expected = {
     ...endedState
   }
@@ -141,10 +140,10 @@ test('Set bid should do no-op when stage is ended', t => {
     payload: genMap(0, 0, 0, 0)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'State should not be modified')
+  expect(actual).toEqual(expected)
 })
 
-test('Set bid should set bid property', t => {
+test('Set bid should set bid property', () => {
   const expected = {
     ...waitingBidState,
     bid: genMap(0, 1, 0, 0)
@@ -158,20 +157,20 @@ test('Set bid should set bid property', t => {
     payload: genMap(0, 1, 0, 0)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Bid property should be set')
+  expect(actual).toEqual(expected)
 })
 
-test('Set win should do no-op when state is null', t => {
+test('Set win should do no-op when state is null', () => {
   const expected = null
   const action = {
     type: SET_WIN,
     payload: genMap(0, 0, 0, 0)
   }
   const actual = reducer(null, action)
-  t.is(actual, expected, 'Null should be the new state')
+  expect(actual).toBe(expected)
 })
 
-test('Set win should do no-op when stage is ended', t => {
+test('Set win should do no-op when stage is ended', () => {
   const expected = {
     ...endedState
   }
@@ -183,10 +182,10 @@ test('Set win should do no-op when stage is ended', t => {
     payload: genMap(0, 0, 0, 0)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'State should not be modified')
+  expect(actual).toEqual(expected)
 })
 
-test('Set win should set win property', t => {
+test('Set win should set win property', () => {
   const expected = {
     ...waitingWinState,
     win: genMap(0, 1, 0, 0)
@@ -200,20 +199,20 @@ test('Set win should set win property', t => {
     payload: genMap(0, 1, 0, 0)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Win property should be set')
+  expect(actual).toEqual(expected)
 })
 
-test('Bid should do no-op when the state is null', t => {
+test('Bid should do no-op when the state is null', () => {
   const expected = null
   const action = {
     type: BID,
     payload: genMap(0, 1, 0, 1)
   }
   const actual = reducer(null, action)
-  t.is(actual, expected, 'Null should be the new state')
+  expect(actual).toBe(expected)
 })
 
-test('Bid should do no-op when game stage is ended', t => {
+test('Bid should do no-op when game stage is ended', () => {
   const expected = {
     ...endedState
   }
@@ -225,10 +224,10 @@ test('Bid should do no-op when game stage is ended', t => {
     payload: genMap(0, 1, 0, 1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'No-op should be done')
+  expect(actual).toEqual(expected)
 })
 
-test('Bid should change stage to waitingWin', t => {
+test('Bid should change stage to waitingWin', () => {
   const expected = {
     ...waitingWinState,
     bid: genMap(0, 1, 0, 1)
@@ -242,10 +241,10 @@ test('Bid should change stage to waitingWin', t => {
     payload: genMap(0, 1, 0, 1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'WaitingWin object should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('Bid should use data from currentGame.bid when bid is not given in payload', t => {
+test('Bid should use data from currentGame.bid when bid is not given in payload', () => {
   const expected = {
     ...waitingWinState,
     bid: genMap(0, 1, 0, 1)
@@ -258,10 +257,10 @@ test('Bid should use data from currentGame.bid when bid is not given in payload'
     type: BID
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'WaitingWin object should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('Win should do no-op when state is null', t => {
+test('Win should do no-op when state is null', () => {
   const expected = null
   const state = null
   const action = {
@@ -270,10 +269,10 @@ test('Win should do no-op when state is null', t => {
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'No-op should be done')
+  expect(actual).toEqual(expected)
 })
 
-test('Win should do no-op when game stage is ended', t => {
+test('Win should do no-op when game stage is ended', () => {
   const expected = {
     ...endedState
   }
@@ -286,10 +285,10 @@ test('Win should do no-op when game stage is ended', t => {
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'No-op should be done')
+  expect(actual).toEqual(expected)
 })
 
-test('Win should change stage to waitingBid', t => {
+test('Win should change stage to waitingBid', () => {
   const expected = {
     ...waitingBidState,
     currentPlayerOrder: ['b', 'c', 'd', 'a'],
@@ -306,10 +305,10 @@ test('Win should change stage to waitingBid', t => {
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'waitingBid object for new round should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('Win should change stage to ended for last round', t => {
+test('Win should change stage to ended for last round', () => {
   const expected = {
     ...endedState,
     rounds: 1,
@@ -326,10 +325,10 @@ test('Win should change stage to ended for last round', t => {
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'game should be ended')
+  expect(actual).toEqual(expected)
 })
 
-test('Win should use data from gameStage.win if win is not given in action', t => {
+test('Win should use data from gameStage.win if win is not given in action', () => {
   const expected = {
     ...waitingBidState,
     currentPlayerOrder: ['b', 'c', 'd', 'a'],
@@ -346,20 +345,20 @@ test('Win should use data from gameStage.win if win is not given in action', t =
     time: new Date(1)
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'waitingBid object for new round should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('Undo should do no-op when state is null', t => {
+test('Undo should do no-op when state is null', () => {
   const expected = null
   const state = null
   const action = {
     type: UNDO
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'No-op should be done')
+  expect(actual).toEqual(expected)
 })
 
-test('Undo should do no-op when stage is ended', t => {
+test('Undo should do no-op when stage is ended', () => {
   const expected = {
     ...endedState
   }
@@ -370,10 +369,10 @@ test('Undo should do no-op when stage is ended', t => {
     type: UNDO
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'No-op should be done')
+  expect(actual).toEqual(expected)
 })
 
-test('Undo should do no-op when stage is waitingBid', t => {
+test('Undo should do no-op when stage is waitingBid', () => {
   const expected = {
     ...waitingBidState
   }
@@ -384,10 +383,10 @@ test('Undo should do no-op when stage is waitingBid', t => {
     type: UNDO
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'No-op should be done')
+  expect(actual).toEqual(expected)
 })
 
-test('Undo should roll back stage is waitingWin', t => {
+test('Undo should roll back stage is waitingWin', () => {
   const expected = {
     ...waitingBidState,
     bid: genMap(0, 0, 0, 0)
@@ -400,10 +399,10 @@ test('Undo should roll back stage is waitingWin', t => {
     type: UNDO
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Stage should be waitingWin')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should do no-op in null state', t => {
+test('Change players should do no-op in null state', () => {
   const expected = null
   const state = null
   const action = {
@@ -413,10 +412,10 @@ test('Change players should do no-op in null state', t => {
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.is(actual, expected, 'no-op should be done on null state')
+  expect(actual).toBe(expected)
 })
 
-test('Change players should do no-op in ended state', t => {
+test('Change players should do no-op in ended state', () => {
   const expected = {
     ...endedState
   }
@@ -430,10 +429,10 @@ test('Change players should do no-op in ended state', t => {
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'no-op should be done on ended state')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should do no-op when given names are same as original map and maker is the current one', t => {
+test('Change players should do no-op when given names are same as original map and maker is the current one', () => {
   const expected = {
     ...waitingBidState
   }
@@ -447,10 +446,10 @@ test('Change players should do no-op when given names are same as original map a
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'State should not be changed')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should revert stage to waitingBid for waitingWin stage', t => {
+test('Change players should revert stage to waitingBid for waitingWin stage', () => {
   const expected = {
     ...waitingBidState
   }
@@ -464,10 +463,10 @@ test('Change players should revert stage to waitingBid for waitingWin stage', t 
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Stage should be reverted to waitingBid')
+  expect(actual).toEqual(expected)
 })
 
-test("Change players should change player's names from given map", t => {
+test("Change players should change player's names from given map", () => {
   const expected = {
     ...waitingBidState,
     names: genMap('John', 'DPGJW', 'Henry', 'Joe')
@@ -482,10 +481,10 @@ test("Change players should change player's names from given map", t => {
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'player names should be changed')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should change all maps order from given map (For no addition nor deletion)', t => {
+test('Change players should change all maps order from given map (For no addition nor deletion)', () => {
   function genReorderedMap(b, c, d, a) {
     return {b, c, d, a}
   }
@@ -508,10 +507,10 @@ test('Change players should change all maps order from given map (For no additio
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'All maps should be re-ordered')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should re-order players by given maker', t => {
+test('Change players should re-order players by given maker', () => {
   const expected = {
     ...waitingBidState,
     currentPlayerOrder: ['c', 'd', 'a', 'b']
@@ -526,10 +525,10 @@ test('Change players should re-order players by given maker', t => {
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'currentPlayerOrder should be re-ordered')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should change rounds from given payload', t => {
+test('Change players should change rounds from given payload', () => {
   const expected = {
     ...waitingBidState,
     rounds: 12
@@ -544,10 +543,10 @@ test('Change players should change rounds from given payload', t => {
     rounds: 12
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Rounds should be changed')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should remove all data from removed player', t => {
+test('Change players should remove all data from removed player', () => {
   function genSmallMap(a, b, c) {
     return {a, b, c}
   }
@@ -570,10 +569,10 @@ test('Change players should remove all data from removed player', t => {
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'All data related to removed player should be removed')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should assign 0 mark for ended rounds of new player', t => {
+test('Change players should assign 0 mark for ended rounds of new player', () => {
   function genNewMap(a, b, c, d, e) {
     return {b, c, d, a, e}
   }
@@ -599,10 +598,10 @@ test('Change players should assign 0 mark for ended rounds of new player', t => 
     rounds: 13
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'New player should be added')
+  expect(actual).toEqual(expected)
 })
 
-test('Change players should end game when given rounds is less than current round', t => {
+test('Change players should end game when given rounds is less than current round', () => {
   const expected = {
     ...endedState,
     rounds: 1,
@@ -624,5 +623,5 @@ test('Change players should end game when given rounds is less than current roun
     rounds: 1
   }
   const actual = reducer(state, action)
-  t.deepEqual(actual, expected, 'Game should be ended')
+  expect(actual).toEqual(expected)
 })

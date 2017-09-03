@@ -1,17 +1,16 @@
-import test from 'ava'
 import {namesSelector} from '../../../src/selectors/current-game/names'
 import {genMap, waitingBidState} from '../../fixtures/current-game-states'
 
-test('empty object should be selected if currentGame is null', t => {
+test('empty object should be selected if currentGame is null', () => {
   const expected = {}
   const state = {
     currentGame: null
   }
   const actual = namesSelector(state)
-  t.deepEqual(actual, expected, 'Empty object should be returned')
+  expect(actual).toEqual(expected)
 })
 
-test('Names should be selected', t => {
+test('Names should be selected', () => {
   const expected = genMap('John', 'Mary', 'Henry', 'Joe')
   const state = {
     currentGame: {
@@ -19,5 +18,5 @@ test('Names should be selected', t => {
     }
   }
   const actual = namesSelector(state)
-  t.deepEqual(actual, expected, 'Names should be selected')
+  expect(actual).toEqual(expected)
 })

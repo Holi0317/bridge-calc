@@ -1,17 +1,16 @@
-import test from 'ava'
 import {waitingBidState} from '../../fixtures/current-game-states'
 import {roundsSelector} from '../../../src/selectors/current-game/rounds'
 
-test('null should be selected if currentGame is null', t => {
+test('null should be selected if currentGame is null', () => {
   const expected = null
   const state = {
     currentGame: null
   }
   const actual = roundsSelector(state)
-  t.is(actual, expected, 'null should be returned')
+  expect(actual).toBe(expected)
 })
 
-test('currentRound should be selected', t => {
+test('currentRound should be selected', () => {
   const expected = 13
   const state = {
     currentGame: {
@@ -19,5 +18,5 @@ test('currentRound should be selected', t => {
     }
   }
   const actual = roundsSelector(state)
-  t.is(actual, expected, 'rounds should be selected')
+  expect(actual).toBe(expected)
 })

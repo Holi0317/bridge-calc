@@ -1,17 +1,16 @@
-import test from 'ava'
 import {playerIDSelector} from '../../../src/selectors/current-game/player-id'
 import {waitingBidState} from '../../fixtures/current-game-states'
 
-test('Empty array should be selected when state is null', t => {
+test('Empty array should be selected when state is null', () => {
   const state = {
     currentGame: null
   }
   const expected = []
   const actual = playerIDSelector(state)
-  t.deepEqual(actual, expected, 'Empty array should be selected')
+  expect(actual).toEqual(expected)
 })
 
-test('Player IDs should be selected', t => {
+test('Player IDs should be selected', () => {
   const state = {
     currentGame: {
       ...waitingBidState
@@ -19,5 +18,5 @@ test('Player IDs should be selected', t => {
   }
   const expected = ['a', 'b', 'c', 'd']
   const actual = playerIDSelector(state)
-  t.deepEqual(actual, expected, 'Player IDs should be selected')
+  expect(actual).toEqual(expected)
 })
