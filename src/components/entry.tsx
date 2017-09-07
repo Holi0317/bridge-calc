@@ -81,8 +81,10 @@ function mapDispatchToProps(dispatch: Dispatch) {
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
+type EntryProps = typeof stateType & typeof dispatchType & RouteComponentProps<any> & ITranslateMixin
+
 class EntryImpl extends React.Component {
-  public props: typeof stateType & typeof dispatchType & RouteComponentProps<any> & ITranslateMixin
+  public props: EntryProps
 
   public componentWillMount() {
     this.props.genOptions()
