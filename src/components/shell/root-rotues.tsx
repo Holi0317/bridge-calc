@@ -1,9 +1,7 @@
 import * as React from 'react'
 import {Redirect, Route} from 'react-router'
-import {Menu} from './lazy-views/menu'
-import {Entry} from './lazy-views/entry'
-import {Layout} from './lazy-views/game-layout'
-import {IRootState} from '../types'
+import {Menu, Entry, Layout} from '../lazy-views'
+import {IRootState} from '../../types'
 import {returntypeof} from 'react-redux-typescript'
 import {connect} from 'react-redux'
 

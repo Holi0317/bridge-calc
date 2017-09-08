@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Route} from 'react-router-dom'
-import {GameTitle} from './game/title'
-import {createTitle} from './create-title'
+import {GameTitle} from '../game/title'
+import {createTitle} from '../create-title'
 
 type Title = [string, React.ComponentType<any>]
 
