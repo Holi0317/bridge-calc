@@ -1,7 +1,8 @@
 import * as React from 'react'
+import Loadable from 'react-loadable'
 import {CurrentGameTitle} from './current-game-title'
 import {createTitle} from '../create-title'
-import {lazyHOC} from '../lazy-views/lazy-hoc'
+import {Loading} from '../lazy-views/loading'
 
 export interface IRoute {
   path: string
@@ -16,22 +17,31 @@ export const routes: IRoute[] = [{
   path: '/game',
   exact: true,
   name: 'Input',
-  component: lazyHOC(() =>
-    import('./enter' /* webpackChunkName: "game-enter-view" */)
-      .then(mod => mod.Enter)),
+  component: Loadable({
+    loader: () =>
+      import('./enter' /* webpackChunkName: "game-enter-view" */)
+        .then(mod => mod.Enter),
+    loading: Loading
+  }),
   titleComponent: CurrentGameTitle
 }, {
   path: '/game/scoreboard',
   name: 'Scoreboard',
-  component: lazyHOC(() =>
-    import('./scoreboard' /* webpackChunkName: "game-scoreboard-view" */)
-      .then(mod => mod.Scoreboard)),
+  component: Loadable({
+    loader: () =>
+      import('./scoreboard' /* webpackChunkName: "game-scoreboard-view" */)
+        .then(mod => mod.Scoreboard),
+    loading: Loading
+  }),
   titleComponent: createTitle('Scoreboard')
 }, {
   path: '/game/settings',
   name: 'Settings',
-  component: lazyHOC(() =>
-    import('./settings' /* webpackChunkName: "game-settings-view" */)
-      .then(mod => mod.Settings)),
+  component: Loadable({
+    loader: () =>
+      import('./settings' /* webpackChunkName: "game-settings-view" */)
+        .then(mod => mod.Settings),
+    loading: Loading
+  }),
   titleComponent: createTitle('Settings')
 }]

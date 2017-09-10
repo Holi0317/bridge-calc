@@ -14,13 +14,15 @@ const stateType = returntypeof(mapStateToProps)
 type RootRoutesProps = typeof stateType
 
 function RootRoutesImpl({gameRedirect}: RootRoutesProps) {
-  return [
-    <Route exact path="/" component={Menu} />,
-    <Route path="/entry" component={Entry} />,
-    <Route path="/game" render={() => (
-      gameRedirect ? <Redirect to="/entry" /> : <Layout />
-    )} />
-  ]
+  return (
+    <div>
+      <Route exact path="/" component={Menu} />
+      <Route path="/entry" component={Entry} />
+      <Route path="/game" render={() => (
+        gameRedirect ? <Redirect to="/entry" /> : <Layout />
+      )} />
+    </div>
+  )
 }
 
 export const RootRoutes = connect(mapStateToProps)(RootRoutesImpl as any)
