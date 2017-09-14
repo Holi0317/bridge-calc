@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Loadable from 'react-loadable'
 import {CurrentGameTitle} from './current-game-title'
-import {createTitle} from '../create-title'
+import {titleAugment} from '../title-augment'
 import {Loading} from '../lazy-views/loading'
 
 export interface IRoute {
@@ -33,7 +33,7 @@ export const routes: IRoute[] = [{
         .then(mod => mod.Scoreboard),
     loading: Loading
   }),
-  titleComponent: createTitle('Scoreboard')
+  titleComponent: titleAugment('Scoreboard')
 }, {
   path: '/game/settings',
   name: 'Settings',
@@ -43,5 +43,5 @@ export const routes: IRoute[] = [{
         .then(mod => mod.Settings),
     loading: Loading
   }),
-  titleComponent: createTitle('Settings')
+  titleComponent: titleAugment('Settings')
 }]
