@@ -1,5 +1,5 @@
 import {CurrentGameActions} from './actions/current-game'
-import {EntryActions} from './actions/ui/entry'
+import {EntryActions} from './entry/entry-actions'
 import {GameState} from './reducer/current-game'
 import {IEntryState} from './reducer/ui/entry'
 import {ISettingsState} from './reducer/ui/settings'

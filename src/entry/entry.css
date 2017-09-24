@@ -19,3 +19,22 @@
   display: flex;
   justify-content: space-between;
 }
+
+.options-root-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.options-container {
+  display: flex;
+  align-items: center;
+  & > span {
+    flex-grow: 1;
+  }
+  & > div {
+    flex-grow: 5;
+  }
+  & select {
+    width: 100%;
+  }
+}

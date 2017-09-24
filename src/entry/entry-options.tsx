@@ -2,11 +2,11 @@ import * as React from 'react'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
-import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
+import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from './entry-actions'
 import {entrySourceSelector} from '../selectors/ui/entry/entry-source'
 import {Dispatch, IRootState, ITranslateMixin} from '../types'
 import {Dropdown} from '../material/dropdown'
-import style from './entry-options.css'
+import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => {
   const entry = state.ui.entry
@@ -35,24 +35,24 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type EntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-function DisconnectedEntryOptions({t, sources, cards, rounds, startingRound, cardsSet, roundsSet, startingRoundSet}: EntryOptionsProps) {
+function EntryOptionsImpl({t, sources, cards, rounds, startingRound, cardsSet, roundsSet, startingRoundSet}: EntryOptionsProps) {
   return (
-    <div className={style.rootContainer}>
-      <div className={style.selectContainer}>
+    <div className={style.optionsRootContainer}>
+      <div className={style.optionsContainer}>
         <span>{t('Number of cards')}</span>
         <Dropdown label={t('Number of cards')}
           value={cards} source={sources.cards}
           onChange={cardsSet} />
       </div>
 
-      <div className={style.selectContainer}>
+      <div className={style.optionsContainer}>
         <span>{t('Number of rounds')}</span>
         <Dropdown label={t('Number of rounds')}
           value={rounds} source={sources.rounds}
           onChange={roundsSet} />
       </div>
 
-      <div className={style.selectContainer}>
+      <div className={style.optionsContainer}>
         <span>{t('Starting round')}</span>
         <Dropdown label={t('Starting round')}
           value={startingRound} source={sources.startingRound}
@@ -62,4 +62,4 @@ function DisconnectedEntryOptions({t, sources, cards, rounds, startingRound, car
   )
 }
 
-export const EntryOptions = translate()(connect(mapStateToProps, mapDispatchToProps)(DisconnectedEntryOptions as any))
+export const EntryOptions = translate()(connect(mapStateToProps, mapDispatchToProps)(EntryOptionsImpl as any))

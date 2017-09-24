@@ -1,4 +1,4 @@
-import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../../src/actions/ui/entry'
+import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../../src/entry/entry-actions'
 import {entry as reducer} from '../../src/reducer/ui/entry'
 
 const defaultState = {
