@@ -2,7 +2,7 @@ import * as React from 'react'
 import {TouchTapEvent} from 'material-ui'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
-import {IDropdownSource} from '../../types'
+import {IDropdownSource} from '../types'
 
 export interface IDropdownProps<T> {
   label: string

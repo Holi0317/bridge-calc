@@ -5,7 +5,7 @@ import {returntypeof} from 'react-redux-typescript'
 import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from '../actions/ui/entry'
 import {entrySourceSelector} from '../selectors/ui/entry/entry-source'
 import {Dispatch, IRootState, ITranslateMixin} from '../types'
-import {Dropdown} from './material/dropdown'
+import {Dropdown} from '../material/dropdown'
 import style from './entry-options.css'
 
 const mapStateToProps = (state: IRootState) => {

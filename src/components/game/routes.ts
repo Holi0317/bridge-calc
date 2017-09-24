@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Loadable from 'react-loadable'
 import {CurrentGameTitle} from './current-game-title'
-import {titleAugment} from '../title-augment'
+import {titleAugment} from '../../shell/title-augment'
 import {Loading} from '../lazy-views/loading'
 
 export interface IRoute {

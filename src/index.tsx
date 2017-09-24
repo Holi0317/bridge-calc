@@ -4,10 +4,10 @@ import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {I18nextProvider} from 'react-i18next'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {Shell} from './components/shell'
-import {i18n} from './i18n'
-import {store} from './redux-store'
-import {muiTheme} from './mui-theme'
+import {Shell} from './shell'
+import {i18n} from './app/i18n'
+import {store} from './app/redux-store'
+import {muiTheme} from './app/mui-theme'
 
 function Root() {
   return (

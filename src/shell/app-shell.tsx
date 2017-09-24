@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton'
 import ActionHelp from 'material-ui/svg-icons/action/help'
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import {Titles} from './titles'
-import {routes} from '../../routes'
+import {routes} from '../app/routes'
 
 /**
  * Create a function that will route to specified location.

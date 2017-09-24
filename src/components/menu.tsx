@@ -7,7 +7,7 @@ import AvSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
 import ActionSettings from 'material-ui/svg-icons/action/settings'
 import ActionInfo from 'material-ui/svg-icons/action/info'
 import ActionBugReport from 'material-ui/svg-icons/action/bug-report'
-import {Tile} from './material/tile'
+import {Tile} from '../material/tile'
 import {ITranslateMixin} from '../types'
 import grid from '../styles/grid.css'
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Route} from 'react-router-dom'
-import {titleAugment} from '../title-augment'
-import {routes} from '../../routes'
+import {titleAugment} from './title-augment'
+import {routes} from '../app/routes'
 
 export function Titles() {
   return (
