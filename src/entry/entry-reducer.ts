@@ -1,4 +1,4 @@
-import {EntryActions, OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../../entry/entry-actions'
+import {EntryActions, OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from './entry-actions'
 
 export interface IEntryState {
   cards: number,

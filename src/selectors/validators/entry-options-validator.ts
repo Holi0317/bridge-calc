@@ -2,7 +2,7 @@ import {createSelector} from 'reselect'
 import {entryOptionsValidator, IEntryError} from '../../validators/entry-options'
 import {isOk} from '../../utils'
 import {IRootState, I18nT} from '../../types'
-import {IEntryState} from '../../reducer/ui/entry'
+import {IEntryState} from '../../entry/entry-reducer'
 
 /**
  * Select validation result of entry options.
