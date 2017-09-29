@@ -3,11 +3,11 @@ import Loadable from 'react-loadable'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import {Loading} from './loading'
-import {IRootState} from '../../types'
+import {IRootState} from '../types'
 import {Redirect} from 'react-router'
 
 const importer = () =>
-  import ('../game/layout' /* webpackChunkName: "game-layout-view" */)
+  import ('../components/game/layout' /* webpackChunkName: "game-layout-view" */)
     .then(mod => mod.Layout)
 
 export const Content = Loadable({

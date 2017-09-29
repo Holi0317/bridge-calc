@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {RouteProps} from 'react-router'
-import {Menu, Entry, Layout} from '../components/lazy-views'
+import {Menu, Entry, Layout} from '../lazy-views'
 import {GameTitle} from '../components/game/title'
 
 export interface IRoute extends RouteProps {
