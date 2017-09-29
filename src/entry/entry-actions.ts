@@ -5,6 +5,7 @@ export type EntryActions =
   | IStartingRoundSetAction
   | IPlayerNamesSetAction
   | IAddPlayerAction
+  | IResetStateAction
 
 /**
  * Toggle open state for entry options.
@@ -76,4 +77,13 @@ export const ADD_PLAYER: 'UI/ENTRY/ADD_PLAYER' = 'UI/ENTRY/ADD_PLAYER'
 export interface IAddPlayerAction {
   type: typeof ADD_PLAYER,
   payload: string
+}
+
+/**
+ * Reset state to default one.
+ * @type {string}
+ */
+export const RESET_STATE: 'UI/ENTRY/RESET_STATE' = 'UI/ENTRY/RESET_STATE'
+export interface IResetStateAction {
+  type: typeof RESET_STATE
 }

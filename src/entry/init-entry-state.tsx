@@ -1,12 +1,14 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
-import {IPlayerNamesSetAction, PLAYER_NAMES_SET} from './entry-actions'
+import {IPlayerNamesSetAction, IResetStateAction, PLAYER_NAMES_SET, RESET_STATE} from './entry-actions'
 import {genRandomNames} from '../example-names'
 import {Dispatch} from '../types'
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   genOptions() {
+    const resetAction: IResetStateAction = {type: RESET_STATE}
+    dispatch(resetAction)
     const action: IPlayerNamesSetAction = {type: PLAYER_NAMES_SET, payload: genRandomNames()}
     dispatch(action)
   }

@@ -1,4 +1,7 @@
-import {EntryActions, OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from './entry-actions'
+import {
+  EntryActions, OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER,
+  RESET_STATE
+} from './entry-actions'
 
 export interface IEntryState {
   cards: number,
@@ -85,6 +88,8 @@ export function entry(state: IEntryState = defaultState, action: EntryActions) {
     return playerNameAction(state, [...state.playerNames, action.payload])
   case PLAYER_NAMES_SET:
     return playerNameAction(state, action.payload)
+  case RESET_STATE:
+    return defaultState
   default:
     return state
   }

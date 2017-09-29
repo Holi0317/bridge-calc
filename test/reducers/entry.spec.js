@@ -1,4 +1,4 @@
-import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER} from '../../src/entry/entry-actions'
+import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER, RESET_STATE} from '../../src/entry/entry-actions'
 import {entry as reducer} from '../../src/entry/entry-reducer'
 
 const defaultState = {
@@ -213,6 +213,22 @@ test('Rounds should not re-compute on removing player when rounds < maxPossibleR
   const action = {
     type: PLAYER_NAMES_SET,
     payload: ['John', 'Mary', 'Henry']
+  }
+  const actual = reducer(state, action)
+  expect(actual).toEqual(expected)
+})
+
+test('Reset state should reset state', () => {
+  const state = {
+    ...defaultState,
+    rounds: 8,
+    optionsOpened: true
+  }
+  const expected = {
+    ...defaultState
+  }
+  const action = {
+    type: RESET_STATE
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
