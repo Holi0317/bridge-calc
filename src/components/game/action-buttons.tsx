@@ -47,7 +47,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type ActionButtonsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-function DisconnectActionButtons({t, nextDisabled, undoDisabled, currentGame, next, undo}: ActionButtonsProps) {
+function ActionButtonsImpl({t, nextDisabled, undoDisabled, currentGame, next, undo}: ActionButtonsProps) {
   const undoHandler = currentGame == null
     ? undefined  // Material-ui needs this to be undefined instead of null
     : undo(currentGame.stage)
@@ -63,4 +63,4 @@ function DisconnectActionButtons({t, nextDisabled, undoDisabled, currentGame, ne
 export const ActionButtons = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(DisconnectActionButtons)
+)(ActionButtonsImpl)
