@@ -1,3 +1,3 @@
-export {Entry} from './entry'
-export {Menu} from './menu'
-export {Layout} from './game-layout'
+export {EntryView} from './entry'
+export {MenuView} from './menu'
+export {ScoreInputView} from './score-input'

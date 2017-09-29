@@ -26,4 +26,4 @@ export function LayoutImpl({gameRedirect}: LayoutProps) {
   return gameRedirect ? <Redirect to="/entry" /> : <Content />
 }
 
-export const Layout = connect(mapStateToProps)(LayoutImpl as any)
+export const ScoreInputView = connect(mapStateToProps)(LayoutImpl as any)
