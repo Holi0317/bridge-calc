@@ -47,7 +47,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type StackInputProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-function StackInputImpl({t, bidDisabled, winDisabled, playerOrder, names, bid, win, error, bidStackInput, winStackInput, disp}: StackInputProps) {
+export function StackInputImpl({t, bidDisabled, winDisabled, playerOrder, names, bid, win, error, bidStackInput, winStackInput, disp}: StackInputProps) {
   return (
     <div className={style.tableContainer}>
       <table className={style.table}>

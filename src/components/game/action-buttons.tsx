@@ -47,7 +47,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type ActionButtonsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-function ActionButtonsImpl({t, nextDisabled, undoDisabled, currentGame, next, undo}: ActionButtonsProps) {
+export function ActionButtonsImpl({t, nextDisabled, undoDisabled, currentGame, next, undo}: ActionButtonsProps) {
   const undoHandler = currentGame == null
     ? undefined  // Material-ui needs this to be undefined instead of null
     : undo(currentGame.stage)

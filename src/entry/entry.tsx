@@ -10,7 +10,7 @@ import grid from '../styles/grid.css'
 
 type EntryProps = ITranslateMixin
 
-function EntryImpl({t}: EntryProps) {
+export function EntryImpl({t}: EntryProps) {
   return (
     <div className={grid.container}>
       <h3>{t('Player Names')}</h3>

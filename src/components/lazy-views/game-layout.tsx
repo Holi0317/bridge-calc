@@ -22,7 +22,7 @@ const mapStateToProps = (state: IRootState) => ({
 const stateType = returntypeof(mapStateToProps)
 type LayoutProps = typeof stateType
 
-function LayoutImpl({gameRedirect}: LayoutProps) {
+export function LayoutImpl({gameRedirect}: LayoutProps) {
   return gameRedirect ? <Redirect to="/entry" /> : <Content />
 }
 

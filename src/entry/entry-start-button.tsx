@@ -43,7 +43,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type EntryStartButtonProps = typeof stateType & typeof dispatchType & RouteComponentProps<any> & ITranslateMixin
 
-class EntryStartButtonImpl extends React.PureComponent {
+export class EntryStartButtonImpl extends React.PureComponent {
   public props: EntryStartButtonProps
 
   public render() {

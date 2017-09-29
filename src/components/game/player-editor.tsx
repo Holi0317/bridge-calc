@@ -78,7 +78,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 /**
  * Edit player's names, order and delete them
  */
-class PlayerEditorImpl extends React.Component {
+export class PlayerEditorImpl extends React.Component {
   public props: typeof stateType & typeof dispatchType & ITranslateMixin
 
   public componentWillMount() {

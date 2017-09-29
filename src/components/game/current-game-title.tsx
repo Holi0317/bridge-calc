@@ -13,7 +13,7 @@ const stateType = returntypeof(mapStateToProps)
 
 type CurrentGameTitleProps = typeof stateType
 
-function CurrentGameTitleImpl({title}: CurrentGameTitleProps) {
+export function CurrentGameTitleImpl({title}: CurrentGameTitleProps) {
   return <span>{title}</span>
 }
 

@@ -29,7 +29,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type MakerChooserProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-function MakerChooserImpl({names, maker, onChange, t}: MakerChooserProps) {
+export function MakerChooserImpl({names, maker, onChange, t}: MakerChooserProps) {
   return (
     <Dropdown label={t('Maker')} source={names} value={maker || ''} onChange={onChange} />
   )

@@ -29,7 +29,7 @@ function createRemoveHandler<T>(items: T[], change: (newItems: T[]) => void) {
   }
 }
 
-function ContainerImpl<T, V>(props: INameInputListProps<T, V>) {
+export function ContainerImpl<T, V>(props: INameInputListProps<T, V>) {
   const {values, error, getter, setter, errorGetter, onChange} = props
   const changeHandler = createChangeHandler(values, setter, onChange)
   const removeHandler = createRemoveHandler(values, onChange)

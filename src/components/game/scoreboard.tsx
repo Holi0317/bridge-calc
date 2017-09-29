@@ -23,7 +23,7 @@ const stateType = returntypeof(mapStateToProps)
 
 type ScoreboardProps = typeof stateType & ITranslateMixin
 
-function ScoreboardImpl({t, names, scores, endedRounds, totalScores, ranks}: ScoreboardProps) {
+export function ScoreboardImpl({t, names, scores, endedRounds, totalScores, ranks}: ScoreboardProps) {
   return (
     <div className={grid.container}>
       <div className={style.tableContainer}>

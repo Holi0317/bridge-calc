@@ -16,7 +16,7 @@ type SortableItemProps = {
   error: string | null
 } & ITranslateMixin
 
-function SortableItemImpl({value, onChange, remove, error, t}: SortableItemProps) {
+export function SortableItemImpl({value, onChange, remove, error, t}: SortableItemProps) {
   return (
     <div className={style.itemContainer}>
       <DragHandle />

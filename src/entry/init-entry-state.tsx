@@ -16,7 +16,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type InitEntryStateProps = typeof dispatchType
 
-class InitEntryStateImpl extends React.PureComponent {
+export class InitEntryStateImpl extends React.PureComponent {
   public props: InitEntryStateProps
 
   public componentWillMount() {

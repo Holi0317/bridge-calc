@@ -32,7 +32,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type EntryPlayerListProps = typeof stateType & typeof dispatchType
 
-function EntryPlayerListImpl({playerNames, playerNamesError, changePlayerNames}: EntryPlayerListProps) {
+export function EntryPlayerListImpl({playerNames, playerNamesError, changePlayerNames}: EntryPlayerListProps) {
   return (
     <NameInputList values={playerNames} error={playerNamesError || []}
                    onChange={changePlayerNames}

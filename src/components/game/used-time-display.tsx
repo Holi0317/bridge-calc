@@ -33,7 +33,7 @@ const mapStateToProps = (state: IRootState) => ({
 
 const stateType = returntypeof(mapStateToProps)
 
-class UsedTimeDisplayImpl extends React.Component {
+export class UsedTimeDisplayImpl extends React.Component {
   public props: typeof stateType & ITranslateMixin
   public state = {
     time: '00:00:00'

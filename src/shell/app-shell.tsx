@@ -27,7 +27,7 @@ type AppProps = RouteComponentProps<any>
  * @param location {Location} - Location object injected by react-router
  * @param history {History} - History object injected by react-router
  */
-function ShellImpl({location, history}: AppProps) {
+export function ShellImpl({location, history}: AppProps) {
   const helpBtn = <IconButton><ActionHelp width="24px" height="24px" /></IconButton>
   const backFn = to(history, '/')
   const backBtn = <IconButton><NavigationArrowBack width="24px" height="24px" /></IconButton>

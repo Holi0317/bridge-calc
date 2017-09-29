@@ -20,7 +20,7 @@ const stateType = returntypeof(mapStateToProps)
 
 type MiniScoreboardProps = typeof stateType & ITranslateMixin
 
-function MiniScoreboardImpl({names, prevScores, totalScores, ranks, t}: MiniScoreboardProps) {
+export function MiniScoreboardImpl({names, prevScores, totalScores, ranks, t}: MiniScoreboardProps) {
   return (
     <div className={style.tableContainer}>
       <table className={style.table}>

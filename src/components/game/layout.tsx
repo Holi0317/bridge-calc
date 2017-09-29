@@ -15,7 +15,7 @@ function getActive(pathname: string): number {
 
 type LayoutProps = RouteComponentProps<any> & ITranslateMixin
 
-class LayoutImpl extends React.Component {
+export class LayoutImpl extends React.Component {
   public props: LayoutProps
   public state: {
     active: number

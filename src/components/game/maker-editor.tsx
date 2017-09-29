@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
-class MakerEditorImpl extends React.Component {
+export class MakerEditorImpl extends React.Component {
   public props: typeof stateType & typeof dispatchType & ITranslateMixin
   public state = {
     snackbarOpen: false

@@ -25,7 +25,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type EntryActionButtonsProps = typeof dispatchType & ITranslateMixin
 
-function EntryActionButtonsImpl({addPlayer, importNames, t}: EntryActionButtonsProps) {
+export function EntryActionButtonsImpl({addPlayer, importNames, t}: EntryActionButtonsProps) {
   return (
     <div className={style.actionButtonContainer}>
       <IconButton tooltip={t('Add player')} onClick={addPlayer}>

@@ -35,7 +35,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type EntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-function EntryOptionsImpl({t, sources, cards, rounds, startingRound, cardsSet, roundsSet, startingRoundSet}: EntryOptionsProps) {
+export function EntryOptionsImpl({t, sources, cards, rounds, startingRound, cardsSet, roundsSet, startingRoundSet}: EntryOptionsProps) {
   return (
     <div className={style.optionsRootContainer}>
       <div className={style.optionsContainer}>

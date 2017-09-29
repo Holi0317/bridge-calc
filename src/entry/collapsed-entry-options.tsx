@@ -26,7 +26,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 type CollapsedEntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-function CollapsedEntryOptionsImpl({toggleCollapse, optionsOpened, t}: CollapsedEntryOptionsProps) {
+export function CollapsedEntryOptionsImpl({toggleCollapse, optionsOpened, t}: CollapsedEntryOptionsProps) {
   return (
     <div>
       <RaisedButton onClick={toggleCollapse} className={style.optionsBtn}>{t('Options')}</RaisedButton>

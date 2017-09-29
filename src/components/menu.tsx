@@ -11,7 +11,7 @@ import {Tile} from '../material/tile'
 import {ITranslateMixin} from '../types'
 import grid from '../styles/grid.css'
 
-function MenuImpl({t}: ITranslateMixin) {
+export function MenuImpl({t}: ITranslateMixin) {
   return (
     <div className={grid.container}>
       <div className={grid.row}>
