@@ -7,7 +7,7 @@ import {IRootState} from '../types'
 import {Redirect} from 'react-router'
 
 const importer = () =>
-  import ('../components/game/layout' /* webpackChunkName: "game-layout-view" */)
+  import ('../score-input/layout' /* webpackChunkName: "score-input-view" */)
     .then(mod => mod.Layout)
 
 export const Content = Loadable({

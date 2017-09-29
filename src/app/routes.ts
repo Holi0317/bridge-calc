@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {RouteProps} from 'react-router'
 import {Menu, Entry, Layout} from '../lazy-views'
-import {GameTitle} from '../components/game/title'
+import {GameTitle} from '../score-input/title'
 
 export interface IRoute extends RouteProps {
   title: string | React.ComponentType<any>
@@ -20,8 +20,8 @@ export const routes: IRoute[] = [{
   component: Entry,
   title: 'Entry'
 }, {
-  path: '/game',
-  name: 'game',
+  path: '/score-input',
+  name: 'score-input',
   component: Layout,
   title: GameTitle
 }]

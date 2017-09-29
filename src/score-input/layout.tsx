@@ -2,7 +2,7 @@ import * as React from 'react'
 import {Route, withRouter, matchPath} from 'react-router-dom'
 import {translate} from 'react-i18next'
 import {routes} from './routes'
-import {ITranslateMixin} from '../../types'
+import {ITranslateMixin} from '../types'
 import {RouteComponentProps} from 'react-router'
 import {Tabs, Tab} from 'material-ui/Tabs'
 

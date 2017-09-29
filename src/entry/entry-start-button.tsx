@@ -66,7 +66,7 @@ export class EntryStartButtonImpl extends React.PureComponent {
       type: START
     }
     start(startParam)
-    history.push('/game')
+    history.push('/score-input')
   }
 }
 

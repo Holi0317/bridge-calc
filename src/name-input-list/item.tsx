@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField'
 import ActionDelete from 'material-ui/svg-icons/action/delete'
 import {DragHandle} from './drag-handle'
 import style from './name-input-list.css'
-import {ITranslateMixin} from '../../types'
+import {ITranslateMixin} from '../types'
 
 type SortableItemProps = {
   value: string,
