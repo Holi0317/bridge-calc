@@ -1,17 +1,17 @@
 {
   "presets": [
-    "es2016",
-    "es2017",
-    "react",
-    "stage-1"
+    ["env", {
+      "targets": {
+        "chrome": "61"
+      },
+      "modules": false,
+      "shippedProposals": true
+    }],
+    "stage-1",
+    "react"
   ],
 
   "env": {
-    "test": {
-      "plugins": [
-        "transform-es2015-modules-commonjs"
-      ]
-    },
     "production": {
       "plugins": [
         "transform-react-remove-prop-types"
