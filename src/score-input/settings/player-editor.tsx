@@ -11,7 +11,6 @@ import {
 } from '../../actions/ui/settings'
 import {NameInputList} from '../../name-input-list'
 import {nameInputListSourceSelector, PlayerName, revert} from '../../selectors/ui/settings/name-input-list-source'
-import {isValidPlayerEditor, playerEditorValidatorSelector} from '../../selectors/validators/player-editor'
 import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../../types'
 import {GameState} from '../reducer/types'
 import {randomName} from '../../example-names'
@@ -38,9 +37,7 @@ const errorGetter = (error: IPlayerMap<string>, value: PlayerName) => error[valu
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   currentGame: state.currentGame,
-  names: nameInputListSourceSelector(state),
-  error: playerEditorValidatorSelector(state, t),
-  isValid: isValidPlayerEditor(state, t)
+  names: nameInputListSourceSelector(state)
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -87,11 +84,11 @@ export class PlayerEditorImpl extends React.Component {
   }
 
   public render() {
-    const {names, error, isValid, changeNames, addPlayer, t} = this.props
+    const {names, changeNames, addPlayer, t} = this.props
     return (
       <div>
         <h4>{t('Edit players')}</h4>
-        <NameInputList values={names} error={error.names}
+        <NameInputList values={names} error={{}}
           getter={getter} setter={setter} errorGetter={errorGetter}
           onChange={changeNames} />
         <div className={style.addContainer}>
@@ -100,8 +97,7 @@ export class PlayerEditorImpl extends React.Component {
           </IconButton>
         </div>
         <div className={style.btnContainer}>
-          <RaisedButton primary={true} className={style.startBtn} disabled={!isValid} onClick={this.dispatch}>{t('Change names')}</RaisedButton>
-          <span className={style.errorMessage}>{error.misc}</span>
+          <RaisedButton primary={true} className={style.startBtn} disabled={true} onClick={this.dispatch}>{t('Change names')}</RaisedButton>
         </div>
       </div>
     )
