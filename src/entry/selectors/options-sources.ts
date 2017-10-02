@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect'
 import range from 'lodash-es/range'
-import {createSource} from '../../../utils'
-import {IDropdownSource, IRootState} from '../../../types'
+import {createSource} from '../../utils'
+import {IDropdownSource, IRootState} from '../../types'
 
 // This is a constant
 const cardsSource = [
@@ -15,7 +15,7 @@ const defaultRounds = [{value: 1, label: '1'}]
 /**
  * Select Dropdown source for entry options.
  */
-export const entrySourceSelector = createSelector(
+export const optionsSourcesSelector = createSelector(
   (state: IRootState) => state.ui.entry.cards,
   (state: IRootState) => state.ui.entry.playerNames.length,
   (state: IRootState) => state.ui.entry.rounds,

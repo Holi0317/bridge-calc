@@ -3,7 +3,7 @@ import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from './entry-actions'
-import {entrySourceSelector} from '../selectors/ui/entry/entry-source'
+import {optionsSourcesSelector} from './selectors/options-sources'
 import {Dispatch, IRootState, ITranslateMixin} from '../types'
 import {Dropdown} from '../material/dropdown'
 import style from './entry.css'
@@ -11,7 +11,7 @@ import style from './entry.css'
 const mapStateToProps = (state: IRootState) => {
   const entry = state.ui.entry
   return {
-    sources: entrySourceSelector(state),
+    sources: optionsSourcesSelector(state),
     cards: entry.cards,
     rounds: entry.rounds,
     startingRound: entry.startingRound
