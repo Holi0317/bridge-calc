@@ -2,7 +2,7 @@ import {createSelector} from 'reselect'
 import range from 'lodash-es/range'
 import {stageSelector} from './stage'
 import {currentRoundSelector} from './current-round'
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../../score-input/game-stage'
 import {roundsSelector} from './rounds'
 
 /**

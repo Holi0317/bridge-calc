@@ -1,6 +1,6 @@
 import {trans} from '../../utils/translate'
 import {stackInputValidator as validator, isStackInputValid, stackInputValidatorWithProps} from './stack-input-validator'
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../game-stage'
 
 function genMap(a, b, c, d) {
   return {a, b, c, d}

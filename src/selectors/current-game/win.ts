@@ -1,4 +1,4 @@
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../../score-input/game-stage'
 import {IPlayerMap, IRootState} from '../../types'
 import {createSelector} from 'reselect'
 import mapValues from 'lodash-es/mapValues'

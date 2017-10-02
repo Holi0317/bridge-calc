@@ -2,7 +2,7 @@ import {createSelector} from 'reselect'
 import {stageSelector} from './stage'
 import {currentRoundSelector} from './current-round'
 import {roundsSelector} from './rounds'
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../../score-input/game-stage'
 
 import {IRootState, I18nT} from '../../types'
 

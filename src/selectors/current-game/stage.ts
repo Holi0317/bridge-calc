@@ -1,5 +1,5 @@
 import {IRootState} from '../../types'
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../../score-input/game-stage'
 
 /**
  * Select currentGame stage.

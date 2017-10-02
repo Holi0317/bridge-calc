@@ -1,5 +1,5 @@
 import {CurrentGameActions, START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../actions/current-game'
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../game-stage'
 import {skip} from './skip'
 import {start} from './start'
 import {winHandler} from './win-handler'

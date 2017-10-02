@@ -1,4 +1,4 @@
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../game-stage'
 
 import {IPlayerMap} from '../../types'
 

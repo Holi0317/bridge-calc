@@ -2,7 +2,7 @@
 import {createSelector} from 'reselect'
 import {stageSelector} from './stage'
 import {playerIDSelector} from './player-id'
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../../score-input/game-stage'
 import {fillObj} from '../../utils'
 import {IDropdownSource, IPlayerMap} from '../../types'
 

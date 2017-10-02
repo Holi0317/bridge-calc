@@ -1,4 +1,4 @@
-import {GameStage} from '../../src/game-stage'
+import {GameStage} from '../../src/score-input/game-stage'
 import {deepFreeze} from '../helpers/deep-freeze'
 
 export function genMap(a, b, c, d) {

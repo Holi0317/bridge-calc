@@ -7,7 +7,7 @@ import {playerOrderSelector} from '../../selectors/current-game/player-order'
 import {bidSelector} from '../../selectors/current-game/bid'
 import {winSelector} from '../../selectors/current-game/win'
 import {currentRoundSelector} from '../../selectors/current-game/current-round'
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../game-stage'
 import {isOk, removeUndef} from '../../utils'
 import {I18nT, IPlayerMap, IRootState} from '../../types'
 

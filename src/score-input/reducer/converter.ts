@@ -1,4 +1,4 @@
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../game-stage'
 import {bidWinGenerator} from './bid-win-generator'
 import {IWaitingBidState, IWaitingWinState, IEndedState} from './types'
 

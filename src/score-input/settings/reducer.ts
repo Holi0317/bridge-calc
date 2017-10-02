@@ -1,4 +1,4 @@
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../game-stage'
 import {SettingsActions, ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../actions/ui/settings'
 import {IPlayerMap} from '../../types'
 

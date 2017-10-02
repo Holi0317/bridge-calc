@@ -1,4 +1,4 @@
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../game-stage'
 import {computeScores} from './compute-scores'
 import {toEndedState, toWaitingBidState} from './converter'
 import {bidWinGenerator} from './bid-win-generator'

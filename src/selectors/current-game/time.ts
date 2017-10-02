@@ -1,4 +1,4 @@
-import {GameStage} from '../../game-stage'
+import {GameStage} from '../../score-input/game-stage'
 import {IRootState} from '../../types'
 
 /**
