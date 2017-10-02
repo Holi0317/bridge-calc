@@ -4,12 +4,12 @@ import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import flowRight from 'lodash-es/flowRight'
-import {entryOptionsValidatorSelector, validEntryOptionsSelector} from '../selectors/validators/entry-options-validator'
 import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 import {IStartAction, START} from '../actions/current-game'
 import {genID} from '../utils'
 import {RouteComponentProps, withRouter} from 'react-router'
+import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
 
 /**
  * Change player names array to object with random generated player ID as key.
@@ -27,8 +27,8 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   rounds: state.ui.entry.rounds,
   playerNames: state.ui.entry.playerNames,
   startingRound: state.ui.entry.startingRound,
-  valid: validEntryOptionsSelector(state, t),
-  miscError: entryOptionsValidatorSelector(state, t).misc
+  valid: isEntryOptionsValid(state, t),
+  miscError: entryOptionsValidator(state, t).misc
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

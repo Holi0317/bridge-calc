@@ -4,9 +4,9 @@ import {translate} from 'react-i18next'
 import {returntypeof} from 'react-redux-typescript'
 import flowRight from 'lodash-es/flowRight'
 import {NameInputList} from '../name-input-list/index'
-import {entryOptionsValidatorSelector} from '../selectors/validators/entry-options-validator'
 import {IPlayerNamesSetAction, PLAYER_NAMES_SET} from './entry-actions'
 import {Dispatch, IRootState, ITranslateMixin} from '../types'
+import {entryOptionsValidator} from './entry-validator'
 
 // Getters and setters for name input list element
 export const getter = (val: string) => val
@@ -17,7 +17,7 @@ export const errorGetter = (error: string[], value: string, index: number) => er
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   playerNames: state.ui.entry.playerNames,
-  playerNamesError: entryOptionsValidatorSelector(state, t).playerNames
+  playerNamesError: entryOptionsValidator(state, t).playerNames
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
