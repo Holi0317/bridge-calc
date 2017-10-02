@@ -2,15 +2,20 @@ import {I18nT, IRootState} from '../types'
 import {dupe, removeUndef, isOk} from '../utils'
 import {createSelector} from 'reselect'
 
+const playerUpperLimit = 52
+
 export interface IEntryError {
   playerNames?: string[],
   misc?: string
 }
 
 function validateMisc(playerNames: string[], t: I18nT): string | null {
-  return playerNames.length < 2
-    ? t('At least 2 players is required for a game')
-    : null
+  if (playerNames.length < 2) {
+    return t('At least 2 players is required for a game')
+  } else if (playerNames.length > playerUpperLimit) {
+    return t('Too many players. Upper limit is {{limit}} players.', {limit: playerUpperLimit})
+  }
+  return null
 }
 
 function validatePlayerName(rawNames: string[], t: I18nT): string[] | null {

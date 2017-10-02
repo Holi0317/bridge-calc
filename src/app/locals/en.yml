@@ -28,6 +28,7 @@ Starting round: Starting round
 
 # Validation messages
 At least 2 players is required for a game: At least 2 players is required for a game
+"Too many players. Upper limit is {{limit}} players.": "Too many players. Upper limit is {{limit}} players."
 Name cannot be empty: Name cannot be empty
 Cannot choose that: Cannot choose that
 Too many stacks: Too many stacks

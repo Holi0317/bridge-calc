@@ -28,6 +28,7 @@ Starting round: 起始回合
 
 # Validation messages
 At least 2 players is required for a game: 最少需要2位玩家才能開始遊戲
+"Too many players. Upper limit is {{limit}} players.": "太多玩家 最多只支援{{limit}}人"
 Name cannot be empty: 名字必需被填上
 Cannot choose that: 不能選擇這個
 Too many stacks: 太多墩

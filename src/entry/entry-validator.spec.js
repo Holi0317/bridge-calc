@@ -1,3 +1,4 @@
+import range from 'lodash-es/range'
 import {trans} from '../utils/translate'
 import {entryOptionsValidator as validator, isEntryOptionsValid} from './entry-validator'
 
@@ -38,6 +39,15 @@ test('validator should fail when there is only 1 player', () => {
   const actual = validator(options, trans)
   const expected = {
     misc: 'At least 2 players is required for a game'
+  }
+  expect(actual).toEqual(expected)
+})
+
+test('validator should fail when there is too many players', () => {
+  const options = makeTree(range(53).map(i => i + ''))
+  const actual = validator(options, trans)
+  const expected = {
+    misc: 'Too many players. Upper limit is 52 players.'
   }
   expect(actual).toEqual(expected)
 })
