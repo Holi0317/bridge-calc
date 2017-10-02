@@ -2,9 +2,10 @@ import * as React from 'react'
 import {RouteProps} from 'react-router'
 import {MenuView, EntryView, ScoreInputView} from '../lazy-views'
 import {GameTitle} from '../score-input/title'
+import {titleAugment} from './title-augment'
 
 export interface IRoute extends RouteProps {
-  title: string | React.ComponentType<any>
+  title: React.ComponentType<any>
   name: string
 }
 
@@ -13,12 +14,12 @@ export const routes: IRoute[] = [{
   name: 'root',
   component: MenuView,
   exact: true,
-  title: 'Bridge calculator'
+  title: titleAugment('Bridge calculator')
 }, {
   path: '/entry',
   name: 'entry',
   component: EntryView,
-  title: 'Entry'
+  title: titleAugment('Entry')
 }, {
   path: '/score-input',
   name: 'score-input',

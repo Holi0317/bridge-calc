@@ -2,12 +2,12 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {returntypeof} from 'react-redux-typescript'
-import {namesSelector} from '../selectors/current-game/names'
-import {playerPrevScoreSelector} from '../selectors/current-game/player-prev-score'
-import {playerTotalScoreSelector} from '../selectors/current-game/player-total-score'
-import {playerRankSelector} from '../selectors/current-game/player-rank'
-import {IRootState, ITranslateMixin} from '../types'
-import style from './scoreboard.css'
+import {namesSelector} from '../../selectors/current-game/names'
+import {playerPrevScoreSelector} from '../../selectors/current-game/player-prev-score'
+import {playerTotalScoreSelector} from '../../selectors/current-game/player-total-score'
+import {playerRankSelector} from '../../selectors/current-game/player-rank'
+import {IRootState, ITranslateMixin} from '../../types'
+import style from '../scoreboard/scoreboard.css'
 
 const mapStateToProps = (state: IRootState) => ({
   names: namesSelector(state),

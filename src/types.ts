@@ -1,8 +1,8 @@
 import {CurrentGameActions} from './actions/current-game'
 import {EntryActions} from './entry/entry-actions'
-import {GameState} from './reducer/current-game'
+import {GameState} from './score-input/reducer'
 import {IEntryState} from './entry/entry-reducer'
-import {ISettingsState} from './reducer/ui/settings'
+import {ISettingsState} from './score-input/settings/reducer'
 import {SettingsActions} from './actions/ui/settings'
 import {TranslationFunction} from 'i18next'
 

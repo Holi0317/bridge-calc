@@ -10,7 +10,7 @@ import {GameState} from './types'
 
 const defaultState: GameState = null
 
-export function currentGame(state: GameState = defaultState, action: CurrentGameActions): GameState {
+export function currentGameReducer(state: GameState = defaultState, action: CurrentGameActions): GameState {
   if (action.type === START) {
     // Only START action will always return a new state, ignoring the original state
     return start(action)

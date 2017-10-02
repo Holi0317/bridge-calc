@@ -1,5 +1,5 @@
 import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER, RESET_STATE} from '../../src/entry/entry-actions'
-import {entry as reducer} from '../../src/entry/entry-reducer'
+import {entryReducer as reducer} from '../../src/entry'
 
 const defaultState = {
   cards: 52,

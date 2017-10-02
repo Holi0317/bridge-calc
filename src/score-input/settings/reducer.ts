@@ -19,7 +19,7 @@ const defaultState: ISettingsState = {
   names: {}
 }
 
-export function settings(state: ISettingsState = defaultState, action: SettingsActions): ISettingsState {
+export function settingsReducer(state: ISettingsState = defaultState, action: SettingsActions): ISettingsState {
   switch (action.type) {
   case SET_BY_GAME_STATE: {
     const gameState = action.state

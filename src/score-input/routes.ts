@@ -1,17 +1,8 @@
-import * as React from 'react'
 import Loadable from 'react-loadable'
 import {CurrentGameTitle} from './current-game-title'
-import {titleAugment} from '../shell/title-augment'
 import {Loading} from '../lazy-views/loading'
-
-export interface IRoute {
-  path: string
-  exact?: boolean
-  strict?: boolean
-  name: string
-  component: React.ComponentType<any>
-  titleComponent: React.ComponentType<any>
-}
+import {IRoute} from '../app/routes'
+import {titleAugment} from '../app/title-augment'
 
 export const routes: IRoute[] = [{
   path: '/score-input',
@@ -23,7 +14,7 @@ export const routes: IRoute[] = [{
         .then(mod => mod.Enter),
     loading: Loading
   }),
-  titleComponent: CurrentGameTitle
+  title: CurrentGameTitle
 }, {
   path: '/score-input/scoreboard',
   name: 'Scoreboard',
@@ -33,7 +24,7 @@ export const routes: IRoute[] = [{
         .then(mod => mod.Scoreboard),
     loading: Loading
   }),
-  titleComponent: titleAugment('Scoreboard')
+  title: titleAugment('Scoreboard')
 }, {
   path: '/score-input/settings',
   name: 'Settings',
@@ -43,5 +34,5 @@ export const routes: IRoute[] = [{
         .then(mod => mod.Settings),
     loading: Loading
   }),
-  titleComponent: titleAugment('Settings')
+  title: titleAugment('Settings')
 }]

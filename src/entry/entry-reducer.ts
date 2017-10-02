@@ -56,7 +56,7 @@ function playerNameAction(state: IEntryState, playerNames: string[]) {
   }
 }
 
-export function entry(state: IEntryState = defaultState, action: EntryActions) {
+export function entryReducer(state: IEntryState = defaultState, action: EntryActions) {
   switch (action.type) {
   case OPTION_OPEN_TOGGLE:
     return {

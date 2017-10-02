@@ -8,14 +8,14 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import {
   ADD_NAME, IAddNameAction, ISetByGameStateAction, ISetNamesAction, SET_BY_GAME_STATE,
   SET_NAMES
-} from '../actions/ui/settings'
-import {NameInputList} from '../name-input-list'
-import {nameInputListSourceSelector, PlayerName, revert} from '../selectors/ui/settings/name-input-list-source'
-import {isValidPlayerEditor, playerEditorValidatorSelector} from '../selectors/validators/player-editor'
-import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../types'
-import {GameState} from '../reducer/current-game/types'
-import {randomName} from '../example-names'
-import {genID} from '../utils'
+} from '../../actions/ui/settings'
+import {NameInputList} from '../../name-input-list'
+import {nameInputListSourceSelector, PlayerName, revert} from '../../selectors/ui/settings/name-input-list-source'
+import {isValidPlayerEditor, playerEditorValidatorSelector} from '../../selectors/validators/player-editor'
+import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../../types'
+import {GameState} from '../reducer/types'
+import {randomName} from '../../example-names'
+import {genID} from '../../utils'
 import {returntypeof} from 'react-redux-typescript'
 import style from './player-editor.css'
 

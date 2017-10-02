@@ -1,4 +1,4 @@
-import {GameState} from '../../reducer/current-game/types'
+import {GameState} from '../../score-input/reducer/types'
 import {IPlayerMap} from '../../types'
 
 export type SettingsActions =

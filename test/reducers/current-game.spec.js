@@ -1,6 +1,6 @@
 import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../src/actions/current-game'
 import {startParams, waitingBidState, waitingWinState, endedState, genMap} from '../fixtures/current-game-states'
-import {currentGame as reducer} from '../../src/reducer/current-game/index'
+import {currentGameReducer as reducer} from '../../src/score-input/reducer/index'
 
 test('Default state should be null', () => {
   const expected = null
