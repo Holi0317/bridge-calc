@@ -1,4 +1,4 @@
-import {isOk, removeUndef, toPairs} from '../utils'
+import {isOk, removeUndef} from '../utils'
 import mapValues from 'lodash-es/mapValues'
 import sumBy from 'lodash-es/sumBy'
 
@@ -20,7 +20,7 @@ function validateBid(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
   if (!opts.bid) {
     return null
   }
-  const sum: number = sumBy(toPairs(opts.bid), ([, value]) => value)
+  const sum: number = sumBy(Object.entries(opts.bid), ([, value]) => value)
   return sum === opts.currentRound
     ? {[opts.lastPlayerID]: t('Cannot choose that')}
     : null
@@ -30,7 +30,7 @@ function validateWin(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
   if (!opts.win || /* Is empty? */isOk(opts.win)) {
     return null
   }
-  const sum: number = sumBy(toPairs(opts.win), ([, value]) => value)
+  const sum: number = sumBy(Object.entries(opts.win), ([, value]) => value)
   if (sum === opts.currentRound) {
     return null
   }
