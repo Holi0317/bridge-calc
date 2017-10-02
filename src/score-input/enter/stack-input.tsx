@@ -10,7 +10,7 @@ import {namesSelector} from '../../selectors/current-game/names'
 import {bidSelector} from '../../selectors/current-game/bid'
 import {winSelector} from '../../selectors/current-game/win'
 import {playerOrderSelector} from '../../selectors/current-game/player-order'
-import {withErrorProp} from '../../selectors/validators/stack-input-validator'
+import {stackInputValidatorWithProps} from './stack-input-validator'
 import {SET_BID, SET_WIN} from '../../actions/current-game'
 import {bidStackInputSourceSelector} from '../../selectors/current-game/bid-stack-input-source'
 import {winStackInputSourceSelector} from '../../selectors/current-game/win-stack-input-source'
@@ -24,7 +24,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   bid: bidSelector(state),
   win: winSelector(state),
   names: namesSelector(state),
-  error: withErrorProp(state, t),
+  error: stackInputValidatorWithProps(state, t),
   bidStackInput: bidStackInputSourceSelector(state),
   winStackInput: winStackInputSourceSelector(state)
 })

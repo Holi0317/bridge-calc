@@ -1,0 +1,112 @@
+import {createSelector} from 'reselect'
+import sumBy from 'lodash-es/sumBy'
+import mapValues from 'lodash-es/mapValues'
+import last from 'lodash-es/last'
+import {stageSelector} from '../../selectors/current-game/stage'
+import {playerOrderSelector} from '../../selectors/current-game/player-order'
+import {bidSelector} from '../../selectors/current-game/bid'
+import {winSelector} from '../../selectors/current-game/win'
+import {currentRoundSelector} from '../../selectors/current-game/current-round'
+import {GameStage} from '../../game-stage'
+import {isOk, removeUndef} from '../../utils'
+import {I18nT, IPlayerMap, IRootState} from '../../types'
+
+export interface IStackInput {
+  bid?: IPlayerMap<number>,
+  win?: IPlayerMap<number>,
+  currentRound: number,
+  lastPlayerID: string
+}
+
+export interface IStackInputError {
+  bid?: IPlayerMap<string>,
+  win?: IPlayerMap<string>
+}
+
+function validateBid(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
+  if (!opts.bid) {
+    return null
+  }
+  const sum: number = sumBy(Object.entries(opts.bid), ([, value]) => value)
+  return sum === opts.currentRound
+    ? {[opts.lastPlayerID]: t('Cannot choose that')}
+    : null
+}
+
+function validateWin(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
+  if (!opts.win || /* Is empty? */isOk(opts.win)) {
+    return null
+  }
+  const sum: number = sumBy(Object.entries(opts.win), ([, value]) => value)
+  if (sum === opts.currentRound) {
+    return null
+  }
+  const msg = sum > opts.currentRound
+    ? t('Too many stacks')
+    : t('Too less stacks')
+  return mapValues(opts.win, () => msg)
+}
+
+/**
+ * Validate Stack Input.
+ * If options are valid, an empty object will be returned.
+ * Otherwise, an object with property -> Player ID -> error message will be returned.
+ * Use utils.isOk to check if there is any error during validation process.
+ * Additional argument: i18next T object must be passed in as second argument.
+ */
+export const stackInputValidator = createSelector(
+  stageSelector,
+  playerOrderSelector,
+  bidSelector,
+  winSelector,
+  currentRoundSelector,
+  (state: IRootState, t: I18nT) => t,
+  (stage: GameStage | null, playerOrder: string[], bid: IPlayerMap<number>, win: IPlayerMap<number>, currentRound: number, t: I18nT) => {
+    if (!stage || stage === GameStage.ended) {
+      return {}
+    }
+    const lastPlayerID = last(playerOrder)
+
+    const opts = {
+      bid,
+      win: stage === GameStage.waitingWin ? win : {},
+      currentRound,
+      lastPlayerID: lastPlayerID || ''
+    }
+    const res = {
+      bid: validateBid(opts, t),
+      win: validateWin(opts, t)
+    }
+    return removeUndef(res)
+  }
+)
+
+/**
+ * Select if current stack input state is valid or not.
+ * If true, the current state is valid. False if otherwise.
+ * Additional argument: i18next T object must be passed in as second argument.
+ */
+export const isStackInputValid = createSelector(
+  stackInputValidator,
+  (error: IStackInputError) => isOk(error)
+)
+
+/**
+ * Same functionality as stackInputValidator.
+ * Except the selected object must contain both bid and win properties.
+ * If there is no error, the bid and win properties will be empty object.
+ * This aims to suppress undefined error from JS when accessing error.
+ * Additional argument: i18next T object must be passed in as second argument.
+ */
+export const stackInputValidatorWithProps = createSelector(
+  stackInputValidator,
+  (error: IStackInputError) => {
+    const bid: IPlayerMap<string> = {}
+    const win: IPlayerMap<string> = {}
+    return ({
+      bid,
+      win,
+      ...error
+    })
+  }
+)

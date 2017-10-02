@@ -40,9 +40,6 @@ function validatePlayerName(rawNames: string[], t: I18nT): string[] | null {
  * Otherwise, an object with property -> error message will be returned.
  * Use utils.isOk to check if there is any error during validation process.
  * Additional argument: i18next T object must be passed in as second argument.
- * @param playerNames - List of player names
- * @param t - i18next translate function
- * @returns {Object} Error of each property
  */
 export const entryOptionsValidator = createSelector(
   (state: IRootState) => state.ui.entry.playerNames,

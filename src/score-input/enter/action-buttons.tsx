@@ -9,12 +9,12 @@ import {BID, IBidAction, IUndoAction, IWinAction, UNDO, WIN} from '../../actions
 import {Dispatch, IRootState, ITranslateMixin} from '../../types'
 import {GameState} from '../reducer/index'
 import {stageSelector} from '../../selectors/current-game/stage'
-import {validStackInput} from '../../selectors/validators/stack-input-validator'
+import {isStackInputValid} from './stack-input-validator'
 import style from './action-buttons.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   undoDisabled: stageSelector(state) !== GameStage.waitingWin,
-  nextDisabled: !validStackInput(state, t),
+  nextDisabled: !isStackInputValid(state, t),
   currentGame: state.currentGame
 })
 
