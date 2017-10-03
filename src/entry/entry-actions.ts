@@ -12,7 +12,7 @@ export type EntryActions =
  * No parameter required.
  * @type {string}
  */
-export const OPTION_OPEN_TOGGLE: 'UI/ENTRY/OPTION_OPEN_TOGGLE' = 'UI/ENTRY/OPTION_OPEN_TOGGLE'
+export const OPTION_OPEN_TOGGLE: 'ENTRY/OPTION_OPEN_TOGGLE' = 'ENTRY/OPTION_OPEN_TOGGLE'
 export interface IOptionOpenToggleAction {
   type: typeof OPTION_OPEN_TOGGLE
 }
@@ -23,7 +23,7 @@ export interface IOptionOpenToggleAction {
  *  - (payload: integer) The rounds to be set
  * @type {string}
  */
-export const ROUNDS_SET: 'UI/ENTRY/ROUNDS_SET' = 'UI/ENTRY/ROUNDS_SET'
+export const ROUNDS_SET: 'ENTRY/ROUNDS_SET' = 'ENTRY/ROUNDS_SET'
 export interface IRoundsSetAction {
   type: typeof ROUNDS_SET,
   payload: number
@@ -35,7 +35,7 @@ export interface IRoundsSetAction {
  *  - (payload: integer) The number of cards to be set
  * @type {string}
  */
-export const CARDS_SET: 'UI/ENTRY/CARDS_SET' = 'UI/ENTRY/CARDS_SET'
+export const CARDS_SET: 'ENTRY/CARDS_SET' = 'ENTRY/CARDS_SET'
 export interface ICardsSetAction {
   type: typeof CARDS_SET,
   payload: number
@@ -47,7 +47,7 @@ export interface ICardsSetAction {
  *  - (payload: integer) The starting round to be set
  * @type {string}
  */
-export const STARTING_ROUND_SET: 'UI/ENTRY/STARTING_ROUND_SET' = 'UI/ENTRY/STARTING_ROUND_SET'
+export const STARTING_ROUND_SET: 'ENTRY/STARTING_ROUND_SET' = 'ENTRY/STARTING_ROUND_SET'
 export interface IStartingRoundSetAction {
   type: typeof STARTING_ROUND_SET,
   payload: number
@@ -56,12 +56,12 @@ export interface IStartingRoundSetAction {
 /**
  * Set player names that will be in the game for entry options.
  * This can handle change, add and delete operations.
- * But there is another action UI/ENTRY/ADD_PLAYER just for appending new player.
+ * But there is another action ENTRY/ADD_PLAYER just for appending new player.
  * Parameter:
  *  - (payload: string[]) The array of player names to be set
  * @type {string}
  */
-export const PLAYER_NAMES_SET: 'UI/ENTRY/PLAYER_NAMES_SET' = 'UI/ENTRY/PLAYER_NAMES_SET'
+export const PLAYER_NAMES_SET: 'ENTRY/PLAYER_NAMES_SET' = 'ENTRY/PLAYER_NAMES_SET'
 export interface IPlayerNamesSetAction {
   type: typeof PLAYER_NAMES_SET,
   payload: string[]
@@ -73,7 +73,7 @@ export interface IPlayerNamesSetAction {
  *  - (payload: string) The name of new player
  * @type {string}
  */
-export const ADD_PLAYER: 'UI/ENTRY/ADD_PLAYER' = 'UI/ENTRY/ADD_PLAYER'
+export const ADD_PLAYER: 'ENTRY/ADD_PLAYER' = 'ENTRY/ADD_PLAYER'
 export interface IAddPlayerAction {
   type: typeof ADD_PLAYER,
   payload: string
@@ -83,7 +83,7 @@ export interface IAddPlayerAction {
  * Reset state to default one.
  * @type {string}
  */
-export const RESET_STATE: 'UI/ENTRY/RESET_STATE' = 'UI/ENTRY/RESET_STATE'
+export const RESET_STATE: 'ENTRY/RESET_STATE' = 'ENTRY/RESET_STATE'
 export interface IResetStateAction {
   type: typeof RESET_STATE
 }

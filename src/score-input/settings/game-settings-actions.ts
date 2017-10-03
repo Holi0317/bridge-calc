@@ -1,7 +1,7 @@
-import {GameState} from '../../score-input/reducer/types'
+import {GameState} from '../reducer/types'
 import {IPlayerMap} from '../../types'
 
-export type SettingsActions =
+export type GameSettingsActions =
   | ISetByGameStateAction
   | ISetMakerAction
   | ISetNamesAction
@@ -11,7 +11,7 @@ export type SettingsActions =
  * Set state of settings section by given game state.
  * If the state is null or stage is end, settings state will return to default.
  */
-export const SET_BY_GAME_STATE: 'UI/SETTINGS/SET_BY_GAME_STATE' = 'UI/SETTINGS/SET_BY_GAME_STATE'
+export const SET_BY_GAME_STATE: 'GAME_SETTINGS/SET_BY_GAME_STATE' = 'GAME_SETTINGS/SET_BY_GAME_STATE'
 export interface ISetByGameStateAction {
   type: typeof SET_BY_GAME_STATE,
   /**
@@ -24,7 +24,7 @@ export interface ISetByGameStateAction {
  * Set maker in UI settings UI.
  * This does NOT change anything in currentGame state of our store.
  */
-export const SET_MAKER: 'UI/SETTINGS/SET_MAKER' = 'UI/SETTINGS/SET_MAKER'
+export const SET_MAKER: 'GAME_SETTINGS/SET_MAKER' = 'GAME_SETTINGS/SET_MAKER'
 export interface ISetMakerAction {
   type: typeof SET_MAKER,
   /**
@@ -37,7 +37,7 @@ export interface ISetMakerAction {
  * Set names state in settings UI.
  * This does NOT change anything in currentGame state of our store
  */
-export const SET_NAMES: 'UI/SETTINGS/SET_NAMES' = 'UI/SETTINGS/SET_NAMES'
+export const SET_NAMES: 'GAME_SETTINGS/SET_NAMES' = 'GAME_SETTINGS/SET_NAMES'
 export interface ISetNamesAction {
   type: typeof SET_NAMES,
   /**

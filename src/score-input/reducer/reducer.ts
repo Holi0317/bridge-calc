@@ -1,4 +1,4 @@
-import {CurrentGameActions, START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../actions/current-game'
+import {CurrentGameActions, START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../score-input-actions'
 import {GameStage} from '../game-stage'
 import {skip} from './skip'
 import {start} from './start'

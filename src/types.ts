@@ -1,9 +1,9 @@
-import {CurrentGameActions} from './actions/current-game'
+import {CurrentGameActions} from './score-input/score-input-actions'
 import {EntryActions} from './entry/entry-actions'
 import {GameState} from './score-input/reducer'
 import {IEntryState} from './entry/entry-reducer'
 import {ISettingsState} from './score-input/settings/reducer'
-import {SettingsActions} from './actions/ui/settings'
+import {GameSettingsActions} from './score-input/settings/game-settings-actions'
 import {TranslationFunction} from 'i18next'
 
 export interface IPlayerMap<T> {[playerID: string]: T}
@@ -29,6 +29,6 @@ export interface IRootState {
 export type Actions =
   | CurrentGameActions
   | EntryActions
-  | SettingsActions
+  | GameSettingsActions
 
 export type Dispatch = (action: Actions) => void

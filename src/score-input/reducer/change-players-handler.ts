@@ -3,7 +3,7 @@ import range from 'lodash-es/range'
 import {toEndedState, toWaitingBidState} from './converter'
 import {toFront} from '../../utils'
 import {IEndedState, IWaitingBidState, IWaitingWinState} from './types'
-import {IChangePlayersAction} from '../../actions/current-game'
+import {IChangePlayersAction} from '../score-input-actions'
 
 export function changePlayersHandler(rawState: IWaitingBidState | IWaitingWinState, {newNames, rounds, maker}: IChangePlayersAction): IWaitingBidState | IEndedState {
   // Short circuit. When action.rounds is less than current round

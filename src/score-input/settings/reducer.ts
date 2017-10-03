@@ -1,5 +1,5 @@
 import {GameStage} from '../game-stage'
-import {SettingsActions, ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../actions/ui/settings'
+import {GameSettingsActions, ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from './game-settings-actions'
 import {IPlayerMap} from '../../types'
 
 export interface ISettingsState {
@@ -19,7 +19,7 @@ const defaultState: ISettingsState = {
   names: {}
 }
 
-export function settingsReducer(state: ISettingsState = defaultState, action: SettingsActions): ISettingsState {
+export function settingsReducer(state: ISettingsState = defaultState, action: GameSettingsActions): ISettingsState {
   switch (action.type) {
   case SET_BY_GAME_STATE: {
     const gameState = action.state

@@ -8,7 +8,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import {
   ADD_NAME, IAddNameAction, ISetByGameStateAction, ISetNamesAction, SET_BY_GAME_STATE,
   SET_NAMES
-} from '../../actions/ui/settings'
+} from './game-settings-actions'
 import {NameInputList} from '../../name-input-list'
 import {nameInputListSourceSelector, PlayerName, revert} from '../../selectors/ui/settings/name-input-list-source'
 import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../../types'

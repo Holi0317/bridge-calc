@@ -1,4 +1,4 @@
-import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../src/actions/current-game'
+import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../../src/score-input/score-input-actions'
 import {startParams, waitingBidState, waitingWinState, endedState, genMap} from '../fixtures/current-game-states'
 import {currentGameReducer as reducer} from '../../src/score-input/reducer/index'
 

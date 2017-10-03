@@ -3,7 +3,7 @@ import {skip} from './skip'
 import {bidWinGenerator} from './bid-win-generator'
 import {fillObj} from '../../utils'
 
-import {IStartAction} from '../../actions/current-game'
+import {IStartAction} from '../score-input-actions'
 import {IWaitingBidState} from './types'
 
 /**
