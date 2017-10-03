@@ -3,10 +3,8 @@ import {namesSelector} from '../../../../src/selectors/ui/settings/names'
 
 test('names property should be selected from ui/settings', () => {
   const state = {
-    ui: {
-      settings: {
-        ...defaultState
-      }
+    gameSettings: {
+      ...defaultState
     }
   }
   const expected = {}

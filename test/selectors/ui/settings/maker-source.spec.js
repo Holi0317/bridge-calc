@@ -3,11 +3,9 @@ import {genMap} from '../../../fixtures/current-game-states'
 
 test('Empty array should be selected for empty names', () => {
   const state = {
-    ui: {
-      settings: {
-        names: {},
-        maker: null
-      }
+    gameSettings: {
+      names: {},
+      maker: null
     }
   }
   const expected = []
@@ -17,11 +15,9 @@ test('Empty array should be selected for empty names', () => {
 
 test('Array of dropdown source should be selected for normal names', () => {
   const state = {
-    ui: {
-      settings: {
-        names: genMap('John', 'Mary', 'Henry', 'Joe'),
-        maker: 'a'
-      }
+    gameSettings: {
+      names: genMap('John', 'Mary', 'Henry', 'Joe'),
+      maker: 'a'
     }
   }
   const expected = [

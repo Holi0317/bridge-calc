@@ -3,10 +3,8 @@ import {makerSelector} from '../../../../src/selectors/ui/settings/maker'
 
 test('selector should select maker', () => {
   const state = {
-    ui: {
-      settings: {
-        ...defaultState
-      }
+    gameSettings: {
+      ...defaultState
     }
   }
   const expected = null
@@ -16,11 +14,9 @@ test('selector should select maker', () => {
 
 test('selector should select maker 2', () => {
   const state = {
-    ui: {
-      settings: {
-        ...defaultState,
-        maker: 'b'
-      }
+    gameSettings: {
+      ...defaultState,
+      maker: 'b'
     }
   }
   const expected = 'b'

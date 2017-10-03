@@ -3,11 +3,9 @@ import {genMap} from '../../../fixtures/current-game-states'
 
 test('Empty array should be selected when player names are empty', () => {
   const state = {
-    ui: {
-      settings: {
-        names: {},
-        maker: 'a'
-      }
+    gameSettings: {
+      names: {},
+      maker: 'a'
     }
   }
   const expected = []
@@ -17,11 +15,9 @@ test('Empty array should be selected when player names are empty', () => {
 
 test('Array of player names should be selected from settings state', () => {
   const state = {
-    ui: {
-      settings: {
-        names: genMap('John', 'Mary', 'Henry', 'Joe'),
-        maker: 'a'
-      }
+    gameSettings: {
+      names: genMap('John', 'Mary', 'Henry', 'Joe'),
+      maker: 'a'
     }
   }
   const expected = [
