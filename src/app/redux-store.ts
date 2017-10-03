@@ -4,8 +4,8 @@ import {entryReducer} from '../entry/entry-reducer'
 import {settingsReducer} from '../score-input/settings/reducer'
 
 const reducer = combineReducers({
+  entry: entryReducer,
   ui: combineReducers({
-    entry: entryReducer,
     settings: settingsReducer
   }),
   currentGame: currentGameReducer

@@ -11,7 +11,7 @@ import {Dispatch, IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => ({
-  optionsOpened: state.ui.entry.optionsOpened
+  optionsOpened: state.entry.optionsOpened
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

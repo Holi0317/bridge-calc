@@ -22,8 +22,8 @@ export interface IDropdownSource<T> {
 
 export interface IRootState {
   currentGame: GameState,
+  entry: IEntryState,
   ui: {
-    entry: IEntryState,
     settings: ISettingsState
   }
 }

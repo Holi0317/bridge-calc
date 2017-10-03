@@ -24,9 +24,9 @@ function namesToMap(playerNames: string[]) {
 }
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
-  rounds: state.ui.entry.rounds,
-  playerNames: state.ui.entry.playerNames,
-  startingRound: state.ui.entry.startingRound,
+  rounds: state.entry.rounds,
+  playerNames: state.entry.playerNames,
+  startingRound: state.entry.startingRound,
   valid: isEntryOptionsValid(state, t),
   miscError: entryOptionsValidator(state, t).misc
 })

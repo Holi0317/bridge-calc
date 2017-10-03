@@ -9,7 +9,7 @@ import {Dropdown} from '../material/dropdown'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => {
-  const entry = state.ui.entry
+  const {entry} = state
   return {
     sources: optionsSourcesSelector(state),
     cards: entry.cards,

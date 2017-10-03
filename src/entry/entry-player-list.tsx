@@ -16,7 +16,7 @@ export const setter = (newVal: string) => newVal
 export const errorGetter = (error: string[], value: string, index: number) => error[index]
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
-  playerNames: state.ui.entry.playerNames,
+  playerNames: state.entry.playerNames,
   playerNamesError: entryOptionsValidator(state, t).playerNames
 })
 

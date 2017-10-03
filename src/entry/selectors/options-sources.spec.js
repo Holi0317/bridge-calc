@@ -5,14 +5,12 @@ import {optionsSourcesSelector} from './options-sources'
  */
 function makeTree(rest) {
   return {
-    ui: {
-      entry: {
-        cards: 52,
-        rounds: 13,
-        startingRound: 1,
-        playerNames: ['John', 'Mary', 'Henry', 'Joe'],
-        ...rest
-      }
+    entry: {
+      cards: 52,
+      rounds: 13,
+      startingRound: 1,
+      playerNames: ['John', 'Mary', 'Henry', 'Joe'],
+      ...rest
     }
   }
 }

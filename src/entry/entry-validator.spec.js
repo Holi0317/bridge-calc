@@ -8,10 +8,8 @@ import {entryOptionsValidator as validator, isEntryOptionsValid} from './entry-v
  */
 function makeTree(playerNames) {
   return {
-    ui: {
-      entry: {
-        playerNames
-      }
+    entry: {
+      playerNames
     }
   }
 }

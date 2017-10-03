@@ -42,7 +42,7 @@ function validatePlayerName(rawNames: string[], t: I18nT): string[] | null {
  * Additional argument: i18next T object must be passed in as second argument.
  */
 export const entryOptionsValidator = createSelector(
-  (state: IRootState) => state.ui.entry.playerNames,
+  (state: IRootState) => state.entry.playerNames,
   (state: IRootState, t: I18nT) => t,
   (playerNames: string[], t: I18nT): IEntryError => {
     const res = {

@@ -16,9 +16,9 @@ const defaultRounds = [{value: 1, label: '1'}]
  * Select Dropdown source for entry options.
  */
 export const optionsSourcesSelector = createSelector(
-  (state: IRootState) => state.ui.entry.cards,
-  (state: IRootState) => state.ui.entry.playerNames.length,
-  (state: IRootState) => state.ui.entry.rounds,
+  (state: IRootState) => state.entry.cards,
+  (state: IRootState) => state.entry.playerNames.length,
+  (state: IRootState) => state.entry.rounds,
   (cards: number, playerLength: number, selectedRounds: number): IEntrySource => {
     const maxRounds = Math.floor(cards / playerLength)
     const rounds = playerLength > 0
