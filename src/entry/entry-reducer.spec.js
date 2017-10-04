@@ -1,13 +1,6 @@
-import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER, RESET_STATE} from '../../src/entry/entry-actions'
-import {entryReducer as reducer} from '../../src/entry'
-
-const defaultState = {
-  cards: 52,
-  rounds: 13,
-  startingRound: 1,
-  playerNames: ['John', 'Mary', 'Henry', 'Joe'],
-  optionsOpened: false
-}
+import {entryReducer as reducer} from './entry-reducer'
+import {OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER, RESET_STATE} from './entry-actions'
+import {defaultState} from '../../test-fixtures/entry-options'
 
 test('Default state', () => {
   const expected = {

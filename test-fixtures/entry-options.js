@@ -1,10 +1,11 @@
 import {deepFreeze} from './deep-freeze'
 
-export const defaultOptions = deepFreeze({
+export const defaultState = deepFreeze({
   cards: 52,
   rounds: 13,
   startingRound: 1,
-  playerNames: ['John', 'Mary', 'Henry', 'Joe']
+  playerNames: ['John', 'Mary', 'Henry', 'Joe'],
+  optionsOpened: false
 })
 
 /**
@@ -13,7 +14,7 @@ export const defaultOptions = deepFreeze({
 export function makeEntryTree(rest) {
   return {
     entry: {
-      ...defaultOptions,
+      ...defaultState,
       ...rest
     }
   }
