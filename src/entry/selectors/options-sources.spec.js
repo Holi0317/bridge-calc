@@ -1,19 +1,5 @@
 import {optionsSourcesSelector} from './options-sources'
-
-/**
- * Create part of redux tree for testing.
- */
-function makeTree(rest) {
-  return {
-    entry: {
-      cards: 52,
-      rounds: 13,
-      startingRound: 1,
-      playerNames: ['John', 'Mary', 'Henry', 'Joe'],
-      ...rest
-    }
-  }
-}
+import {makeEntryTree} from '../../../test-fixtures/entry-options'
 
 const defaultRound = [
   {value: 1, label: '1'},
@@ -41,7 +27,7 @@ const defaultSource = {
 }
 
 test('Default state should work', () => {
-  const state = makeTree({})
+  const state = makeEntryTree({})
   const expected = {
     ...defaultSource
   }
@@ -50,7 +36,7 @@ test('Default state should work', () => {
 })
 
 test('Source should change according to player number', () => {
-  const state = makeTree({
+  const state = makeEntryTree({
     rounds: 17,
     playerNames: ['John', 'Mary', 'Henry']
   })
@@ -71,7 +57,7 @@ test('Source should change according to player number', () => {
 })
 
 test('Sources should change according to card number', () => {
-  const state = makeTree({
+  const state = makeEntryTree({
     rounds: 26,
     cards: 104
   })
@@ -101,7 +87,7 @@ test('Sources should change according to card number', () => {
 })
 
 test('0 player should give 1 value in rounds and startingRound', () => {
-  const state = makeTree({
+  const state = makeEntryTree({
     playerNames: []
   })
   const expected = {
@@ -114,7 +100,7 @@ test('0 player should give 1 value in rounds and startingRound', () => {
 })
 
 test('startingRound should decrease according to number of rounds', () => {
-  const state = makeTree({
+  const state = makeEntryTree({
     rounds: 10
   })
   const startingRound = [

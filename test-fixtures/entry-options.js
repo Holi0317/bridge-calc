@@ -6,3 +6,15 @@ export const defaultOptions = deepFreeze({
   startingRound: 1,
   playerNames: ['John', 'Mary', 'Henry', 'Joe']
 })
+
+/**
+ * Create mock redux state tree for test related to entry module.
+ */
+export function makeEntryTree(rest) {
+  return {
+    entry: {
+      ...defaultOptions,
+      ...rest
+    }
+  }
+}

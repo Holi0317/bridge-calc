@@ -1,17 +1,14 @@
+import {entryOptionsValidator as validator, isEntryOptionsValid} from './entry-validator'
 import range from 'lodash-es/range'
 import {trans} from '../utils/translate'
-import {entryOptionsValidator as validator, isEntryOptionsValid} from './entry-validator'
+import {makeEntryTree} from '../../test-fixtures/entry-options'
 
 /**
  * Create part of redux store tree for validator to consume.
  * @param playerNames {string[]}
  */
 function makeTree(playerNames) {
-  return {
-    entry: {
-      playerNames
-    }
-  }
+  return makeEntryTree({playerNames})
 }
 
 const defaultNames = ['John', 'Mary', 'Henry', 'Joe']
