@@ -11,7 +11,7 @@ import {
   SET_NAMES
 } from './game-settings-actions'
 import {NameInputList} from '../../name-input-list'
-import {nameInputListSourceSelector, PlayerName, revert} from '../../selectors/ui/settings/name-input-list-source'
+import {nameInputListSourceSelector, PlayerName, revert} from './selectors/name-input-list-source'
 import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../../types'
 import {GameState} from '../reducer/types'
 import {randomName} from '../../example-names'

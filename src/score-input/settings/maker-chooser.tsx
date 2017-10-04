@@ -3,10 +3,10 @@ import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Dropdown} from '../../material/dropdown'
-import {makerSourceSelector} from '../../selectors/ui/settings/maker-source'
+import {makerSourceSelector} from './selectors/maker-source'
 import {SET_MAKER, ISetMakerAction} from './game-settings-actions'
 import {Dispatch, IRootState, ITranslateMixin} from '../../types'
-import {makerSelector} from '../../selectors/ui/settings/maker'
+import {makerSelector} from './selectors/maker'
 import {returntypeof} from 'react-redux-typescript'
 
 const mapStateToProps = (state: IRootState) => ({
