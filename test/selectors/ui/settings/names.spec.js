@@ -1,4 +1,4 @@
-import {defaultState} from '../../../fixtures/settings-state'
+import {defaultState} from '../../../../test-fixtures/settings-state'
 import {namesSelector} from '../../../../src/selectors/ui/settings/names'
 
 test('names property should be selected from ui/settings', () => {

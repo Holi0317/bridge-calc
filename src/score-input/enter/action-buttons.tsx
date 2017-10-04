@@ -8,7 +8,7 @@ import {GameStage} from '../game-stage'
 import {BID, IBidAction, IUndoAction, IWinAction, UNDO, WIN} from '../score-input-actions'
 import {Dispatch, IRootState, ITranslateMixin} from '../../types'
 import {GameState} from '../reducer/index'
-import {stageSelector} from '../../selectors/current-game/stage'
+import {stageSelector} from '../selectors/stage'
 import {isStackInputValid} from './stack-input-validator'
 import style from './action-buttons.css'
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {gameTitleSelector} from '../selectors/current-game/game-title'
+import {gameTitleSelector} from './selectors/game-title'
 import {IRootState, ITranslateMixin} from '../types'
 import {returntypeof} from 'react-redux-typescript'
 

@@ -1,4 +1,4 @@
-import {defaultState} from '../../../fixtures/settings-state'
+import {defaultState} from '../../../../test-fixtures/settings-state'
 import {makerSelector} from '../../../../src/selectors/ui/settings/maker'
 
 test('selector should select maker', () => {

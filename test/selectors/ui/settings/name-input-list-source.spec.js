@@ -1,5 +1,5 @@
 import {nameInputListSourceSelector} from '../../../../src/selectors/ui/settings/name-input-list-source'
-import {genMap} from '../../../fixtures/current-game-states'
+import {genMap} from '../../../../test-fixtures/current-game-states'
 
 test('Empty array should be selected when player names are empty', () => {
   const state = {

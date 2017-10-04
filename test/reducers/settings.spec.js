@@ -1,7 +1,7 @@
 import {settingsReducer as reducer} from '../../src/score-input/settings/reducer'
-import {defaultState} from '../fixtures/settings-state'
+import {defaultState} from '../../test-fixtures/settings-state'
 import {ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from '../../src/score-input/settings/game-settings-actions'
-import {endedState, genMap, waitingBidState} from '../fixtures/current-game-states'
+import {endedState, genMap, waitingBidState} from '../../test-fixtures/current-game-states'
 
 test('Default state', () => {
   const state = undefined

@@ -1,5 +1,5 @@
 import {makerSourceSelector} from '../../../../src/selectors/ui/settings/maker-source'
-import {genMap} from '../../../fixtures/current-game-states'
+import {genMap} from '../../../../test-fixtures/current-game-states'
 
 test('Empty array should be selected for empty names', () => {
   const state = {

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {returntypeof} from 'react-redux-typescript'
 import {IRootState, ITranslateMixin} from '../../types'
-import {endTimeSelector, startTimeSelector} from '../../selectors/current-game/time'
+import {endTimeSelector, startTimeSelector} from '../selectors/time'
 import utilsCSS from '../../styles/utils.css'
 
 function msToTime(milliseconds: number) {
