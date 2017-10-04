@@ -1,6 +1,5 @@
 import mapValues from 'lodash-es/mapValues'
 import {calculateScore} from './calculate-score'
-
 import {IPlayerMap} from '../../types'
 
 /**

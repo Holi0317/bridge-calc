@@ -21,19 +21,13 @@ test('Production of default basic state after start', () => {
 })
 
 test('Start on second round should work', () => {
-  const expected = {
-    ...waitingBidState,
-    scores: genMap([0], [0], [0], [0]),
-    currentPlayerOrder: ['b', 'c', 'd', 'a'],
-    currentRound: 2
-  }
   const action = {
     type: START,
     ...startParams,
     startingRound: 2
   }
   const actual = reducer(null, action)
-  expect(actual).toEqual(expected)
+  expect(actual).toMatchSnapshot()
 })
 
 test('Skip should do no-op when the state is null', () => {
@@ -409,7 +403,8 @@ test('Change players should do no-op in null state', () => {
     type: CHANGE_PLAYERS,
     newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
     maker: 'a',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toBe(expected)
@@ -426,7 +421,8 @@ test('Change players should do no-op in ended state', () => {
     type: CHANGE_PLAYERS,
     newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
     maker: 'a',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -443,7 +439,8 @@ test('Change players should do no-op when given names are same as original map a
     type: CHANGE_PLAYERS,
     newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
     maker: 'a',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -460,7 +457,8 @@ test('Change players should revert stage to waitingBid for waitingWin stage', ()
     type: CHANGE_PLAYERS,
     newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
     maker: 'a',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -478,7 +476,8 @@ test("Change players should change player's names from given map", () => {
     type: CHANGE_PLAYERS,
     newNames: genMap('John', 'DPGJW', 'Henry', 'Joe'),
     maker: 'a',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -504,7 +503,8 @@ test('Change players should change all maps order from given map (For no additio
     type: CHANGE_PLAYERS,
     newNames: genReorderedMap('Mary', 'Henry', 'Joe', 'John'),
     maker: 'b',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -522,7 +522,8 @@ test('Change players should re-order players by given maker', () => {
     type: CHANGE_PLAYERS,
     newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
     maker: 'c',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -540,7 +541,8 @@ test('Change players should change rounds from given payload', () => {
     type: CHANGE_PLAYERS,
     newNames: genMap('John', 'Mary', 'Henry', 'Joe'),
     maker: 'a',
-    rounds: 12
+    rounds: 12,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -566,7 +568,8 @@ test('Change players should remove all data from removed player', () => {
     type: CHANGE_PLAYERS,
     newNames: genSmallMap('John', 'Mary', 'Henry'),
     maker: 'a',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -595,7 +598,8 @@ test('Change players should assign 0 mark for ended rounds of new player', () =>
     type: CHANGE_PLAYERS,
     newNames: genNewMap('John', 'Mary', 'Henry', 'Joe', 'DPGJW'),
     maker: 'b',
-    rounds: 13
+    rounds: 13,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -607,7 +611,7 @@ test('Change players should end game when given rounds is less than current roun
     rounds: 1,
     scores: genMap([0], [0], [0], [0]),
     names: genMap('Mary', 'John', 'Henry', 'Joe'),
-    endTime: new Date(60000) // 1 minute in ms
+    endTime: new Date(1) // 1 minute in ms
   }
   const s = [0, 0] // Short hand for score
   const state = {
@@ -620,7 +624,8 @@ test('Change players should end game when given rounds is less than current roun
     type: CHANGE_PLAYERS,
     newNames: genMap('Mary', 'John', 'Henry', 'Joe'),
     maker: 'a',
-    rounds: 1
+    rounds: 1,
+    time: new Date(1)
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)

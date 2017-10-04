@@ -5,12 +5,11 @@ import {toFront} from '../../utils'
 import {IEndedState, IWaitingBidState, IWaitingWinState} from './types'
 import {IChangePlayersAction} from '../score-input-actions'
 
-export function changePlayersHandler(rawState: IWaitingBidState | IWaitingWinState, {newNames, rounds, maker}: IChangePlayersAction): IWaitingBidState | IEndedState {
+export function changePlayersHandler(rawState: IWaitingBidState | IWaitingWinState, {newNames, rounds, maker, time}: IChangePlayersAction): IWaitingBidState | IEndedState {
   // Short circuit. When action.rounds is less than current round
   if (rounds < rawState.currentRound) {
-    const endTime = new Date(rawState.startTime.getTime() + 60000)
     // tslint:disable-next-line: no-shadowed-variable
-    const state = toEndedState(rawState, endTime)
+    const state = toEndedState(rawState, time)
     state.names = newNames
     state.rounds = rounds
     state.scores = mapValues(state.scores, (score: number[]) => score.slice(0, rounds))

@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should end game when it is dispatched at last round 1`] = `
+Object {
+  "endTime": 1970-01-01T00:00:00.001Z,
+  "names": Object {
+    "a": "John",
+    "b": "Mary",
+    "c": "Henry",
+    "d": "Joe",
+  },
+  "rounds": 1,
+  "scores": Object {
+    "a": Array [
+      -1,
+    ],
+    "b": Array [
+      10,
+    ],
+    "c": Array [
+      10,
+    ],
+    "d": Array [
+      10,
+    ],
+  },
+  "stage": "ended",
+  "startTime": 1970-01-01T00:00:00.000Z,
+}
+`;
+
+exports[`it should use given win to calculate score 1`] = `
+Object {
+  "bid": Object {
+    "a": 0,
+    "b": 0,
+    "c": 0,
+    "d": 0,
+  },
+  "currentPlayerOrder": Array [
+    "b",
+    "c",
+    "d",
+    "a",
+  ],
+  "currentRound": 2,
+  "names": Object {
+    "a": "John",
+    "b": "Mary",
+    "c": "Henry",
+    "d": "Joe",
+  },
+  "rounds": 13,
+  "scores": Object {
+    "a": Array [
+      10,
+    ],
+    "b": Array [
+      10,
+    ],
+    "c": Array [
+      10,
+    ],
+    "d": Array [
+      -1,
+    ],
+  },
+  "stage": "waitingBid",
+  "startTime": 1970-01-01T00:00:00.000Z,
+}
+`;
+
+exports[`it should use win in state object to calculate score when win is not given in action 1`] = `
+Object {
+  "bid": Object {
+    "a": 0,
+    "b": 0,
+    "c": 0,
+    "d": 0,
+  },
+  "currentPlayerOrder": Array [
+    "b",
+    "c",
+    "d",
+    "a",
+  ],
+  "currentRound": 2,
+  "names": Object {
+    "a": "John",
+    "b": "Mary",
+    "c": "Henry",
+    "d": "Joe",
+  },
+  "rounds": 13,
+  "scores": Object {
+    "a": Array [
+      -1,
+    ],
+    "b": Array [
+      10,
+    ],
+    "c": Array [
+      10,
+    ],
+    "d": Array [
+      10,
+    ],
+  },
+  "stage": "waitingBid",
+  "startTime": 1970-01-01T00:00:00.000Z,
+}
+`;

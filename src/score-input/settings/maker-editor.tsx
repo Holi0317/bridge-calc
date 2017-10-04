@@ -24,6 +24,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     const action: IChangePlayersAction = {
       type: CHANGE_PLAYERS,
       newNames: names,
+      time: new Date(),
       maker,
       rounds
     }

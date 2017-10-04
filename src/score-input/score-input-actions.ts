@@ -106,7 +106,7 @@ export interface IWinAction {
   type: typeof WIN,
   /**
    * A map that maps player ID to their win choice.
-   * If this is not defined, win property in currentGame state will be used as win.
+   * If this is not defined, win property in currentGame state will be used as fallback.
    */
   win?: IPlayerMap<number>,
   /**
@@ -155,5 +155,11 @@ export interface IChangePlayersAction {
    * If the above case happens, endTime of the game will be starting time + 1 min.
    * Because providing such round is invalid and validation should not be done in reducer.
    */
-  rounds: number
+  rounds: number,
+  /**
+   * Time for this action to dispatch.
+   * It is possible for this action to end the game. Therefore time is required
+   * to record end game time.
+   */
+  time: Date
 }

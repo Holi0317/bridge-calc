@@ -18,7 +18,7 @@ export function toWaitingBidState(state: IWaitingBidState | IWaitingWinState): I
 export function toWaitingWinState(state: IWaitingBidState | IWaitingWinState): IWaitingWinState {
   const newState = toWaitingBidState(state) as any // Just to remove some whitelist boilerplate
   newState.stage = GameStage.waitingWin
-  newState.win = (state as any).win || bidWinGenerator(Object.keys(state.names))
+  newState.win = (state as IWaitingWinState).win || bidWinGenerator(Object.keys(state.names))
   return newState
 }
 
