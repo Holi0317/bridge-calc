@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import flowRight from 'lodash-es/flowRight'
+import uniqueId from 'lodash-es/uniqueId'
 import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 import {IStartAction, START} from '../score-input/score-input-actions'
-import {genID} from '../utils'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
 
@@ -18,7 +18,7 @@ import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
 function namesToMap(playerNames: string[]) {
   const result: IPlayerMap<string> = {}
   playerNames.forEach(name => {
-    result[genID()] = name
+    result[uniqueId('player_')] = name
   })
   return result
 }

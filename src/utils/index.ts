@@ -1,7 +1,6 @@
 export {createSource} from './create-source'
 export {dupe} from './dupe'
 export {fillObj} from './fill-obj'
-export {genID} from './gen-id'
 export {isOk} from './is-ok'
 export {nth} from './nth'
 export {removeUndef} from './remove-undef'
