@@ -1,18 +1,13 @@
 import * as React from 'react'
+import {bindActionCreators, Dispatch} from 'redux'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
-import {IPlayerNamesSetAction, IResetStateAction, PLAYER_NAMES_SET, RESET_STATE} from './entry-actions'
 import {genRandomNames} from '../example-names'
-import {Dispatch} from '../types'
+import {setPlayerNames} from './actions/set-player-names'
+import {reset} from './actions/reset'
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  genOptions() {
-    const resetAction: IResetStateAction = {type: RESET_STATE}
-    dispatch(resetAction)
-    const action: IPlayerNamesSetAction = {type: PLAYER_NAMES_SET, payload: genRandomNames()}
-    dispatch(action)
-  }
-})
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators({reset, setPlayerNames}, dispatch)
 
 const dispatchType = returntypeof(mapDispatchToProps)
 
@@ -22,7 +17,8 @@ export class InitEntryStateImpl extends React.PureComponent {
   public props: InitEntryStateProps
 
   public componentWillMount() {
-    this.props.genOptions()
+    this.props.reset()
+    this.props.setPlayerNames(genRandomNames())
   }
 
   public render() {

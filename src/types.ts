@@ -1,5 +1,5 @@
 import {CurrentGameActions} from './score-input/score-input-actions'
-import {EntryActions} from './entry/entry-actions'
+import {EntryActions} from './entry/actions'
 import {GameState} from './score-input/reducer'
 import {IEntryState} from './entry/entry-reducer'
 import {ISettingsState} from './score-input/settings/reducer'

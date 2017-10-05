@@ -1,11 +1,14 @@
 import * as React from 'react'
+import {bindActionCreators, Dispatch} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
-import {ROUNDS_SET, CARDS_SET, STARTING_ROUND_SET} from './entry-actions'
-import {optionsSourcesSelector} from './selectors/options-sources'
-import {Dispatch, IRootState, ITranslateMixin} from '../types'
 import {Dropdown} from '../material/dropdown'
+import {setCards} from './actions/set-cards'
+import {setRounds} from './actions/set-rounds'
+import {optionsSourcesSelector} from './selectors/options-sources'
+import {setStartingRound} from './actions/set-starting-round'
+import {IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => {
@@ -18,45 +21,36 @@ const mapStateToProps = (state: IRootState) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  cardsSet(payload: number) {
-    dispatch({type: CARDS_SET, payload})
-  },
-  roundsSet(payload: number) {
-    dispatch({type: ROUNDS_SET, payload})
-  },
-  startingRoundSet(payload: number) {
-    dispatch({type: STARTING_ROUND_SET, payload})
-  }
-})
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators({setCards, setRounds, setStartingRound}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
 type EntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-export function EntryOptionsImpl({t, sources, cards, rounds, startingRound, cardsSet, roundsSet, startingRoundSet}: EntryOptionsProps) {
+export function EntryOptionsImpl({t, sources, cards, rounds, startingRound, setCards, setRounds, setStartingRound}: EntryOptionsProps) {
   return (
     <div className={style.optionsRootContainer}>
       <div className={style.optionsContainer}>
         <span>{t('Number of cards')}</span>
         <Dropdown label={t('Number of cards')}
           value={cards} source={sources.cards}
-          onChange={cardsSet} />
+          onChange={setCards} />
       </div>
 
       <div className={style.optionsContainer}>
         <span>{t('Number of rounds')}</span>
         <Dropdown label={t('Number of rounds')}
           value={rounds} source={sources.rounds}
-          onChange={roundsSet} />
+          onChange={setRounds} />
       </div>
 
       <div className={style.optionsContainer}>
         <span>{t('Starting round')}</span>
         <Dropdown label={t('Starting round')}
           value={startingRound} source={sources.startingRound}
-          onChange={startingRoundSet} />
+          onChange={setStartingRound} />
       </div>
     </div>
   )

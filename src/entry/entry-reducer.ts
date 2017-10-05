@@ -1,7 +1,11 @@
-import {
-  EntryActions, OPTION_OPEN_TOGGLE, ROUNDS_SET, CARDS_SET, PLAYER_NAMES_SET, STARTING_ROUND_SET, ADD_PLAYER,
-  RESET_STATE
-} from './entry-actions'
+import {EntryActions} from './actions'
+import {TOGGLE_OPTION_OPEN} from './actions/toggle-option-open'
+import {SET_ROUNDS} from './actions/set-rounds'
+import {SET_CARDS} from './actions/set-cards'
+import {SET_STARTING_ROUND} from './actions/set-starting-round'
+import {ADD_PLAYER} from './actions/add-player'
+import {SET_PLAYER_NAMES} from './actions/set-player-names'
+import {RESET} from './actions/reset'
 
 export interface IEntryState {
   cards: number,
@@ -58,12 +62,12 @@ function playerNameAction(state: IEntryState, playerNames: string[]) {
 
 export function entryReducer(state: IEntryState = defaultState, action: EntryActions) {
   switch (action.type) {
-  case OPTION_OPEN_TOGGLE:
+  case TOGGLE_OPTION_OPEN:
     return {
       ...state,
       optionsOpened: !state.optionsOpened
     }
-  case ROUNDS_SET: {
+  case SET_ROUNDS: {
     const startingRound = state.startingRound > action.payload
       ? 1
       : state.startingRound
@@ -73,22 +77,22 @@ export function entryReducer(state: IEntryState = defaultState, action: EntryAct
       startingRound
     }
   }
-  case CARDS_SET:
+  case SET_CARDS:
     return {
       ...state,
       cards: action.payload,
       rounds: Math.floor(action.payload / state.playerNames.length)
     }
-  case STARTING_ROUND_SET:
+  case SET_STARTING_ROUND:
     return {
       ...state,
       startingRound: action.payload
     }
   case ADD_PLAYER:
     return playerNameAction(state, [...state.playerNames, action.payload])
-  case PLAYER_NAMES_SET:
+  case SET_PLAYER_NAMES:
     return playerNameAction(state, action.payload)
-  case RESET_STATE:
+  case RESET:
     return defaultState
   default:
     return state
