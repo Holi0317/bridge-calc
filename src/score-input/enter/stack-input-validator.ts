@@ -2,6 +2,7 @@ import {createSelector} from 'reselect'
 import sumBy from 'lodash-es/sumBy'
 import mapValues from 'lodash-es/mapValues'
 import last from 'lodash-es/last'
+import {TranslationFunction} from 'i18next'
 import {stageSelector} from '../selectors/stage'
 import {playerOrderSelector} from '../selectors/player-order'
 import {bidSelector} from '../selectors/bid'
@@ -9,7 +10,7 @@ import {winSelector} from '../selectors/win'
 import {currentRoundSelector} from '../selectors/current-round'
 import {GameStage} from '../game-stage'
 import {isOk, removeUndef} from '../../utils'
-import {I18nT, IPlayerMap, IRootState} from '../../types'
+import {IPlayerMap, IRootState} from '../../types'
 
 export interface IStackInput {
   bid?: IPlayerMap<number>,
@@ -23,7 +24,7 @@ export interface IStackInputError {
   win?: IPlayerMap<string>
 }
 
-function validateBid(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
+function validateBid(opts: IStackInput, t: TranslationFunction): IPlayerMap<string> | null {
   if (!opts.bid) {
     return null
   }
@@ -33,7 +34,7 @@ function validateBid(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
     : null
 }
 
-function validateWin(opts: IStackInput, t: I18nT): IPlayerMap<string> | null {
+function validateWin(opts: IStackInput, t: TranslationFunction): IPlayerMap<string> | null {
   if (!opts.win || /* Is empty? */isOk(opts.win)) {
     return null
   }
@@ -60,8 +61,8 @@ export const stackInputValidator = createSelector(
   bidSelector,
   winSelector,
   currentRoundSelector,
-  (state: IRootState, t: I18nT) => t,
-  (stage: GameStage | null, playerOrder: string[], bid: IPlayerMap<number>, win: IPlayerMap<number>, currentRound: number, t: I18nT) => {
+  (state: IRootState, t: TranslationFunction) => t,
+  (stage: GameStage | null, playerOrder: string[], bid: IPlayerMap<number>, win: IPlayerMap<number>, currentRound: number, t: TranslationFunction) => {
     if (!stage || stage === GameStage.ended) {
       return {}
     }

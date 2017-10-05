@@ -1,6 +1,7 @@
-import {I18nT, IRootState} from '../types'
-import {dupe, removeUndef, isOk} from '../utils'
 import {createSelector} from 'reselect'
+import {TranslationFunction} from 'i18next'
+import {dupe, removeUndef, isOk} from '../utils'
+import {IRootState} from '../types'
 
 const playerUpperLimit = 52
 
@@ -9,7 +10,7 @@ export interface IEntryError {
   misc?: string
 }
 
-function validateMisc(playerNames: string[], t: I18nT): string | null {
+function validateMisc(playerNames: string[], t: TranslationFunction): string | null {
   if (playerNames.length < 2) {
     return t('At least 2 players is required for a game')
   } else if (playerNames.length > playerUpperLimit) {
@@ -18,7 +19,7 @@ function validateMisc(playerNames: string[], t: I18nT): string | null {
   return null
 }
 
-function validatePlayerName(rawNames: string[], t: I18nT): string[] | null {
+function validatePlayerName(rawNames: string[], t: TranslationFunction): string[] | null {
   const duplicates = dupe(rawNames)
   const playerNames = rawNames
     .map(p => (
@@ -43,8 +44,8 @@ function validatePlayerName(rawNames: string[], t: I18nT): string[] | null {
  */
 export const entryOptionsValidator = createSelector(
   (state: IRootState) => state.entry.playerNames,
-  (state: IRootState, t: I18nT) => t,
-  (playerNames: string[], t: I18nT): IEntryError => {
+  (state: IRootState, t: TranslationFunction) => t,
+  (playerNames: string[], t: TranslationFunction): IEntryError => {
     const res = {
       misc: validateMisc(playerNames, t),
       playerNames: validatePlayerName(playerNames, t)

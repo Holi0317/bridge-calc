@@ -8,8 +8,6 @@ import {TranslationFunction} from 'i18next'
 
 export interface IPlayerMap<T> {[playerID: string]: T}
 
-export type I18nT = TranslationFunction
-
 export interface ITranslateMixin {
   t: TranslationFunction
 }
