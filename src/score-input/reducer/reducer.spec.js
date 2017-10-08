@@ -1,10 +1,11 @@
 import {START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../score-input-actions'
 import {startParams, waitingBidState, waitingWinState, endedState, genMap} from '../../../test-fixtures/current-game-states'
 import {currentGameReducer as reducer} from './reducer'
+import * as lolex from 'lolex'
 
 test('Default state should be null', () => {
   const expected = null
-  const actual = reducer(undefined, {type: ''})
+  const actual = reducer(undefined, {type: '#NULL'})
   expect(expected).toBe(actual)
 })
 

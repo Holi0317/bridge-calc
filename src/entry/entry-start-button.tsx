@@ -1,27 +1,15 @@
 import * as React from 'react'
+import {bindActionCreators, Dispatch} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
+import {RouteComponentProps, withRouter} from 'react-router'
 import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import flowRight from 'lodash-es/flowRight'
-import uniqueId from 'lodash-es/uniqueId'
-import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../types'
-import style from './entry.css'
-import {IStartAction, START} from '../score-input/score-input-actions'
-import {RouteComponentProps, withRouter} from 'react-router'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
-
-/**
- * Change player names array to object with random generated player ID as key.
- * @param playerNames
- */
-function namesToMap(playerNames: string[]) {
-  const result: IPlayerMap<string> = {}
-  playerNames.forEach(name => {
-    result[uniqueId('player_')] = name
-  })
-  return result
-}
+import {start} from '../score-input/actions/start'
+import {IRootState, ITranslateMixin} from '../types'
+import style from './entry.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   rounds: state.entry.rounds,
@@ -31,12 +19,8 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   miscError: entryOptionsValidator(state, t).misc
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  start(param: IStartAction) {
-    const action: IStartAction = {...param, type: START}
-    dispatch(action)
-  }
-})
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators({start}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
@@ -58,14 +42,7 @@ export class EntryStartButtonImpl extends React.PureComponent {
 
   private start = () => {
     const {rounds, playerNames, startingRound, start, history} = this.props
-    const startParam: IStartAction = {
-      rounds,
-      startingRound,
-      playerNames: namesToMap(playerNames),
-      startTime: new Date(),
-      type: START
-    }
-    start(startParam)
+    start(rounds, playerNames, startingRound)
     history.push('/score-input')
   }
 }

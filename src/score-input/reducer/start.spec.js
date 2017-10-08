@@ -1,25 +1,27 @@
 import {start} from './start'
-import {START} from '../score-input-actions'
-import {startParams, waitingBidState} from '../../../test-fixtures/current-game-states'
+import {start as startAction} from '../actions/start'
+import * as lolex from 'lolex'
+
+const playerNames = ['John', 'Mary', 'Henry', 'Joe']
+
+let clock = null
+beforeEach(() => {
+  clock = lolex.install()
+})
+afterEach(() => {
+  if (clock) {
+    clock.uninstall()
+  }
+})
 
 test('it should generate state according to action', () => {
-  const action = {
-    ...startParams,
-    type: START
-  }
-  const expected = {
-    ...waitingBidState
-  }
+  const action = startAction(13, playerNames, 1)
   const actual = start(action)
-  expect(actual).toEqual(expected)
+  expect(actual).toMatchSnapshot() // New ID is generated. If new test is added, just update snapshot
 })
 
 test('Starting in the middle of the game should work', () => {
-  const action = {
-    ...startParams,
-    type: START,
-    startingRound: 5
-  }
+  const action = startAction(13, playerNames, 5)
   const actual = start(action)
   expect(actual).toMatchSnapshot()
 })

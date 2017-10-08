@@ -1,16 +1,17 @@
 import * as React from 'react'
+import {bindActionCreators, Dispatch} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import Snackbar from 'material-ui/Snackbar'
-import {CHANGE_PLAYERS, IChangePlayersAction} from '../score-input-actions'
 import {namesSelector} from '../selectors/names'
 import {roundsSelector} from '../selectors/rounds'
 import {makerSelector} from './selectors/maker'
 import {MakerChooser} from './maker-chooser'
-import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../../types'
+import {changePlayers} from '../actions/change-players'
+import {IRootState, ITranslateMixin} from '../../types'
 import style from './maker-editor.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -19,18 +20,8 @@ const mapStateToProps = (state: IRootState) => ({
   maker: makerSelector(state)
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  commit(names: IPlayerMap<string>, rounds: number, maker: string) {
-    const action: IChangePlayersAction = {
-      type: CHANGE_PLAYERS,
-      newNames: names,
-      time: new Date(),
-      maker,
-      rounds
-    }
-    dispatch(action)
-  }
-})
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators({changePlayers}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
@@ -56,8 +47,8 @@ export class MakerEditorImpl extends React.Component {
   }
 
   private commit = () => {
-    const {names, rounds, maker, commit} = this.props
-    commit(names, rounds!, maker!)
+    const {names, rounds, maker, changePlayers} = this.props
+    changePlayers(names, maker!, rounds!)
     this.setState(() => ({
       snackbarOpen: true
     }))

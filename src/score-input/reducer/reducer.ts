@@ -1,4 +1,3 @@
-import {CurrentGameActions, START, SKIP, SET_BID, BID, SET_WIN, WIN, UNDO, CHANGE_PLAYERS} from '../score-input-actions'
 import {GameStage} from '../game-stage'
 import {skip} from './skip'
 import {start} from './start'
@@ -7,6 +6,15 @@ import {changePlayersHandler} from './change-players-handler'
 import {toWaitingBidState} from './converter'
 import {bidWinGenerator} from './bid-win-generator'
 import {GameState} from './types'
+import {CurrentGameActions} from '../actions'
+import {SKIP} from '../actions/skip'
+import {SET_BID} from '../actions/set-bid'
+import {SET_WIN} from '../actions/set-win'
+import {BID} from '../actions/bid'
+import {WIN} from '../actions/win'
+import {UNDO} from '../actions/undo'
+import {CHANGE_PLAYERS} from '../actions/change-players'
+import {START} from '../actions/start'
 
 const defaultState: GameState = null
 

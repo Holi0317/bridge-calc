@@ -4,7 +4,7 @@ import {toEndedState, toWaitingBidState} from './converter'
 import {bidWinGenerator} from './bid-win-generator'
 import {toFront} from '../../utils'
 import {GameState, IWaitingBidState, IWaitingWinState} from './types'
-import {IWinAction} from '../score-input-actions'
+import {IWinAction} from '../actions/win'
 
 /**
  * Handler for WIN action
