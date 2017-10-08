@@ -37,5 +37,5 @@ export const waitingWinState = deepFreeze({
 export const endedState = deepFreeze({
   ...baseGameState,
   stage: GameStage.ended,
-  endTime: new Date(1)
+  endTime: new Date(0)
 })

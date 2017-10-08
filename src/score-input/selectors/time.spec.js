@@ -42,7 +42,7 @@ test('End time selector should select null for running state', () => {
 })
 
 test('End time selector should select time for ended state', () => {
-  const expected = new Date(1)
+  const expected = new Date(0)
   const state = {
     currentGame: {
       ...endedState
