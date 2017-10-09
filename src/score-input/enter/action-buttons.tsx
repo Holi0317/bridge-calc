@@ -8,9 +8,9 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {GameStage} from '../game-stage'
 import {stageSelector} from '../selectors/stage'
 import {isStackInputValid} from './stack-input-validator'
-import {bid} from '../actions/bid'
-import {win} from '../actions/win'
-import {undo} from '../actions/undo'
+import {bidAction} from '../actions/bid'
+import {winAction} from '../actions/win'
+import {undoAction} from '../actions/undo'
 import {IRootState, ITranslateMixin} from '../../types'
 import style from './action-buttons.css'
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({bid, win, undo}, dispatch)
+  bindActionCreators({bid: bidAction, win: winAction, undo: undoAction}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)

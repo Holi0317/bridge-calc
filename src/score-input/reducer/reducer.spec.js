@@ -1,14 +1,14 @@
 import {waitingBidState, waitingWinState, endedState, genMap} from '../../../test-fixtures/current-game-states'
 import {currentGameReducer as reducer} from './reducer'
 import * as lolex from 'lolex'
-import {start} from '../actions/start'
-import {skip} from '../actions/skip'
-import {setBid} from '../actions/set-bid'
-import {setWin} from '../actions/set-win'
-import {bid} from '../actions/bid'
-import {win} from '../actions/win'
-import {undo} from '../actions/undo'
-import {changePlayers} from '../actions/change-players'
+import {startAction} from '../actions/start'
+import {skipAction} from '../actions/skip'
+import {setBidAction} from '../actions/set-bid'
+import {setWinAction} from '../actions/set-win'
+import {bidAction} from '../actions/bid'
+import {winAction} from '../actions/win'
+import {undoAction} from '../actions/undo'
+import {changePlayersAction} from '../actions/change-players'
 
 let clock = null
 beforeEach(() => {
@@ -27,20 +27,20 @@ test('Default state should be null', () => {
 })
 
 test('Production of default basic state after start', () => {
-  const action = start(13, ['John', 'Mary', 'Henry', 'Joe'], 1)
+  const action = startAction(13, ['John', 'Mary', 'Henry', 'Joe'], 1)
   const actual = reducer(null, action)
   expect(actual).toMatchSnapshot()
 })
 
 test('Start on second round should work', () => {
-  const action = start(13, ['John', 'Mary', 'Henry', 'Joe'], 2)
+  const action = startAction(13, ['John', 'Mary', 'Henry', 'Joe'], 2)
   const actual = reducer(null, action)
   expect(actual).toMatchSnapshot()
 })
 
 test('Skip should do no-op when the state is null', () => {
   const expected = null
-  const action = skip()
+  const action = skipAction()
   const actual = reducer(null, action)
   expect(actual).toBe(expected)
 })
@@ -55,7 +55,7 @@ test('Skip should skip 1 round if no payload is supplied', () => {
   const state = {
     ...waitingBidState
   }
-  const action = skip()
+  const action = skipAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -72,7 +72,7 @@ test('Skip should reset bid and win data', () => {
     bid: genMap(0, 1, 0, 1),
     win: genMap(0, 1, 0, 0)
   }
-  const action = skip(1)
+  const action = skipAction(1)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -87,7 +87,7 @@ test('Skip on last round should change state to ended', () => {
     ...waitingBidState,
     rounds: 2
   }
-  const action = skip()
+  const action = skipAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -99,14 +99,14 @@ test('Skip on ended state should do no-op', () => {
   const state = {
     ...endedState
   }
-  const action = skip()
+  const action = skipAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
 
 test('Set bid should do no-op when state is null', () => {
   const expected = null
-  const action = setBid(genMap(0, 0, 0, 0))
+  const action = setBidAction(genMap(0, 0, 0, 0))
   const actual = reducer(null, action)
   expect(actual).toBe(expected)
 })
@@ -118,7 +118,7 @@ test('Set bid should do no-op when stage is ended', () => {
   const state = {
     ...endedState
   }
-  const action = setBid(genMap(0, 0, 0, 0))
+  const action = setBidAction(genMap(0, 0, 0, 0))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -132,14 +132,14 @@ test('Set bid should set bid property', () => {
     ...waitingBidState,
     bid: genMap(0, 0, 0, 0)
   }
-  const action = setBid(genMap(0, 1, 0, 0))
+  const action = setBidAction(genMap(0, 1, 0, 0))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
 
 test('Set win should do no-op when state is null', () => {
   const expected = null
-  const action = setWin(genMap(0, 0, 0, 0))
+  const action = setWinAction(genMap(0, 0, 0, 0))
   const actual = reducer(null, action)
   expect(actual).toBe(expected)
 })
@@ -151,7 +151,7 @@ test('Set win should do no-op when stage is ended', () => {
   const state = {
     ...endedState
   }
-  const action = setWin(genMap(0, 0, 0, 0))
+  const action = setWinAction(genMap(0, 0, 0, 0))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -165,14 +165,14 @@ test('Set win should set win property', () => {
     ...waitingWinState,
     win: genMap(0, 0, 0, 0)
   }
-  const action = setWin(genMap(0, 1, 0, 0))
+  const action = setWinAction(genMap(0, 1, 0, 0))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
 
 test('Bid should do no-op when the state is null', () => {
   const expected = null
-  const action = bid(genMap(0, 1, 0, 1))
+  const action = bidAction(genMap(0, 1, 0, 1))
   const actual = reducer(null, action)
   expect(actual).toBe(expected)
 })
@@ -184,7 +184,7 @@ test('Bid should do no-op when game stage is ended', () => {
   const state = {
     ...endedState
   }
-  const action = bid(genMap(0, 1, 0, 1))
+  const action = bidAction(genMap(0, 1, 0, 1))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -198,7 +198,7 @@ test('Bid should change stage to waitingWin', () => {
     ...waitingBidState,
     bid: genMap(0, 0, 0, 0)
   }
-  const action = bid(genMap(0, 1, 0, 1))
+  const action = bidAction(genMap(0, 1, 0, 1))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -212,7 +212,7 @@ test('Bid should use data from currentGame.bid when bid is not given in payload'
     ...waitingBidState,
     bid: genMap(0, 1, 0, 1)
   }
-  const action = bid()
+  const action = bidAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -220,7 +220,7 @@ test('Bid should use data from currentGame.bid when bid is not given in payload'
 test('Win should do no-op when state is null', () => {
   const expected = null
   const state = null
-  const action = win(genMap(0, 1, 0, 0))
+  const action = winAction(genMap(0, 1, 0, 0))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -232,7 +232,7 @@ test('Win should do no-op when game stage is ended', () => {
   const state = {
     ...endedState
   }
-  const action = win(genMap(0, 1, 0, 0))
+  const action = winAction(genMap(0, 1, 0, 0))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -248,7 +248,7 @@ test('Win should change stage to waitingBid', () => {
     ...waitingWinState,
     bid: genMap(1, 0, 0, 1)
   }
-  const action = win(genMap(1, 0, 0, 0))
+  const action = winAction(genMap(1, 0, 0, 0))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -264,7 +264,7 @@ test('Win should change stage to ended for last round', () => {
     rounds: 1,
     bid: genMap(1, 0, 0, 1)
   }
-  const action = win(genMap(1, 0, 0, 0))
+  const action = winAction(genMap(1, 0, 0, 0))
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -281,7 +281,7 @@ test('Win should use data from gameStage.win if win is not given in action', () 
     bid: genMap(1, 0, 0, 1),
     win: genMap(1, 0, 0, 0)
   }
-  const action = win()
+  const action = winAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -289,7 +289,7 @@ test('Win should use data from gameStage.win if win is not given in action', () 
 test('Undo should do no-op when state is null', () => {
   const expected = null
   const state = null
-  const action = undo()
+  const action = undoAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -301,7 +301,7 @@ test('Undo should do no-op when stage is ended', () => {
   const state = {
     ...endedState
   }
-  const action = undo()
+  const action = undoAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -313,7 +313,7 @@ test('Undo should do no-op when stage is waitingBid', () => {
   const state = {
     ...waitingBidState
   }
-  const action = undo()
+  const action = undoAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -327,7 +327,7 @@ test('Undo should roll back stage is waitingWin', () => {
     ...waitingWinState,
     bid: genMap(0, 0, 0, 0)
   }
-  const action = undo()
+  const action = undoAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -336,7 +336,7 @@ test('Change players should do no-op in null state', () => {
   const expected = null
   const state = null
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const actual = reducer(state, action)
   expect(actual).toBe(expected)
 })
@@ -349,7 +349,7 @@ test('Change players should do no-op in ended state', () => {
     ...endedState
   }
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -362,7 +362,7 @@ test('Change players should do no-op when given names are same as original map a
     ...waitingBidState
   }
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -375,7 +375,7 @@ test('Change players should revert stage to waitingBid for waitingWin stage', ()
     ...waitingWinState
   }
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -389,7 +389,7 @@ test("Change players should change player's names from given map", () => {
     ...waitingBidState
   }
   const newNames = genMap('John', 'DPGJW', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -411,7 +411,7 @@ test('Change players should change all maps order from given map (For no additio
     bid: genMap(0, 1, 0, 1)
   }
   const newNames = genReorderedMap('Mary', 'Henry', 'Joe', 'John')
-  const action = changePlayers(newNames, 'b', 13)
+  const action = changePlayersAction(newNames, 'b', 13)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -425,7 +425,7 @@ test('Change players should re-order players by given maker', () => {
     ...waitingBidState
   }
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'c', 13)
+  const action = changePlayersAction(newNames, 'c', 13)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -439,7 +439,7 @@ test('Change players should change rounds from given payload', () => {
     ...waitingBidState
   }
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 12)
+  const action = changePlayersAction(newNames, 'a', 12)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -461,7 +461,7 @@ test('Change players should remove all data from removed player', () => {
     bid: genMap(0, 1, 0, 1)
   }
   const newNames = genSmallMap('John', 'Mary', 'Henry')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -486,7 +486,7 @@ test('Change players should assign 0 mark for ended rounds of new player', () =>
     scores: genMap([10], [11], [10], [-1])
   }
   const newNames = genNewMap('John', 'Mary', 'Henry', 'Joe', 'DPGJW')
-  const action = changePlayers(newNames, 'b', 13)
+  const action = changePlayersAction(newNames, 'b', 13)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -506,7 +506,7 @@ test('Change players should end game when given rounds is less than current roun
     scores: genMap(s, s, s, s)
   }
   const newNames = genMap('Mary', 'John', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 1)
+  const action = changePlayersAction(newNames, 'a', 1)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })

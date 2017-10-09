@@ -8,6 +8,6 @@ export interface ISetCardsAction {
  * Set number of cards for entry options.
  * @param payload - The number of cards to be set
  */
-export function setCards(payload: number): ISetCardsAction {
+export function setCardsAction(payload: number): ISetCardsAction {
   return {type: SET_CARDS, payload}
 }

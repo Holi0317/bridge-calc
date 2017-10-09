@@ -6,6 +6,6 @@ export interface IResetAction {
 /**
  * Reset state to default one.
  */
-export function reset(): IResetAction {
+export function resetAction(): IResetAction {
   return {type: RESET}
 }

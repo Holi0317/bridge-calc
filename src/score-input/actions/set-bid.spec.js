@@ -1,4 +1,4 @@
-import {SET_BID, setBid} from './set-bid'
+import {SET_BID, setBidAction} from './set-bid'
 import {genMap} from '../../../test-fixtures/current-game-states'
 
 test('it should return set bid action', () => {
@@ -7,6 +7,6 @@ test('it should return set bid action', () => {
     type: SET_BID,
     payload: bidMap
   }
-  const actual = setBid(bidMap)
+  const actual = setBidAction(bidMap)
   expect(actual).toEqual(expected)
 })

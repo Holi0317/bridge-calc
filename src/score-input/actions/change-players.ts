@@ -32,7 +32,7 @@ export interface IChangePlayersAction {
  * If the above case happens, endTime of the game will be starting time + 1 min.
  * Because providing such round is invalid and validation should not be done in reducer.
  */
-export function changePlayers(newNames: IPlayerMap<string>, maker: string, rounds: number): IChangePlayersAction {
+export function changePlayersAction(newNames: IPlayerMap<string>, maker: string, rounds: number): IChangePlayersAction {
   return {
     type: CHANGE_PLAYERS,
     newNames,

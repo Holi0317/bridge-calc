@@ -14,8 +14,8 @@ import {playerOrderSelector} from '../selectors/player-order'
 import {stackInputValidatorWithProps} from './stack-input-validator'
 import {bidStackInputSourceSelector} from '../selectors/bid-stack-input-source'
 import {winStackInputSourceSelector} from '../selectors/win-stack-input-source'
-import {setBid} from '../actions/set-bid'
-import {setWin} from '../actions/set-win'
+import {setBidAction} from '../actions/set-bid'
+import {setWinAction} from '../actions/set-win'
 import {IRootState, ITranslateMixin} from '../../types'
 import style from './stack-input.css'
 
@@ -32,7 +32,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({setBid, setWin}, dispatch)
+  bindActionCreators({setBid: setBidAction, setWin: setWinAction}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)

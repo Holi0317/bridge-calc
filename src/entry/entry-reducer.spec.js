@@ -1,12 +1,12 @@
 import {entryReducer as reducer} from './entry-reducer'
 import {defaultState} from '../../test-fixtures/entry-options'
-import {toggleOptionOpen} from './actions/toggle-option-open'
-import {setRounds} from './actions/set-rounds'
-import {setCards} from './actions/set-cards'
-import {setStartingRound} from './actions/set-starting-round'
-import {addPlayer} from './actions/add-player'
-import {setPlayerNames} from './actions/set-player-names'
-import {reset} from './actions/reset'
+import {toggleOptionOpenAction} from './actions/toggle-option-open'
+import {setRoundsAction} from './actions/set-rounds'
+import {setCardsAction} from './actions/set-cards'
+import {setStartingRoundAction} from './actions/set-starting-round'
+import {addPlayerAction} from './actions/add-player'
+import {setPlayerNamesAction} from './actions/set-player-names'
+import {resetAction} from './actions/reset'
 
 test('Default state', () => {
   const expected = {
@@ -28,7 +28,7 @@ test('Toggle option opened should flip false', () => {
     ...defaultState,
     optionsOpened: true
   }
-  const action = toggleOptionOpen()
+  const action = toggleOptionOpenAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -42,7 +42,7 @@ test('Toggle option opened should flip true', () => {
     ...defaultState,
     optionsOpened: false
   }
-  const action = toggleOptionOpen()
+  const action = toggleOptionOpenAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -52,7 +52,7 @@ test('Rounds should set when its action dispatched', () => {
     ...defaultState,
     rounds: 5
   }
-  const action = setRounds(5)
+  const action = setRoundsAction(5)
   const actual = reducer(undefined, action)
   expect(actual).toEqual(expected)
 })
@@ -66,7 +66,7 @@ test('Setting rounds should reset startingRound if the new state will cause star
     ...defaultState,
     rounds: 10
   }
-  const action = setRounds(10)
+  const action = setRoundsAction(10)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -77,7 +77,7 @@ test('Number of cards should re-compute whenever rounds property when it is upda
     cards: 30,
     rounds: 7
   }
-  const action = setCards(30)
+  const action = setCardsAction(30)
   const actual = reducer(undefined, action)
   expect(actual).toEqual(expected)
 })
@@ -87,7 +87,7 @@ test('Starting round should set when its action dispatched', () => {
     ...defaultState,
     startingRound: 13
   }
-  const action = setStartingRound(13)
+  const action = setStartingRoundAction(13)
   const actual = reducer(undefined, action)
   expect(actual).toEqual(expected)
 })
@@ -98,7 +98,7 @@ test('Add player should append the new name to the last and re-compute rounds', 
     playerNames: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW'],
     rounds: 10
   }
-  const action = addPlayer('DPGJW')
+  const action = addPlayerAction('DPGJW')
   const actual = reducer(undefined, action)
   expect(actual).toEqual(expected)
 })
@@ -113,7 +113,7 @@ test('Add player should not re-compute rounds when rounds < maxAvailableRounds',
     playerNames: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW'],
     rounds: 8
   }
-  const action = addPlayer('DPGJW')
+  const action = addPlayerAction('DPGJW')
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -123,7 +123,7 @@ test('Rounds should not re-compute on changing player names', () => {
     ...defaultState,
     playerNames: ['John', 'Joe', 'Henry', 'Mary']
   }
-  const action = setPlayerNames(['John', 'Joe', 'Henry', 'Mary'])
+  const action = setPlayerNamesAction(['John', 'Joe', 'Henry', 'Mary'])
   const actual = reducer(undefined, action)
   expect(actual).toEqual(expected)
 })
@@ -138,7 +138,7 @@ test('Rounds should not re-compute on adding player when rounds < maxAvailableRo
     playerNames: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW'],
     rounds: 8
   }
-  const action = setPlayerNames(['John', 'Mary', 'Henry', 'Joe', 'DPGJW'])
+  const action = setPlayerNamesAction(['John', 'Mary', 'Henry', 'Joe', 'DPGJW'])
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -149,7 +149,7 @@ test('Rounds should re-compute on adding player when rounds > maxAvailableRounds
     playerNames: ['John', 'Mary', 'Henry', 'Joe', 'DPGJW'],
     rounds: 10
   }
-  const action = setPlayerNames(['John', 'Mary', 'Henry', 'Joe', 'DPGJW'])
+  const action = setPlayerNamesAction(['John', 'Mary', 'Henry', 'Joe', 'DPGJW'])
   const actual = reducer(undefined, action)
   expect(actual).toEqual(expected)
 })
@@ -160,7 +160,7 @@ test('Rounds should re-compute on removing player when rounds === maxPossibleRou
     playerNames: ['John', 'Mary', 'Henry'],
     rounds: 17
   }
-  const action = setPlayerNames(['John', 'Mary', 'Henry'])
+  const action = setPlayerNamesAction(['John', 'Mary', 'Henry'])
   const actual = reducer(undefined, action)
   expect(actual).toEqual(expected)
 })
@@ -175,7 +175,7 @@ test('Rounds should not re-compute on removing player when rounds < maxPossibleR
     playerNames: ['John', 'Mary', 'Henry'],
     rounds: 10
   }
-  const action = setPlayerNames(['John', 'Mary', 'Henry'])
+  const action = setPlayerNamesAction(['John', 'Mary', 'Henry'])
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -189,7 +189,7 @@ test('Reset state should reset state', () => {
   const expected = {
     ...defaultState
   }
-  const action = reset()
+  const action = resetAction()
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })

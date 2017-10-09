@@ -7,6 +7,6 @@ export interface IUndoAction {
  * Roll back from waitingWin stage to waitingBid stage.
  * If the stage is not waitingWin, no-op will be done.
  */
-export function undo(): IUndoAction {
+export function undoAction(): IUndoAction {
   return {type: UNDO}
 }

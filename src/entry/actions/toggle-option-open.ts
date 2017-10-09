@@ -6,6 +6,6 @@ export interface IToggleOptionOptionAction {
 /**
  * Toggle open state for entry options.
  */
-export function toggleOptionOpen(): IToggleOptionOptionAction {
+export function toggleOptionOpenAction(): IToggleOptionOptionAction {
   return {type: TOGGLE_OPTION_OPEN}
 }

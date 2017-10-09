@@ -1,11 +1,11 @@
-import {ADD_PLAYER, addPlayer, addRandomPlayer} from './add-player'
+import {ADD_PLAYER, addPlayerAction, addRandomPlayer} from './add-player'
 
 test('it should return add player action', () => {
   const expected = {
     type: ADD_PLAYER,
     payload: 'John'
   }
-  const actual = addPlayer('John')
+  const actual = addPlayerAction('John')
   expect(actual).toEqual(expected)
 })
 

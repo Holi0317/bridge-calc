@@ -14,6 +14,6 @@ export interface IWinAction {
  * @param win - A map that maps player ID to their win choice.
  * If this is not defined, win property in currentGame state will be used as fallback.
  */
-export function win(win?: IPlayerMap<number>): IWinAction {
+export function winAction(win?: IPlayerMap<number>): IWinAction {
   return {type: WIN, win, time: new Date()}
 }

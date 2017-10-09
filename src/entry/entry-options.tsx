@@ -4,10 +4,10 @@ import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import {Dropdown} from '../material/dropdown'
-import {setCards} from './actions/set-cards'
-import {setRounds} from './actions/set-rounds'
+import {setCardsAction} from './actions/set-cards'
+import {setRoundsAction} from './actions/set-rounds'
 import {optionsSourcesSelector} from './selectors/options-sources'
-import {setStartingRound} from './actions/set-starting-round'
+import {setStartingRoundAction} from './actions/set-starting-round'
 import {IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
@@ -22,7 +22,11 @@ const mapStateToProps = (state: IRootState) => {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({setCards, setRounds, setStartingRound}, dispatch)
+  bindActionCreators({
+    setCards: setCardsAction,
+    setRounds: setRoundsAction,
+    setStartingRound: setStartingRoundAction
+  }, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)

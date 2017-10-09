@@ -12,6 +12,6 @@ export interface ISetWinAction {
  *
  * @param payload - A map that maps player ID to their win choice
  */
-export function setWin(payload: IPlayerMap<number>): ISetWinAction {
+export function setWinAction(payload: IPlayerMap<number>): ISetWinAction {
   return {type: SET_WIN, payload}
 }

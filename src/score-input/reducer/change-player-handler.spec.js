@@ -1,5 +1,5 @@
 import {changePlayersHandler} from './change-players-handler'
-import {changePlayers} from '../actions/change-players'
+import {changePlayersAction} from '../actions/change-players'
 import {genMap, waitingBidState, waitingWinState, endedState} from '../../../test-fixtures/current-game-states'
 import * as lolex from 'lolex'
 
@@ -8,7 +8,7 @@ test('it should no-op when new player map is identical to original one', () => {
     ...waitingBidState
   }
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const expected = {
     ...waitingBidState
   }
@@ -21,7 +21,7 @@ test('it should revert waiting win state to waiting bid state', () => {
     ...waitingWinState
   }
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const expected = {
     ...waitingBidState
   }
@@ -38,7 +38,7 @@ test("it should change player's names from given map", () => {
     ...waitingBidState
   }
   const newNames = genMap('John', 'DPGJW', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const actual = changePlayersHandler(state, action)
   expect(actual).toEqual(expected)
 })
@@ -60,7 +60,7 @@ test('it should change all maps order from given map (For no addition nor deleti
     bid: genMap(0, 1, 0, 1)
   }
   const newNames = genReorderedMap('Mary', 'Henry', 'Joe', 'John')
-  const action = changePlayers(newNames, 'b', 13)
+  const action = changePlayersAction(newNames, 'b', 13)
   const actual = changePlayersHandler(state, action)
   expect(actual).toEqual(expected)
 })
@@ -75,7 +75,7 @@ test('it should re-order players by given maker', () => {
   }
 
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'c', 13)
+  const action = changePlayersAction(newNames, 'c', 13)
   const actual = changePlayersHandler(state, action)
   expect(actual).toEqual(expected)
 })
@@ -89,7 +89,7 @@ test('it should change rounds from given payload', () => {
     ...waitingBidState
   }
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 12)
+  const action = changePlayersAction(newNames, 'a', 12)
   const actual = changePlayersHandler(state, action)
   expect(actual).toEqual(expected)
 })
@@ -111,7 +111,7 @@ test('it should remove all data from removed player', () => {
     bid: genMap(0, 1, 0, 1)
   }
   const newNames = genSmallMap('John', 'Mary', 'Henry')
-  const action = changePlayers(newNames, 'a', 13)
+  const action = changePlayersAction(newNames, 'a', 13)
   const actual = changePlayersHandler(state, action)
   expect(actual).toEqual(expected)
 })
@@ -136,7 +136,7 @@ test('it should assign 0 mark for ended rounds of new player', () => {
     scores: genMap([10], [11], [10], [-1])
   }
   const newNames = genNewMap('John', 'Mary', 'Henry', 'Joe', 'DPGJW')
-  const action = changePlayers(newNames, 'b', 13)
+  const action = changePlayersAction(newNames, 'b', 13)
   const actual = changePlayersHandler(state, action)
   expect(actual).toEqual(expected)
 })
@@ -159,7 +159,7 @@ test('it should end game when given rounds is less than current round', () => {
     scores: genMap(s, s, s, s)
   }
   const newNames = genMap('Mary', 'John', 'Henry', 'Joe')
-  const action = changePlayers(newNames, 'a', 1)
+  const action = changePlayersAction(newNames, 'a', 1)
   const actual = changePlayersHandler(state, action)
   expect(actual).toEqual(expected)
 

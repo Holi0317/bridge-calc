@@ -10,6 +10,6 @@ export interface ISkipAction {
  * @param times - Number of rounds to be skip.
  * If not provided, current round will be skipped.
  */
-export function skip(times?: number): ISkipAction {
+export function skipAction(times?: number): ISkipAction {
   return {type: SKIP, times, time: new Date()}
 }

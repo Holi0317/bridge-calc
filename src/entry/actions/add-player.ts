@@ -10,7 +10,7 @@ export interface IAddPlayerAction {
  * Add a new player for entry options.
  * @parm payload - The name of new player
  */
-export function addPlayer(payload: string): IAddPlayerAction {
+export function addPlayerAction(payload: string): IAddPlayerAction {
   return {type: ADD_PLAYER, payload}
 }
 
@@ -18,5 +18,5 @@ export function addPlayer(payload: string): IAddPlayerAction {
  * Add a new player with random name to entry options.
  */
 export function addRandomPlayer(): IAddPlayerAction {
-  return addPlayer(randomName())
+  return addPlayerAction(randomName())
 }

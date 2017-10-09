@@ -1,4 +1,4 @@
-import {win, WIN} from './win'
+import {winAction, WIN} from './win'
 import {genMap} from '../../../test-fixtures/current-game-states'
 import * as lolex from 'lolex'
 
@@ -18,7 +18,7 @@ test('it should return win action', () => {
     win: genMap(0, 0, 0, 0),
     time: new Date()
   }
-  const actual = win(genMap(0, 0, 0, 0))
+  const actual = winAction(genMap(0, 0, 0, 0))
   expect(actual).toEqual(expected)
 })
 
@@ -27,6 +27,6 @@ test('it should return win action with no payload', () => {
     type: WIN,
     time: new Date()
   }
-  const actual = win()
+  const actual = winAction()
   expect(actual).toEqual(expected)
 })

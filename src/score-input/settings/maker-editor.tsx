@@ -10,7 +10,7 @@ import {namesSelector} from '../selectors/names'
 import {roundsSelector} from '../selectors/rounds'
 import {makerSelector} from './selectors/maker'
 import {MakerChooser} from './maker-chooser'
-import {changePlayers} from '../actions/change-players'
+import {changePlayersAction} from '../actions/change-players'
 import {IRootState, ITranslateMixin} from '../../types'
 import style from './maker-editor.css'
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state: IRootState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({changePlayers}, dispatch)
+  bindActionCreators({changePlayers: changePlayersAction}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)

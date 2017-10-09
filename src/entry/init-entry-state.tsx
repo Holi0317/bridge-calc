@@ -3,11 +3,11 @@ import {bindActionCreators, Dispatch} from 'redux'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import {genRandomNames} from '../example-names'
-import {setPlayerNames} from './actions/set-player-names'
-import {reset} from './actions/reset'
+import {setPlayerNamesAction} from './actions/set-player-names'
+import {resetAction} from './actions/reset'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({reset, setPlayerNames}, dispatch)
+  bindActionCreators({reset: resetAction, setPlayerNames: setPlayerNamesAction}, dispatch)
 
 const dispatchType = returntypeof(mapDispatchToProps)
 

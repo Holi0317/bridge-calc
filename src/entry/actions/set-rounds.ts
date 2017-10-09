@@ -8,6 +8,6 @@ export interface ISetRoundsAction {
  * Set rounds for entry options.
  * @param payload - The rounds to be set
  */
-export function setRounds(payload: number): ISetRoundsAction {
+export function setRoundsAction(payload: number): ISetRoundsAction {
   return {type: SET_ROUNDS, payload}
 }

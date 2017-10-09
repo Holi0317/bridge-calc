@@ -30,7 +30,7 @@ function namesToMap(playerNames: string[]): IPlayerMap<string> {
  * Ordering of the names will be used as the player order for first round.
  * @param startingRound - The round to start from
  */
-export function start(rounds: number, playerNames: string[], startingRound: number): IStartAction {
+export function startAction(rounds: number, playerNames: string[], startingRound: number): IStartAction {
   return {
     type: START,
     rounds,

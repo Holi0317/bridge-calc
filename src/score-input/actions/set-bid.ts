@@ -12,6 +12,6 @@ export interface ISetBidAction {
  *
  * @param payload - A map that maps player ID to their bid choice
  */
-export function setBid(payload: IPlayerMap<number>): ISetBidAction {
+export function setBidAction(payload: IPlayerMap<number>): ISetBidAction {
   return {type: SET_BID, payload}
 }

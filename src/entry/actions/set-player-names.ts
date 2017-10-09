@@ -11,6 +11,6 @@ export interface ISetPlayerNamesAction {
  * For appending one player only, action ENTRY/ADD_PLAYER can be used.
  * @param payload - The array of player names to be replaced
  */
-export function setPlayerNames(payload: string[]): ISetPlayerNamesAction {
+export function setPlayerNamesAction(payload: string[]): ISetPlayerNamesAction {
   return {type: SET_PLAYER_NAMES, payload}
 }

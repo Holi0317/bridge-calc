@@ -7,7 +7,7 @@ import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import flowRight from 'lodash-es/flowRight'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
-import {start} from '../score-input/actions/start'
+import {startAction} from '../score-input/actions/start'
 import {IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
@@ -20,7 +20,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({start}, dispatch)
+  bindActionCreators({start: startAction}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)

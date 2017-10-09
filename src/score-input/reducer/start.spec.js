@@ -1,5 +1,5 @@
 import {start} from './start'
-import {start as startAction} from '../actions/start'
+import {startAction as startAction} from '../actions/start'
 import * as lolex from 'lolex'
 
 const playerNames = ['John', 'Mary', 'Henry', 'Joe']

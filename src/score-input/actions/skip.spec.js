@@ -1,4 +1,4 @@
-import {skip, SKIP} from './skip'
+import {skipAction, SKIP} from './skip'
 import * as lolex from 'lolex'
 
 let clock = null
@@ -16,7 +16,7 @@ test('it should return a skip action', () => {
     type: SKIP,
     time: new Date()
   }
-  const actual = skip()
+  const actual = skipAction()
   expect(actual).toEqual(expected)
 })
 
@@ -26,6 +26,6 @@ test('it should return skip action with n rounds specified', () => {
     time: new Date(),
     times: 5
   }
-  const actual = skip(5)
+  const actual = skipAction(5)
   expect(actual).toEqual(expected)
 })

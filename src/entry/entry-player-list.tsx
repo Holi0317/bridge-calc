@@ -6,7 +6,7 @@ import {translate} from 'react-i18next'
 import {returntypeof} from 'react-redux-typescript'
 import {NameInputList} from '../name-input-list'
 import {entryOptionsValidator} from './entry-validator'
-import {setPlayerNames} from './actions/set-player-names'
+import {setPlayerNamesAction} from './actions/set-player-names'
 import {IRootState, ITranslateMixin} from '../types'
 
 // Getters and setters for name input list element
@@ -22,7 +22,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({setPlayerNames}, dispatch)
+  bindActionCreators({setPlayerNames: setPlayerNamesAction}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)

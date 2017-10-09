@@ -7,7 +7,7 @@ import Collapse from 'react-collapse'
 import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import {EntryOptions} from './entry-options'
-import {toggleOptionOpen} from './actions/toggle-option-open'
+import {toggleOptionOpenAction} from './actions/toggle-option-open'
 import {IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
@@ -16,7 +16,7 @@ const mapStateToProps = (state: IRootState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({toggleOptionOpen}, dispatch)
+  bindActionCreators({toggleOptionOpen: toggleOptionOpenAction}, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)

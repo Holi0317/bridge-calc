@@ -1,4 +1,4 @@
-import {SET_WIN, setWin} from './set-win'
+import {SET_WIN, setWinAction} from './set-win'
 import {genMap} from '../../../test-fixtures/current-game-states'
 
 test('it should return set bid action', () => {
@@ -7,6 +7,6 @@ test('it should return set bid action', () => {
     type: SET_WIN,
     payload: winMap
   }
-  const actual = setWin(winMap)
+  const actual = setWinAction(winMap)
   expect(actual).toEqual(expected)
 })
