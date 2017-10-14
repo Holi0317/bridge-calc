@@ -1,3 +1,4 @@
-.btn {
-  margin-top: 1em;
+.chooser-container {
+  display: flex;
+  align-items: center;
 }

@@ -39,8 +39,10 @@ export class MakerEditorImpl extends React.Component {
     return (
       <div>
         <h4>{t('Change maker')}</h4>
-        <MakerChooser />
-        <RaisedButton primary={true} className={style.btn} onClick={this.commit}>{t('Change maker')}</RaisedButton>
+        <div className={style.chooserContainer}>
+          <MakerChooser />
+          <RaisedButton primary={true} onClick={this.commit}>{t('Change maker')}</RaisedButton>
+        </div>
         <Snackbar open={snackbarOpen} message={t('Maker changed!')} onRequestClose={this.snackbarClosed} />
       </div>
     )
