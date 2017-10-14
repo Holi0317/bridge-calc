@@ -13,9 +13,6 @@ const htmlSettings = {
 
 module.exports = {
   plugins: [
-    new HtmlWebpackPlugin(htmlSettings),
-    new HtmlWebpackPlugin(Object.assign({}, htmlSettings, {
-      filename: '404.html'
-    }))
+    new HtmlWebpackPlugin(htmlSettings)
   ]
 }
