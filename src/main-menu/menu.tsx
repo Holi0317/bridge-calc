@@ -25,7 +25,7 @@ export function MenuImpl({t}: ITranslateMixin) {
           <Tile icon={AvFiberNew} title={t('New Game')} to="/entry" />
         </div>
         <div className={`${grid.colLg6} ${grid.colMd12}`}>
-          <Tile icon={AvSkipPrevious} title={t('Previous games')} />
+          <Tile icon={AvSkipPrevious} title={t('Previous games')} to="/prev-games" />
         </div>
       </div>
 

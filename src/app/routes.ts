@@ -3,6 +3,7 @@ import {RouteProps} from 'react-router'
 import {MenuView, EntryView, ScoreInputView} from '../lazy-views'
 import {GameTitle} from '../score-input/title'
 import {titleAugment} from '../utils'
+import {PrevGames} from '../prev-games'
 
 export interface IRoute extends RouteProps {
   title: React.ComponentType<any>
@@ -25,4 +26,9 @@ export const routes: IRoute[] = [{
   name: 'score-input',
   component: ScoreInputView,
   title: GameTitle
+}, {
+  path: '/prev-games',
+  name: 'prev-games',
+  component: PrevGames,
+  title: titleAugment('Previous games')
 }]
