@@ -15,6 +15,7 @@ const alias = require('./webpack-cfg/alias')
 const yaml = require('./webpack-cfg/yaml')
 const scopeHoisting = require('./webpack-cfg/scope-hoisting')
 const offline = require('./webpack-cfg/offline')
+const commonChunk = require('./webpack-cfg/common-chunk')
 
 const {ENV} = require('./webpack-cfg/paths')
 
@@ -33,6 +34,7 @@ module.exports = merge.smart(
 
   env,
   alias,
+  commonChunk,
 
   babel,
   typescript,

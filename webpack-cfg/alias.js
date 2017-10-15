@@ -1,6 +1,8 @@
 module.exports = {
   resolve: {
     alias: {
+      'lodash': 'lodash-es',
+
       // Use non-compiled version of the following libraries
       'reselect': 'reselect/src/index.js',
 
