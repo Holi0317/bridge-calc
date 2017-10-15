@@ -14,6 +14,7 @@ const analyzer = require('./webpack-cfg/analyzer')
 const alias = require('./webpack-cfg/alias')
 const yaml = require('./webpack-cfg/yaml')
 const scopeHoisting = require('./webpack-cfg/scope-hoisting')
+const offline = require('./webpack-cfg/offline')
 
 const {ENV} = require('./webpack-cfg/paths')
 
@@ -40,17 +41,14 @@ module.exports = merge.smart(
   fontsImagesLoader,
   yaml,
 
-  ...(ENV === 'production' || ENV === 'development' ? [
-    genIndex,
-    copyFiles
-  ] : [
-    /* ENV === 'test' */
-  ]),
+  genIndex,
+  copyFiles,
 
   ...(ENV === 'production' ? [
     analyzer,
     scopeHoisting,
-    babelMinify
+    babelMinify,
+    offline
   ] : [
 
   ])
