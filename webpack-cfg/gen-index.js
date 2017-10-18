@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const {ENV} = require('./paths')
 
 const htmlSettings = {
@@ -13,6 +14,9 @@ const htmlSettings = {
 
 module.exports = {
   plugins: [
-    new HtmlWebpackPlugin(htmlSettings)
+    new HtmlWebpackPlugin(htmlSettings),
+    new PreloadWebpackPlugin({
+      rel: 'prefetch' // Prefetch resources likely to be used for future navigations
+    })
   ]
 }
