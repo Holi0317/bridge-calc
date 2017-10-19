@@ -19,6 +19,11 @@
 
 .icon-container {
   margin: 0 auto;
+
+  & > svg {
+    width: 92px !important;
+    height: 92px !important;
+  }
 }
 
 .title-container {
