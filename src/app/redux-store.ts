@@ -1,12 +1,14 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import {currentGameReducer} from '../score-input/reducer'
-import {entryReducer} from '../entry/entry-reducer'
-import {settingsReducer} from '../score-input/settings/reducer'
+import {entryReducer} from '../entry'
+import {settingsReducer} from '../score-input/settings'
+import {prevGamesReducer} from '../prev-games/prev-games-reducer'
 
 const reducer = combineReducers({
   entry: entryReducer,
   gameSettings: settingsReducer,
-  currentGame: currentGameReducer
+  currentGame: currentGameReducer,
+  prevGames: prevGamesReducer
 })
 
 const middlewares = []

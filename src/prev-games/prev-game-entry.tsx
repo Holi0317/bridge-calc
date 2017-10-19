@@ -1,6 +1,6 @@
 import * as React from 'react'
-import {IPrevGameState} from './prev-games-reducer'
+import {IPrevGameEntry} from './types'
 
-export function PrevGameEntry(game: IPrevGameState) {
+export function PrevGameEntry(game: IPrevGameEntry) {
   return null
 }

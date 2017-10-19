@@ -7,7 +7,7 @@ import {bindActionCreators, Dispatch} from 'redux'
 import {IRootState, ITranslateMixin} from '../types'
 import grid from '../styles/grid.css'
 import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
-import {IPrevGameState} from './prev-games-reducer'
+import {IPrevGameEntry} from './types'
 import {PrevGameEntry} from './prev-game-entry'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -29,7 +29,7 @@ export function PrevGamesImpl({havePrevGame, prevGames, t}: PrevGamesProps) {
   }
   return (
     <div className={grid.container}>
-      {prevGames.map((prevGame: IPrevGameState) => (
+      {prevGames.map((prevGame: IPrevGameEntry) => (
         <PrevGameEntry key={prevGame.id} {...prevGame} />
       ))}
     </div>

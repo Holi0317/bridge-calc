@@ -5,6 +5,8 @@ import {IEntryState} from './entry/entry-reducer'
 import {ISettingsState} from './score-input/settings/reducer'
 import {GameSettingsActions} from './score-input/settings/game-settings-actions'
 import {TranslationFunction} from 'i18next'
+import {IPrevGamesState} from './prev-games/prev-games-reducer'
+import {PrevGamesActions} from './prev-games/actions'
 
 export interface IPlayerMap<T> {[playerID: string]: T}
 
@@ -21,12 +23,14 @@ export interface IDropdownSource<T> {
 export interface IRootState {
   currentGame: GameState,
   entry: IEntryState,
-  gameSettings: ISettingsState
+  gameSettings: ISettingsState,
+  prevGames: IPrevGamesState
 }
 
 export type Actions =
   | CurrentGameActions
   | EntryActions
   | GameSettingsActions
+  | PrevGamesActions
 
 export type Dispatch = (action: Actions) => void
