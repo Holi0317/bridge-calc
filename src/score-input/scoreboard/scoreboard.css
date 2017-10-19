@@ -10,7 +10,7 @@
   border-collapse: collapse;
   white-space: nowrap;
   font-size: 13px;
-  background-color: rgb(255,255,255);
+  background-color: rgb(255, 255, 255);
   display: table;
 
   & thead {
@@ -26,8 +26,9 @@
     will-change: background-color;
   }
 
-  & td, & th {
-    padding: 0 18px 12px 18px;
+  & td,
+  & th {
+    padding: 0 18px 12px;
     text-align: right;
   }
 
@@ -55,16 +56,18 @@
     box-sizing: border-box;
   }
 
-  & th:first-of-type, & td:first-of-type {
+  & th:first-of-type,
+  & td:first-of-type {
     padding-left: 24px;
     text-align: left;
   }
 
-  & td:last-of-type, & th:last-of-type {
+  & td:last-of-type,
+  & th:last-of-type {
     padding-right: 24px;
   }
 
   & tbody tr:hover {
-    background-color: #eeeeee;
+    background-color: #eee;
   }
 }

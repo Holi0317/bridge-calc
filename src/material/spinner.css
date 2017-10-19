@@ -6,7 +6,8 @@ Credit to https://codepen.io/jczimm/pen/vEBpoL
   position: relative;
   margin: 0 auto;
   width: 100px;
-  &:before {
+
+  &::before {
     content: '';
     display: block;
     padding-top: 100%;
@@ -44,10 +45,12 @@ Credit to https://codepen.io/jczimm/pen/vEBpoL
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
   }
+
   50% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -35px;
   }
+
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
@@ -59,12 +62,15 @@ Credit to https://codepen.io/jczimm/pen/vEBpoL
   0% {
     stroke: #d62d20;
   }
+
   40% {
     stroke: #0057e7;
   }
+
   66% {
     stroke: #008744;
   }
+
   80%,
   90% {
     stroke: #ffa700;

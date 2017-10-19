@@ -5,10 +5,9 @@
   will-change: box-shadow;
   cursor: pointer;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  margin: 0.5em 0 1em 0;
-
+  margin: 0.5em 0 1em;
   overflow: hidden;
-  background: rgb(255,255,255);
+  background: rgb(255, 255, 255);
   border-radius: 2px;
   box-sizing: border-box;
   text-align: center;
@@ -24,7 +23,7 @@
 
 .title-container {
   display: inline-block;
-  padding: 16px 16px;
+  padding: 16px;
   font-size: 24px;
   font-weight: 300;
   line-height: normal;
