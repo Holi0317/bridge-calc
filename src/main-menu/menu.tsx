@@ -37,7 +37,7 @@ export function MenuImpl({t}: ITranslateMixin) {
           <Tile icon={<ActionInfo />} title={t('Information')} />
         </div>
         <div className={`${grid.colLg4} ${grid.colMd12}`}>
-          <Tile icon={<ActionBugReport />} title={t('Support/bug')} to="https://github.com/holi0317/bridge-calc" />
+          <Tile icon={<ActionBugReport />} title={t('Support/bug')} to="https://github.com/holi0317/bridge-calc" external={true} target="_blank" />
         </div>
       </div>
 
