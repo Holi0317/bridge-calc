@@ -13,7 +13,7 @@ function loadLocales(url: string, options: any, callback: any) {
     })
 }
 
-const languages = ['en', 'zh', 'zh-tw']
+export const languages = ['en', 'zh', 'zh-tw']
 
 export const i18n = I18next
   .use(XHR)

@@ -5,6 +5,10 @@ import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {bindActionCreators, Dispatch} from 'redux'
 import {IRootState, ITranslateMixin} from '../types'
+import grid from '../styles/grid.css'
+import {LanguageSelector} from './language-selector'
+import {PurgeData} from './purge-data'
+import {VersionDisplay} from './version-display'
 
 const mapStateToProps = (state: IRootState) => ({
 
@@ -19,7 +23,13 @@ const dispatchType = returntypeof(mapDispatchToProps)
 type GlobalSettingsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
 export function GlobalSettingsImpl({t}: GlobalSettingsProps) {
-  return null
+  return (
+    <div className={grid.container}>
+      <LanguageSelector />
+      <PurgeData />
+      <VersionDisplay />
+    </div>
+  )
 }
 
 export const GlobalSettings = flowRight(

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {TouchTapEvent} from 'material-ui'
-import DropDownMenu from 'material-ui/DropDownMenu'
+import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import {IDropdownSource} from '../types'
 
@@ -18,13 +18,13 @@ export class Dropdown<SourceType> extends React.Component {
   public props: IDropdownProps<SourceType>
 
   public render() {
-    const {source, ...rest} = this.props
+    const {source, label, error, ...rest} = this.props
     return (
-      <DropDownMenu {...rest} onChange={this.handleChange}>
+      <SelectField floatingLabelText={label} errorText={error} {...rest} onChange={this.handleChange}>
         {source.map(item => (
           <MenuItem key={item.label} value={item.value} primaryText={item.label} disabled={item.disabled} />
         ))}
-      </DropDownMenu>
+      </SelectField>
     )
   }
 
