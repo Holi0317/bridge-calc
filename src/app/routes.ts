@@ -3,6 +3,7 @@ import {RouteProps} from 'react-router'
 import {MenuView, EntryView, ScoreInputView, PrevGamesView} from '../lazy-views'
 import {GameTitle} from '../score-input/title'
 import {titleAugment} from '../utils'
+import {GlobalSettingsView} from '../lazy-views/global-settings'
 
 export interface IRoute extends RouteProps {
   title: React.ComponentType<any>
@@ -30,4 +31,9 @@ export const routes: IRoute[] = [{
   name: 'prev-games',
   component: PrevGamesView,
   title: titleAugment('Previous games')
+}, {
+  path: '/global-settings',
+  name: 'global-settings',
+  component: GlobalSettingsView,
+  title: titleAugment('Global settings')
 }]

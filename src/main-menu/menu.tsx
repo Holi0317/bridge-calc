@@ -31,7 +31,7 @@ export function MenuImpl({t}: ITranslateMixin) {
 
       <div className={grid.row}>
         <div className={`${grid.colLg4} ${grid.colMd12}`}>
-          <Tile icon={<ActionSettings />} title={t('Settings')} />
+          <Tile icon={<ActionSettings />} title={t('Settings')} to="/global-settings" />
         </div>
         <div className={`${grid.colLg4} ${grid.colMd12}`}>
           <Tile icon={<ActionInfo />} title={t('Information')} />
