@@ -36,26 +36,20 @@ type EntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixi
 export function EntryOptionsImpl({t, sources, cards, rounds, startingRound, setCards, setRounds, setStartingRound}: EntryOptionsProps) {
   return (
     <div className={style.optionsRootContainer}>
-      <div className={style.optionsContainer}>
-        <span>{t('Number of cards')}</span>
-        <Dropdown label={t('Number of cards')}
-          value={cards} source={sources.cards}
-          onChange={setCards} />
-      </div>
+      <Dropdown label={t('Number of cards')}
+                className={style.optionsDropdown}
+                value={cards} source={sources.cards}
+                onChange={setCards} />
 
-      <div className={style.optionsContainer}>
-        <span>{t('Number of rounds')}</span>
-        <Dropdown label={t('Number of rounds')}
-          value={rounds} source={sources.rounds}
-          onChange={setRounds} />
-      </div>
+      <Dropdown label={t('Number of rounds')}
+                className={style.optionsDropdown}
+                value={rounds} source={sources.rounds}
+                onChange={setRounds} />
 
-      <div className={style.optionsContainer}>
-        <span>{t('Starting round')}</span>
-        <Dropdown label={t('Starting round')}
-          value={startingRound} source={sources.startingRound}
-          onChange={setStartingRound} />
-      </div>
+      <Dropdown label={t('Starting round')}
+                className={style.optionsDropdown}
+                value={startingRound} source={sources.startingRound}
+                onChange={setStartingRound} />
     </div>
   )
 }
