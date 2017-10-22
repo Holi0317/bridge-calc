@@ -1,0 +1,26 @@
+.center-container {
+  height: 100%;
+  margin: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  text-align: center;
+}
+
+.sad-face {
+  font-weight: 700;
+  font-size: 72px;
+  padding-bottom: 1em;
+}
+
+.error-message {
+  font-weight: 200;
+  font-size: 12px;
+}
+
+.reload-link {
+  color: #428bca;
+  text-decoration: underline;
+  cursor: pointer;
+}

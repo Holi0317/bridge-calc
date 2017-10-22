@@ -5,6 +5,7 @@ import {routes} from './routes'
 import {ITranslateMixin} from '../types'
 import {RouteComponentProps} from 'react-router'
 import {Tabs, Tab} from 'material-ui/Tabs'
+import {ErrorBoundary} from '../error-boundary'
 
 function getActive(pathname: string): number {
   // Create a matches array.
@@ -41,9 +42,11 @@ export class LayoutImpl extends React.Component {
             <Tab key={index} label={t(route.name)} value={index} />
           ))}
         </Tabs>
-        {routes.map((route, index) => (
-          <Route key={index} path={route.path} component={route.component} exact={route.exact} />
-        ))}
+        <ErrorBoundary>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} component={route.component} exact={route.exact} />
+          ))}
+        </ErrorBoundary>
       </div>
     )
   }

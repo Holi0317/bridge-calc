@@ -4,8 +4,8 @@ import {TileLink} from './tile-link'
 import style from './tile.css'
 
 export interface ITileProps {
-  title: string,
-  icon: React.ReactElement<{}>,
+  title: string
+  icon: React.ReactNode
   to?: string
   external?: boolean
   target?: string

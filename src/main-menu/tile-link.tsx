@@ -18,7 +18,7 @@ export interface ITileLinkProps {
    * Same functionality as the `target` props in HTML anchor (<a>) element
    */
   target?: string
-  children: React.ReactElement<any>
+  children: React.ReactNode
 }
 
 export function TileLink({to, external, target, children}: ITileLinkProps) {

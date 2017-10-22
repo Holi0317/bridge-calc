@@ -10,6 +10,7 @@ import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import {Titles} from './titles'
 import {routes} from '../app/routes'
 import {SWReg} from '../sw-reg'
+import {ErrorBoundary} from '../error-boundary'
 
 /**
  * Create a function that will route to specified location.
@@ -41,9 +42,11 @@ export function ShellImpl({location, history}: AppProps) {
         onLeftIconButtonTouchTap={backFn}
         title={<Titles />}
       />
-      {routes.map(({title, name, ...rest}) => (
-        <Route key={name} {...rest} />
-      ))}
+      <ErrorBoundary>
+        {routes.map(({title, name, ...rest}) => (
+          <Route key={name} {...rest} />
+        ))}
+      </ErrorBoundary>
       <SWReg />
     </div>
   )

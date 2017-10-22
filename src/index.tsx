@@ -8,6 +8,7 @@ import {Shell} from './shell'
 import {i18n} from './app/i18n'
 import {store} from './app/redux-store'
 import {muiTheme} from './app/mui-theme'
+import {ErrorBoundary} from './error-boundary'
 
 function Root() {
   return (
@@ -15,7 +16,9 @@ function Root() {
       <I18nextProvider i18n={i18n}>
         <BrowserRouter>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <Shell />
+            <ErrorBoundary>
+              <Shell />
+            </ErrorBoundary>
           </MuiThemeProvider>
         </BrowserRouter>
       </I18nextProvider>
