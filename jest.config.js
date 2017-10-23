@@ -7,6 +7,7 @@ module.exports = {
     '<rootDir>/node_modules/(?!lodash-es)'
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  watchPathIgnorePatterns: ['<rootDir>/node_modules/'],
   moduleNameMapper: {
     '\\.css$': 'identity-obj-proxy'
   },
