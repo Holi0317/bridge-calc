@@ -1,5 +1,4 @@
 import * as React from 'react'
-import TouchRipple from 'material-ui/internal/TouchRipple'
 import {TileLink} from './tile-link'
 import style from './tile.css'
 
@@ -25,12 +24,10 @@ export function Tile(props: ITileProps) {
   const to = props.to || '/'
   return (
     <TileLink to={to} external={external} target={target}>
-      <TouchRipple>
-        <div className={style.tile}>
-          <div className={style.iconContainer}>{icon}</div>
-          <div className={style.titleContainer}>{title}</div>
-        </div>
-      </TouchRipple>
+      <div className={style.tile}>
+        <div className={style.iconContainer}>{icon}</div>
+        <div className={style.titleContainer}>{title}</div>
+      </div>
     </TileLink>
   )
 }

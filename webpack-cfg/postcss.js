@@ -27,7 +27,7 @@ module.exports = {
   module: {
     rules: [{
       test: /\.css$/,
-      exclude: /node_modules/,
+      exclude: /flexboxgrid/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [cssLoader, 'postcss-loader']
@@ -36,7 +36,7 @@ module.exports = {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: flexCssLoader
+        use: [flexCssLoader, 'postcss-loader']
       }),
       include: /flexboxgrid/
     }]
