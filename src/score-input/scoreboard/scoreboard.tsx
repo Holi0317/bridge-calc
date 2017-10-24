@@ -1,13 +1,13 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
+import {Grid} from 'react-flexbox-grid'
 import {namesSelector} from '../selectors/names'
 import {playerScoresSelector} from '../selectors/player-scores'
 import {playerTotalScoreSelector} from '../selectors/player-total-score'
 import {playerRankSelector} from '../selectors/player-rank'
 import {endedRoundsArraySelector} from '../selectors/ended-rounds-array'
 import style from './scoreboard.css'
-import grid from '../../styles/grid.css'
 import {IRootState, ITranslateMixin} from '../../types'
 import {returntypeof} from 'react-redux-typescript'
 
@@ -25,7 +25,7 @@ type ScoreboardProps = typeof stateType & ITranslateMixin
 
 export function ScoreboardImpl({t, names, scores, endedRounds, totalScores, ranks}: ScoreboardProps) {
   return (
-    <div className={grid.container}>
+    <Grid>
       <div className={style.tableContainer}>
         <table className={style.table}>
 
@@ -69,7 +69,7 @@ export function ScoreboardImpl({t, names, scores, endedRounds, totalScores, rank
 
         </table>
       </div>
-    </div>
+    </Grid>
   )
 }
 

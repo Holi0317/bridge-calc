@@ -1,38 +1,21 @@
 import * as React from 'react'
-import flowRight from 'lodash-es/flowRight'
-import {returntypeof} from 'react-redux-typescript'
 import {translate} from 'react-i18next'
-import {connect} from 'react-redux'
-import {bindActionCreators, Dispatch} from 'redux'
-import {IRootState, ITranslateMixin} from '../types'
-import grid from '../styles/grid.css'
+import {Grid} from 'react-flexbox-grid'
 import {LanguageSelector} from './language-selector'
 import {PurgeData} from './purge-data'
 import {VersionDisplay} from './version-display'
+import {ITranslateMixin} from '../types'
 
-const mapStateToProps = (state: IRootState) => ({
-
-})
-
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({}, dispatch)
-
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
-
-type GlobalSettingsProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type GlobalSettingsProps = ITranslateMixin
 
 export function GlobalSettingsImpl({t}: GlobalSettingsProps) {
   return (
-    <div className={grid.container}>
+    <Grid>
       <LanguageSelector />
       <PurgeData />
       <VersionDisplay />
-    </div>
+    </Grid>
   )
 }
 
-export const GlobalSettings = flowRight(
-  translate(),
-  connect(mapStateToProps, mapDispatchToProps)
-)(GlobalSettingsImpl)
+export const GlobalSettings = translate()(GlobalSettingsImpl as any)

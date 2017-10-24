@@ -1,6 +1,7 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
+import {Grid, Row, Col} from 'react-flexbox-grid'
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow'
 import AvFiberNew from 'material-ui/svg-icons/av/fiber-new'
 import AvSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
@@ -9,39 +10,39 @@ import ActionInfo from 'material-ui/svg-icons/action/info'
 import ActionBugReport from 'material-ui/svg-icons/action/bug-report'
 import {Tile} from './tile'
 import {ITranslateMixin} from '../types'
-import grid from '../styles/grid.css'
 
 export function MenuImpl({t}: ITranslateMixin) {
   return (
-    <div className={grid.container}>
-      <div className={grid.row}>
-        <div className={grid.col12}>
+    <Grid>
+      {/* TODO hide his row if there is no game to continue */}
+      <Row>
+        <Col xs={12}>
           <Tile icon={<AvPlayArrow />} title={t('Continue')} />
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className={grid.row}>
-        <div className={`${grid.colLg6} ${grid.colMd12}`}>
+      <Row>
+        <Col md={6} xs={12}>
           <Tile icon={<AvFiberNew />} title={t('New Game')} to="/entry" />
-        </div>
-        <div className={`${grid.colLg6} ${grid.colMd12}`}>
+        </Col>
+        <Col md={6} xs={12}>
           <Tile icon={<AvSkipPrevious />} title={t('Previous games')} to="/prev-games" />
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className={grid.row}>
-        <div className={`${grid.colLg4} ${grid.colMd12}`}>
+      <Row>
+        <Col md={4} xs={12}>
           <Tile icon={<ActionSettings />} title={t('Settings')} to="/global-settings" />
-        </div>
-        <div className={`${grid.colLg4} ${grid.colMd12}`}>
+        </Col>
+        <Col md={4} xs={12}>
           <Tile icon={<ActionInfo />} title={t('Information')} />
-        </div>
-        <div className={`${grid.colLg4} ${grid.colMd12}`}>
+        </Col>
+        <Col md={4} xs={12}>
           <Tile icon={<ActionBugReport />} title={t('Support/bug')} to="https://github.com/holi0317/bridge-calc" external={true} target="_blank" />
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-    </div>
+    </Grid>
   )
 }
 
