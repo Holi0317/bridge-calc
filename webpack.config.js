@@ -6,6 +6,7 @@ const babel = require('./webpack-cfg/babel')
 const typescript = require('./webpack-cfg/typescript')
 const htmlLoader = require('./webpack-cfg/html-loader')
 const postCssLoader = require('./webpack-cfg/postcss')
+const extractText = require('./webpack-cfg/extract-text')
 const fontsImagesLoader = require('./webpack-cfg/fonts-images-loader')
 const genIndex = require('./webpack-cfg/gen-index')
 const copyFiles = require('./webpack-cfg/copy-files')
@@ -43,6 +44,7 @@ module.exports = merge.smart(
   fontsImagesLoader,
   yaml,
 
+  extractText,
   genIndex,
   copyFiles,
 

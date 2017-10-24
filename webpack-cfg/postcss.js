@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const {ENV} = require('./paths')
 
@@ -14,25 +13,32 @@ const cssLoader = {
   }
 }
 
+const flexCssLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: true,
+    sourceMap: true,
+    minimize: ENV === 'production',
+    localIdentName: '[hash:base64:5]'
+  }
+}
+
 module.exports = {
   module: {
     rules: [{
       test: /\.css$/,
+      exclude: /node_modules/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [cssLoader, 'postcss-loader']
       })
+    }, {
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: flexCssLoader
+      }),
+      include: /flexboxgrid/
     }]
-  },
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        context: __dirname // This magically solves class name collision in CSS module
-      }
-    }),
-    new ExtractTextPlugin({
-      filename: 'style.css',
-      allChunks: true
-    })
-  ]
+  }
 }
