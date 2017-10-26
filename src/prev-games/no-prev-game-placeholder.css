@@ -1,0 +1,20 @@
+.container {
+  height: 100%;
+  margin-top: 1em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.joker-icon {
+  width: 8em;
+  height: 8em;
+  margin-bottom: 1em;
+  fill: rgba(0, 0, 0, 0.66);
+}
+
+.start-link {
+  color: #428bca;
+}

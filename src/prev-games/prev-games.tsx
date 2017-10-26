@@ -11,7 +11,7 @@ import {PrevGameEntry} from './prev-game-entry'
 import {IRootState, ITranslateMixin} from '../types'
 
 const mapStateToProps = (state: IRootState) => ({
-  havePrevGame: true,
+  havePrevGame: false,
   prevGames: []
 })
 
@@ -24,16 +24,17 @@ const dispatchType = returntypeof(mapDispatchToProps)
 type PrevGamesProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
 export function PrevGamesImpl({havePrevGame, prevGames, t}: PrevGamesProps) {
-  if (!havePrevGame) {
-    return <NoPrevGamePlaceholder />
+  if (havePrevGame) {
+    return (
+      <Grid>
+        {prevGames.map((prevGame: IPrevGameEntry) => (
+          <PrevGameEntry key={prevGame.id} {...prevGame} />
+        ))}
+      </Grid>
+    )
   }
-  return (
-    <Grid>
-      {prevGames.map((prevGame: IPrevGameEntry) => (
-        <PrevGameEntry key={prevGame.id} {...prevGame} />
-      ))}
-    </Grid>
-  )
+
+  return <NoPrevGamePlaceholder/>
 }
 
 export const PrevGames = flowRight(
