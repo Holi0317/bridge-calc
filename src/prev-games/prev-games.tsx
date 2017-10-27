@@ -6,13 +6,15 @@ import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {Grid} from 'react-flexbox-grid'
 import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
+import {havePrevGamesSelector} from './selectors/have-prev-games'
+import {prevGamesSelector} from './selectors/prev-games'
 import {IPrevGameEntry} from './types'
 import {PrevGameEntry} from './prev-game-entry'
 import {IRootState, ITranslateMixin} from '../types'
 
 const mapStateToProps = (state: IRootState) => ({
-  havePrevGame: false,
-  prevGames: []
+  havePrevGame: havePrevGamesSelector(state),
+  prevGames: prevGamesSelector(state)
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
