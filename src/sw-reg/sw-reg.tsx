@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
-import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import {ITranslateMixin} from '../types'
 import Snackbar from 'material-ui/Snackbar'
 
@@ -35,25 +34,48 @@ class SWRegImpl extends React.Component {
     )
   }
 
-  private install() {
-    const {t} = this.props
-    OfflinePluginRuntime.install({
-      onInstalled: () => {
-        this.setState(() => ({
-          barOpen: true,
-          message: t('This app is now available offline')
-        }))
-      },
-      onUpdateReady() {
-        OfflinePluginRuntime.applyUpdate()
-      },
-      onUpdated: () => {
-        this.setState(() => ({
-          barOpen: true,
-          message: t('App will update after page reload')
-        }))
+  private async install() {
+    if ('serviceWorker' in navigator) {
+      try {
+        const registration = await navigator.serviceWorker.register('/sw.js')
+        if (!registration) {
+          // WTF no registration????
+          return
+        }
+
+        // New installation notify logic
+        const sw = registration.installing || registration.waiting
+        if (sw) {
+          sw.addEventListener('statechange', () => {
+            if (sw.state === 'activated') {
+              this.openSnackbar('This app is now available offline')
+            }
+          })
+        }
+
+        // Update notification logic
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed') {
+                this.openSnackbar('App will update after page reload')
+              }
+            })
+          }
+        })
+      } catch (err) {
+        console.error('Error when registering service worker', err)
       }
-    })
+
+    }
+  }
+
+  private openSnackbar = (msg: string) => {
+    this.setState(() => ({
+      barOpen: true,
+      message: this.props.t(msg)
+    }))
   }
 
   private handleRequestClose = () => {

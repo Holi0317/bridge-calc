@@ -15,7 +15,7 @@ const analyzer = require('./webpack-cfg/analyzer')
 const alias = require('./webpack-cfg/alias')
 const yaml = require('./webpack-cfg/yaml')
 const scopeHoisting = require('./webpack-cfg/scope-hoisting')
-const offline = require('./webpack-cfg/offline')
+const workbox = require('./webpack-cfg/workbox')
 const commonChunk = require('./webpack-cfg/common-chunk')
 
 const {ENV} = require('./webpack-cfg/paths')
@@ -52,7 +52,7 @@ module.exports = merge.smart(
     analyzer,
     scopeHoisting,
     babelMinify,
-    offline
+    workbox
   ] : [
 
   ])
