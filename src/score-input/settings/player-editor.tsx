@@ -1,6 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import uniqueId from 'lodash-es/uniqueId'
+import * as cuid from 'cuid'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import IconButton from 'material-ui/IconButton'
@@ -13,7 +13,7 @@ import {
 import {NameInputList} from '../../name-input-list'
 import {nameInputListSourceSelector, PlayerName, revert} from './selectors/name-input-list-source'
 import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../../types'
-import {GameState} from '../reducer/types'
+import {GameState} from '../reducer'
 import {randomName} from '../../example-names'
 import {returntypeof} from 'react-redux-typescript'
 import style from './player-editor.css'
@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     const action: IAddNameAction = {
       type: ADD_NAME,
       name: randomName(),
-      ID: uniqueId('player_')
+      ID: cuid()
     }
     dispatch(action)
   },

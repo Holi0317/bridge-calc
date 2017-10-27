@@ -1,4 +1,4 @@
-import uniqueId from 'lodash-es/uniqueId'
+import * as cuid from 'cuid'
 import {IPlayerMap} from '../../types'
 
 export const START: 'CURRENT_GAME/START' = 'CURRENT_GAME/START'
@@ -17,7 +17,7 @@ export interface IStartAction {
 function namesToMap(playerNames: string[]): IPlayerMap<string> {
   const result: IPlayerMap<string> = {}
   playerNames.forEach(name => {
-    result[uniqueId('player_')] = name
+    result[cuid()] = name
   })
   return result
 }
