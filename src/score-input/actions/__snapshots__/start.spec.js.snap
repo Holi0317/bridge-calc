@@ -3,10 +3,10 @@
 exports[`it should returns start action 1`] = `
 Object {
   "playerNames": Object {
-    "player_1": "John",
-    "player_2": "Mary",
-    "player_3": "Henry",
-    "player_4": "Joe",
+    "0": "John",
+    "1": "Mary",
+    "2": "Henry",
+    "3": "Joe",
   },
   "rounds": 13,
   "startTime": 1970-01-01T00:00:00.000Z,

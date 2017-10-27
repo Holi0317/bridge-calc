@@ -1,3 +1,8 @@
+jest.mock('cuid', () => {
+  let count = 0
+  return jest.fn(() => count++)
+})
+
 import {waitingBidState, waitingWinState, endedState, genMap} from '../../../test-fixtures/current-game-states'
 import {currentGameReducer as reducer} from './reducer'
 import * as lolex from 'lolex'
