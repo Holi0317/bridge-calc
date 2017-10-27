@@ -1,13 +1,14 @@
 const webpack = require('webpack')
 
-const regex = /lodash|material-ui/
+const regex = /lodash|material-ui|react-dom/
 
 module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      children: true,
-      minChunks: (module, count) => (
-        module.resource && regex.test(module.resource) && count >= 3
+      name: 'vendor',
+      filename: 'vendor.[chunkhash].js',
+      minChunks: module => (
+        module.context && regex.test(module.context)
       )
     })
   ]
