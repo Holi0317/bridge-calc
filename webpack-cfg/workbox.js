@@ -7,8 +7,8 @@ module.exports = {
   plugins: [
     new WorkboxPlugin({
       globDirectory: DIST_DIR,
-      globPatterns: ['**/*.{html,js,css,json,ico}'],
-      globIgnores: 'report.html',
+      globPatterns: ['**/*.{html,js,css}'],
+      globIgnores: ['report.html', '404.html'],
       dontCacheBustUrlsMatching: /\.\w{8}\./,
       navigateFallback: '/',
       skipWaiting: true,
