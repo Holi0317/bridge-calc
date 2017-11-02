@@ -6,10 +6,13 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'vendor.[chunkhash].js',
       minChunks: module => (
-        module.context && regex.test(module.context)
+        module.resource && regex.test(module.resource)
       )
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      minChunks: 3
     })
   ]
 }

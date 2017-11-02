@@ -1,9 +1,8 @@
 import * as React from 'react'
 import {RouteProps} from 'react-router'
-import {MenuView, EntryView, ScoreInputView, PrevGamesView} from '../lazy-views'
+import {MenuView, EntryView, ScoreInputView, PrevGamesView, GlobalSettingsView} from '../lazy-views'
 import {GameTitle} from '../score-input/title'
 import {titleAugment} from '../utils'
-import {GlobalSettingsView} from '../lazy-views/global-settings'
 
 export interface IRoute extends RouteProps {
   title: React.ComponentType<any>
