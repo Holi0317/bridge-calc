@@ -2,7 +2,7 @@ import * as React from 'react'
 import {TranslationFunction} from 'i18next'
 import {translate} from 'react-i18next'
 import {Dropdown} from '../material/dropdown'
-import {i18n, languages} from '../app/i18n'
+import {languages} from '../app/i18n'
 import {IDropdownSource, ITranslateMixin} from '../types'
 import Snackbar from 'material-ui/Snackbar'
 
@@ -27,7 +27,7 @@ export class LanguageSelectorImpl extends React.Component {
   }
 
   public render() {
-    const {t} = this.props
+    const {i18n, t} = this.props
     const {message, open} = this.state
     return (
       <div>
@@ -42,6 +42,7 @@ export class LanguageSelectorImpl extends React.Component {
   }
 
   private changeLanguage = (lang: string) => {
+    const {i18n} = this.props
     i18n.changeLanguage(lang, err => {
       const message = err
         ? this.props.t('Error when changing language. Error: {{err}}', {err: err.message})

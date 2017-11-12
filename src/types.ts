@@ -4,7 +4,7 @@ import {GameState} from './score-input/reducer'
 import {IEntryState} from './entry/entry-reducer'
 import {ISettingsState} from './score-input/settings/reducer'
 import {GameSettingsActions} from './score-input/settings/game-settings-actions'
-import {TranslationFunction} from 'i18next'
+import {i18n, TranslationFunction} from 'i18next'
 import {IPrevGamesState} from './prev-games/prev-games-reducer'
 import {PrevGamesActions} from './prev-games/actions'
 
@@ -12,6 +12,7 @@ export interface IPlayerMap<T> {[playerID: string]: T}
 
 export interface ITranslateMixin {
   t: TranslationFunction
+  i18n: i18n
 }
 
 export interface IDropdownSource<T> {
