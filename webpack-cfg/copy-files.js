@@ -4,7 +4,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       {from: 'favicon.ico', to: 'favicon.ico'},
-      {from: 'manifest.json', to: 'manifest.json'}
+      {from: 'manifest.json', to: 'manifest.json'},
+      {from: 'icons', to: 'icons'}
     ])
   ]
 }
