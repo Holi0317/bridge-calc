@@ -47,9 +47,9 @@ module.exports = merge.smart(
   extractText,
   genIndex,
   copyFiles,
+  analyzer,
 
   ...(ENV === 'production' ? [
-    analyzer,
     scopeHoisting,
     babelMinify,
     workbox
