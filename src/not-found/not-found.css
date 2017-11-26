@@ -1,0 +1,24 @@
+.container {
+  height: 100%;
+  margin-top: 1em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.icon {
+  width: 8em !important;
+  height: 8em !important;
+  margin-bottom: 1em !important;
+  fill: rgba(0, 0, 0, 0.66) !important;
+}
+
+.text {
+  font-size: 22px;
+}
+
+.link {
+  color: #428bca;
+}

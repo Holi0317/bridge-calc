@@ -1,6 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Switch} from 'react-router-dom'
 import {Route, RouteComponentProps} from 'react-router'
 import {History} from 'history'
 import AppBar from 'material-ui/AppBar'
@@ -43,9 +43,11 @@ export function ShellImpl({location, history}: AppProps) {
         title={<Titles />}
       />
       <ErrorBoundary>
-        {routes.map(({title, name, ...rest}) => (
-          <Route key={name} {...rest} />
-        ))}
+        <Switch>
+          {routes.map(({title, name, ...rest}) => (
+            <Route key={name} {...rest} />
+          ))}
+        </Switch>
       </ErrorBoundary>
       <SWReg />
     </div>

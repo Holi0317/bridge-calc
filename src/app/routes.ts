@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {RouteProps} from 'react-router'
-import {MenuView, EntryView, ScoreInputView, PrevGamesView, GlobalSettingsView} from '../lazy-views'
+import {MenuView, EntryView, ScoreInputView, PrevGamesView, GlobalSettingsView, NotFoundView} from '../lazy-views'
 import {GameTitle} from '../score-input/title'
 import {titleAugment} from '../utils'
 
@@ -35,4 +35,8 @@ export const routes: IRoute[] = [{
   name: 'global-settings',
   component: GlobalSettingsView,
   title: titleAugment('Global settings')
+}, {
+  name: 'not-found',
+  title: titleAugment('Not found'),
+  component: NotFoundView
 }]
