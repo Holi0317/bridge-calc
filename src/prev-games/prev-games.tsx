@@ -4,7 +4,7 @@ import {bindActionCreators, Dispatch} from 'redux'
 import {returntypeof} from 'react-redux-typescript'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
-import {Grid} from 'react-flexbox-grid'
+import {Container} from 'react-grid-system'
 import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {prevGamesSelector} from './selectors/prev-games'
@@ -28,11 +28,11 @@ type PrevGamesProps = typeof stateType & typeof dispatchType & ITranslateMixin
 export function PrevGamesImpl({havePrevGame, prevGames, t}: PrevGamesProps) {
   if (havePrevGame) {
     return (
-      <Grid>
+      <Container>
         {prevGames.map((prevGame: IPrevGameEntry) => (
           <PrevGameEntry key={prevGame.id} {...prevGame} />
         ))}
-      </Grid>
+      </Container>
     )
   }
 

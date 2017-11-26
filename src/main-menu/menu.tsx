@@ -1,7 +1,7 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
-import {Grid, Row, Col} from 'react-flexbox-grid'
+import {Container, Row, Col} from 'react-grid-system'
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow'
 import AvFiberNew from 'material-ui/svg-icons/av/fiber-new'
 import AvSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
@@ -13,7 +13,7 @@ import {ITranslateMixin} from '../types'
 
 export function MenuImpl({t}: ITranslateMixin) {
   return (
-    <Grid>
+    <Container>
       {/* TODO hide his row if there is no game to continue */}
       <Row>
         <Col xs={12}>
@@ -42,7 +42,7 @@ export function MenuImpl({t}: ITranslateMixin) {
         </Col>
       </Row>
 
-    </Grid>
+    </Container>
   )
 }
 

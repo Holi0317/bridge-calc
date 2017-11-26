@@ -3078,10 +3078,6 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flexboxgrid@^6.3.0:
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/flexboxgrid/-/flexboxgrid-6.3.1.tgz#e99898afc07b7047722bb81a958a5fba4d4e20fd"
-
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -6029,12 +6025,12 @@ react-event-listener@^0.5.1:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
-react-flexbox-grid@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/react-flexbox-grid/-/react-flexbox-grid-1.1.5.tgz#405fea87eb735d54d161be9bb09c7930910bf8cc"
+react-grid-system@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-3.1.0.tgz#2071e0a8c8336d940e0ab215b950e5e43a53fd04"
   dependencies:
-    flexboxgrid "^6.3.0"
-    prop-types "^15.5.8"
+    lodash "^4.17.4"
+    prop-types "^15.6.0"
 
 react-height@3.0.0:
   version "3.0.0"

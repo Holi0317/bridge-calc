@@ -13,16 +13,6 @@ const cssLoader = {
   }
 }
 
-const flexCssLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: true,
-    sourceMap: true,
-    minimize: ENV === 'production',
-    localIdentName: '[hash:base64:5]'
-  }
-}
-
 module.exports = {
   module: {
     rules: [{
@@ -32,13 +22,6 @@ module.exports = {
         fallback: 'style-loader',
         use: [cssLoader, 'postcss-loader']
       })
-    }, {
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [flexCssLoader, 'postcss-loader']
-      }),
-      include: /flexboxgrid/
     }]
   }
 }

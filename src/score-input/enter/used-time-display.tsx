@@ -5,7 +5,7 @@ import {translate} from 'react-i18next'
 import {returntypeof} from 'react-redux-typescript'
 import {IRootState, ITranslateMixin} from '../../types'
 import {endTimeSelector, startTimeSelector} from '../selectors/time'
-import utilsCSS from '../../styles/utils.css'
+import styles from './used-time-display.css'
 
 function msToTime(milliseconds: number) {
   // Get hours from milliseconds
@@ -58,7 +58,7 @@ export class UsedTimeDisplayImpl extends React.Component {
   public render() {
     const {t} = this.props
     const {time} = this.state
-    return <span className={utilsCSS.pullRight}>{t('Time: {{time}}', {time})}</span>
+    return <span className={styles.pullRight}>{t('Time: {{time}}', {time})}</span>
   }
 
   private tick = () => {

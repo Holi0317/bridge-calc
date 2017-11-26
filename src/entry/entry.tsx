@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
-import {Grid} from 'react-flexbox-grid'
+import {Container} from 'react-grid-system'
 import {EntryPlayerList} from './entry-player-list'
 import {InitEntryState} from './init-entry-state'
 import {EntryActionButtons} from './entry-action-buttons'
@@ -12,7 +12,7 @@ type EntryProps = ITranslateMixin
 
 export function EntryImpl({t}: EntryProps) {
   return (
-    <Grid>
+    <Container>
       <h3>{t('Player Names')}</h3>
       <EntryPlayerList />
       <EntryActionButtons />
@@ -22,7 +22,7 @@ export function EntryImpl({t}: EntryProps) {
 
       <EntryStartButton />
       <InitEntryState />
-    </Grid>
+    </Container>
   )
 }
 

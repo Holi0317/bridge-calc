@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
-import {Grid} from 'react-flexbox-grid'
+import {Container} from 'react-grid-system'
 import {LanguageSelector} from './language-selector'
 import {PurgeData} from './purge-data'
 import {VersionDisplay} from './version-display'
@@ -10,11 +10,11 @@ type GlobalSettingsProps = ITranslateMixin
 
 export function GlobalSettingsImpl({t}: GlobalSettingsProps) {
   return (
-    <Grid>
+    <Container>
       <LanguageSelector />
       <PurgeData />
       <VersionDisplay />
-    </Grid>
+    </Container>
   )
 }
 

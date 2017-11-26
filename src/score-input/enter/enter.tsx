@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Grid} from 'react-flexbox-grid'
+import {Container} from 'react-grid-system'
 import {UsedTimeDisplay} from './used-time-display'
 import {StackInput} from './stack-input'
 import {ActionButtons} from './action-buttons'
@@ -8,7 +8,7 @@ import style from './enter.css'
 
 export function Enter() {
   return (
-    <Grid>
+    <Container>
       <UsedTimeDisplay />
 
       <div className={style.actionContainer}>
@@ -17,6 +17,6 @@ export function Enter() {
       </div>
 
       <MiniScoreboard />
-    </Grid>
+    </Container>
   )
 }

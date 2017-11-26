@@ -1,14 +1,14 @@
 import * as React from 'react'
-import {Grid} from 'react-flexbox-grid'
+import {Container} from 'react-grid-system'
 import {PlayerEditor} from './player-editor'
 import {RoundManagement} from './round-management'
 
 export function Settings() {
   return (
-    <Grid>
+    <Container>
       <PlayerEditor />
       <hr />
       <RoundManagement />
-    </Grid>
+    </Container>
   )
 }

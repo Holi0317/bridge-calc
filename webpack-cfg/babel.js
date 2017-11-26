@@ -5,7 +5,7 @@ const libraries = [
   'react-i18next',
   'react-collapse',
   'react-height',
-  'react-flexbox-grid'
+  'react-grid-system'
 ]
 
 const babelOpts = {
@@ -30,7 +30,7 @@ const babelOpts = {
 module.exports = {
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       include: libraries.map(lib => path.resolve(__dirname, '../node_modules', lib)),
       use: {
         loader: 'babel-loader',
