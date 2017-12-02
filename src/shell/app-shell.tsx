@@ -1,16 +1,15 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {withRouter, Switch} from 'react-router-dom'
-import {Route, RouteComponentProps} from 'react-router'
+import {withRouter} from 'react-router-dom'
+import {RouteComponentProps} from 'react-router'
 import {History} from 'history'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ActionHelp from 'material-ui/svg-icons/action/help'
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import {Titles} from './titles'
-import {routes} from '../app/routes'
 import {SWReg} from '../sw-reg'
-import {ErrorBoundary} from '../error-boundary'
+import {Routes} from './routes'
 
 /**
  * Create a function that will route to specified location.
@@ -42,18 +41,10 @@ export function ShellImpl({location, history}: AppProps) {
         onLeftIconButtonTouchTap={backFn}
         title={<Titles />}
       />
-      <ErrorBoundary>
-        <Switch>
-          {routes.map(({title, name, ...rest}) => (
-            <Route key={name} {...rest} />
-          ))}
-        </Switch>
-      </ErrorBoundary>
+      <Routes location={location} />
       <SWReg />
     </div>
   )
 }
 
-export const Shell = flowRight(
-  withRouter
-)(ShellImpl)
+export const Shell = withRouter(ShellImpl)
