@@ -60,4 +60,4 @@ export class ActionButtonsImpl extends React.Component {
 export const ActionButtons = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(ActionButtonsImpl)
+)(ActionButtonsImpl) as React.StatelessComponent<{}>

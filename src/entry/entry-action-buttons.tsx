@@ -35,4 +35,4 @@ export function EntryActionButtonsImpl({addRandomPlayer, t}: EntryActionButtonsP
 export const EntryActionButtons = flowRight(
   translate(),
   connect(null, mapDispatchToProps)
-)(EntryActionButtonsImpl)
+)(EntryActionButtonsImpl) as React.StatelessComponent<{}>

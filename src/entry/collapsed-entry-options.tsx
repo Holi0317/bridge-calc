@@ -37,4 +37,4 @@ export function CollapsedEntryOptionsImpl({toggleOptionOpen, optionsOpened, t}: 
 export const CollapsedEntryOptions = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(CollapsedEntryOptionsImpl)
+)(CollapsedEntryOptionsImpl) as React.StatelessComponent<{}>

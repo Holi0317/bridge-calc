@@ -33,4 +33,4 @@ export function SkipRoundsImpl({t}: SkipRoundsProps) {
 export const SkipRounds = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(SkipRoundsImpl)
+)(SkipRoundsImpl) as React.StatelessComponent<{}>

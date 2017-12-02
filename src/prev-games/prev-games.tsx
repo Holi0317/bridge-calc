@@ -42,4 +42,4 @@ export function PrevGamesImpl({havePrevGame, prevGames, t}: PrevGamesProps) {
 export const PrevGames = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(PrevGamesImpl)
+)(PrevGamesImpl) as React.StatelessComponent<{}>

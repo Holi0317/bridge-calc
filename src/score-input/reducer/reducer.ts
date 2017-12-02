@@ -3,7 +3,7 @@ import {skip} from './skip'
 import {start} from './start'
 import {winHandler} from './win-handler'
 import {changePlayersHandler} from './change-players-handler'
-import {toWaitingBidState} from './converter'
+import {toWaitingBidState, toWaitingWinState} from './converter'
 import {bidWinGenerator} from './bid-win-generator'
 import {GameState} from './types'
 import {CurrentGameActions} from '../actions'
@@ -42,7 +42,7 @@ export function currentGameReducer(state: GameState = defaultState, action: Curr
     }
   case SET_WIN:
     return {
-      ...state,
+      ...toWaitingWinState(state),
       win: action.payload
     }
   case BID:

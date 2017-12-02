@@ -38,4 +38,4 @@ export function MakerChooserImpl({names, maker, onChange, t}: MakerChooserProps)
 export const MakerChooser = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(MakerChooserImpl)
+)(MakerChooserImpl) as React.StatelessComponent<{}>

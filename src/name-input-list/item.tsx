@@ -29,4 +29,4 @@ export function SortableItemImpl({value, onChange, remove, error, t}: SortableIt
 export const SortableItem = flowRight(
   SortableElement,
   translate()
-)(SortableItemImpl)
+)(SortableItemImpl) as React.ComponentType<any>

@@ -112,4 +112,4 @@ export class PlayerEditorImpl extends React.Component {
 export const PlayerEditor = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(PlayerEditorImpl)
+)(PlayerEditorImpl) as React.StatelessComponent<{}>

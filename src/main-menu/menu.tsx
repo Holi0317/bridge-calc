@@ -46,6 +46,4 @@ export function MenuImpl({t}: ITranslateMixin) {
   )
 }
 
-export const Menu = flowRight(
-  translate()
-)(MenuImpl)
+export const Menu = translate()(MenuImpl)
