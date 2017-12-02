@@ -10,9 +10,7 @@ const transitionClass = {
   appear: styles.appear,
   appearActive: styles.appearActive,
   enter: styles.enter,
-  enterActive: styles.enterActive,
-  exit: styles.exit,
-  exitActive: styles.exitActive,
+  enterActive: styles.enterActive
 }
 
 interface IRoutesProps {
@@ -21,9 +19,9 @@ interface IRoutesProps {
 
 export function Routes({location}: IRoutesProps) {
   return <ErrorBoundary>
-    <TransitionGroup>
-      <CSSTransition classNames={transitionClass} key={location.key} timeout={500} appear>
-        <div>
+    <TransitionGroup exit={false}>
+      <CSSTransition classNames={transitionClass} key={location.key} timeout={300} appear>
+        <div className={styles.base}>
           <Switch location={location}>
             {routes.map(({title, name, ...rest}) => (
               <Route key={name} {...rest} />

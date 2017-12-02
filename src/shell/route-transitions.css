@@ -1,12 +1,14 @@
 .appear,
-.enter,
-.exit,
-.exit-active {
+.enter {
   opacity: 0;
 }
 
 .appear-active,
 .enter-active {
+  transition: opacity 300ms linear;
   opacity: 1;
-  transition: opacity 0.5s;
+}
+
+.base {
+  will-change: opacity;
 }
