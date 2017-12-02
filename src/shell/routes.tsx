@@ -18,8 +18,11 @@ interface IRoutesProps {
 }
 
 export function Routes({location}: IRoutesProps) {
+  // `/score-input` route has its own transition/animation logic.
+  // Blacklisting it from general transition
+  const transitionDisabled = location.pathname.startsWith('/score-input')
   return <ErrorBoundary>
-    <TransitionGroup exit={false}>
+    <TransitionGroup exit={false} enter={!transitionDisabled}>
       <CSSTransition classNames={transitionClass} key={location.key} timeout={300} appear>
         <div className={styles.base}>
           <Switch location={location}>
