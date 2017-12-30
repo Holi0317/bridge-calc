@@ -7,16 +7,17 @@ import {RouteComponentProps, withRouter} from 'react-router'
 import {Container} from 'react-grid-system'
 import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
-import {prevGamesSelector} from './selectors/prev-games'
 import {PrevGameEntry} from './types'
 import {PrevGame} from './prev-game'
 import {IRootState} from '../types'
 import {deleteGameAction} from './actions/delete-game'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
+import styles from './prev-games.css'
+import {reversedPrevGamesSelector} from './selectors/reversed-prev-games'
 
 const mapStateToProps = (state: IRootState) => ({
   havePrevGame: havePrevGamesSelector(state),
-  prevGames: prevGamesSelector(state)
+  prevGames: reversedPrevGamesSelector(state)
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
@@ -34,12 +35,12 @@ export class PrevGamesImpl extends React.Component {
   public props: PrevGamesProps
 
   public render() {
-    const {havePrevGame, prevGames, del, load} = this.props
+    const {havePrevGame, prevGames, del} = this.props
     if (havePrevGame) {
       return (
         <Container>
-          {prevGames.map((prevGame: PrevGameEntry, index: number) => (
-            <PrevGame key={`prev-game-${index}`} game={prevGame}
+          {prevGames.reverse().map((prevGame: PrevGameEntry, index: number) => (
+            <PrevGame key={`prev-game-${index}`} className={styles.prevGame} game={prevGame}
                       requestDelete={() => del(index)} requestContinue={() => this.load(prevGame)}/>
           ))}
         </Container>
