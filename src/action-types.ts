@@ -11,6 +11,15 @@ export enum ActionTypes {
   REPLACE_CURRENT_GAME = 'CURRENT_GAME/REPLACE_CURRENT_GAME',
 
   // Entry module
+  ADD_PLAYER = 'ENTRY/ADD_PLAYER',
+  RESET_ENTRY = 'ENTRY/RESET',
+  // FIXME Remove settable cards. That idea is just stupid
+  SET_CARDS = 'ENTRY/SET_CARDS',
+  // FIXME Integrate all of the following actions to one. I am not writing java
+  SET_PLAYER_NAMES = 'ENTRY/SET_PLAYER_NAMES',
+  SET_ROUNDS = 'ENTRY/SET_ROUNDS',
+  SET_STARTING_ROUND = 'ENTRY/SET_STARTING_ROUND',
+  TOGGLE_OPTION_OPEN = 'ENTRY/TOGGLE_OPTION_OPEN',
 
   // Game Settings module
 

@@ -1,8 +1,9 @@
-import {setCardsAction, SET_CARDS} from './set-cards'
+import {setCardsAction} from './set-cards'
+import {ActionTypes} from '../../action-types'
 
 test('it should return set cards action', () => {
   const expected = {
-    type: SET_CARDS,
+    type: ActionTypes.SET_CARDS,
     payload: 104
   }
   const actual = setCardsAction(104)

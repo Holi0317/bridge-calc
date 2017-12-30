@@ -1,8 +1,9 @@
-import {toggleOptionOpenAction, TOGGLE_OPTION_OPEN} from './toggle-option-open'
+import {toggleOptionOpenAction} from './toggle-option-open'
+import {ActionTypes} from '../../action-types'
 
 test('it should return toggle option open action', () => {
   const expected = {
-    type: TOGGLE_OPTION_OPEN
+    type: ActionTypes.TOGGLE_OPTION_OPEN
   }
   const actual = toggleOptionOpenAction()
   expect(actual).toEqual(expected)

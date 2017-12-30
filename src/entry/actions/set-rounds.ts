@@ -1,6 +1,7 @@
-export const SET_ROUNDS: 'ENTRY/SET_ROUNDS' = 'ENTRY/SET_ROUNDS'
+import {ActionTypes} from '../../action-types'
+
 export interface ISetRoundsAction {
-  type: typeof SET_ROUNDS,
+  type: ActionTypes.SET_ROUNDS,
   payload: number
 }
 
@@ -9,5 +10,5 @@ export interface ISetRoundsAction {
  * @param payload - The rounds to be set
  */
 export function setRoundsAction(payload: number): ISetRoundsAction {
-  return {type: SET_ROUNDS, payload}
+  return {type: ActionTypes.SET_ROUNDS, payload}
 }

@@ -1,8 +1,8 @@
 import {randomName} from '../../example-names'
+import {ActionTypes} from '../../action-types'
 
-export const ADD_PLAYER: 'ENTRY/ADD_PLAYER' = 'ENTRY/ADD_PLAYER'
 export interface IAddPlayerAction {
-  type: typeof ADD_PLAYER,
+  type: ActionTypes.ADD_PLAYER,
   payload: string
 }
 
@@ -11,7 +11,7 @@ export interface IAddPlayerAction {
  * @parm payload - The name of new player
  */
 export function addPlayerAction(payload: string): IAddPlayerAction {
-  return {type: ADD_PLAYER, payload}
+  return {type: ActionTypes.ADD_PLAYER, payload}
 }
 
 /**
