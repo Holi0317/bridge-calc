@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const {ENV} = require('./paths')
 
 const productionEnv = {
-  devtool: 'hidden-source-map',
   output: {
     filename: '[name].[chunkhash].bundle.js',
     sourceMapFilename: '[name].[chunkhash].bundle.map',
