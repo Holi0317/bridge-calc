@@ -1,4 +1,4 @@
-import {deleteGameAction, DELETE_GAME, lazyDeleteGameAction} from './delete-game'
+import {deleteGameAction, DELETE_GAME} from './delete-game'
 
 test('it should return delete game action', () => {
   const expected = {
