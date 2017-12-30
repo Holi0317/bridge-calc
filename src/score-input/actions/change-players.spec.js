@@ -1,4 +1,5 @@
-import {CHANGE_PLAYERS, changePlayersAction} from './change-players'
+import {changePlayersAction} from './change-players'
+import {ActionTypes} from '../../action-types'
 import {genMap} from '../../../test-fixtures/current-game-states'
 import * as lolex from 'lolex'
 
@@ -6,7 +7,7 @@ test('it should return change players action', () => {
   const clock = lolex.install()
   const newNames = genMap('John', 'Mary', 'Henry', 'Joe')
   const expected = {
-    type: CHANGE_PLAYERS,
+    type: ActionTypes.CHANGE_PLAYERS,
     newNames,
     maker: 'a',
     rounds: 13,

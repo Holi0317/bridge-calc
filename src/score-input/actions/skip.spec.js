@@ -1,4 +1,5 @@
-import {skipAction, SKIP} from './skip'
+import {skipAction} from './skip'
+import {ActionTypes} from '../../action-types'
 import * as lolex from 'lolex'
 
 let clock = null
@@ -13,7 +14,7 @@ afterEach(() => {
 
 test('it should return a skip action', () => {
   const expected = {
-    type: SKIP,
+    type: ActionTypes.SKIP,
     time: new Date()
   }
   const actual = skipAction()
@@ -22,7 +23,7 @@ test('it should return a skip action', () => {
 
 test('it should return skip action with n rounds specified', () => {
   const expected = {
-    type: SKIP,
+    type: ActionTypes.SKIP,
     time: new Date(),
     times: 5
   }

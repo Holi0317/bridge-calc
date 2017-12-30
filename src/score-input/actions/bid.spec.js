@@ -1,9 +1,10 @@
-import {bidAction, BID} from './bid'
+import {bidAction} from './bid'
+import {ActionTypes} from '../../action-types'
 import {genMap} from '../../../test-fixtures/current-game-states'
 
 test('it should return bid action', () => {
   const expected = {
-    type: BID,
+    type: ActionTypes.BID,
     payload: genMap(0, 0, 0, 0)
   }
   const actual = bidAction(genMap(0, 0, 0, 0))
@@ -12,7 +13,7 @@ test('it should return bid action', () => {
 
 test('it should return bid action with no payload', () => {
   const expected = {
-    type: BID
+    type: ActionTypes.BID
   }
   const actual = bidAction()
   expect(actual).toEqual(expected)

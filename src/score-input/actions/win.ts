@@ -1,8 +1,8 @@
 import {IPlayerMap} from '../../types'
+import {ActionTypes} from '../../action-types'
 
-export const WIN: 'CURRENT_GAME/WIN' = 'CURRENT_GAME/WIN'
 export interface IWinAction {
-  type: typeof WIN,
+  type: ActionTypes.WIN,
   win?: IPlayerMap<number>,
   time: Date
 }
@@ -15,5 +15,5 @@ export interface IWinAction {
  * If this is not defined, win property in currentGame state will be used as fallback.
  */
 export function winAction(win?: IPlayerMap<number>): IWinAction {
-  return {type: WIN, win, time: new Date()}
+  return {type: ActionTypes.WIN, win, time: new Date()}
 }
