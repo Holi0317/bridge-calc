@@ -66,4 +66,4 @@ export class MakerEditorImpl extends React.Component {
 export const MakerEditor = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(MakerEditorImpl) as React.StatelessComponent<{}>
+)(MakerEditorImpl)

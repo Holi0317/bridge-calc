@@ -7,11 +7,11 @@ function reload() {
   window.location.reload()
 }
 
-interface IOuchProps extends ITranslateMixin {
+interface IOuchProps {
   error: Error
 }
 
-export function OuchImpl({error, t}: IOuchProps) {
+export function OuchImpl({error, t}: IOuchProps & ITranslateMixin) {
   return (
     <div className={style.centerContainer}>
       <div className={style.sadFace}>
@@ -30,4 +30,4 @@ export function OuchImpl({error, t}: IOuchProps) {
   )
 }
 
-export const Ouch = translate()(OuchImpl as any)
+export const Ouch = translate()(OuchImpl)

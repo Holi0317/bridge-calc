@@ -1,8 +1,8 @@
 import {createSelector} from 'reselect'
 import {prevGamesSelector} from './prev-games'
-import {IPrevGameEntry} from '../types'
+import {PrevGameEntry} from '../types'
 
 export const havePrevGamesSelector = createSelector(
   prevGamesSelector,
-  (prevGames: IPrevGameEntry[]) => prevGames.length !== 0
+  (prevGames: PrevGameEntry[]) => prevGames.length !== 0
 )

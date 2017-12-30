@@ -1,5 +1,4 @@
 import * as React from 'react'
-import {TouchTapEvent} from 'material-ui'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import {IDropdownSource} from '../types'
@@ -28,7 +27,7 @@ export class Dropdown<SourceType> extends React.Component {
     )
   }
 
-  private handleChange = (event: TouchTapEvent, index: number, value: SourceType) => {
+  private handleChange = (event: React.SyntheticEvent<{}>, index: number, value: SourceType) => {
     this.props.onChange(value)
   }
 }

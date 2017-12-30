@@ -1,5 +1,4 @@
 import {GameStage} from '../game-stage'
-
 import {IPlayerMap} from '../../types'
 
 /**
@@ -41,7 +40,8 @@ export interface IWaitingWinState extends IBaseGameState {
 }
 
 export interface IEndedState extends IBaseGameState {
-  stage: typeof GameStage.ended,
+  stage: typeof GameStage.ended
+  /** Time for the game to end */
   endTime: Date
 }
 

@@ -111,4 +111,4 @@ export class StackInputImpl extends React.Component {
 export const StackInput = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(StackInputImpl) as React.StatelessComponent<{}>
+)(StackInputImpl)

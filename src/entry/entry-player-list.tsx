@@ -40,4 +40,4 @@ export function EntryPlayerListImpl({playerNames, playerNamesError, setPlayerNam
 export const EntryPlayerList = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(EntryPlayerListImpl) as React.StatelessComponent<{}>
+)(EntryPlayerListImpl)

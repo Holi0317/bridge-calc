@@ -26,4 +26,4 @@ export function PurgeDataImpl({t}: PurgeDataProps) {
 export const PurgeData = flowRight(
   translate(),
   connect(null, mapDispatchToProps)
-)(PurgeDataImpl) as React.StatelessComponent<{}>
+)(PurgeDataImpl)

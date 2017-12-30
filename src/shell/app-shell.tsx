@@ -1,5 +1,4 @@
 import * as React from 'react'
-import flowRight from 'lodash-es/flowRight'
 import {withRouter} from 'react-router-dom'
 import {RouteComponentProps} from 'react-router'
 import {History} from 'history'
@@ -38,7 +37,7 @@ export function ShellImpl({location, history}: AppProps) {
         iconElementRight={helpBtn}
         iconElementLeft={backBtn}
         showMenuIconButton={location.pathname !== '/'}
-        onLeftIconButtonTouchTap={backFn}
+        onLeftIconButtonClick={backFn}
         title={<Titles />}
       />
       <Routes location={location} />

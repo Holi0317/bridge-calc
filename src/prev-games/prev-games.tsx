@@ -8,8 +8,8 @@ import {Container} from 'react-grid-system'
 import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {prevGamesSelector} from './selectors/prev-games'
-import {IPrevGameEntry} from './types'
-import {PrevGameEntry} from './prev-game-entry'
+import {PrevGameEntry} from './types'
+import {PrevGame} from './prev-game'
 import {IRootState, ITranslateMixin} from '../types'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -29,8 +29,8 @@ export function PrevGamesImpl({havePrevGame, prevGames, t}: PrevGamesProps) {
   if (havePrevGame) {
     return (
       <Container>
-        {prevGames.map((prevGame: IPrevGameEntry) => (
-          <PrevGameEntry key={prevGame.id} {...prevGame} />
+        {prevGames.map((prevGame: PrevGameEntry, index: number) => (
+          <PrevGame key={`prev-game-${index}`} game={prevGame} requestDelete={() => {}} />
         ))}
       </Container>
     )
@@ -42,4 +42,4 @@ export function PrevGamesImpl({havePrevGame, prevGames, t}: PrevGamesProps) {
 export const PrevGames = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(PrevGamesImpl) as React.StatelessComponent<{}>
+)(PrevGamesImpl)

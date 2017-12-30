@@ -6,7 +6,7 @@ import {Ouch} from '../error-boundary/ouch'
 
 export function Loading({error, pastDelay}: LoadingComponentProps) {
   if (error) {
-    return <Ouch error="Failed to load route." />
+    return <Ouch error={new Error('Failed to load route.')} />
   }
   if (pastDelay) {
     return (

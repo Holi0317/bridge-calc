@@ -1,6 +1,9 @@
+import {IEndedState, IWaitingBidState, IWaitingWinState} from '../score-input/reducer/types'
+
 /**
  * Represent a previous game (Ended or paused)
  */
-export interface IPrevGameEntry {
-  id: string
-}
+export type PrevGameEntry =
+  | IWaitingBidState
+  | IWaitingWinState
+  | IEndedState

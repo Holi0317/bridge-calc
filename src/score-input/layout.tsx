@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {Route, withRouter, matchPath} from 'react-router-dom'
+import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {routes} from './routes'
 import {ITranslateMixin} from '../types'
@@ -65,4 +66,7 @@ export class LayoutImpl extends React.Component {
   }
 }
 
-export const Layout = withRouter(translate()(LayoutImpl))
+export const Layout = flowRight(
+  withRouter,
+  translate()
+)(LayoutImpl)

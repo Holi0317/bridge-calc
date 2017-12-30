@@ -81,4 +81,4 @@ export class UsedTimeDisplayImpl extends React.Component {
 export const UsedTimeDisplay = flowRight(
   translate(),
   connect(mapStateToProps)
-)(UsedTimeDisplayImpl) as React.StatelessComponent<{}>
+)(UsedTimeDisplayImpl)
