@@ -1,5 +1,7 @@
 .btn-container {
   display: flex;
 
-  /* TODO make children align to head and tail */
+  & > * {
+    margin-right: 3em;
+  }
 }

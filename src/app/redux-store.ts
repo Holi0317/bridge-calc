@@ -3,7 +3,6 @@ import {currentGameReducer} from '../score-input/reducer'
 import {prevGamesReducer} from '../prev-games/prev-games-reducer'
 import {entryReducer} from '../entry/entry-reducer'
 import {settingsReducer} from '../score-input/settings/reducer'
-import {batchDispatch} from '../redux-middlewares/batch-dispatch'
 import {autoSave} from '../redux-middlewares/auto-save'
 
 const reducer = combineReducers({
@@ -14,7 +13,6 @@ const reducer = combineReducers({
 })
 
 const middlewares = [
-  batchDispatch,
   autoSave
 ]
 
