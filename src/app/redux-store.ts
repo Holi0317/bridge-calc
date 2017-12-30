@@ -4,6 +4,7 @@ import {prevGamesReducer} from '../prev-games/prev-games-reducer'
 import {entryReducer} from '../entry/entry-reducer'
 import {settingsReducer} from '../score-input/settings/reducer'
 import {batchDispatch} from '../redux-middlewares/batch-dispatch'
+import {autoSave} from '../redux-middlewares/auto-save'
 
 const reducer = combineReducers({
   entry: entryReducer,
@@ -13,7 +14,8 @@ const reducer = combineReducers({
 })
 
 const middlewares = [
-  batchDispatch
+  batchDispatch,
+  autoSave
 ]
 
 if (process.env.NODE_ENV === 'development') {
@@ -25,4 +27,4 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger)
 }
 
-export const store = compose(applyMiddleware(...middlewares))(createStore)(reducer)
+export const store = compose(applyMiddleware(...middlewares as any[]))(createStore)(reducer)
