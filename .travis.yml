@@ -16,7 +16,7 @@ install:
 
 script:
  - npm run lint
- - npm run test
+ - npm test -- --runInBand
  - npm run build:prod
 
 deploy:
