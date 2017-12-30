@@ -2,6 +2,7 @@
 
 exports[`it should returns start action 1`] = `
 Object {
+  "id": 4,
   "playerNames": Object {
     "0": "John",
     "1": "Mary",

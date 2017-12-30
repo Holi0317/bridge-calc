@@ -6,6 +6,8 @@ import {IPlayerMap} from '../../types'
  * (Except the stage property)
  */
 interface IBaseGameState {
+  /** Unique identifier for the game */
+  id: string
   /** Number of rounds for this game */
   rounds: number
   /** The time that game has started */

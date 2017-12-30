@@ -3,32 +3,27 @@
 exports[`Starting in the middle of the game should work 1`] = `
 Object {
   "bid": Object {
-    "4": 0,
     "5": 0,
     "6": 0,
     "7": 0,
+    "8": 0,
   },
   "currentPlayerOrder": Array [
-    "4",
     "5",
     "6",
     "7",
+    "8",
   ],
   "currentRound": 5,
+  "id": 9,
   "names": Object {
-    "4": "John",
-    "5": "Mary",
-    "6": "Henry",
-    "7": "Joe",
+    "5": "John",
+    "6": "Mary",
+    "7": "Henry",
+    "8": "Joe",
   },
   "rounds": 13,
   "scores": Object {
-    "4": Array [
-      0,
-      0,
-      0,
-      0,
-    ],
     "5": Array [
       0,
       0,
@@ -42,6 +37,12 @@ Object {
       0,
     ],
     "7": Array [
+      0,
+      0,
+      0,
+      0,
+    ],
+    "8": Array [
       0,
       0,
       0,
@@ -68,6 +69,7 @@ Object {
     "3",
   ],
   "currentRound": 1,
+  "id": 4,
   "names": Object {
     "0": "John",
     "1": "Mary",

@@ -15,6 +15,7 @@ export function start(action: IStartAction) {
 
   const firstState: IWaitingBidState = {
     stage: GameStage.waitingBid,
+    id: action.id,
     rounds: action.rounds,
     startTime: action.startTime,
     names: action.playerNames,

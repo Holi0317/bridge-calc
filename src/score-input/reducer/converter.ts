@@ -5,6 +5,7 @@ import {IWaitingBidState, IWaitingWinState, IEndedState} from './types'
 export function toWaitingBidState(state: IWaitingBidState | IWaitingWinState): IWaitingBidState {
   return {
     stage: GameStage.waitingBid,
+    id: state.id,
     rounds: state.rounds,
     startTime: state.startTime,
     names: state.names,
@@ -26,6 +27,7 @@ export function toEndedState(state: IWaitingBidState | IWaitingWinState, endTime
   return {
     stage: GameStage.ended,
     endTime,
+    id: state.id,
     rounds: state.rounds,
     startTime: state.startTime,
     names: state.names,

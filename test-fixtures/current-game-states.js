@@ -14,6 +14,7 @@ export const startParams = deepFreeze({
 
 export const baseGameState = deepFreeze({
   stage: null,
+  id: 'testing',
   rounds: 13,
   startTime: new Date(0),
   names: genMap('John', 'Mary', 'Henry', 'Joe'),

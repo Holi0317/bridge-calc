@@ -3,6 +3,7 @@
 exports[`it should end game when it is dispatched at last round 1`] = `
 Object {
   "endTime": 1970-01-01T00:00:00.000Z,
+  "id": "testing",
   "names": Object {
     "a": "John",
     "b": "Mary",
@@ -44,6 +45,7 @@ Object {
     "a",
   ],
   "currentRound": 2,
+  "id": "testing",
   "names": Object {
     "a": "John",
     "b": "Mary",
@@ -85,6 +87,7 @@ Object {
     "a",
   ],
   "currentRound": 2,
+  "id": "testing",
   "names": Object {
     "a": "John",
     "b": "Mary",
