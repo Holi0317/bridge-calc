@@ -15,13 +15,18 @@ import {WIN} from '../actions/win'
 import {UNDO} from '../actions/undo'
 import {CHANGE_PLAYERS} from '../actions/change-players'
 import {START} from '../actions/start'
+import {REPLACE_CURRENT_GAME} from '../actions/replace-current-game'
 
 const defaultState: GameState = null
 
 export function currentGameReducer(state: GameState = defaultState, action: CurrentGameActions): GameState {
   if (action.type === START) {
-    // Only START action will always return a new state, ignoring the original state
+    // START action will always return a new state, ignoring the original state
     return start(action)
+  }
+  if (action.type === REPLACE_CURRENT_GAME) {
+    // REPLACE_CURRENT_GAME ignores all safety check
+    return action.payload
   }
   if (state == null) {
     // Prevent any other action when game is not initialized

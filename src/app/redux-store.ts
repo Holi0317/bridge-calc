@@ -3,6 +3,7 @@ import {currentGameReducer} from '../score-input/reducer'
 import {prevGamesReducer} from '../prev-games/prev-games-reducer'
 import {entryReducer} from '../entry/entry-reducer'
 import {settingsReducer} from '../score-input/settings/reducer'
+import {batchDispatch} from '../redux-middlewares/batch-dispatch'
 
 const reducer = combineReducers({
   entry: entryReducer,
@@ -11,10 +12,12 @@ const reducer = combineReducers({
   prevGames: prevGamesReducer
 })
 
-const middlewares = []
+const middlewares = [
+  batchDispatch
+]
 
 if (process.env.NODE_ENV === 'development') {
-  // tslint:disable-next-line:no-var-requires
+  // tslint:disable-next-line:no-var-requires no-implicit-dependencies
   const {createLogger} = require('redux-logger')
   const logger = createLogger({
     collapsed: true

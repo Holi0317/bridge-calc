@@ -1,3 +1,5 @@
+import {replaceCurrentGameAction} from '../actions/replace-current-game'
+
 jest.mock('cuid', () => {
   let count = 0
   return jest.fn(() => count++)
@@ -41,6 +43,33 @@ test('Start on second round should work', () => {
   const action = startAction(13, ['John', 'Mary', 'Henry', 'Joe'], 2)
   const actual = reducer(null, action)
   expect(actual).toMatchSnapshot()
+})
+
+test('Replace current game should replace its state when state is undefined', () => {
+  const gameState = {
+    ...waitingBidState
+  }
+  const action = replaceCurrentGameAction(gameState)
+  const actual = reducer(null, action)
+  const expected = {
+    ...waitingBidState
+  }
+  expect(actual).toEqual(expected)
+})
+
+test('Replace current game should work even current state is ended', () => {
+  const state = {
+    ...endedState
+  }
+  const gameState = {
+    ...waitingWinState
+  }
+  const action = replaceCurrentGameAction(gameState)
+  const actual = reducer(state, action)
+  const expected = {
+    ...waitingWinState
+  }
+  expect(actual).toEqual(expected)
 })
 
 test('Skip should do no-op when the state is null', () => {

@@ -11,9 +11,10 @@ import RaisedButton from 'material-ui/RaisedButton'
 export interface IPrevGameProps {
   game: PrevGameEntry
   requestDelete: () => void
+  requestContinue: () => void
 }
 
-export function PrevGameImpl({game, requestDelete, t}: IPrevGameProps & ITranslateMixin) {
+export function PrevGameImpl({game, requestDelete, requestContinue, t}: IPrevGameProps & ITranslateMixin) {
   return <div>
     <div>{t('Game on {{date}}', {date: format(game.startTime, 'DD MMM YYYY')})}</div>
     {game.stage === GameStage.ended
@@ -24,8 +25,8 @@ export function PrevGameImpl({game, requestDelete, t}: IPrevGameProps & ITransla
       : null}
     <div>{t('Total rounds: {{rounds}}', {rounds: game.rounds})}</div>
     <div className={styles.btnContainer}>
-      <RaisedButton label={t('Delete')} primary={true} />
-      <RaisedButton label={t('Continue')} secondary={true} />
+      <RaisedButton label={t('Delete')} primary={true} onClick={requestDelete} />
+      <RaisedButton label={t('Continue')} secondary={true} onClick={requestContinue} />
     </div>
   </div>
 }

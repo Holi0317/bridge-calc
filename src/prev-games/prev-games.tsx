@@ -11,6 +11,8 @@ import {prevGamesSelector} from './selectors/prev-games'
 import {PrevGameEntry} from './types'
 import {PrevGame} from './prev-game'
 import {IRootState, ITranslateMixin} from '../types'
+import {lazyDeleteGameAction} from './actions/delete-game'
+import {loadGameAction} from './actions/load-game'
 
 const mapStateToProps = (state: IRootState) => ({
   havePrevGame: havePrevGamesSelector(state),
@@ -18,19 +20,23 @@ const mapStateToProps = (state: IRootState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({}, dispatch)
+  bindActionCreators({
+    del: lazyDeleteGameAction,
+    load: loadGameAction
+  }, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
 type PrevGamesProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
-export function PrevGamesImpl({havePrevGame, prevGames, t}: PrevGamesProps) {
+export function PrevGamesImpl({havePrevGame, prevGames, del, load, t}: PrevGamesProps) {
   if (havePrevGame) {
     return (
       <Container>
         {prevGames.map((prevGame: PrevGameEntry, index: number) => (
-          <PrevGame key={`prev-game-${index}`} game={prevGame} requestDelete={() => {}} />
+          <PrevGame key={`prev-game-${index}`} game={prevGame}
+                    requestDelete={del(index)} requestContinue={load(index, prevGame)} />
         ))}
       </Container>
     )

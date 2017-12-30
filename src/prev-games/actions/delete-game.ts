@@ -12,3 +12,10 @@ export interface IDeleteGameAction {
 export function deleteGameAction(id: number): IDeleteGameAction {
   return {type: DELETE_GAME, id}
 }
+
+/**
+ * Return an function that will return action for deleting given ID of game.
+ */
+export function lazyDeleteGameAction(id: number): () => IDeleteGameAction {
+  return () => deleteGameAction(id)
+}
