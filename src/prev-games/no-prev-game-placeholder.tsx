@@ -8,7 +8,7 @@ import styles from './no-prev-game-placeholder.css'
 export function NoPrevGamePlaceholderImpl({t}: ITranslateMixin) {
   return <div className={styles.container}>
     <JokerIcon className={styles.jokerIcon} />
-    <div>{t("You don't have any played game yet.")}</div>
+    <div>{t('You have not played any game yet.')}</div>
     <Link to="/entry" className={styles.startLink}>{t('Click here to start a new game')}</Link>
   </div>
 }

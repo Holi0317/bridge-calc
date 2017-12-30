@@ -17,6 +17,7 @@ export interface IPrevGameProps {
 export function PrevGameImpl({game, requestDelete, requestContinue, t}: IPrevGameProps & ITranslateMixin) {
   return <div>
     <div>{t('Game on {{date}}', {date: format(game.startTime, 'DD MMM YYYY')})}</div>
+    <div>{t('Players: {{players}}', {players: Object.values(game.names).join(', ')})}</div>
     {game.stage === GameStage.ended
       ? <div>{t('Game ended')}</div>
       : <div>{t('Current round: {{round}}', {round: game.currentRound})}</div>}
