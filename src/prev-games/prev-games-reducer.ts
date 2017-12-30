@@ -1,9 +1,7 @@
 import {PrevGameEntry} from './types'
 import {PrevGamesActions} from './actions'
-import {RESET_GAMES} from './actions/reset-games'
-import {ADD_GAME} from './actions/add-game'
-import {DELETE_GAME} from './actions/delete-game'
-import {ISaveGameAction, SAVE_GAME} from './actions/save-game'
+import {ISaveGameAction} from './actions/save-game'
+import {ActionTypes} from '../action-types'
 
 export interface IPrevGamesState {
   prevGames: PrevGameEntry[]
@@ -15,13 +13,13 @@ const defaultState: IPrevGamesState = {
 
 export function prevGamesReducer(state = defaultState, action: PrevGamesActions) {
   switch (action.type) {
-    case ADD_GAME:
+    case ActionTypes.ADD_GAME:
       return {
         ...state,
         prevGames: [action.payload, ...state.prevGames]
       }
 
-    case DELETE_GAME: {
+    case ActionTypes.DELETE_GAME: {
       const prevGames = state.prevGames.slice()
       prevGames.splice(action.index, 1)
       return {
@@ -30,10 +28,10 @@ export function prevGamesReducer(state = defaultState, action: PrevGamesActions)
       }
     }
 
-    case SAVE_GAME: {
+    case ActionTypes.SAVE_GAME: {
       if (action.entry !== null) {
         // FIXME Remove type casting here
-        const {entry}: ISaveGameAction = action
+        const {entry} = action
         const index = state.prevGames.findIndex(game => game.id === entry.id)
         if (index === -1) {
           return {
@@ -52,7 +50,7 @@ export function prevGamesReducer(state = defaultState, action: PrevGamesActions)
       return state
     }
 
-    case RESET_GAMES:
+    case ActionTypes.RESET_GAMES:
       return defaultState
 
     default:

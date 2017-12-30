@@ -1,8 +1,8 @@
 import {PrevGameEntry} from '../types'
+import {ActionTypes} from '../../action-types'
 
-export const ADD_GAME: 'PREV_GAMES/ADD_GAME' = 'PREV_GAMES/ADD_GAME'
 export interface IAddGameAction {
-  type: typeof ADD_GAME
+  type: ActionTypes.ADD_GAME
   payload: PrevGameEntry
 }
 
@@ -11,5 +11,5 @@ export interface IAddGameAction {
  * @param payload - The prevGame entry
  */
 export function addGameAction(payload: PrevGameEntry): IAddGameAction {
-  return {type: ADD_GAME, payload}
+  return {type: ActionTypes.ADD_GAME, payload}
 }

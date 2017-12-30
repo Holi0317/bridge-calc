@@ -1,8 +1,9 @@
-import {deleteGameAction, DELETE_GAME} from './delete-game'
+import {deleteGameAction} from './delete-game'
+import {ActionTypes} from '../../action-types'
 
 test('it should return delete game action', () => {
   const expected = {
-    type: DELETE_GAME,
+    type: ActionTypes.DELETE_GAME,
     index: 3
   }
   const actual = deleteGameAction(3)

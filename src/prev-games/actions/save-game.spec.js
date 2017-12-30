@@ -1,9 +1,10 @@
-import {SAVE_GAME, saveGameAction} from './save-game'
+import {saveGameAction} from './save-game'
+import {ActionTypes} from '../../action-types'
 import {endedState} from '../../../test-fixtures/current-game-states'
 
 test('no entry should be populated for null game state', () => {
   const expected = {
-    type: SAVE_GAME,
+    type: ActionTypes.SAVE_GAME,
     entry: null
   }
   const actual = saveGameAction(null)
@@ -12,7 +13,7 @@ test('no entry should be populated for null game state', () => {
 
 test('it should fill in entry property with PrevGame', () => {
   const expected = {
-    type: SAVE_GAME,
+    type: ActionTypes.SAVE_GAME,
     entry: endedState
   }
   const actual = saveGameAction(endedState)

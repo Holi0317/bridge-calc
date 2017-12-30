@@ -24,4 +24,8 @@ export enum ActionTypes {
   // Game Settings module
 
   // PrevGames module
+  ADD_GAME = 'PREV_GAMES/ADD_GAME',
+  DELETE_GAME = 'PREV_GAMES/DELETE_GAME',
+  RESET_GAMES = 'PREV_GAMES/RESET_GAMES',
+  SAVE_GAME = 'PREV_GAMES/SAVE_GAME'
 }

@@ -1,11 +1,12 @@
-export const RESET_GAMES: 'PREV_GAMES/RESET_GAMES' = 'PREV_GAMES/RESET_GAMES'
+import {ActionTypes} from '../../action-types'
+
 export interface IResetGamesAction {
-  type: typeof RESET_GAMES
+  type: ActionTypes.RESET_GAMES
 }
 
 /**
  * Clear previous games array from redux state tree.
  */
 export function resetGamesAtion(): IResetGamesAction {
-  return {type: RESET_GAMES}
+  return {type: ActionTypes.RESET_GAMES}
 }
