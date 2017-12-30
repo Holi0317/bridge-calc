@@ -1,21 +1,20 @@
 export const DELETE_GAME: 'PREV_GAMES/DELETE_GAME' = 'PREV_GAMES/DELETE_GAME'
 export interface IDeleteGameAction {
   type: typeof DELETE_GAME,
-  id: number
+  index: number
 }
 
 /**
  * Delete a game from previous game state tree in redux.
- * @param id - ID of the game desired to delete.
- * ID means the index of the game in the array.
+ * @param index - index of the game in prevGame state desired to delete.
  */
-export function deleteGameAction(id: number): IDeleteGameAction {
-  return {type: DELETE_GAME, id}
+export function deleteGameAction(index: number): IDeleteGameAction {
+  return {type: DELETE_GAME, index}
 }
 
 /**
  * Return an function that will return action for deleting given ID of game.
  */
-export function lazyDeleteGameAction(id: number): () => IDeleteGameAction {
-  return () => deleteGameAction(id)
+export function lazyDeleteGameAction(index: number): () => IDeleteGameAction {
+  return () => deleteGameAction(index)
 }

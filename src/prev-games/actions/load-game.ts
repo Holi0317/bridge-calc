@@ -6,9 +6,9 @@ import {prevGameToGameState} from '../converter'
 /**
  * Load a given game from prevGames to currentGame
  */
-export function loadGameAction(id: number, prevGame: PrevGameEntry) {
+export function loadGameAction(index: number, prevGame: PrevGameEntry) {
   return () => [
-    deleteGameAction(id),
+    deleteGameAction(index),
     replaceCurrentGameAction(prevGameToGameState(prevGame))
   ]
 }
