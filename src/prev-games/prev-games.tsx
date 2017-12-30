@@ -1,7 +1,9 @@
 import * as React from 'react'
+import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators, Dispatch} from 'redux'
 import {returntypeof} from 'react-redux-typescript'
 import {connect} from 'react-redux'
+import {RouteComponentProps, withRouter} from 'react-router'
 import {Container} from 'react-grid-system'
 import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
@@ -26,21 +28,35 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
-type PrevGamesProps = typeof stateType & typeof dispatchType
+type PrevGamesProps = typeof stateType & typeof dispatchType & RouteComponentProps<any>
 
-export function PrevGamesImpl({havePrevGame, prevGames, del, load}: PrevGamesProps) {
-  if (havePrevGame) {
-    return (
-      <Container>
-        {prevGames.map((prevGame: PrevGameEntry, index: number) => (
-          <PrevGame key={`prev-game-${index}`} game={prevGame}
-                    requestDelete={() => del(index)} requestContinue={() => load(prevGame)} />
-        ))}
-      </Container>
-    )
+export class PrevGamesImpl extends React.Component {
+  public props: PrevGamesProps
+
+  public render() {
+    const {havePrevGame, prevGames, del, load} = this.props
+    if (havePrevGame) {
+      return (
+        <Container>
+          {prevGames.map((prevGame: PrevGameEntry, index: number) => (
+            <PrevGame key={`prev-game-${index}`} game={prevGame}
+                      requestDelete={() => del(index)} requestContinue={() => this.load(prevGame)}/>
+          ))}
+        </Container>
+      )
+    }
+
+    return <NoPrevGamePlaceholder/>
   }
 
-  return <NoPrevGamePlaceholder/>
+  private load(prevGame: PrevGameEntry) {
+    const {load, history} = this.props
+    load(prevGame)
+    history.push('/score-input')
+  }
 }
 
-export const PrevGames = connect(mapStateToProps, mapDispatchToProps)(PrevGamesImpl)
+export const PrevGames = flowRight(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(PrevGamesImpl)
