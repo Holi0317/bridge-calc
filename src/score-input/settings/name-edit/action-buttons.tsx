@@ -9,10 +9,12 @@ import {IRootState, ITranslateMixin} from '../../../types'
 import style from './name-edit.css'
 import {settingsValidator} from '../settings-validator'
 import {allowNamesCommitSelector} from '../selectors/allow-names-commit'
+import {isMakerCleanSelector} from '../selectors/is-maker-clean'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   error: settingsValidator(state, t).misc,
-  changeDisabled: !allowNamesCommitSelector(state, t)
+  changeDisabled: !allowNamesCommitSelector(state, t),
+  makerClean: isMakerCleanSelector(state)
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
@@ -28,11 +30,12 @@ export class ActionButtonsImpl extends React.Component {
   public props: ActionButtonsProps
 
   public render() {
-    const {changeDisabled, error, t} = this.props
+    const {changeDisabled, makerClean, error, t} = this.props
+    const errMsg = makerClean ? error : t('Player name edit is disabled when editing maker')
     return <div className={style.btnContainer}>
       <RaisedButton label={t('Change names')} primary={true}
                     disabled={changeDisabled} onClick={this.dispatch} />
-      <span className={style.errorMessage}>{error}</span>
+      <span className={style.errorMessage}>{errMsg}</span>
     </div>
   }
 
