@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should return init settings action 1`] = `
+Object {
+  "state": Object {
+    "bid": Object {
+      "a": 0,
+      "b": 0,
+      "c": 0,
+      "d": 0,
+    },
+    "currentPlayerOrder": Array [
+      "a",
+      "b",
+      "c",
+      "d",
+    ],
+    "currentRound": 1,
+    "id": "testing",
+    "names": Object {
+      "a": "John",
+      "b": "Mary",
+      "c": "Henry",
+      "d": "Joe",
+    },
+    "rounds": 13,
+    "scores": Object {
+      "a": Array [],
+      "b": Array [],
+      "c": Array [],
+      "d": Array [],
+    },
+    "stage": "waitingBid",
+    "startTime": 1970-01-01T00:00:00.000Z,
+  },
+  "type": "GAME_SETTINGS/INIT_SETTINGS",
+}
+`;

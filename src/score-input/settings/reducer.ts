@@ -1,6 +1,7 @@
 import {GameStage} from '../game-stage'
-import {GameSettingsActions, ADD_NAME, SET_BY_GAME_STATE, SET_MAKER, SET_NAMES} from './game-settings-actions'
+import {GameSettingsActions} from './actions'
 import {IPlayerMap} from '../../types'
+import {ActionTypes} from '../../action-types'
 
 export interface ISettingsState {
   /**
@@ -21,7 +22,7 @@ const defaultState: ISettingsState = {
 
 export function settingsReducer(state: ISettingsState = defaultState, action: GameSettingsActions): ISettingsState {
   switch (action.type) {
-  case SET_BY_GAME_STATE: {
+  case ActionTypes.INIT_SETTINGS: {
     const gameState = action.state
     if (gameState == null || gameState.stage === GameStage.ended) {
       return defaultState
@@ -31,17 +32,17 @@ export function settingsReducer(state: ISettingsState = defaultState, action: Ga
       names: gameState.names
     }
   }
-  case SET_MAKER:
+  case ActionTypes.SET_MAKER:
     return {
       ...state,
       maker: action.maker
     }
-  case SET_NAMES:
+  case ActionTypes.SET_NAMES:
     return {
       ...state,
       names: action.newNames
     }
-  case ADD_NAME:
+  case ActionTypes.ADD_NAME:
     return {
       ...state,
       names: {
