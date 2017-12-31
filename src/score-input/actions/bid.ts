@@ -1,8 +1,8 @@
 import {IPlayerMap} from '../../types'
+import {ActionTypes} from '../../action-types'
 
-export const BID: 'CURRENT_GAME/BID' = 'CURRENT_GAME/BID'
 export interface IBidAction {
-  type: typeof BID,
+  type: ActionTypes.BID,
   payload?: IPlayerMap<number>
 }
 
@@ -12,5 +12,5 @@ export interface IBidAction {
  * If undefined, bid property in currentGame state will be used
  */
 export function bidAction(payload?: IPlayerMap<number>): IBidAction {
-  return {type: BID, payload}
+  return {type: ActionTypes.BID, payload}
 }

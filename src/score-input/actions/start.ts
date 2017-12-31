@@ -1,9 +1,9 @@
 import * as cuid from 'cuid'
 import {IPlayerMap} from '../../types'
+import {ActionTypes} from '../../action-types'
 
-export const START: 'CURRENT_GAME/START' = 'CURRENT_GAME/START'
 export interface IStartAction {
-  type: typeof START,
+  type: ActionTypes.START,
   rounds: number,
   playerNames: IPlayerMap<string>,
   startTime: Date,
@@ -33,7 +33,7 @@ function namesToMap(playerNames: string[]): IPlayerMap<string> {
  */
 export function startAction(rounds: number, playerNames: string[], startingRound: number): IStartAction {
   return {
-    type: START,
+    type: ActionTypes.START,
     rounds,
     playerNames: namesToMap(playerNames),
     startTime: new Date(),

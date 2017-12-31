@@ -1,8 +1,8 @@
 import {IPlayerMap} from '../../types'
+import {ActionTypes} from '../../action-types'
 
-export const SET_BID: 'CURRENT_GAME/SET_BID' = 'CURRENT_GAME/SET_BID'
 export interface ISetBidAction {
-  type: typeof SET_BID,
+  type: ActionTypes.SET_BID,
   payload: IPlayerMap<number>
 }
 
@@ -13,5 +13,5 @@ export interface ISetBidAction {
  * @param payload - A map that maps player ID to their bid choice
  */
 export function setBidAction(payload: IPlayerMap<number>): ISetBidAction {
-  return {type: SET_BID, payload}
+  return {type: ActionTypes.SET_BID, payload}
 }

@@ -1,6 +1,7 @@
-export const DELETE_GAME: 'PREV_GAMES/DELETE_GAME' = 'PREV_GAMES/DELETE_GAME'
+import {ActionTypes} from '../../action-types'
+
 export interface IDeleteGameAction {
-  type: typeof DELETE_GAME,
+  type: ActionTypes.DELETE_GAME,
   index: number
 }
 
@@ -9,5 +10,5 @@ export interface IDeleteGameAction {
  * @param index - index of the game in prevGame state desired to delete.
  */
 export function deleteGameAction(index: number): IDeleteGameAction {
-  return {type: DELETE_GAME, index}
+  return {type: ActionTypes.DELETE_GAME, index}
 }

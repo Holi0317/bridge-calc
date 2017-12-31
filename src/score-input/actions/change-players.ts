@@ -1,8 +1,8 @@
 import {IPlayerMap} from '../../types'
+import {ActionTypes} from '../../action-types'
 
-export const CHANGE_PLAYERS: 'CURRENT_GAME/CHANGE_PLAYERS' = 'CURRENT_GAME/CHANGE_PLAYERS'
 export interface IChangePlayersAction {
-  type: typeof CHANGE_PLAYERS,
+  type: ActionTypes.CHANGE_PLAYERS,
   newNames: IPlayerMap<string>,
   maker: string,
   rounds: number,
@@ -34,7 +34,7 @@ export interface IChangePlayersAction {
  */
 export function changePlayersAction(newNames: IPlayerMap<string>, maker: string, rounds: number): IChangePlayersAction {
   return {
-    type: CHANGE_PLAYERS,
+    type: ActionTypes.CHANGE_PLAYERS,
     newNames,
     maker,
     rounds,

@@ -1,8 +1,9 @@
-import {addGameAction, ADD_GAME} from './add-game'
+import {addGameAction} from './add-game'
+import {ActionTypes} from '../../action-types'
 
 test('it should return add game action', () => {
   const expected = {
-    type: ADD_GAME,
+    type: ActionTypes.ADD_GAME,
     payload: {
       type: 'IPrevGameEntry' // Just be lazy
     }

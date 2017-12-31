@@ -1,4 +1,5 @@
-import {winAction, WIN} from './win'
+import {winAction} from './win'
+import {ActionTypes} from '../../action-types'
 import {genMap} from '../../../test-fixtures/current-game-states'
 import * as lolex from 'lolex'
 
@@ -14,7 +15,7 @@ afterEach(() => {
 
 test('it should return win action', () => {
   const expected = {
-    type: WIN,
+    type: ActionTypes.WIN,
     win: genMap(0, 0, 0, 0),
     time: new Date()
   }
@@ -24,7 +25,7 @@ test('it should return win action', () => {
 
 test('it should return win action with no payload', () => {
   const expected = {
-    type: WIN,
+    type: ActionTypes.WIN,
     time: new Date()
   }
   const actual = winAction()

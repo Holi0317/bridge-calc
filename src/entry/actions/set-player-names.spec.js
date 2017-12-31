@@ -1,8 +1,9 @@
-import {setPlayerNamesAction, SET_PLAYER_NAMES} from './set-player-names'
+import {setPlayerNamesAction} from './set-player-names'
+import {ActionTypes} from '../../action-types'
 
 test('it should return set player names action', () => {
   const expected = {
-    type: SET_PLAYER_NAMES,
+    type: ActionTypes.SET_PLAYER_NAMES,
     payload: ['John']
   }
   const actual = setPlayerNamesAction(['John'])

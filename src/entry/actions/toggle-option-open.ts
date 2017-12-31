@@ -1,11 +1,12 @@
-export const TOGGLE_OPTION_OPEN: 'ENTRY/TOGGLE_OPTION_OPEN' = 'ENTRY/TOGGLE_OPTION_OPEN'
+import {ActionTypes} from '../../action-types'
+
 export interface IToggleOptionOptionAction {
-  type: typeof TOGGLE_OPTION_OPEN
+  type: ActionTypes.TOGGLE_OPTION_OPEN
 }
 
 /**
  * Toggle open state for entry options.
  */
 export function toggleOptionOpenAction(): IToggleOptionOptionAction {
-  return {type: TOGGLE_OPTION_OPEN}
+  return {type: ActionTypes.TOGGLE_OPTION_OPEN}
 }

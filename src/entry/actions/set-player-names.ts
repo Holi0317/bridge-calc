@@ -1,6 +1,7 @@
-export const SET_PLAYER_NAMES: 'ENTRY/SET_PLAYER_NAMES' = 'ENTRY/SET_PLAYER_NAMES'
+import {ActionTypes} from '../../action-types'
+
 export interface ISetPlayerNamesAction {
-  type: typeof SET_PLAYER_NAMES,
+  type: ActionTypes.SET_PLAYER_NAMES,
   payload: string[]
 }
 
@@ -12,5 +13,5 @@ export interface ISetPlayerNamesAction {
  * @param payload - The array of player names to be replaced
  */
 export function setPlayerNamesAction(payload: string[]): ISetPlayerNamesAction {
-  return {type: SET_PLAYER_NAMES, payload}
+  return {type: ActionTypes.SET_PLAYER_NAMES, payload}
 }

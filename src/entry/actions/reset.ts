@@ -1,11 +1,12 @@
-export const RESET: 'ENTRY/RESET' = 'ENTRY/RESET'
+import {ActionTypes} from '../../action-types'
+
 export interface IResetAction {
-  type: typeof RESET
+  type: ActionTypes.RESET_ENTRY
 }
 
 /**
  * Reset state to default one.
  */
 export function resetAction(): IResetAction {
-  return {type: RESET}
+  return {type: ActionTypes.RESET_ENTRY}
 }

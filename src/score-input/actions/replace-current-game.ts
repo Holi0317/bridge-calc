@@ -1,11 +1,11 @@
 import {GameState} from '../reducer'
+import {ActionTypes} from '../../action-types'
 
-export const REPLACE_CURRENT_GAME: 'CURRENT_GAME/REPLACE_CURRENT_GAME' = 'CURRENT_GAME/REPLACE_CURRENT_GAME'
 export interface IReplaceCurrentGameAction {
-  type: typeof REPLACE_CURRENT_GAME
+  type: ActionTypes.REPLACE_CURRENT_GAME
   payload: GameState
 }
 
 export function replaceCurrentGameAction(payload: GameState): IReplaceCurrentGameAction {
-  return {type: REPLACE_CURRENT_GAME, payload}
+  return {type: ActionTypes.REPLACE_CURRENT_GAME, payload}
 }

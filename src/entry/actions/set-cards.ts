@@ -1,6 +1,7 @@
-export const SET_CARDS: 'ENTRY/SET_CARDS' = 'ENTRY/SET_CARDS'
+import {ActionTypes} from '../../action-types'
+
 export interface ISetCardsAction {
-  type: typeof SET_CARDS,
+  type: ActionTypes.SET_CARDS,
   payload: number
 }
 
@@ -9,5 +10,5 @@ export interface ISetCardsAction {
  * @param payload - The number of cards to be set
  */
 export function setCardsAction(payload: number): ISetCardsAction {
-  return {type: SET_CARDS, payload}
+  return {type: ActionTypes.SET_CARDS, payload}
 }

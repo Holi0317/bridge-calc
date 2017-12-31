@@ -1,6 +1,7 @@
-export const UNDO: 'CURRENT_GAME/UNDO' = 'CURRENT_GAME/UNDO'
+import {ActionTypes} from '../../action-types'
+
 export interface IUndoAction {
-  type: typeof UNDO
+  type: ActionTypes.UNDO
 }
 
 /**
@@ -8,5 +9,5 @@ export interface IUndoAction {
  * If the stage is not waitingWin, no-op will be done.
  */
 export function undoAction(): IUndoAction {
-  return {type: UNDO}
+  return {type: ActionTypes.UNDO}
 }

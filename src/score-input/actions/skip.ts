@@ -1,6 +1,7 @@
-export const SKIP: 'CURRENT_GAME/SKIP' = 'CURRENT_GAME/SKIP'
+import {ActionTypes} from '../../action-types'
+
 export interface ISkipAction {
-  type: typeof SKIP,
+  type: ActionTypes.SKIP,
   times?: number,
   time: Date
 }
@@ -11,5 +12,5 @@ export interface ISkipAction {
  * If not provided, current round will be skipped.
  */
 export function skipAction(times?: number): ISkipAction {
-  return {type: SKIP, times, time: new Date()}
+  return {type: ActionTypes.SKIP, times, time: new Date()}
 }
