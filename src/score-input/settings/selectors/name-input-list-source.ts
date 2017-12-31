@@ -10,10 +10,6 @@ import {IPlayerMap} from '../../../types'
  */
 export type PlayerName = [string, string]
 
-export function revert(data: PlayerName[]): IPlayerMap<string> {
-  return fromPairs(data)
-}
-
 /**
  * Select names source used for name-input-list component for usage in settings view.
  */

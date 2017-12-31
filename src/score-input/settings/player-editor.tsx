@@ -5,44 +5,19 @@ import {translate} from 'react-i18next'
 import IconButton from 'material-ui/IconButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import {NameInputList} from '../../name-input-list'
-import {nameInputListSourceSelector, PlayerName, revert} from './selectors/name-input-list-source'
-import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../../types'
-import {GameState} from '../reducer'
+import {nameInputListSourceSelector} from './selectors/name-input-list-source'
+import {Dispatch, IRootState, ITranslateMixin} from '../../types'
 import {randomName} from '../../example-names'
 import {returntypeof} from 'react-redux-typescript'
 import style from './player-editor.css'
-import {initSettingsAction} from './actions/init-settings'
-import {setNamesAction} from './actions/set-names'
 import {addNameAction} from './actions/add-name'
-
-/**
- * Get player name from PlayerName type.
- * Used as getter of name-input-list component.
- */
-const getter = ([, name]: PlayerName) => name
-
-/**
- * Set player name for PlayerName type.
- * Used as setter of name-input-list component.
- */
-const setter = (newVal: string, [ID]: PlayerName): PlayerName => ([ID, newVal])
-
-/**
- * Error getter for name-input-list component
- */
-const errorGetter = (error: IPlayerMap<string>, value: PlayerName) => error[value[0]]
+import {SettingsPlayerList} from './settings-player-list'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   names: nameInputListSourceSelector(state)
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  changeNames(rawNewNames: PlayerName[]) {
-    const newNames = revert(rawNewNames)
-    const action = setNamesAction(newNames)
-    dispatch(action)
-  },
   addPlayer() {
     const action = addNameAction(randomName())
     dispatch(action)
@@ -62,13 +37,11 @@ export class PlayerEditorImpl extends React.Component {
   public props: typeof stateType & typeof dispatchType & ITranslateMixin
 
   public render() {
-    const {names, changeNames, addPlayer, t} = this.props
+    const {addPlayer, t} = this.props
     return (
       <div>
         <h4>{t('Edit players')}</h4>
-        <NameInputList values={names} error={{}}
-          getter={getter} setter={setter} errorGetter={errorGetter}
-          onChange={changeNames} />
+        <SettingsPlayerList />
         <div className={style.addContainer}>
           <IconButton tooltip={t('Add player')} onClick={addPlayer}>
             <ContentAdd width="28px" height="28px" />
