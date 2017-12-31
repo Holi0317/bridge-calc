@@ -6,18 +6,21 @@ import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import Snackbar from 'material-ui/Snackbar'
+import {Dropdown} from '../../material/dropdown'
 import {namesSelector} from '../selectors/names'
 import {roundsSelector} from '../selectors/rounds'
 import {makerSelector} from './selectors/maker'
 import {namesChangedSelector} from './selectors/names-changed'
-import {MakerChooser} from './maker-chooser'
 import {changePlayersAction} from '../actions/change-players'
 import {initSettingsAction} from './actions/init-settings'
+import {setMakerAction} from './actions/set-maker'
 import {IRootState, ITranslateMixin} from '../../types'
 import style from './maker-editor.css'
+import {makerSourceSelector} from './selectors/maker-source'
 
 const mapStateToProps = (state: IRootState) => ({
   names: namesSelector(state),
+  namesSource: makerSourceSelector(state),
   rounds: roundsSelector(state),
   maker: makerSelector(state),
   disabled: namesChangedSelector(state),
@@ -27,7 +30,8 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
     changePlayers: changePlayersAction,
-    init: initSettingsAction
+    init: initSettingsAction,
+    setMaker: setMakerAction
   }, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
@@ -40,16 +44,20 @@ export class MakerEditorImpl extends React.Component {
   }
 
   public render() {
-    const {disabled, t} = this.props
+    const {maker, namesSource, disabled, setMaker, t} = this.props
     const {snackbarOpen} = this.state
 
     return (
       <div>
         <h4>{t('Change maker')}</h4>
         <div className={style.chooserContainer}>
-          <MakerChooser />
+          <Dropdown label={t('Maker')} disabled={disabled}
+                    source={disabled ? [] : namesSource} value={disabled ? '' : maker || ''} onChange={setMaker} />
           <RaisedButton primary={true} disabled={disabled} onClick={this.commit}>{t('Change maker')}</RaisedButton>
         </div>
+        {disabled
+          ? <div className={style.disabledHint}>{t('Maker edit is disabled when editing player names')}</div>
+          : null}
         <Snackbar open={snackbarOpen} message={t('Maker changed!')} onRequestClose={this.snackbarClosed} />
       </div>
     )
