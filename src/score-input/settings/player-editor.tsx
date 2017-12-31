@@ -1,15 +1,10 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import * as cuid from 'cuid'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import IconButton from 'material-ui/IconButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import {
-  ADD_NAME, IAddNameAction, ISetByGameStateAction, ISetNamesAction, SET_BY_GAME_STATE,
-  SET_NAMES
-} from './actions/index'
 import {NameInputList} from '../../name-input-list'
 import {nameInputListSourceSelector, PlayerName, revert} from './selectors/name-input-list-source'
 import {Dispatch, IPlayerMap, IRootState, ITranslateMixin} from '../../types'
@@ -17,6 +12,9 @@ import {GameState} from '../reducer'
 import {randomName} from '../../example-names'
 import {returntypeof} from 'react-redux-typescript'
 import style from './player-editor.css'
+import {initSettingsAction} from './actions/init-settings'
+import {setNamesAction} from './actions/set-names'
+import {addNameAction} from './actions/add-name'
 
 /**
  * Get player name from PlayerName type.
@@ -42,26 +40,16 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   init(state: GameState) {
-    const action: ISetByGameStateAction = {
-      type: SET_BY_GAME_STATE,
-      state
-    }
+    const action = initSettingsAction(state)
     dispatch(action)
   },
   changeNames(rawNewNames: PlayerName[]) {
     const newNames = revert(rawNewNames)
-    const action: ISetNamesAction = {
-      type: SET_NAMES,
-      newNames
-    }
+    const action = setNamesAction(newNames)
     dispatch(action)
   },
   addPlayer() {
-    const action: IAddNameAction = {
-      type: ADD_NAME,
-      name: randomName(),
-      ID: cuid()
-    }
+    const action = addNameAction(randomName())
     dispatch(action)
   },
   applyChange() {
