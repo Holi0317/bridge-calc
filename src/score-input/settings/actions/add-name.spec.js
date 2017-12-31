@@ -1,5 +1,5 @@
 import {ActionTypes} from '../../../action-types'
-import {addNameAction} from './add-name'
+import {addNameAction, addRandomNameAction} from './add-name'
 
 jest.mock('cuid', () => {
   let count = 0
@@ -14,4 +14,11 @@ test('it should return add name action', () => {
   }
   const actual = addNameAction('John')
   expect(actual).toEqual(expected)
+})
+
+test('add random name should return add name action', () => {
+  const actual = addRandomNameAction()
+  expect(actual.type).toEqual(ActionTypes.ADD_NAME)
+  expect(actual.ID).toEqual('1')
+  expect(typeof actual.name).toEqual('string')
 })

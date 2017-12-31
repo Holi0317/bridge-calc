@@ -1,5 +1,6 @@
 import {ActionTypes} from '../../../action-types'
 import * as cuid from 'cuid'
+import {randomName} from '../../../example-names'
 
 export interface IAddNameAction {
   type: ActionTypes.ADD_NAME,
@@ -20,4 +21,8 @@ export interface IAddNameAction {
  */
 export function addNameAction(name: string): IAddNameAction {
   return {type: ActionTypes.ADD_NAME, name, ID: cuid()}
+}
+
+export function addRandomNameAction(): IAddNameAction {
+  return {type: ActionTypes.ADD_NAME, name: randomName(), ID: cuid()}
 }

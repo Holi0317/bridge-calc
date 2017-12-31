@@ -34,15 +34,10 @@ const setter = (newVal: string, [ID]: PlayerName): PlayerName => ([ID, newVal])
 const errorGetter = (error: IPlayerMap<string>, value: PlayerName) => error[value[0]]
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
-  currentGame: state.currentGame,
   names: nameInputListSourceSelector(state)
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  init(state: GameState) {
-    const action = initSettingsAction(state)
-    dispatch(action)
-  },
   changeNames(rawNewNames: PlayerName[]) {
     const newNames = revert(rawNewNames)
     const action = setNamesAction(newNames)
@@ -65,11 +60,6 @@ const dispatchType = returntypeof(mapDispatchToProps)
  */
 export class PlayerEditorImpl extends React.Component {
   public props: typeof stateType & typeof dispatchType & ITranslateMixin
-
-  public componentWillMount() {
-    const state = this.props.currentGame
-    this.props.init(state)
-  }
 
   public render() {
     const {names, changeNames, addPlayer, t} = this.props
