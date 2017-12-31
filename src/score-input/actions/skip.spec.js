@@ -15,9 +15,10 @@ afterEach(() => {
 test('it should return a skip action', () => {
   const expected = {
     type: ActionTypes.SKIP,
-    time: new Date()
+    time: new Date(),
+    times: 1
   }
-  const actual = skipAction()
+  const actual = skipAction(1)
   expect(actual).toEqual(expected)
 })
 

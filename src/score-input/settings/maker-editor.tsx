@@ -49,7 +49,6 @@ export class MakerEditorImpl extends React.Component {
 
     return (
       <div>
-        <h4>{t('Change maker')}</h4>
         <div className={style.chooserContainer}>
           <Dropdown label={t('Maker')} disabled={disabled}
                     source={disabled ? [] : namesSource} value={disabled ? '' : maker || ''} onChange={setMaker} />

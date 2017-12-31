@@ -31,7 +31,7 @@ export function currentGameReducer(state: GameState = defaultState, action: Curr
 
   switch (action.type) {
   case ActionTypes.SKIP:
-    return skip(state, action.times || 1, action.time)
+    return skip(state, action.times, action.time)
   case ActionTypes.SET_BID:
     return {
       ...state,

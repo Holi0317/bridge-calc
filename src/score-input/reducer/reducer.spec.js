@@ -73,7 +73,7 @@ test('Replace current game should work even current state is ended', () => {
 
 test('Skip should do no-op when the state is null', () => {
   const expected = null
-  const action = skipAction()
+  const action = skipAction(1)
   const actual = reducer(null, action)
   expect(actual).toBe(expected)
 })
@@ -88,7 +88,7 @@ test('Skip should skip 1 round if no payload is supplied', () => {
   const state = {
     ...waitingBidState
   }
-  const action = skipAction()
+  const action = skipAction(1)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -113,14 +113,14 @@ test('Skip should reset bid and win data', () => {
 test('Skip on last round should change state to ended', () => {
   const expected = {
     ...endedState,
-    rounds: 2,
+    rounds: 1,
     scores: genMap([0], [0], [0], [0])
   }
   const state = {
     ...waitingBidState,
-    rounds: 2
+    rounds: 1
   }
-  const action = skipAction()
+  const action = skipAction(1)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
@@ -132,7 +132,7 @@ test('Skip on ended state should do no-op', () => {
   const state = {
     ...endedState
   }
-  const action = skipAction()
+  const action = skipAction(1)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })

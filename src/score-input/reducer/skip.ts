@@ -8,7 +8,7 @@ import {IEndedState, IWaitingBidState, IWaitingWinState} from './types'
  * Skip n round(s) of game.
  */
 export function skip(state: IWaitingBidState | IWaitingWinState, n: number, time: Date): IWaitingBidState | IEndedState {
-  if (state.currentRound >= state.rounds) {
+  if (state.currentRound > state.rounds) {
     // Last round. Return regardless of content of n.
     return toEndedState(state, time)
   }
