@@ -8,7 +8,7 @@ import {addNameAction} from './actions/add-name'
 
 jest.mock('cuid', () => {
   let count = 0
-  return jest.fn(() => count++)
+  return jest.fn(() => '' + count++)
 })
 
 test('Default state', () => {

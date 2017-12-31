@@ -15,7 +15,7 @@ Object {
     "3",
   ],
   "currentRound": 1,
-  "id": 4,
+  "id": "4",
   "names": Object {
     "0": "John",
     "1": "Mary",
@@ -49,7 +49,7 @@ Object {
     "5",
   ],
   "currentRound": 2,
-  "id": 9,
+  "id": "9",
   "names": Object {
     "5": "John",
     "6": "Mary",

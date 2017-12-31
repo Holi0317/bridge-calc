@@ -1,10 +1,4 @@
 import {replaceCurrentGameAction} from '../actions/replace-current-game'
-
-jest.mock('cuid', () => {
-  let count = 0
-  return jest.fn(() => count++)
-})
-
 import {waitingBidState, waitingWinState, endedState, genMap} from '../../../test-fixtures/current-game-states'
 import {currentGameReducer as reducer} from './reducer'
 import * as lolex from 'lolex'
@@ -16,6 +10,11 @@ import {bidAction} from '../actions/bid'
 import {winAction} from '../actions/win'
 import {undoAction} from '../actions/undo'
 import {changePlayersAction} from '../actions/change-players'
+
+jest.mock('cuid', () => {
+  let count = 0
+  return jest.fn(() => '' + count++)
+})
 
 let clock = null
 beforeEach(() => {

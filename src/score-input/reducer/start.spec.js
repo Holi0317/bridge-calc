@@ -1,11 +1,12 @@
-jest.mock('cuid', () => {
-  let count = 0
-  return jest.fn(() => count++)
-})
-
 import {start} from './start'
+
 import {startAction as startAction} from '../actions/start'
 import * as lolex from 'lolex'
+
+jest.mock('cuid', () => {
+  let count = 0
+  return jest.fn(() => '' + count++)
+})
 
 const playerNames = ['John', 'Mary', 'Henry', 'Joe']
 
