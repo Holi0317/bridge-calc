@@ -1,5 +1,4 @@
 import {createSelector} from 'reselect'
-import fromPairs from 'lodash-es/fromPairs'
 import {namesSelector} from './names'
 import {IPlayerMap} from '../../../types'
 

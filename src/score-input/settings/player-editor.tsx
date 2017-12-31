@@ -5,27 +5,20 @@ import {translate} from 'react-i18next'
 import IconButton from 'material-ui/IconButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import {nameInputListSourceSelector} from './selectors/name-input-list-source'
-import {Dispatch, IRootState, ITranslateMixin} from '../../types'
-import {randomName} from '../../example-names'
+import {IRootState, ITranslateMixin} from '../../types'
 import {returntypeof} from 'react-redux-typescript'
 import style from './player-editor.css'
-import {addNameAction} from './actions/add-name'
+import {addRandomNameAction} from './actions/add-name'
 import {SettingsPlayerList} from './settings-player-list'
+import {bindActionCreators, Dispatch} from 'redux'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
-  names: nameInputListSourceSelector(state)
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addPlayer() {
-    const action = addNameAction(randomName())
-    dispatch(action)
-  },
-  applyChange() {
-    // TODO
-  }
-})
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators({
+    addPlayer: addRandomNameAction
+  }, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
@@ -48,7 +41,7 @@ export class PlayerEditorImpl extends React.Component {
           </IconButton>
         </div>
         <div className={style.btnContainer}>
-          <RaisedButton primary={true} className={style.startBtn} disabled={true} onClick={this.dispatch}>{t('Change names')}</RaisedButton>
+          <RaisedButton label={t('Change names')} primary={true} className={style.startBtn} disabled={true} onClick={this.dispatch} />
         </div>
       </div>
     )

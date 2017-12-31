@@ -1,5 +1,5 @@
 /**
- * Remove any undefined value from the object given.
+ * Remove any undefined value or empty string from the object given.
  * Does NOT mutate the original object. Instead, a shallow clone will be returned.
  * @param obj
  */
