@@ -5,12 +5,12 @@ import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {bindActionCreators, Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
-import {IRootState, ITranslateMixin} from '../../types'
-import {skipAction} from '../actions/skip'
-import {remainingRoundsSelector} from '../selectors/remaining-rounds'
-import {currentRoundSelector} from '../selectors/current-round'
+import {IRootState, ITranslateMixin} from '../../../types'
+import {skipAction} from '../../actions/skip'
+import {remainingRoundsSelector} from '../../selectors/remaining-rounds'
+import {currentRoundSelector} from '../../selectors/current-round'
 import styles from './skip-rounds.css'
-import {initSettingsAction} from './actions/init-settings'
+import {initSettingsAction} from '../actions/init-settings'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,

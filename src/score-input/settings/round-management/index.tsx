@@ -1,9 +1,10 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
-import {ITranslateMixin} from '../../types'
-import {MakerEditor} from './maker-editor'
-import {SkipRounds} from './skip-rounds'
 import Snackbar from 'material-ui/Snackbar'
+import Card, {CardHeader, CardText} from 'material-ui/Card'
+import {SkipRounds} from './skip-rounds'
+import {ITranslateMixin} from '../../../types'
+import style from '../settings.css'
 
 interface IRoundManagementState {
   toastOpen: boolean,
@@ -21,11 +22,13 @@ export class RoundManagementImpl extends React.Component {
     const {t} = this.props
     const {toastOpen, toastMsg} = this.state
 
-    return (
-      <div>
-        <h4>{t('Change maker')}</h4>
-        <MakerEditor />
-        <h4>{t('Skip rounds')}</h4>
+    return <Card className={style.sessionCard}>
+      <CardHeader
+        title={t('Skip rounds')}
+        actAsExpander={false}
+        showExpandableButton={false}
+      />
+      <CardText>
         <SkipRounds requestToast={this.openToast} />
         <Snackbar
           open={toastOpen}
@@ -33,8 +36,8 @@ export class RoundManagementImpl extends React.Component {
           autoHideDuration={3000}
           onRequestClose={this.closeToast}
         />
-      </div>
-    )
+      </CardText>
+    </Card>
   }
 
   private openToast = (round: number | null) => {
