@@ -31,8 +31,9 @@ const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
 interface IMutateNameDialogProps {
-  open: boolean,
+  open: boolean
   onRequestClose: () => void
+  requestToast: (msg: string) => void
 }
 
 interface IMutateNameDialogState {
@@ -84,9 +85,10 @@ export class MutateNameDialogImpl extends React.Component {
 
     // Reset setting state after a tick
     window.setTimeout(() => {
-      const {init, currentGame, onRequestClose} = this.props
+      const {init, currentGame, requestToast, onRequestClose, t} = this.props
       init(currentGame)
       onRequestClose()
+      requestToast(t('Player name changed!'))
     }, 0)
   }
 

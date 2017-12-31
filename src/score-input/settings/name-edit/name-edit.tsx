@@ -5,22 +5,25 @@ import {SettingsAddPlayer} from './settings-add-player'
 import {ActionButtons} from './action-buttons'
 import {ITranslateMixin} from '../../../types'
 import {MutateNameDialog} from './mutate-name-dialog'
+import Snackbar from 'material-ui/Snackbar'
 
 interface INameEditState {
   dialogOpen: boolean
   toastOpen: boolean
+  toastMsg: string
 }
 
 export class NameEditImpl extends React.Component {
   public props: ITranslateMixin
   public state: INameEditState = {
     dialogOpen: false,
-    toastOpen: false
+    toastOpen: false,
+    toastMsg: ''
   }
 
   public render() {
     const {t} = this.props
-    const {dialogOpen, toastOpen} = this.state
+    const {dialogOpen, toastOpen, toastMsg} = this.state
 
     return (
       <div>
@@ -29,7 +32,13 @@ export class NameEditImpl extends React.Component {
         <SettingsAddPlayer />
         <ActionButtons requestDialog={this.openDialog} />
 
-        <MutateNameDialog open={dialogOpen} onRequestClose={this.closeDialog} />
+        <MutateNameDialog open={dialogOpen} requestToast={this.openToast} onRequestClose={this.closeDialog} />
+        <Snackbar
+          open={toastOpen}
+          message={toastMsg}
+          autoHideDuration={3000}
+          onRequestClose={this.closeToast}
+        />
       </div>
     )
   }
@@ -46,9 +55,10 @@ export class NameEditImpl extends React.Component {
     }))
   }
 
-  private openToast = () => {
+  private openToast = (msg: string) => {
     this.setState(() => ({
-      toastOpen: true
+      toastOpen: true,
+      toastMsg: msg
     }))
   }
 
