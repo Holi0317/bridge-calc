@@ -6,12 +6,12 @@ import {trans} from '../../utils/translate'
 /**
  * Create segment of redux tree for validator to consume
  * @param names - IPlayerMap<string> of names
+ * @param currentRound - `state.currentGame.currentRound`, pass in null to stimulate null game/ended game
  */
-function makeTree(names) {
+function makeTree(names, currentRound = 1) {
   return {
-    gameSettings: {
-      names
-    }
+    currentGame: {currentRound},
+    gameSettings: {names}
   }
 }
 
@@ -81,6 +81,17 @@ test('it should fail if there are too many players', () => {
   const expected = {
     names: {},
     misc: 'Too many players. Upper limit is 52 players.'
+  }
+  const actual = settingsValidator(tree, trans)
+  expect(actual).toEqual(expected)
+})
+
+test('it should fail if current round has passed through maximum round', () => {
+  const names = range(10).map(i => i + '').reduce((acc, val) => ({...acc, [val]: val}), {})
+  const tree = makeTree(names, 7)
+  const expected = {
+    names: {},
+    misc: 'Impossible to continue the game due to too many players'
   }
   const actual = settingsValidator(tree, trans)
   expect(actual).toEqual(expected)

@@ -4,6 +4,8 @@ import mapValues from 'lodash-es/mapValues'
 import {namesSelector} from './selectors/names'
 import {dupe, isOk, removeUndef} from '../../utils'
 import {IPlayerMap, IRootState} from '../../types'
+import {expectedRoundsSelector} from './selectors/expected-rounds'
+import {currentRoundSelector} from '../selectors/current-round'
 
 const playerUpperLimit = 52
 
@@ -26,7 +28,7 @@ function validateNames(names: IPlayerMap<string>, t: TranslationFunction): IPlay
   return removeUndef(res)
 }
 
-function validateMisc(names: IPlayerMap<string>, t: TranslationFunction): string | null {
+function validateMisc(names: IPlayerMap<string>, currentRound: number, expectedRounds: number, t: TranslationFunction): string | null {
   // TODO Validation: Will added player cause insufficient rounds?
   const size = Object.keys(names).length
   if (size < 2) {
@@ -34,6 +36,9 @@ function validateMisc(names: IPlayerMap<string>, t: TranslationFunction): string
   }
   if (size > playerUpperLimit) {
     return t('Too many players. Upper limit is {{limit}} players.', {limit: playerUpperLimit})
+  }
+  if (expectedRounds < currentRound) {
+    return t('Impossible to continue the game due to too many players')
   }
   return null
 }
@@ -46,10 +51,12 @@ function validateMisc(names: IPlayerMap<string>, t: TranslationFunction): string
  */
 export const settingsValidator = createSelector(
   namesSelector,
+  currentRoundSelector,
+  expectedRoundsSelector,
   (state: IRootState, t: TranslationFunction) => t,
-  (names: IPlayerMap<string>, t: TranslationFunction): ISettingsError => ({
+  (names: IPlayerMap<string>, currentRound: number, expectedRounds: number, t: TranslationFunction): ISettingsError => ({
     names: validateNames(names, t),
-    misc: validateMisc(names, t)
+    misc: validateMisc(names, currentRound, expectedRounds, t)
   })
 )
 

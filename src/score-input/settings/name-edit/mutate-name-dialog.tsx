@@ -9,6 +9,7 @@ import FlatButton from 'material-ui/FlatButton'
 import {Dropdown} from '../../../material/dropdown'
 import {makerSourceSelector} from '../selectors/maker-source'
 import {namesSelector} from '../selectors/names'
+import {expectedRoundsSelector} from '../selectors/expected-rounds'
 import {changePlayersAction} from '../../actions/change-players'
 import {initSettingsAction} from '../actions/init-settings'
 import {IRootState, ITranslateMixin} from '../../../types'
@@ -16,8 +17,7 @@ import {IRootState, ITranslateMixin} from '../../../types'
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
   names: namesSelector(state),
-  // TODO Implement selector for calculating expected rounds
-  rounds: 13,
+  rounds: expectedRoundsSelector(state),
   makers: makerSourceSelector(state)
 })
 
