@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`INIT_SETTINGS should work on running game state 1`] = `
+Object {
+  "maker": "a",
+  "makerDirty": false,
+  "names": Object {
+    "a": "John",
+    "b": "Mary",
+    "c": "Henry",
+    "d": "Joe",
+  },
+}
+`;

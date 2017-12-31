@@ -45,13 +45,9 @@ test('INIT_SETTINGS should return default state on ended game stage', () => {
 
 test('INIT_SETTINGS should work on running game state', () => {
   const state = null
-  const expected = {
-    maker: 'a',
-    names: genMap('John', 'Mary', 'Henry', 'Joe')
-  }
   const action = initSettingsAction(waitingBidState)
   const actual = reducer(state, action)
-  expect(actual).toEqual(expected)
+  expect(actual).toMatchSnapshot()
 })
 
 test('SET_MAKER should set maker', () => {
@@ -60,6 +56,7 @@ test('SET_MAKER should set maker', () => {
   }
   const expected = {
     ...defaultState,
+    makerDirty: true,
     maker: 'b'
   }
   const action = setMakerAction('b')

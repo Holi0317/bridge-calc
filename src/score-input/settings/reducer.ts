@@ -10,6 +10,11 @@ export interface ISettingsState {
    */
   maker: string | null,
   /**
+   * If maker has changed by user or not.
+   * By default, this value is false.
+   */
+  makerDirty: boolean,
+  /**
    * New player map.
    */
   names: IPlayerMap<string>
@@ -17,6 +22,7 @@ export interface ISettingsState {
 
 const defaultState: ISettingsState = {
   maker: null,
+  makerDirty: false,
   names: {}
 }
 
@@ -29,12 +35,14 @@ export function settingsReducer(state: ISettingsState = defaultState, action: Ga
     }
     return {
       maker: gameState.currentPlayerOrder[0],
+      makerDirty: false,
       names: gameState.names
     }
   }
   case ActionTypes.SET_MAKER:
     return {
       ...state,
+      makerDirty: true,
       maker: action.maker
     }
   case ActionTypes.SET_NAMES:
