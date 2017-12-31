@@ -29,5 +29,5 @@ export function SettingsAddPlayerImpl({addPlayer, t}: SettingsAddPlayerProps) {
 
 export const SettingsAddPlayer = flowRight(
   translate(),
-  connect(mapDispatchToProps)
+  connect(null, mapDispatchToProps)
 )(SettingsAddPlayerImpl)
