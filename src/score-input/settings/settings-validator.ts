@@ -27,6 +27,7 @@ function validateNames(names: IPlayerMap<string>, t: TranslationFunction): IPlay
 }
 
 function validateMisc(names: IPlayerMap<string>, t: TranslationFunction): string | null {
+  // TODO Validation: Will added player cause insufficient rounds?
   const size = Object.keys(names).length
   if (size < 2) {
     return t('At least 2 players is required for a game')

@@ -24,28 +24,25 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
-type ActionButtonsProps = typeof stateType & typeof dispatchType & ITranslateMixin
+interface IActionButtonProps {
+  requestDialog: () => void
+}
 
 export class ActionButtonsImpl extends React.Component {
-  public props: ActionButtonsProps
+  public props: IActionButtonProps & typeof stateType & typeof dispatchType & ITranslateMixin
 
   public render() {
-    const {changeDisabled, makerClean, error, t} = this.props
+    const {changeDisabled, makerClean, error, requestDialog, t} = this.props
     const errMsg = makerClean ? error : t('Player name edit is disabled when editing maker')
     return <div className={style.btnContainer}>
       <RaisedButton label={t('Change names')} primary={true}
-                    disabled={changeDisabled} onClick={this.dispatch} />
+                    disabled={changeDisabled} onClick={requestDialog} />
       <span className={style.errorMessage}>{errMsg}</span>
     </div>
-  }
-
-  private dispatch = () => {
-    // TODO Show maker chooser, max rounds chooser in a dialog.
-    // TODO Validation: Will added player cause insufficient rounds?
   }
 }
 
 export const ActionButtons = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(ActionButtonsImpl)
+)(ActionButtonsImpl) as React.ComponentType<IActionButtonProps>

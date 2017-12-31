@@ -14,7 +14,8 @@ export interface IChangePlayersAction {
  * Change can include: Change name, add player or remove player.
  * After this action is dispatched, the stage will revert to waitingBid if original stage is waitingWin. (To avoid invalid bid after changing player)
  *
- * This action can also be used to change maker. Just pass in original name map, original rounds and specify new maker in `maker` property.
+ * This action can also be used to change maker. Just pass in original name map, original rounds
+ * and specify new maker in `maker` property.
  *
  * This action can also be used to change number of rounds. Similar to change maker, only update rounds property.
  *
@@ -29,8 +30,7 @@ export interface IChangePlayersAction {
  *
  * @param rounds - Number of rounds after dispatching this action.
  * If the given rounds is less than current round, the game will end immediately.
- * If the above case happens, endTime of the game will be starting time + 1 min.
- * Because providing such round is invalid and validation should not be done in reducer.
+ * The above case is considered as a bug. Prevention of this should be done on the caller side.
  */
 export function changePlayersAction(newNames: IPlayerMap<string>, maker: string, rounds: number): IChangePlayersAction {
   return {
