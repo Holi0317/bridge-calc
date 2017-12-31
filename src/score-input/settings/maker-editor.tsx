@@ -9,19 +9,26 @@ import Snackbar from 'material-ui/Snackbar'
 import {namesSelector} from '../selectors/names'
 import {roundsSelector} from '../selectors/rounds'
 import {makerSelector} from './selectors/maker'
+import {namesChangedSelector} from './selectors/names-changed'
 import {MakerChooser} from './maker-chooser'
 import {changePlayersAction} from '../actions/change-players'
+import {initSettingsAction} from './actions/init-settings'
 import {IRootState, ITranslateMixin} from '../../types'
 import style from './maker-editor.css'
 
 const mapStateToProps = (state: IRootState) => ({
   names: namesSelector(state),
   rounds: roundsSelector(state),
-  maker: makerSelector(state)
+  maker: makerSelector(state),
+  disabled: namesChangedSelector(state),
+  currentGame: state.currentGame,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({changePlayers: changePlayersAction}, dispatch)
+  bindActionCreators({
+    changePlayers: changePlayersAction,
+    init: initSettingsAction
+  }, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
@@ -33,7 +40,7 @@ export class MakerEditorImpl extends React.Component {
   }
 
   public render() {
-    const {t} = this.props
+    const {disabled, t} = this.props
     const {snackbarOpen} = this.state
 
     return (
@@ -41,7 +48,7 @@ export class MakerEditorImpl extends React.Component {
         <h4>{t('Change maker')}</h4>
         <div className={style.chooserContainer}>
           <MakerChooser />
-          <RaisedButton primary={true} onClick={this.commit}>{t('Change maker')}</RaisedButton>
+          <RaisedButton primary={true} disabled={disabled} onClick={this.commit}>{t('Change maker')}</RaisedButton>
         </div>
         <Snackbar open={snackbarOpen} message={t('Maker changed!')} onRequestClose={this.snackbarClosed} />
       </div>
@@ -54,6 +61,12 @@ export class MakerEditorImpl extends React.Component {
     this.setState(() => ({
       snackbarOpen: true
     }))
+
+    // Reset game settings in next tick
+    window.setTimeout(() => {
+      const {currentGame, init} = this.props
+      init(currentGame)
+    }, 0)
   }
 
   private snackbarClosed = () => {
