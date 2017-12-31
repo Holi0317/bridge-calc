@@ -2,7 +2,6 @@ import {entryReducer as reducer} from './entry-reducer'
 import {defaultState} from '../../test-fixtures/entry-options'
 import {toggleOptionOpenAction} from './actions/toggle-option-open'
 import {setRoundsAction} from './actions/set-rounds'
-import {setCardsAction} from './actions/set-cards'
 import {setStartingRoundAction} from './actions/set-starting-round'
 import {addPlayerAction} from './actions/add-player'
 import {setPlayerNamesAction} from './actions/set-player-names'
@@ -68,17 +67,6 @@ test('Setting rounds should reset startingRound if the new state will cause star
   }
   const action = setRoundsAction(10)
   const actual = reducer(state, action)
-  expect(actual).toEqual(expected)
-})
-
-test('Number of cards should re-compute whenever rounds property when it is updated', () => {
-  const expected = {
-    ...defaultState,
-    cards: 30,
-    rounds: 7
-  }
-  const action = setCardsAction(30)
-  const actual = reducer(undefined, action)
   expect(actual).toEqual(expected)
 })
 

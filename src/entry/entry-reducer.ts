@@ -2,7 +2,6 @@ import {EntryActions} from './actions'
 import {ActionTypes} from '../action-types'
 
 export interface IEntryState {
-  cards: number,
   rounds: number,
   startingRound: number,
   playerNames: string[],
@@ -10,7 +9,6 @@ export interface IEntryState {
 }
 
 const defaultState: IEntryState = {
-  cards: 52,
   optionsOpened: false,
   playerNames: ['John', 'Mary', 'Henry', 'Joe'],
   rounds: 13,
@@ -27,9 +25,9 @@ const defaultState: IEntryState = {
  */
 function playerNameAction(state: IEntryState, playerNames: string[]) {
   const newPlayerNum = playerNames.length
-  const newRounds = Math.floor(state.cards / newPlayerNum)
+  const newRounds = Math.floor(52 / newPlayerNum)
   const playerNum = state.playerNames.length
-  const oldRounds = Math.floor(state.cards / playerNum)
+  const oldRounds = Math.floor(52 / playerNum)
 
   if (newPlayerNum === playerNum) {
     // Rename
@@ -71,12 +69,6 @@ export function entryReducer(state: IEntryState = defaultState, action: EntryAct
       startingRound
     }
   }
-  case ActionTypes.SET_CARDS:
-    return {
-      ...state,
-      cards: action.payload,
-      rounds: Math.floor(action.payload / state.playerNames.length)
-    }
   case ActionTypes.SET_STARTING_ROUND:
     return {
       ...state,
