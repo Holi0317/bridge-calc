@@ -5,7 +5,7 @@ Global settings: 全域設定
 Entry: 開始遊戲
 Scoreboard: 計分板
 Game over: 遊戲終了
-Round {{currentRound}} of {{rounds}}: "{{rounds}} 回合之 {{currentRound}}"
+Round {{currentRound}} of {{rounds}}: "第{{rounds}} 回合之 {{currentRound}}"
 
 # Error message
 Ouch! An error has occurred.: 不好了! 發生了未知的錯誤
@@ -111,7 +111,4 @@ Click here to start a new game: 按此以開始一局新的遊戲
 "Game on {{date}}": "於{{date}}的遊戲"
 "With {{players}}": "成員: {{players}}"
 Delete: 刪除
-Game ended: 遊戲結束
-"Current round: {{round}}": "現在的回合: {{round}}"
 "Time used: {{timeUsed}}": "已用的時間: {{timeUsed}}"
-"Total rounds: {{rounds}}": "合計回合: {{rounds}}"

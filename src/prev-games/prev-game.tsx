@@ -7,6 +7,7 @@ import {ITranslateMixin} from '../types'
 import {GameStage} from '../score-input/game-stage'
 import Card, {CardActions, CardText, CardHeader} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
+import {GameProgressDisp} from './game-progress-disp'
 
 export interface IPrevGameProps {
   className?: string
@@ -29,13 +30,10 @@ export function PrevGameImpl({className, game, requestDelete, requestContinue, t
     </CardActions>
     <CardText expandable={true}>
       <div>
-        {game.stage === GameStage.ended
-          ? <div>{t('Game ended')}</div>
-          : <div>{t('Current round: {{round}}', {round: game.currentRound})}</div>}
+        <GameProgressDisp entry={game} />
         {game.stage === GameStage.ended
           ? <div>{t('Time used: {{timeUsed}}', {timeUsed: distanceInWords(game.startTime, game.endTime)})}</div>
           : null}
-        <div>{t('Total rounds: {{rounds}}', {rounds: game.rounds})}</div>
       </div>
     </CardText>
   </Card>

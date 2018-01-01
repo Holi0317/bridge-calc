@@ -60,7 +60,7 @@ export class SkipRoundsImpl extends React.Component {
 
         const message = currentRound
           ? t('Skipped round(s). You are now playing round {{round}}', {round: currentRound})
-          : t('Game ended')
+          : t('Game has ended')
         showToast(message)
       }, 0)
     }
