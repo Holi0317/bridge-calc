@@ -48,7 +48,7 @@ export function MenuImpl({showContinue, t}: MenuProps) {
           <Tile icon={<ActionSettings />} title={t('Settings')} to="/global-settings" />
         </Col>
         <Col md={4} xs={12}>
-          <Tile icon={<ActionInfo />} title={t('Information')} />
+          <Tile icon={<ActionInfo />} title={t('Information')} to="/help" />
         </Col>
         <Col md={4} xs={12}>
           <Tile icon={<ActionBugReport />} title={t('Support/bug')} to="https://github.com/holi0317/bridge-calc" external={true} target="_blank" />
