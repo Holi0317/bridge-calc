@@ -6,7 +6,7 @@ import {IRootState, ITranslateMixin} from '../../types'
 import {returntypeof} from 'react-redux-typescript'
 import {bindActionCreators, Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
-import {setImportOpenAction} from '../actions/set-import-open'
+import {setImportOpenAction} from '../actions/set-entry-props'
 import Dialog from 'material-ui/Dialog'
 import {ImportNamesContent} from './import-names-content'
 

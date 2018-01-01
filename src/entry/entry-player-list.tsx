@@ -6,7 +6,7 @@ import {translate} from 'react-i18next'
 import {returntypeof} from 'react-redux-typescript'
 import {NameInputList} from '../name-input-list'
 import {entryOptionsValidator} from './entry-validator'
-import {setPlayerNamesAction} from './actions/set-player-names'
+import {setPlayerNamesAction} from './actions/set-entry-props'
 import {IRootState, ITranslateMixin} from '../types'
 
 // Getters and setters for name input list element

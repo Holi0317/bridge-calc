@@ -1,12 +1,9 @@
 import {entryReducer as reducer} from './entry-reducer'
 import {defaultState} from '../../test-fixtures/entry-options'
+import {setImportOpenAction, setPlayerNamesAction, setRoundsAction, setStartingRoundAction} from './actions/set-entry-props'
 import {toggleOptionOpenAction} from './actions/toggle-option-open'
-import {setRoundsAction} from './actions/set-rounds'
-import {setStartingRoundAction} from './actions/set-starting-round'
 import {addPlayerAction} from './actions/add-player'
-import {setPlayerNamesAction} from './actions/set-player-names'
 import {resetAction} from './actions/reset'
-import {setImportOpenAction} from './actions/set-import-open'
 
 test('Default state', () => {
   const expected = {

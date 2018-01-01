@@ -3,7 +3,7 @@ import {bindActionCreators, Dispatch} from 'redux'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import {genRandomNames} from '../example-names'
-import {setPlayerNamesAction} from './actions/set-player-names'
+import {setPlayerNamesAction} from './actions/set-entry-props'
 import {resetAction} from './actions/reset'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>

@@ -11,7 +11,6 @@ import {SortableItem} from './item'
 function createChangeHandler<T>(items: T[], setter: Setter<T>, change: (newItems: T[]) => void) {
   return (index: number) => (event: React.KeyboardEvent<{}>, newValue: string) => {
     const newItems = items.slice()
-    // TODO uncomment below
     newItems[index] = setter(newValue, items[index])
     return change(newItems)
   }

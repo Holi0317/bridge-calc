@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import FileDownload from 'material-ui/svg-icons/file/file-download'
 import {addRandomPlayerAction} from './actions/add-player'
-import {setImportOpenAction} from './actions/set-import-open'
+import {setImportOpenAction} from './actions/set-entry-props'
 import {ITranslateMixin} from '../types'
 import style from './entry.css'
 

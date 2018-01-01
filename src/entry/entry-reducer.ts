@@ -22,35 +22,22 @@ const defaultState: IEntryState = {
  * Because it is fairly complex, this reducer is moved into a separate function.
  * (I don't want to look at this code with 8 space before each line ._.).
  * See test/entry-reducer.spec.js for expected result on this.
+ * ATTENTION: This function will mutate given state object
  * @param state - previous state of reducer
- * @param playerNames - New player names passed in as action payload
+ * @param playerNames - original player names before updating
  */
 function playerNameAction(state: IEntryState, playerNames: string[]) {
-  const newPlayerNum = playerNames.length
+  const newPlayerNum = state.playerNames.length
   const newRounds = Math.floor(52 / newPlayerNum)
-  const playerNum = state.playerNames.length
+  const playerNum = playerNames.length
   const oldRounds = Math.floor(52 / playerNum)
 
-  if (newPlayerNum === playerNum) {
-    // Rename
-    return {
-      ...state,
-      playerNames
-    }
-  } else if (newPlayerNum > playerNum) {
-    // Add player
-    return {
-      ...state,
-      playerNames,
-      rounds: newRounds > state.rounds ? state.rounds : newRounds
-    }
-  } else {
-    // Remove player
-    return {
-      ...state,
-      playerNames,
-      rounds: state.rounds === oldRounds ? newRounds : state.rounds
-    }
+  if (newPlayerNum > playerNum && newRounds <= state.rounds) {
+    // Add player and currently selected rounds is too large
+    state.rounds = newRounds
+  } else if (newPlayerNum < playerNum && state.rounds === oldRounds) {
+    // Remove player and currently selected rounds is at maximum (i.e. default)
+    state.rounds = newRounds
   }
 }
 
@@ -61,32 +48,28 @@ export function entryReducer(state: IEntryState = defaultState, action: EntryAct
       ...state,
       optionsOpened: !state.optionsOpened
     }
-  case ActionTypes.SET_ROUNDS: {
-    const startingRound = state.startingRound > action.payload
-      ? 1
-      : state.startingRound
-    return {
+  case ActionTypes.SET_ENTRY_PROPS: {
+    const {type, ...props} = action
+    const res: IEntryState = {
       ...state,
-      rounds: action.payload,
-      startingRound
+      ...props
     }
+    if (res.startingRound > res.rounds) {
+      res.startingRound = 1
+    }
+    playerNameAction(res, state.playerNames)
+    return res
   }
-  case ActionTypes.SET_STARTING_ROUND:
-    return {
+  case ActionTypes.ADD_PLAYER: {
+    const res: IEntryState = {
       ...state,
-      startingRound: action.payload
+      playerNames: [...state.playerNames, action.payload]
     }
-  case ActionTypes.ADD_PLAYER:
-    return playerNameAction(state, [...state.playerNames, action.payload])
-  case ActionTypes.SET_PLAYER_NAMES:
-    return playerNameAction(state, action.payload)
+    playerNameAction(res, state.playerNames)
+    return res
+  }
   case ActionTypes.RESET_ENTRY:
     return defaultState
-  case ActionTypes.SET_IMPORT_OPEN:
-    return {
-      ...state,
-      importOpened: action.payload
-    }
   default:
     return state
   }
