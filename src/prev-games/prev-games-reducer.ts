@@ -1,6 +1,5 @@
 import {PrevGameEntry} from './types'
 import {PrevGamesActions} from './actions'
-import {ISaveGameAction} from './actions/save-game'
 import {ActionTypes} from '../action-types'
 
 export interface IPrevGamesState {

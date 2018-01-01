@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ActionHelp from 'material-ui/svg-icons/action/help'
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
+import {ToastSingleton} from '../toast-singleton'
 import {Titles} from './titles'
 import {SWReg} from '../sw-reg'
 import {Routes} from './routes'
@@ -41,6 +42,7 @@ export function ShellImpl({location, history}: AppProps) {
         title={<Titles />}
       />
       <Routes location={location} />
+      <ToastSingleton />
       <SWReg />
     </div>
   )

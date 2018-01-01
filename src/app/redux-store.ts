@@ -1,10 +1,11 @@
 import {persistStore, persistCombineReducers} from 'redux-persist'
-import {applyMiddleware, compose, createStore} from 'redux'
+import {applyMiddleware, createStore} from 'redux'
 import storage from 'redux-persist/es/storage'
 import {currentGameReducer} from '../score-input/reducer'
 import {prevGamesReducer} from '../prev-games/prev-games-reducer'
 import {entryReducer} from '../entry/entry-reducer'
 import {settingsReducer} from '../score-input/settings/reducer'
+import {toastSingletonReducer} from '../toast-singleton/toast-singleton-reducer'
 import {autoSave} from '../redux-middlewares/auto-save'
 
 const presistConfig = {
@@ -19,7 +20,8 @@ const reducer = persistCombineReducers(presistConfig, {
   entry: entryReducer,
   gameSettings: settingsReducer,
   currentGame: currentGameReducer,
-  prevGames: prevGamesReducer
+  prevGames: prevGamesReducer,
+  toastSingleton: toastSingletonReducer
 })
 
 const middlewares: any[] = [
