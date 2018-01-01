@@ -27,9 +27,8 @@ export class ErrorBoundaryImpl extends React.Component {
     if (error) {
       return <Ouch error={error} />
     }
-    // FIXME `as any` is workaround for TS typing. Due to render's return type cannot be ReactNode
-    return (this.props.children as any)
+    return this.props.children
   }
 }
 
-export const ErrorBoundary = translate()(ErrorBoundaryImpl as any)
+export const ErrorBoundary = translate()(ErrorBoundaryImpl)

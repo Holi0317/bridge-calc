@@ -44,7 +44,9 @@ export class RoundManagementImpl extends React.Component {
     const {t} = this.props
     this.setState(() => ({
       toastOpen: true,
-      toastMsg: round ? t(`Skipped round(s). You are now playing round ${round}`) : t('Game ended')
+      toastMsg: round
+        ? t('Skipped round(s). You are now playing round {{round}}', {round})
+        : t('Game ended')
     }))
   }
 
