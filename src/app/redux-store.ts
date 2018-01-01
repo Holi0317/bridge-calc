@@ -1,18 +1,28 @@
-import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
+import {persistStore, persistCombineReducers} from 'redux-persist'
+import {applyMiddleware, compose, createStore} from 'redux'
+import storage from 'redux-persist/es/storage'
 import {currentGameReducer} from '../score-input/reducer'
 import {prevGamesReducer} from '../prev-games/prev-games-reducer'
 import {entryReducer} from '../entry/entry-reducer'
 import {settingsReducer} from '../score-input/settings/reducer'
 import {autoSave} from '../redux-middlewares/auto-save'
 
-const reducer = combineReducers({
+const presistConfig = {
+  key: 'root',
+  version: 1,
+  debug: process.env.NODE_ENV === 'development',
+  whitelist: ['prevGames', 'currentGame'],
+  storage
+}
+
+const reducer = persistCombineReducers(presistConfig, {
   entry: entryReducer,
   gameSettings: settingsReducer,
   currentGame: currentGameReducer,
   prevGames: prevGamesReducer
 })
 
-const middlewares = [
+const middlewares: any[] = [
   autoSave
 ]
 
@@ -25,4 +35,8 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger)
 }
 
-export const store = compose(applyMiddleware(...middlewares as any[]))(createStore)(reducer)
+export const store = createStore(
+  reducer,
+  applyMiddleware(...middlewares)
+)
+export const persistor = persistStore(store)

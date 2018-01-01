@@ -4,24 +4,27 @@ import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {I18nextProvider} from 'react-i18next'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {PersistGate} from 'redux-persist/es/integration/react'
 import {Shell} from './shell'
 import {i18n} from './app/i18n'
-import {store} from './app/redux-store'
+import {store, persistor} from './app/redux-store'
 import {muiTheme} from './app/mui-theme'
 import {ErrorBoundary} from './error-boundary'
 
 function Root() {
   return (
     <Provider store={store}>
-      <I18nextProvider i18n={i18n}>
-        <BrowserRouter>
-          <MuiThemeProvider muiTheme={muiTheme}>
-            <ErrorBoundary>
-              <Shell />
-            </ErrorBoundary>
-          </MuiThemeProvider>
-        </BrowserRouter>
-      </I18nextProvider>
+      <PersistGate persistor={persistor}>
+        <I18nextProvider i18n={i18n}>
+          <BrowserRouter>
+            <MuiThemeProvider muiTheme={muiTheme}>
+              <ErrorBoundary>
+                <Shell />
+              </ErrorBoundary>
+            </MuiThemeProvider>
+          </BrowserRouter>
+        </I18nextProvider>
+      </PersistGate>
     </Provider>
   )
 }
