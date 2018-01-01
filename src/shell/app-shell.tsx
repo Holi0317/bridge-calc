@@ -29,7 +29,9 @@ type AppProps = RouteComponentProps<any>
  * @param history {History} - History object injected by react-router
  */
 export function ShellImpl({location, history}: AppProps) {
-  const helpBtn = <IconButton><ActionHelp width="24px" height="24px" /></IconButton>
+  const helpBtn = <IconButton href="https://github.com/Holi0317/bridge-calc/blob/master/docs/en.md" target="_blank">
+    <ActionHelp width="24px" height="24px" />
+  </IconButton>
   const backFn = to(history, '/')
   const backBtn = <IconButton><NavigationArrowBack width="24px" height="24px" /></IconButton>
   return (

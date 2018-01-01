@@ -13,4 +13,4 @@ export function NotFoundImpl({t}: ITranslateMixin) {
   </div>
 }
 
-export const NotFound = translate()(NotFoundImpl as any)
+export const NotFound = translate()(NotFoundImpl)
