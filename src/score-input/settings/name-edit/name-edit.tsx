@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
-import Snackbar from 'material-ui/Snackbar'
 import {Card, CardHeader, CardText} from 'material-ui/Card'
 import {SettingsPlayerList} from './settings-player-list'
 import {SettingsAddPlayer} from './settings-add-player'
@@ -11,21 +10,17 @@ import style from '../settings.css'
 
 interface INameEditState {
   dialogOpen: boolean
-  toastOpen: boolean
-  toastMsg: string
 }
 
 export class NameEditImpl extends React.Component {
   public props: ITranslateMixin
   public state: INameEditState = {
-    dialogOpen: false,
-    toastOpen: false,
-    toastMsg: ''
+    dialogOpen: false
   }
 
   public render() {
     const {t} = this.props
-    const {dialogOpen, toastOpen, toastMsg} = this.state
+    const {dialogOpen} = this.state
 
     return <Card className={style.sessionCard}>
       <CardHeader
@@ -38,13 +33,7 @@ export class NameEditImpl extends React.Component {
         <SettingsAddPlayer />
         <ActionButtons requestDialog={this.openDialog} />
 
-        <MutateNameDialog open={dialogOpen} requestToast={this.openToast} onRequestClose={this.closeDialog} />
-        <Snackbar
-          open={toastOpen}
-          message={toastMsg}
-          autoHideDuration={3000}
-          onRequestClose={this.closeToast}
-        />
+        <MutateNameDialog open={dialogOpen} onRequestClose={this.closeDialog} />
       </CardText>
     </Card>
   }
@@ -58,19 +47,6 @@ export class NameEditImpl extends React.Component {
   private closeDialog = () => {
     this.setState(() => ({
       dialogOpen: false
-    }))
-  }
-
-  private openToast = (msg: string) => {
-    this.setState(() => ({
-      toastOpen: true,
-      toastMsg: msg
-    }))
-  }
-
-  private closeToast = () => {
-    this.setState(() => ({
-      toastOpen: false
     }))
   }
 }

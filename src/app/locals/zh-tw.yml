@@ -12,6 +12,10 @@ Ouch! An error has occurred.: 不好了! 發生了未知的錯誤
 Hopefully your data is safe. Refresh page may fix the problem.: 重新整理可能會解決問題
 "Error message: {{message}}": "錯誤信息: {{message}}"
 
+# Offline messages
+This app is now available offline: 這個應用現在可以離線使用
+App will update after page reload: 有可用的更新 重刷頁面以應用更新
+
 # Main menu tiles messages
 Continue: 繼續遊戲
 New Game: 新增遊戲
@@ -80,6 +84,7 @@ Skip this round: 跳過這個回合
 Skip to last round: 跳至最後一個回合
 End game: 結束遊戲
 "Skipped round(s). You are now playing round {{round}}": "已跳過回合 現在是第{{round}}個回合"
+Already at the last round. Cannot skip.: 已經在最後一個回合
 
 # Global settings
 Change language: 更改語言

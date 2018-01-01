@@ -7,10 +7,11 @@ import {bindActionCreators, Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
 import {IRootState, ITranslateMixin} from '../../../types'
 import {skipAction} from '../../actions/skip'
+import {initSettingsAction} from '../actions/init-settings'
+import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {remainingRoundsSelector} from '../../selectors/remaining-rounds'
 import {currentRoundSelector} from '../../selectors/current-round'
 import styles from './skip-rounds.css'
-import {initSettingsAction} from '../actions/init-settings'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
@@ -21,18 +22,15 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
     skip: skipAction,
-    init: initSettingsAction
+    init: initSettingsAction,
+    showToast: showToastAction
   }, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
-interface ISkipRoundsProps {
-  requestToast: (round: number | null) => void
-}
-
 export class SkipRoundsImpl extends React.Component {
-  public props: ISkipRoundsProps & typeof stateType & typeof dispatchType & ITranslateMixin
+  public props: typeof stateType & typeof dispatchType & ITranslateMixin
 
   public render() {
     const {remainingRounds, t} = this.props
@@ -47,13 +45,23 @@ export class SkipRoundsImpl extends React.Component {
 
   private skip = (n: number) => {
     return () => {
+      if (n <= 0) {
+        const {showToast, t} = this.props
+        showToast(t('Already at the last round. Cannot skip.'))
+        return
+      }
+
       const {skip} = this.props
       skip(n)
 
       window.setTimeout(() => {
-        const {init, currentGame, currentRound, requestToast} = this.props
+        const {init, currentGame, currentRound, showToast, t} = this.props
         init(currentGame)
-        requestToast(currentRound)
+
+        const message = currentRound
+          ? t('Skipped round(s). You are now playing round {{round}}', {round: currentRound})
+          : t('Game ended')
+        showToast(message)
       }, 0)
     }
   }
@@ -62,4 +70,4 @@ export class SkipRoundsImpl extends React.Component {
 export const SkipRounds = flowRight(
   translate(),
   connect(mapStateToProps, mapDispatchToProps)
-)(SkipRoundsImpl) as React.ComponentType<ISkipRoundsProps>
+)(SkipRoundsImpl)

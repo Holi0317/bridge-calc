@@ -11,6 +11,7 @@ import {makerSourceSelector} from '../selectors/maker-source'
 import {namesSelector} from '../selectors/names'
 import {expectedRoundsSelector} from '../selectors/expected-rounds'
 import {changePlayersAction} from '../../actions/change-players'
+import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {initSettingsAction} from '../actions/init-settings'
 import {IRootState, ITranslateMixin} from '../../../types'
 
@@ -24,7 +25,8 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
     changePlayers: changePlayersAction,
-    init: initSettingsAction
+    init: initSettingsAction,
+    showToast: showToastAction
   }, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
@@ -33,7 +35,6 @@ const dispatchType = returntypeof(mapDispatchToProps)
 interface IMutateNameDialogProps {
   open: boolean
   onRequestClose: () => void
-  requestToast: (msg: string) => void
 }
 
 interface IMutateNameDialogState {
@@ -85,10 +86,10 @@ export class MutateNameDialogImpl extends React.Component {
 
     // Reset setting state after a tick
     window.setTimeout(() => {
-      const {init, currentGame, requestToast, onRequestClose, t} = this.props
+      const {init, currentGame, showToast, onRequestClose, t} = this.props
       init(currentGame)
       onRequestClose()
-      requestToast(t('Player name changed!'))
+      showToast(t('Player name changed!'))
     }, 0)
   }
 

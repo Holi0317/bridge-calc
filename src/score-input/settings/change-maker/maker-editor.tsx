@@ -5,18 +5,18 @@ import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
-import Snackbar from 'material-ui/Snackbar'
 import {Dropdown} from '../../../material/dropdown'
 import {namesSelector} from '../../selectors/names'
 import {roundsSelector} from '../../selectors/rounds'
 import {makerSelector} from '../selectors/maker'
 import {namesChangedSelector} from '../selectors/names-changed'
+import {makerSourceSelector} from '../selectors/maker-source'
 import {changePlayersAction} from '../../actions/change-players'
 import {initSettingsAction} from '../actions/init-settings'
 import {setMakerAction} from '../actions/set-maker'
+import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {IRootState, ITranslateMixin} from '../../../types'
 import style from './maker-editor.css'
-import {makerSourceSelector} from '../selectors/maker-source'
 
 const mapStateToProps = (state: IRootState) => ({
   names: namesSelector(state),
@@ -31,7 +31,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
     changePlayers: changePlayersAction,
     init: initSettingsAction,
-    setMaker: setMakerAction
+    setMaker: setMakerAction,
+    showToast: showToastAction
   }, dispatch)
 
 const stateType = returntypeof(mapStateToProps)
@@ -39,13 +40,9 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 export class MakerEditorImpl extends React.Component {
   public props: typeof stateType & typeof dispatchType & ITranslateMixin
-  public state = {
-    snackbarOpen: false
-  }
 
   public render() {
     const {maker, namesSource, disabled, setMaker, t} = this.props
-    const {snackbarOpen} = this.state
 
     return (
       <div>
@@ -57,29 +54,20 @@ export class MakerEditorImpl extends React.Component {
         {disabled
           ? <div className={style.disabledHint}>{t('Maker edit is disabled when editing player names')}</div>
           : null}
-        <Snackbar open={snackbarOpen} message={t('Maker changed!')} onRequestClose={this.snackbarClosed} />
       </div>
     )
   }
 
   private commit = () => {
-    const {names, rounds, maker, changePlayers} = this.props
+    const {names, rounds, maker, changePlayers, showToast, t} = this.props
     changePlayers(names, maker!, rounds!)
-    this.setState(() => ({
-      snackbarOpen: true
-    }))
+    showToast(t('Maker changed!'))
 
     // Reset game settings in next tick
     window.setTimeout(() => {
       const {currentGame, init} = this.props
       init(currentGame)
     }, 0)
-  }
-
-  private snackbarClosed = () => {
-    this.setState(() => ({
-      snackbarOpen: false
-    }))
   }
 }
 

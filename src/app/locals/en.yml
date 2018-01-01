@@ -12,6 +12,10 @@ Ouch! An error has occurred.: Ouch! An error has occurred.
 Hopefully your data is safe. Refresh page may fix the problem.: Hopefully your data is safe. Refresh page may fix the problem.
 "Error message: {{message}}": "Error message: {{message}}"
 
+# Offline messages
+This app is now available offline: This app is now available offline
+App will update after page reload: App will update after page reload
+
 # Main menu tiles messages
 Continue: Continue
 New Game: New Game
@@ -80,6 +84,7 @@ Skip this round: Skip this round
 Skip to last round: Skip to last round
 End game: End game
 "Skipped round(s). You are now playing round {{round}}": "Skipped round(s). You are now playing round {{round}}"
+Already at the last round. Cannot skip.: Already at the last round. Cannot skip.
 
 # Global settings
 Change language: Change language

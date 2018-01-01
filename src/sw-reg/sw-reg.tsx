@@ -1,88 +1,76 @@
 import * as React from 'react'
+import flowRight from 'lodash-es/flowRight'
+import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
+import {bindActionCreators, Dispatch} from 'redux'
+import {returntypeof} from 'react-redux-typescript'
+import {showToastAction} from '../toast-singleton/actions/show-toast'
 import {ITranslateMixin} from '../types'
-import Snackbar from 'material-ui/Snackbar'
 
-type SwRegProps = ITranslateMixin
-interface ISWRegState {
-  barOpen: boolean
-  message: string
-}
+const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+  bindActionCreators({
+    showToast: showToastAction
+  }, dispatch)
+
+const dispatchType = returntypeof(mapDispatchToProps)
+
+type SWRegProps = typeof dispatchType & ITranslateMixin
 
 class SWRegImpl extends React.Component {
-  public props: SwRegProps
-  public state: ISWRegState = {
-    barOpen: false,
-    message: ''
-  }
+  public props: SWRegProps
 
   public componentDidMount() {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       this.install()
     }
   }
 
   public render() {
-    const {barOpen, message} = this.state
-    return (
-      <Snackbar
-        open={barOpen}
-        message={message}
-        autoHideDuration={4000}
-        onRequestClose={this.handleRequestClose}
-      />
-    )
+    return null
   }
 
   private async install() {
-    if ('serviceWorker' in navigator) {
-      try {
-        const registration = await navigator.serviceWorker.register('/sw.js')
-        if (!registration) {
-          // WTF no registration????
-          return
-        }
+    try {
+      const registration = await navigator.serviceWorker.register('/sw.js')
+      if (!registration) {
+        // WTF no registration????
+        return
+      }
 
-        // New installation notify logic
-        const sw = registration.installing || registration.waiting
-        if (sw) {
-          sw.addEventListener('statechange', () => {
-            if (sw.state === 'activated') {
-              this.openSnackbar('This app is now available offline')
+      // New installation notify logic
+      const sw = registration.installing || registration.waiting
+      if (sw) {
+        sw.addEventListener('statechange', () => {
+          if (sw.state === 'activated') {
+            this.showToast('This app is now available offline')
+          }
+        })
+      }
+
+      // Update notification logic
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing
+        if (newWorker) {
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed') {
+              this.showToast('App will update after page reload')
             }
           })
         }
-
-        // Update notification logic
-        registration.addEventListener('updatefound', () => {
-          const newWorker = registration.installing
-          if (newWorker) {
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed') {
-                this.openSnackbar('App will update after page reload')
-              }
-            })
-          }
-        })
-      } catch (err) {
-        console.error('Error when registering service worker', err)
-      }
-
+      })
+    } catch (err) {
+      console.error('Error when registering service worker', err)
     }
+
   }
 
-  private openSnackbar = (msg: string) => {
-    this.setState(() => ({
-      barOpen: true,
-      message: this.props.t(msg)
-    }))
-  }
-
-  private handleRequestClose = () => {
-    this.setState(() => ({
-      barOpen: false
-    }))
+  private showToast = (msg: string) => {
+    const {showToast, t} = this.props
+    showToast(t(msg))
   }
 }
 
-export const SWReg = translate()(SWRegImpl as any)
+export const SWReg = flowRight(
+  translate(),
+  connect(null, mapDispatchToProps)
+)(SWRegImpl)
