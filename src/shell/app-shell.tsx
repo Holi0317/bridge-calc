@@ -29,7 +29,6 @@ type AppProps = RouteComponentProps<any>
  * @param history {History} - History object injected by react-router
  */
 export function ShellImpl({location, history}: AppProps) {
-  const helpFn = to(history, '/help')
   const helpBtn = <IconButton><ActionHelp width="24px" height="24px" /></IconButton>
   const backFn = to(history, '/')
   const backBtn = <IconButton><NavigationArrowBack width="24px" height="24px" /></IconButton>
@@ -40,7 +39,6 @@ export function ShellImpl({location, history}: AppProps) {
         iconElementLeft={backBtn}
         showMenuIconButton={location.pathname !== '/'}
         onLeftIconButtonClick={backFn}
-        onRightIconButtonClick={helpFn}
         title={<Titles />}
       />
       <Routes location={location} />
