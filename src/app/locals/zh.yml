@@ -1,10 +1,16 @@
 Bridge calculator: 橋牌計分器
 
 # Title messages
+Global settings: 全域設定
 Entry: 開始遊戲
 Scoreboard: 計分板
 Game over: 遊戲終了
 Round {{currentRound}} of {{rounds}}: "{{rounds}} 回合之 {{currentRound}}"
+
+# Error message
+Ouch! An error has occurred.: 不好了! 發生了未知的錯誤
+Hopefully your data is safe. Refresh page may fix the problem.: 重新整理可能會解決問題
+"Error message: {{message}}": "錯誤信息: {{message}}"
 
 # Main menu tiles messages
 Continue: 繼續遊戲
@@ -22,7 +28,6 @@ Import names: 匯入名稱
 Options: 遊戲選項
 Start: 開始
 Player name: 玩家名稱
-Number of cards: 卡牌數量
 Number of rounds: 回合數量
 Starting round: 起始回合
 
@@ -34,6 +39,7 @@ Cannot choose that: 不能選擇這個
 Too many stacks: 太多墩
 Too less stacks: 太少墩
 Name cannot be repeated: 名字不可以重複
+Impossible to continue the game due to too many players: 太多玩家 遊戲無法繼續
 
 # Time used in the game
 "Time: {{time}}": "已用時間: {{time}}"
@@ -54,8 +60,48 @@ Rank: 名次
 "Round {{n}}": "第{{n}}回合"
 
 # Settings messages
+# Change names
 Edit players: 更改玩家
 Change names: 更改名字
+Player name edit is disabled when editing maker: 修改莊家時無法更改玩家
+Cancel: 取消
+Submit: 提交
+Choose the maker for this round: 為這個回合選擇莊家
+"Expected rounds: {{rounds}}": "預計會有{{rounds}}個回合"
+Player name changed!: '玩家列表已更改!'
+# Change maker
 Change maker: 更改莊家
+Maker edit is disabled when editing player names: 修改玩家時無法更改莊家
 Maker changed!: 莊家已經更改!
 Maker: 莊家
+# Skip rounds
+Skip rounds: 回合管理
+Skip this round: 跳過這個回合
+Skip to last round: 跳至最後一個回合
+End game: 結束遊戲
+"Skipped round(s). You are now playing round {{round}}": "已跳過回合 現在是第{{round}}個回合"
+
+# Global settings
+Change language: 更改語言
+"Error when changing language. Error: {{err}}": "更改語言時發生錯誤 原因: {{err}}"
+Changed language successfully: 成功更改語言
+Clear all data: 清除所有數據
+"Version: {{version}}": "版本: {{version}}"
+
+# Language names
+# For language other than English, include __both__ English and your language in translation
+# e.g. en -> English (英文)
+en: English (英文)
+zh: Chinese (中文)
+zh-tw: Chinese traditional (繁體中文)
+
+# Previous games
+You have not played any game yet.: 你未曾遊玩過遊戲
+Click here to start a new game: 按此以開始一局新的遊戲
+"Game on {{date}}": "於{{date}}的遊戲"
+"With {{players}}": "成員: {{players}}"
+Delete: 刪除
+Game ended: 遊戲結束
+"Current round: {{round}}": "現在的回合: {{round}}"
+"Time used: {{timeUsed}}": "已用的時間: {{timeUsed}}"
+"Total rounds: {{rounds}}": "合計回合: {{rounds}}"
