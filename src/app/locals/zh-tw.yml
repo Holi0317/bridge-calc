@@ -86,6 +86,7 @@ Change language: 更改語言
 "Error when changing language. Error: {{err}}": "更改語言時發生錯誤 原因: {{err}}"
 Changed language successfully: 成功更改語言
 Clear all data: 清除所有數據
+All data is cleared: 你的數據已被清除
 "Version: {{version}}": "版本: {{version}}"
 
 # Language names

@@ -29,7 +29,6 @@ export function prevGamesReducer(state = defaultState, action: PrevGamesActions)
 
     case ActionTypes.SAVE_GAME: {
       if (action.entry !== null) {
-        // FIXME Remove type casting here
         const {entry} = action
         const index = state.prevGames.findIndex(game => game.id === entry.id)
         if (index === -1) {

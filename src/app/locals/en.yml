@@ -86,6 +86,7 @@ Change language: Change language
 "Error when changing language. Error: {{err}}": "Error when changing language. Error: {{err}}"
 Changed language successfully: Changed language successfully
 Clear all data: Clear all data
+All data is cleared: All data is cleared
 "Version: {{version}}": "Version: {{version}}"
 
 # Language names
