@@ -51,18 +51,22 @@ export class SkipRoundsImpl extends React.Component {
         return
       }
 
-      const {skip} = this.props
+      const {remainingRounds, skip} = this.props
+      const isEndGame = remainingRounds <= n
       skip(n)
 
-      window.setTimeout(() => {
-        const {init, currentGame, currentRound, showToast, t} = this.props
-        init(currentGame)
+      if (!isEndGame) {
+        window.setTimeout(() => {
+          const {init, currentGame, currentRound, showToast, t} = this.props
+          init(currentGame)
 
-        const message = currentRound
-          ? t('Skipped round(s). You are now playing round {{round}}', {round: currentRound})
-          : t('Game has ended')
-        showToast(message)
-      }, 0)
+          if (currentRound !== null) {
+            const msg = t('Skipped round(s). You are now playing round {{round}}', {round: currentRound})
+            showToast(msg)
+          }
+
+        }, 0)
+      }
     }
   }
 }
