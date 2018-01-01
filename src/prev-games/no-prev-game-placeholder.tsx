@@ -4,14 +4,12 @@ import {Link} from 'react-router-dom'
 import {JokerIcon} from './joker-icon'
 import {ITranslateMixin} from '../types'
 import styles from './no-prev-game-placeholder.css'
-import {DevAddGame} from './dev-add-game'
 
 export function NoPrevGamePlaceholderImpl({t}: ITranslateMixin) {
   return <div className={styles.container}>
     <JokerIcon className={styles.jokerIcon} />
     <div>{t('You have not played any game yet.')}</div>
     <Link to="/entry" className={styles.startLink}>{t('Click here to start a new game')}</Link>
-    {process.env.NODE_ENV === 'development' ? <DevAddGame /> : null}
   </div>
 }
 
