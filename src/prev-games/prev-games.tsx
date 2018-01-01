@@ -16,6 +16,7 @@ import styles from './prev-games.css'
 import {reversedPrevGamesSelector} from './selectors/reversed-prev-games'
 
 const mapStateToProps = (state: IRootState) => ({
+  currentGame: state.currentGame,
   havePrevGame: havePrevGamesSelector(state),
   prevGames: reversedPrevGamesSelector(state)
 })
@@ -35,19 +36,29 @@ export class PrevGamesImpl extends React.Component {
   public props: PrevGamesProps
 
   public render() {
-    const {havePrevGame, prevGames, del} = this.props
+    const {havePrevGame, prevGames} = this.props
     if (havePrevGame) {
       return (
         <Container>
-          {prevGames.reverse().map((prevGame: PrevGameEntry, index: number) => (
+          {prevGames.map((prevGame: PrevGameEntry, index: number) => (
             <PrevGame key={`prev-game-${index}`} className={styles.prevGame} game={prevGame}
-                      requestDelete={() => del(index)} requestContinue={() => this.load(prevGame)}/>
+                      requestDelete={() => this.del(index)} requestContinue={() => this.load(prevGame)}/>
           ))}
         </Container>
       )
     }
 
     return <NoPrevGamePlaceholder/>
+  }
+
+  private del = (reversedIndex: number) => {
+    const {prevGames, del, currentGame, load} = this.props
+    const index = prevGames.length - reversedIndex - 1
+    const entry = prevGames[reversedIndex]
+    if (currentGame && currentGame.id === entry.id) {
+      load(null)
+    }
+    del(index)
   }
 
   private load(prevGame: PrevGameEntry) {
