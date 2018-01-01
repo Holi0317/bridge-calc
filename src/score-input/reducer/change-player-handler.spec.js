@@ -2,6 +2,7 @@ import {changePlayersHandler} from './change-players-handler'
 import {changePlayersAction} from '../actions/change-players'
 import {genMap, waitingBidState, waitingWinState, endedState} from '../../../test-fixtures/current-game-states'
 import * as lolex from 'lolex'
+import {GameStage} from '../game-stage'
 
 test('it should no-op when new player map is identical to original one', () => {
   const state = {
@@ -144,13 +145,6 @@ test('it should assign 0 mark for ended rounds of new player', () => {
 test('it should end game when given rounds is less than current round', () => {
   const clock = lolex.install()
 
-  const expected = {
-    ...endedState,
-    rounds: 1,
-    scores: genMap([0], [0], [0], [0]),
-    names: genMap('Mary', 'John', 'Henry', 'Joe'),
-    endTime: new Date()
-  }
   const s = [0, 0] // Short hand for score
   const state = {
     ...waitingBidState,
@@ -161,7 +155,9 @@ test('it should end game when given rounds is less than current round', () => {
   const newNames = genMap('Mary', 'John', 'Henry', 'Joe')
   const action = changePlayersAction(newNames, 'a', 1)
   const actual = changePlayersHandler(state, action)
-  expect(actual).toEqual(expected)
+
+  expect(actual.stage).toEqual(GameStage.ended)
+  expect(actual).toMatchSnapshot()
 
   clock.uninstall()
 })

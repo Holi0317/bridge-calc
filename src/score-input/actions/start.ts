@@ -6,7 +6,7 @@ export interface IStartAction {
   type: ActionTypes.START,
   rounds: number,
   playerNames: IPlayerMap<string>,
-  startTime: Date,
+  startTime: number,
   startingRound: number,
   id: string
 }
@@ -36,7 +36,7 @@ export function startAction(rounds: number, playerNames: string[], startingRound
     type: ActionTypes.START,
     rounds,
     playerNames: namesToMap(playerNames),
-    startTime: new Date(),
+    startTime: new Date().getTime(),
     startingRound,
     id: cuid()
   }

@@ -16,7 +16,7 @@ export const baseGameState = deepFreeze({
   stage: null,
   id: 'testing',
   rounds: 13,
-  startTime: new Date(0),
+  startTime: 0,
   names: genMap('John', 'Mary', 'Henry', 'Joe'),
   scores: genMap([], [], [], [])
 })
@@ -38,5 +38,5 @@ export const waitingWinState = deepFreeze({
 export const endedState = deepFreeze({
   ...baseGameState,
   stage: GameStage.ended,
-  endTime: new Date(0)
+  endTime: 0
 })

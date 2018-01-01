@@ -6,7 +6,7 @@ export interface IChangePlayersAction {
   newNames: IPlayerMap<string>,
   maker: string,
   rounds: number,
-  time: Date
+  time: number
 }
 
 /**
@@ -38,6 +38,6 @@ export function changePlayersAction(newNames: IPlayerMap<string>, maker: string,
     newNames,
     maker,
     rounds,
-    time: new Date()
+    time: new Date().getTime()
   }
 }

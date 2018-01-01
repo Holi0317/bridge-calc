@@ -15,7 +15,7 @@ afterEach(() => {
 test('it should return a skip action', () => {
   const expected = {
     type: ActionTypes.SKIP,
-    time: new Date(),
+    time: 0,
     times: 1
   }
   const actual = skipAction(1)
@@ -25,7 +25,7 @@ test('it should return a skip action', () => {
 test('it should return skip action with n rounds specified', () => {
   const expected = {
     type: ActionTypes.SKIP,
-    time: new Date(),
+    time: 0,
     times: 5
   }
   const actual = skipAction(5)

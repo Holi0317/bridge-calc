@@ -7,7 +7,7 @@ import {IRootState} from '../../types'
  */
 export const startTimeSelector = (state: IRootState): Date | null =>
   state.currentGame
-    ? state.currentGame.startTime
+    ? new Date(state.currentGame.startTime)
     : null
 
 /**
@@ -16,5 +16,5 @@ export const startTimeSelector = (state: IRootState): Date | null =>
  */
 export const endTimeSelector = (state: IRootState): Date | null =>
   (state.currentGame && state.currentGame.stage === GameStage.ended)
-    ? state.currentGame.endTime
+    ? new Date(state.currentGame.endTime)
     : null

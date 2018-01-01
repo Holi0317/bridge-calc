@@ -10,8 +10,8 @@ interface IBaseGameState {
   id: string
   /** Number of rounds for this game */
   rounds: number
-  /** The time that game has started */
-  startTime: Date
+  /** The time that game has started, in unix timestamp */
+  startTime: number
 
   /** Player name map */
   names: IPlayerMap<string>
@@ -43,8 +43,8 @@ export interface IWaitingWinState extends IBaseGameState {
 
 export interface IEndedState extends IBaseGameState {
   stage: typeof GameStage.ended
-  /** Time for the game to end */
-  endTime: Date
+  /** Time for the game to end, in unix timestamp */
+  endTime: number
 }
 
 export type GameState =

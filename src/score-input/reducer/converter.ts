@@ -23,7 +23,7 @@ export function toWaitingWinState(state: IWaitingBidState | IWaitingWinState): I
   return newState
 }
 
-export function toEndedState(state: IWaitingBidState | IWaitingWinState, endTime: Date): IEndedState {
+export function toEndedState(state: IWaitingBidState | IWaitingWinState, endTime: number): IEndedState {
   return {
     stage: GameStage.ended,
     endTime,

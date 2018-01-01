@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should end game when given rounds is less than current round 1`] = `
+Object {
+  "endTime": 0,
+  "id": "testing",
+  "names": Object {
+    "a": "Mary",
+    "b": "John",
+    "c": "Henry",
+    "d": "Joe",
+  },
+  "rounds": 1,
+  "scores": Object {
+    "a": Array [
+      0,
+    ],
+    "b": Array [
+      0,
+    ],
+    "c": Array [
+      0,
+    ],
+    "d": Array [
+      0,
+    ],
+  },
+  "stage": "ended",
+  "startTime": 0,
+}
+`;

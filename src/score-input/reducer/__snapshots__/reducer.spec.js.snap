@@ -30,7 +30,7 @@ Object {
     "3": Array [],
   },
   "stage": "waitingBid",
-  "startTime": 1970-01-01T00:00:00.000Z,
+  "startTime": 0,
 }
 `;
 
@@ -72,6 +72,6 @@ Object {
     ],
   },
   "stage": "waitingBid",
-  "startTime": 1970-01-01T00:00:00.000Z,
+  "startTime": 0,
 }
 `;

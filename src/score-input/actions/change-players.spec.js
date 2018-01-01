@@ -11,7 +11,7 @@ test('it should return change players action', () => {
     newNames,
     maker: 'a',
     rounds: 13,
-    time: new Date()
+    time: 0
   }
   const actual = changePlayersAction(newNames, 'a', 13)
   expect(actual).toEqual(expected)
