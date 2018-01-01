@@ -8,6 +8,7 @@ import {bindActionCreators, Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
 import {setImportOpenAction} from '../actions/set-import-open'
 import Dialog from 'material-ui/Dialog'
+import {ImportNamesContent} from './import-names-content'
 
 const mapStateToProps = (state: IRootState) => ({
   open: state.entry.importOpened
@@ -21,10 +22,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
 const stateType = returntypeof(mapStateToProps)
 const dispatchType = returntypeof(mapDispatchToProps)
 
-type EntryActionButtonsProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type ImportNamesDialogProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
 export class ImportNamesDialogImpl extends React.Component {
-  public props: EntryActionButtonsProps
+  public props: ImportNamesDialogProps
 
   public render() {
     const {open, t} = this.props
@@ -35,12 +36,15 @@ export class ImportNamesDialogImpl extends React.Component {
         onClick={this.close}
       />
     ]
+
     return <Dialog
-      title={t('Import names')}
+      title={t('Import names from previous games')}
       actions={actions}
       open={open}
       onRequestClose={this.close}
-    />
+    >
+      <ImportNamesContent />
+    </Dialog>
   }
 
   private close = () => {
