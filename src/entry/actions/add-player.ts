@@ -17,6 +17,6 @@ export function addPlayerAction(payload: string): IAddPlayerAction {
 /**
  * Add a new player with random name to entry options.
  */
-export function addRandomPlayer(): IAddPlayerAction {
+export function addRandomPlayerAction(): IAddPlayerAction {
   return addPlayerAction(randomName())
 }

@@ -20,7 +20,7 @@ export const bidStackInputSourceSelector = createSelector(
   currentRoundSelector,
   bidSelector,
   playerOrderSelector,
-  (common: StackInputSourceCommon, playerID: string[], currentRound: number, bidMap: IPlayerMap<number>, playerOrder: string[]): IPlayerMap<IDropdownSource<number>[]> => {
+  (common: StackInputSourceCommon, playerID: string[], currentRound: number, bidMap: IPlayerMap<number>, playerOrder: string[]): IPlayerMap<Array<IDropdownSource<number>>> => {
     if (common) {
       return common
     }

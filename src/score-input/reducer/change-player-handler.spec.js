@@ -1,6 +1,6 @@
 import {changePlayersHandler} from './change-players-handler'
 import {changePlayersAction} from '../actions/change-players'
-import {genMap, waitingBidState, waitingWinState, endedState} from '../../../test-fixtures/current-game-states'
+import {genMap, waitingBidState, waitingWinState} from '../../../test-fixtures/current-game-states'
 import * as lolex from 'lolex'
 import {GameStage} from '../game-stage'
 

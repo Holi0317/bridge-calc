@@ -7,12 +7,12 @@ import {returntypeof} from 'react-redux-typescript'
 import IconButton from 'material-ui/IconButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import FileDownload from 'material-ui/svg-icons/file/file-download'
-import {addRandomPlayer} from './actions/add-player'
+import {addRandomPlayerAction} from './actions/add-player'
 import {ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({addRandomPlayer}, dispatch)
+  bindActionCreators({addRandomPlayer: addRandomPlayerAction}, dispatch)
 
 const dispatchType = returntypeof(mapDispatchToProps)
 

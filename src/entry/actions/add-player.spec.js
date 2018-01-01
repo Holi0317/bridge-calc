@@ -1,4 +1,4 @@
-import {addPlayerAction, addRandomPlayer} from './add-player'
+import {addPlayerAction, addRandomPlayerAction} from './add-player'
 import {ActionTypes} from '../../action-types'
 
 test('it should return add player action', () => {
@@ -11,7 +11,7 @@ test('it should return add player action', () => {
 })
 
 test('addRandomPlayer should return add player action with random player name', () => {
-  const actual = addRandomPlayer()
+  const actual = addRandomPlayerAction()
   expect(actual.type).toEqual(ActionTypes.ADD_PLAYER)
   expect(typeof actual.payload).toEqual('string')
 })
