@@ -25,10 +25,13 @@ Information: 資訊
 Support/bug: 支援/回報Bug
 Input: 輸入
 
-# For entry view. The form need to be filled
+# For entry view
 Player Names: 玩家名稱
 Add player: 新增玩家
 Import names: 匯入名稱
+You have not played any game yet: 你未曾遊玩過遊戲
+Import names from previous games: 從以前的遊戲中匯入名稱
+Imported names successfully: 成功匯入名稱
 Options: 遊戲選項
 Start: 開始
 Player name: 玩家名稱

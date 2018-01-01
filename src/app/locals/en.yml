@@ -25,10 +25,13 @@ Information: Information
 Support/bug: Support/bug
 Input: Input
 
-# For entry view. The form need to be filled
+# For entry view
 Player Names: Player Names
 Add player: Add player
 Import names: Import names
+You have not played any game yet: You have not played any game yet
+Import names from previous games: Import names from previous games
+Imported names successfully: Imported names successfully
 Options: Options
 Start: Start
 Player name: Player name
