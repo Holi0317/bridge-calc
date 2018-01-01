@@ -2,14 +2,16 @@ import {EntryActions} from './actions'
 import {ActionTypes} from '../action-types'
 
 export interface IEntryState {
-  rounds: number,
-  startingRound: number,
-  playerNames: string[],
+  rounds: number
+  startingRound: number
+  playerNames: string[]
   optionsOpened: boolean
+  importOpened: boolean
 }
 
 const defaultState: IEntryState = {
   optionsOpened: false,
+  importOpened: false,
   playerNames: ['John', 'Mary', 'Henry', 'Joe'],
   rounds: 13,
   startingRound: 1
@@ -80,6 +82,11 @@ export function entryReducer(state: IEntryState = defaultState, action: EntryAct
     return playerNameAction(state, action.payload)
   case ActionTypes.RESET_ENTRY:
     return defaultState
+  case ActionTypes.SET_IMPORT_OPEN:
+    return {
+      ...state,
+      importOpened: action.payload
+    }
   default:
     return state
   }

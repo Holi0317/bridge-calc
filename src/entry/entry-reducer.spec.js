@@ -6,6 +6,7 @@ import {setStartingRoundAction} from './actions/set-starting-round'
 import {addPlayerAction} from './actions/add-player'
 import {setPlayerNamesAction} from './actions/set-player-names'
 import {resetAction} from './actions/reset'
+import {setImportOpenAction} from './actions/set-import-open'
 
 test('Default state', () => {
   const expected = {
@@ -178,6 +179,19 @@ test('Reset state should reset state', () => {
     ...defaultState
   }
   const action = resetAction()
+  const actual = reducer(state, action)
+  expect(actual).toEqual(expected)
+})
+
+test('Set import open should set state', () => {
+  const state = {
+    ...defaultState
+  }
+  const expected = {
+    ...defaultState,
+    importOpened: true
+  }
+  const action = setImportOpenAction(true)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })

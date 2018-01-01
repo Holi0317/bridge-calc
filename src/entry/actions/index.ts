@@ -4,6 +4,7 @@ import {ISetPlayerNamesAction} from './set-player-names'
 import {ISetRoundsAction} from './set-rounds'
 import {ISetStartingRoundAction} from './set-starting-round'
 import {IToggleOptionOptionAction} from './toggle-option-open'
+import {ISetImportOpenAction} from './set-import-open'
 
 export type EntryActions =
   | IAddPlayerAction
@@ -12,3 +13,4 @@ export type EntryActions =
   | ISetRoundsAction
   | ISetStartingRoundAction
   | IToggleOptionOptionAction
+  | ISetImportOpenAction

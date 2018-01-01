@@ -4,7 +4,8 @@ export const defaultState = deepFreeze({
   rounds: 13,
   startingRound: 1,
   playerNames: ['John', 'Mary', 'Henry', 'Joe'],
-  optionsOpened: false
+  optionsOpened: false,
+  importOpened: false
 })
 
 /**

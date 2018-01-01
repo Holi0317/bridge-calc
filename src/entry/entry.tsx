@@ -6,6 +6,7 @@ import {InitEntryState} from './init-entry-state'
 import {EntryActionButtons} from './entry-action-buttons'
 import {CollapsedEntryOptions} from './collapsed-entry-options'
 import {EntryStartButton} from './entry-start-button'
+import {ImportNamesDialog} from './import-names'
 import {ITranslateMixin} from '../types'
 
 type EntryProps = ITranslateMixin
@@ -21,6 +22,7 @@ export function EntryImpl({t}: EntryProps) {
       <CollapsedEntryOptions />
 
       <EntryStartButton />
+      <ImportNamesDialog />
       <InitEntryState />
     </Container>
   )

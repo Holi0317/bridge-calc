@@ -8,24 +8,27 @@ import IconButton from 'material-ui/IconButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import FileDownload from 'material-ui/svg-icons/file/file-download'
 import {addRandomPlayerAction} from './actions/add-player'
+import {setImportOpenAction} from './actions/set-import-open'
 import {ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({addRandomPlayer: addRandomPlayerAction}, dispatch)
+  bindActionCreators({
+    addRandomPlayer: addRandomPlayerAction,
+    setImportOpen: setImportOpenAction
+  }, dispatch)
 
 const dispatchType = returntypeof(mapDispatchToProps)
 
 type EntryActionButtonsProps = typeof dispatchType & ITranslateMixin
 
-export function EntryActionButtonsImpl({addRandomPlayer, t}: EntryActionButtonsProps) {
+export function EntryActionButtonsImpl({addRandomPlayer, setImportOpen, t}: EntryActionButtonsProps) {
   return (
     <div className={style.actionButtonContainer}>
       <IconButton tooltip={t('Add player')} onClick={addRandomPlayer}>
         <ContentAdd width="28px" height="28px" />
       </IconButton>
-      {/* TODO Implement import names click handler */}
-      <IconButton tooltip={t('Import names')}>
+      <IconButton tooltip={t('Import names')} onClick={() => setImportOpen(true)}>
         <FileDownload width="28px" height="28px" />
       </IconButton>
     </div>
