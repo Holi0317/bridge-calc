@@ -1,7 +1,9 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
+import {connect} from 'react-redux'
 import {Container, Row, Col} from 'react-grid-system'
+import {returntypeof} from 'react-redux-typescript'
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow'
 import AvFiberNew from 'material-ui/svg-icons/av/fiber-new'
 import AvSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
@@ -9,17 +11,28 @@ import ActionSettings from 'material-ui/svg-icons/action/settings'
 import ActionInfo from 'material-ui/svg-icons/action/info'
 import ActionBugReport from 'material-ui/svg-icons/action/bug-report'
 import {Tile} from './tile'
-import {ITranslateMixin} from '../types'
+import {showContinueSelector} from './show-continue-selector'
+import {IRootState, ITranslateMixin} from '../types'
 
-export function MenuImpl({t}: ITranslateMixin) {
+const mapStateToProps = (state: IRootState) => ({
+  showContinue: showContinueSelector(state)
+})
+
+const stateType = returntypeof(mapStateToProps)
+
+type MenuProps = typeof stateType & ITranslateMixin
+
+export function MenuImpl({showContinue, t}: MenuProps) {
   return (
     <Container>
-      {/* TODO hide his row if there is no game to continue */}
-      <Row>
-        <Col xs={12}>
-          <Tile icon={<AvPlayArrow />} title={t('Continue')} />
-        </Col>
-      </Row>
+      {showContinue
+        ? <Row>
+          <Col xs={12}>
+            <Tile icon={<AvPlayArrow />} title={t('Continue')} to="/score-input" />
+          </Col>
+        </Row>
+        : null
+      }
 
       <Row>
         <Col md={6} xs={12}>
@@ -46,4 +59,7 @@ export function MenuImpl({t}: ITranslateMixin) {
   )
 }
 
-export const Menu = translate()(MenuImpl)
+export const Menu = flowRight(
+  translate(),
+  connect(mapStateToProps)
+)(MenuImpl)
