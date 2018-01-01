@@ -24,12 +24,9 @@ function to(history: History, loc: string) {
 
 type AppProps = RouteComponentProps<any>
 
-/**
- * @param location {Location} - Location object injected by react-router
- * @param history {History} - History object injected by react-router
- */
 export function ShellImpl({location, history}: AppProps) {
-  const helpBtn = <IconButton href="https://github.com/Holi0317/bridge-calc/blob/master/docs/en.md" target="_blank">
+  const helpBtn = <IconButton aria-label="Help" rel="noopener" target="_blank"
+                              href="https://github.com/Holi0317/bridge-calc/blob/master/docs/en.md">
     <ActionHelp width="24px" height="24px" />
   </IconButton>
   const backFn = to(history, '/')
@@ -43,7 +40,9 @@ export function ShellImpl({location, history}: AppProps) {
         onLeftIconButtonClick={backFn}
         title={<Titles />}
       />
-      <Routes location={location} />
+      <main>
+        <Routes location={location} />
+      </main>
       <ToastSingleton />
       <SWReg />
     </div>

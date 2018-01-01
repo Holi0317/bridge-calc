@@ -23,7 +23,7 @@ export interface ITileLinkProps {
 
 export function TileLink({to, external, target, children}: ITileLinkProps) {
   if (external) {
-    return <a href={to} target={target} className={style.link}>
+    return <a href={to} target={target} className={style.link} rel="noopener">
       {children}
     </a>
   }
