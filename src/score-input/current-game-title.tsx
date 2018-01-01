@@ -1,4 +1,5 @@
 import * as React from 'react'
+import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {gameTitleSelector} from './selectors/game-title'
@@ -17,4 +18,7 @@ export function CurrentGameTitleImpl({title}: CurrentGameTitleProps) {
   return <span>{title}</span>
 }
 
-export const CurrentGameTitle = translate()(connect(mapStateToProps)(CurrentGameTitleImpl))
+export const CurrentGameTitle = flowRight(
+  translate(),
+  connect(mapStateToProps)
+)(CurrentGameTitleImpl)
