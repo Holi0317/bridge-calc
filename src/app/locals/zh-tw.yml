@@ -6,6 +6,11 @@ Entry: 開始遊戲
 Scoreboard: 計分板
 Game over: 遊戲終了
 Round {{currentRound}} of {{rounds}}: "第{{rounds}} 回合之 {{currentRound}}"
+Not found: 找不到網頁
+
+# 404 Page
+Page not found!: 找不到網頁
+Click here to return to main menu: 按此以回到主目錄
 
 # Error message
 Ouch! An error has occurred.: 不好了! 發生了未知的錯誤

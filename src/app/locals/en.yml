@@ -6,6 +6,11 @@ Entry: Entry
 Scoreboard: Scoreboard
 Game over: Game over
 Round {{currentRound}} of {{rounds}}: Round {{currentRound}} of {{rounds}}
+Not found: Not found
+
+# 404 Page
+Page not found!: Page not found!
+Click here to return to main menu: Click here to return to main menu
 
 # Error message
 Ouch! An error has occurred.: Ouch! An error has occurred.
