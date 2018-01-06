@@ -7,7 +7,7 @@ export interface IAddGameAction {
 }
 
 /**
- * Push a prevGame entry to the head of prevGame array in state.
+ * Push a prevGame entry to the tail of prevGame array in state.
  * @param payload - The prevGame entry
  */
 export function addGameAction(payload: PrevGameEntry): IAddGameAction {

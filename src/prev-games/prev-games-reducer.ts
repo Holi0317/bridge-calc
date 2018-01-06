@@ -15,7 +15,7 @@ export function prevGamesReducer(state = defaultState, action: PrevGamesActions)
     case ActionTypes.ADD_GAME:
       return {
         ...state,
-        prevGames: [action.payload, ...state.prevGames]
+        prevGames: [...state.prevGames, action.payload]
       }
 
     case ActionTypes.DELETE_GAME: {

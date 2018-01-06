@@ -18,7 +18,7 @@ test('Default state', () => {
 
 test('add game action should prepend game to the head of prev games array', () => {
   const expected = {
-    prevGames: ['d', 'a', 'b', 'c']
+    prevGames: ['a', 'b', 'c', 'd']
   }
   const state = {
     prevGames: ['a', 'b', 'c']
