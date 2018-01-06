@@ -1,4 +1,4 @@
-import * as cuid from 'cuid'
+import cuid from 'cuid'
 import {IPlayerMap} from '../../types'
 import {ActionTypes} from '../../action-types'
 
