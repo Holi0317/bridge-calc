@@ -31,7 +31,8 @@ class SWRegImpl extends React.Component {
 
   private async install() {
     try {
-      const registration = await navigator.serviceWorker.register('/sw.js')
+      const scriptURL = (document.baseURI || '/') + 'sw.js'
+      const registration = await navigator.serviceWorker.register(scriptURL)
       if (!registration) {
         // WTF no registration????
         return
