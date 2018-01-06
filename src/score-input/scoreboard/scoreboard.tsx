@@ -1,4 +1,5 @@
 import * as React from 'react'
+import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Container} from 'react-grid-system'
@@ -73,4 +74,7 @@ export function ScoreboardImpl({t, names, scores, endedRounds, totalScores, rank
   )
 }
 
-export const Scoreboard = translate()(connect(mapStateToProps)(ScoreboardImpl))
+export const Scoreboard = flowRight(
+  translate(),
+  connect(mapStateToProps)
+)(ScoreboardImpl)
