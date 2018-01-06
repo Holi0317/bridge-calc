@@ -26,4 +26,4 @@ export class InitEntryStateImpl extends React.PureComponent {
   }
 }
 
-export const InitEntryState = connect(null, mapDispatchToProps)(InitEntryStateImpl as any)
+export const InitEntryState = connect(null, mapDispatchToProps)(InitEntryStateImpl)

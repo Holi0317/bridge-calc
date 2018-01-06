@@ -1,4 +1,5 @@
 import * as React from 'react'
+import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {returntypeof} from 'react-redux-typescript'
@@ -59,4 +60,7 @@ export function MiniScoreboardImpl({names, prevScores, totalScores, ranks, t}: M
   )
 }
 
-export const MiniScoreboard = translate()(connect(mapStateToProps)(MiniScoreboardImpl as any))
+export const MiniScoreboard = flowRight(
+  translate(),
+  connect(mapStateToProps)
+)(MiniScoreboardImpl)

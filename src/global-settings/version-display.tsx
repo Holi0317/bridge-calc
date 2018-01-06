@@ -14,4 +14,4 @@ export function VersionDisplayImpl({t}: ITranslateMixin) {
   )
 }
 
-export const VersionDisplay = translate()(VersionDisplayImpl as any)
+export const VersionDisplay = translate()(VersionDisplayImpl)
