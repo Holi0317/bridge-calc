@@ -8,8 +8,7 @@ const htmlSettings = {
   minify: (ENV === 'production') ? {
     removeComments: true,
     collapseWhitespace: true
-  } : undefined,
-  baseUrl: '/'
+  } : undefined
 }
 
 module.exports = {
