@@ -11,6 +11,7 @@ import {i18n} from './app/i18n'
 import {store, persistor} from './app/redux-store'
 import {muiTheme} from './app/mui-theme'
 import {ErrorBoundary} from './error-boundary'
+import {basenameProcess} from './utils/basename-process'
 
 function Root() {
   return (
@@ -18,7 +19,7 @@ function Root() {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <I18nextProvider i18n={i18n}>
-            <BrowserRouter>
+            <BrowserRouter basename={basenameProcess(document.baseURI || '/')}>
               <MuiThemeProvider muiTheme={muiTheme}>
                 <ErrorBoundary>
                   <Shell />
