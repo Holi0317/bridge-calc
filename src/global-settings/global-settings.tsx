@@ -18,4 +18,4 @@ export function GlobalSettingsImpl({t}: GlobalSettingsProps) {
   )
 }
 
-export const GlobalSettings = translate()(GlobalSettingsImpl as any)
+export const GlobalSettings = translate()(GlobalSettingsImpl)

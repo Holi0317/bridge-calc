@@ -1,4 +1,5 @@
 import * as React from 'react'
+import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators, Dispatch} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
@@ -45,4 +46,7 @@ export function EntryOptionsImpl({t, sources, rounds, startingRound, setRounds, 
   )
 }
 
-export const EntryOptions = translate()(connect(mapStateToProps, mapDispatchToProps)(EntryOptionsImpl as any))
+export const EntryOptions = flowRight(
+  translate(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(EntryOptionsImpl)

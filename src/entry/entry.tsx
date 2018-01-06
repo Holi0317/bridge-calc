@@ -28,4 +28,4 @@ export function EntryImpl({t}: EntryProps) {
   )
 }
 
-export const Entry = translate()(EntryImpl as any)
+export const Entry = translate()(EntryImpl)
