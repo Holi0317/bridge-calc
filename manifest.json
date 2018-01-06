@@ -28,6 +28,7 @@
     }],
   "start_url": "/",
   "display": "standalone",
+  "orientation": "natural",
   "background_color": "#EC407A",
   "theme_color": "#AD1457"
 }
