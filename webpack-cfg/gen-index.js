@@ -26,8 +26,15 @@ const htmlSettings = {
 module.exports = {
   plugins: [
     new HtmlWebpackPlugin(htmlSettings),
+
+    // Tl;dr: prefetch has lower priority than preload
     new PreloadWebpackPlugin({
-      rel: 'prefetch' // Prefetch resources likely to be used for future navigations
+      rel: 'preload',
+      include: ['main', 'vendor']
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'prefetch',
+      include: 'asyncChunks'
     })
   ]
 }
