@@ -1,6 +1,17 @@
 const WebpackMd5Hash = require('webpack-md5-hash')
 const webpack = require('webpack')
 const {ENV} = require('./paths')
+const pkg = require('../package.json')
+
+const commitHash = require('child_process')
+  .execSync('git rev-parse --short HEAD')
+  .toString()
+
+const definePlugin = new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(ENV),
+  VERSION: JSON.stringify(pkg.version),
+  HASH: JSON.stringify(commitHash)
+})
 
 const productionEnv = {
   output: {
@@ -19,16 +30,7 @@ const productionEnv = {
       }
     }),
 
-    new webpack.DefinePlugin({
-      '__DEV__': false,
-      'ENV': JSON.stringify(ENV),
-      'HMR': false,
-      'process.env': {
-        'ENV': JSON.stringify(ENV),
-        'NODE_ENV': JSON.stringify(ENV),
-        'HMR': false
-      }
-    })
+    definePlugin
   ]
 }
 
@@ -53,16 +55,7 @@ const developmentEnv = {
     }
   },
   plugins: [
-    new webpack.DefinePlugin({
-      '__DEV__': true,
-      'ENV': JSON.stringify(ENV),
-      'HMR': false,
-      'process.env': {
-        'ENV': JSON.stringify(ENV),
-        'NODE_ENV': JSON.stringify(ENV),
-        'HMR': false
-      }
-    })
+    definePlugin
   ]
 }
 

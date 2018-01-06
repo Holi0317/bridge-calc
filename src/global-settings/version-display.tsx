@@ -2,13 +2,14 @@ import * as React from 'react'
 import {translate} from 'react-i18next'
 import {ITranslateMixin} from '../types'
 
-// This variable is injected by webpack. I'm just lazy
+// Variables is injected by webpack
 declare const VERSION: string
+declare const HASH: string
 
 export function VersionDisplayImpl({t}: ITranslateMixin) {
   return (
     <div>
-      {t('Version: {{version}}', {version: VERSION})}
+      {t('Version: {{version}}', {version: `${VERSION}-${HASH}`})}
     </div>
   )
 }
