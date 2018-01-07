@@ -1,0 +1,296 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should convert bid stage to waiting bid 1`] = `
+Object {
+  "bid": Object {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+  },
+  "currentPlayerOrder": Array [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+  ],
+  "currentRound": 1,
+  "id": "5",
+  "names": Object {
+    "0": "Rachel",
+    "1": "Ruth",
+    "2": "Helen",
+    "3": "Walter",
+    "4": "Patience",
+  },
+  "rounds": 6,
+  "scores": Object {
+    "0": Array [],
+    "1": Array [],
+    "2": Array [],
+    "3": Array [],
+    "4": Array [],
+  },
+  "stage": "waitingBid",
+  "startTime": 0,
+}
+`;
+
+exports[`it should convert ended stage 1`] = `
+Object {
+  "endTime": 0,
+  "id": "32",
+  "names": Object {
+    "28": "Christopher",
+    "29": "Rachel",
+    "30": "Mark",
+    "31": "Christopher",
+  },
+  "rounds": 2,
+  "scores": Object {
+    "28": Array [
+      11,
+      14,
+    ],
+    "29": Array [
+      -1,
+      -1,
+    ],
+    "30": Array [
+      -1,
+      10,
+    ],
+    "31": Array [
+      -1,
+      10,
+    ],
+  },
+  "stage": "ended",
+  "startTime": 0,
+}
+`;
+
+exports[`it should convert input win stage to waiting win 1`] = `
+Object {
+  "bid": Object {
+    "6": 1,
+    "7": 1,
+    "8": 0,
+    "9": 0,
+  },
+  "currentPlayerOrder": Array [
+    "6",
+    "7",
+    "8",
+    "9",
+  ],
+  "currentRound": 1,
+  "id": "10",
+  "names": Object {
+    "6": "Frances",
+    "7": "John",
+    "8": "Patience",
+    "9": "Stephen",
+  },
+  "rounds": 13,
+  "scores": Object {
+    "6": Array [],
+    "7": Array [],
+    "8": Array [],
+    "9": Array [],
+  },
+  "stage": "waitingWin",
+  "startTime": 0,
+  "win": Object {
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+  },
+}
+`;
+
+exports[`it should convert round 5 1`] = `
+Object {
+  "bid": Object {
+    "22": 3,
+    "23": 2,
+    "24": 1,
+    "25": 0,
+    "26": 0,
+  },
+  "currentPlayerOrder": Array [
+    "26",
+    "22",
+    "23",
+    "24",
+    "25",
+  ],
+  "currentRound": 5,
+  "id": "27",
+  "names": Object {
+    "22": "Rachel",
+    "23": "Ruth",
+    "24": "Helen",
+    "25": "Walter",
+    "26": "Patience",
+  },
+  "rounds": 6,
+  "scores": Object {
+    "22": Array [
+      11,
+      14,
+      19,
+      -1,
+    ],
+    "23": Array [
+      -1,
+      -4,
+      -4,
+      14,
+    ],
+    "24": Array [
+      10,
+      -4,
+      10,
+      10,
+    ],
+    "25": Array [
+      10,
+      -4,
+      10,
+      10,
+    ],
+    "26": Array [
+      10,
+      -4,
+      10,
+      10,
+    ],
+  },
+  "stage": "waitingWin",
+  "startTime": 0,
+  "win": Object {
+    "22": 0,
+    "23": 0,
+    "24": 0,
+    "25": 0,
+    "26": 0,
+  },
+}
+`;
+
+exports[`it should convert waiting stage to next round 1`] = `
+Object {
+  "bid": Object {
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+  },
+  "currentPlayerOrder": Array [
+    "11",
+    "12",
+    "13",
+    "14",
+  ],
+  "currentRound": 5,
+  "id": "15",
+  "names": Object {
+    "11": "Christopher",
+    "12": "Rachel",
+    "13": "Mark",
+    "14": "Christopher",
+  },
+  "rounds": 13,
+  "scores": Object {
+    "11": Array [
+      11,
+      -1,
+      -4,
+      -1,
+    ],
+    "12": Array [
+      -1,
+      -1,
+      -4,
+      -1,
+    ],
+    "13": Array [
+      10,
+      -1,
+      -4,
+      10,
+    ],
+    "14": Array [
+      10,
+      10,
+      -9,
+      10,
+    ],
+  },
+  "stage": "waitingBid",
+  "startTime": 0,
+}
+`;
+
+exports[`it should end game if waiting stage on last round 1`] = `
+Object {
+  "endTime": 0,
+  "id": "21",
+  "names": Object {
+    "16": "Rachel",
+    "17": "Ruth",
+    "18": "Helen",
+    "19": "Walter",
+    "20": "Patience",
+  },
+  "rounds": 6,
+  "scores": Object {
+    "16": Array [
+      11,
+      14,
+      19,
+      -1,
+      19,
+      -16,
+    ],
+    "17": Array [
+      -1,
+      -4,
+      -4,
+      14,
+      14,
+      -9,
+    ],
+    "18": Array [
+      10,
+      -4,
+      10,
+      10,
+      -1,
+      -4,
+    ],
+    "19": Array [
+      10,
+      -4,
+      10,
+      10,
+      10,
+      10,
+    ],
+    "20": Array [
+      10,
+      -4,
+      10,
+      10,
+      10,
+      10,
+    ],
+  },
+  "stage": "ended",
+  "startTime": 0,
+}
+`;

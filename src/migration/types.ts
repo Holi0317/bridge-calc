@@ -5,11 +5,11 @@ export interface IOldGameData {
   /**
    * Current round of the game
    */
-  currentRound: number
+  currentRound: number | null
   /**
    * The index of maker of this round. Points to the players array.
    */
-  maker: number
+  maker: number | null
   /**
    * Array of players in the game
    */
@@ -17,7 +17,7 @@ export interface IOldGameData {
   /**
    * Current stage of the game
    */
-  state: IOldState
+  state: OldState
   /**
    * Total number of rounds of the game
    */
@@ -31,11 +31,11 @@ export interface IOldPlayers {
   /**
    * Bid for the current round.
    */
-  bid: number
+  bid: string | null
   /**
    * Win for the current round.
    */
-  win: number
+  win: string | null
   /**
    * Score of each round.
    * Index of the array represent the round number.
@@ -51,7 +51,7 @@ export interface IOldPlayers {
 /**
  * The enum for state property under IOldGameData
  */
-export enum IOldState {
+export enum OldState {
   /**
    * No info is filled in. Game is not yet started.
    */
