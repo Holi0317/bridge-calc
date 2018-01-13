@@ -87,7 +87,7 @@ describe('isWaitingBidState', () => {
 
   test('it should fail for waitingWinState', () => {
     const state = waitingWinState
-    const expected = true
+    const expected = false
     const actual = isWaitingBidState(state)
     expect(actual).toEqual(expected)
   })
@@ -251,6 +251,21 @@ describe('isWaitingWinState', () => {
     expect(actual).toEqual(expected)
   })
 
+  test('it should fail if key of IPlayerMap is not string', () => {
+    const state = {
+      ...waitingWinState,
+      bid: {
+        33: 0,
+        42: 0,
+        38: 0,
+        68: 0
+      }
+    }
+    const expected = false
+    const actual = isWaitingWinState(state)
+    expect(actual).toEqual(expected)
+  })
+
   test('it should fail for inconsistent player IDs in fields', () => {
     const state = {
       ...waitingWinState,
@@ -330,6 +345,21 @@ describe('isEndedState', () => {
     const state = {
       ...endedState,
       scores: genMap(['10'], ['-1'], ['11'], ['10'])
+    }
+    const expected = false
+    const actual = isEndedState(state)
+    expect(actual).toEqual(expected)
+  })
+
+  test('it should fail if key of IPlayerMap is not string', () => {
+    const state = {
+      ...endedState,
+      names: {
+        33: 'John',
+        42: 'Helium',
+        38: 'Lithium',
+        68: 'Potassium'
+      }
     }
     const expected = false
     const actual = isEndedState(state)
