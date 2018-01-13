@@ -1,3 +1,5 @@
+import {isArrayEqual} from './is-array-equal'
+
 /**
  * Check if given object only contains given keys.
  *
@@ -18,5 +20,5 @@ export function whitelistKeys(obj: any, keys: string[]): boolean {
 
   actualKeys.sort()
   expectedKeys.sort()
-  return actualKeys.every((el, index) => el === expectedKeys[index])
+  return isArrayEqual(actualKeys, expectedKeys)
 }
