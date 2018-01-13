@@ -5,5 +5,7 @@
  * @param error - Error object to be tested
  */
 export function isOk(error: any): boolean {
-  return JSON.stringify(error) === '{}'
+  const cloned = {...error}
+  Object.entries(cloned).forEach(([key, value]) => (value == null && delete cloned[key]))
+  return Object.keys(cloned).length === 0
 }
