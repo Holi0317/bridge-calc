@@ -24,7 +24,7 @@
     "build": "npm run build:prod",
     "prebuild:prod": "npm run clean",
     "build:prod": "cross-env NODE_ENV=production npm run webpack -- --progress --profile",
-    "postbuild:prod": "cp dist/index.html dist/404.html",
+    "postbuild:prod": "cp dist/index.html dist/404.html && cp dist/sw.js dist/service-worker.js",
     "build-splash-css": "postcss splash.css --no-map -u cssnano postcss-cssnext",
     "start": "npm run server:dev",
     "server": "npm run server:dev",
