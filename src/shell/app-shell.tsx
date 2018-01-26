@@ -9,6 +9,7 @@ import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import {ToastSingleton} from '../toast-singleton'
 import {Titles} from './titles'
 import {SWReg} from '../sw-reg'
+import {Migration} from '../migration/migration'
 import {Routes} from './routes'
 
 /**
@@ -43,6 +44,7 @@ export function ShellImpl({location, history}: AppProps) {
       <main>
         <Routes location={location} />
       </main>
+      <Migration />
       <ToastSingleton />
       <SWReg />
     </div>
