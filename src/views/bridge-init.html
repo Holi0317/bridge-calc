@@ -1,0 +1,391 @@
+<html><head><meta charset="UTF-8"><link rel="import" href="../bridge-shell.html"></head><body><div hidden="" by-vulcanize=""><dom-module id="iron-flex" assetpath="../../bower_components/iron-flex-layout/"><template><style>.layout.horizontal,
+      .layout.vertical {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+      }
+
+      .layout.inline {
+        display: -ms-inline-flexbox;
+        display: -webkit-inline-flex;
+        display: inline-flex;
+      }
+
+      .layout.horizontal {
+        -ms-flex-direction: row;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+      }
+
+      .layout.vertical {
+        -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+      }
+
+      .layout.wrap {
+        -ms-flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+      }
+
+      .layout.center,
+      .layout.center-center {
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .layout.center-justified,
+      .layout.center-center {
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+      }
+
+      .flex {
+        -ms-flex: 1 1 0.000000001px;
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-flex-basis: 0.000000001px;
+        flex-basis: 0.000000001px;
+      }
+
+      .flex-auto {
+        -ms-flex: 1 1 auto;
+        -webkit-flex: 1 1 auto;
+        flex: 1 1 auto;
+      }
+
+      .flex-none {
+        -ms-flex: none;
+        -webkit-flex: none;
+        flex: none;
+      }</style></template></dom-module><dom-module id="iron-flex-reverse" assetpath="../../bower_components/iron-flex-layout/"><template><style>.layout.horizontal-reverse,
+      .layout.vertical-reverse {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+      }
+
+      .layout.horizontal-reverse {
+        -ms-flex-direction: row-reverse;
+        -webkit-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+      }
+
+      .layout.vertical-reverse {
+        -ms-flex-direction: column-reverse;
+        -webkit-flex-direction: column-reverse;
+        flex-direction: column-reverse;
+      }
+
+      .layout.wrap-reverse {
+        -ms-flex-wrap: wrap-reverse;
+        -webkit-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+      }</style></template></dom-module><dom-module id="iron-flex-alignment" assetpath="../../bower_components/iron-flex-layout/"><template><style>/**
+       * Alignment in cross axis.
+       */
+      .layout.start {
+        -ms-flex-align: start;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+      }
+
+      .layout.center,
+      .layout.center-center {
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .layout.end {
+        -ms-flex-align: end;
+        -webkit-align-items: flex-end;
+        align-items: flex-end;
+      }
+
+      .layout.baseline {
+        -ms-flex-align: baseline;
+        -webkit-align-items: baseline;
+        align-items: baseline;
+      }
+
+      /**
+       * Alignment in main axis.
+       */
+      .layout.start-justified {
+        -ms-flex-pack: start;
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+      }
+
+      .layout.center-justified,
+      .layout.center-center {
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+      }
+
+      .layout.end-justified {
+        -ms-flex-pack: end;
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+      }
+
+      .layout.around-justified {
+        -ms-flex-pack: distribute;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+      }
+
+      .layout.justified {
+        -ms-flex-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+      }
+
+      /**
+       * Self alignment.
+       */
+      .self-start {
+        -ms-align-self: flex-start;
+        -webkit-align-self: flex-start;
+        align-self: flex-start;
+      }
+
+      .self-center {
+        -ms-align-self: center;
+        -webkit-align-self: center;
+        align-self: center;
+      }
+
+      .self-end {
+        -ms-align-self: flex-end;
+        -webkit-align-self: flex-end;
+        align-self: flex-end;
+      }
+
+      .self-stretch {
+        -ms-align-self: stretch;
+        -webkit-align-self: stretch;
+        align-self: stretch;
+      }
+
+      .self-baseline {
+        -ms-align-self: baseline;
+        -webkit-align-self: baseline;
+        align-self: baseline;
+      };
+
+      /**
+       * multi-line alignment in main axis.
+       */
+      .layout.start-aligned {
+        -ms-flex-line-pack: start;  /* IE10 */
+        -ms-align-content: flex-start;
+        -webkit-align-content: flex-start;
+        align-content: flex-start;
+      }
+
+      .layout.end-aligned {
+        -ms-flex-line-pack: end;  /* IE10 */
+        -ms-align-content: flex-end;
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+      }
+
+      .layout.center-aligned {
+        -ms-flex-line-pack: center;  /* IE10 */
+        -ms-align-content: center;
+        -webkit-align-content: center;
+        align-content: center;
+      }
+
+      .layout.between-aligned {
+        -ms-flex-line-pack: justify;  /* IE10 */
+        -ms-align-content: space-between;
+        -webkit-align-content: space-between;
+        align-content: space-between;
+      }
+
+      .layout.around-aligned {
+        -ms-flex-line-pack: distribute;  /* IE10 */
+        -ms-align-content: space-around;
+        -webkit-align-content: space-around;
+        align-content: space-around;
+      }</style></template></dom-module><dom-module id="iron-flex-factors" assetpath="../../bower_components/iron-flex-layout/"><template><style>.flex,
+      .flex-1 {
+        -ms-flex: 1 1 0.000000001px;
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-flex-basis: 0.000000001px;
+        flex-basis: 0.000000001px;
+      }
+
+      .flex-2 {
+        -ms-flex: 2;
+        -webkit-flex: 2;
+        flex: 2;
+      }
+
+      .flex-3 {
+        -ms-flex: 3;
+        -webkit-flex: 3;
+        flex: 3;
+      }
+
+      .flex-4 {
+        -ms-flex: 4;
+        -webkit-flex: 4;
+        flex: 4;
+      }
+
+      .flex-5 {
+        -ms-flex: 5;
+        -webkit-flex: 5;
+        flex: 5;
+      }
+
+      .flex-6 {
+        -ms-flex: 6;
+        -webkit-flex: 6;
+        flex: 6;
+      }
+
+      .flex-7 {
+        -ms-flex: 7;
+        -webkit-flex: 7;
+        flex: 7;
+      }
+
+      .flex-8 {
+        -ms-flex: 8;
+        -webkit-flex: 8;
+        flex: 8;
+      }
+
+      .flex-9 {
+        -ms-flex: 9;
+        -webkit-flex: 9;
+        flex: 9;
+      }
+
+      .flex-10 {
+        -ms-flex: 10;
+        -webkit-flex: 10;
+        flex: 10;
+      }
+
+      .flex-11 {
+        -ms-flex: 11;
+        -webkit-flex: 11;
+        flex: 11;
+      }
+
+      .flex-12 {
+        -ms-flex: 12;
+        -webkit-flex: 12;
+        flex: 12;
+      }</style></template></dom-module><dom-module id="iron-positioning" assetpath="../../bower_components/iron-flex-layout/"><template><style>.block {
+        display: block;
+      }
+
+      /* IE 10 support for HTML5 hidden attr */
+      [hidden] {
+        display: none !important;
+      }
+
+      .invisible {
+        visibility: hidden !important;
+      }
+
+      .relative {
+        position: relative;
+      }
+
+      .fit {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      body.fullbleed {
+        margin: 0;
+        height: 100vh;
+      }
+
+      .scroll {
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+      }
+
+      /* fixed position */
+      .fixed-bottom,
+      .fixed-left,
+      .fixed-right,
+      .fixed-top {
+        position: fixed;
+      }
+
+      .fixed-top {
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .fixed-right {
+        top: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .fixed-bottom {
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      .fixed-left {
+        top: 0;
+        bottom: 0;
+        left: 0;
+      }</style></template></dom-module><dom-module is="bridge-input-player"><template><style>:host {
+        display: block;
+      }</style><style is="custom-style" include="iron-flex iron-flex-factors iron-flex-alignment"></style><template is="dom-repeat" items="{{value}}"><div class="layout horizontal warp center"><paper-input class="flex-5" label="Player [[_dispIndex(index)]] name" value="{{item}}"></paper-input><paper-icon-button icon="delete" alt="Delete" index="[[index]]" on-click="_rm"></paper-icon-button></div></template><paper-icon-button icon="add" alt="Add player" id="add"></paper-icon-button></template><script>Polymer({is:"bridge-input-player",behaviours:[Polymer.IronFormElementBehavior],properties:{name:{type:String,readOnly:!0,value:"bridge-input-player"},value:{type:Array,notify:!0,value:function(){return[Bridge.randomName(),Bridge.randomName(),Bridge.randomName(),Bridge.randomName()]}}},listeners:{"add.click":"_mkPlayer"},_dispIndex:function(e){return e+1},_rm:function(e){this.splice("value",e.target.index,1)},_mkPlayer:function(){this.push("value",Bridge.randomName())}});</script></dom-module></div><dom-module id="bridge-init"><style>:host {
+      display: block;
+      padding: 0 10px;
+    }
+
+    paper-material {
+      background: white;
+      box-sizing: border-box;
+      margin: 8px;
+      padding: 16px;
+      border-radius: 2px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    #start {
+      background: var(--paper-green-500);
+      color: white;
+    }
+
+    #redirect {
+      display: none;
+    }
+
+    paper-button [dialog-dismiss] {
+      color: var(--paper-red-500);
+    }
+
+    paper-button [dialog-confirm] {
+      color: var(--paper-green-500);
+    }</style><template><div class="container"><h1>New Game</h1></div><div class="container"><paper-material><bridge-input-player value="{{playerNames}}"></bridge-input-player></paper-material></div><div class="container"><paper-material><paper-input label="Number of cards" value="{{numberOfCard}}" type="number"></paper-input></paper-material></div><div class="container"><paper-material><h3>Game Informations</h3><p>Number of players: [[playerNames.length]]</p><p>Rounds: [[_countRound(playerNames.length, numberOfCard)]]</p><paper-button raised="" id="start">Start</paper-button></paper-material></div><paper-toast fit-into="[[headerLayout]]" id="toast" text="[[toastMessage]]"></paper-toast><bridge-redirect id="redirect"></bridge-redirect><paper-dialog id="modal" modal="" fit-into="[[headerLayout]]" entry-animation="scale-up-animation" exit-animation="fade-out-animation" closing-reason="{{closingReason}}" on-iron-overlay-closed="_modalClosed" on-iron-overlay-opened="_hackOverlay"><p>Existing game found. You really want to start a new game?</p><div class="buttons"><paper-button dialog-dismiss="" autofocus="">No</paper-button><paper-button dialog-confirm="">Yes</paper-button></div></paper-dialog></template><script>Polymer({is:"bridge-init",behaviors:[Polymer.NeonAnimatableBehavior],properties:{playerNames:{type:Array},numberOfCard:{type:Number,value:52},toastMessage:{type:String,value:null},service:{type:Object,notify:!0},closingReason:{type:Object,notify:!0}},listeners:{"start.click":"_start"},ready:function(){this.headerLayout=Bridge.headerLayout},_countRound:function(){return Math.floor(this.numberOfCard/this.playerNames.length)},_start:function(){if(Bridge.Game.state!==Bridge.gameState.notStarted&&Bridge.Game.state!==Bridge.gameState.gameEnd)return void this.$.modal.open();var e=Bridge.Game.start(this.numberOfCard,this.playerNames);return e?(this.toastMessage=e,void this.$.toast.open()):(Bridge.Game.notify(this),void this.$.redirect.redirect("game"))},_modalClosed:function(e){e.detail.confirmed&&(Bridge.Game.state=Bridge.gameState.notStarted,this._start())},_hackOverlay:function(e){e.target.withBackdrop&&e.target.parentNode.insertBefore(e.target.backdropElement,e.target)}});</script></dom-module></body></html>

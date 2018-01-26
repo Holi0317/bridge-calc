@@ -1,0 +1,61 @@
+<html><head><meta charset="UTF-8"><link rel="import" href="../bridge-shell.html"></head><body><div hidden="" by-vulcanize=""><dom-module id="bridge-mini-scoreboard" assetpath="../"><style>:host {
+      display: block;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    /* The follow CSS is copied from Bootstrap 4 */
+    table {
+      width: 100%;
+      margin-bottom: 1rem;
+      border-collapse: collapse;
+    }
+
+    table thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #eceeef;
+    }
+
+    table td, table th {
+      padding: .75rem;
+      line-height: 1.5;
+      vertical-align: top;
+      border-top: 1px solid #eceeef;
+    }
+
+    th {
+      text-align: left;
+    }</style><template><div class="table-container"><table><thead><tr><th></th><template is="dom-repeat" items="[[service.players]]"><th>[[item.name]]</th></template></tr></thead><tbody><tr><td>This round score</td><template is="dom-repeat" items="[[service.players]]"><td>[[_roundScore(item.score, service.currentRound, service.state)]]</td></template></tr><tr><td>Total score</td><template is="dom-repeat" items="[[service.players]]"><td>[[_getTotalScore(item, item.score, service.state)]]</td></template></tr></tbody></table></div></template><script>Polymer({is:"bridge-mini-scoreboard",properties:{service:{type:Object}},_roundScore:function(r,e){var o=r[e-1];return o?o:0},_getTotalScore:function(r){return r.totalScore}});</script></dom-module></div><dom-module id="bridge-game"><style>:host {
+      display: block;
+      padding: 0 10px;
+    }
+
+    paper-material {
+      background: white;
+      box-sizing: border-box;
+      margin: 8px;
+      padding: 16px;
+      border-radius: 2px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .input-container {
+      overflow-x: auto;
+      display: flex;
+    }
+
+    paper-input {
+      min-width: 5em;
+      margin-right: 1em;
+    }
+
+    paper-button {
+      background-color: var(--paper-green-500);
+      color: white;
+    }</style><template><div class="container"><h1>Round [[service.currentRound]] of [[service.totalRounds]]</h1><h2>Maker: [[_makerName(service.players, service.maker)]]</h2></div><div class="container"><paper-material><h3>Bid Trick</h3><div class="input-container"><template is="dom-repeat" items="{{service.players}}"><paper-input label="[[item.name]]" value="{{item.bid}}" type="number" disabled="[[bidDisabled]]"></paper-input></template></div><paper-button id="bid" raised="" disabled="[[bidDisabled]]">Bid</paper-button></paper-material></div><div class="container"><paper-material><h3>Win Trick</h3><div class="input-container"><template is="dom-repeat" items="{{service.players}}"><paper-input label="[[item.name]]" value="{{item.win}}" type="number" disabled="[[winDisabled]]"></paper-input></template></div><paper-button id="end" raised="" disabled="[[winDisabled]]">Round end</paper-button></paper-material></div><div class="container"><paper-material><bridge-mini-scoreboard service="{{service}}"></bridge-mini-scoreboard><paper-button raised="" id="more" disabled="[[nextDisabled]]">Next round</paper-button></paper-material></div><paper-toast fit-into="[[headerLayout]]" id="toast" text="[[toastMessage]]"></paper-toast><bridge-redirect id="redirect"></bridge-redirect></template><script>Polymer({is:"bridge-game",behaviors:[Polymer.NeonAnimatableBehavior],properties:{bidDisabled:{type:Boolean,value:!1},winDisabled:{type:Boolean,value:!0},nextDisabled:{type:Boolean,value:!0},service:{type:Object,notify:!0}},listeners:{"bid.click":"_bid","end.click":"_end","more.click":"_next"},observers:["toggleDisabled(service.state)"],ready:function(){this.headerLayout=Bridge.headerLayout},toggleDisabled:function(e){this.bidDisabled=e!==Bridge.gameState.bid,this.winDisabled=e!==Bridge.gameState.inputWin,this.nextDisabled=e!==Bridge.gameState.waiting},_makerName:function(e,i){return null===i?"":e[i].name},_bid:function(){var e=Bridge.Game.bid();return e?(this.toastMessage=e,void this.$.toast.show()):void Bridge.Game.notify(this)},_end:function(){var e=Bridge.Game.win();return e?(this.toastMessage=e,void this.$.toast.show()):void Bridge.Game.notify(this)},_next:function(){Bridge.Game.next(),Bridge.Game.notify(this),Bridge.Game.state===Bridge.gameState.gameEnd&&this.$.redirect.redirect("scoreboard")}});</script></dom-module></body></html>
