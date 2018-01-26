@@ -117,3 +117,6 @@ Click here to start a new game: Click here to start a new game
 "With {{players}}": "With {{players}}"
 Delete: Delete
 "Time used: {{timeUsed}}": "Time used: {{timeUsed}}"
+
+# Migration from v1.0.0 messages
+Migrated game data from old version: Migrated game data from old version

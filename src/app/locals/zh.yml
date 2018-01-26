@@ -117,3 +117,6 @@ Click here to start a new game: 按此以開始一局新的遊戲
 "With {{players}}": "成員: {{players}}"
 Delete: 刪除
 "Time used: {{timeUsed}}": "已用的時間: {{timeUsed}}"
+#
+# Migration from v1.0.0 messages
+Migrated game data from old version: 已經從舊版本中匯入資料
