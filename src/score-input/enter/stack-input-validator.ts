@@ -61,7 +61,7 @@ export const stackInputValidator = createSelector(
   bidSelector,
   winSelector,
   currentRoundSelector,
-  (state: IRootState, t: TranslationFunction) => t,
+  (_: IRootState, t: TranslationFunction) => t,
   (stage: GameStage | null, playerOrder: string[], bid: IPlayerMap<number>, win: IPlayerMap<number>, currentRound: number, t: TranslationFunction) => {
     if (!stage || stage === GameStage.ended) {
       return {}

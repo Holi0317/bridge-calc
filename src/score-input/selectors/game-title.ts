@@ -14,7 +14,7 @@ export const gameTitleSelector = createSelector(
   stageSelector,
   currentRoundSelector,
   roundsSelector,
-  (state: IRootState, t: TranslationFunction) => t,
+  (_: IRootState, t: TranslationFunction) => t,
   (stage: GameStage | null, currentRound: number | null, rounds: number | null, t: TranslationFunction): string => {
     if (stage == null) {
       return ''

@@ -52,7 +52,7 @@ export const settingsValidator = createSelector(
   namesSelector,
   currentRoundSelector,
   expectedRoundsSelector,
-  (state: IRootState, t: TranslationFunction) => t,
+  (_: IRootState, t: TranslationFunction) => t,
   (names: IPlayerMap<string>, currentRound: number, expectedRounds: number, t: TranslationFunction): ISettingsError => ({
     names: validateNames(names, t),
     misc: validateMisc(names, currentRound, expectedRounds, t)

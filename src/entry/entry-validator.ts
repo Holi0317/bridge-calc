@@ -44,7 +44,7 @@ function validatePlayerName(rawNames: string[], t: TranslationFunction): string[
  */
 export const entryOptionsValidator = createSelector(
   (state: IRootState) => state.entry.playerNames,
-  (state: IRootState, t: TranslationFunction) => t,
+  (_: IRootState, t: TranslationFunction) => t,
   (playerNames: string[], t: TranslationFunction): IEntryError => {
     const res = {
       misc: validateMisc(playerNames, t),

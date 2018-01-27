@@ -6,6 +6,7 @@ export function Titles() {
   return (
     <span>
       <Switch>
+        {/* tslint:disable-next-line: no-unused-variable */}
         {routes.map(({title, name, component, ...rest}) => (
           <Route key={name} component={title} {...rest} />
         ))}

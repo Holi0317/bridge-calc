@@ -27,7 +27,7 @@ export class Dropdown<SourceType> extends React.Component {
     )
   }
 
-  private handleChange = (event: React.SyntheticEvent<{}>, index: number, value: SourceType) => {
+  private handleChange = (_event: React.SyntheticEvent<{}>, _index: number, value: SourceType) => {
     this.props.onChange(value)
   }
 }

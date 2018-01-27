@@ -8,6 +8,7 @@ import {IChangePlayersAction} from '../actions/change-players'
 export function changePlayersHandler(rawState: IWaitingBidState | IWaitingWinState, {newNames, rounds, maker, time}: IChangePlayersAction): IWaitingBidState | IEndedState {
   // Short circuit. When action.rounds is less than current round
   if (rounds < rawState.currentRound) {
+    // tslint false positive on shallowed variable -- Shallowed variable on the else branch
     // tslint:disable-next-line: no-shadowed-variable
     const state = toEndedState(rawState, time)
     state.names = newNames
@@ -26,7 +27,7 @@ export function changePlayersHandler(rawState: IWaitingBidState | IWaitingWinSta
   // Change scores
   const oldScores = state.scores
   const freshScores = range(state.currentRound - 1).fill(0) // Score for new players. I am terrible at naming.
-  state.scores = mapValues(newNames, (name: string, ID: string): number[] => (
+  state.scores = mapValues(newNames, (_: string, ID: string): number[] => (
     (ID in oldScores)
       ? oldScores[ID]
       : freshScores
@@ -34,7 +35,7 @@ export function changePlayersHandler(rawState: IWaitingBidState | IWaitingWinSta
 
   // Change bid
   const oldBid = state.bid
-  state.bid = mapValues(newNames, (name: string, ID: string): number => (
+  state.bid = mapValues(newNames, (_: string, ID: string): number => (
     (ID in oldBid)
       ? oldBid[ID]
       : 0

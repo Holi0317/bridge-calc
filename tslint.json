@@ -9,6 +9,9 @@
     "max-line-length": false,
     "ordered-imports": false,
     "no-submodule-imports": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-unused-expression": true,
+    "no-unused-variable": [true, "check-parameters"],
+    "variable-name": [true, "ban-keywords", "allow-leading-underscore", "check-format", "allow-pascal-case"]
   }
 }

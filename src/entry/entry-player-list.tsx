@@ -14,7 +14,7 @@ export const getter = (val: string) => val
 
 export const setter = (newVal: string) => newVal
 
-export const errorGetter = (error: string[], value: string, index: number) => error[index]
+export const errorGetter = (error: string[], _: string, index: number) => error[index]
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   playerNames: state.entry.playerNames,

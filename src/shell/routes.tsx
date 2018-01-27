@@ -14,6 +14,7 @@ export function Routes({location}: IRoutesProps) {
   // Ref: 314974f089de50901b6d6422c5b9edc682236104
   return <ErrorBoundary>
     <Switch location={location}>
+      {/* tslint:disable-next-line: no-unused-variable */}
       {routes.map(({title, name, ...rest}) => (
         <Route key={name} {...rest} />
       ))}

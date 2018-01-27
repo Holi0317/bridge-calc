@@ -3,7 +3,7 @@ import * as Cache from 'i18next-localstorage-cache'
 import * as LngDetector from 'i18next-browser-languagedetector'
 import * as XHR from 'i18next-xhr-backend'
 
-function loadLocales(url: string, options: any, callback: any) {
+function loadLocales(url: string, _options: any, callback: any) {
   import(`./locals/${url}.yml` /* webpackChunkName: "i18n-[index]" */)
     .then(local => {
       callback(local, {status: '200'})
