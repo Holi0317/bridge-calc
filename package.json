@@ -19,7 +19,7 @@
     "lint:css": "stylelint src/**/*.css splash.css",
     "lint:js": "eslint --ext .jsx,.js --cache webpack-cfg test *.config.js src",
     "lint:js:fix": "eslint --ext .jsx,.js --fix --cache webpack-cfg test *.config.js src",
-    "lint:ts": "tslint -c tslint.json -p tsconfig.json",
+    "lint:ts": "tslint -c tslint.json -p tsconfig.json -t stylish",
     "clean": "del-cli dist .tmp",
     "build": "npm run build:prod",
     "prebuild:prod": "npm run clean",
