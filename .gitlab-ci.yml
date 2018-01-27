@@ -5,28 +5,27 @@ cache:
     - node_modules
 
 stages:
-  - install
   - build
   - deploy
 
-# Install dependencies
-install:
-  script: yarn install --pure-lockfile
-  stage: install
-
-# Linting
 lint:
-  script: npm run lint
+  script:
+    - yarn install --pure-lockfile
+    - npm run lint
   stage: build
 
 # Unit test
 test:
-  script: npm test -- --runInBand
+  script:
+    - yarn install --pure-lockfile
+    - npm test -- --runInBand
   stage: build
 
 # Compile assets
 build:
-  script: npm run build:prod
+  script:
+    - yarn install --pure-lockfile
+    - npm run build:prod
   stage: build
   artifacts:
     paths:
