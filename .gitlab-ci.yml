@@ -1,0 +1,80 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules
+
+stages:
+  - install
+  - build
+  - deploy
+
+# Install dependencies
+install:
+  script: yarn install --pure-lockfile
+  stage: install
+
+# Linting
+lint:
+  script: npm run lint
+  stage: build
+
+# Unit test
+test:
+  script: npm test -- --runInBand
+  stage: build
+
+# Compile assets
+build:
+  script: npm run build:prod
+  stage: build
+  artifacts:
+    paths:
+      - dist
+
+# Deploy production artifact to Firebase Hosting (Main deployment)
+firebase:
+  script:
+    - npm -g config set user root # Workaround for EACCES issue when run as root
+    - npm install -g firebase-tools
+    - firebase deploy --token $FIREBASE_TOKEN
+  stage: deploy
+  environment:
+    name: firebase
+    url: https://bridge.holi0317.net
+  only:
+    - master
+
+# Deploy production artifact to GitLab pages (Secondary deployment)
+pages:
+  script: mkdir public && cp -R dist/* public/
+  stage: deploy
+  artifacts:
+    paths:
+      - public
+  environment:
+    name: gitlab-page
+    url: https://holi0317.gitlab.io/bridge-calc
+  only:
+   - master
+
+# Deploy staging artifact to Google Cloud Storage
+gcs:
+  image: google/cloud-sdk:latest
+  script:
+    # Set up auth
+    - echo $GCLOUD_SERVICE_KEY | base64 -d - > gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file gcloud-service-key.json
+    - rm gcloud-service-key.json
+    - gcloud config set project $GCLOUD_PROJECT
+
+    - gsutil rsync -d -r dist/ $GCLOUD_BUCKET
+  environment:
+    name: gcloud
+    url: https://staging.bridge-calc-8c2a7.appspot.com/
+  variables:
+    GCLOUD_PROJECT: bridge-calc-8c2a7
+    GCLOUD_BUCKET: gs://staging.bridge-calc-8c2a7.appspot.com/
+  stage: deploy
+  only:
+    - staging
