@@ -6,12 +6,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Holi0317/bridge-calc.git"
+    "url": "git://gitlab.com/holi0317/bridge-calc.git"
   },
   "bugs": {
-    "url": "https://github.com/Holi0317/bridge-calc/issues"
+    "url": "https://gitlab.com/holi0317/bridge-calc/issues"
   },
-  "homepage": "https://github.com/Holi0317/bridge-calc#readme",
+  "homepage": "https://gitlab.com/holi0317/bridge-calc",
   "main": "dist/main.js",
   "scripts": {
     "test": "jest",

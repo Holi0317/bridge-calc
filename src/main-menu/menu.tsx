@@ -48,10 +48,10 @@ export function MenuImpl({showContinue, t}: MenuProps) {
           <Tile icon={<ActionSettings />} title={t('Settings')} to="/global-settings" />
         </Col>
         <Col md={4} xs={12}>
-          <Tile icon={<ActionInfo />} title={t('Information')} to="https://github.com/Holi0317/bridge-calc/blob/master/docs/en.md" external={true} target="_blank" />
+          <Tile icon={<ActionInfo />} title={t('Information')} to="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md" external={true} target="_blank" />
         </Col>
         <Col md={4} xs={12}>
-          <Tile icon={<ActionBugReport />} title={t('Support/bug')} to="https://github.com/Holi0317/bridge-calc" external={true} target="_blank" />
+          <Tile icon={<ActionBugReport />} title={t('Support/bug')} to="https://gitlab.com/holi0317/bridge-calc/issues" external={true} target="_blank" />
         </Col>
       </Row>
 

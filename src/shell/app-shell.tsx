@@ -27,7 +27,7 @@ type AppProps = RouteComponentProps<any>
 
 export function ShellImpl({location, history}: AppProps) {
   const helpBtn = <IconButton aria-label="Help" rel="noopener" target="_blank"
-                              href="https://github.com/Holi0317/bridge-calc/blob/master/docs/en.md">
+                              href="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md">
     <ActionHelp width="24px" height="24px" />
   </IconButton>
   const backFn = to(history, '/')
