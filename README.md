@@ -6,7 +6,7 @@ A simple calculator for German Bridge
 
 [Stable release](https://bridge.holi0317.net)
 
-[Staging server (Not always available)](https://staging.bridge-calc-8c2a7.appspot.com)
+[Staging server (Not always available)](https://holi0317.gitlab.io/bridge-calc)
 
 ## Overview
 Bridge calc helps to calculate score for a German Bridge game.
