@@ -145,7 +145,8 @@ test('it should assign 0 mark for ended rounds of new player', () => {
 test('it should end game when given rounds is less than current round', () => {
   const clock = lolex.install()
 
-  const s = [0, 0] // Short hand for score
+  // Short hand for score
+  const s = [0, 0]
   const state = {
     ...waitingBidState,
     currentRound: 3,

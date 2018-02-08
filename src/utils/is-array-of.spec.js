@@ -25,7 +25,7 @@ test('it should fail if the array type is not match', () => {
 })
 
 test('it should fail if given object is not array', () => {
-  const obj = {} 
+  const obj = {}
   const of = 'string'
   const expected = false
   const actual = isArrayOf(obj, of)

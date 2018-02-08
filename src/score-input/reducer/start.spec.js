@@ -23,7 +23,7 @@ afterEach(() => {
 test('it should generate state according to action', () => {
   const action = startAction(13, playerNames, 1)
   const actual = start(action)
-  expect(actual).toMatchSnapshot() // New ID is generated. If new test is added, just update snapshot
+  expect(actual).toMatchSnapshot()
 })
 
 test('Starting in the middle of the game should work', () => {

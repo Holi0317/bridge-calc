@@ -9,5 +9,7 @@ test('it should return reversed prevGames', () => {
   const actual = reversedPrevGamesSelector(tree)
 
   expect(actual).toEqual(expected)
-  expect(prevGames).toEqual(prevGamesDupe) // Ensure no mutation
+
+  // Ensure no mutation
+  expect(prevGames).toEqual(prevGamesDupe)
 })

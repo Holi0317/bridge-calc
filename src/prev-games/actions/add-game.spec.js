@@ -5,7 +5,8 @@ test('it should return add game action', () => {
   const expected = {
     type: ActionTypes.ADD_GAME,
     payload: {
-      type: 'IPrevGameEntry' // Just be lazy
+      // Fake IPrevGameEntry type object
+      type: 'IPrevGameEntry'
     }
   }
   const actual = addGameAction({

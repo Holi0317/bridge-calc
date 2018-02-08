@@ -531,7 +531,8 @@ test('Change players should end game when given rounds is less than current roun
     scores: genMap([0], [0], [0], [0]),
     names: genMap('Mary', 'John', 'Henry', 'Joe')
   }
-  const s = [0, 0] // Short hand for score
+  // Short hand for score
+  const s = [0, 0]
   const state = {
     ...waitingBidState,
     currentRound: 3,

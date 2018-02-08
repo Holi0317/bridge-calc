@@ -5,8 +5,9 @@ import {trans} from '../../utils/translate'
 
 /**
  * Create segment of redux tree for validator to consume
- * @param names - IPlayerMap<string> of names
- * @param currentRound - `state.currentGame.currentRound`, pass in null to stimulate null game/ended game
+ * @param {IPlayerMap<string>} names Player names inside a IPlayerMap
+ * @param {number|null} currentRound `state.currentGame.currentRound`, pass in null to stimulate null game/ended game
+ * @returns {Object} Part of redux tree to consume
  */
 function makeTree(names, currentRound = 1) {
   return {

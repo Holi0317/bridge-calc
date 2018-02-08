@@ -5,7 +5,8 @@ module.exports = {
   plugins: [
     new webpack.LoaderOptionsPlugin({
       options: {
-        context: __dirname // This magically solves class name collision in CSS module
+      // This magically solves class name collision in CSS module
+        context: __dirname
       }
     }),
     new ExtractTextPlugin({

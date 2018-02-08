@@ -15,7 +15,12 @@ extends:
  - eslint:recommended
 
 rules:
+  getter-return: error
+  no-await-in-loop: warn
+  no-prototype-builtins: error
   no-template-curly-in-string: warn
+  valid-jsdoc: error
+
   array-callback-return: error
   curly: error
   dot-location:
@@ -25,11 +30,25 @@ rules:
   eqeqeq:
    - error
    - smart
+  guard-for-in: error
+  no-alert: error
+  no-else-return: warn
+  no-lone-blocks: error
+  no-loop-func: error
+  prefer-promise-reject-errors: error
   no-return-await: warn
   yoda:
    - error
    - never
    - exceptRange: true
+
+  array-bracket-spacing: error
+  block-spacing: error
+  brace-style: error
+  comma-dangle: error
+  comma-spacing: error
+  eol-last: error
+  linebreak-style: error
   semi:
    - error
    - never
@@ -44,21 +63,20 @@ rules:
    - allowTemplateLiterals: false
      avoidEscape: true
   prefer-const: error
-  array-bracket-spacing: error
-  comma-spacing: error
   capitalized-comments:
    - error
    - always
    - {ignorePattern: webpackChunkName}
-  brace-style: error
+  line-comment-position: error
   no-throw-literal: error
   no-return-assign: error
   no-multi-str: error
   no-multi-spaces: error
+  no-trailing-spaces: error
+  multiline-comment-style: error
   space-infix-ops: error
   space-unary-ops: error
-  no-loop-func: error
+  spaced-comment: error
   no-floating-decimal: error
-  comma-dangle: error
   object-curly-spacing: error
   no-console: off

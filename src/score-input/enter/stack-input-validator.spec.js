@@ -9,6 +9,8 @@ function genMap(a, b, c, d) {
 /**
  * Create part of redux store tree for testing validator.
  * See implementation for details.
+ * @param {Object} rest Remaining properties to be added to return state
+ * @returns {Object} Part of redux store tree for consumption
  */
 function makeTree(rest) {
   return {

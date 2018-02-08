@@ -23,7 +23,9 @@ test('dupe should not mutate the input array', () => {
 
 test('dupe should return only 1 duplicated item for duplicated element', () => {
   const input = [1, 2, 3, 2, 1, 2]
-  const expected = [2, 1] // 2 is repeated first
+
+  // 2 is repeated first
+  const expected = [2, 1]
   const actual = dupe(input)
   expect(actual).toEqual(expected)
 })

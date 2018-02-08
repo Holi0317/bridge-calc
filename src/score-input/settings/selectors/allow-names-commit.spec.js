@@ -4,9 +4,10 @@ import {trans} from '../../../utils/translate'
 
 /**
  * Build part of redux store tree for testing
- * @param settingsNames - `state.settings.names`
- * @param names - `state.currentGame.names`
- * @param makerDirty - `state.gameSettings.makerDirty`
+ * @param {IPlayerMap<string>} settingsNames - `state.settings.names`
+ * @param {IPlayerMap<string>} names - `state.currentGame.names`
+ * @param {Boolean} makerDirty - `state.gameSettings.makerDirty`
+ * @returns {Object} Partial redux tree for consumption
  */
 function buildTree(settingsNames, names, makerDirty) {
   return {

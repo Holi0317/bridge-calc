@@ -2,7 +2,8 @@ import {isMakerCleanSelector} from './is-maker-clean'
 
 /**
  * Make part of redux tree for testing
- * @param makerDirty - `state.gameSettings.makerDirty`
+ * @param {Boolean} makerDirty - `state.gameSettings.makerDirty`
+ * @returns {Object} Part of redux tree for consumption
  */
 function makeTree(makerDirty) {
   return {
