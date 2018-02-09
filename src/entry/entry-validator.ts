@@ -61,6 +61,5 @@ export const entryOptionsValidator = createSelector(
  */
 export const isEntryOptionsValid = createSelector(
   entryOptionsValidator,
-  (error: IEntryError): boolean =>
-    isOk(error)
+  isOk
 )

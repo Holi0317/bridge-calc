@@ -8,7 +8,6 @@ import {IWaitingBidState} from './types'
 /**
  * Helper function for reducer.
  * Start a new game base on start action parameters.
- * @param action
  */
 export function start(action: IStartAction) {
   const playerIDs = Object.keys(action.playerNames)

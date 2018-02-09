@@ -13,7 +13,6 @@ export interface IStartAction {
 
 /**
  * Helper function to Change player names array to object with random generated player ID as key.
- * @param playerNames
  */
 function namesToMap(playerNames: string[]): IPlayerMap<string> {
   const result: IPlayerMap<string> = {}

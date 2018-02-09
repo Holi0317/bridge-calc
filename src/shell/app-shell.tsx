@@ -15,9 +15,9 @@ import {Routes} from './routes'
 /**
  * Create a function that will route to specified location.
  * Think of this as the Link component in react-router. But in function form.
- * @param history {History} - History object from react-router
- * @param loc {string} - Path of the desired location
- * @returns {function()} - Function to redirect to the location above
+ * @param history - History object from react-router
+ * @param loc - Path of the desired location
+ * @returns - Function to redirect to the location above
  */
 function to(history: History, loc: string) {
   return () => history.push(loc)

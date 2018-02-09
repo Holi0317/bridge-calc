@@ -12,8 +12,8 @@ import {GameProgressDisp} from './game-progress-disp'
 export interface IPrevGameProps {
   className?: string
   game: PrevGameEntry
-  requestDelete: () => void
-  requestContinue: () => void
+  requestDelete(): void
+  requestContinue(): void
 }
 
 export function PrevGameImpl({className, game, requestDelete, requestContinue, t}: IPrevGameProps & ITranslateMixin) {

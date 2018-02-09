@@ -89,7 +89,7 @@ export const stackInputValidator = createSelector(
  */
 export const isStackInputValid = createSelector(
   stackInputValidator,
-  (error: IStackInputError) => isOk(error)
+  isOk
 )
 
 /**

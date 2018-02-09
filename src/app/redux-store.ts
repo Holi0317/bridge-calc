@@ -29,7 +29,7 @@ const middlewares: any[] = [
 ]
 
 if (process.env.NODE_ENV === 'development') {
-  // tslint:disable-next-line:no-var-requires no-implicit-dependencies
+  // tslint:disable-next-line:no-var-requires no-implicit-dependencies no-require-imports
   const {createLogger} = require('redux-logger')
   const logger = createLogger({
     collapsed: true

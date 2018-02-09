@@ -93,7 +93,7 @@ export function migrateOldState(oldState: IOldGameData): PrevGameEntry {
  * Create names, scores, bid and win maps
  */
 function migratePlayers(players: IOldPlayers[]): IPlayerMaps {
-  const ids = players.map(() => cuid())
+  const ids = players.map(cuid)
   const map = {
     names: 'name',
     scores: 'score',

@@ -8,7 +8,7 @@ import {isArrayOf} from './is-array-of'
  * Only primitive can be used (as used in typeof check).
  * Or use `type[]` to notate array of `type`, where type must also be primitive and
  * at most 1 dimension array is allowed.
- * @returns {boolean} - Validation result. True for pass and false for failed
+ * @returns - Validation result. True for pass and false for failed
  * @see IPlayerMap
  */
 export function isPlayerMapOf(obj: any, of: string): boolean {

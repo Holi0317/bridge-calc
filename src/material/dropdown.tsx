@@ -10,7 +10,7 @@ export interface IDropdownProps<T> {
   disabled?: boolean
   className?: string
   error?: string
-  onChange: (value: T) => void
+  onChange(value: T): void
 }
 
 export class Dropdown<SourceType> extends React.Component {

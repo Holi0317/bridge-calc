@@ -1,6 +1,5 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
 import {returntypeof} from 'react-redux-typescript'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
@@ -17,19 +16,14 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   makerClean: isMakerCleanSelector(state)
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  bindActionCreators({
-  }, dispatch)
-
 const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
 
 interface IActionButtonProps {
-  requestDialog: () => void
+  requestDialog(): void
 }
 
 export class ActionButtonsImpl extends React.Component {
-  public props: IActionButtonProps & typeof stateType & typeof dispatchType & ITranslateMixin
+  public props: IActionButtonProps & typeof stateType & ITranslateMixin
 
   public render() {
     const {changeDisabled, makerClean, error, requestDialog, t} = this.props
@@ -44,5 +38,5 @@ export class ActionButtonsImpl extends React.Component {
 
 export const ActionButtons = flowRight(
   translate(),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps)
 )(ActionButtonsImpl) as React.ComponentType<IActionButtonProps>

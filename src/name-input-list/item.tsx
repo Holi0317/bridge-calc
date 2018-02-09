@@ -9,14 +9,14 @@ import {DragHandle} from './drag-handle'
 import style from './name-input-list.css'
 import {ITranslateMixin} from '../types'
 
-type SortableItemProps = {
+interface ISortableItemProps extends ITranslateMixin {
   value: string,
-  onChange: React.EventHandler<React.KeyboardEvent<{}>>,
-  remove: () => void,
   error: string | null
-} & ITranslateMixin
+  onChange: React.EventHandler<React.KeyboardEvent<{}>>,
+  remove(): void,
+}
 
-export function SortableItemImpl({value, onChange, remove, error, t}: SortableItemProps) {
+export function SortableItemImpl({value, onChange, remove, error, t}: ISortableItemProps) {
   return (
     <div className={style.itemContainer}>
       <DragHandle />

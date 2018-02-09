@@ -8,10 +8,6 @@ export interface INameInputListProps<DataType, ErrorType> {
    */
   values: DataType[]
   /**
-   * When data is changed (modified, renamed, deleted), this will be called with new data array.
-   */
-  onChange: (values: DataType[]) => void
-  /**
    * Optional. Error to be displayed under name input.
    */
   error: ErrorType
@@ -28,4 +24,8 @@ export interface INameInputListProps<DataType, ErrorType> {
    * This function transform old data to new one with given new value in input field.
    */
   setter: Setter<DataType>
+  /**
+   * When data is changed (modified, renamed, deleted), this will be called with new data array.
+   */
+  onChange(values: DataType[]): void
 }

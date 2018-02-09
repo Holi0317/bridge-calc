@@ -9,7 +9,7 @@ import {isArrayEqual} from './is-array-equal'
  *
  * @param obj - Object to be validate against. Assumption: the object must not be null.
  * @param keys - Keys expected to contain in the object
- * @returns {boolean} - If validation pass or not
+ * @returns - If validation pass or not
  */
 export function whitelistKeys(obj: any, keys: string[]): boolean {
   const actualKeys = Object.keys(obj)

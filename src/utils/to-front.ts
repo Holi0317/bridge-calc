@@ -8,7 +8,6 @@ import {nth} from './nth'
  * // -> ['b', 'c', 'a']
  * @param array - The original array
  * @param frontIndex - Index of element that need to be moved to front.
- * @returns
  */
 export function toFront<T>(array: T[], frontIndex: number): T[] {
   if (frontIndex >= array.length) {

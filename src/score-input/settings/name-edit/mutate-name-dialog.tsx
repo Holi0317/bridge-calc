@@ -34,7 +34,7 @@ const dispatchType = returntypeof(mapDispatchToProps)
 
 interface IMutateNameDialogProps {
   open: boolean
-  onRequestClose: () => void
+  onRequestClose(): void
 }
 
 interface IMutateNameDialogState {

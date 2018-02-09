@@ -8,7 +8,7 @@ import {IChangePlayersAction} from '../actions/change-players'
 export function changePlayersHandler(rawState: IWaitingBidState | IWaitingWinState, {newNames, rounds, maker, time}: IChangePlayersAction): IWaitingBidState | IEndedState {
   // Short circuit. When action.rounds is less than current round
   if (rounds < rawState.currentRound) {
-    // tslint false positive on shallowed variable -- Shallowed variable on the else branch
+    // Tslint false positive on shallowed variable -- Shallowed variable on the else branch
     // tslint:disable-next-line: no-shadowed-variable
     const state = toEndedState(rawState, time)
     state.names = newNames

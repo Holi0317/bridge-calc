@@ -11,6 +11,6 @@ import {IPlayerMap} from '../../types'
 export const playerTotalScoreSelector = createSelector(
   playerScoresSelector,
   (scores: IPlayerMap<number[]>): IPlayerMap<number> => (
-    mapValues(scores, score => sum(score))
+    mapValues(scores, sum)
   )
 )
