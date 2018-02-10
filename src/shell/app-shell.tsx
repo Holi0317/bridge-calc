@@ -1,5 +1,7 @@
 import * as React from 'react'
+import flowRight from 'lodash-es/flowRight'
 import {withRouter} from 'react-router-dom'
+import {translate} from 'react-i18next'
 import {RouteComponentProps} from 'react-router'
 import {History} from 'history'
 import AppBar from 'material-ui/AppBar'
@@ -11,6 +13,7 @@ import {Titles} from './titles'
 import {SWReg} from '../sw-reg'
 import {Migration} from '../migration/migration'
 import {Routes} from './routes'
+import {ITranslateMixin} from '../types'
 
 /**
  * Create a function that will route to specified location.
@@ -23,15 +26,17 @@ function to(history: History, loc: string) {
   return () => history.push(loc)
 }
 
-type AppProps = RouteComponentProps<any>
+type AppProps = RouteComponentProps<any> & ITranslateMixin
 
-export function ShellImpl({location, history}: AppProps) {
-  const helpBtn = <IconButton aria-label="Help" rel="noopener" target="_blank"
+export function ShellImpl({location, history, t}: AppProps) {
+  const helpBtn = <IconButton tooltip={t('Help')} rel="noopener" target="_blank"
                               href="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md">
     <ActionHelp width="24px" height="24px" />
   </IconButton>
   const backFn = to(history, '/')
-  const backBtn = <IconButton><NavigationArrowBack width="24px" height="24px" /></IconButton>
+  const backBtn = <IconButton tooltip={t('Back to menu')}>
+    <NavigationArrowBack width="24px" height="24px" />
+  </IconButton>
   return (
     <div>
       <AppBar
@@ -51,4 +56,7 @@ export function ShellImpl({location, history}: AppProps) {
   )
 }
 
-export const Shell = withRouter(ShellImpl)
+export const Shell = flowRight(
+  withRouter,
+  translate()
+)(ShellImpl)
