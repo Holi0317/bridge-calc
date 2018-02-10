@@ -3,7 +3,7 @@ import {bindActionCreators, Dispatch} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import IconButton from 'material-ui/IconButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import FileDownload from 'material-ui/svg-icons/file/file-download'
@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     setImportOpen: setImportOpenAction
   }, dispatch)
 
-const dispatchType = returntypeof(mapDispatchToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type EntryActionButtonsProps = typeof dispatchType & ITranslateMixin
 

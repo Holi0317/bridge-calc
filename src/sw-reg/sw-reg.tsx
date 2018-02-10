@@ -3,7 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {bindActionCreators, Dispatch} from 'redux'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
 import {ITranslateMixin} from '../types'
 
@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const dispatchType = returntypeof(mapDispatchToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type SWRegProps = typeof dispatchType & ITranslateMixin
 

@@ -3,7 +3,7 @@ import {bindActionCreators, Dispatch} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {NameInputList} from '../name-input-list'
 import {entryOptionsValidator} from './entry-validator'
 import {setPlayerNamesAction} from './actions/set-entry-props'
@@ -24,8 +24,8 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({setPlayerNames: setPlayerNamesAction}, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type EntryPlayerListProps = typeof stateType & typeof dispatchType
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {IRootState} from '../../types'
 import {bindActionCreators, Dispatch} from 'redux'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {initSettingsAction} from './actions/init-settings'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -14,8 +14,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     init: initSettingsAction
   }, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type SettingsInitializerProps = typeof stateType & typeof dispatchType
 

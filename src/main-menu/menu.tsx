@@ -3,7 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {Container, Row, Col} from 'react-grid-system'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow'
 import AvFiberNew from 'material-ui/svg-icons/av/fiber-new'
 import AvSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
@@ -18,7 +18,7 @@ const mapStateToProps = (state: IRootState) => ({
   showContinue: showContinueSelector(state)
 })
 
-const stateType = returntypeof(mapStateToProps)
+const stateType = $call(mapStateToProps)
 
 type MenuProps = typeof stateType & ITranslateMixin
 

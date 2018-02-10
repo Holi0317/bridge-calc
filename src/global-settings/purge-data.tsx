@@ -3,7 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators} from 'redux'
 import {translate} from 'react-i18next'
 import {connect, Dispatch} from 'react-redux'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import RaisedButton from 'material-ui/RaisedButton'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import {resetGamesAtion} from '../prev-games/actions/reset-games'
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const dispatchType = returntypeof(mapDispatchToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type PurgeDataProps = typeof dispatchType & ITranslateMixin
 

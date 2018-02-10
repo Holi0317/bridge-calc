@@ -3,7 +3,7 @@ import {bindActionCreators, Dispatch} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import RaisedButton from 'material-ui/RaisedButton'
 import flowRight from 'lodash-es/flowRight'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
@@ -22,8 +22,8 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({start: startAction}, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type EntryStartButtonProps = typeof stateType & typeof dispatchType & RouteComponentProps<any> & ITranslateMixin
 

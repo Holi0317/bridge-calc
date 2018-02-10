@@ -1,6 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {bindActionCreators, Dispatch} from 'redux'
@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 export class SkipRoundsImpl extends React.Component {
   public props: typeof stateType & typeof dispatchType & ITranslateMixin

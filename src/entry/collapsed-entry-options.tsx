@@ -4,7 +4,7 @@ import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import Collapse from 'react-collapse'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import RaisedButton from 'material-ui/RaisedButton'
 import {EntryOptions} from './entry-options'
 import {toggleOptionOpenAction} from './actions/toggle-option-open'
@@ -18,8 +18,8 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({toggleOptionOpen: toggleOptionOpenAction}, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type CollapsedEntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators, Dispatch} from 'redux'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {setImportOpenAction, setPlayerNamesAction} from '../actions/set-entry-props'
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     setPlayerNames: setPlayerNamesAction
   }, dispatch)
 
-const dispatchType = returntypeof(mapDispatchToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 interface INameEntryProps {
   name: string[]

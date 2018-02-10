@@ -1,6 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {IPlayerMap, IRootState, ITranslateMixin} from '../../../types'
 import {bindActionCreators, Dispatch} from 'redux'
 import {connect} from 'react-redux'
@@ -37,8 +37,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     changeNames: setNamesFromArrayAction
   }, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type SettingsPlayerListProps = typeof stateType & typeof dispatchType & ITranslateMixin
 

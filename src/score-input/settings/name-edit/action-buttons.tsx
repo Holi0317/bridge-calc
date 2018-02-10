@@ -1,6 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -16,7 +16,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   makerClean: isMakerCleanSelector(state)
 })
 
-const stateType = returntypeof(mapStateToProps)
+const stateType = $call(mapStateToProps)
 
 interface IActionButtonProps {
   requestDialog(): void

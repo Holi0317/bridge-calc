@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {connect} from 'react-redux'
 import {prevNamesSelector} from '../../prev-games/selectors/prev-names'
 import {IRootState} from '../../types'
@@ -11,7 +11,7 @@ const mapStateToProps = (state: IRootState) => ({
   names: prevNamesSelector(state)
 })
 
-const stateType = returntypeof(mapStateToProps)
+const stateType = $call(mapStateToProps)
 
 type ImportNamesContentProps = typeof stateType
 

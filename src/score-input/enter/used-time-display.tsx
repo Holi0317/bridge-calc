@@ -2,7 +2,7 @@ import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {IRootState, ITranslateMixin} from '../../types'
 import {endTimeSelector, startTimeSelector} from '../selectors/time'
 import styles from './used-time-display.css'
@@ -31,7 +31,7 @@ const mapStateToProps = (state: IRootState) => ({
   endTime: endTimeSelector(state)
 })
 
-const stateType = returntypeof(mapStateToProps)
+const stateType = $call(mapStateToProps)
 
 export class UsedTimeDisplayImpl extends React.Component {
   public props: typeof stateType & ITranslateMixin

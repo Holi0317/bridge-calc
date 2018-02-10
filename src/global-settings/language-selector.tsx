@@ -4,7 +4,7 @@ import {bindActionCreators, Dispatch} from 'redux'
 import {TranslationFunction} from 'i18next'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {Dropdown} from '../material/dropdown'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
 import {languages} from '../app/i18n'
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const dispatchType = returntypeof(mapDispatchToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 export class LanguageSelectorImpl extends React.Component {
   public props: typeof dispatchType & ITranslateMixin

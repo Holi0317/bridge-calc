@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Loadable from 'react-loadable'
 import {connect} from 'react-redux'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 import {Loading} from './loading'
 import {IRootState} from '../types'
 import {Redirect} from 'react-router'
@@ -19,7 +19,7 @@ const mapStateToProps = (state: IRootState) => ({
   gameRedirect: state.currentGame == null
 })
 
-const stateType = returntypeof(mapStateToProps)
+const stateType = $call(mapStateToProps)
 type LayoutProps = typeof stateType
 
 export function LayoutImpl({gameRedirect}: LayoutProps) {

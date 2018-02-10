@@ -4,13 +4,13 @@ import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {gameTitleSelector} from './selectors/game-title'
 import {IRootState, ITranslateMixin} from '../types'
-import {returntypeof} from 'react-redux-typescript'
+import {$call} from 'utility-types'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   title: gameTitleSelector(state, t)
 })
 
-const stateType = returntypeof(mapStateToProps)
+const stateType = $call(mapStateToProps)
 
 type CurrentGameTitleProps = typeof stateType
 
