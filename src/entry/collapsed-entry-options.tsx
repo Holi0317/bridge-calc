@@ -3,7 +3,6 @@ import {bindActionCreators, Dispatch} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
-import Collapse from 'react-collapse'
 import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import {EntryOptions} from './entry-options'
@@ -24,12 +23,17 @@ const dispatchType = returntypeof(mapDispatchToProps)
 type CollapsedEntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixin
 
 export function CollapsedEntryOptionsImpl({toggleOptionOpen, optionsOpened, t}: CollapsedEntryOptionsProps) {
+  const collapseCss = [style.collapse]
+  if (optionsOpened) {
+    collapseCss.push(style.collapseOpen)
+  }
+
   return (
     <div>
       <RaisedButton onClick={toggleOptionOpen} className={style.optionsBtn}>{t('Options')}</RaisedButton>
-      <Collapse isOpened={optionsOpened}>
+      <div className={collapseCss.join(' ')}>
         <EntryOptions />
-      </Collapse>
+      </div>
     </div>
   )
 }
