@@ -38,6 +38,10 @@ firebase:
     - npm install -g firebase-tools
     - firebase deploy --token $FIREBASE_TOKEN
   stage: deploy
+  cache:
+    key: firebase-tools
+    paths:
+      - /usr/local/lib/node_modules
   environment:
     name: firebase
     url: https://bridge.holi0317.net
