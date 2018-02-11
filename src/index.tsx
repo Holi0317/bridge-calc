@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {render} from 'react-dom'
+import * as ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {I18nextProvider} from 'react-i18next'
@@ -33,4 +33,10 @@ function Root() {
   )
 }
 
-render(<Root />, document.querySelector('.root'))
+if (process.env.NODE_ENV === 'development') {
+  // tslint:disable-next-line:no-var-requires no-implicit-dependencies no-require-imports
+  const axe = require('react-axe')
+  axe(React, ReactDOM, 1000)
+}
+
+ReactDOM.render(<Root />, document.querySelector('.root'))
