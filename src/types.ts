@@ -39,7 +39,7 @@ export type Actions =
 export type Dispatch = (action: Actions) => void
 
 export function $call<RT>(
-  expression: (...params: any[]) => RT,
+  _expression: (...params: any[]) => RT,
 ): RT {
   return null as any as RT
 }
