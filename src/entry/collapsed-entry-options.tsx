@@ -4,11 +4,10 @@ import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import Collapse from 'react-collapse'
-import {$call} from 'utility-types'
 import RaisedButton from 'material-ui/RaisedButton'
 import {EntryOptions} from './entry-options'
 import {toggleOptionOpenAction} from './actions/toggle-option-open'
-import {IRootState, ITranslateMixin} from '../types'
+import {$call, IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => ({

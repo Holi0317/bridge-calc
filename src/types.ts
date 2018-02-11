@@ -37,3 +37,9 @@ export type Actions =
   | PrevGamesActions
 
 export type Dispatch = (action: Actions) => void
+
+export function $call<RT>(
+  expression: (...params: any[]) => RT,
+): RT {
+  return null as any as RT
+}

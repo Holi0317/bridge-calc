@@ -1,8 +1,7 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators, Dispatch} from 'redux'
-import {$call} from 'utility-types'
-import {IRootState} from '../types'
+import {$call, IRootState} from '../types'
 import {closeToastAction} from './actions/close-toast'
 import Snackbar from 'material-ui/Snackbar'
 

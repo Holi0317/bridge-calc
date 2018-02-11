@@ -3,11 +3,10 @@ import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators, Dispatch} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
-import {$call} from 'utility-types'
 import {Dropdown} from '../material/dropdown'
 import {setRoundsAction, setStartingRoundAction} from './actions/set-entry-props'
 import {optionsSourcesSelector} from './selectors/options-sources'
-import {IRootState, ITranslateMixin} from '../types'
+import {$call, IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => {

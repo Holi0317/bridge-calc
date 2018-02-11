@@ -1,13 +1,12 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {$call} from 'utility-types'
+import {bindActionCreators, Dispatch} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import IconButton from 'material-ui/IconButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import {bindActionCreators, Dispatch} from 'redux'
 import {addRandomNameAction} from '../actions/add-name'
-import {ITranslateMixin} from '../../../types'
+import {$call, ITranslateMixin} from '../../../types'
 import style from './name-edit.css'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>

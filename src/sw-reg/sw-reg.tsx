@@ -3,9 +3,8 @@ import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {bindActionCreators, Dispatch} from 'redux'
-import {$call} from 'utility-types'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
-import {ITranslateMixin} from '../types'
+import {$call, ITranslateMixin} from '../types'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({

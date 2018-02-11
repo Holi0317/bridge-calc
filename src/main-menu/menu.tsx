@@ -3,7 +3,6 @@ import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {Container, Row, Col} from 'react-grid-system'
-import {$call} from 'utility-types'
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow'
 import AvFiberNew from 'material-ui/svg-icons/av/fiber-new'
 import AvSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
@@ -12,7 +11,7 @@ import ActionInfo from 'material-ui/svg-icons/action/info'
 import ActionBugReport from 'material-ui/svg-icons/action/bug-report'
 import {Tile} from './tile'
 import {showContinueSelector} from './show-continue-selector'
-import {IRootState, ITranslateMixin} from '../types'
+import {$call, IRootState, ITranslateMixin} from '../types'
 
 const mapStateToProps = (state: IRootState) => ({
   showContinue: showContinueSelector(state)

@@ -3,11 +3,10 @@ import {bindActionCreators, Dispatch} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {$call} from 'utility-types'
 import {NameInputList} from '../name-input-list'
 import {entryOptionsValidator} from './entry-validator'
 import {setPlayerNamesAction} from './actions/set-entry-props'
-import {IRootState, ITranslateMixin} from '../types'
+import {$call, IRootState, ITranslateMixin} from '../types'
 
 // Getters and setters for name input list element
 export const getter = (val: string) => val

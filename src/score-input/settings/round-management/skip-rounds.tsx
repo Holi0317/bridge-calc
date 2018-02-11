@@ -1,16 +1,15 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {$call} from 'utility-types'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {bindActionCreators, Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
-import {IRootState, ITranslateMixin} from '../../../types'
 import {skipAction} from '../../actions/skip'
 import {initSettingsAction} from '../actions/init-settings'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {remainingRoundsSelector} from '../../selectors/remaining-rounds'
 import {currentRoundSelector} from '../../selectors/current-round'
+import {$call, IRootState, ITranslateMixin} from '../../../types'
 import styles from './skip-rounds.css'
 
 const mapStateToProps = (state: IRootState) => ({

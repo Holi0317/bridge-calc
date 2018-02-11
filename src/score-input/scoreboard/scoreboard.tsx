@@ -8,9 +8,8 @@ import {playerScoresSelector} from '../selectors/player-scores'
 import {playerTotalScoreSelector} from '../selectors/player-total-score'
 import {playerRankSelector} from '../selectors/player-rank'
 import {endedRoundsArraySelector} from '../selectors/ended-rounds-array'
+import {$call, IRootState, ITranslateMixin} from '../../types'
 import style from './scoreboard.css'
-import {IRootState, ITranslateMixin} from '../../types'
-import {$call} from 'utility-types'
 
 const mapStateToProps = (state: IRootState) => ({
   names: namesSelector(state),

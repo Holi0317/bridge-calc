@@ -60,8 +60,7 @@
     "react-sortable-hoc": "0.6.8",
     "redux": "3.7.2",
     "redux-persist": "5.7.0",
-    "reselect": "3.0.1",
-    "utility-types": "1.0.0"
+    "reselect": "3.0.1"
   },
   "devDependencies": {
     "@types/i18next": "8.4.3",

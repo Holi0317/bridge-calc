@@ -1,14 +1,13 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {$call} from 'utility-types'
-import {IPlayerMap, IRootState, ITranslateMixin} from '../../../types'
 import {bindActionCreators, Dispatch} from 'redux'
 import {connect} from 'react-redux'
-import {nameInputListSourceSelector, PlayerName} from '../selectors/name-input-list-source'
 import {translate} from 'react-i18next'
-import {setNamesFromArrayAction} from '../actions/set-names'
 import {NameInputList} from '../../../name-input-list'
+import {nameInputListSourceSelector, PlayerName} from '../selectors/name-input-list-source'
+import {setNamesFromArrayAction} from '../actions/set-names'
 import {settingsValidator} from '../settings-validator'
+import {$call, IPlayerMap, IRootState, ITranslateMixin} from '../../../types'
 
 /**
  * Get player name from PlayerName type.

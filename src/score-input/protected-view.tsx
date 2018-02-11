@@ -4,11 +4,10 @@ import {bindActionCreators, Dispatch} from 'redux'
 import {Redirect, Route} from 'react-router'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {$call} from 'utility-types'
 import {GameStage} from './game-stage'
 import {stageSelector} from './selectors/stage'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
-import {IRootState, ITranslateMixin} from '../types'
+import {$call, IRootState, ITranslateMixin} from '../types'
 
 interface IProtectedViewProps {
   comp: React.ComponentType<{}>

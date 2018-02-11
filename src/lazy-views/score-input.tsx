@@ -1,9 +1,8 @@
 import * as React from 'react'
 import Loadable from 'react-loadable'
 import {connect} from 'react-redux'
-import {$call} from 'utility-types'
 import {Loading} from './loading'
-import {IRootState} from '../types'
+import {$call, IRootState} from '../types'
 import {Redirect} from 'react-router'
 
 const importer = () =>

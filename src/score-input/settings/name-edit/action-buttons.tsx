@@ -1,14 +1,13 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {$call} from 'utility-types'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import RaisedButton from 'material-ui/RaisedButton'
-import {IRootState, ITranslateMixin} from '../../../types'
-import style from './name-edit.css'
-import {settingsValidator} from '../settings-validator'
 import {allowNamesCommitSelector} from '../selectors/allow-names-commit'
 import {isMakerCleanSelector} from '../selectors/is-maker-clean'
+import {settingsValidator} from '../settings-validator'
+import {$call, IRootState, ITranslateMixin} from '../../../types'
+import style from './name-edit.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   error: settingsValidator(state, t).misc,

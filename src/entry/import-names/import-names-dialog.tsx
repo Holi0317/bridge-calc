@@ -2,13 +2,12 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
-import {IRootState, ITranslateMixin} from '../../types'
-import {$call} from 'utility-types'
 import {bindActionCreators, Dispatch} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
-import {setImportOpenAction} from '../actions/set-entry-props'
 import Dialog from 'material-ui/Dialog'
 import {ImportNamesContent} from './import-names-content'
+import {setImportOpenAction} from '../actions/set-entry-props'
+import {$call, IRootState, ITranslateMixin} from '../../types'
 
 const mapStateToProps = (state: IRootState) => ({
   open: state.entry.importOpened
