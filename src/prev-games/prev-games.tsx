@@ -1,7 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators, Dispatch} from 'redux'
-import {returntypeof} from 'react-redux-typescript'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {Container} from 'react-grid-system'
@@ -9,7 +8,7 @@ import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {PrevGameEntry} from './types'
 import {PrevGame} from './prev-game'
-import {IRootState} from '../types'
+import {$call, IRootState} from '../types'
 import {deleteGameAction} from './actions/delete-game'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import styles from './prev-games.css'
@@ -27,8 +26,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     load: replaceCurrentGameAction
   }, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type PrevGamesProps = typeof stateType & typeof dispatchType & RouteComponentProps<any>
 

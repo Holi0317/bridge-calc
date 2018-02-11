@@ -1,13 +1,12 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators, Dispatch} from 'redux'
-import {returntypeof} from 'react-redux-typescript'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
+import {ListItem} from 'material-ui/List'
 import {setImportOpenAction, setPlayerNamesAction} from '../actions/set-entry-props'
 import {showToastAction} from '../../toast-singleton/actions/show-toast'
-import {ITranslateMixin} from '../../types'
-import {ListItem} from 'material-ui/List'
+import {$call, ITranslateMixin} from '../../types'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
@@ -16,7 +15,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     setPlayerNames: setPlayerNamesAction
   }, dispatch)
 
-const dispatchType = returntypeof(mapDispatchToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 interface INameEntryProps {
   name: string[]

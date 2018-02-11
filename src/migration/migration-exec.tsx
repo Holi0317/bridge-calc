@@ -2,13 +2,12 @@ import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {connect, Dispatch} from 'react-redux'
 import {translate} from 'react-i18next'
-import {ITranslateMixin} from '../types'
 import {bindActionCreators} from 'redux'
-import {returntypeof} from 'react-redux-typescript'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import {hasOldData, retrieveOldData, deleteOldData, isNotStarted} from './old-state-manager'
 import {migrateOldState} from './converter'
+import {$call, ITranslateMixin} from '../types'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
@@ -16,7 +15,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     replaceCurrentGame: replaceCurrentGameAction
   }, dispatch)
 
-const dispatchType = returntypeof(mapDispatchToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 export class MigrationExecImpl extends React.Component {
   public props: typeof dispatchType & ITranslateMixin

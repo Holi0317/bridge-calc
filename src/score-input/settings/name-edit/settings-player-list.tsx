@@ -1,14 +1,13 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {returntypeof} from 'react-redux-typescript'
-import {IPlayerMap, IRootState, ITranslateMixin} from '../../../types'
 import {bindActionCreators, Dispatch} from 'redux'
 import {connect} from 'react-redux'
-import {nameInputListSourceSelector, PlayerName} from '../selectors/name-input-list-source'
 import {translate} from 'react-i18next'
-import {setNamesFromArrayAction} from '../actions/set-names'
 import {NameInputList} from '../../../name-input-list'
+import {nameInputListSourceSelector, PlayerName} from '../selectors/name-input-list-source'
+import {setNamesFromArrayAction} from '../actions/set-names'
 import {settingsValidator} from '../settings-validator'
+import {$call, IPlayerMap, IRootState, ITranslateMixin} from '../../../types'
 
 /**
  * Get player name from PlayerName type.
@@ -37,8 +36,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     changeNames: setNamesFromArrayAction
   }, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type SettingsPlayerListProps = typeof stateType & typeof dispatchType & ITranslateMixin
 

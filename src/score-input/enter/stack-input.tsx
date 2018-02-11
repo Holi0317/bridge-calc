@@ -2,7 +2,6 @@ import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators, Dispatch} from 'redux'
 import {connect} from 'react-redux'
-import {returntypeof} from 'react-redux-typescript'
 import {translate} from 'react-i18next'
 import {Dropdown} from '../../material/dropdown'
 import {GameStage} from '../game-stage'
@@ -16,7 +15,7 @@ import {bidStackInputSourceSelector} from '../selectors/bid-stack-input-source'
 import {winStackInputSourceSelector} from '../selectors/win-stack-input-source'
 import {setBidAction} from '../actions/set-bid'
 import {setWinAction} from '../actions/set-win'
-import {IRootState, ITranslateMixin} from '../../types'
+import {$call, IRootState, ITranslateMixin} from '../../types'
 import style from './stack-input.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
@@ -34,8 +33,8 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({setBid: setBidAction, setWin: setWinAction}, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 type StackInputProps = typeof stateType & typeof dispatchType & ITranslateMixin
 

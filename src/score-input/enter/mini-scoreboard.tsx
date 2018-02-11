@@ -2,12 +2,11 @@ import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {returntypeof} from 'react-redux-typescript'
 import {namesSelector} from '../selectors/names'
 import {playerPrevScoreSelector} from '../selectors/player-prev-score'
 import {playerTotalScoreSelector} from '../selectors/player-total-score'
 import {playerRankSelector} from '../selectors/player-rank'
-import {IRootState, ITranslateMixin} from '../../types'
+import {$call, IRootState, ITranslateMixin} from '../../types'
 import style from '../scoreboard/scoreboard.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -17,7 +16,7 @@ const mapStateToProps = (state: IRootState) => ({
   ranks: playerRankSelector(state)
 })
 
-const stateType = returntypeof(mapStateToProps)
+const stateType = $call(mapStateToProps)
 
 type MiniScoreboardProps = typeof stateType & ITranslateMixin
 

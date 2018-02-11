@@ -8,9 +8,8 @@ import {playerScoresSelector} from '../selectors/player-scores'
 import {playerTotalScoreSelector} from '../selectors/player-total-score'
 import {playerRankSelector} from '../selectors/player-rank'
 import {endedRoundsArraySelector} from '../selectors/ended-rounds-array'
+import {$call, IRootState, ITranslateMixin} from '../../types'
 import style from './scoreboard.css'
-import {IRootState, ITranslateMixin} from '../../types'
-import {returntypeof} from 'react-redux-typescript'
 
 const mapStateToProps = (state: IRootState) => ({
   names: namesSelector(state),
@@ -20,7 +19,7 @@ const mapStateToProps = (state: IRootState) => ({
   endedRounds: endedRoundsArraySelector(state)
 })
 
-const stateType = returntypeof(mapStateToProps)
+const stateType = $call(mapStateToProps)
 
 type ScoreboardProps = typeof stateType & ITranslateMixin
 

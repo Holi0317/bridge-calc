@@ -3,7 +3,6 @@ import {bindActionCreators, Dispatch} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
-import {returntypeof} from 'react-redux-typescript'
 import RaisedButton from 'material-ui/RaisedButton'
 import {Dropdown} from '../../../material/dropdown'
 import {namesSelector} from '../../selectors/names'
@@ -15,7 +14,7 @@ import {changePlayersAction} from '../../actions/change-players'
 import {initSettingsAction} from '../actions/init-settings'
 import {setMakerAction} from '../actions/set-maker'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
-import {IRootState, ITranslateMixin} from '../../../types'
+import {$call, IRootState, ITranslateMixin} from '../../../types'
 import style from './maker-editor.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -35,8 +34,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const stateType = returntypeof(mapStateToProps)
-const dispatchType = returntypeof(mapDispatchToProps)
+const stateType = $call(mapStateToProps)
+const dispatchType = $call(mapDispatchToProps)
 
 export class MakerEditorImpl extends React.Component {
   public props: typeof stateType & typeof dispatchType & ITranslateMixin
