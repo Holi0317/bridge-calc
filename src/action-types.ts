@@ -30,5 +30,8 @@ export enum ActionTypes {
 
   // Toast Singleton module
   SHOW_TOAST = 'TOAST/SHOW',
-  CLOSE_TOAST = 'TOAST/CLOSE'
+  CLOSE_TOAST = 'TOAST/CLOSE',
+
+  // Theme module
+  SET_THEME = 'THEME/SET_THEME'
 }

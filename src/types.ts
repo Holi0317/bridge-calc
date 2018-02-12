@@ -8,6 +8,7 @@ import {i18n, TranslationFunction} from 'i18next'
 import {IPrevGamesState} from './prev-games/prev-games-reducer'
 import {PrevGamesActions} from './prev-games/actions'
 import {IToastSingletonState} from './toast-singleton/toast-singleton-reducer'
+import {IThemeState} from './theme/theme-reducer'
 
 export interface IPlayerMap<T> {[playerID: string]: T}
 
@@ -27,7 +28,8 @@ export interface IRootState {
   entry: IEntryState,
   gameSettings: ISettingsState,
   prevGames: IPrevGamesState,
-  toastSingleton: IToastSingletonState
+  toastSingleton: IToastSingletonState,
+  theme: IThemeState
 }
 
 export type Actions =
