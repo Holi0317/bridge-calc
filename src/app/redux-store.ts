@@ -13,7 +13,7 @@ const presistConfig = {
   key: 'root',
   version: 1,
   debug: process.env.NODE_ENV === 'development',
-  whitelist: ['prevGames', 'currentGame'],
+  whitelist: ['prevGames', 'currentGame', 'theme'],
   storage
 }
 

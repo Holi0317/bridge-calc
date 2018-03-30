@@ -33,5 +33,6 @@ export enum ActionTypes {
   CLOSE_TOAST = 'TOAST/CLOSE',
 
   // Theme module
-  SET_THEME = 'THEME/SET_THEME'
+  SET_THEME = 'THEME/SET_THEME',
+  SET_AUTO_DARK = 'THEME/SET_AUTO_DARK'
 }

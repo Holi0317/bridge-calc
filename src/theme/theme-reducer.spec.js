@@ -1,10 +1,12 @@
 import {themeReducer as reducer} from './theme-reducer'
-import {setThemeAction, setAutoDarkThemeAction, setDarkThresholdAction} from './actions/set-theme'
+import {setThemeAction, setDarkThresholdAction, setIllumanceAction} from './actions/set-theme'
+import {setAutoDarkAction} from './actions/set-auto-dark'
 
 const defaultState = {
   theme: 'default',
   autoDarkTheme: false,
-  darkThreshold: 1000
+  darkThreshold: 1000,
+  currentIllumance: null
 }
 
 test('default state', () => {
@@ -28,12 +30,28 @@ test('setThemeAction should work', () => {
   expect(actual).toEqual(expected)
 })
 
-test('setAutoDarkThemeAction should work', () => {
+test('setAutoDarkAction should work', () => {
   const state = defaultState
-  const action = setAutoDarkThemeAction(true)
+  const action = setAutoDarkAction(true)
   const expected = {
     ...defaultState,
     autoDarkTheme: true
+  }
+  const actual = reducer(state, action)
+  expect(actual).toEqual(expected)
+})
+
+test('setAutoDarkAction should clear current illumance when disabled', () => {
+  const state = {
+    ...defaultState,
+    autoDarkTheme: true,
+    currentIllumance: 2048
+  }
+  const action = setAutoDarkAction(false)
+  const expected = {
+    ...defaultState,
+    autoDarkTheme: false,
+    currentIllumance: null
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
@@ -45,6 +63,17 @@ test('setDarkThresholdAction should work', () => {
   const expected = {
     ...defaultState,
     darkThreshold: 2000
+  }
+  const actual = reducer(state, action)
+  expect(actual).toEqual(expected)
+})
+
+test('setIllumanceAction should work', () => {
+  const state = defaultState
+  const action = setIllumanceAction(1000)
+  const expected = {
+    ...defaultState,
+    currentIllumance: 1000
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)

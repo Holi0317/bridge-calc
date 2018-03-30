@@ -1,5 +1,5 @@
 import {ActionTypes} from '../../action-types'
-import {setThemeAction, setAutoDarkThemeAction, setDarkThresholdAction} from './set-theme'
+import {setThemeAction, setDarkThresholdAction, setIllumanceAction} from './set-theme'
 
 test('it should return set theme action', () => {
   const expected = {
@@ -10,20 +10,29 @@ test('it should return set theme action', () => {
   expect(actual).toEqual(expected)
 })
 
-test('it should return set autoDarkTheme property action', () => {
-  const expected = {
-    type: ActionTypes.SET_THEME,
-    autoDarkTheme: true
-  }
-  const actual = setAutoDarkThemeAction(true)
-  expect(actual).toEqual(expected)
-})
-
-test('it should return setDarkThreshold action', () => {
+test('it should return set dark thereshold action', () => {
   const expected = {
     type: ActionTypes.SET_THEME,
     darkThreshold: 1000
   }
   const actual = setDarkThresholdAction(1000)
+  expect(actual).toEqual(expected)
+})
+
+test('it should return set illumance action for numeric illumance', () => {
+  const expected = {
+    type: ActionTypes.SET_THEME,
+    currentIllumance: 5216
+  }
+  const actual = setIllumanceAction(5216)
+  expect(actual).toEqual(expected)
+})
+
+test('it should return set illumance action for null illumance', () => {
+  const expected = {
+    type: ActionTypes.SET_THEME,
+    currentIllumance: null
+  }
+  const actual = setIllumanceAction(null)
   expect(actual).toEqual(expected)
 })
