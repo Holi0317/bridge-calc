@@ -7,10 +7,8 @@ import {IRootState} from '../../types'
 
 /**
  * Return theme according to current selection from redux state.
- * Second parameter: Illuminance level from light sensor.
  * If the light level is lower than threshold and auto dark theme is enabled,
  * dark theme would be returned.
- * If light sensor is not available, pass in null for second parameter.
  */
 export const activatedThemeSelector = createSelector(
   (state: IRootState) => state.theme,

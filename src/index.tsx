@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {I18nextProvider} from 'react-i18next'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {ThemeProvider} from './theme/theme-provider'
 import {PersistGate} from 'redux-persist/es/integration/react'
 import {HttpsRedirect} from './https-redirect'
 import {Shell} from './shell'
@@ -19,13 +19,13 @@ function Root() {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <I18nextProvider i18n={i18n}>
-            <BrowserRouter basename={basenameProcess(document.baseURI || '/')}>
-              <MuiThemeProvider muiTheme={muiTheme}>
+            <ThemeProvider>
+              <BrowserRouter basename={basenameProcess(document.baseURI || '/')}>
                 <ErrorBoundary>
                   <Shell />
                 </ErrorBoundary>
-              </MuiThemeProvider>
-            </BrowserRouter>
+              </BrowserRouter>
+            </ThemeProvider>
           </I18nextProvider>
         </PersistGate>
       </Provider>
