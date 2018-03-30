@@ -13,6 +13,7 @@ function makeTree(rest) {
       theme: 'default',
       autoDarkTheme: false,
       darkThreshold: 1000,
+      currentIlluminance: null,
       ...rest
     }
   }
@@ -21,8 +22,7 @@ function makeTree(rest) {
 test('it should return default theme in default situation', () => {
   const expected = themes.get('default')
   const state = makeTree({})
-  const illuminance = null
-  const actual = activatedThemeSelector(state, illuminance)
+  const actual = activatedThemeSelector(state)
   expect(actual).toEqual(expected)
 })
 
@@ -31,18 +31,17 @@ test('it should return dark theme if it is selected', () => {
   const state = makeTree({
     theme: 'dark'
   })
-  const illuminance = null
-  const actual = activatedThemeSelector(state, illuminance)
+  const actual = activatedThemeSelector(state)
   expect(actual).toEqual(expected)
 })
 
 test('it should return dark theme if illuminance is too low', () => {
   const expected = themes.get('dark')
   const state = makeTree({
-    autoDarkTheme: true
+    autoDarkTheme: true,
+    currentIlluminance: 1
   })
-  const illuminance = 1
-  const actual = activatedThemeSelector(state, illuminance)
+  const actual = activatedThemeSelector(state)
   expect(actual).toEqual(expected)
 })
 
@@ -51,8 +50,7 @@ test('it should return other themes also', () => {
   const state = makeTree({
     theme: 'teal'
   })
-  const illuminance = null
-  const actual = activatedThemeSelector(state, illuminance)
+  const actual = activatedThemeSelector(state)
   expect(actual).toEqual(expected)
 })
 
@@ -60,10 +58,10 @@ test('it should return selected theme if illuminance is high', () => {
   const expected = themes.get('teal')
   const state = makeTree({
     theme: 'teal',
-    autoDarkTheme: true
+    autoDarkTheme: true,
+    currentIlluminance: 100000
   })
-  const illuminance = 100000
-  const actual = activatedThemeSelector(state, illuminance)
+  const actual = activatedThemeSelector(state)
   expect(actual).toEqual(expected)
 })
 
@@ -72,7 +70,6 @@ test('it should return default theme if selected theme is not available', () => 
   const state = makeTree({
     theme: 'awesome-theme-but-this-does-not-exist-🎉'
   })
-  const illuminance = null
-  const actual = activatedThemeSelector(state, illuminance)
+  const actual = activatedThemeSelector(state)
   expect(actual).toEqual(expected)
 })

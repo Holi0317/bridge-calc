@@ -6,17 +6,17 @@ export interface IThemeState {
   theme: string
   /** Automatically turn on dark theme in dark environment? */
   autoDarkTheme: boolean
-  /** Illumance (in lux) threshold for dark theme to operate */
+  /** Illuminance (in lux) threshold for dark theme to operate */
   darkThreshold: number
   /** Current illuminance (in lux) detected. Null if sensor not available */
-  currentIllumance: number | null
+  currentIlluminance: number | null
 }
 
 const defaultState: IThemeState = {
   theme: 'default',
   autoDarkTheme: false,
   darkThreshold: 1000,
-  currentIllumance: null
+  currentIlluminance: null
 }
 
 export function themeReducer(state = defaultState, action: ThemeActions): IThemeState {
@@ -31,8 +31,8 @@ export function themeReducer(state = defaultState, action: ThemeActions): ITheme
     case ActionTypes.SET_AUTO_DARK:
       return {
         ...state,
-        currentIllumance: action.payload
-          ? state.currentIllumance
+        currentIlluminance: action.payload
+          ? state.currentIlluminance
           : null,
         autoDarkTheme: action.payload
       }

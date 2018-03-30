@@ -2,6 +2,7 @@ import {createSelector} from 'reselect'
 import {defaultTheme, themes} from '../color-presets'
 import {IThemeState} from '../theme-reducer'
 import {ITheme} from '../types'
+import {illuminanceSelector} from './illuminance'
 import {IRootState} from '../../types'
 
 /**
@@ -13,7 +14,7 @@ import {IRootState} from '../../types'
  */
 export const activatedThemeSelector = createSelector(
   (state: IRootState) => state.theme,
-  (_: IRootState, illuminance: number | null) => illuminance,
+  illuminanceSelector,
   (theme: IThemeState, illuminance: number | null): ITheme => {
     const useDark = theme.autoDarkTheme && illuminance && illuminance < theme.darkThreshold
     if (useDark) {
