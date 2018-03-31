@@ -48,7 +48,7 @@ export class MakerEditorImpl extends React.Component {
         <div className={style.chooserContainer}>
           <Dropdown label={t('Maker')} disabled={disabled}
                     source={disabled ? [] : namesSource} value={disabled ? '' : maker || ''} onChange={setMaker} />
-          <RaisedButton primary={true} disabled={disabled} onClick={this.commit}>{t('Change maker')}</RaisedButton>
+          <RaisedButton primary={true} disabled={disabled} label={t('Change maker')} onClick={this.commit} />
         </div>
         {disabled
           ? <div className={style.disabledHint}>{t('Maker edit is disabled when editing player names')}</div>

@@ -1,5 +1,4 @@
 .options-btn {
-  display: block;
   width: 100%;
 }
 
@@ -38,4 +37,8 @@
 
 .collapse.collapse-open {
   max-height: 10em;
+}
+
+.text {
+  color: var(--text-color);
 }

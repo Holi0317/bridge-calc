@@ -6,6 +6,7 @@
 
 /* Table element. Contains some general styling */
 .table {
+  color: var(--text-color);
   table-layout: fixed;
   white-space: nowrap;
 

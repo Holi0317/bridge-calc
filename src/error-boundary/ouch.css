@@ -8,11 +8,16 @@
   text-align: center;
 }
 
+.text,
+.sad-face,
+.error-message {
+  color: var(--text-color);
+}
+
 .sad-face {
   font-weight: 700;
   font-size: 72px;
   padding-bottom: 1em;
-  color: rgba(0, 0, 0, 0.66);
 }
 
 .error-message {

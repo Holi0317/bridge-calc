@@ -29,7 +29,7 @@ export function CollapsedEntryOptionsImpl({toggleOptionOpen, optionsOpened, t}: 
 
   return (
     <div>
-      <RaisedButton onClick={toggleOptionOpen} className={style.optionsBtn}>{t('Options')}</RaisedButton>
+      <RaisedButton onClick={toggleOptionOpen} className={style.optionsBtn} label={t('Options')} />
       <div className={collapseCss.join(' ')}>
         <EntryOptions />
       </div>

@@ -3,25 +3,25 @@ import {TileLink} from './tile-link'
 import style from './tile.css'
 
 export interface ITileProps {
+  /** Title of the tile */
   title: string
+  /** Icon for the title, in React element format */
   icon: React.ReactNode
+  /** Path of the link for this tile links to */
   to?: string
+  /** `true` for external (not in the scope of this app) link */
   external?: boolean
+  /** Same functionality as HTML anchor element's `target` props */
   target?: string
 }
 
 /**
  * A tile represents a block on menu
- * @param props.title - Title for the tile
- * @param props.icon - Icon for the tile, in React element format
- * @param props.to - Path of the link that this tile links to
- * @param props.external - If the link is an external link or not.
- * By default, all links are internal links.
- * @param props.target - Same functionality as HTML anchor element's `target` props.
  */
 export function Tile(props: ITileProps) {
   const {title, icon, external, target} = props
   const to = props.to || '/'
+
   return (
     <TileLink to={to} external={external} target={target}>
       <div className={style.tile}>

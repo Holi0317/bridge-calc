@@ -17,7 +17,7 @@ export function OuchImpl({error, t}: IOuchProps & ITranslateMixin) {
       <div className={style.sadFace}>
         :-(
       </div>
-      <div>
+      <div className={style.text}>
         {t('Ouch! An error has occurred.')}
       </div>
       <div className={style.reloadLink} onClick={reload}>

@@ -12,11 +12,12 @@
   width: 8em !important;
   height: 8em !important;
   margin-bottom: 1em !important;
-  fill: rgba(0, 0, 0, 0.66) !important;
+  fill: var(--text-color) !important;
 }
 
 .text {
   font-size: 22px;
+  color: var(--text-color);
 }
 
 .link {

@@ -16,15 +16,11 @@ interface ISortableItemProps extends ITranslateMixin {
   remove(): void,
 }
 
-const floatStyle = {
-  color: 'rgba(0, 0, 0, 0.5)'
-}
-
 export function SortableItemImpl({value, onChange, remove, error, t}: ISortableItemProps) {
   return (
     <div className={style.itemContainer}>
       <DragHandle />
-      <TextField type="text" fullWidth={true} floatingLabelText={t('Player name')} floatingLabelStyle={floatStyle}
+      <TextField type="text" fullWidth={true} floatingLabelText={t('Player name')}
                  value={value} errorText={error} onChange={onChange} />
       <IconButton tooltip={t('Delete name')} onClick={remove}><ActionDelete width="24px" height="24px" /></IconButton>
     </div>

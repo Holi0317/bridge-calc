@@ -37,9 +37,9 @@ export class ActionButtonsImpl extends React.Component {
       : undo
     return (
       <div className={style.btnContainer}>
-        <RaisedButton primary={true} disabled={nextDisabled} onClick={this.next}>{t('Next')}</RaisedButton>
+        <RaisedButton primary={true} disabled={nextDisabled} label={t('Next')} onClick={this.next} />
         <div className={style.stretch}/>
-        <RaisedButton disabled={undoDisabled} onClick={undoHandler}>{t('Undo')}</RaisedButton>
+        <RaisedButton disabled={undoDisabled} label={t('Undo')} onClick={undoHandler} />
       </div>
     )
   }

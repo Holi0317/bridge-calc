@@ -33,7 +33,7 @@ export class EntryStartButtonImpl extends React.PureComponent {
     const {valid, miscError, t} = this.props
     return (
       <div className={style.startBtnContainer}>
-        <RaisedButton primary={true} disabled={!valid} onClick={this.start}>{t('Start')}</RaisedButton>
+        <RaisedButton primary={true} disabled={!valid} onClick={this.start} label={t('Start')} />
         <span className={style.errorMessage}>{miscError}</span>
       </div>
     )
