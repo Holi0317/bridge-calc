@@ -8,6 +8,6 @@
 }
 
 .error-message {
-  color: #ef5350;
+  color: var(--error-text-color);
   padding-left: 1em;
 }

@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect'
 import {activatedThemeSelector} from './activated-theme'
 import {MuiTheme} from 'material-ui/styles'
-import {fullWhite, white, darkBlack} from 'material-ui/styles/colors'
+import {red500, fullWhite, white, darkBlack} from 'material-ui/styles/colors'
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import {fade} from 'material-ui/utils/colorManipulator'
 
@@ -15,7 +15,8 @@ export const cssPropsSelector = createSelector(
     return new Map([
       ['--bg-color', palette.canvasColor || white],
       ['--text-color', palette.textColor || fullWhite],
-      ['--hover-color', fade(palette.textColor || darkBlack, 0.1)]
+      ['--hover-color', fade(palette.textColor || darkBlack, 0.1)],
+      ['--error-text-color', red500]
     ])
   }
 )

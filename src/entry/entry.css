@@ -10,7 +10,7 @@
 }
 
 .error-message {
-  color: rgb(222, 50, 38);
+  color: var(--error-text-color);
   padding-left: 1em;
 }
 
