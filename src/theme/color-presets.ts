@@ -1,5 +1,5 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import {pink500, pink700, tealA200, grey600, tealA400, tealA100} from 'material-ui/styles/colors'
+import {pink500, pink700, tealA200, grey600, tealA400, tealA100, lightBlue500, lightBlue700, pinkA200, blueGrey500, blueGrey700, teal400} from 'material-ui/styles/colors'
 import {MuiTheme} from 'material-ui/styles'
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
 
@@ -24,8 +24,27 @@ const darkTheme: MuiTheme = getMuiTheme(darkBaseTheme, {
 
 const tealTheme: MuiTheme = getMuiTheme()
 
+const blueTheme: MuiTheme = getMuiTheme({
+  palette: {
+    primary1Color: lightBlue500,
+    primary2Color: lightBlue700,
+    accent1Color: pinkA200
+  }
+})
+
+const greyTheme: MuiTheme = getMuiTheme({
+  palette: {
+    primary1Color: blueGrey500,
+    primary2Color: blueGrey700,
+    primary3Color: teal400,
+    accent1Color: pinkA200
+  }
+})
+
 export const themes: Map<string, MuiTheme> = new Map([
   ['default', defaultTheme],
   ['dark', darkTheme],
-  ['teal', tealTheme]
+  ['teal', tealTheme],
+  ['blue', blueTheme],
+  ['grey', greyTheme]
 ])
