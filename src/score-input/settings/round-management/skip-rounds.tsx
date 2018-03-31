@@ -35,9 +35,12 @@ export class SkipRoundsImpl extends React.Component {
     const {remainingRounds, t} = this.props
     return (
       <div className={styles.btnContainer}>
-        <FlatButton className={styles.btn} onClick={this.skip(1)} label={t('Skip this round')}/>
-        <FlatButton className={styles.btn} onClick={this.skip(remainingRounds - 1)} label={t('Skip to last round')}/>
-        <FlatButton className={styles.btn} onClick={this.skip(remainingRounds)} label={t('End game')}/>
+        <FlatButton className={styles.btn} label={t('Skip this round')}
+                    onClick={this.skip(1)} />
+        <FlatButton className={styles.btn} label={t('Skip to last round')}
+                    disabled={remainingRounds <= 1} onClick={this.skip(remainingRounds - 1)} />
+        <FlatButton className={styles.btn} label={t('End game')}
+                    onClick={this.skip(remainingRounds)} />
       </div>
     )
   }
