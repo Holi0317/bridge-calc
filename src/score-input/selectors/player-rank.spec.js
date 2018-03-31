@@ -11,7 +11,7 @@ test('null state should produce empty object', () => {
 })
 
 test('1st round should produce all 1st place', () => {
-  const expected = genMap('1st', '1st', '1st', '1st')
+  const expected = genMap('1st 👑', '1st 👑', '1st 👑', '1st 👑')
   const state = {
     currentGame: {
       ...waitingBidState
@@ -22,7 +22,7 @@ test('1st round should produce all 1st place', () => {
 })
 
 test('3rd round should rank properly', () => {
-  const expected = genMap('2nd', '4th', '1st', '2nd')
+  const expected = genMap('2nd 🥈', '4th 💩', '1st 👑', '2nd 🥈')
   const state = {
     currentGame: {
       ...waitingBidState,
