@@ -26,7 +26,7 @@ const darkTheme: ITheme = {
       canvasColor: '#303030'
     }
   }),
-  backgroundColor: 'black'
+  backgroundColor: '#303030'
 }
 
 const tealTheme: ITheme = {

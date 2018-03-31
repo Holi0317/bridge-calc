@@ -14,6 +14,9 @@ class ThemeProviderImpl extends React.Component {
   public props: typeof stateType & {children: React.ReactNode}
 
   public render() {
+    if (document.body) {
+      document.body.style.setProperty('--bg-color', this.props.theme.backgroundColor)
+    }
     return <MuiThemeProvider muiTheme={this.props.theme.mui}>
       {this.props.children}
     </MuiThemeProvider>
