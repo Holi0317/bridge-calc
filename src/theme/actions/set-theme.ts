@@ -2,9 +2,7 @@ import {ActionTypes} from '../../action-types'
 
 export interface ISetThemeAction {
   type: ActionTypes.SET_THEME
-  theme?: string
-  darkThreshold?: number
-  currentIlluminance?: number | null
+  theme: string
 }
 
 /**
@@ -13,22 +11,4 @@ export interface ISetThemeAction {
  */
 export function setThemeAction(theme: string): ISetThemeAction {
   return {type: ActionTypes.SET_THEME, theme}
-}
-
-/**
- * Set threshold for dark theme to activate.
- * Unit for this is lux.
- * If auto dark is disabled, this number will have no use.
- */
-export function setDarkThresholdAction(darkThreshold: number): ISetThemeAction {
-  return {type: ActionTypes.SET_THEME, darkThreshold}
-}
-
-/**
- * Set current illuminance received from light sensor.
- * If light sensor is not available, null should be set.
- * Unit for illuminance is lux.
- */
-export function setIlluminanceAction(illuminance: number | null): ISetThemeAction {
-  return {type: ActionTypes.SET_THEME, currentIlluminance: illuminance}
 }
