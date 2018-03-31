@@ -1,5 +1,5 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import {pink500, pink700, tealA200, grey600, tealA400, tealA100, fullWhite, white} from 'material-ui/styles/colors'
+import {pink500, pink700, tealA200, grey600, tealA400, tealA100} from 'material-ui/styles/colors'
 import {MuiTheme} from 'material-ui/styles'
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
 
