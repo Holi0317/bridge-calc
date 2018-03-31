@@ -97,6 +97,7 @@ End game: End game
 Already at the last round. Cannot skip.: Already at the last round. Cannot skip.
 
 # Global settings
+Change theme: Change theme
 Change language: Change language
 "Error when changing language. Error: {{err}}": "Error when changing language. Error: {{err}}"
 Changed language successfully: Changed language successfully

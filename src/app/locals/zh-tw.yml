@@ -7,8 +7,6 @@ Scoreboard: 計分板
 Game over: 遊戲終了
 Round {{currentRound}} of {{rounds}}: "第 {{currentRound}} 回合 / {{rounds}} 個回合"
 Not found: 找不到網頁
-Help: 幫助
-Back to menu: 回到主目錄
 
 # 404 Page
 Page not found!: 找不到網頁
@@ -99,6 +97,7 @@ End game: 結束遊戲
 Already at the last round. Cannot skip.: 已經在最後一個回合
 
 # Global settings
+Change theme: 更改配色
 Change language: 更改語言
 "Error when changing language. Error: {{err}}": "更改語言時發生錯誤 原因: {{err}}"
 Changed language successfully: 成功更改語言
@@ -120,6 +119,6 @@ Click here to start a new game: 按此以開始一局新的遊戲
 "With {{players}}": "成員: {{players}}"
 Delete: 刪除
 "Time used: {{timeUsed}}": "已用的時間: {{timeUsed}}"
-#
+
 # Migration from v1.0.0 messages
 Migrated game data from old version: 已經從舊版本中匯入資料
