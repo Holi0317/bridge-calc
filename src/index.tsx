@@ -33,10 +33,4 @@ function Root() {
   )
 }
 
-if (process.env.NODE_ENV === 'development') {
-  // tslint:disable-next-line:no-var-requires no-implicit-dependencies no-require-imports
-  const axe = require('react-axe')
-  axe(React, ReactDOM, 1000)
-}
-
 ReactDOM.render(<Root />, document.querySelector('.root'))

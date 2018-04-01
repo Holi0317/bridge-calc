@@ -4,7 +4,7 @@ import * as LngDetector from 'i18next-browser-languagedetector'
 import * as XHR from 'i18next-xhr-backend'
 
 function loadLocales(url: string, _options: any, callback: any) {
-  import(`./locals/${url}.yml` /* webpackChunkName: "i18n-[index]" */)
+  import(`./locals/${url}.json` /* webpackChunkName: "i18n-[index]" */)
     .then(local => {
       callback(local, {status: '200'})
     })

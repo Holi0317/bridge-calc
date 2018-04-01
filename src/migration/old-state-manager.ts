@@ -24,7 +24,7 @@ export function retrieveOldData(): IOldGameData | null {
   if (Object.values(dataMap).includes(null)) {
     return null
   } else {
-    return dataMap
+    return dataMap as any
   }
 }
 

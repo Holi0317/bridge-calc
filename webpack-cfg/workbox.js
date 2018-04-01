@@ -1,18 +1,15 @@
-const path = require('path')
-const WorkboxPlugin = require('workbox-webpack-plugin')
-
-const DIST_DIR = 'dist'
+const {GenerateSW} = require('workbox-webpack-plugin')
 
 module.exports = {
   plugins: [
-    new WorkboxPlugin({
-      globDirectory: DIST_DIR,
-      globPatterns: ['**/*.{html,js,css}'],
-      globIgnores: ['report.html', '404.html', 'sw.js', 'service-worker.js'],
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
-      navigateFallback: '/index.html',
+    new GenerateSW({
+      swDest: 'sw.js',
+      clientsClaim: true,
       skipWaiting: true,
-      swDest: path.join(DIST_DIR, 'sw.js')
+
+      exclude: ['report.html', '404.html', 'sw.js', 'service-worker.js'],
+      navigateFallback: '/index.html',
+      navigateFallbackBlacklist: [/report.html/]
     })
   ]
 }
