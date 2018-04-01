@@ -12,7 +12,7 @@ const babelOpt = {
 }
 
 const htmlSettings = {
-  template: 'index.ejs',
+  template: 'assets/index.ejs',
   chunksSortMode: 'dependency',
   minify: (ENV === 'production') ? {
     removeComments: true,

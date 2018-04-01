@@ -16,7 +16,7 @@
   "scripts": {
     "test": "jest",
     "lint": "npm run lint:js && npm run lint:ts && npm run lint:css",
-    "lint:css": "stylelint src/**/*.css splash.css",
+    "lint:css": "stylelint src/**/*.css assets/splash.css",
     "lint:js": "eslint --ext .jsx,.js --cache webpack-cfg test *.config.js src",
     "lint:js:fix": "eslint --ext .jsx,.js --fix --cache webpack-cfg test *.config.js src",
     "lint:ts": "tslint -c tslint.json -p tsconfig.json -t stylish",
@@ -25,7 +25,7 @@
     "prebuild:prod": "npm run clean",
     "build:prod": "cross-env NODE_ENV=production npm run webpack -- --profile --mode production",
     "postbuild:prod": "cp dist/index.html dist/404.html && cp dist/sw.js dist/service-worker.js",
-    "build-splash-css": "postcss splash.css --no-map -u cssnano postcss-cssnext",
+    "build-splash-css": "postcss assets/splash.css --no-map -u cssnano postcss-cssnext",
     "start": "npm run server:dev",
     "server": "npm run server:dev",
     "server:dev": "cross-env NODE_ENV=development npm run webpack-dev-server -- --inline --profile --watch",
