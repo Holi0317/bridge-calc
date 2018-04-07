@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import {ImportNamesContent} from './import-names-content'
 import {setImportOpenAction} from '../actions/set-entry-props'
-import {$call, IRootState, ITranslateMixin} from '../../types'
+import {IRootState, ITranslateMixin} from '../../types'
 
 const mapStateToProps = (state: IRootState) => ({
   open: state.entry.importOpened
@@ -18,10 +18,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     setImportOpen: setImportOpenAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type ImportNamesDialogProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type ImportNamesDialogProps = stateType & dispatchType & ITranslateMixin
 
 export class ImportNamesDialogImpl extends React.Component {
   public props: ImportNamesDialogProps

@@ -7,7 +7,7 @@ import {Dropdown} from '../material/dropdown'
 import {themeSources} from '../theme/theme-sources'
 import {selectedThemeSelector} from '../theme/selectors/selected-theme'
 import {setThemeAction} from '../theme/actions/set-theme'
-import {$call, IRootState, ITranslateMixin} from '../types'
+import {IRootState, ITranslateMixin} from '../types'
 
 const mapStateToProps = (state: IRootState) => ({
   selectedTheme: selectedThemeSelector(state)
@@ -16,10 +16,10 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({setTheme: setThemeAction}, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type ThemeSelectionProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type ThemeSelectionProps = stateType & dispatchType & ITranslateMixin
 
 export function ThemeSelectionImpl({selectedTheme, setTheme, t}: ThemeSelectionProps) {
   return <Dropdown label={t('Change theme')}

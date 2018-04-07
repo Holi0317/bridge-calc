@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators, Dispatch} from 'redux'
-import {$call, IRootState} from '../types'
 import {closeToastAction} from './actions/close-toast'
 import Snackbar from 'material-ui/Snackbar'
+import {IRootState} from '../types'
 
 const mapStateToProps = (state: IRootState) => ({
   param: state.toastSingleton
@@ -14,10 +14,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     close: closeToastAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type ToastSingletonProps = typeof stateType & typeof dispatchType
+type ToastSingletonProps = stateType & dispatchType
 
 export function ToastSingletonImpl({param, close}: ToastSingletonProps) {
   return <Snackbar

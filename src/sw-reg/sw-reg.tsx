@@ -4,16 +4,16 @@ import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {bindActionCreators, Dispatch} from 'redux'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
-import {$call, ITranslateMixin} from '../types'
+import {ITranslateMixin} from '../types'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
     showToast: showToastAction
   }, dispatch)
 
-const dispatchType = $call(mapDispatchToProps)
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type SWRegProps = typeof dispatchType & ITranslateMixin
+type SWRegProps = dispatchType & ITranslateMixin
 
 class SWRegImpl extends React.Component {
   public props: SWRegProps

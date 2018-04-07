@@ -10,7 +10,7 @@ import {isStackInputValid} from './stack-input-validator'
 import {bidAction} from '../actions/bid'
 import {winAction} from '../actions/win'
 import {undoAction} from '../actions/undo'
-import {$call, IRootState, ITranslateMixin} from '../../types'
+import {IRootState, ITranslateMixin} from '../../types'
 import style from './action-buttons.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
@@ -22,10 +22,10 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({bid: bidAction, win: winAction, undo: undoAction}, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type ActionButtonsProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type ActionButtonsProps = stateType & dispatchType & ITranslateMixin
 
 export class ActionButtonsImpl extends React.Component {
   public props: ActionButtonsProps

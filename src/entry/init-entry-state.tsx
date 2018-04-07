@@ -4,14 +4,13 @@ import {connect} from 'react-redux'
 import {genRandomNames} from '../example-names'
 import {setPlayerNamesAction} from './actions/set-entry-props'
 import {resetAction} from './actions/reset'
-import {$call} from '../types'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({reset: resetAction, setPlayerNames: setPlayerNamesAction}, dispatch)
 
-const dispatchType = $call(mapDispatchToProps)
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type InitEntryStateProps = typeof dispatchType
+type InitEntryStateProps = dispatchType
 
 export class InitEntryStateImpl extends React.PureComponent {
   public props: InitEntryStateProps

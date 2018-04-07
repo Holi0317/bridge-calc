@@ -15,7 +15,7 @@ import {bidStackInputSourceSelector} from '../selectors/bid-stack-input-source'
 import {winStackInputSourceSelector} from '../selectors/win-stack-input-source'
 import {setBidAction} from '../actions/set-bid'
 import {setWinAction} from '../actions/set-win'
-import {$call, IRootState, ITranslateMixin} from '../../types'
+import {IRootState, ITranslateMixin} from '../../types'
 import style from './stack-input.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
@@ -33,10 +33,10 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({setBid: setBidAction, setWin: setWinAction}, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type StackInputProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type StackInputProps = stateType & dispatchType & ITranslateMixin
 
 export class StackInputImpl extends React.Component {
   public props: StackInputProps

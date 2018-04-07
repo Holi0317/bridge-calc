@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {Dropdown} from '../material/dropdown'
 import {setRoundsAction, setStartingRoundAction} from './actions/set-entry-props'
 import {optionsSourcesSelector} from './selectors/options-sources'
-import {$call, IRootState, ITranslateMixin} from '../types'
+import {IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => {
@@ -24,10 +24,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     setStartingRound: setStartingRoundAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type EntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type EntryOptionsProps = stateType & dispatchType & ITranslateMixin
 
 export function EntryOptionsImpl({t, sources, rounds, startingRound, setRounds, setStartingRound}: EntryOptionsProps) {
   return (

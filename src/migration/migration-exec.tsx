@@ -7,7 +7,7 @@ import {showToastAction} from '../toast-singleton/actions/show-toast'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import {hasOldData, retrieveOldData, deleteOldData, isNotStarted} from './old-state-manager'
 import {migrateOldState} from './converter'
-import {$call, ITranslateMixin} from '../types'
+import {ITranslateMixin} from '../types'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
@@ -15,10 +15,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     replaceCurrentGame: replaceCurrentGameAction
   }, dispatch)
 
-const dispatchType = $call(mapDispatchToProps)
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
 export class MigrationExecImpl extends React.Component {
-  public props: typeof dispatchType & ITranslateMixin
+  public props: dispatchType & ITranslateMixin
 
   public componentDidMount() {
     setTimeout(() => {

@@ -8,7 +8,7 @@ import {playerScoresSelector} from '../selectors/player-scores'
 import {playerTotalScoreSelector} from '../selectors/player-total-score'
 import {playerRankSelector} from '../selectors/player-rank'
 import {endedRoundsArraySelector} from '../selectors/ended-rounds-array'
-import {$call, IRootState, ITranslateMixin} from '../../types'
+import {IRootState, ITranslateMixin} from '../../types'
 import style from './scoreboard.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -19,9 +19,9 @@ const mapStateToProps = (state: IRootState) => ({
   endedRounds: endedRoundsArraySelector(state)
 })
 
-const stateType = $call(mapStateToProps)
+type stateType = ReturnType<typeof mapStateToProps>
 
-type ScoreboardProps = typeof stateType & ITranslateMixin
+type ScoreboardProps = stateType & ITranslateMixin
 
 export function ScoreboardImpl({t, names, scores, endedRounds, totalScores, ranks}: ScoreboardProps) {
   return (

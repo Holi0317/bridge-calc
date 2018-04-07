@@ -14,7 +14,7 @@ import {changePlayersAction} from '../../actions/change-players'
 import {initSettingsAction} from '../actions/init-settings'
 import {setMakerAction} from '../actions/set-maker'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
-import {$call, IRootState, ITranslateMixin} from '../../../types'
+import {IRootState, ITranslateMixin} from '../../../types'
 import style from './maker-editor.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -34,11 +34,11 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
 export class MakerEditorImpl extends React.Component {
-  public props: typeof stateType & typeof dispatchType & ITranslateMixin
+  public props: stateType & dispatchType & ITranslateMixin
 
   public render() {
     const {maker, namesSource, disabled, setMaker, t} = this.props

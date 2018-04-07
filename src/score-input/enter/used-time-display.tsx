@@ -3,7 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {endTimeSelector, startTimeSelector} from '../selectors/time'
-import {$call, IRootState, ITranslateMixin} from '../../types'
+import {IRootState, ITranslateMixin} from '../../types'
 import styles from './used-time-display.css'
 
 function msToTime(milliseconds: number) {
@@ -30,13 +30,15 @@ const mapStateToProps = (state: IRootState) => ({
   endTime: endTimeSelector(state)
 })
 
-const stateType = $call(mapStateToProps)
+type stateType = ReturnType<typeof mapStateToProps>
 
 export class UsedTimeDisplayImpl extends React.Component {
-  public props: typeof stateType & ITranslateMixin
+  public props: stateType & ITranslateMixin
+
   public state = {
     time: '00:00:00'
   }
+
   private timerID: number | null
 
   public componentWillMount() {

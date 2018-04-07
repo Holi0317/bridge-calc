@@ -9,7 +9,7 @@ import {initSettingsAction} from '../actions/init-settings'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {remainingRoundsSelector} from '../../selectors/remaining-rounds'
 import {currentRoundSelector} from '../../selectors/current-round'
-import {$call, IRootState, ITranslateMixin} from '../../../types'
+import {IRootState, ITranslateMixin} from '../../../types'
 import styles from './skip-rounds.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -25,11 +25,11 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
 export class SkipRoundsImpl extends React.Component {
-  public props: typeof stateType & typeof dispatchType & ITranslateMixin
+  public props: stateType & dispatchType & ITranslateMixin
 
   public render() {
     const {remainingRounds, t} = this.props

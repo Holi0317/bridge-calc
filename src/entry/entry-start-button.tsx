@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import flowRight from 'lodash-es/flowRight'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
 import {startAction} from '../score-input/actions/start'
-import {$call, IRootState, ITranslateMixin} from '../types'
+import {IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
@@ -21,10 +21,10 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({start: startAction}, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type EntryStartButtonProps = typeof stateType & typeof dispatchType & RouteComponentProps<any> & ITranslateMixin
+type EntryStartButtonProps = stateType & dispatchType & RouteComponentProps<any> & ITranslateMixin
 
 export class EntryStartButtonImpl extends React.PureComponent {
   public props: EntryStartButtonProps

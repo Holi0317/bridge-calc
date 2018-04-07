@@ -11,15 +11,15 @@ import ActionInfo from 'material-ui/svg-icons/action/info'
 import ActionBugReport from 'material-ui/svg-icons/action/bug-report'
 import {Tile} from './tile'
 import {showContinueSelector} from './show-continue-selector'
-import {$call, IRootState, ITranslateMixin} from '../types'
+import {IRootState, ITranslateMixin} from '../types'
 
 const mapStateToProps = (state: IRootState) => ({
   showContinue: showContinueSelector(state)
 })
 
-const stateType = $call(mapStateToProps)
+type stateType = ReturnType<typeof mapStateToProps>
 
-type MenuProps = typeof stateType & ITranslateMixin
+type MenuProps = stateType & ITranslateMixin
 
 export function MenuImpl({showContinue, t}: MenuProps) {
   return (

@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import {resetGamesAtion} from '../prev-games/actions/reset-games'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
-import {$call, ITranslateMixin} from '../types'
+import {ITranslateMixin} from '../types'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const dispatchType = $call(mapDispatchToProps)
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type PurgeDataProps = typeof dispatchType & ITranslateMixin
+type PurgeDataProps = dispatchType & ITranslateMixin
 
 export class PurgeDataImpl extends React.Component {
   public props: PurgeDataProps

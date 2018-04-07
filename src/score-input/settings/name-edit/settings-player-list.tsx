@@ -7,7 +7,7 @@ import {NameInputList} from '../../../name-input-list'
 import {nameInputListSourceSelector, PlayerName} from '../selectors/name-input-list-source'
 import {setNamesFromArrayAction} from '../actions/set-names'
 import {settingsValidator} from '../settings-validator'
-import {$call, IPlayerMap, IRootState, ITranslateMixin} from '../../../types'
+import {IPlayerMap, IRootState, ITranslateMixin} from '../../../types'
 
 /**
  * Get player name from PlayerName type.
@@ -36,10 +36,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     changeNames: setNamesFromArrayAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type SettingsPlayerListProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type SettingsPlayerListProps = stateType & dispatchType & ITranslateMixin
 
 export function SettingsPlayerListImpl({names, errors, changeNames}: SettingsPlayerListProps) {
   return (

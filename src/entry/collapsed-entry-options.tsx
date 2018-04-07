@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import {EntryOptions} from './entry-options'
 import {toggleOptionOpenAction} from './actions/toggle-option-open'
-import {$call, IRootState, ITranslateMixin} from '../types'
+import {IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -16,10 +16,10 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({toggleOptionOpen: toggleOptionOpenAction}, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type CollapsedEntryOptionsProps = typeof stateType & typeof dispatchType & ITranslateMixin
+type CollapsedEntryOptionsProps = stateType & dispatchType & ITranslateMixin
 
 export function CollapsedEntryOptionsImpl({toggleOptionOpen, optionsOpened, t}: CollapsedEntryOptionsProps) {
   const collapseCss = [style.collapse]

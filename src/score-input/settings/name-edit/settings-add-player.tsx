@@ -6,7 +6,7 @@ import {translate} from 'react-i18next'
 import IconButton from 'material-ui/IconButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import {addRandomNameAction} from '../actions/add-name'
-import {$call, ITranslateMixin} from '../../../types'
+import {ITranslateMixin} from '../../../types'
 import style from './name-edit.css'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
@@ -14,9 +14,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     addPlayer: addRandomNameAction
   }, dispatch)
 
-const dispatchType = $call(mapDispatchToProps)
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type SettingsAddPlayerProps = typeof dispatchType & ITranslateMixin
+type SettingsAddPlayerProps = dispatchType & ITranslateMixin
 
 export function SettingsAddPlayerImpl({addPlayer, t}: SettingsAddPlayerProps) {
   return <div className={style.addContainer}>

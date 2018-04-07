@@ -6,7 +6,7 @@ import {translate} from 'react-i18next'
 import {ListItem} from 'material-ui/List'
 import {setImportOpenAction, setPlayerNamesAction} from '../actions/set-entry-props'
 import {showToastAction} from '../../toast-singleton/actions/show-toast'
-import {$call, ITranslateMixin} from '../../types'
+import {ITranslateMixin} from '../../types'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({
@@ -15,14 +15,14 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     setPlayerNames: setPlayerNamesAction
   }, dispatch)
 
-const dispatchType = $call(mapDispatchToProps)
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
 interface INameEntryProps {
   name: string[]
 }
 
 export class NameListEntryImpl extends React.Component {
-  public props: INameEntryProps & typeof dispatchType & ITranslateMixin
+  public props: INameEntryProps & dispatchType & ITranslateMixin
 
   public render() {
     return <ListItem primaryText={this.props.name.join(', ')} onClick={this.setNames} />

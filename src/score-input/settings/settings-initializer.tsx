@@ -2,7 +2,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators, Dispatch} from 'redux'
 import {initSettingsAction} from './actions/init-settings'
-import {$call, IRootState} from '../../types'
+import {IRootState} from '../../types'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
@@ -13,10 +13,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     init: initSettingsAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type SettingsInitializerProps = typeof stateType & typeof dispatchType
+type SettingsInitializerProps = stateType & dispatchType
 
 export class SettingsInitializerImpl extends React.Component {
   public props: SettingsInitializerProps

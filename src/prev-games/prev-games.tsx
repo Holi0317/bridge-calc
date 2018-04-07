@@ -8,7 +8,7 @@ import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {PrevGameEntry} from './types'
 import {PrevGame} from './prev-game'
-import {$call, IRootState} from '../types'
+import {IRootState} from '../types'
 import {deleteGameAction} from './actions/delete-game'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import styles from './prev-games.css'
@@ -26,13 +26,11 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     load: replaceCurrentGameAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
-
-type PrevGamesProps = typeof stateType & typeof dispatchType & RouteComponentProps<any>
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
 export class PrevGamesImpl extends React.Component {
-  public props: PrevGamesProps
+  public props: stateType & dispatchType & RouteComponentProps<any>
 
   public render() {
     const {havePrevGame, prevGames} = this.props

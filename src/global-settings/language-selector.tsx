@@ -7,7 +7,7 @@ import {translate} from 'react-i18next'
 import {Dropdown} from '../material/dropdown'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
 import {languages} from '../app/i18n'
-import {$call, IDropdownSource, ITranslateMixin} from '../types'
+import {IDropdownSource, ITranslateMixin} from '../types'
 
 function transformLanguageArray(t: TranslationFunction): Array<IDropdownSource<string>> {
   return languages.filter(lang => lang !== 'cimode') // Filter away 'cimode' pseudo language created by i18next
@@ -22,10 +22,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const dispatchType = $call(mapDispatchToProps)
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
 export class LanguageSelectorImpl extends React.Component {
-  public props: typeof dispatchType & ITranslateMixin
+  public props: dispatchType & ITranslateMixin
 
   public render() {
     const {i18n, t} = this.props

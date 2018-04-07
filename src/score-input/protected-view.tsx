@@ -7,7 +7,7 @@ import {translate} from 'react-i18next'
 import {GameStage} from './game-stage'
 import {stageSelector} from './selectors/stage'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
-import {$call, IRootState, ITranslateMixin} from '../types'
+import {IRootState, ITranslateMixin} from '../types'
 
 interface IProtectedViewProps {
   comp: React.ComponentType<{}>
@@ -22,10 +22,10 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type ProtectedViewProps = IProtectedViewProps & typeof stateType & typeof dispatchType & ITranslateMixin
+type ProtectedViewProps = IProtectedViewProps & stateType & dispatchType & ITranslateMixin
 
 export class ProtectedViewImpl extends React.Component {
   public props: ProtectedViewProps

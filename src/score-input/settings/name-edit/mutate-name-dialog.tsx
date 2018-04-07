@@ -12,7 +12,7 @@ import {expectedRoundsSelector} from '../selectors/expected-rounds'
 import {changePlayersAction} from '../../actions/change-players'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {initSettingsAction} from '../actions/init-settings'
-import {$call, IRootState, ITranslateMixin} from '../../../types'
+import {IRootState, ITranslateMixin} from '../../../types'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
@@ -28,8 +28,8 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     showToast: showToastAction
   }, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
 interface IMutateNameDialogProps {
   open: boolean
@@ -41,7 +41,7 @@ interface IMutateNameDialogState {
 }
 
 export class MutateNameDialogImpl extends React.Component {
-  public props: IMutateNameDialogProps & typeof stateType & typeof dispatchType & ITranslateMixin
+  public props: IMutateNameDialogProps & stateType & dispatchType & ITranslateMixin
   public state: IMutateNameDialogState = {
     chosenMaker: ''
   }

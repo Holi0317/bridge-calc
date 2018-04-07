@@ -6,7 +6,7 @@ import {namesSelector} from '../selectors/names'
 import {playerPrevScoreSelector} from '../selectors/player-prev-score'
 import {playerTotalScoreSelector} from '../selectors/player-total-score'
 import {playerRankSelector} from '../selectors/player-rank'
-import {$call, IRootState, ITranslateMixin} from '../../types'
+import {IRootState, ITranslateMixin} from '../../types'
 import style from '../scoreboard/scoreboard.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -16,9 +16,9 @@ const mapStateToProps = (state: IRootState) => ({
   ranks: playerRankSelector(state)
 })
 
-const stateType = $call(mapStateToProps)
+type stateType = ReturnType<typeof mapStateToProps>
 
-type MiniScoreboardProps = typeof stateType & ITranslateMixin
+type MiniScoreboardProps = stateType & ITranslateMixin
 
 export function MiniScoreboardImpl({names, prevScores, totalScores, ranks, t}: MiniScoreboardProps) {
   return (

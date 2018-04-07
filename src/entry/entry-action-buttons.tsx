@@ -8,7 +8,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import FileDownload from 'material-ui/svg-icons/file/file-download'
 import {addRandomPlayerAction} from './actions/add-player'
 import {setImportOpenAction} from './actions/set-entry-props'
-import {$call, ITranslateMixin} from '../types'
+import {ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
@@ -17,9 +17,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) =>
     setImportOpen: setImportOpenAction
   }, dispatch)
 
-const dispatchType = $call(mapDispatchToProps)
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type EntryActionButtonsProps = typeof dispatchType & ITranslateMixin
+type EntryActionButtonsProps = dispatchType & ITranslateMixin
 
 export function EntryActionButtonsImpl({addRandomPlayer, setImportOpen, t}: EntryActionButtonsProps) {
   return (

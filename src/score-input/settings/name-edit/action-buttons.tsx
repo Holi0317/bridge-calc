@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {allowNamesCommitSelector} from '../selectors/allow-names-commit'
 import {isMakerCleanSelector} from '../selectors/is-maker-clean'
 import {settingsValidator} from '../settings-validator'
-import {$call, IRootState, ITranslateMixin} from '../../../types'
+import {IRootState, ITranslateMixin} from '../../../types'
 import style from './name-edit.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
@@ -15,14 +15,14 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   makerClean: isMakerCleanSelector(state)
 })
 
-const stateType = $call(mapStateToProps)
+type stateType = ReturnType<typeof mapStateToProps>
 
 interface IActionButtonProps {
   requestDialog(): void
 }
 
 export class ActionButtonsImpl extends React.Component {
-  public props: IActionButtonProps & typeof stateType & ITranslateMixin
+  public props: IActionButtonProps & stateType & ITranslateMixin
 
   public render() {
     const {changeDisabled, makerClean, error, requestDialog, t} = this.props

@@ -6,7 +6,7 @@ import {translate} from 'react-i18next'
 import {NameInputList} from '../name-input-list'
 import {entryOptionsValidator} from './entry-validator'
 import {setPlayerNamesAction} from './actions/set-entry-props'
-import {$call, IRootState, ITranslateMixin} from '../types'
+import {IRootState, ITranslateMixin} from '../types'
 
 // Getters and setters for name input list element
 export const getter = (val: string) => val
@@ -23,10 +23,10 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) =>
   bindActionCreators({setPlayerNames: setPlayerNamesAction}, dispatch)
 
-const stateType = $call(mapStateToProps)
-const dispatchType = $call(mapDispatchToProps)
+type stateType = ReturnType<typeof mapStateToProps>
+type dispatchType = ReturnType<typeof mapDispatchToProps>
 
-type EntryPlayerListProps = typeof stateType & typeof dispatchType
+type EntryPlayerListProps = stateType & dispatchType
 
 export function EntryPlayerListImpl({playerNames, playerNamesError, setPlayerNames}: EntryPlayerListProps) {
   return (
