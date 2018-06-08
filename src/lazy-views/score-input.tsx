@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Loadable from 'react-loadable'
+import * as Loadable from 'react-loadable'
 import {connect} from 'react-redux'
 import {Loading} from './loading'
 import {IRootState} from '../types'
