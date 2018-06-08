@@ -25,7 +25,7 @@ export class PrevGameImpl extends React.Component<IPrevGameProps> {
     collapsed: false
   }
 
-  render() {
+  public render() {
     // FIXME Click CardHeader should make component expand
     const {className, game, requestDelete, requestContinue, t} = this.props
     const {collapsed} = this.state

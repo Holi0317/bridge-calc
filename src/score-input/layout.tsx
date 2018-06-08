@@ -53,7 +53,7 @@ export class LayoutImpl extends React.Component {
     )
   }
 
-  private tabChange = (event: any, routeIndex: number) => {
+  private tabChange = (_event: any, routeIndex: number) => {
     const {path} = routes[routeIndex]
     if (path) {
       this.props.history.push(path)

@@ -1,12 +1,12 @@
 import {Action, MiddlewareAPI} from 'redux'
 import {saveGameAction} from '../prev-games/actions/save-game'
-import {IRootState, Dispatch} from '../types'
+import {Dispatch} from '../types'
 
 /**
  * This middleware will trigger `PREV_GAMES/SAVE_GAME` action when `currentGame` in state is not equal (read: !==) to
  * previous one.
  */
-export function autoSave<S extends IRootState>(store: MiddlewareAPI<Dispatch>) {
+export function autoSave(store: MiddlewareAPI<Dispatch>) {
   return (next: Dispatch) => (action: Action) => {
     const prevState = store.getState()
     const res = next(action)

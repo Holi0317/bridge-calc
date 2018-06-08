@@ -11,7 +11,7 @@ const fullWhite = 'rgba(255, 255, 255, 1)'
 /**
  * Add transparency to given color.
  */
-function fade(color: string, opacity: number): string {
+function fade(color: string, _opacity: number): string {
   // FIXME Add the logic
   return color
 }

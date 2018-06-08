@@ -1,10 +1,8 @@
-import {createMuiTheme} from '@material-ui/core/styles'
+import {createMuiTheme, Theme} from '@material-ui/core/styles'
 import pink from '@material-ui/core/colors/pink'
 import teal from '@material-ui/core/colors/teal'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 import blueGrey from '@material-ui/core/colors/blueGrey'
-import grey from '@material-ui/core/colors/grey'
-import {Theme} from '@material-ui/core/styles'
 
 export const defaultTheme: Theme = createMuiTheme({
   palette: {

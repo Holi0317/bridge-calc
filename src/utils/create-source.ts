@@ -1,6 +1,5 @@
 import {IDropdownSource} from '../material/dropdown'
 
-
 /**
  * Create sources for react-toolbox's dropdown component.
  * The given array will be used as value in sources.
