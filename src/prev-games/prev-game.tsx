@@ -38,7 +38,7 @@ export class PrevGameImpl extends React.Component<IPrevGameProps> {
 
       <CardActions>
         <Button onClick={requestDelete}>{t('Delete')}</Button>
-        <Button color="primary" onClick={requestContinue}>{t('Delete')}</Button>
+        <Button color="primary" onClick={requestContinue}>{t('Continue')}</Button>
       </CardActions>
 
       <Collapse in={collapsed} timeout="auto" unmountOnExit>
