@@ -3,9 +3,10 @@ import {bindActionCreators} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import IconButton from 'material-ui/IconButton'
-import ContentAdd from 'material-ui/svg-icons/content/add'
-import FileDownload from 'material-ui/svg-icons/file/file-download'
+import Tooltip from '@material-ui/core/Tooltip'
+import IconButton from '@material-ui/core/IconButton'
+import ContentAdd from '@material-ui/icons/Add'
+import FileDownload from '@material-ui/icons/FileDownload'
 import {addRandomPlayerAction} from './actions/add-player'
 import {setImportOpenAction} from './actions/set-entry-props'
 import {Dispatch, ITranslateMixin} from '../types'
@@ -24,12 +25,17 @@ type EntryActionButtonsProps = dispatchType & ITranslateMixin
 export function EntryActionButtonsImpl({addRandomPlayer, setImportOpen, t}: EntryActionButtonsProps) {
   return (
     <div className={style.actionButtonContainer}>
-      <IconButton tooltip={t('Add player')} onClick={addRandomPlayer}>
-        <ContentAdd width="28px" height="28px" />
-      </IconButton>
-      <IconButton tooltip={t('Import names')} onClick={() => setImportOpen(true)}>
-        <FileDownload width="28px" height="28px" />
-      </IconButton>
+      <Tooltip title={t('Add player')}>
+        <IconButton onClick={addRandomPlayer}>
+          <ContentAdd width="28px" height="28px" />
+        </IconButton>
+      </Tooltip>
+
+      <Tooltip title={t('Import names')}>
+        <IconButton onClick={() => setImportOpen(true)}>
+          <FileDownload width="28px" height="28px" />
+        </IconButton>
+      </Tooltip>
     </div>
   )
 }

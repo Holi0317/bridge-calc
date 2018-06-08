@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from '@material-ui/core/Button'
 import flowRight from 'lodash-es/flowRight'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
 import {startAction} from '../score-input/actions/start'
@@ -33,7 +33,7 @@ export class EntryStartButtonImpl extends React.PureComponent {
     const {valid, miscError, t} = this.props
     return (
       <div className={style.startBtnContainer}>
-        <RaisedButton primary={true} disabled={!valid} onClick={this.start} label={t('Start')} />
+        <Button variant="contained" color="primary" disabled={!valid} onClick={this.start}>{t('Start')}</Button>
         <span className={style.errorMessage}>{miscError}</span>
       </div>
     )

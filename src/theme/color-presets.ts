@@ -1,47 +1,43 @@
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import {pink500, pink700, tealA200, grey600, tealA400, tealA100, lightBlue500, lightBlue700, pinkA200, blueGrey500, blueGrey700, teal400} from 'material-ui/styles/colors'
-import {MuiTheme} from 'material-ui/styles'
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
+import {createMuiTheme} from '@material-ui/core/styles'
+import pink from '@material-ui/core/colors/pink'
+import teal from '@material-ui/core/colors/teal'
+import lightBlue from '@material-ui/core/colors/lightBlue'
+import blueGrey from '@material-ui/core/colors/blueGrey'
+import grey from '@material-ui/core/colors/grey'
+import {Theme} from '@material-ui/core/styles'
 
-export const defaultTheme: MuiTheme = getMuiTheme({
+export const defaultTheme: Theme = createMuiTheme({
   palette: {
-    primary1Color: pink500,
-    primary2Color: pink700,
-    accent1Color: tealA200
+    primary: pink,
+    secondary: teal
   }
 })
 
-const darkTheme: MuiTheme = getMuiTheme(darkBaseTheme, {
+const darkTheme: Theme = createMuiTheme({
   palette: {
-    primary1Color: pink700,
-    primary2Color: pink700,
-    primary3Color: grey600,
-    accent1Color: tealA200,
-    accent2Color: tealA400,
-    accent3Color: tealA100,
+    primary: pink,
+    secondary: teal,
+    type: 'dark'
   }
 })
 
-const tealTheme: MuiTheme = getMuiTheme()
+const tealTheme: Theme = createMuiTheme()
 
-const blueTheme: MuiTheme = getMuiTheme({
+const blueTheme: Theme = createMuiTheme({
   palette: {
-    primary1Color: lightBlue500,
-    primary2Color: lightBlue700,
-    accent1Color: pinkA200
+    primary: lightBlue,
+    secondary: pink
   }
 })
 
-const greyTheme: MuiTheme = getMuiTheme({
+const greyTheme: Theme = createMuiTheme({
   palette: {
-    primary1Color: blueGrey500,
-    primary2Color: blueGrey700,
-    primary3Color: teal400,
-    accent1Color: pinkA200
+    primary: blueGrey,
+    secondary: pink
   }
 })
 
-export const themes: Map<string, MuiTheme> = new Map([
+export const themes: Map<string, Theme> = new Map([
   ['default', defaultTheme],
   ['dark', darkTheme],
   ['teal', tealTheme],

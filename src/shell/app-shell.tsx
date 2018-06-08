@@ -4,10 +4,13 @@ import {withRouter} from 'react-router-dom'
 import {translate} from 'react-i18next'
 import {RouteComponentProps} from 'react-router'
 import {History} from 'history'
-import AppBar from 'material-ui/AppBar'
-import IconButton from 'material-ui/IconButton'
-import ActionHelp from 'material-ui/svg-icons/action/help'
-import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import Tooltip from '@material-ui/core/Tooltip'
+import ActionHelp from '@material-ui/icons/Help'
+import NavigationArrowBack from '@material-ui/icons/ArrowBack'
 import {ToastSingleton} from '../toast-singleton'
 import {Titles} from './titles'
 import {SWReg} from '../sw-reg'
@@ -29,26 +32,35 @@ function to(history: History, loc: string) {
 type AppProps = RouteComponentProps<any> & ITranslateMixin
 
 export function ShellImpl({location, history, t}: AppProps) {
-  const helpBtn = <IconButton tooltip={t('Help')} rel="noopener" target="_blank"
-                              href="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md">
-    <ActionHelp width="24px" height="24px" />
-  </IconButton>
-  const backFn = to(history, '/')
-  const backBtn = <IconButton tooltip={t('Back to menu')}>
-    <NavigationArrowBack width="24px" height="24px" />
-  </IconButton>
   return (
     <div>
-      <AppBar
-        iconElementRight={helpBtn}
-        iconElementLeft={backBtn}
-        showMenuIconButton={location.pathname !== '/'}
-        onLeftIconButtonClick={backFn}
-        title={<Titles />}
-      />
+      <AppBar position="static">
+        <Toolbar>
+          {location.pathname !== '/' && (
+            <Tooltip title={t('Back to menu')}>
+              <IconButton onClick={to(history, '/')}>
+                <NavigationArrowBack width="24px" height="24px" />
+              </IconButton>
+            </Tooltip>
+          )}
+
+          <Typography variant="title" color="inherit">
+            <Titles />
+          </Typography>
+
+          <Tooltip title={t('Help')}>
+            <IconButton rel="noopener" target="_blank"
+                        href="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md">
+              <ActionHelp width="24px" height="24px" />
+            </IconButton>
+          </Tooltip>
+        </Toolbar>
+      </AppBar>
+
       <main>
         <Routes location={location} />
       </main>
+
       <Migration />
       <ToastSingleton />
       <SWReg />

@@ -1,4 +1,5 @@
-import {IDropdownSource} from '../types'
+import {IDropdownSource} from '../material/dropdown'
+
 
 /**
  * Create sources for react-toolbox's dropdown component.

@@ -3,7 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from '@material-ui/core/Button'
 import {GameStage} from '../game-stage'
 import {stageSelector} from '../selectors/stage'
 import {isStackInputValid} from './stack-input-validator'
@@ -37,9 +37,9 @@ export class ActionButtonsImpl extends React.Component {
       : undo
     return (
       <div className={style.btnContainer}>
-        <RaisedButton primary={true} disabled={nextDisabled} label={t('Next')} onClick={this.next} />
+        <Button variant="contained" color="primary" disabled={nextDisabled} onClick={this.next}>{t('Next')}</Button>
         <div className={style.stretch}/>
-        <RaisedButton disabled={undoDisabled} label={t('Undo')} onClick={undoHandler} />
+        <Button variant="contained" disabled={undoDisabled} onClick={undoHandler}>{t('Undo')}</Button>
       </div>
     )
   }

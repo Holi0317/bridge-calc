@@ -3,7 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from '@material-ui/core/Button'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import {resetGamesAtion} from '../prev-games/actions/reset-games'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
@@ -27,7 +27,7 @@ export class PurgeDataImpl extends React.Component {
     const {t} = this.props
     return (
       <div>
-        <RaisedButton label={t('Clear all data')} primary={true} onClick={this.clear} />
+        <Button variant="contained" color="primary" onClick={this.clear}>{t('Clear all data')}</Button>
       </div>
     )
   }

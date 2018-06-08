@@ -9,7 +9,8 @@ import {bidSelector} from './bid'
 import {playerIDSelector} from './player-id'
 import {playerOrderSelector} from './player-order'
 import {createSource, fillObj} from '../../utils'
-import {IDropdownSource, IPlayerMap} from '../../types'
+import {IPlayerMap} from '../../types'
+import {IDropdownSource} from '../../material/dropdown'
 
 /**
  * Select input source for MDC's dropdown on bid stack.

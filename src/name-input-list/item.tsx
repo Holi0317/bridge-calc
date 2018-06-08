@@ -2,9 +2,10 @@ import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {SortableElement} from 'react-sortable-hoc'
-import IconButton from 'material-ui/IconButton'
-import TextField from 'material-ui/TextField'
-import ActionDelete from 'material-ui/svg-icons/action/delete'
+import IconButton from '@material-ui/core/IconButton'
+import TextField from '@material-ui/core/TextField'
+import Tooltip from '@material-ui/core/Tooltip'
+import ActionDelete from '@material-ui/icons/Delete'
 import {DragHandle} from './drag-handle'
 import style from './name-input-list.css'
 import {ITranslateMixin} from '../types'
@@ -20,9 +21,12 @@ export function SortableItemImpl({value, onChange, remove, error, t}: ISortableI
   return (
     <div className={style.itemContainer}>
       <DragHandle />
-      <TextField type="text" fullWidth={true} floatingLabelText={t('Player name')}
-                 value={value} errorText={error} onChange={onChange} />
-      <IconButton tooltip={t('Delete name')} onClick={remove}><ActionDelete width="24px" height="24px" /></IconButton>
+      <TextField type="text" fullWidth label={t('Player name')}
+                 value={value} error={error != null} helperText={error}
+                 onChange={(event: any) => onChange(event.target.value)} />
+      <Tooltip title={t('Delete name')}>
+        <IconButton onClick={remove}><ActionDelete width="24px" height="24px" /></IconButton>
+      </Tooltip>
     </div>
   )
 }

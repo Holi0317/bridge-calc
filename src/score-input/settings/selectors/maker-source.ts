@@ -1,6 +1,7 @@
 import {createSelector} from 'reselect'
 import {namesSelector} from './names'
-import {IDropdownSource, IPlayerMap} from '../../../types'
+import {IPlayerMap} from '../../../types'
+import {IDropdownSource} from '../../../material/dropdown'
 
 /**
  * Select dropdown source for selecting maker from settings view.

@@ -9,7 +9,6 @@ import {HttpsRedirect} from './https-redirect'
 import {Shell} from './shell'
 import {i18n} from './app/i18n'
 import {store, persistor} from './app/redux-store'
-import {muiTheme} from './app/mui-theme'
 import {ErrorBoundary} from './error-boundary'
 import {basenameProcess} from './utils/basename-process'
 

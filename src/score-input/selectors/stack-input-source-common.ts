@@ -1,10 +1,10 @@
-// @flow
 import {createSelector} from 'reselect'
 import {stageSelector} from './stage'
 import {playerIDSelector} from './player-id'
 import {GameStage} from '../game-stage'
 import {fillObj} from '../../utils'
-import {IDropdownSource, IPlayerMap} from '../../types'
+import {IPlayerMap} from '../../types'
+import {IDropdownSource} from '../../material/dropdown'
 
 /**
  * A common base for input source selector.

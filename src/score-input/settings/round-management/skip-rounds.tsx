@@ -3,7 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import FlatButton from 'material-ui/FlatButton'
+import Button from '@material-ui/core/Button'
 import {skipAction} from '../../actions/skip'
 import {initSettingsAction} from '../actions/init-settings'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
@@ -35,12 +35,15 @@ export class SkipRoundsImpl extends React.Component {
     const {remainingRounds, t} = this.props
     return (
       <div className={styles.btnContainer}>
-        <FlatButton className={styles.btn} label={t('Skip this round')}
-                    onClick={this.skip(1)} />
-        <FlatButton className={styles.btn} label={t('Skip to last round')}
-                    disabled={remainingRounds <= 1} onClick={this.skip(remainingRounds - 1)} />
-        <FlatButton className={styles.btn} label={t('End game')}
-                    onClick={this.skip(remainingRounds)} />
+        <Button className={styles.btn} onClick={this.skip(1)}>
+          {t('Skip this round')}
+        </Button>
+        <Button className={styles.btn} disabled={remainingRounds <= 1} onClick={this.skip(remainingRounds - 1)}>
+          {t('Skip to last round')}
+        </Button>
+        <Button className={styles.btn} onClick={this.skip(remainingRounds)}>
+          {t('End game')}
+        </Button>
       </div>
     )
   }

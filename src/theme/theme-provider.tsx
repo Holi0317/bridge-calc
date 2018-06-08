@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {MuiThemeProvider} from '@material-ui/core/styles'
 import {activatedThemeSelector} from './selectors/activated-theme'
 import {cssPropsSelector} from './selectors/css-props'
 import {IRootState} from '../types'
@@ -19,7 +19,7 @@ export function ThemeProviderImpl({theme, cssProps, children}: ThemeProviderProp
     document.body.style.setProperty(key, value)
   })
 
-  return <MuiThemeProvider muiTheme={theme}>
+  return <MuiThemeProvider theme={theme}>
     {children}
   </MuiThemeProvider>
 }

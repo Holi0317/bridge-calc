@@ -5,7 +5,8 @@ import {translate} from 'react-i18next'
 import {routes} from './routes'
 import {ITranslateMixin} from '../types'
 import {RouteComponentProps} from 'react-router'
-import {Tabs, Tab} from 'material-ui/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Tabs from '@material-ui/core/Tabs'
 import {ErrorBoundary} from '../error-boundary'
 
 function getActive(pathname: string): number {
@@ -52,7 +53,7 @@ export class LayoutImpl extends React.Component {
     )
   }
 
-  private tabChange = (routeIndex: number) => {
+  private tabChange = (event: any, routeIndex: number) => {
     const {path} = routes[routeIndex]
     if (path) {
       this.props.history.push(path)

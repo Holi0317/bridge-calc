@@ -18,12 +18,6 @@ export interface ITranslateMixin {
   i18n: i18n
 }
 
-export interface IDropdownSource<T> {
-  value: T,
-  label: string,
-  disabled?: boolean
-}
-
 export interface IRootState {
   currentGame: GameState,
   entry: IEntryState,

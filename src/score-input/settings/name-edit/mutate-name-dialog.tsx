@@ -3,8 +3,11 @@ import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Dialog from '@material-ui/core/Dialog'
+import Button from '@material-ui/core/Button'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
 import {Dropdown} from '../../../material/dropdown'
 import {makerSourceSelector} from '../selectors/maker-source'
 import {namesSelector} from '../selectors/names'
@@ -49,26 +52,19 @@ export class MutateNameDialogImpl extends React.Component {
   public render() {
     const {makers, open, rounds, t} = this.props
     const {chosenMaker} = this.state
-    const actions = [
-      <FlatButton
-        label={t('Cancel')}
-        primary={true}
-        onClick={this.reject}
-      />,
-      <FlatButton
-        label={t('Submit')}
-        disabled={chosenMaker === ''}
-        primary={true}
-        onClick={this.confirm}
-      />,
-    ]
-    return <Dialog
-      title={t('Choose the maker for this round')}
-      actions={actions}
-      onRequestClose={this.reject}
-      open={open}>
-      <Dropdown label={t('Maker')} value={chosenMaker} source={makers} onChange={this.makerChanged} />
-      <div>{t('Expected rounds: {{rounds}}', {rounds})}</div>
+
+    return <Dialog onClose={this.reject} open={open}>
+      <DialogTitle>{t('Choose the maker for this round')}</DialogTitle>
+
+      <DialogContent>
+        <Dropdown label={t('Maker')} value={chosenMaker} source={makers} onChange={this.makerChanged} />
+        <div>{t('Expected rounds: {{rounds}}', {rounds})}</div>
+      </DialogContent>
+
+      <DialogActions>
+        <Button color="primary" onClick={this.reject}>{t('Cancel')}</Button>
+        <Button disabled={chosenMaker === ''} color="primary" onClick={this.confirm}>{t('Submit')}</Button>
+      </DialogActions>
     </Dialog>
   }
 

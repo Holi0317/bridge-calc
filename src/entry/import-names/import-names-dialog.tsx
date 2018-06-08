@@ -3,8 +3,11 @@ import {connect} from 'react-redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {bindActionCreators} from 'redux'
-import FlatButton from 'material-ui/FlatButton'
-import Dialog from 'material-ui/Dialog'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogActions from '@material-ui/core/DialogActions'
 import {ImportNamesContent} from './import-names-content'
 import {setImportOpenAction} from '../actions/set-entry-props'
 import {Dispatch, IRootState, ITranslateMixin} from '../../types'
@@ -28,21 +31,13 @@ export class ImportNamesDialogImpl extends React.Component {
 
   public render() {
     const {open, t} = this.props
-    const actions = [
-      <FlatButton
-        label={t('Cancel')}
-        primary={true}
-        onClick={this.close}
-      />
-    ]
 
-    return <Dialog
-      title={t('Import names from previous games')}
-      actions={actions}
-      open={open}
-      onRequestClose={this.close}
-    >
-      <ImportNamesContent />
+    return <Dialog open={open} onClose={this.close}>
+      <DialogTitle>{t('Import names from previous games')}</DialogTitle>
+      <DialogContent><ImportNamesContent /></DialogContent>
+      <DialogActions>
+        <Button color="primary" onClick={this.close}>{t('Cancel')}</Button>
+      </DialogActions>
     </Dialog>
   }
 

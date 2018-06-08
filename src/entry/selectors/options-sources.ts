@@ -1,7 +1,8 @@
 import {createSelector} from 'reselect'
 import range from 'lodash-es/range'
 import {createSource} from '../../utils'
-import {IDropdownSource, IRootState} from '../../types'
+import {IRootState} from '../../types'
+import {IDropdownSource} from '../../material/dropdown'
 
 // Rounds source to be used when there is no player available.
 const defaultRounds = [{value: 1, label: '1'}]

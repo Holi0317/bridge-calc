@@ -3,7 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {ListItem} from 'material-ui/List'
+import ListItem from '@material-ui/core/ListItem'
 import {setImportOpenAction, setPlayerNamesAction} from '../actions/set-entry-props'
 import {showToastAction} from '../../toast-singleton/actions/show-toast'
 import {Dispatch, ITranslateMixin} from '../../types'
@@ -25,7 +25,7 @@ export class NameListEntryImpl extends React.Component {
   public props: INameEntryProps & dispatchType & ITranslateMixin
 
   public render() {
-    return <ListItem primaryText={this.props.name.join(', ')} onClick={this.setNames} />
+    return <ListItem onClick={this.setNames}>{this.props.name.join(', ')}</ListItem>
   }
 
   private setNames = () => {

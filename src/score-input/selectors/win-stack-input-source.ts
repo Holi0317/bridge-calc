@@ -10,8 +10,8 @@ import {stageSelector} from './stage'
 import {winSelector} from './win'
 import {createSource, fillObj} from '../../utils'
 import {GameStage} from '../game-stage'
-
-import {IDropdownSource, IPlayerMap} from '../../types'
+import {IPlayerMap} from '../../types'
+import {IDropdownSource} from '../../material/dropdown'
 
 /**
  * Select input source for MDC's dropdown on win stack.

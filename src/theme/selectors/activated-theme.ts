@@ -1,10 +1,10 @@
 import {createSelector} from 'reselect'
+import {Theme} from '@material-ui/core/styles'
 import {selectedThemeSelector} from './selected-theme'
 import {themes, defaultTheme} from '../color-presets'
-import {MuiTheme} from 'material-ui/styles'
 
 export const activatedThemeSelector = createSelector(
   selectedThemeSelector,
-  (selectedTheme: string): MuiTheme =>
+  (selectedTheme: string): Theme =>
     themes.get(selectedTheme) || defaultTheme
 )

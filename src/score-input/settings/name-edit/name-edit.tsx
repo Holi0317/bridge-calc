@@ -1,6 +1,8 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
-import {Card, CardHeader, CardText} from 'material-ui/Card'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardContent from '@material-ui/core/CardContent'
 import {SettingsPlayerList} from './settings-player-list'
 import {SettingsAddPlayer} from './settings-add-player'
 import {ActionButtons} from './action-buttons'
@@ -19,22 +21,19 @@ export class NameEditImpl extends React.Component {
   }
 
   public render() {
+    // FIXME The card should be expandable and CardHeader should expand the card
     const {t} = this.props
     const {dialogOpen} = this.state
 
     return <Card className={style.sessionCard}>
-      <CardHeader
-        title={t('Edit players')}
-        actAsExpander={false}
-        showExpandableButton={false}
-      />
-      <CardText>
+      <CardHeader title={t('Edit players')}/>
+      <CardContent>
         <SettingsPlayerList />
         <SettingsAddPlayer />
         <ActionButtons requestDialog={this.openDialog} />
 
         <MutateNameDialog open={dialogOpen} onRequestClose={this.closeDialog} />
-      </CardText>
+      </CardContent>
     </Card>
   }
 

@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from '@material-ui/core/Button'
 import {Dropdown} from '../../../material/dropdown'
 import {namesSelector} from '../../selectors/names'
 import {roundsSelector} from '../../selectors/rounds'
@@ -48,7 +48,7 @@ export class MakerEditorImpl extends React.Component {
         <div className={style.chooserContainer}>
           <Dropdown label={t('Maker')} disabled={disabled}
                     source={disabled ? [] : namesSource} value={disabled ? '' : maker || ''} onChange={setMaker} />
-          <RaisedButton primary={true} disabled={disabled} label={t('Change maker')} onClick={this.commit} />
+          <Button variant="contained" color="primary" disabled={disabled} onClick={this.commit}>{t('Change maker')}</Button>
         </div>
         {disabled
           ? <div className={style.disabledHint}>{t('Maker edit is disabled when editing player names')}</div>

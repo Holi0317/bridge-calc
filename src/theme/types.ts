@@ -1,8 +1,8 @@
-import {MuiTheme} from 'material-ui/styles'
+import {Theme} from '@material-ui/core/styles'
 
 export interface ITheme {
   /** Theme object applied to Material-UI provider */
-  mui: MuiTheme
+  mui: Theme
   /** Background color of the page. Applied to <body> */
   backgroundColor: string
 }

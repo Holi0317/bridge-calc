@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from '@material-ui/core/Button'
 import {EntryOptions} from './entry-options'
 import {toggleOptionOpenAction} from './actions/toggle-option-open'
 import {Dispatch, IRootState, ITranslateMixin} from '../types'
@@ -29,7 +29,7 @@ export function CollapsedEntryOptionsImpl({toggleOptionOpen, optionsOpened, t}: 
 
   return (
     <div>
-      <RaisedButton onClick={toggleOptionOpen} className={style.optionsBtn} label={t('Options')} />
+      <Button variant="contained" onClick={toggleOptionOpen} className={style.optionsBtn}>{t('Options')}</Button>
       <div className={collapseCss.join(' ')}>
         <EntryOptions />
       </div>
