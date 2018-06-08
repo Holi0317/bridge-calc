@@ -37,6 +37,9 @@ export class LayoutImpl extends React.Component {
   public render() {
     const {t} = this.props
     const {active} = this.state
+
+    // FIXME Regression: The Tabs are... horrible
+
     return (
       <div>
         <Tabs value={active} onChange={this.tabChange}>

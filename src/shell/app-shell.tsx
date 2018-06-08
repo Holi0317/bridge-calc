@@ -36,6 +36,7 @@ export function ShellImpl({location, history, t}: AppProps) {
     <div>
       <AppBar position="static">
         <Toolbar>
+          {/* FIXME Regression: Need proper aligning of icons */}
           {location.pathname !== '/' && (
             <Tooltip title={t('Back to menu')}>
               <IconButton onClick={to(history, '/')}>
@@ -44,6 +45,8 @@ export function ShellImpl({location, history, t}: AppProps) {
             </Tooltip>
           )}
 
+          {/* FIXME Regression: Title color does not respect dark theme */}
+          {/* FIXME Regression: Title font size is a bit smaller */}
           <Typography variant="title" color="inherit">
             <Titles />
           </Typography>

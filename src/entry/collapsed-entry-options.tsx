@@ -30,6 +30,8 @@ export function CollapsedEntryOptionsImpl({toggleOptionOpen, optionsOpened, t}: 
   return (
     <div>
       <Button variant="contained" onClick={toggleOptionOpen} className={style.optionsBtn}>{t('Options')}</Button>
+      {/* TODO Use Collapse from material-ui */}
+      {/* FIXME Regression: The container is too compact */}
       <div className={collapseCss.join(' ')}>
         <EntryOptions />
       </div>

@@ -22,6 +22,7 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>
 type ThemeSelectionProps = stateType & dispatchType & ITranslateMixin
 
 export function ThemeSelectionImpl({selectedTheme, setTheme, t}: ThemeSelectionProps) {
+  // FIXME Regression: The dropdown's width is too small
   return <Dropdown label={t('Change theme')}
     source={themeSources} value={selectedTheme}
     onChange={setTheme} />

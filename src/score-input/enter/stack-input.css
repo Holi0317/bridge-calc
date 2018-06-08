@@ -33,6 +33,7 @@
 
   /* Maximize width of select component */
   & select {
+    /* FIXME Regression: Max width seems not working */
     width: 100%;
   }
 }

@@ -46,6 +46,7 @@ export class MakerEditorImpl extends React.Component {
     return (
       <div>
         <div className={style.chooserContainer}>
+          {/* FIXME Regression: Dropdown's width is too short */}
           <Dropdown label={t('Maker')} disabled={disabled}
                     source={disabled ? [] : namesSource} value={disabled ? '' : maker || ''} onChange={setMaker} />
           <Button variant="contained" color="primary" disabled={disabled} onClick={this.commit}>{t('Change maker')}</Button>

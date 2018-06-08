@@ -10,6 +10,7 @@ import style from '../settings.css'
 export function ChangeMakerImpl({t}: ITranslateMixin) {
   // FIXME CardHeader should expand the card and the card should be a collapse
   return <Card className={style.sessionCard}>
+    {/* FIXME Regression: Card header title is too large */}
     <CardHeader title={t('Change maker')}/>
     <CardContent>
       <MakerEditor />

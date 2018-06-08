@@ -18,6 +18,7 @@ export function EntryImpl({t}: EntryProps) {
       <h3 className={style.text}>{t('Player Names')}</h3>
       <EntryPlayerList />
       <EntryActionButtons />
+      {/* TODO Make this divider less dark */}
       <hr />
 
       <CollapsedEntryOptions />

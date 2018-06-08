@@ -10,6 +10,7 @@ import style from '../settings.css'
 export function RoundManagementImpl({t}: ITranslateMixin) {
   // FIXME Click CardHeader should make component expand
   return <Card className={style.sessionCard}>
+    {/* FIXME Regression: Card header title is too large */}
     <CardHeader title={t('Skip rounds')}/>
     <CardContent>
       <SkipRounds />

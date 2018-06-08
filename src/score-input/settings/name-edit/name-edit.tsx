@@ -26,6 +26,7 @@ export class NameEditImpl extends React.Component {
     const {dialogOpen} = this.state
 
     return <Card className={style.sessionCard}>
+      {/* FIXME Regression: Card header title is too large */}
       <CardHeader title={t('Edit players')}/>
       <CardContent>
         <SettingsPlayerList />

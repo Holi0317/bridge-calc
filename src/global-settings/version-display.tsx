@@ -8,6 +8,7 @@ declare const VERSION: string
 declare const HASH: string
 
 export function VersionDisplayImpl({t}: ITranslateMixin) {
+  // TODO Make the text secondary
   return (
     <div className={style.text}>
       {t('Version: {{version}}', {version: `${VERSION}-${HASH}`})}

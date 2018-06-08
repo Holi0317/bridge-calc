@@ -26,6 +26,7 @@ export const cssPropsSelector = createSelector(
     return new Map([
       ['--bg-color', palette.background.default || white],
       ['--text-color', palette.text.primary || fullWhite],
+      // FIXME Regression: --hover-color is not correctly computed
       ['--hover-color', fade(palette.text.primary || darkBlack, 0.1)],
       ['--error-text-color', red[500]]
     ])

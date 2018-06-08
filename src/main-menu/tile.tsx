@@ -22,6 +22,7 @@ export function Tile(props: ITileProps) {
   const {title, icon, external, target} = props
   const to = props.to || '/'
 
+  // FIXME Regression: icon color does not respect dark theme
   return (
     <TileLink to={to} external={external} target={target}>
       <div className={style.tile}>
