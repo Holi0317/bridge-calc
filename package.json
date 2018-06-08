@@ -36,6 +36,8 @@
     "ci": "npm run lint && npm test && npm run type-check"
   },
   "dependencies": {
+    "@material-ui/core": "1.2.0",
+    "@material-ui/icons": "1.1.0",
     "cuid": "2.1.1",
     "date-fns": "1.29.0",
     "history": "4.7.2",
