@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import flowRight from 'lodash-es/flowRight'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
 import {startAction} from '../score-input/actions/start'
-import {IRootState, ITranslateMixin} from '../types'
+import {IRootState, ITranslateMixin, Dispatch} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
@@ -18,7 +18,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   miscError: entryOptionsValidator(state, t).misc
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({start: startAction}, dispatch)
 
 type stateType = ReturnType<typeof mapStateToProps>

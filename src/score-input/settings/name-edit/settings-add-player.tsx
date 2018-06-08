@@ -1,15 +1,15 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import IconButton from 'material-ui/IconButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import {addRandomNameAction} from '../actions/add-name'
-import {ITranslateMixin} from '../../../types'
+import {ITranslateMixin, Dispatch} from '../../../types'
 import style from './name-edit.css'
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     addPlayer: addRandomNameAction
   }, dispatch)

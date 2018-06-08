@@ -2,14 +2,14 @@ import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import FlatButton from 'material-ui/FlatButton'
 import {skipAction} from '../../actions/skip'
 import {initSettingsAction} from '../actions/init-settings'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {remainingRoundsSelector} from '../../selectors/remaining-rounds'
 import {currentRoundSelector} from '../../selectors/current-round'
-import {IRootState, ITranslateMixin} from '../../../types'
+import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
 import styles from './skip-rounds.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -18,7 +18,7 @@ const mapStateToProps = (state: IRootState) => ({
   remainingRounds: remainingRoundsSelector(state)
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     skip: skipAction,
     init: initSettingsAction,

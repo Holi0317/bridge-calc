@@ -1,6 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Dropdown} from '../../material/dropdown'
@@ -15,7 +15,7 @@ import {bidStackInputSourceSelector} from '../selectors/bid-stack-input-source'
 import {winStackInputSourceSelector} from '../selectors/win-stack-input-source'
 import {setBidAction} from '../actions/set-bid'
 import {setWinAction} from '../actions/set-win'
-import {IRootState, ITranslateMixin} from '../../types'
+import {IRootState, ITranslateMixin, Dispatch} from '../../types'
 import style from './stack-input.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
@@ -30,7 +30,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   winStackInput: winStackInputSourceSelector(state)
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({setBid: setBidAction, setWin: setWinAction}, dispatch)
 
 type stateType = ReturnType<typeof mapStateToProps>

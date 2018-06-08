@@ -9,10 +9,13 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   title: gameTitleSelector(state, t)
 })
 
-type CurrentGameTitleProps = ReturnType<typeof mapStateToProps>
+export class CurrentGameTitleImpl extends React.Component {
+  public props: ReturnType<typeof mapStateToProps>
 
-export function CurrentGameTitleImpl({title}: CurrentGameTitleProps) {
-  return <span>{title}</span>
+  public render() {
+    const {title} = this.props
+    return <span>{title}</span>
+  }
 }
 
 export const CurrentGameTitle = flowRight(

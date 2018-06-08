@@ -1,13 +1,13 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {TranslationFunction} from 'i18next'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Dropdown} from '../material/dropdown'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
 import {languages} from '../app/i18n'
-import {IDropdownSource, ITranslateMixin} from '../types'
+import {Dispatch, IDropdownSource, ITranslateMixin} from '../types'
 
 function transformLanguageArray(t: TranslationFunction): Array<IDropdownSource<string>> {
   return languages.filter(lang => lang !== 'cimode') // Filter away 'cimode' pseudo language created by i18next
@@ -17,7 +17,7 @@ function transformLanguageArray(t: TranslationFunction): Array<IDropdownSource<s
     }))
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     showToast: showToastAction
   }, dispatch)

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
@@ -14,7 +14,7 @@ import {changePlayersAction} from '../../actions/change-players'
 import {initSettingsAction} from '../actions/init-settings'
 import {setMakerAction} from '../actions/set-maker'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
-import {IRootState, ITranslateMixin} from '../../../types'
+import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
 import style from './maker-editor.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -26,7 +26,7 @@ const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     changePlayers: changePlayersAction,
     init: initSettingsAction,

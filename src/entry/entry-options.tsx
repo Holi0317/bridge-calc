@@ -1,12 +1,12 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import {Dropdown} from '../material/dropdown'
 import {setRoundsAction, setStartingRoundAction} from './actions/set-entry-props'
 import {optionsSourcesSelector} from './selectors/options-sources'
-import {IRootState, ITranslateMixin} from '../types'
+import {Dispatch, IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state: IRootState) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     setRounds: setRoundsAction,
     setStartingRound: setStartingRoundAction

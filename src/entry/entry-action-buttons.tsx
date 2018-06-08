@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
@@ -8,10 +8,10 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import FileDownload from 'material-ui/svg-icons/file/file-download'
 import {addRandomPlayerAction} from './actions/add-player'
 import {setImportOpenAction} from './actions/set-entry-props'
-import {ITranslateMixin} from '../types'
+import {Dispatch, ITranslateMixin} from '../types'
 import style from './entry.css'
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     addRandomPlayer: addRandomPlayerAction,
     setImportOpen: setImportOpenAction

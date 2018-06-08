@@ -1,6 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -10,7 +10,7 @@ import {isStackInputValid} from './stack-input-validator'
 import {bidAction} from '../actions/bid'
 import {winAction} from '../actions/win'
 import {undoAction} from '../actions/undo'
-import {IRootState, ITranslateMixin} from '../../types'
+import {IRootState, ITranslateMixin, Dispatch} from '../../types'
 import style from './action-buttons.css'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
@@ -19,7 +19,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   currentGame: state.currentGame
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({bid: bidAction, win: winAction, undo: undoAction}, dispatch)
 
 type stateType = ReturnType<typeof mapStateToProps>

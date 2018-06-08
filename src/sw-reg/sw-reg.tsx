@@ -2,11 +2,11 @@ import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
-import {ITranslateMixin} from '../types'
+import {ITranslateMixin, Dispatch} from '../types'
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     showToast: showToastAction
   }, dispatch)

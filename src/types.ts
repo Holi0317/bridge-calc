@@ -1,3 +1,4 @@
+import {Dispatch as ReduxDispatch} from 'redux'
 import {CurrentGameActions} from './score-input/actions'
 import {EntryActions} from './entry/actions'
 import {GameState} from './score-input/reducer'
@@ -38,4 +39,4 @@ export type Actions =
   | GameSettingsActions
   | PrevGamesActions
 
-export type Dispatch = (action: Actions) => void
+export type Dispatch = ReduxDispatch<Actions>

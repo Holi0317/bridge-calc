@@ -1,6 +1,6 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import Dialog from 'material-ui/Dialog'
@@ -12,7 +12,7 @@ import {expectedRoundsSelector} from '../selectors/expected-rounds'
 import {changePlayersAction} from '../../actions/change-players'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {initSettingsAction} from '../actions/init-settings'
-import {IRootState, ITranslateMixin} from '../../../types'
+import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
@@ -21,7 +21,7 @@ const mapStateToProps = (state: IRootState) => ({
   makers: makerSourceSelector(state)
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     changePlayers: changePlayersAction,
     init: initSettingsAction,

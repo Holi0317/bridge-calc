@@ -1,13 +1,13 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {NameInputList} from '../../../name-input-list'
 import {nameInputListSourceSelector, PlayerName} from '../selectors/name-input-list-source'
 import {setNamesFromArrayAction} from '../actions/set-names'
 import {settingsValidator} from '../settings-validator'
-import {IPlayerMap, IRootState, ITranslateMixin} from '../../../types'
+import {IPlayerMap, IRootState, ITranslateMixin, Dispatch} from '../../../types'
 
 /**
  * Get player name from PlayerName type.
@@ -31,7 +31,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   errors: settingsValidator(state, t).names
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     changeNames: setNamesFromArrayAction
   }, dispatch)

@@ -1,19 +1,19 @@
 import * as React from 'react'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import {EntryOptions} from './entry-options'
 import {toggleOptionOpenAction} from './actions/toggle-option-open'
-import {IRootState, ITranslateMixin} from '../types'
+import {Dispatch, IRootState, ITranslateMixin} from '../types'
 import style from './entry.css'
 
 const mapStateToProps = (state: IRootState) => ({
   optionsOpened: state.entry.optionsOpened
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({toggleOptionOpen: toggleOptionOpenAction}, dispatch)
 
 type stateType = ReturnType<typeof mapStateToProps>

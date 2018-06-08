@@ -1,12 +1,12 @@
 import * as React from 'react'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import flowRight from 'lodash-es/flowRight'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {NameInputList} from '../name-input-list'
 import {entryOptionsValidator} from './entry-validator'
 import {setPlayerNamesAction} from './actions/set-entry-props'
-import {IRootState, ITranslateMixin} from '../types'
+import {Dispatch, IRootState, ITranslateMixin} from '../types'
 
 // Getters and setters for name input list element
 export const getter = (val: string) => val
@@ -20,7 +20,7 @@ const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   playerNamesError: entryOptionsValidator(state, t).playerNames
 })
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({setPlayerNames: setPlayerNamesAction}, dispatch)
 
 type stateType = ReturnType<typeof mapStateToProps>

@@ -1,14 +1,14 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
-import {bindActionCreators, Dispatch} from 'redux'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {ListItem} from 'material-ui/List'
 import {setImportOpenAction, setPlayerNamesAction} from '../actions/set-entry-props'
 import {showToastAction} from '../../toast-singleton/actions/show-toast'
-import {ITranslateMixin} from '../../types'
+import {Dispatch, ITranslateMixin} from '../../types'
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     setImportOpen: setImportOpenAction,
     showToast: showToastAction,
