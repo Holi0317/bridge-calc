@@ -1,6 +1,6 @@
 import {ActionTypes} from '../../../action-types'
-import cuid from 'cuid'
 import {randomName} from '../../../example-names'
+import {cuid} from '../../../utils'
 
 export interface IAddNameAction {
   type: ActionTypes.ADD_NAME,

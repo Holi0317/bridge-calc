@@ -1,6 +1,6 @@
-import cuid from 'cuid'
 import {IPlayerMap} from '../../types'
 import {ActionTypes} from '../../action-types'
+import {cuid} from '../../utils'
 
 export interface IStartAction {
   type: ActionTypes.START,

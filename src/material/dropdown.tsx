@@ -1,10 +1,10 @@
 import * as React from 'react'
-import cuid from 'cuid'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import {cuid} from '../utils'
 
 export interface IDropdownSource<T extends number | string> {
   value: T
