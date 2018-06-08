@@ -11,11 +11,6 @@ import {winAction} from '../actions/win'
 import {undoAction} from '../actions/undo'
 import {changePlayersAction} from '../actions/change-players'
 
-jest.mock('cuid', () => {
-  let count = 0
-  return jest.fn(() => '' + count++)
-})
-
 let clock = null
 beforeEach(() => {
   clock = lolex.install()

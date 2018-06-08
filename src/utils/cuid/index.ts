@@ -34,6 +34,11 @@ function safeCounter () {
 }
 
 export function cuid () {
+  // Make cuid behave a simple counter in testing environment for easier snapshot testing.
+  if (process.env.NODE_ENV === 'test') {
+    return '' + c++
+  }
+
   // Starting with a lowercase letter makes
   // it HTML element ID friendly.
   const letter = 'c' // hard-coded allows for sequential access

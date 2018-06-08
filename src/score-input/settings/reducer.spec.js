@@ -6,11 +6,6 @@ import {setMakerAction} from './actions/set-maker'
 import {setNamesAction} from './actions/set-names'
 import {addNameAction} from './actions/add-name'
 
-jest.mock('cuid', () => {
-  let count = 0
-  return jest.fn(() => '' + count++)
-})
-
 test('Default state', () => {
   const state = undefined
   const expected = {

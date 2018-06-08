@@ -6,6 +6,6 @@ const clientId = pad((mimeTypesLength +
   navigator.userAgent.length).toString(36) +
   globalCount.toString(36), 4)
 
-export function fingerprint () {
+export function fingerprint() {
   return clientId
 }

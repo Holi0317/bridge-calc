@@ -2,11 +2,6 @@ import * as lolex from 'lolex'
 import {migrateOldState} from './converter'
 import {GameStage} from '../score-input/game-stage'
 
-jest.mock('cuid', () => {
-  let count = 0
-  return jest.fn(() => '' + count++)
-})
-
 let clock = null
 beforeEach(() => {
   clock = lolex.install()
