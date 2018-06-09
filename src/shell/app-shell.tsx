@@ -17,6 +17,7 @@ import {SWReg} from '../sw-reg'
 import {Migration} from '../migration/migration'
 import {Routes} from './routes'
 import {ITranslateMixin} from '../types'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 /**
  * Create a function that will route to specified location.
@@ -64,6 +65,7 @@ export function ShellImpl({location, history, t}: AppProps) {
         <Routes location={location} />
       </main>
 
+      <CssBaseline />
       <Migration />
       <ToastSingleton />
       <SWReg />
