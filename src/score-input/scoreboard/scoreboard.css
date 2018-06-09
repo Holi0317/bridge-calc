@@ -70,6 +70,6 @@
   }
 
   & tbody tr:hover {
-    background-color: var(--hover-color);
+    background-color: var(--selected-color);
   }
 }
