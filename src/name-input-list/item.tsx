@@ -21,8 +21,8 @@ export function SortableItemImpl({value, onChange, remove, error, t}: ISortableI
   return (
     <div className={style.itemContainer}>
       <DragHandle />
-      {/* FIXME Regression: Container for TextField is too short (or too compact?) */}
       <TextField type="text" fullWidth label={t('Player name')}
+                 margin="normal"
                  value={value} error={error != null} helperText={error}
                  onChange={(event: any) => onChange(event.target.value)} />
       <Tooltip title={t('Delete name')}>

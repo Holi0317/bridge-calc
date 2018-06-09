@@ -34,7 +34,7 @@ export class Dropdown<SourceType extends number | string> extends React.Componen
   public render() {
     const {source, label, error, ...rest} = this.props
     return (
-      <FormControl error={error != null}>
+      <FormControl error={error != null} margin="normal">
         <InputLabel htmlFor={this._uid}>{label}</InputLabel>
         <Select {...rest} inputProps={{name: label, id: this._uid}} onChange={this.handleChange}>
           {source.map(item => (
