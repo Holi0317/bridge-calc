@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
 import {Container} from 'react-grid-system'
+import Divider from '@material-ui/core/Divider'
 import {EntryPlayerList} from './entry-player-list'
 import {InitEntryState} from './init-entry-state'
 import {EntryActionButtons} from './entry-action-buttons'
@@ -18,8 +19,7 @@ export function EntryImpl({t}: EntryProps) {
       <h3 className={style.text}>{t('Player Names')}</h3>
       <EntryPlayerList />
       <EntryActionButtons />
-      {/* TODO Make this divider less dark */}
-      <hr />
+      <Divider />
 
       <CollapsedEntryOptions />
 
