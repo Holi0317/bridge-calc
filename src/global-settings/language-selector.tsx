@@ -30,7 +30,6 @@ export class LanguageSelectorImpl extends React.Component {
   public render() {
     const {i18n, t} = this.props
 
-    // FIXME Regression: The dropdown's width is too small
     return <div>
       <Dropdown label={t('Change language')}
                 value={i18n.language}

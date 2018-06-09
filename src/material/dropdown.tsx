@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import {cuid} from '../utils'
+import styles from './dropdown.css'
 
 export interface IDropdownSource<T extends number | string> {
   value: T
@@ -36,7 +37,10 @@ export class Dropdown<SourceType extends number | string> extends React.Componen
     return (
       <FormControl error={error != null} margin="normal">
         <InputLabel htmlFor={this._uid}>{label}</InputLabel>
-        <Select {...rest} inputProps={{name: label, id: this._uid}} onChange={this.handleChange}>
+        <Select {...rest}
+                inputProps={{name: label, id: this._uid}}
+                classes={{root: styles.dropdownRoot, selectMenu: styles.dropdownSelectMenu}}
+                onChange={this.handleChange}>
           {source.map(item => (
             <MenuItem key={item.label} value={item.value} disabled={item.disabled}>{item.label}</MenuItem>
           ))}
