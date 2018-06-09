@@ -1,21 +1,13 @@
 .tile {
   width: 100%;
   min-height: 200px;
-  transition: box-shadow 0.5s, background 0.5s;
+  transition: background 0.5s;
   transition-timing-function: ease-in-out, cubic-bezier(0.4, 0, 1, 1);
-  will-change: box-shadow, background;
-  cursor: pointer;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  will-change: background;
   margin: 0.5em 0 1em;
   overflow: hidden;
-  background: var(--bg-color);
-  border-radius: 2px;
   box-sizing: border-box;
   text-align: center;
-
-  &:hover {
-    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-  }
 
   &:active {
     background: var(--hover-color);
@@ -34,12 +26,9 @@
 .title-container {
   display: inline-block;
   padding: 16px;
-  font-size: 24px;
-  font-weight: 300;
-  line-height: normal;
-  color: var(--text-color);
 }
 
 .link {
   color: inherit;
+  text-decoration: none;
 }
