@@ -7,6 +7,7 @@ import {ITranslateMixin} from '../types'
 import {RouteComponentProps} from 'react-router'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
+import Paper from '@material-ui/core/Paper'
 import {ErrorBoundary} from '../error-boundary'
 
 function getActive(pathname: string): number {
@@ -38,15 +39,17 @@ export class LayoutImpl extends React.Component {
     const {t} = this.props
     const {active} = this.state
 
-    // FIXME Regression: The Tabs are... horrible
-
     return (
       <div>
-        <Tabs value={active} onChange={this.tabChange}>
-          {routes.map((route, index) => (
-            <Tab key={index} label={t(route.name)} value={index} />
-          ))}
-        </Tabs>
+        <Paper>
+          <Tabs value={active} onChange={this.tabChange} indicatorColor="primary"
+                textColor="primary"
+                centered>
+            {routes.map((route, index) => (
+              <Tab key={index} label={t(route.name)} value={index} />
+            ))}
+          </Tabs>
+        </Paper>
         <ErrorBoundary>
           {routes.map((route, index) => (
             <Route key={index} path={route.path} component={route.component} exact={route.exact} />
