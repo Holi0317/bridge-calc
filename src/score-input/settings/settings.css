@@ -1,3 +1,18 @@
 .session-card {
   margin-top: 1em;
 }
+
+.panel-container {
+  width: 100%;
+}
+
+.panel-heading {
+  flex-basis: 33.33%;
+  flex-shrink: 0;
+  font-size: 0.9375rem;
+}
+
+.panel-subheading {
+  flex-basis: 33.33%;
+  font-size: 0.9375rem;
+}

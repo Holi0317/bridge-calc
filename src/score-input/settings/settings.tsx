@@ -12,6 +12,7 @@ export function SettingsImpl() {
       <NameEdit />
       <ChangeMaker />
       <RoundManagement />
+
       <SettingsInitializer />
     </Container>
   )

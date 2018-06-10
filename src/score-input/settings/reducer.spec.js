@@ -5,6 +5,8 @@ import {initSettingsAction} from './actions/init-settings'
 import {setMakerAction} from './actions/set-maker'
 import {setNamesAction} from './actions/set-names'
 import {addNameAction} from './actions/add-name'
+import {toggleExpandAction} from './actions/toggle-expand'
+import {PANEL} from './panel'
 
 test('Default state', () => {
   const state = undefined
@@ -84,6 +86,22 @@ test('ADD_NAME should append new name to the end', () => {
     }
   }
   const action = addNameAction('DPGJW')
+  const actual = reducer(state, action)
+  expect(actual).toEqual(expected)
+})
+
+test('TOGGLE_PANEL_EXPAND should toggle the correct panel state', () => {
+  const state = {
+    ...defaultState
+  }
+  const expected = {
+    ...defaultState,
+    panelExpanded: {
+      ...defaultState.panelExpanded,
+      changeMaker: true
+    }
+  }
+  const action = toggleExpandAction(PANEL.CHANGE_MAKER)
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })

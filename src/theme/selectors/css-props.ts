@@ -11,6 +11,7 @@ export const cssPropsSelector = createSelector(
     return new Map([
       ['--bg-color', palette.background.default],
       ['--text-color', palette.text.primary],
+      ['--secondary-text-color', palette.text.secondary],
       ['--selected-color', palette.action.selected],
       ['--error-text-color', palette.error.main],
       ['--contrast-text-color', palette.getContrastText(palette.background.default)]

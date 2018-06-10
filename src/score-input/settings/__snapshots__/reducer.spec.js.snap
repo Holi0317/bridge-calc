@@ -10,5 +10,10 @@ Object {
     "c": "Henry",
     "d": "Joe",
   },
+  "panelExpanded": Object {
+    "changeMaker": false,
+    "nameEdit": false,
+    "roundManagement": false,
+  },
 }
 `;

@@ -4,6 +4,12 @@ import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import Typography from '@material-ui/core/Typography'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import {Dropdown} from '../../../material/dropdown'
 import {namesSelector} from '../../selectors/names'
 import {roundsSelector} from '../../selectors/rounds'
@@ -13,9 +19,11 @@ import {makerSourceSelector} from '../selectors/maker-source'
 import {changePlayersAction} from '../../actions/change-players'
 import {initSettingsAction} from '../actions/init-settings'
 import {setMakerAction} from '../actions/set-maker'
+import {toggleExpandAction} from '../actions/toggle-expand'
 import {showToastAction} from '../../../toast-singleton/actions/show-toast'
+import {PANEL} from '../panel'
 import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
-import style from './maker-editor.css'
+import style from '../settings.css'
 
 const mapStateToProps = (state: IRootState) => ({
   names: namesSelector(state),
@@ -23,6 +31,7 @@ const mapStateToProps = (state: IRootState) => ({
   rounds: roundsSelector(state),
   maker: makerSelector(state),
   disabled: namesChangedSelector(state),
+  expanded: state.gameSettings.panelExpanded[PANEL.CHANGE_MAKER],
   currentGame: state.currentGame,
 })
 
@@ -31,6 +40,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     changePlayers: changePlayersAction,
     init: initSettingsAction,
     setMaker: setMakerAction,
+    toggleExpand: toggleExpandAction,
     showToast: showToastAction
   }, dispatch)
 
@@ -41,18 +51,34 @@ export class MakerEditorImpl extends React.Component {
   public props: stateType & dispatchType & ITranslateMixin
 
   public render() {
-    const {maker, namesSource, disabled, setMaker, t} = this.props
+    const {maker, namesSource, disabled, expanded, setMaker, toggleExpand, t} = this.props
+
+    const subHeading = disabled
+      ? t('Maker edit is disabled when editing player names')
+      : t('Change maker of current round')
 
     return (
-      <div>
-        <div className={style.chooserContainer}>
-          <Dropdown label={t('Maker')} disabled={disabled}
-                    source={disabled ? [] : namesSource} value={disabled ? '' : maker || ''} onChange={setMaker} />
-          <Button variant="contained" color="primary" disabled={disabled} onClick={this.commit}>{t('Change maker')}</Button>
-        </div>
-        {disabled
-          ? <div className={style.disabledHint}>{t('Maker edit is disabled when editing player names')}</div>
-          : null}
+      <div className={style.panelContainer}>
+        <ExpansionPanel expanded={expanded && !disabled} disabled={disabled} onChange={() => toggleExpand(PANEL.CHANGE_MAKER)}>
+
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <div className={style.panelHeading}>
+              <Typography className={style.heading}>Change maker</Typography>
+            </div>
+            <div className={style.panelSubheading}>
+              <Typography className={style.secondaryHeading} color="textSecondary">{subHeading}</Typography>
+            </div>
+          </ExpansionPanelSummary>
+
+          <ExpansionPanelDetails>
+            <Dropdown label={t('Maker')} disabled={disabled}
+                              source={disabled ? [] : namesSource} value={disabled ? '' : maker || ''} onChange={setMaker} />
+          </ExpansionPanelDetails>
+
+          <ExpansionPanelActions>
+            <Button variant="contained" color="primary" disabled={disabled} onClick={this.commit}>{t('Change maker')}</Button>
+          </ExpansionPanelActions>
+        </ExpansionPanel>
       </div>
     )
   }

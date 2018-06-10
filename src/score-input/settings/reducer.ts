@@ -18,12 +18,21 @@ export interface ISettingsState {
    * New player map.
    */
   names: IPlayerMap<string>
+  /**
+   * State if panel are expanded or not.
+   */
+  panelExpanded: {[panel: string]: boolean}
 }
 
 const defaultState: ISettingsState = {
   maker: null,
   makerDirty: false,
-  names: {}
+  names: {},
+  panelExpanded: {
+    nameEdit: false,
+    changeMaker: false,
+    roundManagement: false
+  }
 }
 
 export function settingsReducer(state: ISettingsState = defaultState, action: GameSettingsActions): ISettingsState {
@@ -34,8 +43,8 @@ export function settingsReducer(state: ISettingsState = defaultState, action: Ga
       return defaultState
     }
     return {
+      ...defaultState,
       maker: gameState.currentPlayerOrder[0],
-      makerDirty: false,
       names: gameState.names
     }
   }
@@ -56,6 +65,14 @@ export function settingsReducer(state: ISettingsState = defaultState, action: Ga
       names: {
         ...state.names,
         [action.ID]: action.name
+      }
+    }
+  case ActionTypes.TOGGLE_SETTING_PANEL:
+    return {
+      ...state,
+      panelExpanded: {
+        ...state.panelExpanded,
+        [action.panel]: !state.panelExpanded[action.panel]
       }
     }
   default:
