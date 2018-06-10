@@ -1,0 +1,12 @@
+.back-btn {
+  margin-left: -12px;
+  margin-right: 20px;
+}
+
+.toolbar {
+  flex-grow: 1;
+}
+
+.title {
+  flex: 1;
+}
