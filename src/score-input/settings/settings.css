@@ -1,8 +1,3 @@
-/* FIXME Remove this style */
-.session-card {
-  margin-top: 1em;
-}
-
 .panel-container {
   width: 100%;
 }
@@ -16,4 +11,12 @@
 .panel-subheading {
   flex-basis: 33.33%;
   font-size: 0.9375rem;
+}
+
+.skip-rounds-btn {
+  margin-right: 1em !important;
+
+  &:last-child {
+    margin-right: 0 !important;
+  }
 }

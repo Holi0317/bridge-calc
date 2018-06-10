@@ -10,7 +10,8 @@ import {showToastAction} from '../../../toast-singleton/actions/show-toast'
 import {remainingRoundsSelector} from '../../selectors/remaining-rounds'
 import {currentRoundSelector} from '../../selectors/current-round'
 import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
-import styles from './skip-rounds.css'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import styles from '../settings.css'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
@@ -34,17 +35,17 @@ export class SkipRoundsImpl extends React.Component {
   public render() {
     const {remainingRounds, t} = this.props
     return (
-      <div className={styles.btnContainer}>
-        <Button className={styles.btn} onClick={this.skip(1)}>
+      <ExpansionPanelDetails>
+        <Button variant="outlined" className={styles.skipRoundsBtn} onClick={this.skip(1)}>
           {t('Skip this round')}
         </Button>
-        <Button className={styles.btn} disabled={remainingRounds <= 1} onClick={this.skip(remainingRounds - 1)}>
+        <Button variant="outlined" className={styles.skipRoundsBtn} disabled={remainingRounds <= 1} onClick={this.skip(remainingRounds - 1)}>
           {t('Skip to last round')}
         </Button>
-        <Button className={styles.btn} onClick={this.skip(remainingRounds)}>
+        <Button variant="outlined" className={styles.skipRoundsBtn} onClick={this.skip(remainingRounds)}>
           {t('End game')}
         </Button>
-      </div>
+      </ExpansionPanelDetails>
     )
   }
 
