@@ -72,7 +72,7 @@ export class StackInputImpl extends React.Component {
             <td>{t('Win')}</td>
             {playerOrder.map(playerID => (
               <td key={playerID}>
-                <Dropdown value={win[playerID]} source={winStackInput[playerID]}
+                <Dropdown value={win[playerID] == null ? '' : win[playerID]} source={winStackInput[playerID]}
                           label={t('Win for {{name}}', {name: names[playerID]})}
                           disabled={winDisabled} error={error.win[playerID]}
                           onChange={this.setWin(playerID)}/>
