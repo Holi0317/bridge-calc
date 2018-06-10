@@ -2,6 +2,7 @@ import * as React from 'react'
 import {SortableContainer} from 'react-sortable-hoc'
 import {INameInputListProps, Setter} from './types'
 import {SortableItem} from './item'
+import style from './name-input-list.css'
 
 /**
  * Create a change handler for change in input.
@@ -33,7 +34,7 @@ export function ContainerImpl<T, V>(props: INameInputListProps<T, V>) {
   const changeHandler = createChangeHandler(values, setter, onChange)
   const removeHandler = createRemoveHandler(values, onChange)
   return (
-    <div>
+    <div className={style.container}>
       {values.map((value, index) => (
         <SortableItem key={`item-${index}`} index={index}
                       value={getter(value)} error={errorGetter(error, value, index)}
