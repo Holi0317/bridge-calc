@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
-import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
+import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
 import style from '../settings.css'
 import {NameEditor} from './name-editor'
 
@@ -35,8 +35,7 @@ export class NameEditImpl extends React.Component {
       ? t('Player name edit is disabled when editing maker')
       : t('Add, remove or change names of players')
 
-    return <div className={style.panelContainer}>
-      <ExpansionPanel expanded={expanded && !disabled} disabled={disabled} onChange={() => toggleExpand(PANEL.NAME_EDIT)}>
+    return <ExpansionPanel expanded={expanded && !disabled} disabled={disabled} onChange={() => toggleExpand(PANEL.NAME_EDIT)}>
 
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={style.panelHeading}>
@@ -50,7 +49,6 @@ export class NameEditImpl extends React.Component {
         <NameEditor />
 
       </ExpansionPanel>
-    </div>
 
   }
 }

@@ -10,7 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import {namesChangedSelector} from '../selectors/names-changed'
 import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
-import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
+import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
 import style from '../settings.css'
 import {MakerEditor} from './maker-editor'
 
@@ -37,22 +37,20 @@ export class ChangeMakerImpl extends React.Component {
       : t('Change maker of current round')
 
     return (
-      <div className={style.panelContainer}>
-        <ExpansionPanel expanded={expanded && !disabled} disabled={disabled} onChange={() => toggleExpand(PANEL.CHANGE_MAKER)}>
+      <ExpansionPanel expanded={expanded && !disabled} disabled={disabled} onChange={() => toggleExpand(PANEL.CHANGE_MAKER)}>
 
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <div className={style.panelHeading}>
-              <Typography className={style.heading}>{t('Change maker')}</Typography>
-            </div>
-            <div className={style.panelSubheading}>
-              <Typography className={style.secondaryHeading} color="textSecondary">{subHeading}</Typography>
-            </div>
-          </ExpansionPanelSummary>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <div className={style.panelHeading}>
+            <Typography className={style.heading}>{t('Change maker')}</Typography>
+          </div>
+          <div className={style.panelSubheading}>
+            <Typography className={style.secondaryHeading} color="textSecondary">{subHeading}</Typography>
+          </div>
+        </ExpansionPanelSummary>
 
-          <MakerEditor />
+        <MakerEditor />
 
-        </ExpansionPanel>
-      </div>
+      </ExpansionPanel>
     )
   }
 }
