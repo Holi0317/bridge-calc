@@ -1,4 +1,4 @@
-export enum ActionTypes {
+export const enum ActionTypes {
   // Current game (score-input) module
   BID = 'CURRENT_GAME/BID',
   CHANGE_PLAYERS = 'CURRENT_GAME/CHANGE_PLAYERS',
@@ -34,6 +34,5 @@ export enum ActionTypes {
   CLOSE_TOAST = 'TOAST/CLOSE',
 
   // Theme module
-  SET_THEME = 'THEME/SET_THEME',
-  SET_AUTO_DARK = 'THEME/SET_AUTO_DARK'
+  SET_THEME = 'THEME/SET_THEME'
 }
