@@ -9,12 +9,13 @@ import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
+import {NameEditor} from './name-editor'
+import {nameEditDisabledSelector} from '../selectors/name-edit-disabled'
 import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
 import style from '../settings.css'
-import {NameEditor} from './name-editor'
 
 const mapStateToProps = (state: IRootState) => ({
-  disabled: state.gameSettings.makerDirty,
+  disabled: nameEditDisabledSelector(state),
   expanded: state.gameSettings.panelExpanded[PANEL.NAME_EDIT]
 })
 

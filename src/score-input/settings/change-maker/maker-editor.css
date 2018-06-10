@@ -1,8 +1,0 @@
-.chooser-container {
-  display: flex;
-  align-items: center;
-}
-
-.disabled-hint {
-  color: var(--error-text-color);
-}
