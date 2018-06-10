@@ -38,11 +38,11 @@
     position: relative;
     vertical-align: bottom;
     text-overflow: ellipsis;
-    font-weight: bold;
+    font-weight: 300;
     line-height: 24px;
     letter-spacing: 0;
     height: 48px;
-    font-size: 12px;
+    font-size: 17.5px;
     color: var(--text-color);
     padding-bottom: 8px;
     box-sizing: border-box;
@@ -54,7 +54,7 @@
     height: 48px;
     border-top: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    padding-top: 12px;
+    padding-top: 14px;
     box-sizing: border-box;
   }
 
