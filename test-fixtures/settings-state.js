@@ -4,11 +4,7 @@ export const defaultState = deepFreeze({
   maker: null,
   makerDirty: false,
   names: {},
-  panelExpanded: {
-    nameEdit: false,
-    changeMaker: false,
-    roundManagement: false
-  }
+  expandedPanel: null
 })
 
 /**

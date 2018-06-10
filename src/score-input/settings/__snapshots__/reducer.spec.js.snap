@@ -2,6 +2,7 @@
 
 exports[`INIT_SETTINGS should work on running game state 1`] = `
 Object {
+  "expandedPanel": null,
   "maker": "a",
   "makerDirty": false,
   "names": Object {
@@ -9,11 +10,6 @@ Object {
     "b": "Mary",
     "c": "Henry",
     "d": "Joe",
-  },
-  "panelExpanded": Object {
-    "changeMaker": false,
-    "nameEdit": false,
-    "roundManagement": false,
   },
 }
 `;

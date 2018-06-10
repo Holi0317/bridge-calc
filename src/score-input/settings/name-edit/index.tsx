@@ -8,15 +8,16 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import {toggleExpandAction} from '../actions/toggle-expand'
+import {nameEditDisabledSelector} from '../selectors/name-edit-disabled'
+import {expandedPanelSelector} from '../selectors/expanded-panel'
 import {PANEL} from '../panel'
 import {NameEditor} from './name-editor'
-import {nameEditDisabledSelector} from '../selectors/name-edit-disabled'
 import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
 import style from '../settings.css'
 
 const mapStateToProps = (state: IRootState) => ({
   disabled: nameEditDisabledSelector(state),
-  expanded: state.gameSettings.panelExpanded[PANEL.NAME_EDIT]
+  expanded: expandedPanelSelector(state) === PANEL.NAME_EDIT
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

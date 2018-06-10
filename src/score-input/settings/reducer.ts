@@ -2,6 +2,7 @@ import {GameStage} from '../game-stage'
 import {GameSettingsActions} from './actions'
 import {IPlayerMap} from '../../types'
 import {ActionTypes} from '../../action-types'
+import {PANEL} from './panel'
 
 export interface ISettingsState {
   /**
@@ -19,20 +20,17 @@ export interface ISettingsState {
    */
   names: IPlayerMap<string>
   /**
-   * State if panel are expanded or not.
+   * State which panel is expanded now.
+   * If null, no panel is expanded.
    */
-  panelExpanded: {[panel: string]: boolean}
+  expandedPanel: PANEL | null
 }
 
 const defaultState: ISettingsState = {
   maker: null,
   makerDirty: false,
   names: {},
-  panelExpanded: {
-    nameEdit: false,
-    changeMaker: false,
-    roundManagement: false
-  }
+  expandedPanel: null
 }
 
 export function settingsReducer(state: ISettingsState = defaultState, action: GameSettingsActions): ISettingsState {
@@ -67,14 +65,19 @@ export function settingsReducer(state: ISettingsState = defaultState, action: Ga
         [action.ID]: action.name
       }
     }
-  case ActionTypes.TOGGLE_SETTING_PANEL:
-    return {
-      ...state,
-      panelExpanded: {
-        ...state.panelExpanded,
-        [action.panel]: !state.panelExpanded[action.panel]
+  case ActionTypes.TOGGLE_SETTING_PANEL: {
+    if (action.panel === state.expandedPanel) {
+      return {
+        ...state,
+        expandedPanel: null
       }
     }
+    return {
+      ...state,
+      expandedPanel: action.panel
+    }
+  }
+
   default:
     return state
   }

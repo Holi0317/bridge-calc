@@ -90,16 +90,28 @@ test('ADD_NAME should append new name to the end', () => {
   expect(actual).toEqual(expected)
 })
 
-test('TOGGLE_PANEL_EXPAND should toggle the correct panel state', () => {
+test('TOGGLE_PANEL_EXPAND should expand given panel', () => {
   const state = {
-    ...defaultState
+    ...defaultState,
+    expandedPanel: PANEL.ROUND_MANAGEMENT
   }
   const expected = {
     ...defaultState,
-    panelExpanded: {
-      ...defaultState.panelExpanded,
-      changeMaker: true
-    }
+    expandedPanel: PANEL.CHANGE_MAKER
+  }
+  const action = toggleExpandAction(PANEL.CHANGE_MAKER)
+  const actual = reducer(state, action)
+  expect(actual).toEqual(expected)
+})
+
+test('TOGGLE_PANEL_EXPAND should collapse panel if given is already expanded', () => {
+  const state = {
+    ...defaultState,
+    expandedPanel: PANEL.CHANGE_MAKER
+  }
+  const expected = {
+    ...defaultState,
+    expandedPanel: null
   }
   const action = toggleExpandAction(PANEL.CHANGE_MAKER)
   const actual = reducer(state, action)

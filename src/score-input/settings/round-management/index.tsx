@@ -7,14 +7,15 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import {expandedPanelSelector} from '../selectors/expanded-panel'
 import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
+import {SkipRounds} from './skip-rounds'
 import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
 import style from '../settings.css'
-import {SkipRounds} from './skip-rounds'
 
 const mapStateToProps = (state: IRootState) => ({
-  expanded: state.gameSettings.panelExpanded[PANEL.ROUND_MANAGEMENT]
+  expanded: expandedPanelSelector(state) === PANEL.ROUND_MANAGEMENT
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

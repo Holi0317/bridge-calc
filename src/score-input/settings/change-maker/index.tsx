@@ -8,6 +8,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import {changeMakerDisabledSelector} from '../selectors/change-maker-disabled'
+import {expandedPanelSelector} from '../selectors/expanded-panel'
 import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
 import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
@@ -16,7 +17,7 @@ import {MakerEditor} from './maker-editor'
 
 const mapStateToProps = (state: IRootState) => ({
   disabled: changeMakerDisabledSelector(state),
-  expanded: state.gameSettings.panelExpanded[PANEL.CHANGE_MAKER]
+  expanded: expandedPanelSelector(state) === PANEL.CHANGE_MAKER
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
