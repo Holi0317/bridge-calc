@@ -3,11 +3,20 @@ import {PrevGamesActions} from './actions'
 import {ActionTypes} from '../action-types'
 
 export interface IPrevGamesState {
-  prevGames: PrevGameEntry[]
+  /**
+   * Array of game entries played in the past or currently playing
+   */
+  prevGames: PrevGameEntry[],
+  /**
+   * The index of game entry modal is currently showing.
+   * Or null, which means no entry should be show now.
+   */
+  modalEntry: number | null
 }
 
 const defaultState: IPrevGamesState = {
-  prevGames: []
+  prevGames: [],
+  modalEntry: null
 }
 
 export function prevGamesReducer(state = defaultState, action: PrevGamesActions) {
@@ -46,6 +55,12 @@ export function prevGamesReducer(state = defaultState, action: PrevGamesActions)
       }
 
       return state
+    }
+
+  case ActionTypes.SET_GAME_MODAL:
+    return {
+      ...state,
+      modalEntry: action.index
     }
 
     case ActionTypes.RESET_GAMES:

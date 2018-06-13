@@ -1,3 +1,15 @@
 .prev-game {
   margin-top: 1em;
 }
+
+.prev-game-container {
+  margin-top: 1em;
+}
+
+.app-bar {
+  position: relative;
+}
+
+.flex {
+  flex: 1;
+}
