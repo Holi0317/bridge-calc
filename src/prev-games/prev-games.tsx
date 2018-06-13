@@ -1,10 +1,12 @@
 import * as React from 'react'
 import flowRight from 'lodash-es/flowRight'
+import {translate} from 'react-i18next'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {RouteComponentProps, withRouter} from 'react-router'
 import {Container} from 'react-grid-system'
 import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
 import {NoPrevGamePlaceholder} from './no-prev-game-placeholder'
 import {PrevGame} from './prev-game'
 import {ResetModal} from './reset-modal'
@@ -14,7 +16,7 @@ import {deleteGameAction} from './actions/delete-game'
 import {showGameModalAction} from './actions/game-modal'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {reversedPrevGamesSelector} from './selectors/reversed-prev-games'
-import {IRootState, Dispatch} from '../types'
+import {IRootState, Dispatch, ITranslateMixin} from '../types'
 import styles from './prev-games.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -34,14 +36,15 @@ type stateType = ReturnType<typeof mapStateToProps>
 type dispatchType = ReturnType<typeof mapDispatchToProps>
 
 export class PrevGamesImpl extends React.Component {
-  public props: stateType & dispatchType & RouteComponentProps<any>
+  public props: stateType & dispatchType & RouteComponentProps<any> & ITranslateMixin
 
   public render() {
-    const {havePrevGame, prevGames} = this.props
+    const {havePrevGame, prevGames, t} = this.props
     if (havePrevGame) {
       return (
         <Container>
           <div className={styles.prevGameContainer}>
+            <Typography variant="display1" gutterBottom>{t('Click on an entry for details')}</Typography>
             <List>
               {prevGames.map((prevGame, index) => (
                 <PrevGame key={`prev-game-${index}`} game={prevGame}
@@ -81,5 +84,6 @@ export class PrevGamesImpl extends React.Component {
 
 export const PrevGames = flowRight(
   withRouter,
+  translate(),
   connect(mapStateToProps, mapDispatchToProps)
 )(PrevGamesImpl)
