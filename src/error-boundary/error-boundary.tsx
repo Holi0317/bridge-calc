@@ -17,6 +17,7 @@ export class ErrorBoundaryImpl extends React.Component {
   }
 
   public componentDidCatch(err: Error) {
+    console.error(err)
     this.setState(() => ({
       error: err
     }))
