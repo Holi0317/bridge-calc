@@ -16,7 +16,6 @@
 
 .icon-container {
   margin: 0 auto;
-  color: var(--contrast-text-color);
 
   & > svg {
     width: 92px !important;

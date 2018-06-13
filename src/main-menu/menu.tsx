@@ -27,7 +27,7 @@ export function MenuImpl({showContinue, t}: MenuProps) {
       {showContinue
         ? <Row>
           <Col xs={12}>
-            <Tile icon={<AvPlayArrow />} title={t('Continue')} to="/score-input" />
+            <Tile icon={<AvPlayArrow color="action" />} title={t('Continue')} to="/score-input" />
           </Col>
         </Row>
         : null
@@ -35,22 +35,22 @@ export function MenuImpl({showContinue, t}: MenuProps) {
 
       <Row>
         <Col md={6} xs={12}>
-          <Tile icon={<AvFiberNew />} title={t('New Game')} to="/entry" />
+          <Tile icon={<AvFiberNew color="action" />} title={t('New Game')} to="/entry" />
         </Col>
         <Col md={6} xs={12}>
-          <Tile icon={<AvSkipPrevious />} title={t('Previous games')} to="/prev-games" />
+          <Tile icon={<AvSkipPrevious color="action" />} title={t('Previous games')} to="/prev-games" />
         </Col>
       </Row>
 
       <Row>
         <Col md={4} xs={12}>
-          <Tile icon={<ActionSettings />} title={t('Settings')} to="/global-settings" />
+          <Tile icon={<ActionSettings color="action" />} title={t('Settings')} to="/global-settings" />
         </Col>
         <Col md={4} xs={12}>
-          <Tile icon={<ActionInfo />} title={t('Information')} to="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md" external={true} target="_blank" />
+          <Tile icon={<ActionInfo color="action" />} title={t('Information')} to="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md" external={true} target="_blank" />
         </Col>
         <Col md={4} xs={12}>
-          <Tile icon={<ActionBugReport />} title={t('Support/bug')} to="https://gitlab.com/holi0317/bridge-calc/issues" external={true} target="_blank" />
+          <Tile icon={<ActionBugReport color="action" />} title={t('Support/bug')} to="https://gitlab.com/holi0317/bridge-calc/issues" external={true} target="_blank" />
         </Col>
       </Row>
 
