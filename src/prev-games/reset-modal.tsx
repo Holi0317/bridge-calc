@@ -11,6 +11,9 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 type dispatchType = ReturnType<typeof mapDispatchToProps>
 
+/**
+ * Reset dialog when this component mounts
+ */
 export class ResetModalImpl extends React.Component {
   public props: dispatchType
 
