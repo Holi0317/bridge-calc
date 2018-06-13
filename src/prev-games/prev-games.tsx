@@ -15,7 +15,6 @@ import {showGameModalFunction} from './actions/game-modal'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {reversedPrevGamesSelector} from './selectors/reversed-prev-games'
 import {IRootState, Dispatch} from '../types'
-import {PrevGameEntry} from './types'
 import styles from './prev-games.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -69,12 +68,6 @@ export class PrevGamesImpl extends React.Component {
       }
       del(index)
     }
-  }
-
-  private load(prevGame: PrevGameEntry) {
-    const {load, history} = this.props
-    load(prevGame)
-    history.push('/score-input')
   }
 
   private makeDetails(reversedIndex: number) {
