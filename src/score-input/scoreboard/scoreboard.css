@@ -5,3 +5,7 @@
 .table {
   white-space: nowrap;
 }
+
+.scoreboard-container {
+  margin-top: 1em;
+}
