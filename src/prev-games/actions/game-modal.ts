@@ -9,7 +9,7 @@ export interface ISetGameModalAction {
  * Set a game modal to display
  * @param index Index of the game entry in the prevGames array
  */
-export function showGameModalFunction(index: number): ISetGameModalAction {
+export function showGameModalAction(index: number): ISetGameModalAction {
   return {type: ActionTypes.SET_GAME_MODAL, index}
 }
 

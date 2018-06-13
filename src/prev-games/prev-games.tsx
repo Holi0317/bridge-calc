@@ -11,7 +11,7 @@ import {ResetModal} from './reset-modal'
 import {GameModal} from './game-modal'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import {deleteGameAction} from './actions/delete-game'
-import {showGameModalFunction} from './actions/game-modal'
+import {showGameModalAction} from './actions/game-modal'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {reversedPrevGamesSelector} from './selectors/reversed-prev-games'
 import {IRootState, Dispatch} from '../types'
@@ -26,7 +26,7 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     del: deleteGameAction,
-    show: showGameModalFunction,
+    show: showGameModalAction,
     load: replaceCurrentGameAction
   }, dispatch)
 

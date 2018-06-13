@@ -10,6 +10,6 @@ export const modalEntrySelector = createSelector(
     if (modalEntry == null) {
       return null
     }
-    return prevGames[modalEntry]
+    return prevGames[modalEntry] || null
   }
 )
