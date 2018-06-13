@@ -16,13 +16,13 @@ import DialogContent from '@material-ui/core/DialogContent/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions/DialogActions'
 import Button from '@material-ui/core/Button/Button'
 import {EntryDetail} from './entry-detail'
-import {Scoreboard} from '../score-input/scoreboard'
 import AppBar from '@material-ui/core/AppBar/AppBar'
 import IconButton from '@material-ui/core/IconButton/IconButton'
 import Toolbar from '@material-ui/core/Toolbar/Toolbar'
 import Typography from '@material-ui/core/Typography/Typography'
 import CloseIcon from '@material-ui/icons/Close'
 import styles from './prev-games.css'
+import {ScoreboardTable} from '../score-input/scoreboard/scoreboard-table'
 
 const mapStateToProps = (state: IRootState) => ({
   entry: modalEntrySelector(state),
@@ -73,7 +73,7 @@ export class GameModalImpl extends React.Component {
       {entry != null && (
         <DialogContent>
           <EntryDetail entry={entry} />
-          <Scoreboard entry={entry} mini={false} />
+          <ScoreboardTable entry={entry} mini={false} />
         </DialogContent>
       )}
 
