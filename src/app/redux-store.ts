@@ -1,5 +1,5 @@
 import {persistStore, persistCombineReducers} from 'redux-persist'
-import {applyMiddleware, createStore} from 'redux'
+import {applyMiddleware, createStore, compose} from 'redux'
 import storage from 'redux-persist/es/storage'
 import {autoSave} from '../redux-middlewares/auto-save'
 import {currentGameReducer} from '../score-input/reducer'
@@ -26,21 +26,32 @@ const reducer = persistCombineReducers(presistConfig, {
   theme: themeReducer
 })
 
+/*
+ * Default set of middlewares would be applied to both
+ * production and development environment
+ */
 const middlewares: any[] = [
   autoSave
 ]
 
-if (process.env.NODE_ENV === 'development') {
+function devEnhancer() {
+  const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   // tslint:disable-next-line:no-var-requires no-implicit-dependencies no-require-imports
   const {createLogger} = require('redux-logger')
   const logger = createLogger({
     collapsed: true
   })
-  middlewares.push(logger)
+  return composeEnhancers(
+    applyMiddleware(...[...middlewares, logger])
+  )
+}
+
+function prodEnchancer() {
+  return applyMiddleware(...middlewares)
 }
 
 export const store = createStore(
   reducer,
-  applyMiddleware(...middlewares)
+  process.env.NODE_ENV === 'production' ? prodEnchancer() : devEnhancer()
 )
 export const persistor = persistStore(store)
