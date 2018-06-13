@@ -1,8 +1,14 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
-import {ITranslateMixin} from '../../types'
+import Paper from '@material-ui/core/Paper'
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
+import TableBody from '@material-ui/core/TableBody'
 import {GameState} from '../reducer'
 import {computeData} from './compute-data'
+import {ITranslateMixin} from '../../types'
 import style from './scoreboard.css'
 
 interface IScoreboardTableProps extends ITranslateMixin {
@@ -14,58 +20,58 @@ export function ScoreboardTableImpl({entry, mini, t}: IScoreboardTableProps) {
   const {names, scores, prevScores, totalScores, ranks, endedRounds} = computeData(entry)
 
   return (
-    <div className={style.tableContainer}>
-      <table className={style.table}>
+    <Paper className={style.tableContainer}>
+      <Table className={style.table}>
 
-        <thead>
+        <TableHead>
         {/* Player names */}
-        <tr>
-          <th>{t('Name')}</th>
+        <TableRow>
+          <TableCell>{t('Name')}</TableCell>
           {Object.entries(names).map(([playerID, name]) => (
-            <th key={playerID}>{name}</th>
+            <TableCell key={playerID}>{name}</TableCell>
           ))}
-        </tr>
-        </thead>
+        </TableRow>
+        </TableHead>
 
-        <tbody>
+        <TableBody>
 
         {mini ? (
-          <tr>
-            <td>{t('Previous round score')}</td>
+          <TableRow>
+            <TableCell>{t('Previous round score')}</TableCell>
             {Object.entries(prevScores).map(([playerID, score]) => (
-              <td key={playerID}>{score}</td>
+              <TableCell numeric key={playerID}>{score}</TableCell>
             ))}
-          </tr>
+          </TableRow>
         ) : (
           endedRounds.map(i => (
             <tr key={i}>
-              <td>{t('Round {{n}}', {n: i})}</td>
+              <TableCell>{t('Round {{n}}', {n: i})}</TableCell>
               {Object.entries(scores).map(([playerID, score]) => (
-                <td key={playerID}>{score[i - 1]}</td>
+                <TableCell numeric key={playerID}>{score[i - 1]}</TableCell>
               ))}
             </tr>
           ))
         )}
 
         {/* Total scores */}
-        <tr>
-          <td>{t('Total score')}</td>
+        <TableRow>
+          <TableCell>{t('Total score')}</TableCell>
           {Object.entries(totalScores).map(([playerID, total]) => (
-            <td key={playerID}>{total}</td>
+            <TableCell numeric key={playerID}>{total}</TableCell>
           ))}
-        </tr>
+        </TableRow>
 
         {/* Rank */}
-        <tr>
-          <td>{t('Rank')}</td>
+        <TableRow>
+          <TableCell>{t('Rank')}</TableCell>
           {Object.entries(ranks).map(([playerID, rank]) => (
-            <td key={playerID}>{rank}</td>
+            <TableCell numeric key={playerID}>{rank}</TableCell>
           ))}
-        </tr>
-        </tbody>
+        </TableRow>
+        </TableBody>
 
-      </table>
-    </div>
+      </Table>
+    </Paper>
   )
 }
 
