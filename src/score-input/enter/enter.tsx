@@ -1,5 +1,7 @@
 import * as React from 'react'
 import {Container} from 'react-grid-system'
+import Paper from '@material-ui/core/Paper'
+import Divider from '@material-ui/core/Divider'
 import {UsedTimeDisplay} from './used-time-display'
 import {StackInput} from './stack-input'
 import {ActionButtons} from './action-buttons'
@@ -12,10 +14,11 @@ export function EnterImpl() {
     <Container>
       <UsedTimeDisplay />
 
-      <div className={style.actionContainer}>
+      <Paper className={style.actionContainer}>
         <StackInput />
+        <Divider />
         <ActionButtons />
-      </div>
+      </Paper>
 
       <MiniScoreboard />
     </Container>

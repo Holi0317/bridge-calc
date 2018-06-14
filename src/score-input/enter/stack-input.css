@@ -6,7 +6,6 @@
 
 /* Table element. Contains some general styling */
 .table {
-  color: var(--text-color);
   table-layout: fixed;
   white-space: nowrap;
 
@@ -20,19 +19,20 @@
   text-align: left;
   width: 300px;
   min-width: 100px;
+  display: table-cell;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .body td {
   width: 300px;
   min-width: 100px;
 
-  /* Style for caption */
+  /* Caption styling */
   &:first-of-type {
     padding-right: 0.5em;
-  }
-
-  /* Maximize width of select component */
-  & select {
-    width: 100%;
+    display: table-cell;
+    font-size: 16px;
+    font-weight: 400;
   }
 }

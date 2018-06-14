@@ -35,6 +35,7 @@ export class ActionButtonsImpl extends React.Component {
     const undoHandler = currentGame == null
       ? undefined  // Material-ui needs this to be undefined instead of null
       : undo
+
     return (
       <div className={style.btnContainer}>
         <Button variant="contained" color="primary" disabled={nextDisabled} onClick={this.next}>{t('Next')}</Button>

@@ -3,6 +3,7 @@ import flowRight from 'lodash-es/flowRight'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
+import Typography from '@material-ui/core/Typography'
 import {Dropdown} from '../../material/dropdown'
 import {GameStage} from '../game-stage'
 import {stageSelector} from '../selectors/stage'
@@ -43,6 +44,7 @@ export class StackInputImpl extends React.Component {
 
   public render() {
     const {t, bidDisabled, winDisabled, playerOrder, names, bid, win, error, bidStackInput, winStackInput} = this.props
+
     return (
       <div className={style.tableContainer}>
         <table className={style.table}>
@@ -50,14 +52,14 @@ export class StackInputImpl extends React.Component {
           <tr>
             <th/>
             {playerOrder.map(playerID => (
-              <th key={playerID}>{names[playerID]}</th>
+              <Typography component="th" key={playerID}>{names[playerID]}</Typography>
             ))}
           </tr>
           </thead>
           <tbody className={style.body}>
 
           <tr>
-            <td>{t('Bid')}</td>
+            <Typography component="td">{t('Bid')}</Typography>
             {playerOrder.map(playerID => (
               <td key={playerID}>
                 <Dropdown value={bid[playerID]} source={bidStackInput[playerID]}
@@ -69,7 +71,7 @@ export class StackInputImpl extends React.Component {
           </tr>
 
           <tr>
-            <td>{t('Win')}</td>
+            <Typography component="td">{t('Win')}</Typography>
             {playerOrder.map(playerID => (
               <td key={playerID}>
                 <Dropdown value={win[playerID] == null ? '' : win[playerID]} source={winStackInput[playerID]}

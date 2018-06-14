@@ -1,7 +1,7 @@
 .dropdown-root {
-  min-width: 256px;
+  min-width: 100px;
 }
 
 .dropdown-select-menu {
-  min-width: 256px;
+  min-width: 100px;
 }
