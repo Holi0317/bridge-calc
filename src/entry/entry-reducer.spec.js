@@ -1,7 +1,6 @@
 import {entryReducer as reducer} from './entry-reducer'
 import {defaultState} from '../../test-fixtures/entry-options'
 import {setImportOpenAction, setPlayerNamesAction, setRoundsAction, setStartingRoundAction} from './actions/set-entry-props'
-import {toggleOptionOpenAction} from './actions/toggle-option-open'
 import {addPlayerAction} from './actions/add-player'
 import {resetAction} from './actions/reset'
 
@@ -13,34 +12,6 @@ test('Default state', () => {
     type: '#NULL'
   }
   const actual = reducer(undefined, action)
-  expect(actual).toEqual(expected)
-})
-
-test('Toggle option opened should flip false', () => {
-  const state = {
-    ...defaultState,
-    optionsOpened: false
-  }
-  const expected = {
-    ...defaultState,
-    optionsOpened: true
-  }
-  const action = toggleOptionOpenAction()
-  const actual = reducer(state, action)
-  expect(actual).toEqual(expected)
-})
-
-test('Toggle option opened should flip true', () => {
-  const state = {
-    ...defaultState,
-    optionsOpened: true
-  }
-  const expected = {
-    ...defaultState,
-    optionsOpened: false
-  }
-  const action = toggleOptionOpenAction()
-  const actual = reducer(state, action)
   expect(actual).toEqual(expected)
 })
 

@@ -5,12 +5,10 @@ export interface IEntryState {
   rounds: number
   startingRound: number
   playerNames: string[]
-  optionsOpened: boolean
   importOpened: boolean
 }
 
 const defaultState: IEntryState = {
-  optionsOpened: false,
   importOpened: false,
   playerNames: ['John', 'Mary', 'Henry', 'Joe'],
   rounds: 13,
@@ -43,11 +41,6 @@ function playerNameAction(state: IEntryState, playerNames: string[]) {
 
 export function entryReducer(state: IEntryState = defaultState, action: EntryActions) {
   switch (action.type) {
-  case ActionTypes.TOGGLE_OPTION_OPEN:
-    return {
-      ...state,
-      optionsOpened: !state.optionsOpened
-    }
   case ActionTypes.SET_ENTRY_PROPS: {
     const {type, ...props} = action
     const res: IEntryState = {
