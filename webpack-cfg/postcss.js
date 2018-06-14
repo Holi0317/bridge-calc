@@ -9,7 +9,10 @@ const cssLoader = {
     sourceMap: true,
     importLoaders: 1,
     minimize: ENV === 'production',
-    localIdentName: '[hash:base64:5]',
+    localIdentName:
+      ENV === 'production'
+        ? '[hash:base64:5]'
+        : '[name]__[local]--[hash:base64:5]',
     camelCase: 'dashesOnly'
   }
 }
