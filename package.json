@@ -106,7 +106,6 @@
     "postcss-scss": "1.0.5",
     "postcss-strip-inline-comments": "0.1.5",
     "preload-webpack-plugin": "3.0.0-beta.1",
-    "redux-logger": "3.0.6",
     "serve": "8.2.0",
     "style-loader": "0.21.0",
     "stylelint": "9.2.1",
