@@ -5,7 +5,7 @@ import {RoundManagement} from './round-management'
 import {SettingsInitializer} from './settings-initializer'
 import {ChangeMaker} from './change-maker'
 import {ProtectedView} from '../protected-view'
-import style from './settings.css'
+import style from './settings.pcss'
 
 export function SettingsImpl() {
   return (

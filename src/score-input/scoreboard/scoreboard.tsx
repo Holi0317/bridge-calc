@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Container} from 'react-grid-system'
 import {ScoreboardTable} from './scoreboard-table'
 import {IRootState} from '../../types'
-import styles from './scoreboard.css'
+import styles from './scoreboard.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   entry: state.currentGame

@@ -2,7 +2,7 @@ import * as React from 'react'
 import {SortableContainer} from 'react-sortable-hoc'
 import {INameInputListProps, Setter} from './types'
 import {SortableItem} from './item'
-import style from './name-input-list.css'
+import style from './name-input-list.pcss'
 
 /**
  * Create a change handler for change in input.

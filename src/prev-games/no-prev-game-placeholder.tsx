@@ -3,7 +3,7 @@ import {translate} from 'react-i18next'
 import {Link} from 'react-router-dom'
 import {JokerIcon} from './joker-icon'
 import {ITranslateMixin} from '../types'
-import styles from './no-prev-game-placeholder.css'
+import styles from './no-prev-game-placeholder.pcss'
 
 export function NoPrevGamePlaceholderImpl({t}: ITranslateMixin) {
   return <div className={styles.container}>

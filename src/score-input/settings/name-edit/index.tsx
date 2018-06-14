@@ -13,7 +13,7 @@ import {expandedPanelSelector} from '../selectors/expanded-panel'
 import {PANEL} from '../panel'
 import {NameEditor} from './name-editor'
 import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
-import style from '../settings.css'
+import style from '../settings.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   disabled: nameEditDisabledSelector(state),

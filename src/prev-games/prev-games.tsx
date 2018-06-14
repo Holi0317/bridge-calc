@@ -17,7 +17,7 @@ import {showGameModalAction} from './actions/game-modal'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {reversedPrevGamesSelector} from './selectors/reversed-prev-games'
 import {IRootState, Dispatch, ITranslateMixin} from '../types'
-import styles from './prev-games.css'
+import styles from './prev-games.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,

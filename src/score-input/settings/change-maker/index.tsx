@@ -12,7 +12,7 @@ import {expandedPanelSelector} from '../selectors/expanded-panel'
 import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
 import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
-import style from '../settings.css'
+import style from '../settings.pcss'
 import {MakerEditor} from './maker-editor'
 
 const mapStateToProps = (state: IRootState) => ({

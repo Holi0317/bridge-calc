@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as Loadable from 'react-loadable'
 import {Spinner} from '../material/spinner'
-import style from './loading.css'
+import style from './loading.pcss'
 import {Ouch} from '../error-boundary/ouch'
 
 export function Loading({error, pastDelay}: Loadable.LoadingComponentProps) {

@@ -5,7 +5,7 @@ import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import {cuid} from '../utils'
-import styles from './dropdown.css'
+import styles from './dropdown.pcss'
 
 export interface IDropdownSource<T extends number | string> {
   value: T

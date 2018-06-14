@@ -9,7 +9,7 @@ import {CollapsedEntryOptions} from './collapsed-entry-options'
 import {EntryStartButton} from './entry-start-button'
 import {ImportNamesDialog} from './import-names'
 import {ITranslateMixin} from '../types'
-import style from './entry.css'
+import style from './entry.pcss'
 
 type EntryProps = ITranslateMixin
 

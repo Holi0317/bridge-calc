@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {TileLink} from './tile-link'
-import style from './tile.css'
+import style from './tile.pcss'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography/Typography'
 

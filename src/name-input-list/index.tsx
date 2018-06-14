@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {arrayMove, SortEnd} from 'react-sortable-hoc'
-import style from './name-input-list.css'
+import style from './name-input-list.pcss'
 import {Container} from './container'
 import {INameInputListProps} from './types'
 

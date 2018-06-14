@@ -3,7 +3,7 @@ import {translate} from 'react-i18next'
 import {Link} from 'react-router-dom'
 import AlertError from '@material-ui/icons/Error'
 import {ITranslateMixin} from '../types'
-import styles from './not-found.css'
+import styles from './not-found.pcss'
 
 export function NotFoundImpl({t}: ITranslateMixin) {
   return <div className={styles.container}>

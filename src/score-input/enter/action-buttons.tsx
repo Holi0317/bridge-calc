@@ -11,7 +11,7 @@ import {bidAction} from '../actions/bid'
 import {winAction} from '../actions/win'
 import {undoAction} from '../actions/undo'
 import {IRootState, ITranslateMixin, Dispatch} from '../../types'
-import style from './action-buttons.css'
+import style from './action-buttons.pcss'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   undoDisabled: stageSelector(state) !== GameStage.waitingWin,

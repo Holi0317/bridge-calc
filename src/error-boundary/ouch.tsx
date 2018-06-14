@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
 import {ITranslateMixin} from '../types'
-import style from './ouch.css'
+import style from './ouch.pcss'
 
 function reload() {
   window.location.reload()

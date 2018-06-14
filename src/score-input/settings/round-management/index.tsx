@@ -12,7 +12,7 @@ import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
 import {SkipRounds} from './skip-rounds'
 import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
-import style from '../settings.css'
+import style from '../settings.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   expanded: expandedPanelSelector(state) === PANEL.ROUND_MANAGEMENT

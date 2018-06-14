@@ -9,7 +9,7 @@ import TableBody from '@material-ui/core/TableBody'
 import {GameState} from '../reducer'
 import {computeData} from './compute-data'
 import {ITranslateMixin} from '../../types'
-import style from './scoreboard.css'
+import style from './scoreboard.pcss'
 
 interface IScoreboardTableProps extends ITranslateMixin {
   entry: NonNullable<GameState>,

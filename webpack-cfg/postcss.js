@@ -20,7 +20,7 @@ const cssLoader = {
 module.exports = {
   module: {
     rules: [{
-      test: /\.css$/,
+      test: /\.pcss$/,
       use: [
         MiniCssExtractPlugin.loader,
         cssLoader,
@@ -44,7 +44,7 @@ module.exports = {
       cacheGroups: {
         styles: {
           name: 'styles',
-          test: /\.css$/,
+          test: /\.p?css$/,
           chunks: 'all',
           enforce: true
         }

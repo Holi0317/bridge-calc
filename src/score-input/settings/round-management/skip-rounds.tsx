@@ -11,7 +11,7 @@ import {remainingRoundsSelector} from '../../selectors/remaining-rounds'
 import {currentRoundSelector} from '../../selectors/current-round'
 import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import styles from '../settings.css'
+import styles from '../settings.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,

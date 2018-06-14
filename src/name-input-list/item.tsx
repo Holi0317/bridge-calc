@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import Tooltip from '@material-ui/core/Tooltip'
 import ActionDelete from '@material-ui/icons/Delete'
 import {DragHandle} from './drag-handle'
-import style from './name-input-list.css'
+import style from './name-input-list.pcss'
 import {ITranslateMixin} from '../types'
 
 interface ISortableItemProps extends ITranslateMixin {

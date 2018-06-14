@@ -7,7 +7,7 @@ import {Dropdown} from '../material/dropdown'
 import {setRoundsAction, setStartingRoundAction} from './actions/set-entry-props'
 import {optionsSourcesSelector} from './selectors/options-sources'
 import {Dispatch, IRootState, ITranslateMixin} from '../types'
-import style from './entry.css'
+import style from './entry.pcss'
 
 const mapStateToProps = (state: IRootState) => {
   const {entry} = state

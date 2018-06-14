@@ -12,7 +12,7 @@ import ActionHelp from '@material-ui/icons/Help'
 import NavigationArrowBack from '@material-ui/icons/ArrowBack'
 import {Titles} from './titles'
 import {ITranslateMixin} from '../types'
-import styles from './navbar.css'
+import styles from './navbar.pcss'
 
 type NavbarProps = RouteComponentProps<any> & ITranslateMixin
 

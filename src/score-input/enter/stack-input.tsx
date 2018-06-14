@@ -17,7 +17,7 @@ import {winStackInputSourceSelector} from '../selectors/win-stack-input-source'
 import {setBidAction} from '../actions/set-bid'
 import {setWinAction} from '../actions/set-win'
 import {IRootState, ITranslateMixin, Dispatch} from '../../types'
-import style from './stack-input.css'
+import style from './stack-input.pcss'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   bidDisabled: stageSelector(state) !== GameStage.waitingBid,

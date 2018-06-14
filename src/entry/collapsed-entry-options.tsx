@@ -3,7 +3,7 @@ import {translate} from 'react-i18next'
 import Button from '@material-ui/core/Button'
 import {EntryOptions} from './entry-options'
 import {ITranslateMixin} from '../types'
-import style from './entry.css'
+import style from './entry.pcss'
 import Collapse from '@material-ui/core/Collapse/Collapse'
 
 interface ICollapsedEntryOptionsState {

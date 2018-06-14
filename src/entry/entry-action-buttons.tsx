@@ -10,7 +10,7 @@ import FileDownload from '@material-ui/icons/FileDownload'
 import {addRandomPlayerAction} from './actions/add-player'
 import {setImportOpenAction} from './actions/set-entry-props'
 import {Dispatch, ITranslateMixin} from '../types'
-import style from './entry.css'
+import style from './entry.pcss'
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({

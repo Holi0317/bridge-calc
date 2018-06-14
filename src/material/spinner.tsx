@@ -1,5 +1,5 @@
 import * as React from 'react'
-import style from './spinner.css'
+import style from './spinner.pcss'
 
 export function Spinner() {
   return (

@@ -8,7 +8,7 @@ import flowRight from 'lodash-es/flowRight'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
 import {startAction} from '../score-input/actions/start'
 import {IRootState, ITranslateMixin, Dispatch} from '../types'
-import style from './entry.css'
+import style from './entry.pcss'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   rounds: state.entry.rounds,
