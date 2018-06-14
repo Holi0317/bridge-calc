@@ -19,7 +19,7 @@ const darkTheme: Theme = createMuiTheme({
   }
 })
 
-const tealTheme: Theme = createMuiTheme()
+const indigoTheme: Theme = createMuiTheme()
 
 const blueTheme: Theme = createMuiTheme({
   palette: {
@@ -38,7 +38,7 @@ const greyTheme: Theme = createMuiTheme({
 export const themes: Map<string, Theme> = new Map([
   ['default', defaultTheme],
   ['dark', darkTheme],
-  ['teal', tealTheme],
+  ['indigo', indigoTheme],
   ['blue', blueTheme],
   ['grey', greyTheme]
 ])
