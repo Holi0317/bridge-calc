@@ -1,7 +1,5 @@
 import * as React from 'react'
-import flowRight from 'lodash-es/flowRight'
 import {translate} from 'react-i18next'
-import {Theme, withStyles} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
@@ -14,18 +12,11 @@ import {ITranslateMixin} from '../../types'
 import classes from './scoreboard.pcss'
 
 interface IScoreboardTableProps extends ITranslateMixin {
-  entry: NonNullable<GameState>,
-  mini: boolean,
-  classes: {[className: string]: string}
+  entry: NonNullable<GameState>
+  mini: boolean
 }
 
-const styles = (theme: Theme) => ({
-  errorText: {
-    color: theme.palette.error.main
-  }
-})
-
-export function ScoreboardTableImpl({entry, mini, classes: cls, t}: IScoreboardTableProps) {
+export function ScoreboardTableImpl({entry, mini, t}: IScoreboardTableProps) {
   const {names, scores, prevScores, totalScores, ranks, endedRounds} = computeData(entry)
 
   return (
@@ -49,7 +40,7 @@ export function ScoreboardTableImpl({entry, mini, classes: cls, t}: IScoreboardT
               <TableCell>{t('Previous round score')}</TableCell>
               {Object.entries(prevScores).map(([playerID, score]) => (
                 <TableCell numeric key={playerID}
-                           className={score < 0 ? cls.errorText : ''}>
+                           className={score < 0 ? classes.errorText : ''}>
                   {score}
                 </TableCell>
               ))}
@@ -60,7 +51,7 @@ export function ScoreboardTableImpl({entry, mini, classes: cls, t}: IScoreboardT
                 <TableCell>{t('Round {{n}}', {n: i})}</TableCell>
                 {Object.entries(scores).map(([playerID, score]) => (
                   <TableCell numeric key={playerID}
-                             className={score[i - 1] < 0 ? cls.errorText : ''}>
+                             className={score[i - 1] < 0 ? classes.errorText : ''}>
                     {score[i - 1]}
                   </TableCell>
                 ))}
@@ -73,7 +64,7 @@ export function ScoreboardTableImpl({entry, mini, classes: cls, t}: IScoreboardT
             <TableCell>{t('Total score')}</TableCell>
             {Object.entries(totalScores).map(([playerID, total]) => (
               <TableCell numeric key={playerID}
-                         className={total < 0 ? cls.errorText : ''}>
+                         className={total < 0 ? classes.errorText : ''}>
                 {total}
               </TableCell>
             ))}
@@ -93,7 +84,4 @@ export function ScoreboardTableImpl({entry, mini, classes: cls, t}: IScoreboardT
   )
 }
 
-export const ScoreboardTable = flowRight(
-  withStyles(styles),
-  translate()
-)(ScoreboardTableImpl)
+export const ScoreboardTable = translate()(ScoreboardTableImpl)
