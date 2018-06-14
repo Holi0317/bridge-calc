@@ -11,7 +11,7 @@ import {remainingRoundsSelector} from '../../selectors/remaining-rounds'
 import {currentRoundSelector} from '../../selectors/current-round'
 import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import styles from '../settings.pcss'
+import classes from '../settings.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
@@ -36,13 +36,13 @@ export class SkipRoundsImpl extends React.Component {
     const {remainingRounds, t} = this.props
     return (
       <ExpansionPanelDetails>
-        <Button variant="outlined" className={styles.skipRoundsBtn} onClick={this.skip(1)}>
+        <Button variant="outlined" className={classes.skipRoundsBtn} onClick={this.skip(1)}>
           {t('Skip this round')}
         </Button>
-        <Button variant="outlined" className={styles.skipRoundsBtn} disabled={remainingRounds <= 1} onClick={this.skip(remainingRounds - 1)}>
+        <Button variant="outlined" className={classes.skipRoundsBtn} disabled={remainingRounds <= 1} onClick={this.skip(remainingRounds - 1)}>
           {t('Skip to last round')}
         </Button>
-        <Button variant="outlined" className={styles.skipRoundsBtn} onClick={this.skip(remainingRounds)}>
+        <Button variant="outlined" className={classes.skipRoundsBtn} onClick={this.skip(remainingRounds)}>
           {t('End game')}
         </Button>
       </ExpansionPanelDetails>

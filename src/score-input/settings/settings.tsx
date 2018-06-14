@@ -5,12 +5,12 @@ import {RoundManagement} from './round-management'
 import {SettingsInitializer} from './settings-initializer'
 import {ChangeMaker} from './change-maker'
 import {ProtectedView} from '../protected-view'
-import style from './settings.pcss'
+import classes from './settings.pcss'
 
 export function SettingsImpl() {
   return (
     <Container>
-      <div className={style.panelContainer}>
+      <div className={classes.panelContainer}>
         <NameEdit />
         <ChangeMaker />
         <RoundManagement />

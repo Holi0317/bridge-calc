@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
 import Button from '@material-ui/core/Button'
+import Collapse from '@material-ui/core/Collapse'
 import {EntryOptions} from './entry-options'
 import {ITranslateMixin} from '../types'
-import style from './entry.pcss'
-import Collapse from '@material-ui/core/Collapse/Collapse'
+import classes from './entry.pcss'
 
 interface ICollapsedEntryOptionsState {
   expanded: boolean
@@ -20,8 +20,8 @@ export class CollapsedEntryOptionsImpl extends React.Component<ITranslateMixin, 
     const {expanded} = this.state
 
     return (
-      <div className={style.optionsSection}>
-        <Button variant="contained" onClick={this._toggleOptionOpen} className={style.optionsBtn}>{t('Options')}</Button>
+      <div className={classes.optionsSection}>
+        <Button variant="contained" onClick={this._toggleOptionOpen} className={classes.optionsBtn}>{t('Options')}</Button>
         <Collapse in={expanded}>
           <EntryOptions/>
         </Collapse>

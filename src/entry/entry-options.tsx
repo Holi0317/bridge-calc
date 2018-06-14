@@ -7,7 +7,7 @@ import {Dropdown} from '../material/dropdown'
 import {setRoundsAction, setStartingRoundAction} from './actions/set-entry-props'
 import {optionsSourcesSelector} from './selectors/options-sources'
 import {Dispatch, IRootState, ITranslateMixin} from '../types'
-import style from './entry.pcss'
+import classes from './entry.pcss'
 
 const mapStateToProps = (state: IRootState) => {
   const {entry} = state
@@ -31,14 +31,14 @@ type EntryOptionsProps = stateType & dispatchType & ITranslateMixin
 
 export function EntryOptionsImpl({t, sources, rounds, startingRound, setRounds, setStartingRound}: EntryOptionsProps) {
   return (
-    <div className={style.optionsRootContainer}>
+    <div className={classes.optionsRootContainer}>
       <Dropdown label={t('Number of rounds')}
-                className={style.optionsDropdown}
+                className={classes.optionsDropdown}
                 value={rounds} source={sources.rounds}
                 onChange={setRounds} />
 
       <Dropdown label={t('Starting round')}
-                className={style.optionsDropdown}
+                className={classes.optionsDropdown}
                 value={startingRound} source={sources.startingRound}
                 onChange={setStartingRound} />
     </div>

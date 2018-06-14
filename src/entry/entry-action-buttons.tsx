@@ -10,7 +10,7 @@ import FileDownload from '@material-ui/icons/FileDownload'
 import {addRandomPlayerAction} from './actions/add-player'
 import {setImportOpenAction} from './actions/set-entry-props'
 import {Dispatch, ITranslateMixin} from '../types'
-import style from './entry.pcss'
+import classes from './entry.pcss'
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
@@ -24,7 +24,7 @@ type EntryActionButtonsProps = dispatchType & ITranslateMixin
 
 export function EntryActionButtonsImpl({addRandomPlayer, setImportOpen, t}: EntryActionButtonsProps) {
   return (
-    <div className={style.actionButtonContainer}>
+    <div className={classes.actionButtonContainer}>
       <Tooltip title={t('Add player')}>
         <IconButton onClick={addRandomPlayer}>
           <ContentAdd width="28px" height="28px" />

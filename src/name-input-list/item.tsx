@@ -7,8 +7,8 @@ import TextField from '@material-ui/core/TextField'
 import Tooltip from '@material-ui/core/Tooltip'
 import ActionDelete from '@material-ui/icons/Delete'
 import {DragHandle} from './drag-handle'
-import style from './name-input-list.pcss'
 import {ITranslateMixin} from '../types'
+import classes from './name-input-list.pcss'
 
 interface ISortableItemProps extends ITranslateMixin {
   value: string,
@@ -19,7 +19,7 @@ interface ISortableItemProps extends ITranslateMixin {
 
 export function SortableItemImpl({value, onChange, remove, error, t}: ISortableItemProps) {
   return (
-    <div className={style.itemContainer}>
+    <div className={classes.itemContainer}>
       <DragHandle />
       <TextField type="text" fullWidth label={t('Player name')}
                  margin="normal"

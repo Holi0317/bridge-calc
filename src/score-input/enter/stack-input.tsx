@@ -17,7 +17,7 @@ import {winStackInputSourceSelector} from '../selectors/win-stack-input-source'
 import {setBidAction} from '../actions/set-bid'
 import {setWinAction} from '../actions/set-win'
 import {IRootState, ITranslateMixin, Dispatch} from '../../types'
-import style from './stack-input.pcss'
+import classes from './stack-input.pcss'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   bidDisabled: stageSelector(state) !== GameStage.waitingBid,
@@ -46,9 +46,9 @@ export class StackInputImpl extends React.Component {
     const {t, bidDisabled, winDisabled, playerOrder, names, bid, win, error, bidStackInput, winStackInput} = this.props
 
     return (
-      <div className={style.tableContainer}>
-        <table className={style.table}>
-          <thead className={style.head}>
+      <div className={classes.tableContainer}>
+        <table className={classes.table}>
+          <thead className={classes.head}>
           <tr>
             <th/>
             {playerOrder.map(playerID => (
@@ -56,7 +56,7 @@ export class StackInputImpl extends React.Component {
             ))}
           </tr>
           </thead>
-          <tbody className={style.body}>
+          <tbody className={classes.body}>
 
           <tr>
             <Typography component="td">{t('Bid')}</Typography>

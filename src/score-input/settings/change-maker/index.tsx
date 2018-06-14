@@ -11,9 +11,9 @@ import {changeMakerDisabledSelector} from '../selectors/change-maker-disabled'
 import {expandedPanelSelector} from '../selectors/expanded-panel'
 import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
-import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
-import style from '../settings.pcss'
 import {MakerEditor} from './maker-editor'
+import {Dispatch, IRootState, ITranslateMixin} from '../../../types'
+import classes from '../settings.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   disabled: changeMakerDisabledSelector(state),
@@ -41,11 +41,11 @@ export class ChangeMakerImpl extends React.Component {
       <ExpansionPanel expanded={expanded && !disabled} disabled={disabled} onChange={() => toggleExpand(PANEL.CHANGE_MAKER)}>
 
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <div className={style.panelHeading}>
-            <Typography className={style.heading}>{t('Change maker')}</Typography>
+          <div className={classes.panelHeading}>
+            <Typography className={classes.heading}>{t('Change maker')}</Typography>
           </div>
-          <div className={style.panelSubheading}>
-            <Typography className={style.secondaryHeading} color="textSecondary">{subHeading}</Typography>
+          <div className={classes.panelSubheading}>
+            <Typography className={classes.secondaryHeading} color="textSecondary">{subHeading}</Typography>
           </div>
         </ExpansionPanelSummary>
 

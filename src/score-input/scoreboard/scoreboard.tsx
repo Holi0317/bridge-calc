@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Container} from 'react-grid-system'
 import {ScoreboardTable} from './scoreboard-table'
 import {IRootState} from '../../types'
-import styles from './scoreboard.pcss'
+import classes from './scoreboard.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   entry: state.currentGame
@@ -15,7 +15,7 @@ export function ScoreboardImpl({entry}: stateType) {
   return (
     <Container>
       {entry && (
-        <div className={styles.scoreboardContainer}>
+        <div className={classes.scoreboardContainer}>
           <ScoreboardTable entry={entry} mini={false} />
         </div>
       )}

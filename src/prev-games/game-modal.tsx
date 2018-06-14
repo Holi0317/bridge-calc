@@ -22,7 +22,7 @@ import {deleteGameAction} from './actions/delete-game'
 import {closeGameModalAction} from './actions/game-modal'
 import {replaceCurrentGameAction} from '../score-input/actions/replace-current-game'
 import {Dispatch, IRootState, ITranslateMixin} from '../types'
-import styles from './prev-games.pcss'
+import classes from './prev-games.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   entry: modalEntrySelector(state),
@@ -53,12 +53,12 @@ export class GameModalImpl extends React.Component {
     >
 
       {fullScreen ? (
-        <AppBar className={styles.appBar}>
+        <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton color="inherit" onClick={close} aria-label="Close">
               <CloseIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" className={styles.flex}>
+            <Typography variant="title" color="inherit" className={classes.flex}>
               {t('Previous game details')}
             </Typography>
             <Button color="inherit" onClick={this.del}>

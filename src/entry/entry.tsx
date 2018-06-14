@@ -9,14 +9,14 @@ import {CollapsedEntryOptions} from './collapsed-entry-options'
 import {EntryStartButton} from './entry-start-button'
 import {ImportNamesDialog} from './import-names'
 import {ITranslateMixin} from '../types'
-import style from './entry.pcss'
+import classes from './entry.pcss'
 
 type EntryProps = ITranslateMixin
 
 export function EntryImpl({t}: EntryProps) {
   return (
     <Container>
-      <h3 className={style.text}>{t('Player Names')}</h3>
+      <h3 className={classes.text}>{t('Player Names')}</h3>
       <EntryPlayerList />
       <EntryActionButtons />
       <Divider />

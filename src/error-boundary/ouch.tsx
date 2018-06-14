@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
 import {ITranslateMixin} from '../types'
-import style from './ouch.pcss'
+import classes from './ouch.pcss'
 
 function reload() {
   window.location.reload()
@@ -13,17 +13,17 @@ interface IOuchProps {
 
 export function OuchImpl({error, t}: IOuchProps & ITranslateMixin) {
   return (
-    <div className={style.centerContainer}>
-      <div className={style.sadFace}>
+    <div className={classes.centerContainer}>
+      <div className={classes.sadFace}>
         :-(
       </div>
-      <div className={style.text}>
+      <div className={classes.text}>
         {t('Ouch! An error has occurred.')}
       </div>
-      <div className={style.reloadLink} onClick={reload}>
+      <div className={classes.reloadLink} onClick={reload}>
         {t('Hopefully your data is safe. Refresh page may fix the problem.')}
       </div>
-      <div className={style.errorMessage}>
+      <div className={classes.errorMessage}>
         {t('Error message: {{message}}', {message: error.message})}
       </div>
     </div>

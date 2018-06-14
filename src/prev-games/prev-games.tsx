@@ -17,7 +17,7 @@ import {showGameModalAction} from './actions/game-modal'
 import {havePrevGamesSelector} from './selectors/have-prev-games'
 import {reversedPrevGamesSelector} from './selectors/reversed-prev-games'
 import {IRootState, Dispatch, ITranslateMixin} from '../types'
-import styles from './prev-games.pcss'
+import classes from './prev-games.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
@@ -43,7 +43,7 @@ export class PrevGamesImpl extends React.Component {
     if (havePrevGame) {
       return (
         <Container>
-          <div className={styles.prevGameContainer}>
+          <div className={classes.prevGameContainer}>
             <Typography variant="display1" gutterBottom>{t('Click on an entry for details')}</Typography>
             <List>
               {prevGames.map((prevGame, index) => (

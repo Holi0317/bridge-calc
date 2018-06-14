@@ -9,7 +9,7 @@ import TableBody from '@material-ui/core/TableBody'
 import {GameState} from '../reducer'
 import {computeData} from './compute-data'
 import {ITranslateMixin} from '../../types'
-import style from './scoreboard.pcss'
+import classes from './scoreboard.pcss'
 
 interface IScoreboardTableProps extends ITranslateMixin {
   entry: NonNullable<GameState>,
@@ -20,8 +20,8 @@ export function ScoreboardTableImpl({entry, mini, t}: IScoreboardTableProps) {
   const {names, scores, prevScores, totalScores, ranks, endedRounds} = computeData(entry)
 
   return (
-    <Paper className={style.tableContainer}>
-      <Table className={style.table}>
+    <Paper className={classes.tableContainer}>
+      <Table className={classes.table}>
 
         <TableHead>
         {/* Player names */}

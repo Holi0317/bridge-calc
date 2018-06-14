@@ -1,8 +1,8 @@
 import * as React from 'react'
 import * as Loadable from 'react-loadable'
 import {Spinner} from '../material/spinner'
-import style from './loading.pcss'
 import {Ouch} from '../error-boundary/ouch'
+import classes from './loading.pcss'
 
 export function Loading({error, pastDelay}: Loadable.LoadingComponentProps) {
   if (error) {
@@ -11,7 +11,7 @@ export function Loading({error, pastDelay}: Loadable.LoadingComponentProps) {
   }
   if (pastDelay) {
     return (
-      <div className={style.container}>
+      <div className={classes.container}>
         <Spinner />
       </div>
     )

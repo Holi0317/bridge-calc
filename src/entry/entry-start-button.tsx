@@ -8,7 +8,7 @@ import flowRight from 'lodash-es/flowRight'
 import {entryOptionsValidator, isEntryOptionsValid} from './entry-validator'
 import {startAction} from '../score-input/actions/start'
 import {IRootState, ITranslateMixin, Dispatch} from '../types'
-import style from './entry.pcss'
+import classes from './entry.pcss'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   rounds: state.entry.rounds,
@@ -32,9 +32,9 @@ export class EntryStartButtonImpl extends React.PureComponent {
   public render() {
     const {valid, miscError, t} = this.props
     return (
-      <div className={style.startBtnContainer}>
+      <div className={classes.startBtnContainer}>
         <Button variant="contained" color="primary" disabled={!valid} onClick={this.start}>{t('Start')}</Button>
-        <span className={style.errorMessage}>{miscError}</span>
+        <span className={classes.errorMessage}>{miscError}</span>
       </div>
     )
   }

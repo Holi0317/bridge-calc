@@ -6,15 +6,15 @@ import {UsedTimeDisplay} from './used-time-display'
 import {StackInput} from './stack-input'
 import {ActionButtons} from './action-buttons'
 import {MiniScoreboard} from './mini-scoreboard'
-import style from './enter.pcss'
 import {ProtectedView} from '../protected-view'
+import classes from './enter.pcss'
 
 export function EnterImpl() {
   return (
     <Container>
       <UsedTimeDisplay />
 
-      <Paper className={style.actionContainer}>
+      <Paper className={classes.actionContainer}>
         <StackInput />
         <Divider />
         <ActionButtons />

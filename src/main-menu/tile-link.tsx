@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {Link} from 'react-router-dom'
-import style from './tile.pcss'
+import classes from './tile.pcss'
 
 export interface ITileLinkProps {
   /**
@@ -23,11 +23,11 @@ export interface ITileLinkProps {
 
 export function TileLink({to, external, target, children}: ITileLinkProps) {
   if (external) {
-    return <a href={to} target={target} className={style.link} rel="noopener">
+    return <a href={to} target={target} className={classes.link} rel="noopener">
       {children}
     </a>
   }
-  return <Link to={to} target={target} className={style.link}>
+  return <Link to={to} target={target} className={classes.link}>
     {children}
   </Link>
 }

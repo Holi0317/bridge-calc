@@ -12,7 +12,7 @@ import {toggleExpandAction} from '../actions/toggle-expand'
 import {PANEL} from '../panel'
 import {SkipRounds} from './skip-rounds'
 import {IRootState, ITranslateMixin, Dispatch} from '../../../types'
-import style from '../settings.pcss'
+import classes from '../settings.pcss'
 
 const mapStateToProps = (state: IRootState) => ({
   expanded: expandedPanelSelector(state) === PANEL.ROUND_MANAGEMENT
@@ -37,11 +37,11 @@ export class RoundManagementImpl extends React.Component {
                       onChange={() => toggleExpand(PANEL.ROUND_MANAGEMENT)}>
 
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-          <div className={style.panelHeading}>
-            <Typography className={style.heading}>{t('Skip rounds')}</Typography>
+          <div className={classes.panelHeading}>
+            <Typography className={classes.heading}>{t('Skip rounds')}</Typography>
           </div>
-          <div className={style.panelSubheading}>
-            <Typography className={style.secondaryHeading} color="textSecondary">{t('Jump to other rounds')}</Typography>
+          <div className={classes.panelSubheading}>
+            <Typography className={classes.secondaryHeading} color="textSecondary">{t('Jump to other rounds')}</Typography>
           </div>
         </ExpansionPanelSummary>
 

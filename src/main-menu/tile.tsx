@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {TileLink} from './tile-link'
-import style from './tile.pcss'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography/Typography'
+import Typography from '@material-ui/core/Typography'
+import classes from './tile.pcss'
 
 export interface ITileProps {
   /** Title of the tile */
@@ -27,9 +27,9 @@ export class Tile extends React.Component<ITileProps> {
 
     return (
       <TileLink to={to} external={external} target={target}>
-        <Paper className={style.tile} elevation={4}>
-          <div className={style.iconContainer}>{icon}</div>
-          <Typography className={style.titleContainer} variant="title">{title}</Typography>
+        <Paper className={classes.tile} elevation={4}>
+          <div className={classes.iconContainer}>{icon}</div>
+          <Typography className={classes.titleContainer} variant="title">{title}</Typography>
         </Paper>
       </TileLink>
     )

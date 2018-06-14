@@ -11,7 +11,7 @@ import {bidAction} from '../actions/bid'
 import {winAction} from '../actions/win'
 import {undoAction} from '../actions/undo'
 import {IRootState, ITranslateMixin, Dispatch} from '../../types'
-import style from './action-buttons.pcss'
+import classes from './action-buttons.pcss'
 
 const mapStateToProps = (state: IRootState, {t}: ITranslateMixin) => ({
   undoDisabled: stageSelector(state) !== GameStage.waitingWin,
@@ -37,9 +37,9 @@ export class ActionButtonsImpl extends React.Component {
       : undo
 
     return (
-      <div className={style.btnContainer}>
+      <div className={classes.btnContainer}>
         <Button variant="contained" color="primary" disabled={nextDisabled} onClick={this.next}>{t('Next')}</Button>
-        <div className={style.stretch}/>
+        <div className={classes.stretch}/>
         <Button variant="contained" disabled={undoDisabled} onClick={undoHandler}>{t('Undo')}</Button>
       </div>
     )

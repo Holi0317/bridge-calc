@@ -12,7 +12,7 @@ import ActionHelp from '@material-ui/icons/Help'
 import NavigationArrowBack from '@material-ui/icons/ArrowBack'
 import {Titles} from './titles'
 import {ITranslateMixin} from '../types'
-import styles from './navbar.pcss'
+import classes from './navbar.pcss'
 
 type NavbarProps = RouteComponentProps<any> & ITranslateMixin
 
@@ -20,16 +20,16 @@ export function NavbarImpl({t, history}: NavbarProps) {
   const hasBackBtn = location.pathname !== '/'
 
   return <AppBar position="static">
-    <Toolbar className={styles.toolbar}>
+    <Toolbar className={classes.toolbar}>
       {hasBackBtn && (
         <Tooltip title={t('Back to menu')}>
-          <IconButton className={styles.backBtn} onClick={() => history.push('/')}>
+          <IconButton className={classes.backBtn} onClick={() => history.push('/')}>
             <NavigationArrowBack width="24px" height="24px" />
           </IconButton>
         </Tooltip>
       )}
 
-      <Typography variant="title" color="inherit" className={styles.title}>
+      <Typography variant="title" color="inherit" className={classes.title}>
         <Titles />
       </Typography>
 
