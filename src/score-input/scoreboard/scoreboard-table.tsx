@@ -56,7 +56,7 @@ export function ScoreboardTableImpl({entry, mini, classes: cls, t}: IScoreboardT
             </TableRow>
           ) : (
             endedRounds.map(i => (
-              <tr key={i}>
+              <TableRow key={i}>
                 <TableCell>{t('Round {{n}}', {n: i})}</TableCell>
                 {Object.entries(scores).map(([playerID, score]) => (
                   <TableCell numeric key={playerID}
@@ -64,7 +64,7 @@ export function ScoreboardTableImpl({entry, mini, classes: cls, t}: IScoreboardT
                     {score[i - 1]}
                   </TableCell>
                 ))}
-              </tr>
+              </TableRow>
             ))
           )}
 
