@@ -8,12 +8,13 @@ module.exports = {
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   watchPathIgnorePatterns: ['<rootDir>/node_modules/'],
-  moduleNameMapper: {
-    '\\.css$': 'identity-obj-proxy'
-  },
   globals: {
     'ts-jest': {
       tsConfigFile: 'tsconfig.test.json'
     }
-  }
+  },
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}'
+  ],
+  coverageReporters: ['text-summary', 'html']
 }

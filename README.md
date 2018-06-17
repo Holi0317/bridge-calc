@@ -1,6 +1,7 @@
 # Bridge calc
 
 [![pipeline status](https://gitlab.com/holi0317/bridge-calc/badges/master/pipeline.svg)](https://gitlab.com/holi0317/bridge-calc/commits/master)
+[![coverage report](https://gitlab.com/holi0317/bridge-calc/badges/master/coverage.svg)](https://gitlab.com/holi0317/bridge-calc/commits/master)
 
 A simple calculator for German Bridge
 

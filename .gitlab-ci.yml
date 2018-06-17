@@ -18,7 +18,7 @@ lint:
 test:
   script:
     - yarn install --pure-lockfile
-    - npm test -- --runInBand
+    - npm test -- --runInBand --coverage
   stage: build
 
 # Compile assets
