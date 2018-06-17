@@ -34,6 +34,8 @@ const local = {
   'Game over': 'Game over',
   'Round {{currentRound}} of {{rounds}}': 'Round {{currentRound}} of {{rounds}}',
   'Not found': 'Not found',
+  'Back to menu': 'Back to menu',
+  'Help': 'Help',
 
   // 404 page view
   'Page not found!': 'Page not found!',
@@ -93,24 +95,29 @@ const local = {
   'Win for {{name}}': 'Win for {{name}}',
   'Game has ended': 'Game has ended',
 
-  // Scoreboard and game settings
+  // Scoreboard
   'Name': 'Name',
   'Previous round score': 'Previous round score',
   'Total score': 'Total score',
   'Rank': 'Rank',
   'Round {{n}}': 'Round {{n}}',
+
+  // Game settings
   'Edit players': 'Edit players',
+  'Add, remove or change names of players': 'Add, remove or change names of players',
   'Change names': 'Change names',
+  'Choose the maker for this round': 'Choose the maker for this round',
   'Player name edit is disabled when editing maker': 'Player name edit is disabled when editing maker',
   'Cancel': 'Cancel',
   'Submit': 'Submit',
-  'Choose the maker for this round': 'Choose the maker for this round',
+  'Change maker': 'Change maker',
+  'Change maker of current round': 'Change maker of current round',
   'Expected rounds: {{rounds}}': 'Expected rounds: {{rounds}}',
   'Player name changed!': 'Player name changed!',
-  'Change maker': 'Change maker',
   'Maker edit is disabled when editing player names': 'Maker edit is disabled when editing player names',
   'Maker changed!': 'Maker changed!',
   'Maker': 'Maker',
+  'Jump to other rounds': 'Jump to other rounds',
   'Skip rounds': 'Skip rounds',
   'Skip this round': 'Skip this round',
   'Skip to last round': 'Skip to last round',
@@ -120,12 +127,20 @@ const local = {
 
   // Global settings
   'Change theme': 'Change theme',
+  'Use dark theme': 'Use dark theme',
   'Change language': 'Change language',
   'Error when changing language. Error: {{err}}': 'Error when changing language. Error: {{err}}',
   'Changed language successfully': 'Changed language successfully',
   'Clear all data': 'Clear all data',
   'All data is cleared': 'All data is cleared',
   'Version: {{version}}': 'Version: {{version}}',
+  'See Changelog': 'See Changelog',
+
+  // Theme names
+  'Pink': 'Pink',
+  'Indigo': 'Indigo',
+  'Light blue': 'Light blue',
+  'Blue grey': 'Blue grey',
 
   // Languages. Please add an entry in this zone if you are adding a new language
   'en': 'English',
@@ -135,10 +150,22 @@ const local = {
   // Previous game route
   'You have not played any game yet.': 'You have not played any game yet.',
   'Click here to start a new game': 'Click here to start a new game',
+  'Click on an entry for details': 'Click on an entry for details',
   'Game on {{date}}': 'Game on {{date}}',
   'With {{players}}': 'With {{players}}',
   'Delete': 'Delete',
-  'Time used: {{timeUsed}}': 'Time used: {{timeUsed}}',
+  'Previous game details': 'Previous game details',
+  'Starting time': 'Starting time',
+  'ID': 'ID',
+  'Current Stage': 'Current Stage',
+  'Total rounds': 'Total rounds',
+  'Ending time': 'Ending time',
+  'Current round': 'Current round',
+  'Time used': 'Time used',
+  'Waiting for Bid stack': 'Waiting for Bid stack',
+  'Waiting for win stack': 'Waiting for win stack',
+  'Ended': 'Ended',
+  'Load': 'Load',
 
   // Data migration from v1
   'Migrated game data from old version': 'Migrated game data from old version'

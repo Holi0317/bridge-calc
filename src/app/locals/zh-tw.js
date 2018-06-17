@@ -34,6 +34,8 @@ const local = {
   'Game over': '遊戲終了',
   'Round {{currentRound}} of {{rounds}}': '第 {{currentRound}} 回合 / {{rounds}} 個回合',
   'Not found': '找不到網頁',
+  'Back to menu': '回到主目錄',
+  'Help': '求助',
 
   // 404 page view
   'Page not found!': '找不到網頁',
@@ -93,24 +95,29 @@ const local = {
   'Win for {{name}}': '{{name}}的贏取墩數',
   'Game has ended': '遊戲已完結',
 
-  // Scoreboard and game settings
+  // Scoreboard
   'Name': '名稱',
   'Previous round score': '上一回合分數',
   'Total score': '總分',
   'Rank': '名次',
   'Round {{n}}': '第{{n}}回合',
+
+  // Game settings
   'Edit players': '更改玩家',
+  'Add, remove or change names of players': '新增、移除或修改玩家名稱',
   'Change names': '更改名字',
+  'Choose the maker for this round': '請選擇這一個回合的莊家',
   'Player name edit is disabled when editing maker': '修改莊家時無法更改玩家',
   'Cancel': '取消',
   'Submit': '提交',
-  'Choose the maker for this round': '為這個回合選擇莊家',
+  'Change maker': '更改莊家',
+  'Change maker of current round': '更變現在的莊家',
   'Expected rounds: {{rounds}}': '預計會有{{rounds}}個回合',
   'Player name changed!': '玩家列表已更改!',
-  'Change maker': '更改莊家',
   'Maker edit is disabled when editing player names': '修改玩家時無法更改莊家',
   'Maker changed!': '莊家已經更改!',
   'Maker': '莊家',
+  'Jump to other rounds': '跳至其他回合',
   'Skip rounds': '回合管理',
   'Skip this round': '跳過這個回合',
   'Skip to last round': '跳至最後一個回合',
@@ -120,12 +127,20 @@ const local = {
 
   // Global settings
   'Change theme': '更改配色',
+  'Use dark theme': '使用暗色調',
   'Change language': '更改語言',
   'Error when changing language. Error: {{err}}': '更改語言時發生錯誤 原因: {{err}}',
   'Changed language successfully': '成功更改語言',
   'Clear all data': '清除所有數據',
   'All data is cleared': '你的數據已被清除',
   'Version: {{version}}': '版本: {{version}}',
+  'See Changelog': '查看更新日誌',
+
+  // Theme names
+  'Pink': '粉紅',
+  'Indigo': '靛青',
+  'Light blue': '淺藍',
+  'Blue grey': '灰藍',
 
   // Languages. Please add an entry in this zone if you are adding a new language
   'en': 'English (英文)',
@@ -135,10 +150,22 @@ const local = {
   // Previous game route
   'You have not played any game yet.': '你未曾遊玩過遊戲',
   'Click here to start a new game': '按此以開始一局新的遊戲',
+  'Click on an entry for details': '點擊以查看詳情',
   'Game on {{date}}': '於{{date}}的遊戲',
   'With {{players}}': '成員: {{players}}',
   'Delete': '刪除',
-  'Time used: {{timeUsed}}': '已用的時間: {{timeUsed}}',
+  'Previous game details': '遊戲詳情',
+  'Starting time': '開始時間',
+  'ID': '唯一標識符',
+  'Current Stage': '目前狀態',
+  'Total rounds': '合共回合',
+  'Ending time': '完結時間',
+  'Current round': '現在的回合',
+  'Time used': '已用時間',
+  'Waiting for Bid stack': '等待輸入估計墩數',
+  'Waiting for win stack': '等待輸入贏取墩數',
+  'Ended': '已完結',
+  'Load': '載入',
 
   // Data migration from v1
   'Migrated game data from old version': '已經從舊版本中匯入資料'
