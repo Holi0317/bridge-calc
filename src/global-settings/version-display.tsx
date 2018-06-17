@@ -14,6 +14,9 @@ export function VersionDisplayImpl({t}: ITranslateMixin) {
       <Typography variant="caption">
         {t('Version: {{version}}', {version: `${VERSION}-${HASH}`})}
       </Typography>
+      <Typography variant="body1">
+        <a href="https://gitlab.com/holi0317/bridge-calc/tags" rel="noopener" target="_blank">{t('See Changelog')}</a>
+      </Typography>
     </div>
   )
 }
