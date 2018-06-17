@@ -35,7 +35,7 @@ export function NavbarImpl({t, history, location}: NavbarProps) {
 
       <Tooltip title={t('Help')}>
         <IconButton rel="noopener" target="_blank"
-                    href="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md">
+                    href="https://gitlab.com/holi0317/bridge-calc/wikis/home">
           <ActionHelp width="24px" height="24px" />
         </IconButton>
       </Tooltip>

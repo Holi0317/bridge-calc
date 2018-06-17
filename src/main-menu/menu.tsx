@@ -46,7 +46,7 @@ export function MenuImpl({showContinue, t}: MenuProps) {
           <Tile icon={<ActionSettings color="action" />} title={t('Settings')} to="/global-settings" />
         </Grid>
         <Grid item md={4} xs={12}>
-          <Tile icon={<ActionInfo color="action" />} title={t('Information')} to="https://gitlab.com/holi0317/bridge-calc/blob/master/docs/en.md" external={true} target="_blank" />
+          <Tile icon={<ActionInfo color="action" />} title={t('Information')} to="https://gitlab.com/holi0317/bridge-calc/wikis/home" external={true} target="_blank" />
         </Grid>
         <Grid item md={4} xs={12}>
           <Tile icon={<ActionBugReport color="action" />} title={t('Support/bug')} to="https://gitlab.com/holi0317/bridge-calc/issues" external={true} target="_blank" />
