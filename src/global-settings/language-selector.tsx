@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Dropdown, IDropdownSource} from '../material/dropdown'
 import {showToastAction} from '../toast-singleton/actions/show-toast'
-import {languages} from '../app/i18n'
+import {languages} from '../app/languages'
 import {Dispatch, ITranslateMixin} from '../types'
 
 function transformLanguageArray(t: TranslationFunction): Array<IDropdownSource<string>> {

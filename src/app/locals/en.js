@@ -11,7 +11,7 @@
  * 5. Run tests. We have test for validating translation format.
  *
  * For adding a new language, you have to
- * 1. Add the short form of the language to src/app/i18n.ts, languages array
+ * 1. Add the short form of the language to src/app/languages.ts, languages array
  * 2. Copy and rename this file to the short form of your language
  * 3. Change `Default local file.` to `Translation for MY_LANGUAGE` in this comment.
  *    (We try to preserve entries' line number for easier diff-ing)

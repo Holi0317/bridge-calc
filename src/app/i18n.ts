@@ -2,6 +2,7 @@ import * as I18next from 'i18next'
 import * as Cache from 'i18next-localstorage-cache'
 import * as LngDetector from 'i18next-browser-languagedetector'
 import * as XHR from 'i18next-xhr-backend'
+import {languages} from './languages'
 
 function loadLocales(url: string, _options: any, callback: any) {
   import(`./locals/${url}.js` /* webpackChunkName: "i18n-[index]" */)
@@ -12,8 +13,6 @@ function loadLocales(url: string, _options: any, callback: any) {
       callback(null, {status: '404'})
     })
 }
-
-export const languages = ['en', 'zh', 'zh-tw']
 
 export const i18n = I18next
   .use(XHR)
