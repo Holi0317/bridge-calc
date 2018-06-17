@@ -1,28 +1,44 @@
 import {activatedThemeSelector} from './activated-theme'
-import {defaultTheme} from '../color-presets'
+import {pinkTheme} from '../color-presets'
+import {createMuiTheme} from '@material-ui/core/styles'
 
 /**
  * Make partial of redux tree for consumption.
  *
- * @param {String} theme - Name / ID of the theme selected
+ * @param {string} theme Name / ID of the theme selected
+ * @param {boolean} dark Is current theme in dark variant or not
  * @returns {Object} partial redux tree
  */
-function makeTree(theme) {
+function makeTree(theme, dark = false) {
   return {
     theme: {
-      theme
+      theme,
+      dark
     }
   }
 }
 
-test('it should work on existing theme', () => {
-  const state = makeTree('dark')
+test('it should work on existing bright theme', () => {
+  const state = makeTree('Indigo')
   const actual = activatedThemeSelector(state)
   expect(actual).toMatchSnapshot()
 })
 
-test('it should return default on non-existing theme', () => {
+test('it should use dark theme correctly', () => {
+  const state = makeTree('Pink', true)
+  const actual = activatedThemeSelector(state)
+  expect(actual).toMatchSnapshot()
+})
+
+test('it should return pink theme on non-existing theme', () => {
   const state = makeTree(Math.random().toString(36).substring(7))
   const actual = activatedThemeSelector(state)
-  expect(actual).toEqual(defaultTheme)
+  const expected = createMuiTheme(pinkTheme)
+
+  /*
+   * Theme object contains function.
+   * Stringify the result could remove function difference
+   * and make test pass.
+   */
+  expect(JSON.stringify(actual)).toEqual(JSON.stringify(expected))
 })

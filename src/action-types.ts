@@ -34,5 +34,6 @@ export const enum ActionTypes {
   CLOSE_TOAST = 'TOAST/CLOSE',
 
   // Theme module
-  SET_THEME = 'THEME/SET_THEME'
+  SET_THEME = 'THEME/SET_THEME',
+  TOGGLE_DARK = 'THEME/TOGGLE_DARK'
 }

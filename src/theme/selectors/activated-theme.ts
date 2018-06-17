@@ -1,10 +1,26 @@
 import {createSelector} from 'reselect'
-import {Theme} from '@material-ui/core/styles'
+import {createMuiTheme, Theme} from '@material-ui/core/styles'
 import {selectedThemeSelector} from './selected-theme'
-import {themes, defaultTheme} from '../color-presets'
+import {isDarkThemeSelector} from './is-dark-theme'
+import {themes, pinkTheme} from '../color-presets'
 
+/**
+ * Select currently activated theme.
+ * If selected theme is not found, would resort to use pink theme
+ */
 export const activatedThemeSelector = createSelector(
   selectedThemeSelector,
-  (selectedTheme: string): Theme =>
-    themes.get(selectedTheme) || defaultTheme
+  isDarkThemeSelector,
+  (selectedTheme: string, dark: boolean): Theme => {
+    const type = dark ? 'dark' : 'light'
+    const options = themes.get(selectedTheme) || pinkTheme
+
+    return createMuiTheme({
+      ...options,
+      palette: {
+        ...options.palette,
+        type
+      }
+    })
+  }
 )

@@ -1,8 +1,10 @@
 import {themeReducer as reducer} from './theme-reducer'
 import {setThemeAction} from './actions/set-theme'
+import {toggleDarkAction} from './actions/toggle-dark'
 
 const defaultState = {
-  theme: 'default'
+  theme: 'Pink',
+  dark: false
 }
 
 test('default state', () => {
@@ -17,10 +19,24 @@ test('default state', () => {
 
 test('setThemeAction should work', () => {
   const state = defaultState
-  const action = setThemeAction('dark')
+  const action = setThemeAction('Indigo')
   const expected = {
     ...defaultState,
-    theme: 'dark'
+    theme: 'Indigo'
+  }
+  const actual = reducer(state, action)
+  expect(actual).toEqual(expected)
+})
+
+test('toggleDark should work', () => {
+  const state = {
+    ...defaultState,
+    dark: true
+  }
+  const action = toggleDarkAction()
+  const expected = {
+    ...defaultState,
+    dark: false
   }
   const actual = reducer(state, action)
   expect(actual).toEqual(expected)
