@@ -48,6 +48,7 @@ export class GameModalImpl extends React.Component {
     return <Dialog
       fullScreen={fullScreen}
       open={entry != null}
+      maxWidth="md"
       onClose={close}
       aria-labelledby="game-modal-title"
     >
@@ -62,7 +63,9 @@ export class GameModalImpl extends React.Component {
               {t('Previous game details')}
             </Typography>
             <Button color="inherit" onClick={this.del}>
-              {t('Load')}
+              <Typography variant="subheading" color="inherit">
+                {t('Load')}
+              </Typography>
             </Button>
           </Toolbar>
         </AppBar>
@@ -77,16 +80,16 @@ export class GameModalImpl extends React.Component {
         </DialogContent>
       )}
 
-      <DialogActions>
-        <Button onClick={this.del} color="primary">
-          {t('Delete')}
-        </Button>
-        {!fullScreen && (
+      {!fullScreen && (
+        <DialogActions>
+          <Button onClick={this.del} color="primary">
+            {t('Delete')}
+          </Button>
           <Button onClick={this.load} color="primary" autoFocus>
             {t('Load')}
           </Button>
-        )}
-      </DialogActions>
+        </DialogActions>
+      )}
 
     </Dialog>
   }
