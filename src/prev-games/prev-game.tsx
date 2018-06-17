@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import Tooltip from '@material-ui/core/Tooltip'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {PrevGameEntry} from './types'
 import {ITranslateMixin} from '../types'
@@ -26,9 +27,11 @@ export class PrevGameImpl extends React.Component<IPrevGameProps> {
         secondary={t('With {{players}}', {players: Object.values(game.names).join(', ')})}
       />
       <ListItemSecondaryAction>
-        <IconButton aria-label="Delete" onClick={requestDelete}>
-          <DeleteIcon />
-        </IconButton>
+        <Tooltip title={t('Delete')}>
+          <IconButton aria-label="Delete" onClick={requestDelete}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       </ListItemSecondaryAction>
     </ListItem>
   }

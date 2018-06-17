@@ -43,5 +43,5 @@ export const themes: Map<string, ThemeOptions> = new Map([
   ['Pink', pinkTheme],
   ['Indigo', indigoTheme],
   ['Light blue', blueTheme],
-  ['Blue Grey', greyTheme]
+  ['Blue grey', greyTheme]
 ])
