@@ -16,7 +16,7 @@ import classes from './navbar.pcss'
 
 type NavbarProps = RouteComponentProps<any> & ITranslateMixin
 
-export function NavbarImpl({t, history}: NavbarProps) {
+export function NavbarImpl({t, history, location}: NavbarProps) {
   const hasBackBtn = location.pathname !== '/'
 
   return <AppBar position="static">
