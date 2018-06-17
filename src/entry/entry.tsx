@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {translate} from 'react-i18next'
-import {Container} from 'react-grid-system'
 import Divider from '@material-ui/core/Divider'
+import {Container} from '../material/container'
 import {EntryPlayerList} from './entry-player-list'
 import {InitEntryState} from './init-entry-state'
 import {EntryActionButtons} from './entry-action-buttons'

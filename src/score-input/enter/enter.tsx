@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Container} from 'react-grid-system'
+import {Container} from '../../material/container'
 import Paper from '@material-ui/core/Paper'
 import Divider from '@material-ui/core/Divider'
 import {UsedTimeDisplay} from './used-time-display'

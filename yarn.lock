@@ -7403,13 +7403,6 @@ react-event-listener@^0.6.0:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-grid-system@4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-4.1.2.tgz#1cbcafe2b5f813793e3da01482ec90dd4f97c51a"
-  dependencies:
-    lodash "^4.17.10"
-    prop-types "^15.6.1"
-
 react-height@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-height/-/react-height-3.0.0.tgz#fae322f9da64d3e9e25536f26b77c73954261524"

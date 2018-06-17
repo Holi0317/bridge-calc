@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {Container} from 'react-grid-system'
+import {Container} from '../../material/container'
 import {ScoreboardTable} from './scoreboard-table'
 import {IRootState} from '../../types'
 import classes from './scoreboard.pcss'

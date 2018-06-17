@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Container} from 'react-grid-system'
+import {Container} from '../../material/container'
 import {NameEdit} from './name-edit'
 import {RoundManagement} from './round-management'
 import {SettingsInitializer} from './settings-initializer'
