@@ -2,10 +2,7 @@ const path = require('path')
 const {ENV} = require('./env')
 
 const libraries = [
-  'react-i18next',
-  'react-collapse',
-  'react-height',
-  'react-grid-system'
+  'react-i18next'
 ]
 
 const babelOpts = {

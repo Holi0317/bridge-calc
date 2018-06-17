@@ -3433,7 +3433,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.1, fbjs@^0.8.16, fbjs@^0.8.9:
+fbjs@^0.8.1, fbjs@^0.8.16:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
@@ -7232,12 +7232,6 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.5.8:
-  version "15.5.8"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
-  dependencies:
-    fbjs "^0.8.9"
-
 prop-types@15.6.1, prop-types@^15.5.0, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
@@ -7402,12 +7396,6 @@ react-event-listener@^0.6.0:
     "@babel/runtime" "^7.0.0-beta.42"
     prop-types "^15.6.0"
     warning "^4.0.1"
-
-react-height@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-height/-/react-height-3.0.0.tgz#fae322f9da64d3e9e25536f26b77c73954261524"
-  dependencies:
-    prop-types "15.5.8"
 
 react-i18next@7.7.0:
   version "7.7.0"
