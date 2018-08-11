@@ -23,7 +23,7 @@ export function SortableItemImpl({value, onChange, remove, error, t}: ISortableI
       <DragHandle />
       <TextField type="text" fullWidth label={t('Player name')}
                  margin="normal"
-                 value={value} error={error != null} helperText={error}
+                 value={value} error={error != null && error !== ''} helperText={error}
                  onChange={(event: any) => onChange(event.target.value)} />
       <Tooltip title={t('Delete name')}>
         <IconButton onClick={remove}><ActionDelete width="24px" height="24px" /></IconButton>
