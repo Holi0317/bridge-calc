@@ -1,16 +1,16 @@
-const {CheckerPlugin} = require('awesome-typescript-loader')
+const { CheckerPlugin } = require("awesome-typescript-loader");
 
 module.exports = {
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   module: {
-    rules: [{
-      test: /\.tsx?$/,
-      loader: 'awesome-typescript-loader'
-    }]
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: "awesome-typescript-loader"
+      }
+    ]
   },
-  plugins: [
-    new CheckerPlugin()
-  ]
-}
+  plugins: [new CheckerPlugin()]
+};

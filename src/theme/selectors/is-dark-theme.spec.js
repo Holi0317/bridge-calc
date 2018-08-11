@@ -1,4 +1,4 @@
-import {isDarkThemeSelector} from './is-dark-theme'
+import { isDarkThemeSelector } from "./is-dark-theme";
 
 /**
  * Make partial of redux tree for consumption.
@@ -11,13 +11,12 @@ function makeTree(dark = false) {
     theme: {
       dark
     }
-  }
+  };
 }
 
-test('it should select correct state', () => {
-  const expected = true
-  const state = makeTree(true)
-  const actual = isDarkThemeSelector(state)
-  expect(actual).toEqual(expected)
-})
-
+test("it should select correct state", () => {
+  const expected = true;
+  const state = makeTree(true);
+  const actual = isDarkThemeSelector(state);
+  expect(actual).toEqual(expected);
+});

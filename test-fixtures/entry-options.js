@@ -1,11 +1,11 @@
-import {deepFreeze} from './deep-freeze'
+import { deepFreeze } from "./deep-freeze";
 
 export const defaultState = deepFreeze({
   rounds: 13,
   startingRound: 1,
-  playerNames: ['John', 'Mary', 'Henry', 'Joe'],
+  playerNames: ["John", "Mary", "Henry", "Joe"],
   importOpened: false
-})
+});
 
 /**
  * Create mock redux state tree for test related to entry module.
@@ -19,5 +19,5 @@ export function makeEntryTree(rest) {
       ...defaultState,
       ...rest
     }
-  }
+  };
 }

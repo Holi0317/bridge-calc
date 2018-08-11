@@ -3,5 +3,5 @@ export function makePrevGamesTree(prevGames) {
     prevGames: {
       prevGames
     }
-  }
+  };
 }

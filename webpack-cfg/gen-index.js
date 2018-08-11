@@ -1,27 +1,30 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const PreloadWebpackPlugin = require('preload-webpack-plugin')
-const {transform} = require('babel-core')
-const {ENV} = require('./paths')
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const PreloadWebpackPlugin = require("preload-webpack-plugin");
+const { transform } = require("babel-core");
+const { ENV } = require("./paths");
 
 const babelOpt = {
   babelrc: false,
   comments: false,
-  filename: 'index.html',
+  filename: "index.html",
   minified: true,
-  presets: ['minify']
-}
+  presets: ["minify"]
+};
 
 const htmlSettings = {
-  template: 'assets/index.ejs',
-  chunksSortMode: 'dependency',
-  minify: (ENV === 'production') ? {
-    removeComments: true,
-    collapseWhitespace: true,
-    minifyJS(code) {
-      return transform(code, babelOpt).code
-    }
-  } : undefined
-}
+  template: "assets/index.ejs",
+  chunksSortMode: "dependency",
+  minify:
+    ENV === "production"
+      ? {
+          removeComments: true,
+          collapseWhitespace: true,
+          minifyJS(code) {
+            return transform(code, babelOpt).code;
+          }
+        }
+      : undefined
+};
 
 module.exports = {
   plugins: [
@@ -29,12 +32,12 @@ module.exports = {
 
     // Tl;dr: prefetch has lower priority than preload
     new PreloadWebpackPlugin({
-      rel: 'preload',
-      include: ['main', 'vendor']
+      rel: "preload",
+      include: ["main", "vendor"]
     }),
     new PreloadWebpackPlugin({
-      rel: 'prefetch',
-      include: 'asyncChunks'
+      rel: "prefetch",
+      include: "asyncChunks"
     })
   ]
-}
+};

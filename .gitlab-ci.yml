@@ -12,6 +12,7 @@ lint:
   script:
     - yarn install --pure-lockfile
     - npm run lint
+    - npm run prettier
   stage: build
 
 # Unit test
@@ -59,4 +60,4 @@ pages:
     name: staging
     url: https://holi0317.gitlab.io/bridge-calc
   only:
-   - staging
+    - staging

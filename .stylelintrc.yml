@@ -1,8 +1,12 @@
-extends: stylelint-config-standard
+extends: stylelint-config-recommended
 rules:
-  string-quotes: single
-  at-rule-no-vendor-prefix: true
-  media-feature-name-no-vendor-prefix: true
-  property-no-vendor-prefix: true
-  selector-no-vendor-prefix: true
+  selector-pseudo-class-no-unknown:
+    - true
+    - {
+        ignorePseudoClasses:
+          ["export", "import", "global", "local", "external"],
+      }
+
+  # Custom rules
   value-no-vendor-prefix: true
+  no-descending-specificity: null

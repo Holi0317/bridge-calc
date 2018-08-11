@@ -1,43 +1,43 @@
-import {themeReducer as reducer} from './theme-reducer'
-import {setThemeAction} from './actions/set-theme'
-import {toggleDarkAction} from './actions/toggle-dark'
+import { themeReducer as reducer } from "./theme-reducer";
+import { setThemeAction } from "./actions/set-theme";
+import { toggleDarkAction } from "./actions/toggle-dark";
 
 const defaultState = {
-  theme: 'Pink',
+  theme: "Pink",
   dark: false
-}
+};
 
-test('default state', () => {
-  const state = undefined
+test("default state", () => {
+  const state = undefined;
   const action = {
-    type: '#NULL'
-  }
-  const expected = defaultState
-  const actual = reducer(state, action)
-  expect(actual).toEqual(expected)
-})
+    type: "#NULL"
+  };
+  const expected = defaultState;
+  const actual = reducer(state, action);
+  expect(actual).toEqual(expected);
+});
 
-test('setThemeAction should work', () => {
-  const state = defaultState
-  const action = setThemeAction('Indigo')
+test("setThemeAction should work", () => {
+  const state = defaultState;
+  const action = setThemeAction("Indigo");
   const expected = {
     ...defaultState,
-    theme: 'Indigo'
-  }
-  const actual = reducer(state, action)
-  expect(actual).toEqual(expected)
-})
+    theme: "Indigo"
+  };
+  const actual = reducer(state, action);
+  expect(actual).toEqual(expected);
+});
 
-test('toggleDark should work', () => {
+test("toggleDark should work", () => {
   const state = {
     ...defaultState,
     dark: true
-  }
-  const action = toggleDarkAction()
+  };
+  const action = toggleDarkAction();
   const expected = {
     ...defaultState,
     dark: false
-  }
-  const actual = reducer(state, action)
-  expect(actual).toEqual(expected)
-})
+  };
+  const actual = reducer(state, action);
+  expect(actual).toEqual(expected);
+});

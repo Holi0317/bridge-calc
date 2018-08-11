@@ -1,11 +1,11 @@
-import {deepFreeze} from './deep-freeze'
+import { deepFreeze } from "./deep-freeze";
 
 export const defaultState = deepFreeze({
   maker: null,
   makerDirty: false,
   names: {},
   expandedPanel: null
-})
+});
 
 /**
  * Make part of redux state tree for testing game settings.
@@ -19,5 +19,5 @@ export function makeSettingsTree(rest) {
       ...defaultState,
       ...rest
     }
-  }
+  };
 }

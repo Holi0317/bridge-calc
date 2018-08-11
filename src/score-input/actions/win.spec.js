@@ -1,33 +1,33 @@
-import {winAction} from './win'
-import {ActionTypes} from '../../action-types'
-import {genMap} from '../../../test-fixtures/current-game-states'
-import * as lolex from 'lolex'
+import { winAction } from "./win";
+import { ActionTypes } from "../../action-types";
+import { genMap } from "../../../test-fixtures/current-game-states";
+import * as lolex from "lolex";
 
-let clock = null
+let clock = null;
 beforeEach(() => {
-  clock = lolex.install()
-})
+  clock = lolex.install();
+});
 afterEach(() => {
   if (clock) {
-    clock.uninstall()
+    clock.uninstall();
   }
-})
+});
 
-test('it should return win action', () => {
+test("it should return win action", () => {
   const expected = {
     type: ActionTypes.WIN,
     win: genMap(0, 0, 0, 0),
     time: 0
-  }
-  const actual = winAction(genMap(0, 0, 0, 0))
-  expect(actual).toEqual(expected)
-})
+  };
+  const actual = winAction(genMap(0, 0, 0, 0));
+  expect(actual).toEqual(expected);
+});
 
-test('it should return win action with no payload', () => {
+test("it should return win action with no payload", () => {
   const expected = {
     type: ActionTypes.WIN,
     time: 0
-  }
-  const actual = winAction()
-  expect(actual).toEqual(expected)
-})
+  };
+  const actual = winAction();
+  expect(actual).toEqual(expected);
+});

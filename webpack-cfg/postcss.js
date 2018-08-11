@@ -1,32 +1,30 @@
-const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const {ENV} = require('./paths')
+const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { ENV } = require("./paths");
 
 const cssLoader = {
-  loader: 'css-loader',
+  loader: "css-loader",
   options: {
     modules: true,
     sourceMap: true,
     importLoaders: 1,
-    minimize: ENV === 'production',
+    minimize: ENV === "production",
     localIdentName:
-      ENV === 'production'
-        ? '[hash:base64:5]'
-        : '[name]__[local]--[hash:base64:5]',
-    camelCase: 'dashesOnly'
+      ENV === "production"
+        ? "[hash:base64:5]"
+        : "[name]__[local]--[hash:base64:5]",
+    camelCase: "dashesOnly"
   }
-}
+};
 
 module.exports = {
   module: {
-    rules: [{
-      test: /\.pcss$/,
-      use: [
-        MiniCssExtractPlugin.loader,
-        cssLoader,
-        'postcss-loader'
-      ]
-    }]
+    rules: [
+      {
+        test: /\.pcss$/,
+        use: [MiniCssExtractPlugin.loader, cssLoader, "postcss-loader"]
+      }
+    ]
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
@@ -36,19 +34,19 @@ module.exports = {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: "[name].css"
     })
   ],
   optimization: {
     splitChunks: {
       cacheGroups: {
         styles: {
-          name: 'styles',
+          name: "styles",
           test: /\.p?css$/,
-          chunks: 'all',
+          chunks: "all",
           enforce: true
         }
       }
     }
   }
-}
+};

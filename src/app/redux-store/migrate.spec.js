@@ -1,21 +1,21 @@
-import {migrations} from './migrations'
+import { migrations } from "./migrations";
 
-describe('v1 to v2', () => {
-  const migrate = migrations[2]
+describe("v1 to v2", () => {
+  const migrate = migrations[2];
 
-  test('Migration should reset theme property', () => {
+  test("Migration should reset theme property", () => {
     const oldState = {
       theme: {
-        theme: 'default'
+        theme: "default"
       }
-    }
+    };
     const expected = {
       theme: {
-        theme: 'Pink',
+        theme: "Pink",
         dark: false
       }
-    }
-    const actual = migrate(oldState)
-    expect(actual).toEqual(expected)
-  })
-})
+    };
+    const actual = migrate(oldState);
+    expect(actual).toEqual(expected);
+  });
+});

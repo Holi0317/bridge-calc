@@ -5,6 +5,7 @@ npm-debug.log*
 /test/coverage
 .idea
 stats.json
-.eslintcache
+/.eslintcache
+/.stylelintcache
 /.tmp
 /coverage

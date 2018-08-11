@@ -1,4 +1,3 @@
----
 parserOptions:
   ecmaVersion: 2018
   sourceType: module
@@ -10,7 +9,8 @@ env:
   jest: true
 
 extends:
- - eslint:recommended
+  - eslint:recommended
+  - prettier
 
 rules:
   getter-return: error
@@ -20,14 +20,10 @@ rules:
   valid-jsdoc: error
 
   array-callback-return: error
-  curly: error
-  dot-location:
-   - warn
-   - property
   dot-notation: error
   eqeqeq:
-   - error
-   - smart
+    - error
+    - smart
   guard-for-in: error
   no-alert: error
   no-else-return: warn
@@ -36,45 +32,25 @@ rules:
   prefer-promise-reject-errors: error
   no-return-await: warn
   yoda:
-   - error
-   - never
-   - exceptRange: true
+    - error
+    - never
+    - exceptRange: true
 
-  array-bracket-spacing: error
-  block-spacing: error
-  brace-style: error
-  comma-dangle: error
-  comma-spacing: error
-  eol-last: error
   linebreak-style: error
-  semi:
-   - error
-   - never
-  indent:
-   - error
-   - 2
-  keyword-spacing: error
-  arrow-spacing: error
-  quotes:
-   - error
-   - single
-   - allowTemplateLiterals: false
-     avoidEscape: true
   prefer-const: error
   capitalized-comments:
-   - error
-   - always
-   - {ignorePattern: webpackChunkName}
+    - error
+    - always
+    - { ignorePattern: webpackChunkName }
   line-comment-position: error
   no-throw-literal: error
   no-return-assign: error
   no-multi-str: error
-  no-multi-spaces: error
-  no-trailing-spaces: error
   multiline-comment-style: error
-  space-infix-ops: error
-  space-unary-ops: error
   spaced-comment: error
   no-floating-decimal: error
-  object-curly-spacing: error
   no-console: off
+  no-unused-vars:
+    - 2
+    - { ignoreRestSiblings: true, argsIgnorePattern: "^_" }
+  prefer-object-spread: error

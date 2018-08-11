@@ -1,33 +1,33 @@
-import {skipAction} from './skip'
-import {ActionTypes} from '../../action-types'
-import * as lolex from 'lolex'
+import { skipAction } from "./skip";
+import { ActionTypes } from "../../action-types";
+import * as lolex from "lolex";
 
-let clock = null
+let clock = null;
 beforeEach(() => {
-  clock = lolex.install()
-})
+  clock = lolex.install();
+});
 afterEach(() => {
   if (clock) {
-    clock.uninstall()
+    clock.uninstall();
   }
-})
+});
 
-test('it should return a skip action', () => {
+test("it should return a skip action", () => {
   const expected = {
     type: ActionTypes.SKIP,
     time: 0,
     times: 1
-  }
-  const actual = skipAction(1)
-  expect(actual).toEqual(expected)
-})
+  };
+  const actual = skipAction(1);
+  expect(actual).toEqual(expected);
+});
 
-test('it should return skip action with n rounds specified', () => {
+test("it should return skip action with n rounds specified", () => {
   const expected = {
     type: ActionTypes.SKIP,
     time: 0,
     times: 5
-  }
-  const actual = skipAction(5)
-  expect(actual).toEqual(expected)
-})
+  };
+  const actual = skipAction(5);
+  expect(actual).toEqual(expected);
+});

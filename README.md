@@ -10,7 +10,9 @@ A simple calculator for German Bridge
 [Staging server (Not always available)](https://holi0317.gitlab.io/bridge-calc)
 
 ## Overview
+
 Bridge calc helps to calculate score for a German Bridge game.
 
 ## Bug report
+
 Report bug on [Gitlab issue tracker](https://gitlab.com/holi0317/bridge-calc/issues)

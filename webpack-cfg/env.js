@@ -1,23 +1,23 @@
-const WebpackMd5Hash = require('webpack-md5-hash')
-const webpack = require('webpack')
-const {ENV} = require('./paths')
-const pkg = require('../package.json')
+const WebpackMd5Hash = require("webpack-md5-hash");
+const webpack = require("webpack");
+const { ENV } = require("./paths");
+const pkg = require("../package.json");
 
-const commitHash = require('child_process')
-  .execSync('git rev-parse --short HEAD')
-  .toString()
+const commitHash = require("child_process")
+  .execSync("git rev-parse --short HEAD")
+  .toString();
 
 const definePlugin = new webpack.DefinePlugin({
-  'process.env.NODE_ENV': JSON.stringify(ENV),
+  "process.env.NODE_ENV": JSON.stringify(ENV),
   VERSION: JSON.stringify(pkg.version),
   HASH: JSON.stringify(commitHash)
-})
+});
 
 const productionEnv = {
   output: {
-    filename: '[name].[chunkhash].bundle.js',
-    sourceMapFilename: '[name].[chunkhash].bundle.map',
-    chunkFilename: '[name].[chunkhash].chunk.js'
+    filename: "[name].[chunkhash].bundle.js",
+    sourceMapFilename: "[name].[chunkhash].bundle.map",
+    chunkFilename: "[name].[chunkhash].chunk.js"
   },
 
   plugins: [
@@ -32,14 +32,14 @@ const productionEnv = {
 
     definePlugin
   ]
-}
+};
 
 const developmentEnv = {
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   output: {
-    filename: '[name].bundle.js',
-    sourceMapFilename: '[name].bundle.map',
-    chunkFilename: '[name].chunk.js'
+    filename: "[name].bundle.js",
+    sourceMapFilename: "[name].bundle.map",
+    chunkFilename: "[name].chunk.js"
   },
   devServer: {
     port: 9000,
@@ -54,9 +54,8 @@ const developmentEnv = {
       errors: true
     }
   },
-  plugins: [
-    definePlugin
-  ]
-}
+  plugins: [definePlugin]
+};
 
-module.exports = (ENV === 'test' || ENV === 'development') ? developmentEnv : productionEnv
+module.exports =
+  ENV === "test" || ENV === "development" ? developmentEnv : productionEnv;
