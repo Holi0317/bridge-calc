@@ -6,7 +6,7 @@ import {translate} from 'react-i18next'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import ContentAdd from '@material-ui/icons/Add'
-import FileDownload from '@material-ui/icons/FileDownload'
+import GetApp from '@material-ui/icons/GetApp'
 import {addRandomPlayerAction} from './actions/add-player'
 import {setImportOpenAction} from './actions/set-entry-props'
 import {Dispatch, ITranslateMixin} from '../types'
@@ -33,7 +33,7 @@ export function EntryActionButtonsImpl({addRandomPlayer, setImportOpen, t}: Entr
 
       <Tooltip title={t('Import names')}>
         <IconButton onClick={() => setImportOpen(true)}>
-          <FileDownload width="28px" height="28px" />
+          <GetApp width="28px" height="28px" />
         </IconButton>
       </Tooltip>
     </div>

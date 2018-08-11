@@ -21,7 +21,6 @@
     "no-require-imports": true,
     "no-redundant-jsdoc": true,
     "no-unused-expression": true,
-    "no-unused-variable": [true, "check-parameters"],
     "no-unnecessary-callback-wrapper": true,
     "no-implicit-dependencies": true,
     "no-inferred-empty-object-type": true,
