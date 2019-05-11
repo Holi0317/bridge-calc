@@ -10,7 +10,7 @@ stages:
 
 lint:
   script:
-    - yarn install --pure-lockfile
+    - npm install
     - npm run lint
     - npm run prettier
   stage: build
@@ -18,14 +18,14 @@ lint:
 # Unit test
 test:
   script:
-    - yarn install --pure-lockfile
+    - npm install
     - npm test -- --runInBand --coverage
   stage: build
 
 # Compile assets
 build:
   script:
-    - yarn install --pure-lockfile
+    - npm install
     - npm run build:prod
   stage: build
   artifacts:
