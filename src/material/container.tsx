@@ -1,12 +1,10 @@
-import * as React from 'react'
-import classes from './container.pcss'
+import * as React from "react";
+import classes from "./container.pcss";
 
 interface IContainerProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export function Container({children}: IContainerProps) {
-  return <div className={classes.container}>
-    {children}
-  </div>
+export function Container({ children }: IContainerProps) {
+  return <div className={classes.container}>{children}</div>;
 }

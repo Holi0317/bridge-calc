@@ -4,13 +4,13 @@
  * If empty array is returned, this implies no duplicate exist.
  */
 export function dupe<T>(array: T[]): T[] {
-  const seen = new Set<T>()
-  const res: T[] = []
+  const seen = new Set<T>();
+  const res: T[] = [];
   array.forEach(element => {
     if (seen.has(element) && !res.includes(element)) {
-      res.push(element)
+      res.push(element);
     }
-    seen.add(element)
-  })
-  return res
+    seen.add(element);
+  });
+  return res;
 }

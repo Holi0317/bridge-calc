@@ -6,7 +6,7 @@
  */
 export function isArrayEqual(a: any[], b: any[]): boolean {
   if (a.length !== b.length) {
-    return false
+    return false;
   }
-  return a.every((el, index) => el === b[index])
+  return a.every((el, index) => el === b[index]);
 }

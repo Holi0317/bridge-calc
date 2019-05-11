@@ -1,11 +1,11 @@
-import {ActionTypes} from '../../../action-types'
+import { ActionTypes } from "../../../action-types";
 
 export interface ISetMakerAction {
-  type: ActionTypes.SET_MAKER,
+  type: ActionTypes.SET_MAKER;
   /**
    * The Player ID of maker to be set.
    */
-  maker: string
+  maker: string;
 }
 
 /**
@@ -14,5 +14,5 @@ export interface ISetMakerAction {
  * @param maker - Player ID of the maker to be set.
  */
 export function setMakerAction(maker: string): ISetMakerAction {
-  return {type: ActionTypes.SET_MAKER, maker}
+  return { type: ActionTypes.SET_MAKER, maker };
 }

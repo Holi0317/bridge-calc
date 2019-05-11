@@ -1,9 +1,9 @@
-import {PrevGameEntry} from '../types'
-import {ActionTypes} from '../../action-types'
+import { PrevGameEntry } from "../types";
+import { ActionTypes } from "../../action-types";
 
 export interface IAddGameAction {
-  type: ActionTypes.ADD_GAME
-  payload: PrevGameEntry
+  type: ActionTypes.ADD_GAME;
+  payload: PrevGameEntry;
 }
 
 /**
@@ -11,5 +11,5 @@ export interface IAddGameAction {
  * @param payload - The prevGame entry
  */
 export function addGameAction(payload: PrevGameEntry): IAddGameAction {
-  return {type: ActionTypes.ADD_GAME, payload}
+  return { type: ActionTypes.ADD_GAME, payload };
 }

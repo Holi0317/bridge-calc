@@ -1,15 +1,15 @@
-import {GameState} from '../../score-input/reducer'
-import {PrevGameEntry} from '../types'
-import {gameStateToPrevGame} from '../converter'
-import {ActionTypes} from '../../action-types'
+import { GameState } from "../../score-input/reducer";
+import { PrevGameEntry } from "../types";
+import { gameStateToPrevGame } from "../converter";
+import { ActionTypes } from "../../action-types";
 
 export interface ISaveGameAction {
-  type: ActionTypes.SAVE_GAME
+  type: ActionTypes.SAVE_GAME;
   /**
    * Content of the game to be saved.
    * If undefined, no-op will be done (as to handle null in GameState).
    */
-  entry: PrevGameEntry | null
+  entry: PrevGameEntry | null;
 }
 
 /**
@@ -21,7 +21,7 @@ export interface ISaveGameAction {
  */
 export function saveGameAction(state: GameState): ISaveGameAction {
   if (state == null) {
-    return {type: ActionTypes.SAVE_GAME, entry: null}
+    return { type: ActionTypes.SAVE_GAME, entry: null };
   }
-  return {type: ActionTypes.SAVE_GAME, entry: gameStateToPrevGame(state)}
+  return { type: ActionTypes.SAVE_GAME, entry: gameStateToPrevGame(state) };
 }

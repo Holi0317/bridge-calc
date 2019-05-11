@@ -1,1 +1,1 @@
-export {ImportNamesDialog} from './import-names-dialog'
+export { ImportNamesDialog } from "./import-names-dialog";

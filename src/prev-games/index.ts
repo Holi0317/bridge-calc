@@ -1,1 +1,1 @@
-export {PrevGames} from './prev-games'
+export { PrevGames } from "./prev-games";

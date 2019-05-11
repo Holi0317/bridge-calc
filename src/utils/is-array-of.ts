@@ -8,7 +8,7 @@
  */
 export function isArrayOf(obj: any, of: string): boolean {
   if (!Array.isArray(obj)) {
-    return false
+    return false;
   }
-  return obj.every(el => typeof el === of)
+  return obj.every(el => typeof el === of);
 }

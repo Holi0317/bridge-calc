@@ -1,10 +1,10 @@
-import {createSelector} from 'reselect'
-import {TranslationFunction} from 'i18next'
-import {stageSelector} from './stage'
-import {currentRoundSelector} from './current-round'
-import {roundsSelector} from './rounds'
-import {GameStage} from '../game-stage'
-import {IRootState} from '../../types'
+import { createSelector } from "reselect";
+import { TranslationFunction } from "i18next";
+import { stageSelector } from "./stage";
+import { currentRoundSelector } from "./current-round";
+import { roundsSelector } from "./rounds";
+import { GameStage } from "../game-stage";
+import { IRootState } from "../../types";
 
 /**
  * Compute title to be displayed on app bar for current game.
@@ -15,15 +15,26 @@ export const gameTitleSelector = createSelector(
   currentRoundSelector,
   roundsSelector,
   (_: IRootState, t: TranslationFunction) => t,
-  (stage: GameStage | null, currentRound: number | null, rounds: number | null, t: TranslationFunction): string => {
+  (
+    stage: GameStage | null,
+    currentRound: number | null,
+    rounds: number | null,
+    t: TranslationFunction
+  ): string => {
     if (stage == null) {
-      return ''
-    } else if (stage === GameStage.waitingBid || stage === GameStage.waitingWin) {
-      return t('Round {{currentRound}} of {{rounds}}', {currentRound, rounds})
+      return "";
+    } else if (
+      stage === GameStage.waitingBid ||
+      stage === GameStage.waitingWin
+    ) {
+      return t("Round {{currentRound}} of {{rounds}}", {
+        currentRound,
+        rounds
+      });
     } else if (stage === GameStage.ended) {
-      return t('Game over')
+      return t("Game over");
     } else {
-      return ''
+      return "";
     }
   }
-)
+);

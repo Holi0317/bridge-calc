@@ -1,13 +1,13 @@
-import mapValues from 'lodash-es/mapValues'
-import sum from 'lodash-es/sum'
-import range from 'lodash-es/range'
-import {GameState} from '../reducer'
-import {IPlayerMap} from '../../types'
-import {toOrdinal} from '../../utils'
-import {GameStage} from '../game-stage'
+import mapValues from "lodash-es/mapValues";
+import sum from "lodash-es/sum";
+import range from "lodash-es/range";
+import { GameState } from "../reducer";
+import { IPlayerMap } from "../../types";
+import { toOrdinal } from "../../utils";
+import { GameStage } from "../game-stage";
 
-const TOP_EMOJI = [' 👑', ' 🥈', ' 🥉']
-const LAST = ' 💩'
+const TOP_EMOJI = [" 👑", " 🥈", " 🥉"];
+const LAST = " 💩";
 
 /**
  * Query emoji for this player.
@@ -19,21 +19,21 @@ const LAST = ' 💩'
  */
 function getEmoji(rank: number, isLast: boolean): string {
   if (rank <= 3) {
-    return TOP_EMOJI[rank - 1]
+    return TOP_EMOJI[rank - 1];
   }
   if (isLast) {
-    return LAST
+    return LAST;
   }
-  return ''
+  return "";
 }
 
 function getRank(scores: IPlayerMap<number>): IPlayerMap<string> {
-  const sortedScores: number[] = Object.values(scores).sort((a, b) => b - a)
-  const lastScore = sortedScores[sortedScores.length - 1]
+  const sortedScores: number[] = Object.values(scores).sort((a, b) => b - a);
+  const lastScore = sortedScores[sortedScores.length - 1];
   return mapValues(scores, score => {
-    const rank = sortedScores.indexOf(score) + 1
-    return toOrdinal(rank) + getEmoji(rank, score === lastScore)
-  })
+    const rank = sortedScores.indexOf(score) + 1;
+    return toOrdinal(rank) + getEmoji(rank, score === lastScore);
+  });
 }
 
 /**
@@ -46,22 +46,22 @@ function getRank(scores: IPlayerMap<number>): IPlayerMap<string> {
  */
 function getEndedRounds(entry: NonNullable<GameState>): number[] {
   if (entry.stage === GameStage.ended) {
-    return range(1, entry.rounds + 1)
+    return range(1, entry.rounds + 1);
   }
-  return range(1, entry.currentRound)
+  return range(1, entry.currentRound);
 }
 
 export interface IScoreboardData {
-  names: IPlayerMap<string>,
-  scores: IPlayerMap<number[]>,
-  prevScores: IPlayerMap<number>,
-  totalScores: IPlayerMap<number>,
-  ranks: IPlayerMap<string>,
-  endedRounds: number[]
+  names: IPlayerMap<string>;
+  scores: IPlayerMap<number[]>;
+  prevScores: IPlayerMap<number>;
+  totalScores: IPlayerMap<number>;
+  ranks: IPlayerMap<string>;
+  endedRounds: number[];
 }
 
 export function computeData(entry: NonNullable<GameState>): IScoreboardData {
-  const totalScores = mapValues(entry.scores, sum)
+  const totalScores = mapValues(entry.scores, sum);
   return {
     names: entry.names,
     scores: entry.scores,
@@ -69,5 +69,5 @@ export function computeData(entry: NonNullable<GameState>): IScoreboardData {
     totalScores,
     ranks: getRank(totalScores),
     endedRounds: getEndedRounds(entry)
-  }
+  };
 }

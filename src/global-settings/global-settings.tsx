@@ -1,9 +1,9 @@
-import * as React from 'react'
-import {Container} from '../material/container'
-import {LanguageSelector} from './language-selector'
-import {PurgeData} from './purge-data'
-import {VersionDisplay} from './version-display'
-import {ThemeSelection} from './theme-selection'
+import * as React from "react";
+import { Container } from "../material/container";
+import { LanguageSelector } from "./language-selector";
+import { PurgeData } from "./purge-data";
+import { VersionDisplay } from "./version-display";
+import { ThemeSelection } from "./theme-selection";
 
 export function GlobalSettings() {
   return (
@@ -13,5 +13,5 @@ export function GlobalSettings() {
       <PurgeData />
       <VersionDisplay />
     </Container>
-  )
+  );
 }

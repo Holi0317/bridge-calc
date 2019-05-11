@@ -1,7 +1,7 @@
-import {ActionTypes} from '../../action-types'
+import { ActionTypes } from "../../action-types";
 
 export interface IUndoAction {
-  type: ActionTypes.UNDO
+  type: ActionTypes.UNDO;
 }
 
 /**
@@ -9,5 +9,5 @@ export interface IUndoAction {
  * If the stage is not waitingWin, no-op will be done.
  */
 export function undoAction(): IUndoAction {
-  return {type: ActionTypes.UNDO}
+  return { type: ActionTypes.UNDO };
 }

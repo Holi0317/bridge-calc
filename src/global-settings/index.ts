@@ -1,1 +1,1 @@
-export {GlobalSettings} from './global-settings'
+export { GlobalSettings } from "./global-settings";

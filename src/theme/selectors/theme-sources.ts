@@ -1,6 +1,6 @@
-import {TranslationFunction} from 'i18next'
-import {themes} from '../color-presets'
-import {IDropdownSource} from '../../material/dropdown'
+import { TranslationFunction } from "i18next";
+import { themes } from "../color-presets";
+import { IDropdownSource } from "../../material/dropdown";
 
 /**
  * Available themes in dropdown source form.
@@ -8,10 +8,11 @@ import {IDropdownSource} from '../../material/dropdown'
  * NOTE: This selector is not a usual selector. It does not require `state` argument
  * but a translate function argument.
  */
-export function themeSourcesSelector(t: TranslationFunction): Array<IDropdownSource<string>> {
-  return Array.from(themes.keys())
-    .map(theme => ({
-      value: theme,
-      label: t(theme)
-    }))
+export function themeSourcesSelector(
+  t: TranslationFunction
+): Array<IDropdownSource<string>> {
+  return Array.from(themes.keys()).map(theme => ({
+    value: theme,
+    label: t(theme)
+  }));
 }

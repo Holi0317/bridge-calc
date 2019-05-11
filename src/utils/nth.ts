@@ -12,10 +12,12 @@
  */
 export function nth<T>(array: T[], index: number): T {
   if (index < 0) {
-    throw new Error('Index should be a positive number')
+    throw new Error("Index should be a positive number");
   }
   if (!Number.isInteger(index)) {
-    throw new Error('Index should be an integer')
+    throw new Error("Index should be an integer");
   }
-  return (index >= array.length) ? nth(array, index - array.length) : array[index]
+  return index >= array.length
+    ? nth(array, index - array.length)
+    : array[index];
 }

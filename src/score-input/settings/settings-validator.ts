@@ -1,45 +1,55 @@
-import {createSelector} from 'reselect'
-import {TranslationFunction} from 'i18next'
-import mapValues from 'lodash-es/mapValues'
-import {namesSelector} from './selectors/names'
-import {dupe, isOk, removeUndef} from '../../utils'
-import {IPlayerMap, IRootState} from '../../types'
-import {expectedRoundsSelector} from './selectors/expected-rounds'
-import {currentRoundSelector} from '../selectors/current-round'
+import { createSelector } from "reselect";
+import { TranslationFunction } from "i18next";
+import mapValues from "lodash-es/mapValues";
+import { namesSelector } from "./selectors/names";
+import { dupe, isOk, removeUndef } from "../../utils";
+import { IPlayerMap, IRootState } from "../../types";
+import { expectedRoundsSelector } from "./selectors/expected-rounds";
+import { currentRoundSelector } from "../selectors/current-round";
 
-const playerUpperLimit = 52
+const playerUpperLimit = 52;
 
 export interface ISettingsError {
-  names: IPlayerMap<string>
-  misc: string | null
+  names: IPlayerMap<string>;
+  misc: string | null;
 }
 
-function validateNames(names: IPlayerMap<string>, t: TranslationFunction): IPlayerMap<string> {
-  const duplicates = dupe(Object.values(names))
+function validateNames(
+  names: IPlayerMap<string>,
+  t: TranslationFunction
+): IPlayerMap<string> {
+  const duplicates = dupe(Object.values(names));
   const res: IPlayerMap<string | null> = mapValues(names, (name: string) => {
-    if (name === '') {
-      return t('Name cannot be empty')
+    if (name === "") {
+      return t("Name cannot be empty");
     }
     if (duplicates.includes(name)) {
-      return t('Name cannot be repeated')
+      return t("Name cannot be repeated");
     }
-    return null
-  })
-  return removeUndef(res)
+    return null;
+  });
+  return removeUndef(res);
 }
 
-function validateMisc(names: IPlayerMap<string>, currentRound: number, expectedRounds: number, t: TranslationFunction): string | null {
-  const size = Object.keys(names).length
+function validateMisc(
+  names: IPlayerMap<string>,
+  currentRound: number,
+  expectedRounds: number,
+  t: TranslationFunction
+): string | null {
+  const size = Object.keys(names).length;
   if (size < 2) {
-    return t('At least 2 players is required for a game')
+    return t("At least 2 players is required for a game");
   }
   if (size > playerUpperLimit) {
-    return t('Too many players. Upper limit is {{limit}} players.', {limit: playerUpperLimit})
+    return t("Too many players. Upper limit is {{limit}} players.", {
+      limit: playerUpperLimit
+    });
   }
   if (expectedRounds < currentRound) {
-    return t('Impossible to continue the game due to too many players')
+    return t("Impossible to continue the game due to too many players");
   }
-  return null
+  return null;
 }
 
 /**
@@ -53,11 +63,16 @@ export const settingsValidator = createSelector(
   currentRoundSelector,
   expectedRoundsSelector,
   (_: IRootState, t: TranslationFunction) => t,
-  (names: IPlayerMap<string>, currentRound: number, expectedRounds: number, t: TranslationFunction): ISettingsError => ({
+  (
+    names: IPlayerMap<string>,
+    currentRound: number,
+    expectedRounds: number,
+    t: TranslationFunction
+  ): ISettingsError => ({
     names: validateNames(names, t),
     misc: validateMisc(names, currentRound, expectedRounds, t)
   })
-)
+);
 
 /**
  * Select validity of settings options.
@@ -66,6 +81,5 @@ export const settingsValidator = createSelector(
  */
 export const isSettingsValid = createSelector(
   settingsValidator,
-  (error: ISettingsError): boolean =>
-    isOk(error.names) && error.misc === null
-)
+  (error: ISettingsError): boolean => isOk(error.names) && error.misc === null
+);

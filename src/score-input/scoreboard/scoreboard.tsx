@@ -1,17 +1,17 @@
-import * as React from 'react'
-import {connect} from 'react-redux'
-import {Container} from '../../material/container'
-import {ScoreboardTable} from './scoreboard-table'
-import {IRootState} from '../../types'
-import classes from './scoreboard.pcss'
+import * as React from "react";
+import { connect } from "react-redux";
+import { Container } from "../../material/container";
+import { ScoreboardTable } from "./scoreboard-table";
+import { IRootState } from "../../types";
+import classes from "./scoreboard.pcss";
 
 const mapStateToProps = (state: IRootState) => ({
   entry: state.currentGame
-})
+});
 
-type stateType = ReturnType<typeof mapStateToProps>
+type stateType = ReturnType<typeof mapStateToProps>;
 
-export function ScoreboardImpl({entry}: stateType) {
+export function ScoreboardImpl({ entry }: stateType) {
   return (
     <Container>
       {entry && (
@@ -20,7 +20,7 @@ export function ScoreboardImpl({entry}: stateType) {
         </div>
       )}
     </Container>
-  )
+  );
 }
 
-export const Scoreboard = connect(mapStateToProps)(ScoreboardImpl)
+export const Scoreboard = connect(mapStateToProps)(ScoreboardImpl);

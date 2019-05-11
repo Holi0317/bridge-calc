@@ -1,6 +1,6 @@
-import {createSelector} from 'reselect'
-import {IPlayerMap} from '../../types'
-import {namesSelector} from './names'
+import { createSelector } from "reselect";
+import { IPlayerMap } from "../../types";
+import { namesSelector } from "./names";
 
 /**
  * Select all player ID as an array.
@@ -8,6 +8,5 @@ import {namesSelector} from './names'
  */
 export const playerIDSelector = createSelector(
   namesSelector,
-  (names: IPlayerMap<string>): string[] =>
-    Object.keys(names)
-)
+  (names: IPlayerMap<string>): string[] => Object.keys(names)
+);

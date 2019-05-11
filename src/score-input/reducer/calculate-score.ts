@@ -8,8 +8,8 @@
  */
 export function calculateScore(bid: number, win: number): number {
   if (bid === win) {
-    return (bid) ** 2 + 10
+    return bid ** 2 + 10;
   } else {
-    return -((win - bid) ** 2)
+    return -((win - bid) ** 2);
   }
 }

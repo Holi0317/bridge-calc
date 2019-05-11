@@ -1,4 +1,4 @@
-import {isArrayOf} from './is-array-of'
+import { isArrayOf } from "./is-array-of";
 
 /**
  * Check if given object is an IPlayerMap object.
@@ -12,15 +12,15 @@ import {isArrayOf} from './is-array-of'
  * @see IPlayerMap
  */
 export function isPlayerMapOf(obj: any, of: string): boolean {
-  const type = of.replace('[]', '')
-  const cmp = of.endsWith('[]')
+  const type = of.replace("[]", "");
+  const cmp = of.endsWith("[]")
     ? (val: any) => isArrayOf(val, type)
-    : (val: any) => typeof val === of
+    : (val: any) => typeof val === of;
 
   for (const key in obj) {
     if (obj.hasOwnProperty(key) && !cmp(obj[key])) {
-      return false
+      return false;
     }
   }
-  return true
+  return true;
 }

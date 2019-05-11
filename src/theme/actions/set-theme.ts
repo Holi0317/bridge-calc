@@ -1,8 +1,8 @@
-import {ActionTypes} from '../../action-types'
+import { ActionTypes } from "../../action-types";
 
 export interface ISetThemeAction {
-  type: ActionTypes.SET_THEME
-  theme: string
+  type: ActionTypes.SET_THEME;
+  theme: string;
 }
 
 /**
@@ -10,5 +10,5 @@ export interface ISetThemeAction {
  * See theme-sources.ts for available themes.
  */
 export function setThemeAction(theme: string): ISetThemeAction {
-  return {type: ActionTypes.SET_THEME, theme}
+  return { type: ActionTypes.SET_THEME, theme };
 }

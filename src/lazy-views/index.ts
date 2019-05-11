@@ -1,6 +1,6 @@
-export {EntryView} from './entry'
-export {MenuView} from './menu'
-export {ScoreInputView} from './score-input'
-export {PrevGamesView} from './prev-games'
-export {GlobalSettingsView} from './global-settings'
-export {NotFoundView} from './not-found'
+export { EntryView } from "./entry";
+export { MenuView } from "./menu";
+export { ScoreInputView } from "./score-input";
+export { PrevGamesView } from "./prev-games";
+export { GlobalSettingsView } from "./global-settings";
+export { NotFoundView } from "./not-found";

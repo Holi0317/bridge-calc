@@ -1,1 +1,1 @@
-export {SWReg} from './sw-reg'
+export { SWReg } from "./sw-reg";

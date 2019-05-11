@@ -1,1 +1,1 @@
-export {Shell} from './app-shell'
+export { Shell } from "./app-shell";

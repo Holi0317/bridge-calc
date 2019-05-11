@@ -1,11 +1,11 @@
-import * as React from 'react'
-import {Container} from '../../material/container'
-import {NameEdit} from './name-edit'
-import {RoundManagement} from './round-management'
-import {SettingsInitializer} from './settings-initializer'
-import {ChangeMaker} from './change-maker'
-import {ProtectedView} from '../protected-view'
-import classes from './settings.pcss'
+import * as React from "react";
+import { Container } from "../../material/container";
+import { NameEdit } from "./name-edit";
+import { RoundManagement } from "./round-management";
+import { SettingsInitializer } from "./settings-initializer";
+import { ChangeMaker } from "./change-maker";
+import { ProtectedView } from "../protected-view";
+import classes from "./settings.pcss";
 
 export function SettingsImpl() {
   return (
@@ -18,9 +18,9 @@ export function SettingsImpl() {
 
       <SettingsInitializer />
     </Container>
-  )
+  );
 }
 
 export function Settings() {
-  return <ProtectedView comp={SettingsImpl} />
+  return <ProtectedView comp={SettingsImpl} />;
 }

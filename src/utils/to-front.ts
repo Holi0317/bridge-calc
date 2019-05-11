@@ -1,4 +1,4 @@
-import {nth} from './nth'
+import { nth } from "./nth";
 
 /**
  * Sort array by putting frontIndex element to the first.
@@ -11,11 +11,11 @@ import {nth} from './nth'
  */
 export function toFront<T>(array: T[], frontIndex: number): T[] {
   if (frontIndex >= array.length) {
-    throw new Error('frontIndex is out of boundary')
+    throw new Error("frontIndex is out of boundary");
   }
-  const newArray = []
+  const newArray = [];
   for (let i = frontIndex; i < array.length + frontIndex; i++) {
-    newArray[i - frontIndex] = nth(array, i)
+    newArray[i - frontIndex] = nth(array, i);
   }
-  return newArray
+  return newArray;
 }

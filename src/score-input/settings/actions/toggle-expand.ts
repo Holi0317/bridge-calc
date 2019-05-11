@@ -1,12 +1,12 @@
-import {PANEL} from '../panel'
-import {ActionTypes} from '../../../action-types'
+import { PANEL } from "../panel";
+import { ActionTypes } from "../../../action-types";
 
 export interface IToggleExpandAction {
-  type: ActionTypes.TOGGLE_SETTING_PANEL,
+  type: ActionTypes.TOGGLE_SETTING_PANEL;
   /**
    * The panel to be toggled.
    */
-  panel: PANEL
+  panel: PANEL;
 }
 
 /**
@@ -15,5 +15,5 @@ export interface IToggleExpandAction {
  * @param panel - The panel to be toggled
  */
 export function toggleExpandAction(panel: PANEL): IToggleExpandAction {
-  return {type: ActionTypes.TOGGLE_SETTING_PANEL, panel}
+  return { type: ActionTypes.TOGGLE_SETTING_PANEL, panel };
 }

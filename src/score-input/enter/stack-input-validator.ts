@@ -1,51 +1,56 @@
-import {createSelector} from 'reselect'
-import sumBy from 'lodash-es/sumBy'
-import mapValues from 'lodash-es/mapValues'
-import last from 'lodash-es/last'
-import {TranslationFunction} from 'i18next'
-import {stageSelector} from '../selectors/stage'
-import {playerOrderSelector} from '../selectors/player-order'
-import {bidSelector} from '../selectors/bid'
-import {winSelector} from '../selectors/win'
-import {currentRoundSelector} from '../selectors/current-round'
-import {GameStage} from '../game-stage'
-import {isOk, removeUndef} from '../../utils'
-import {IPlayerMap, IRootState} from '../../types'
+import { createSelector } from "reselect";
+import sumBy from "lodash-es/sumBy";
+import mapValues from "lodash-es/mapValues";
+import last from "lodash-es/last";
+import { TranslationFunction } from "i18next";
+import { stageSelector } from "../selectors/stage";
+import { playerOrderSelector } from "../selectors/player-order";
+import { bidSelector } from "../selectors/bid";
+import { winSelector } from "../selectors/win";
+import { currentRoundSelector } from "../selectors/current-round";
+import { GameStage } from "../game-stage";
+import { isOk, removeUndef } from "../../utils";
+import { IPlayerMap, IRootState } from "../../types";
 
 export interface IStackInput {
-  bid?: IPlayerMap<number>,
-  win?: IPlayerMap<number>,
-  currentRound: number,
-  lastPlayerID: string
+  bid?: IPlayerMap<number>;
+  win?: IPlayerMap<number>;
+  currentRound: number;
+  lastPlayerID: string;
 }
 
 export interface IStackInputError {
-  bid?: IPlayerMap<string>,
-  win?: IPlayerMap<string>
+  bid?: IPlayerMap<string>;
+  win?: IPlayerMap<string>;
 }
 
-function validateBid(opts: IStackInput, t: TranslationFunction): IPlayerMap<string> | null {
+function validateBid(
+  opts: IStackInput,
+  t: TranslationFunction
+): IPlayerMap<string> | null {
   if (!opts.bid) {
-    return null
+    return null;
   }
-  const sum: number = sumBy(Object.entries(opts.bid), ([, value]) => value)
+  const sum: number = sumBy(Object.entries(opts.bid), ([, value]) => value);
   return sum === opts.currentRound
-    ? {[opts.lastPlayerID]: t('Cannot choose that')}
-    : null
+    ? { [opts.lastPlayerID]: t("Cannot choose that") }
+    : null;
 }
 
-function validateWin(opts: IStackInput, t: TranslationFunction): IPlayerMap<string> | null {
-  if (!opts.win || /* Is empty? */isOk(opts.win)) {
-    return null
+function validateWin(
+  opts: IStackInput,
+  t: TranslationFunction
+): IPlayerMap<string> | null {
+  if (!opts.win || /* Is empty? */ isOk(opts.win)) {
+    return null;
   }
-  const sum: number = sumBy(Object.entries(opts.win), ([, value]) => value)
+  const sum: number = sumBy(Object.entries(opts.win), ([, value]) => value);
   if (sum === opts.currentRound) {
-    return null
+    return null;
   }
-  const msg = sum > opts.currentRound
-    ? t('Too many stacks')
-    : t('Too less stacks')
-  return mapValues(opts.win, () => msg)
+  const msg =
+    sum > opts.currentRound ? t("Too many stacks") : t("Too less stacks");
+  return mapValues(opts.win, () => msg);
 }
 
 /**
@@ -62,25 +67,32 @@ export const stackInputValidator = createSelector(
   winSelector,
   currentRoundSelector,
   (_: IRootState, t: TranslationFunction) => t,
-  (stage: GameStage | null, playerOrder: string[], bid: IPlayerMap<number>, win: IPlayerMap<number>, currentRound: number, t: TranslationFunction) => {
+  (
+    stage: GameStage | null,
+    playerOrder: string[],
+    bid: IPlayerMap<number>,
+    win: IPlayerMap<number>,
+    currentRound: number,
+    t: TranslationFunction
+  ) => {
     if (!stage || stage === GameStage.ended) {
-      return {}
+      return {};
     }
-    const lastPlayerID = last(playerOrder)
+    const lastPlayerID = last(playerOrder);
 
     const opts = {
       bid,
       win: stage === GameStage.waitingWin ? win : {},
       currentRound,
-      lastPlayerID: lastPlayerID || ''
-    }
+      lastPlayerID: lastPlayerID || ""
+    };
     const res = {
       bid: validateBid(opts, t),
       win: validateWin(opts, t)
-    }
-    return removeUndef(res)
+    };
+    return removeUndef(res);
   }
-)
+);
 
 /**
  * Select if current stack input state is valid or not.
@@ -90,7 +102,7 @@ export const stackInputValidator = createSelector(
 export const isStackInputValid = createSelector(
   stackInputValidator,
   isOk
-)
+);
 
 /**
  * Same functionality as stackInputValidator.
@@ -102,12 +114,12 @@ export const isStackInputValid = createSelector(
 export const stackInputValidatorWithProps = createSelector(
   stackInputValidator,
   (error: IStackInputError) => {
-    const bid: IPlayerMap<string> = {}
-    const win: IPlayerMap<string> = {}
-    return ({
+    const bid: IPlayerMap<string> = {};
+    const win: IPlayerMap<string> = {};
+    return {
       bid,
       win,
       ...error
-    })
+    };
   }
-)
+);

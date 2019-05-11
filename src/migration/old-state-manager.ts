@@ -1,13 +1,13 @@
-import mapValues from 'lodash-es/mapValues'
-import {IOldGameData, OldState} from './types'
+import mapValues from "lodash-es/mapValues";
+import { IOldGameData, OldState } from "./types";
 
 const KEYS = {
-  currentRound: 'Bridge.currentRound',
-  maker: 'Bridge.maker',
-  players: 'Bridge.players',
-  state: 'Bridge.state',
-  totalRounds: 'Bridge.totalRounds'
-}
+  currentRound: "Bridge.currentRound",
+  maker: "Bridge.maker",
+  players: "Bridge.players",
+  state: "Bridge.state",
+  totalRounds: "Bridge.totalRounds"
+};
 
 /**
  * Attempt to get v1.0.0 data from localStorage.
@@ -17,14 +17,14 @@ const KEYS = {
  */
 export function retrieveOldData(): IOldGameData | null {
   const dataMap = mapValues(KEYS, key => {
-    const value = localStorage.getItem(key)
-    return value != null ? JSON.parse(value) : null
-  })
+    const value = localStorage.getItem(key);
+    return value != null ? JSON.parse(value) : null;
+  });
 
   if (Object.values(dataMap).includes(null)) {
-    return null
+    return null;
   } else {
-    return dataMap as any
+    return dataMap as any;
   }
 }
 
@@ -33,7 +33,7 @@ export function retrieveOldData(): IOldGameData | null {
  * Even the state is notStarted, this function will still return true.
  */
 export function hasOldData(): boolean {
-  return localStorage.getItem('Bridge.state') !== null
+  return localStorage.getItem("Bridge.state") !== null;
 }
 
 /**
@@ -41,14 +41,12 @@ export function hasOldData(): boolean {
  * If either one of the above condition met, false will be returned
  */
 export function isNotStarted(data: IOldGameData | null): boolean {
-  return data == null || data.state === OldState.notStarted
+  return data == null || data.state === OldState.notStarted;
 }
 
 /**
  * Remove all old data in v1.0.0 from localStorage
  */
 export function deleteOldData(): void {
-  Object.values(KEYS).forEach(key =>
-    localStorage.removeItem(key)
-  )
+  Object.values(KEYS).forEach(key => localStorage.removeItem(key));
 }

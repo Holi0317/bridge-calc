@@ -1,34 +1,40 @@
-import * as React from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {initSettingsAction} from './actions/init-settings'
-import {IRootState, Dispatch} from '../../types'
+import * as React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { initSettingsAction } from "./actions/init-settings";
+import { IRootState, Dispatch } from "../../types";
 
 const mapStateToProps = (state: IRootState) => ({
-  currentGame: state.currentGame,
-})
+  currentGame: state.currentGame
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({
-    init: initSettingsAction
-  }, dispatch)
+  bindActionCreators(
+    {
+      init: initSettingsAction
+    },
+    dispatch
+  );
 
-type stateType = ReturnType<typeof mapStateToProps>
-type dispatchType = ReturnType<typeof mapDispatchToProps>
+type stateType = ReturnType<typeof mapStateToProps>;
+type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type SettingsInitializerProps = stateType & dispatchType
+type SettingsInitializerProps = stateType & dispatchType;
 
 export class SettingsInitializerImpl extends React.Component {
-  public props: SettingsInitializerProps
+  public props: SettingsInitializerProps;
 
   public componentWillMount() {
-    const {init, currentGame} = this.props
-    init(currentGame)
+    const { init, currentGame } = this.props;
+    init(currentGame);
   }
 
   public render() {
-    return null
+    return null;
   }
 }
 
-export const SettingsInitializer = connect(mapStateToProps, mapDispatchToProps)(SettingsInitializerImpl)
+export const SettingsInitializer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SettingsInitializerImpl);

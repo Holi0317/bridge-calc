@@ -5,13 +5,13 @@ export enum GameStage {
   /**
    * Waiting for bid result in this round.
    */
-  waitingBid = 'waitingBid',
+  waitingBid = "waitingBid",
   /**
    * Waiting for win result in this round.
    */
-  waitingWin = 'waitingWin',
+  waitingWin = "waitingWin",
   /**
    * Whole game has ended.
    */
-  ended = 'ended'
+  ended = "ended"
 }

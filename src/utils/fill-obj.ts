@@ -10,12 +10,16 @@
  * @param keys - Keys need to be present in the return object
  * @param value - Value to be filled if filling action need to be done
  */
-export function fillObj<T>(obj: {[key: string]: T}, keys: string[], value: T): {[key: string]: T} {
-  const cloned = {...obj}
+export function fillObj<T>(
+  obj: { [key: string]: T },
+  keys: string[],
+  value: T
+): { [key: string]: T } {
+  const cloned = { ...obj };
   for (const key of keys) {
     if (cloned[key] == null) {
-      cloned[key] = value
+      cloned[key] = value;
     }
   }
-  return cloned
+  return cloned;
 }

@@ -1,12 +1,12 @@
-import {IPlayerMap} from '../../types'
-import {ActionTypes} from '../../action-types'
+import { IPlayerMap } from "../../types";
+import { ActionTypes } from "../../action-types";
 
 export interface IChangePlayersAction {
-  type: ActionTypes.CHANGE_PLAYERS,
-  newNames: IPlayerMap<string>,
-  maker: string,
-  rounds: number,
-  time: number
+  type: ActionTypes.CHANGE_PLAYERS;
+  newNames: IPlayerMap<string>;
+  maker: string;
+  rounds: number;
+  time: number;
 }
 
 /**
@@ -32,12 +32,16 @@ export interface IChangePlayersAction {
  * If the given rounds is less than current round, the game will end immediately.
  * The above case is considered as a bug. Prevention of this should be done on the caller side.
  */
-export function changePlayersAction(newNames: IPlayerMap<string>, maker: string, rounds: number): IChangePlayersAction {
+export function changePlayersAction(
+  newNames: IPlayerMap<string>,
+  maker: string,
+  rounds: number
+): IChangePlayersAction {
   return {
     type: ActionTypes.CHANGE_PLAYERS,
     newNames,
     maker,
     rounds,
     time: new Date().getTime()
-  }
+  };
 }

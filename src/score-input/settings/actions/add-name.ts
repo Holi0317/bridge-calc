@@ -1,17 +1,17 @@
-import {ActionTypes} from '../../../action-types'
-import {randomName} from '../../../example-names'
-import {cuid} from '../../../utils'
+import { ActionTypes } from "../../../action-types";
+import { randomName } from "../../../example-names";
+import { cuid } from "../../../utils";
 
 export interface IAddNameAction {
-  type: ActionTypes.ADD_NAME,
+  type: ActionTypes.ADD_NAME;
   /**
    * Name of the new player
    */
-  name: string,
+  name: string;
   /**
    * A new ID for him/her.
    */
-  ID: string
+  ID: string;
 }
 
 /**
@@ -20,9 +20,9 @@ export interface IAddNameAction {
  * @param name - Name of the new Player
  */
 export function addNameAction(name: string): IAddNameAction {
-  return {type: ActionTypes.ADD_NAME, name, ID: cuid()}
+  return { type: ActionTypes.ADD_NAME, name, ID: cuid() };
 }
 
 export function addRandomNameAction(): IAddNameAction {
-  return {type: ActionTypes.ADD_NAME, name: randomName(), ID: cuid()}
+  return { type: ActionTypes.ADD_NAME, name: randomName(), ID: cuid() };
 }

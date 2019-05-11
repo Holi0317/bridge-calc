@@ -1,1 +1,1 @@
-export {ToastSingleton} from './toast-singleton'
+export { ToastSingleton } from "./toast-singleton";

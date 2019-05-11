@@ -1,7 +1,7 @@
-import {createSelector} from 'reselect'
-import {isSettingsValid} from '../settings-validator'
-import {namesChangedSelector} from './names-changed'
-import {isMakerCleanSelector} from './is-maker-clean'
+import { createSelector } from "reselect";
+import { isSettingsValid } from "../settings-validator";
+import { namesChangedSelector } from "./names-changed";
+import { isMakerCleanSelector } from "./is-maker-clean";
 
 /**
  * Determine if current state allows changing player name in currentGame
@@ -19,4 +19,4 @@ export const allowNamesCommitSelector = createSelector(
   isMakerCleanSelector,
   (namesChanged: boolean, isValid: boolean, isMakerClean: boolean) =>
     namesChanged && isValid && isMakerClean
-)
+);

@@ -1,4 +1,4 @@
-import {IDropdownSource} from '../material/dropdown'
+import { IDropdownSource } from "../material/dropdown";
 
 /**
  * Create sources for react-toolbox's dropdown component.
@@ -8,5 +8,5 @@ import {IDropdownSource} from '../material/dropdown'
  * @returns - Source array to be used in React-toolbox dropdown
  */
 export function createSource(values: number[]): Array<IDropdownSource<number>> {
-  return values.map(s => ({value: s, label: s + ''}))
+  return values.map(s => ({ value: s, label: s + "" }));
 }

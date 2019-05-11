@@ -1,8 +1,8 @@
-import {ActionTypes} from '../../action-types'
+import { ActionTypes } from "../../action-types";
 
 export interface IDeleteGameAction {
-  type: ActionTypes.DELETE_GAME,
-  index: number
+  type: ActionTypes.DELETE_GAME;
+  index: number;
 }
 
 /**
@@ -10,5 +10,5 @@ export interface IDeleteGameAction {
  * @param index - index of the game in prevGame state desired to delete.
  */
 export function deleteGameAction(index: number): IDeleteGameAction {
-  return {type: ActionTypes.DELETE_GAME, index}
+  return { type: ActionTypes.DELETE_GAME, index };
 }

@@ -1,6 +1,6 @@
-import {IRootState} from '../../../types'
-import {PANEL} from '../panel'
+import { IRootState } from "../../../types";
+import { PANEL } from "../panel";
 
 export function expandedPanelSelector(state: IRootState): PANEL | null {
-  return state.gameSettings.expandedPanel
+  return state.gameSettings.expandedPanel;
 }

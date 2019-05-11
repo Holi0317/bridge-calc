@@ -1,25 +1,25 @@
-import {IPlayerMap} from '../../types'
-import {ActionTypes} from '../../action-types'
-import {cuid} from '../../utils'
+import { IPlayerMap } from "../../types";
+import { ActionTypes } from "../../action-types";
+import { cuid } from "../../utils";
 
 export interface IStartAction {
-  type: ActionTypes.START,
-  rounds: number,
-  playerNames: IPlayerMap<string>,
-  startTime: number,
-  startingRound: number,
-  id: string
+  type: ActionTypes.START;
+  rounds: number;
+  playerNames: IPlayerMap<string>;
+  startTime: number;
+  startingRound: number;
+  id: string;
 }
 
 /**
  * Helper function to Change player names array to object with random generated player ID as key.
  */
 function namesToMap(playerNames: string[]): IPlayerMap<string> {
-  const result: IPlayerMap<string> = {}
+  const result: IPlayerMap<string> = {};
   playerNames.forEach(name => {
-    result[cuid()] = name
-  })
-  return result
+    result[cuid()] = name;
+  });
+  return result;
 }
 
 /**
@@ -30,7 +30,11 @@ function namesToMap(playerNames: string[]): IPlayerMap<string> {
  * Ordering of the names will be used as the player order for first round.
  * @param startingRound - The round to start from
  */
-export function startAction(rounds: number, playerNames: string[], startingRound: number): IStartAction {
+export function startAction(
+  rounds: number,
+  playerNames: string[],
+  startingRound: number
+): IStartAction {
   return {
     type: ActionTypes.START,
     rounds,
@@ -38,5 +42,5 @@ export function startAction(rounds: number, playerNames: string[], startingRound
     startTime: new Date().getTime(),
     startingRound,
     id: cuid()
-  }
+  };
 }

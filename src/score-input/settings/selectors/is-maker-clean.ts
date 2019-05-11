@@ -1,5 +1,5 @@
-import {IRootState} from '../../../types'
+import { IRootState } from "../../../types";
 
 export function isMakerCleanSelector(state: IRootState): boolean {
-  return !state.gameSettings.makerDirty
+  return !state.gameSettings.makerDirty;
 }

@@ -1,4 +1,4 @@
-import {ActionTypes} from '../../action-types'
+import { ActionTypes } from "../../action-types";
 
 /**
  * Set entry properties on entry reducer.
@@ -6,11 +6,11 @@ import {ActionTypes} from '../../action-types'
  * override value on state.
  */
 export interface ISetEntryPropsAction {
-  type: ActionTypes.SET_ENTRY_PROPS
-  rounds?: number
-  startingRound?: number
-  importOpened?: boolean
-  playerNames?: string[]
+  type: ActionTypes.SET_ENTRY_PROPS;
+  rounds?: number;
+  startingRound?: number;
+  importOpened?: boolean;
+  playerNames?: string[];
 }
 
 /**
@@ -18,23 +18,27 @@ export interface ISetEntryPropsAction {
  * @param rounds - The rounds to be set
  */
 export function setRoundsAction(rounds: number): ISetEntryPropsAction {
-  return {type: ActionTypes.SET_ENTRY_PROPS, rounds}
+  return { type: ActionTypes.SET_ENTRY_PROPS, rounds };
 }
 
 /**
  * Set starting round for entry options.
  * @param startingRound - The starting round to be set
  */
-export function setStartingRoundAction(startingRound: number): ISetEntryPropsAction {
-  return {type: ActionTypes.SET_ENTRY_PROPS, startingRound}
+export function setStartingRoundAction(
+  startingRound: number
+): ISetEntryPropsAction {
+  return { type: ActionTypes.SET_ENTRY_PROPS, startingRound };
 }
 
 /**
  * Set import player names open state for entry options.
  * @param importOpened - The state to be set
  */
-export function setImportOpenAction(importOpened: boolean): ISetEntryPropsAction {
-  return {type: ActionTypes.SET_ENTRY_PROPS, importOpened}
+export function setImportOpenAction(
+  importOpened: boolean
+): ISetEntryPropsAction {
+  return { type: ActionTypes.SET_ENTRY_PROPS, importOpened };
 }
 
 /**
@@ -44,6 +48,8 @@ export function setImportOpenAction(importOpened: boolean): ISetEntryPropsAction
  * For appending one player only, action ENTRY/ADD_PLAYER can be used.
  * @param playerNames - The array of player names to be replaced
  */
-export function setPlayerNamesAction(playerNames: string[]): ISetEntryPropsAction {
-  return {type: ActionTypes.SET_ENTRY_PROPS, playerNames}
+export function setPlayerNamesAction(
+  playerNames: string[]
+): ISetEntryPropsAction {
+  return { type: ActionTypes.SET_ENTRY_PROPS, playerNames };
 }

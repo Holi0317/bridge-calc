@@ -1,20 +1,20 @@
-import * as React from 'react'
-import {TileLink} from './tile-link'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import classes from './tile.pcss'
+import * as React from "react";
+import { TileLink } from "./tile-link";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import classes from "./tile.pcss";
 
 export interface ITileProps {
   /** Title of the tile */
-  title: string
+  title: string;
   /** Icon for the title, in React element format */
-  icon: React.ReactNode
+  icon: React.ReactNode;
   /** Path of the link for this tile links to */
-  to?: string
+  to?: string;
   /** `true` for external (not in the scope of this app) link */
-  external?: boolean
+  external?: boolean;
   /** Same functionality as HTML anchor element's `target` props */
-  target?: string
+  target?: string;
 }
 
 /**
@@ -22,16 +22,18 @@ export interface ITileProps {
  */
 export class Tile extends React.Component<ITileProps> {
   public render() {
-    const {title, icon, external, target} = this.props
-    const to = this.props.to || '/'
+    const { title, icon, external, target } = this.props;
+    const to = this.props.to || "/";
 
     return (
       <TileLink to={to} external={external} target={target}>
         <Paper className={classes.tile} elevation={4}>
           <div className={classes.iconContainer}>{icon}</div>
-          <Typography className={classes.titleContainer} variant="title">{title}</Typography>
+          <Typography className={classes.titleContainer} variant="title">
+            {title}
+          </Typography>
         </Paper>
       </TileLink>
-    )
+    );
   }
 }

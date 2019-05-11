@@ -1,4 +1,4 @@
-import {isArrayEqual} from './is-array-equal'
+import { isArrayEqual } from "./is-array-equal";
 
 /**
  * Check if given object only contains given keys.
@@ -12,13 +12,13 @@ import {isArrayEqual} from './is-array-equal'
  * @returns - If validation pass or not
  */
 export function whitelistKeys(obj: any, keys: string[]): boolean {
-  const actualKeys = Object.keys(obj)
-  const expectedKeys = [...keys]
+  const actualKeys = Object.keys(obj);
+  const expectedKeys = [...keys];
   if (actualKeys.length !== keys.length) {
-    return false
+    return false;
   }
 
-  actualKeys.sort()
-  expectedKeys.sort()
-  return isArrayEqual(actualKeys, expectedKeys)
+  actualKeys.sort();
+  expectedKeys.sort();
+  return isArrayEqual(actualKeys, expectedKeys);
 }

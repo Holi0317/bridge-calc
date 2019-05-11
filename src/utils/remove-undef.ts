@@ -3,7 +3,9 @@
  * Does NOT mutate the original object. Instead, a shallow clone will be returned.
  */
 export function removeUndef(obj: any): any {
-  const cloned = {...obj}
-  Object.entries(cloned).forEach(([key, value]) => (value == null || value === '') && delete cloned[key])
-  return cloned
+  const cloned = { ...obj };
+  Object.entries(cloned).forEach(
+    ([key, value]) => (value == null || value === "") && delete cloned[key]
+  );
+  return cloned;
 }

@@ -4,13 +4,13 @@
  */
 export function trans(key: string, options: any) {
   if (options == null) {
-    return key
+    return key;
   }
-  let result = key
+  let result = key;
   for (const k of Object.keys(options)) {
-    const value = options[k]
-    const template = `{{${k}}}`
-    result = result.replace(template, value)
+    const value = options[k];
+    const template = `{{${k}}}`;
+    result = result.replace(template, value);
   }
-  return result
+  return result;
 }

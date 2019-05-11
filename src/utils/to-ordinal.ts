@@ -5,7 +5,7 @@
  * @param value - Number to be converted
  */
 export function toOrdinal(value: number): string {
-  const suffix = ['th', 'st', 'nd', 'rd']
-  const v = value % 100
-  return value + (suffix[(v - 20) % 10] || suffix[v] || suffix[0])
+  const suffix = ["th", "st", "nd", "rd"];
+  const v = value % 100;
+  return value + (suffix[(v - 20) % 10] || suffix[v] || suffix[0]);
 }

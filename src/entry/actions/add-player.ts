@@ -1,9 +1,9 @@
-import {randomName} from '../../example-names'
-import {ActionTypes} from '../../action-types'
+import { randomName } from "../../example-names";
+import { ActionTypes } from "../../action-types";
 
 export interface IAddPlayerAction {
-  type: ActionTypes.ADD_PLAYER,
-  payload: string
+  type: ActionTypes.ADD_PLAYER;
+  payload: string;
 }
 
 /**
@@ -11,12 +11,12 @@ export interface IAddPlayerAction {
  * @parm payload - The name of new player
  */
 export function addPlayerAction(payload: string): IAddPlayerAction {
-  return {type: ActionTypes.ADD_PLAYER, payload}
+  return { type: ActionTypes.ADD_PLAYER, payload };
 }
 
 /**
  * Add a new player with random name to entry options.
  */
 export function addRandomPlayerAction(): IAddPlayerAction {
-  return addPlayerAction(randomName())
+  return addPlayerAction(randomName());
 }

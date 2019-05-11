@@ -15,8 +15,8 @@ export const migrations = {
   2: (state: any) => ({
     ...state,
     theme: {
-      theme: 'Pink',
+      theme: "Pink",
       dark: false
     }
   })
-}
+};

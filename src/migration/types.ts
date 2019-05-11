@@ -5,23 +5,23 @@ export interface IOldGameData {
   /**
    * Current round of the game
    */
-  currentRound: number | null
+  currentRound: number | null;
   /**
    * The index of maker of this round. Points to the players array.
    */
-  maker: number | null
+  maker: number | null;
   /**
    * Array of players in the game
    */
-  players: IOldPlayers[]
+  players: IOldPlayers[];
   /**
    * Current stage of the game
    */
-  state: OldState
+  state: OldState;
   /**
    * Total number of rounds of the game
    */
-  totalRounds: number
+  totalRounds: number;
 }
 
 /**
@@ -31,21 +31,21 @@ export interface IOldPlayers {
   /**
    * Bid for the current round.
    */
-  bid: string | null
+  bid: string | null;
   /**
    * Win for the current round.
    */
-  win: string | null
+  win: string | null;
   /**
    * Score of each round.
    * Index of the array represent the round number.
    * While value is the score this player got on that round.
    */
-  score: number[]
+  score: number[];
   /**
    * Name of this player
    */
-  name: string
+  name: string;
 }
 
 /**

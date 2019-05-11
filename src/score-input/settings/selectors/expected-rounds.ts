@@ -1,6 +1,6 @@
-import {createSelector} from 'reselect'
-import {namesSelector} from './names'
-import {IPlayerMap} from '../../../types'
+import { createSelector } from "reselect";
+import { namesSelector } from "./names";
+import { IPlayerMap } from "../../../types";
 
 /**
  * Calculate maximum possible rounds for current number of players in game settings.
@@ -9,10 +9,10 @@ import {IPlayerMap} from '../../../types'
 export const expectedRoundsSelector = createSelector(
   namesSelector,
   (names: IPlayerMap<string>): number => {
-    const length = Object.keys(names).length
+    const length = Object.keys(names).length;
     if (length < 2 || length > 52) {
-      return 0
+      return 0;
     }
-    return Math.floor(52 / length)
+    return Math.floor(52 / length);
   }
-)
+);

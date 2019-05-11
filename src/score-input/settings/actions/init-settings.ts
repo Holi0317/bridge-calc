@@ -1,12 +1,12 @@
-import {ActionTypes} from '../../../action-types'
-import {GameState} from '../../reducer'
+import { ActionTypes } from "../../../action-types";
+import { GameState } from "../../reducer";
 
 export interface IInitSettingsAction {
-  type: ActionTypes.INIT_SETTINGS,
+  type: ActionTypes.INIT_SETTINGS;
   /**
    * Game state to be followed for setting settings state.
    */
-  state: GameState
+  state: GameState;
 }
 
 /**
@@ -15,5 +15,5 @@ export interface IInitSettingsAction {
  * @param state - Game state of on-going session
  */
 export function initSettingsAction(state: GameState): IInitSettingsAction {
-  return {type: ActionTypes.INIT_SETTINGS, state}
+  return { type: ActionTypes.INIT_SETTINGS, state };
 }

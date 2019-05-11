@@ -1,5 +1,5 @@
-import {GameState} from '../score-input/reducer'
-import {PrevGameEntry} from './types'
+import { GameState } from "../score-input/reducer";
+import { PrevGameEntry } from "./types";
 
 /**
  * Convert a game state to prev game object.
@@ -8,14 +8,16 @@ import {PrevGameEntry} from './types'
  */
 export function gameStateToPrevGame(gameState: GameState): PrevGameEntry {
   if (gameState == null) {
-    throw new TypeError('[Prev games converter] game state must not be null for storage')
+    throw new TypeError(
+      "[Prev games converter] game state must not be null for storage"
+    );
   }
-  return gameState
+  return gameState;
 }
 
 /**
  * Convert a prev game object to game state.
  */
 export function prevGameToGameState(prevGame: PrevGameEntry): GameState {
-  return prevGame
+  return prevGame;
 }

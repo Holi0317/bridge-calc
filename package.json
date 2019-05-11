@@ -22,7 +22,7 @@
     "lint:js:fix": "npm run lint:js -- --fix",
     "lint:ts": "tslint -c tslint.json -p tsconfig.json -t stylish",
     "lint:ts:fix": "npm run lint:ts -- --fix",
-    "prettier": "prettier --ignore-path .gitignore -l \"**/*.{js,scss,sass,css,json,md,yml,yaml,pcss}\"",
+    "prettier": "prettier --ignore-path .gitignore -l \"**/*.{js,scss,sass,css,json,md,yml,yaml,pcss,ts,tsx}\"",
     "prettier:fix": "npm run prettier -- --write",
     "clean": "del-cli dist .tmp",
     "build": "npm run build:prod",
