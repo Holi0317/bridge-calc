@@ -1,7 +1,8 @@
 import i18next from "i18next";
-import * as Cache from "i18next-localstorage-cache";
-import * as LngDetector from "i18next-browser-languagedetector";
-import * as XHR from "i18next-xhr-backend";
+import Backend from "i18next-chained-backend";
+import LocalStorageBackend from "i18next-localstorage-backend";
+import LngDetector from "i18next-browser-languagedetector";
+import XHR from "i18next-xhr-backend";
 import { initReactI18next } from "react-i18next";
 import { languages } from "./languages";
 
@@ -16,18 +17,23 @@ function loadLocales(url: string, _options: any, callback: any) {
 }
 
 export const i18n = i18next
-  .use(XHR)
-  .use(Cache)
+  .use(Backend)
   .use(LngDetector)
   .use(initReactI18next)
   .init({
     backend: {
-      ajax: loadLocales,
-      loadPath: "{{lng}}",
-      parse: (data: any) => data
-    },
-    cache: {
-      enabled: process.env.NODE_ENV === "production"
+      backends: [LocalStorageBackend, XHR],
+      backendOptions: [
+        {
+          expirationTime:
+            process.env.NODE_ENV === "production" ? 7 * 24 * 60 * 60 * 1000 : 1
+        },
+        {
+          ajax: loadLocales,
+          loadPath: "{{lng}}",
+          parse: (data: any) => data
+        }
+      ]
     },
     debug: process.env.NODE_ENV === "development",
     defaultNS: "default",
