@@ -4,20 +4,8 @@
   <meta charset="utf-8">
   <title>Bridge calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>
-    // Dynamic injection of base element
-    (() => {
-      const hostname = location.hostname.split('.')
-      const baseEl = document.createElement('base')
-      if (hostname[2] === 'io' && (hostname[1] === 'github' || hostname[1] === 'gitlab')) {
-        // Hosted on git(hub|lab) page
-        baseEl.href = '/bridge-calc/'
-      } else {
-        baseEl.href = '/'
-      }
-      document.head.appendChild(baseEl)
-    })()
-  </script>
+  <!-- Dynamic injection of base element. Minified by hand -->
+  <script>(()=>{const hostname=location.hostname.split('.');const baseEl=document.createElement('base');if(hostname[2]==='io'&&(hostname[1]==='github'||hostname[1]==='gitlab')){baseEl.href='/bridge-calc/'}else{baseEl.href='/'}document.head.appendChild(baseEl)})();</script>
 
   <link rel="manifest" href="manifest.json">
   <link rel="shortcut icon" href="icons/icon-16.png" type="image/png">
@@ -33,12 +21,7 @@
   </style>
 
   <!-- Body styling -->
-  <style>
-body {
-  margin: 0;
-  background-color: var(--bg-color, white);
-}
-  </style>
+  <style>body {margin: 0;background-color: var(--bg-color, white);}</style>
 </head>
 <body>
 <div class="root">
