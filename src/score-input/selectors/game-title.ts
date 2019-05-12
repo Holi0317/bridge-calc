@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { TranslationFunction } from "i18next";
+import i18next from "i18next";
 import { stageSelector } from "./stage";
 import { currentRoundSelector } from "./current-round";
 import { roundsSelector } from "./rounds";
@@ -14,12 +14,12 @@ export const gameTitleSelector = createSelector(
   stageSelector,
   currentRoundSelector,
   roundsSelector,
-  (_: IRootState, t: TranslationFunction) => t,
+  (_: IRootState, t: i18next.TFunction) => t,
   (
     stage: GameStage | null,
     currentRound: number | null,
     rounds: number | null,
-    t: TranslationFunction
+    t: i18next.TFunction
   ): string => {
     if (stage == null) {
       return "";

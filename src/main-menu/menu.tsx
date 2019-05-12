@@ -1,6 +1,5 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { Container } from "../material/container";
@@ -12,7 +11,7 @@ import ActionInfo from "@material-ui/icons/Info";
 import ActionBugReport from "@material-ui/icons/BugReport";
 import { Tile } from "./tile";
 import { showContinueSelector } from "./show-continue-selector";
-import { IRootState, ITranslateMixin } from "../types";
+import { IRootState } from "../types";
 
 const mapStateToProps = (state: IRootState) => ({
   showContinue: showContinueSelector(state)
@@ -20,9 +19,11 @@ const mapStateToProps = (state: IRootState) => ({
 
 type stateType = ReturnType<typeof mapStateToProps>;
 
-type MenuProps = stateType & ITranslateMixin;
+type MenuProps = stateType;
 
-export function MenuImpl({ showContinue, t }: MenuProps) {
+export function MenuImpl({ showContinue }: MenuProps) {
+  const { t } = useTranslation();
+
   return (
     <Container>
       {showContinue ? (
@@ -83,7 +84,4 @@ export function MenuImpl({ showContinue, t }: MenuProps) {
   );
 }
 
-export const Menu = flowRight(
-  translate(),
-  connect(mapStateToProps)
-)(MenuImpl);
+export const Menu = connect(mapStateToProps)(MenuImpl);

@@ -2,11 +2,11 @@ import * as React from "react";
 import { bindActionCreators } from "redux";
 import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { NameInputList } from "../name-input-list";
 import { entryOptionsValidator } from "./entry-validator";
 import { setPlayerNamesAction } from "./actions/set-entry-props";
-import { Dispatch, IRootState, ITranslateMixin } from "../types";
+import { Dispatch, IRootState } from "../types";
 
 // Getters and setters for name input list element
 export const getter = (val: string) => val;
@@ -16,7 +16,7 @@ export const setter = (newVal: string) => newVal;
 export const errorGetter = (error: string[], _: string, index: number) =>
   error[index];
 
-const mapStateToProps = (state: IRootState, { t }: ITranslateMixin) => ({
+const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
   playerNames: state.entry.playerNames,
   playerNamesError: entryOptionsValidator(state, t).playerNames
 });
@@ -47,7 +47,7 @@ export function EntryPlayerListImpl({
 }
 
 export const EntryPlayerList = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

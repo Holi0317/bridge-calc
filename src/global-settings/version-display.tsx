@@ -1,6 +1,5 @@
 import * as React from "react";
-import { translate } from "react-i18next";
-import { ITranslateMixin } from "../types";
+import { useTranslation } from "react-i18next";
 import Typography from "@material-ui/core/Typography";
 import classes from "./version-display.pcss";
 
@@ -8,7 +7,9 @@ import classes from "./version-display.pcss";
 declare const VERSION: string;
 declare const HASH: string;
 
-export function VersionDisplayImpl({ t }: ITranslateMixin) {
+export function VersionDisplay() {
+  const { t } = useTranslation();
+
   return (
     <div className={classes.text}>
       <Typography variant="caption">
@@ -26,5 +27,3 @@ export function VersionDisplayImpl({ t }: ITranslateMixin) {
     </div>
   );
 }
-
-export const VersionDisplay = translate()(VersionDisplayImpl);

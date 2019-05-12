@@ -1,5 +1,5 @@
 import * as React from "react";
-import { translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -8,15 +8,14 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import { GameState } from "../reducer";
 import { computeData } from "./compute-data";
-import { ITranslateMixin } from "../../types";
 import classes from "./scoreboard.pcss";
 
-interface IScoreboardTableProps extends ITranslateMixin {
+interface IScoreboardTableProps {
   entry: NonNullable<GameState>;
   mini: boolean;
 }
 
-export function ScoreboardTableImpl({ entry, mini, t }: IScoreboardTableProps) {
+export function ScoreboardTable({ entry, mini }: IScoreboardTableProps) {
   const {
     names,
     scores,
@@ -25,6 +24,7 @@ export function ScoreboardTableImpl({ entry, mini, t }: IScoreboardTableProps) {
     ranks,
     endedRounds
   } = computeData(entry);
+  const { t } = useTranslation();
 
   return (
     <Paper className={classes.tableContainer}>
@@ -45,7 +45,7 @@ export function ScoreboardTableImpl({ entry, mini, t }: IScoreboardTableProps) {
               <TableCell>{t("Previous round score")}</TableCell>
               {Object.entries(prevScores).map(([playerID, score]) => (
                 <TableCell
-                  numeric
+                  align="right"
                   key={playerID}
                   className={score < 0 ? classes.errorText : ""}
                 >
@@ -59,7 +59,7 @@ export function ScoreboardTableImpl({ entry, mini, t }: IScoreboardTableProps) {
                 <TableCell>{t("Round {{n}}", { n: i })}</TableCell>
                 {Object.entries(scores).map(([playerID, score]) => (
                   <TableCell
-                    numeric
+                    align="right"
                     key={playerID}
                     className={score[i - 1] < 0 ? classes.errorText : ""}
                   >
@@ -75,7 +75,7 @@ export function ScoreboardTableImpl({ entry, mini, t }: IScoreboardTableProps) {
             <TableCell>{t("Total score")}</TableCell>
             {Object.entries(totalScores).map(([playerID, total]) => (
               <TableCell
-                numeric
+                align="right"
                 key={playerID}
                 className={total < 0 ? classes.errorText : ""}
               >
@@ -88,7 +88,7 @@ export function ScoreboardTableImpl({ entry, mini, t }: IScoreboardTableProps) {
           <TableRow>
             <TableCell>{t("Rank")}</TableCell>
             {Object.entries(ranks).map(([playerID, rank]) => (
-              <TableCell numeric key={playerID}>
+              <TableCell align="right" key={playerID}>
                 {rank}
               </TableCell>
             ))}
@@ -98,5 +98,3 @@ export function ScoreboardTableImpl({ entry, mini, t }: IScoreboardTableProps) {
     </Paper>
   );
 }
-
-export const ScoreboardTable = translate()(ScoreboardTableImpl);

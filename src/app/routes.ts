@@ -14,6 +14,7 @@ import { titleAugment } from "../utils";
 export interface IRoute extends RouteProps {
   title: React.ComponentType<any>;
   name: string;
+  path?: string;
 }
 
 export const routes: IRoute[] = [

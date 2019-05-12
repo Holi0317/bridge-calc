@@ -1,9 +1,8 @@
 import * as React from "react";
-import { translate } from "react-i18next";
-import { ITranslateMixin } from "../types";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Ouch } from "./ouch";
 
-interface IErrorBoundaryProps extends ITranslateMixin {
+interface IErrorBoundaryProps extends WithTranslation {
   children: React.ReactNode;
 }
 interface IErrorBoundaryState {
@@ -32,4 +31,4 @@ export class ErrorBoundaryImpl extends React.Component {
   }
 }
 
-export const ErrorBoundary = translate()(ErrorBoundaryImpl);
+export const ErrorBoundary = withTranslation()(ErrorBoundaryImpl);

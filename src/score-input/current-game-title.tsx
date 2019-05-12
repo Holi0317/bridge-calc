@@ -1,11 +1,11 @@
 import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { gameTitleSelector } from "./selectors/game-title";
-import { IRootState, ITranslateMixin } from "../types";
+import { IRootState } from "../types";
 
-const mapStateToProps = (state: IRootState, { t }: ITranslateMixin) => ({
+const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
   title: gameTitleSelector(state, t)
 });
 
@@ -19,6 +19,6 @@ export class CurrentGameTitleImpl extends React.Component {
 }
 
 export const CurrentGameTitle = flowRight(
-  translate(),
+  withTranslation(),
   connect(mapStateToProps)
 )(CurrentGameTitleImpl);

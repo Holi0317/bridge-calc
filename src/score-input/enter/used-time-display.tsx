@@ -1,9 +1,9 @@
 import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { endTimeSelector, startTimeSelector } from "../selectors/time";
-import { IRootState, ITranslateMixin } from "../../types";
+import { IRootState } from "../../types";
 import Typography from "@material-ui/core/Typography/Typography";
 
 function msToTime(milliseconds: number) {
@@ -33,7 +33,7 @@ const mapStateToProps = (state: IRootState) => ({
 type stateType = ReturnType<typeof mapStateToProps>;
 
 export class UsedTimeDisplayImpl extends React.Component {
-  public props: stateType & ITranslateMixin;
+  public props: stateType & WithTranslation;
 
   public state = {
     time: "00:00:00"
@@ -84,6 +84,6 @@ export class UsedTimeDisplayImpl extends React.Component {
 }
 
 export const UsedTimeDisplay = flowRight(
-  translate(),
+  withTranslation(),
   connect(mapStateToProps)
 )(UsedTimeDisplayImpl);

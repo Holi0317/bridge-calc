@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { TranslationFunction } from "i18next";
+import i18next from "i18next";
 import mapValues from "lodash-es/mapValues";
 import { namesSelector } from "./selectors/names";
 import { dupe, isOk, removeUndef } from "../../utils";
@@ -16,15 +16,15 @@ export interface ISettingsError {
 
 function validateNames(
   names: IPlayerMap<string>,
-  t: TranslationFunction
+  t: i18next.TFunction
 ): IPlayerMap<string> {
   const duplicates = dupe(Object.values(names));
   const res: IPlayerMap<string | null> = mapValues(names, (name: string) => {
     if (name === "") {
-      return t("Name cannot be empty");
+      return t("Name cannot be empty")!;
     }
     if (duplicates.includes(name)) {
-      return t("Name cannot be repeated");
+      return t("Name cannot be repeated")!;
     }
     return null;
   });
@@ -35,19 +35,19 @@ function validateMisc(
   names: IPlayerMap<string>,
   currentRound: number,
   expectedRounds: number,
-  t: TranslationFunction
+  t: i18next.TFunction
 ): string | null {
   const size = Object.keys(names).length;
   if (size < 2) {
-    return t("At least 2 players is required for a game");
+    return t("At least 2 players is required for a game")!;
   }
   if (size > playerUpperLimit) {
     return t("Too many players. Upper limit is {{limit}} players.", {
       limit: playerUpperLimit
-    });
+    })!;
   }
   if (expectedRounds < currentRound) {
-    return t("Impossible to continue the game due to too many players");
+    return t("Impossible to continue the game due to too many players")!;
   }
   return null;
 }
@@ -62,12 +62,12 @@ export const settingsValidator = createSelector(
   namesSelector,
   currentRoundSelector,
   expectedRoundsSelector,
-  (_: IRootState, t: TranslationFunction) => t,
+  (_: IRootState, t: i18next.TFunction) => t,
   (
     names: IPlayerMap<string>,
     currentRound: number,
     expectedRounds: number,
-    t: TranslationFunction
+    t: i18next.TFunction
   ): ISettingsError => ({
     names: validateNames(names, t),
     misc: validateMisc(names, currentRound, expectedRounds, t)

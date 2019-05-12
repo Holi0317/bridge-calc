@@ -1,8 +1,7 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
 import { RouteComponentProps } from "react-router";
 import { withRouter } from "react-router-dom";
-import { translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -11,12 +10,12 @@ import Tooltip from "@material-ui/core/Tooltip";
 import ActionHelp from "@material-ui/icons/Help";
 import NavigationArrowBack from "@material-ui/icons/ArrowBack";
 import { Titles } from "./titles";
-import { ITranslateMixin } from "../types";
 import classes from "./navbar.pcss";
 
-type NavbarProps = RouteComponentProps<any> & ITranslateMixin;
+type NavbarProps = RouteComponentProps<any>;
 
-export function NavbarImpl({ t, history, location }: NavbarProps) {
+export function NavbarImpl({ history, location }: NavbarProps) {
+  const { t } = useTranslation();
   const hasBackBtn = location.pathname !== "/";
 
   return (
@@ -51,7 +50,4 @@ export function NavbarImpl({ t, history, location }: NavbarProps) {
   );
 }
 
-export const Navbar = flowRight(
-  withRouter,
-  translate()
-)(NavbarImpl);
+export const Navbar = withRouter(NavbarImpl);

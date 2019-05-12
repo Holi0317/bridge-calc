@@ -8,7 +8,6 @@ const cssLoader = {
     modules: true,
     sourceMap: true,
     importLoaders: 1,
-    minimize: ENV === "production",
     localIdentName:
       ENV === "production"
         ? "[hash:base64:5]"

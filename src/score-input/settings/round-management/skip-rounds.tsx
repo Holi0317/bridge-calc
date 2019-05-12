@@ -1,6 +1,6 @@
 import * as React from "react";
 import flowRight from "lodash-es/flowRight";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Button from "@material-ui/core/Button";
@@ -9,7 +9,7 @@ import { initSettingsAction } from "../actions/init-settings";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { remainingRoundsSelector } from "../../selectors/remaining-rounds";
 import { currentRoundSelector } from "../../selectors/current-round";
-import { IRootState, ITranslateMixin, Dispatch } from "../../../types";
+import { IRootState, Dispatch } from "../../../types";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import classes from "../settings.pcss";
 
@@ -33,7 +33,7 @@ type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 export class SkipRoundsImpl extends React.Component {
-  public props: stateType & dispatchType & ITranslateMixin;
+  public props: stateType & dispatchType & WithTranslation;
 
   public render() {
     const { remainingRounds, t } = this.props;
@@ -96,7 +96,7 @@ export class SkipRoundsImpl extends React.Component {
 }
 
 export const SkipRounds = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

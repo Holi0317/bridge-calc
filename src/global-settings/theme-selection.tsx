@@ -1,8 +1,7 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -12,7 +11,7 @@ import { selectedThemeSelector } from "../theme/selectors/selected-theme";
 import { isDarkThemeSelector } from "../theme/selectors/is-dark-theme";
 import { setThemeAction } from "../theme/actions/set-theme";
 import { toggleDarkAction } from "../theme/actions/toggle-dark";
-import { IRootState, ITranslateMixin, Dispatch } from "../types";
+import { IRootState, Dispatch } from "../types";
 
 const mapStateToProps = (state: IRootState) => ({
   selectedTheme: selectedThemeSelector(state),
@@ -31,15 +30,16 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type ThemeSelectionProps = stateType & dispatchType & ITranslateMixin;
+type ThemeSelectionProps = stateType & dispatchType;
 
 export function ThemeSelectionImpl({
   selectedTheme,
   dark,
   setTheme,
-  toggleDark,
-  t
+  toggleDark
 }: ThemeSelectionProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       <Dropdown
@@ -60,10 +60,7 @@ export function ThemeSelectionImpl({
   );
 }
 
-export const ThemeSelection = flowRight(
-  translate(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export const ThemeSelection = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(ThemeSelectionImpl);

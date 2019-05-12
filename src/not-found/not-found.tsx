@@ -1,11 +1,12 @@
 import * as React from "react";
-import { translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import AlertError from "@material-ui/icons/Error";
-import { ITranslateMixin } from "../types";
 import classes from "./not-found.pcss";
 
-export function NotFoundImpl({ t }: ITranslateMixin) {
+export function NotFound() {
+  const { t } = useTranslation();
+
   return (
     <div className={classes.container}>
       <AlertError className={classes.icon} />
@@ -16,5 +17,3 @@ export function NotFoundImpl({ t }: ITranslateMixin) {
     </div>
   );
 }
-
-export const NotFound = translate()(NotFoundImpl);

@@ -2,7 +2,6 @@ const merge = require("webpack-merge");
 const path = require("path");
 const webpack = require("webpack");
 const env = require("./webpack-cfg/env");
-const babel = require("./webpack-cfg/babel");
 const typescript = require("./webpack-cfg/typescript");
 const htmlLoader = require("./webpack-cfg/html-loader");
 const postCssLoader = require("./webpack-cfg/postcss");
@@ -35,7 +34,6 @@ module.exports = merge.smart(
   alias,
   splitChunks,
 
-  babel,
   typescript,
   htmlLoader,
   postCssLoader,

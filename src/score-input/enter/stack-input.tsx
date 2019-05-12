@@ -2,7 +2,7 @@ import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Typography from "@material-ui/core/Typography";
 import { Dropdown } from "../../material/dropdown";
 import { GameStage } from "../game-stage";
@@ -16,10 +16,10 @@ import { bidStackInputSourceSelector } from "../selectors/bid-stack-input-source
 import { winStackInputSourceSelector } from "../selectors/win-stack-input-source";
 import { setBidAction } from "../actions/set-bid";
 import { setWinAction } from "../actions/set-win";
-import { IRootState, ITranslateMixin, Dispatch } from "../../types";
+import { IRootState, Dispatch } from "../../types";
 import classes from "./stack-input.pcss";
 
-const mapStateToProps = (state: IRootState, { t }: ITranslateMixin) => ({
+const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
   bidDisabled: stageSelector(state) !== GameStage.waitingBid,
   winDisabled: stageSelector(state) !== GameStage.waitingWin,
   playerOrder: playerOrderSelector(state),
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type StackInputProps = stateType & dispatchType & ITranslateMixin;
+type StackInputProps = stateType & dispatchType & WithTranslation;
 
 export class StackInputImpl extends React.Component {
   public props: StackInputProps;
@@ -63,15 +63,17 @@ export class StackInputImpl extends React.Component {
             <tr>
               <th />
               {playerOrder.map(playerID => (
-                <Typography component="th" key={playerID}>
-                  {names[playerID]}
-                </Typography>
+                <th key={playerID}>
+                  <Typography component="span">{names[playerID]}</Typography>
+                </th>
               ))}
             </tr>
           </thead>
           <tbody className={classes.body}>
             <tr>
-              <Typography component="td">{t("Bid")}</Typography>
+              <td>
+                <Typography component="span">{t("Bid")}</Typography>
+              </td>
               {playerOrder.map(playerID => (
                 <td key={playerID}>
                   <Dropdown
@@ -87,7 +89,9 @@ export class StackInputImpl extends React.Component {
             </tr>
 
             <tr>
-              <Typography component="td">{t("Win")}</Typography>
+              <td>
+                <Typography component="span">{t("Win")}</Typography>
+              </td>
               {playerOrder.map(playerID => (
                 <td key={playerID}>
                   <Dropdown
@@ -129,7 +133,7 @@ export class StackInputImpl extends React.Component {
 }
 
 export const StackInput = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

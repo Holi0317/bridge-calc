@@ -1,6 +1,5 @@
 import * as React from "react";
-import { translate } from "react-i18next";
-import { ITranslateMixin } from "../types";
+import { useTranslation } from "react-i18next";
 import classes from "./ouch.pcss";
 
 function reload() {
@@ -11,7 +10,9 @@ interface IOuchProps {
   error: Error;
 }
 
-export function OuchImpl({ error, t }: IOuchProps & ITranslateMixin) {
+export function Ouch({ error }: IOuchProps) {
+  const { t } = useTranslation();
+
   return (
     <div className={classes.centerContainer}>
       <div className={classes.sadFace}>:-(</div>
@@ -25,5 +26,3 @@ export function OuchImpl({ error, t }: IOuchProps & ITranslateMixin) {
     </div>
   );
 }
-
-export const Ouch = translate()(OuchImpl);

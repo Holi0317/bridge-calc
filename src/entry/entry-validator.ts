@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { TranslationFunction } from "i18next";
+import i18next from "i18next";
 import { dupe, removeUndef, isOk } from "../utils";
 import { IRootState } from "../types";
 
@@ -12,21 +12,21 @@ export interface IEntryError {
 
 function validateMisc(
   playerNames: string[],
-  t: TranslationFunction
+  t: i18next.TFunction
 ): string | null {
   if (playerNames.length < 2) {
-    return t("At least 2 players is required for a game");
+    return t("At least 2 players is required for a game")!;
   } else if (playerNames.length > playerUpperLimit) {
     return t("Too many players. Upper limit is {{limit}} players.", {
       limit: playerUpperLimit
-    });
+    })!;
   }
   return null;
 }
 
 function validatePlayerName(
   rawNames: string[],
-  t: TranslationFunction
+  t: i18next.TFunction
 ): string[] | null {
   const duplicates = dupe(rawNames);
   const playerNames = rawNames.map(p =>
@@ -49,8 +49,8 @@ function validatePlayerName(
  */
 export const entryOptionsValidator = createSelector(
   (state: IRootState) => state.entry.playerNames,
-  (_: IRootState, t: TranslationFunction) => t,
-  (playerNames: string[], t: TranslationFunction): IEntryError => {
+  (_: IRootState, t: i18next.TFunction) => t,
+  (playerNames: string[], t: i18next.TFunction): IEntryError => {
     const res = {
       misc: validateMisc(playerNames, t),
       playerNames: validatePlayerName(playerNames, t)

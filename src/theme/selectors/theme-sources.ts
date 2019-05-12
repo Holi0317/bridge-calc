@@ -1,4 +1,4 @@
-import { TranslationFunction } from "i18next";
+import i18next from "i18next";
 import { themes } from "../color-presets";
 import { IDropdownSource } from "../../material/dropdown";
 
@@ -9,7 +9,7 @@ import { IDropdownSource } from "../../material/dropdown";
  * but a translate function argument.
  */
 export function themeSourcesSelector(
-  t: TranslationFunction
+  t: i18next.TFunction
 ): Array<IDropdownSource<string>> {
   return Array.from(themes.keys()).map(theme => ({
     value: theme,

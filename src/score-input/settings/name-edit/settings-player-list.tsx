@@ -2,7 +2,7 @@ import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { NameInputList } from "../../../name-input-list";
 import {
   nameInputListSourceSelector,
@@ -10,12 +10,7 @@ import {
 } from "../selectors/name-input-list-source";
 import { setNamesFromArrayAction } from "../actions/set-names";
 import { settingsValidator } from "../settings-validator";
-import {
-  IPlayerMap,
-  IRootState,
-  ITranslateMixin,
-  Dispatch
-} from "../../../types";
+import { IPlayerMap, IRootState, Dispatch } from "../../../types";
 
 /**
  * Get player name from PlayerName type.
@@ -34,7 +29,7 @@ const setter = (newVal: string, [ID]: PlayerName): PlayerName => [ID, newVal];
  */
 const errorGetter = (error: IPlayerMap<string>, [ID]: PlayerName) => error[ID];
 
-const mapStateToProps = (state: IRootState, { t }: ITranslateMixin) => ({
+const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
   names: nameInputListSourceSelector(state),
   errors: settingsValidator(state, t).names
 });
@@ -50,7 +45,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type SettingsPlayerListProps = stateType & dispatchType & ITranslateMixin;
+type SettingsPlayerListProps = stateType & dispatchType & WithTranslation;
 
 export function SettingsPlayerListImpl({
   names,
@@ -70,7 +65,7 @@ export function SettingsPlayerListImpl({
 }
 
 export const SettingsPlayerList = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

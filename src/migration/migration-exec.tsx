@@ -1,7 +1,7 @@
 import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { bindActionCreators } from "redux";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
@@ -12,7 +12,7 @@ import {
   isNotStarted
 } from "./old-state-manager";
 import { migrateOldState } from "./converter";
-import { ITranslateMixin, Dispatch } from "../types";
+import { Dispatch } from "../types";
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 export class MigrationExecImpl extends React.Component {
-  public props: dispatchType & ITranslateMixin;
+  public props: dispatchType & WithTranslation;
 
   public componentDidMount() {
     setTimeout(() => {
@@ -67,7 +67,7 @@ export class MigrationExecImpl extends React.Component {
 }
 
 export const MigrationExec = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

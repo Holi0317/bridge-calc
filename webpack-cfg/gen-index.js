@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const PreloadWebpackPlugin = require("preload-webpack-plugin");
-const { transform } = require("babel-core");
+const { transform } = require("@babel/core");
 const { ENV } = require("./paths");
 
 const babelOpt = {
@@ -27,17 +26,5 @@ const htmlSettings = {
 };
 
 module.exports = {
-  plugins: [
-    new HtmlWebpackPlugin(htmlSettings),
-
-    // Tl;dr: prefetch has lower priority than preload
-    new PreloadWebpackPlugin({
-      rel: "preload",
-      include: ["main", "vendor"]
-    }),
-    new PreloadWebpackPlugin({
-      rel: "prefetch",
-      include: "asyncChunks"
-    })
-  ]
+  plugins: [new HtmlWebpackPlugin(htmlSettings)]
 };

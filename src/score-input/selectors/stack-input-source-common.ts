@@ -13,7 +13,7 @@ import { IDropdownSource } from "../../material/dropdown";
 export const stackInputSourceCommonSelector = createSelector(
   stageSelector,
   playerIDSelector,
-  (stage: GameStage | null, playerID: string[]) => {
+  (stage: GameStage | null, playerID: string[]): StackInputSourceCommon => {
     // No option for null state
     if (stage == null) {
       return {};
@@ -24,6 +24,8 @@ export const stackInputSourceCommonSelector = createSelector(
       const source = [{ value: 0, label: "0", disabled: true }];
       return fillObj({}, playerID, source);
     }
+
+    return null;
   }
 );
 

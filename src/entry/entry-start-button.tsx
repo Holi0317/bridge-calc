@@ -1,16 +1,16 @@
 import * as React from "react";
 import { bindActionCreators } from "redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router";
 import Button from "@material-ui/core/Button";
 import flowRight from "lodash-es/flowRight";
 import { entryOptionsValidator, isEntryOptionsValid } from "./entry-validator";
 import { startAction } from "../score-input/actions/start";
-import { IRootState, ITranslateMixin, Dispatch } from "../types";
+import { IRootState, Dispatch } from "../types";
 import classes from "./entry.pcss";
 
-const mapStateToProps = (state: IRootState, { t }: ITranslateMixin) => ({
+const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
   rounds: state.entry.rounds,
   playerNames: state.entry.playerNames,
   startingRound: state.entry.startingRound,
@@ -27,7 +27,7 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>;
 type EntryStartButtonProps = stateType &
   dispatchType &
   RouteComponentProps<any> &
-  ITranslateMixin;
+  WithTranslation;
 
 export class EntryStartButtonImpl extends React.PureComponent {
   public props: EntryStartButtonProps;
@@ -58,7 +58,7 @@ export class EntryStartButtonImpl extends React.PureComponent {
 
 export const EntryStartButton = flowRight(
   withRouter,
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

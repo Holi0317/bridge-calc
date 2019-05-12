@@ -2,7 +2,7 @@ import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -15,7 +15,7 @@ import { expectedRoundsSelector } from "../selectors/expected-rounds";
 import { changePlayersAction } from "../../actions/change-players";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { initSettingsAction } from "../actions/init-settings";
-import { IRootState, ITranslateMixin, Dispatch } from "../../../types";
+import { IRootState, Dispatch } from "../../../types";
 
 const mapStateToProps = (state: IRootState) => ({
   currentGame: state.currentGame,
@@ -50,7 +50,7 @@ export class MutateNameDialogImpl extends React.Component {
   public props: IMutateNameDialogProps &
     stateType &
     dispatchType &
-    ITranslateMixin;
+    WithTranslation;
   public state: IMutateNameDialogState = {
     chosenMaker: ""
   };
@@ -115,7 +115,7 @@ export class MutateNameDialogImpl extends React.Component {
 }
 
 export const MutateNameDialog = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

@@ -1,10 +1,10 @@
 import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { bindActionCreators } from "redux";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
-import { ITranslateMixin, Dispatch } from "../types";
+import { Dispatch } from "../types";
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type SWRegProps = dispatchType & ITranslateMixin;
+type SWRegProps = dispatchType & WithTranslation;
 
 class SWRegImpl extends React.Component {
   public props: SWRegProps;
@@ -73,7 +73,7 @@ class SWRegImpl extends React.Component {
 }
 
 export const SWReg = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

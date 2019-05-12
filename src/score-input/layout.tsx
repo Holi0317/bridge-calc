@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Route, withRouter, matchPath } from "react-router-dom";
 import flowRight from "lodash-es/flowRight";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { routes } from "./routes";
-import { ITranslateMixin } from "../types";
 import { RouteComponentProps } from "react-router";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
@@ -17,7 +16,7 @@ function getActive(pathname: string): number {
   return index === -1 ? 0 : index;
 }
 
-type LayoutProps = RouteComponentProps<any> & ITranslateMixin;
+type LayoutProps = RouteComponentProps<any> & WithTranslation;
 
 export class LayoutImpl extends React.Component {
   public props: LayoutProps;
@@ -70,7 +69,7 @@ export class LayoutImpl extends React.Component {
 
   private tabChange = (_event: any, routeIndex: number) => {
     const { path } = routes[routeIndex];
-    if (path) {
+    if (path != null) {
       this.props.history.push(path);
     }
   };
@@ -84,5 +83,5 @@ export class LayoutImpl extends React.Component {
 
 export const Layout = flowRight(
   withRouter,
-  translate()
+  withTranslation()
 )(LayoutImpl);

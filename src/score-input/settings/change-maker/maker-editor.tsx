@@ -1,7 +1,7 @@
 import * as React from "react";
 import { bindActionCreators } from "redux";
 import flowRight from "lodash-es/flowRight";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -16,7 +16,7 @@ import { changePlayersAction } from "../../actions/change-players";
 import { initSettingsAction } from "../actions/init-settings";
 import { setMakerAction } from "../actions/set-maker";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
-import { IRootState, ITranslateMixin, Dispatch } from "../../../types";
+import { IRootState, Dispatch } from "../../../types";
 
 const mapStateToProps = (state: IRootState) => ({
   names: namesSelector(state),
@@ -42,7 +42,7 @@ type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 export class MakerEditorImpl extends React.Component {
-  public props: stateType & dispatchType & ITranslateMixin;
+  public props: stateType & dispatchType & WithTranslation;
 
   public render() {
     const { maker, namesSource, disabled, setMaker, t } = this.props;
@@ -87,7 +87,7 @@ export class MakerEditorImpl extends React.Component {
 }
 
 export const MakerEditor = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

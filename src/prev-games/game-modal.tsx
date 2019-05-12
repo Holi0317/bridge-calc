@@ -3,7 +3,7 @@ import flowRight from "lodash-es/flowRight";
 import { RouteComponentProps, withRouter } from "react-router";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -21,7 +21,7 @@ import { modalEntrySelector } from "./selectors/modal-entry";
 import { deleteGameAction } from "./actions/delete-game";
 import { closeGameModalAction } from "./actions/game-modal";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
-import { Dispatch, IRootState, ITranslateMixin } from "../types";
+import { Dispatch, IRootState } from "../types";
 import classes from "./prev-games.pcss";
 
 const mapStateToProps = (state: IRootState) => ({
@@ -44,7 +44,7 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 export class GameModalImpl extends React.Component {
   public props: stateType &
-    dispatchType & { fullScreen: boolean } & ITranslateMixin &
+    dispatchType & { fullScreen: boolean } & WithTranslation &
     RouteComponentProps<any>;
 
   public render() {
@@ -123,7 +123,7 @@ export class GameModalImpl extends React.Component {
 }
 
 export const GameModal = flowRight(
-  translate(),
+  withTranslation(),
   withRouter,
   withMobileDialog(),
   connect(

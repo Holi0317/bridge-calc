@@ -2,7 +2,7 @@ import { createSelector } from "reselect";
 import sumBy from "lodash-es/sumBy";
 import mapValues from "lodash-es/mapValues";
 import last from "lodash-es/last";
-import { TranslationFunction } from "i18next";
+import i18next from "i18next";
 import { stageSelector } from "../selectors/stage";
 import { playerOrderSelector } from "../selectors/player-order";
 import { bidSelector } from "../selectors/bid";
@@ -26,7 +26,7 @@ export interface IStackInputError {
 
 function validateBid(
   opts: IStackInput,
-  t: TranslationFunction
+  t: i18next.TFunction
 ): IPlayerMap<string> | null {
   if (!opts.bid) {
     return null;
@@ -39,7 +39,7 @@ function validateBid(
 
 function validateWin(
   opts: IStackInput,
-  t: TranslationFunction
+  t: i18next.TFunction
 ): IPlayerMap<string> | null {
   if (!opts.win || /* Is empty? */ isOk(opts.win)) {
     return null;
@@ -66,14 +66,14 @@ export const stackInputValidator = createSelector(
   bidSelector,
   winSelector,
   currentRoundSelector,
-  (_: IRootState, t: TranslationFunction) => t,
+  (_: IRootState, t: i18next.TFunction) => t,
   (
     stage: GameStage | null,
     playerOrder: string[],
     bid: IPlayerMap<number>,
     win: IPlayerMap<number>,
     currentRound: number,
-    t: TranslationFunction
+    t: i18next.TFunction
   ) => {
     if (!stage || stage === GameStage.ended) {
       return {};

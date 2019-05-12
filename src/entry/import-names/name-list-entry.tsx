@@ -2,7 +2,7 @@ import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {
@@ -10,7 +10,7 @@ import {
   setPlayerNamesAction
 } from "../actions/set-entry-props";
 import { showToastAction } from "../../toast-singleton/actions/show-toast";
-import { Dispatch, ITranslateMixin } from "../../types";
+import { Dispatch } from "../../types";
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
@@ -29,7 +29,7 @@ interface INameEntryProps {
 }
 
 export class NameListEntryImpl extends React.Component {
-  public props: INameEntryProps & dispatchType & ITranslateMixin;
+  public props: INameEntryProps & dispatchType & WithTranslation;
 
   public render() {
     return (
@@ -48,7 +48,7 @@ export class NameListEntryImpl extends React.Component {
 }
 
 export const NameListEntry = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

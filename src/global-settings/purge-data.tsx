@@ -1,13 +1,13 @@
 import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
 import { resetGamesAtion } from "../prev-games/actions/reset-games";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
-import { ITranslateMixin, Dispatch } from "../types";
+import { Dispatch } from "../types";
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type PurgeDataProps = dispatchType & ITranslateMixin;
+type PurgeDataProps = dispatchType & WithTranslation;
 
 export class PurgeDataImpl extends React.Component {
   public props: PurgeDataProps;
@@ -46,7 +46,7 @@ export class PurgeDataImpl extends React.Component {
 }
 
 export const PurgeData = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

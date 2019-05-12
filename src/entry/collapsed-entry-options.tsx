@@ -1,9 +1,8 @@
 import * as React from "react";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
 import { EntryOptions } from "./entry-options";
-import { ITranslateMixin } from "../types";
 import classes from "./entry.pcss";
 
 interface ICollapsedEntryOptionsState {
@@ -11,7 +10,7 @@ interface ICollapsedEntryOptionsState {
 }
 
 export class CollapsedEntryOptionsImpl extends React.Component<
-  ITranslateMixin,
+  WithTranslation,
   ICollapsedEntryOptionsState
 > {
   public state = {
@@ -45,4 +44,6 @@ export class CollapsedEntryOptionsImpl extends React.Component<
   };
 }
 
-export const CollapsedEntryOptions = translate()(CollapsedEntryOptionsImpl);
+export const CollapsedEntryOptions = withTranslation()(
+  CollapsedEntryOptionsImpl
+);

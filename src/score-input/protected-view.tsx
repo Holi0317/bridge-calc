@@ -3,11 +3,11 @@ import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { Redirect, Route } from "react-router";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { GameStage } from "./game-stage";
 import { stageSelector } from "./selectors/stage";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
-import { IRootState, ITranslateMixin, Dispatch } from "../types";
+import { IRootState, Dispatch } from "../types";
 
 interface IProtectedViewProps {
   comp: React.ComponentType<{}>;
@@ -31,7 +31,7 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>;
 type ProtectedViewProps = IProtectedViewProps &
   stateType &
   dispatchType &
-  ITranslateMixin;
+  WithTranslation;
 
 export class ProtectedViewImpl extends React.Component {
   public props: ProtectedViewProps;
@@ -66,7 +66,7 @@ export class ProtectedViewImpl extends React.Component {
 }
 
 export const ProtectedView = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

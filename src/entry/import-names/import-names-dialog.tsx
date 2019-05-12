@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import flowRight from "lodash-es/flowRight";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { bindActionCreators } from "redux";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -10,7 +10,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import { ImportNamesContent } from "./import-names-content";
 import { setImportOpenAction } from "../actions/set-entry-props";
-import { Dispatch, IRootState, ITranslateMixin } from "../../types";
+import { Dispatch, IRootState } from "../../types";
 
 const mapStateToProps = (state: IRootState) => ({
   open: state.entry.importOpened
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type ImportNamesDialogProps = stateType & dispatchType & ITranslateMixin;
+type ImportNamesDialogProps = stateType & dispatchType & WithTranslation;
 
 export class ImportNamesDialogImpl extends React.Component {
   public props: ImportNamesDialogProps;
@@ -56,7 +56,7 @@ export class ImportNamesDialogImpl extends React.Component {
 }
 
 export const ImportNamesDialog = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

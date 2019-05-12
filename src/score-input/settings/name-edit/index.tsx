@@ -1,7 +1,7 @@
 import * as React from "react";
 import { bindActionCreators } from "redux";
 import flowRight from "lodash-es/flowRight";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -12,7 +12,7 @@ import { nameEditDisabledSelector } from "../selectors/name-edit-disabled";
 import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { PANEL } from "../panel";
 import { NameEditor } from "./name-editor";
-import { Dispatch, IRootState, ITranslateMixin } from "../../../types";
+import { Dispatch, IRootState } from "../../../types";
 import classes from "../settings.pcss";
 
 const mapStateToProps = (state: IRootState) => ({
@@ -32,7 +32,7 @@ type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 export class NameEditImpl extends React.Component {
-  public props: stateType & dispatchType & ITranslateMixin;
+  public props: stateType & dispatchType & WithTranslation;
 
   public render() {
     const { expanded, disabled, toggleExpand, t } = this.props;
@@ -69,7 +69,7 @@ export class NameEditImpl extends React.Component {
 }
 
 export const NameEdit = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

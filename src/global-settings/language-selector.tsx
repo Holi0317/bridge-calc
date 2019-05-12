@@ -1,16 +1,16 @@
 import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
-import { TranslationFunction } from "i18next";
+import i18next from "i18next";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Dropdown, IDropdownSource } from "../material/dropdown";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
 import { languages } from "../app/languages";
-import { Dispatch, ITranslateMixin } from "../types";
+import { Dispatch } from "../types";
 
 function transformLanguageArray(
-  t: TranslationFunction
+  t: i18next.TFunction
 ): Array<IDropdownSource<string>> {
   return languages
     .filter(lang => lang !== "cimode") // Filter away 'cimode' pseudo language created by i18next
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 export class LanguageSelectorImpl extends React.Component {
-  public props: dispatchType & ITranslateMixin;
+  public props: dispatchType & WithTranslation;
 
   public render() {
     const { i18n, t } = this.props;
@@ -48,22 +48,29 @@ export class LanguageSelectorImpl extends React.Component {
     );
   }
 
-  private changeLanguage = (lang: string) => {
+  private changeLanguage = async (lang: string) => {
     const { i18n } = this.props;
-    i18n.changeLanguage(lang, err => {
-      const { showToast, t } = this.props;
-      const message = err
-        ? t("Error when changing language. Error: {{err}}", {
+    let err = null;
+
+    try {
+      await i18n.changeLanguage(lang);
+    } catch (e) {
+      err = e;
+    }
+
+    const { t, showToast } = this.props;
+    const message =
+      err == null
+        ? t("Changed language successfully")
+        : t("Error when changing language. Error: {{err}}", {
             err: err.message
-          })
-        : t("Changed language successfully");
-      showToast(message);
-    });
+          });
+    showToast(message);
   };
 }
 
 export const LanguageSelector = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

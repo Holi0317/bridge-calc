@@ -1,6 +1,6 @@
 import * as React from "react";
 import flowRight from "lodash-es/flowRight";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router";
@@ -16,7 +16,7 @@ import { deleteGameAction } from "./actions/delete-game";
 import { showGameModalAction } from "./actions/game-modal";
 import { havePrevGamesSelector } from "./selectors/have-prev-games";
 import { reversedPrevGamesSelector } from "./selectors/reversed-prev-games";
-import { IRootState, Dispatch, ITranslateMixin } from "../types";
+import { IRootState, Dispatch } from "../types";
 import classes from "./prev-games.pcss";
 
 const mapStateToProps = (state: IRootState) => ({
@@ -42,7 +42,7 @@ export class PrevGamesImpl extends React.Component {
   public props: stateType &
     dispatchType &
     RouteComponentProps<any> &
-    ITranslateMixin;
+    WithTranslation;
 
   public render() {
     const { havePrevGame, prevGames, t } = this.props;
@@ -96,7 +96,7 @@ export class PrevGamesImpl extends React.Component {
 
 export const PrevGames = flowRight(
   withRouter,
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

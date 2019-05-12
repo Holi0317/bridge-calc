@@ -2,14 +2,14 @@ import * as React from "react";
 import { bindActionCreators } from "redux";
 import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import ContentAdd from "@material-ui/icons/Add";
 import GetApp from "@material-ui/icons/GetApp";
 import { addRandomPlayerAction } from "./actions/add-player";
 import { setImportOpenAction } from "./actions/set-entry-props";
-import { Dispatch, ITranslateMixin } from "../types";
+import { Dispatch } from "../types";
 import classes from "./entry.pcss";
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type EntryActionButtonsProps = dispatchType & ITranslateMixin;
+type EntryActionButtonsProps = dispatchType & WithTranslation;
 
 export function EntryActionButtonsImpl({
   addRandomPlayer,
@@ -48,7 +48,7 @@ export function EntryActionButtonsImpl({
 }
 
 export const EntryActionButtons = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

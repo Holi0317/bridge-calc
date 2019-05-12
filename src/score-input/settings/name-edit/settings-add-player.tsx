@@ -2,16 +2,16 @@ import * as React from "react";
 import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import ContentAdd from "@material-ui/icons/Add";
 import { addRandomNameAction } from "../actions/add-name";
-import { ITranslateMixin, Dispatch, IRootState } from "../../../types";
+import { Dispatch, IRootState } from "../../../types";
 import { settingsValidator } from "../settings-validator";
 import Typography from "@material-ui/core/Typography";
 
-const mapStateToProps = (state: IRootState, { t }: ITranslateMixin) => ({
+const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
   error: settingsValidator(state, t).misc
 });
 
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type SettingsAddPlayerProps = stateType & dispatchType & ITranslateMixin;
+type SettingsAddPlayerProps = stateType & dispatchType & WithTranslation;
 
 export function SettingsAddPlayerImpl({
   error,
@@ -47,7 +47,7 @@ export function SettingsAddPlayerImpl({
 }
 
 export const SettingsAddPlayer = flowRight(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

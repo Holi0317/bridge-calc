@@ -1,11 +1,12 @@
 import * as React from "react";
-import { translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { JokerIcon } from "./joker-icon";
-import { ITranslateMixin } from "../types";
 import classes from "./no-prev-game-placeholder.pcss";
 
-export function NoPrevGamePlaceholderImpl({ t }: ITranslateMixin) {
+export function NoPrevGamePlaceholder() {
+  const { t } = useTranslation();
+
   return (
     <div className={classes.container}>
       <JokerIcon className={classes.jokerIcon} />
@@ -16,5 +17,3 @@ export function NoPrevGamePlaceholderImpl({ t }: ITranslateMixin) {
     </div>
   );
 }
-
-export const NoPrevGamePlaceholder = translate()(NoPrevGamePlaceholderImpl);
