@@ -6,6 +6,7 @@ const preset = require("postcss-preset-env");
 const commentStrip = require("postcss-strip-inline-comments");
 const extend = require("postcss-extend");
 const reporter = require("postcss-reporter");
+const cssnano = require("cssnano");
 
 module.exports = {
   syntax: scss,
@@ -16,6 +17,13 @@ module.exports = {
     variables(),
     nested,
     preset(),
+    ...(process.env.NODE_ENV === "production"
+      ? [
+          cssnano({
+            preset: "default"
+          })
+        ]
+      : []),
     reporter({
       clearReportedMessages: true
     })
