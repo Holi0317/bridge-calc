@@ -50,7 +50,7 @@ export class PrevGamesImpl extends React.Component {
       return (
         <Container>
           <div className={classes.prevGameContainer}>
-            <Typography variant="display1" gutterBottom>
+            <Typography variant="h4" gutterBottom>
               {t("Click on an entry for details")}
             </Typography>
             <List>

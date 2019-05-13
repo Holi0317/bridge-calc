@@ -37,7 +37,12 @@ test("it should return pink theme on non-existing theme", () => {
       .substring(7)
   );
   const actual = activatedThemeSelector(state);
-  const expected = createMuiTheme(pinkTheme);
+  const expected = createMuiTheme({
+    ...pinkTheme,
+    typography: {
+      useNextVariants: true
+    }
+  });
 
   /*
    * Theme object contains function.

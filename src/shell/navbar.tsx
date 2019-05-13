@@ -32,7 +32,7 @@ export function NavbarImpl({ history, location }: NavbarProps) {
           </Tooltip>
         )}
 
-        <Typography variant="title" color="inherit" className={classes.title}>
+        <Typography variant="h6" color="inherit" className={classes.title}>
           <Titles />
         </Typography>
 

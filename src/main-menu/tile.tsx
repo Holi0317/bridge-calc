@@ -27,7 +27,7 @@ export function Tile({ title, icon, external, target, to: _to }: ITileProps) {
     <TileLink to={to} external={external} target={target}>
       <Paper className={classes.tile} elevation={4}>
         <div className={classes.iconContainer}>{icon}</div>
-        <Typography className={classes.titleContainer} variant="title">
+        <Typography className={classes.titleContainer} variant="h6">
           {title}
         </Typography>
       </Paper>
