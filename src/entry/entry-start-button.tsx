@@ -1,21 +1,23 @@
 import * as React from "react";
+import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router";
 import Button from "@material-ui/core/Button";
-import flowRight from "lodash-es/flowRight";
+import Typography from "@material-ui/core/Typography";
 import { entryOptionsValidator, isEntryOptionsValid } from "./entry-validator";
 import { startAction } from "../score-input/actions/start";
+import { trans2 } from "../utils";
 import { IRootState, Dispatch } from "../types";
 import classes from "./entry.pcss";
 
-const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
+const mapStateToProps = (state: IRootState) => ({
   rounds: state.entry.rounds,
   playerNames: state.entry.playerNames,
   startingRound: state.entry.startingRound,
-  valid: isEntryOptionsValid(state, t),
-  miscError: entryOptionsValidator(state, t).misc
+  valid: isEntryOptionsValid(state),
+  miscError: entryOptionsValidator(state).misc
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -44,7 +46,9 @@ export class EntryStartButtonImpl extends React.PureComponent {
         >
           {t("Start")}
         </Button>
-        <span className={classes.errorMessage}>{miscError}</span>
+        {miscError != null && (
+          <Typography color="error">{trans2(t, miscError)}</Typography>
+        )}
       </div>
     );
   }

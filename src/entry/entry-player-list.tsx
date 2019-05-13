@@ -1,24 +1,21 @@
 import * as React from "react";
 import { bindActionCreators } from "redux";
-import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { NameInputList } from "../name-input-list";
 import { entryOptionsValidator } from "./entry-validator";
 import { setPlayerNamesAction } from "./actions/set-entry-props";
 import { Dispatch, IRootState } from "../types";
+import { ITranslateData, trans2 } from "../utils";
 
 // Getters and setters for name input list element
 export const getter = (val: string) => val;
 
 export const setter = (newVal: string) => newVal;
 
-export const errorGetter = (error: string[], _: string, index: number) =>
-  error[index];
-
-const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
+const mapStateToProps = (state: IRootState) => ({
   playerNames: state.entry.playerNames,
-  playerNamesError: entryOptionsValidator(state, t).playerNames
+  playerNamesError: entryOptionsValidator(state).playerNames
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -34,6 +31,20 @@ export function EntryPlayerListImpl({
   playerNamesError,
   setPlayerNames
 }: EntryPlayerListProps) {
+  const { t } = useTranslation();
+
+  const errorGetter = (
+    error: Array<ITranslateData | null>,
+    _: string,
+    index: number
+  ) => {
+    const item = error[index];
+    if (item == null) {
+      return "";
+    }
+    return trans2(t, item);
+  };
+
   return (
     <NameInputList
       values={playerNames}
@@ -46,10 +57,7 @@ export function EntryPlayerListImpl({
   );
 }
 
-export const EntryPlayerList = flowRight(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export const EntryPlayerList = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(EntryPlayerListImpl);
