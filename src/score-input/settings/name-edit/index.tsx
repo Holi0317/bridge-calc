@@ -1,7 +1,6 @@
 import * as React from "react";
 import { bindActionCreators } from "redux";
-import flowRight from "lodash-es/flowRight";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -31,47 +30,47 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-export class NameEditImpl extends React.Component {
-  public props: stateType & dispatchType & WithTranslation;
+type NameEditProps = stateType & dispatchType;
 
-  public render() {
-    const { expanded, disabled, toggleExpand, t } = this.props;
-    const subHeading = disabled
-      ? t("Player name edit is disabled when editing maker")
-      : t("Add, remove or change names of players");
+export function NameEditImpl({
+  expanded,
+  disabled,
+  toggleExpand
+}: NameEditProps) {
+  const { t } = useTranslation();
 
-    return (
-      <ExpansionPanel
-        expanded={expanded && !disabled}
-        disabled={disabled}
-        onChange={() => toggleExpand(PANEL.NAME_EDIT)}
-      >
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <div className={classes.panelHeading}>
-            <Typography className={classes.heading}>
-              {t("Edit players")}
-            </Typography>
-          </div>
-          <div className={classes.panelSubheading}>
-            <Typography
-              className={classes.secondaryHeading}
-              color="textSecondary"
-            >
-              {subHeading}
-            </Typography>
-          </div>
-        </ExpansionPanelSummary>
+  const subHeading = disabled
+    ? t("Player name edit is disabled when editing maker")
+    : t("Add, remove or change names of players");
 
-        <NameEditor />
-      </ExpansionPanel>
-    );
-  }
+  return (
+    <ExpansionPanel
+      expanded={expanded && !disabled}
+      disabled={disabled}
+      onChange={() => toggleExpand(PANEL.NAME_EDIT)}
+    >
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <div className={classes.panelHeading}>
+          <Typography className={classes.heading}>
+            {t("Edit players")}
+          </Typography>
+        </div>
+        <div className={classes.panelSubheading}>
+          <Typography
+            className={classes.secondaryHeading}
+            color="textSecondary"
+          >
+            {subHeading}
+          </Typography>
+        </div>
+      </ExpansionPanelSummary>
+
+      <NameEditor />
+    </ExpansionPanel>
+  );
 }
 
-export const NameEdit = flowRight(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export const NameEdit = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(NameEditImpl);

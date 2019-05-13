@@ -1,8 +1,7 @@
 import * as React from "react";
 import { bindActionCreators } from "redux";
-import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import ContentAdd from "@material-ui/icons/Add";
@@ -23,13 +22,14 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type EntryActionButtonsProps = dispatchType & WithTranslation;
+type EntryActionButtonsProps = dispatchType;
 
 export function EntryActionButtonsImpl({
   addRandomPlayer,
-  setImportOpen,
-  t
+  setImportOpen
 }: EntryActionButtonsProps) {
+  const { t } = useTranslation();
+
   return (
     <div className={classes.actionButtonContainer}>
       <Tooltip title={t("Add player")}>
@@ -47,10 +47,7 @@ export function EntryActionButtonsImpl({
   );
 }
 
-export const EntryActionButtons = flowRight(
-  withTranslation(),
-  connect(
-    null,
-    mapDispatchToProps
-  )
+export const EntryActionButtons = connect(
+  null,
+  mapDispatchToProps
 )(EntryActionButtonsImpl);

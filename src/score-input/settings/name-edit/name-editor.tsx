@@ -6,46 +6,27 @@ import { SettingsAddPlayer } from "./settings-add-player";
 import { ActionButtons } from "./action-buttons";
 import { MutateNameDialog } from "./mutate-name-dialog";
 
-interface INameEditState {
-  dialogOpen: boolean;
-}
+export function NameEditor() {
+  const [dialogOpen, setDialogOpen] = React.useState(false);
 
-export class NameEditor extends React.Component {
-  public state: INameEditState = {
-    dialogOpen: false
-  };
+  return (
+    <>
+      <ExpansionPanelDetails>
+        <SettingsPlayerList />
+      </ExpansionPanelDetails>
 
-  public render() {
-    const { dialogOpen } = this.state;
+      <ExpansionPanelDetails>
+        <SettingsAddPlayer />
+      </ExpansionPanelDetails>
 
-    return (
-      <>
-        <ExpansionPanelDetails>
-          <SettingsPlayerList />
-        </ExpansionPanelDetails>
+      <ExpansionPanelActions>
+        <ActionButtons requestDialog={() => setDialogOpen(true)} />
+      </ExpansionPanelActions>
 
-        <ExpansionPanelDetails>
-          <SettingsAddPlayer />
-        </ExpansionPanelDetails>
-
-        <ExpansionPanelActions>
-          <ActionButtons requestDialog={this.openDialog} />
-        </ExpansionPanelActions>
-
-        <MutateNameDialog open={dialogOpen} onRequestClose={this.closeDialog} />
-      </>
-    );
-  }
-
-  private openDialog = () => {
-    this.setState(() => ({
-      dialogOpen: true
-    }));
-  };
-
-  private closeDialog = () => {
-    this.setState(() => ({
-      dialogOpen: false
-    }));
-  };
+      <MutateNameDialog
+        open={dialogOpen}
+        onRequestClose={() => setDialogOpen(false)}
+      />
+    </>
+  );
 }

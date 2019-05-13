@@ -27,15 +27,11 @@ export class Dropdown<
   SourceType extends number | string
 > extends React.Component {
   public props: IDropdownProps<SourceType>;
-  private readonly _uid: string;
-
-  constructor(props: IDropdownProps<SourceType>) {
-    super(props);
-    this._uid = cuid();
-  }
+  private readonly _uid = cuid();
 
   public render() {
     const { source, label, error, ...rest } = this.props;
+
     return (
       <FormControl error={error != null} margin="normal">
         <InputLabel htmlFor={this._uid}>{label}</InputLabel>

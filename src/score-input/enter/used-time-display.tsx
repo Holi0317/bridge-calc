@@ -1,12 +1,11 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { endTimeSelector, startTimeSelector } from "../selectors/time";
 import { IRootState } from "../../types";
 import Typography from "@material-ui/core/Typography/Typography";
 
-function msToTime(milliseconds: number) {
+function msToTime(milliseconds: number): string {
   // Get hours from milliseconds
   const hours = milliseconds / (1000 * 60 * 60);
   const absoluteHours = Math.floor(hours);
@@ -25,6 +24,19 @@ function msToTime(milliseconds: number) {
   return `${h}:${m}:${s}`;
 }
 
+function duration(
+  startTime: Date | null,
+  endTime: Date | null,
+  now: number
+): string {
+  if (startTime == null) {
+    // Not started
+    return "00:00:00";
+  }
+  const largerTime = endTime ? endTime.getTime() : now;
+  return msToTime(largerTime - startTime.getTime());
+}
+
 const mapStateToProps = (state: IRootState) => ({
   startTime: startTimeSelector(state),
   endTime: endTimeSelector(state)
@@ -32,58 +44,23 @@ const mapStateToProps = (state: IRootState) => ({
 
 type stateType = ReturnType<typeof mapStateToProps>;
 
-export class UsedTimeDisplayImpl extends React.Component {
-  public props: stateType & WithTranslation;
+export function UsedTimeDisplayImpl({ startTime, endTime }: stateType) {
+  const { t } = useTranslation();
+  const [currTime, setCurrTime] = React.useState(() => new Date().getTime());
+  React.useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCurrTime(new Date().getTime());
+    }, 1000);
 
-  public state = {
-    time: "00:00:00"
-  };
+    return () => window.clearInterval(timer);
+  }, []);
 
-  private timerID: number | null;
-
-  public componentWillMount() {
-    if (this.timerID) {
-      window.clearInterval(this.timerID);
-    }
-    this.timerID = window.setInterval(this.tick, 1000);
-    this.tick();
-  }
-
-  public componentWillUnmount() {
-    if (this.timerID) {
-      window.clearInterval(this.timerID);
-      this.timerID = null;
-    }
-  }
-
-  public render() {
-    const { t } = this.props;
-    const { time } = this.state;
-    return (
-      <Typography variant="body1" gutterBottom align="right">
-        {t("Time: {{time}}", { time })}
-      </Typography>
-    );
-  }
-
-  private tick = () => {
-    this.setState(() => ({
-      time: this.calcTime()
-    }));
-  };
-
-  private calcTime() {
-    const { startTime, endTime } = this.props;
-    if (!startTime) {
-      // Not started
-      return "00:00:00";
-    }
-    const largerTime = endTime ? endTime : new Date();
-    return msToTime(largerTime.getTime() - startTime.getTime());
-  }
+  const time = duration(startTime, endTime, currTime);
+  return (
+    <Typography variant="body1" gutterBottom align="right">
+      {t("Time: {{time}}", { time })}
+    </Typography>
+  );
 }
 
-export const UsedTimeDisplay = flowRight(
-  withTranslation(),
-  connect(mapStateToProps)
-)(UsedTimeDisplayImpl);
+export const UsedTimeDisplay = connect(mapStateToProps)(UsedTimeDisplayImpl);

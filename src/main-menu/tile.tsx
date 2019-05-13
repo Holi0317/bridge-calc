@@ -20,20 +20,17 @@ export interface ITileProps {
 /**
  * A tile represents a block on menu
  */
-export class Tile extends React.Component<ITileProps> {
-  public render() {
-    const { title, icon, external, target } = this.props;
-    const to = this.props.to || "/";
+export function Tile({ title, icon, external, target, to: _to }: ITileProps) {
+  const to = _to || "/";
 
-    return (
-      <TileLink to={to} external={external} target={target}>
-        <Paper className={classes.tile} elevation={4}>
-          <div className={classes.iconContainer}>{icon}</div>
-          <Typography className={classes.titleContainer} variant="title">
-            {title}
-          </Typography>
-        </Paper>
-      </TileLink>
-    );
-  }
+  return (
+    <TileLink to={to} external={external} target={target}>
+      <Paper className={classes.tile} elevation={4}>
+        <div className={classes.iconContainer}>{icon}</div>
+        <Typography className={classes.titleContainer} variant="title">
+          {title}
+        </Typography>
+      </Paper>
+    </TileLink>
+  );
 }

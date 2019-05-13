@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import flowRight from "lodash-es/flowRight";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { bindActionCreators } from "redux";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -27,38 +26,30 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type ImportNamesDialogProps = stateType & dispatchType & WithTranslation;
+type ImportNamesDialogProps = stateType & dispatchType;
 
-export class ImportNamesDialogImpl extends React.Component {
-  public props: ImportNamesDialogProps;
+export function ImportNamesDialogImpl({
+  open,
+  setImportOpen
+}: ImportNamesDialogProps) {
+  const { t } = useTranslation();
 
-  public render() {
-    const { open, t } = this.props;
-
-    return (
-      <Dialog open={open} onClose={this.close}>
-        <DialogTitle>{t("Import names from previous games")}</DialogTitle>
-        <DialogContent>
-          <ImportNamesContent />
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary" onClick={this.close}>
-            {t("Cancel")}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
-
-  private close = () => {
-    this.props.setImportOpen(false);
-  };
+  return (
+    <Dialog open={open} onClose={() => setImportOpen(false)}>
+      <DialogTitle>{t("Import names from previous games")}</DialogTitle>
+      <DialogContent>
+        <ImportNamesContent />
+      </DialogContent>
+      <DialogActions>
+        <Button color="primary" onClick={() => setImportOpen(false)}>
+          {t("Cancel")}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
 
-export const ImportNamesDialog = flowRight(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export const ImportNamesDialog = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(ImportNamesDialogImpl);
