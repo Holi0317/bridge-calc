@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
+import Typography from "@material-ui/core/Typography";
 import { Dropdown } from "../../../material/dropdown";
 import { makerSourceSelector } from "../selectors/maker-source";
 import { namesSelector } from "../selectors/names";
@@ -70,7 +71,9 @@ export class MutateNameDialogImpl extends React.Component {
             source={makers}
             onChange={this.makerChanged}
           />
-          <div>{t("Expected rounds: {{rounds}}", { rounds })}</div>
+          <Typography>
+            {t("Expected rounds: {{rounds}}", { rounds })}
+          </Typography>
         </DialogContent>
 
         <DialogActions>
