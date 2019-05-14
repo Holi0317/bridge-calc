@@ -13,9 +13,9 @@ import { undoAction } from "../actions/undo";
 import { IRootState, Dispatch } from "../../types";
 import classes from "./action-buttons.pcss";
 
-const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
+const mapStateToProps = (state: IRootState) => ({
   undoDisabled: stageSelector(state) !== GameStage.waitingWin,
-  nextDisabled: !isStackInputValid(state, t),
+  nextDisabled: !isStackInputValid(state),
   currentGame: state.currentGame
 });
 

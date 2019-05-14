@@ -1,8 +1,8 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
+import mapValues from "lodash-es/mapValues";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Typography from "@material-ui/core/Typography";
 import { Dropdown } from "../../material/dropdown";
 import { GameStage } from "../game-stage";
@@ -11,22 +11,23 @@ import { namesSelector } from "../selectors/names";
 import { bidSelector } from "../selectors/bid";
 import { winSelector } from "../selectors/win";
 import { playerOrderSelector } from "../selectors/player-order";
-import { stackInputValidatorWithProps } from "./stack-input-validator";
+import { stackInputValidator } from "./stack-input-validator";
 import { bidStackInputSourceSelector } from "../selectors/bid-stack-input-source";
 import { winStackInputSourceSelector } from "../selectors/win-stack-input-source";
 import { setBidAction } from "../actions/set-bid";
 import { setWinAction } from "../actions/set-win";
+import { trans2 } from "../../utils";
 import { IRootState, Dispatch } from "../../types";
 import classes from "./stack-input.pcss";
 
-const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
+const mapStateToProps = (state: IRootState) => ({
   bidDisabled: stageSelector(state) !== GameStage.waitingBid,
   winDisabled: stageSelector(state) !== GameStage.waitingWin,
   playerOrder: playerOrderSelector(state),
   bid: bidSelector(state),
   win: winSelector(state),
   names: namesSelector(state),
-  error: stackInputValidatorWithProps(state, t),
+  error: stackInputValidator(state),
   bidStackInput: bidStackInputSourceSelector(state),
   winStackInput: winStackInputSourceSelector(state)
 });
@@ -37,105 +38,86 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type StackInputProps = stateType & dispatchType & WithTranslation;
+type StackInputProps = stateType & dispatchType;
 
-export class StackInputImpl extends React.Component {
-  public props: StackInputProps;
+export function StackInputImpl({
+  bidDisabled,
+  winDisabled,
+  playerOrder,
+  names,
+  bid,
+  win,
+  error,
+  bidStackInput,
+  winStackInput,
+  setBid,
+  setWin
+}: StackInputProps) {
+  const { t } = useTranslation();
 
-  public render() {
-    const {
-      t,
-      bidDisabled,
-      winDisabled,
-      playerOrder,
-      names,
-      bid,
-      win,
-      error,
-      bidStackInput,
-      winStackInput
-    } = this.props;
+  const bidErrors = mapValues(error.bid || {}, val => trans2(t, val));
+  const winErrors = mapValues(error.win || {}, val => trans2(t, val));
 
-    return (
-      <div className={classes.tableContainer}>
-        <table className={classes.table}>
-          <thead className={classes.head}>
-            <tr>
-              <th />
-              {playerOrder.map(playerID => (
-                <th key={playerID}>
-                  <Typography component="span">{names[playerID]}</Typography>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className={classes.body}>
-            <tr>
-              <td>
-                <Typography component="span">{t("Bid")}</Typography>
+  return (
+    <div className={classes.tableContainer}>
+      <table className={classes.table}>
+        <thead className={classes.head}>
+          <tr>
+            <th />
+            {playerOrder.map(playerID => (
+              <th key={playerID}>
+                <Typography component="span">{names[playerID]}</Typography>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className={classes.body}>
+          <tr>
+            <td>
+              <Typography component="span">{t("Bid")}</Typography>
+            </td>
+            {playerOrder.map(playerID => (
+              <td key={playerID}>
+                <Dropdown
+                  value={bid[playerID]}
+                  source={bidStackInput[playerID]}
+                  label={t("Bid for {{name}}", { name: names[playerID] })}
+                  disabled={bidDisabled}
+                  error={bidErrors[playerID]}
+                  onChange={(value: number) =>
+                    setBid({ ...bid, [playerID]: value })
+                  }
+                />
               </td>
-              {playerOrder.map(playerID => (
-                <td key={playerID}>
-                  <Dropdown
-                    value={bid[playerID]}
-                    source={bidStackInput[playerID]}
-                    label={t("Bid for {{name}}", { name: names[playerID] })}
-                    disabled={bidDisabled}
-                    error={error.bid[playerID]}
-                    onChange={this.setBid(playerID)}
-                  />
-                </td>
-              ))}
-            </tr>
+            ))}
+          </tr>
 
-            <tr>
-              <td>
-                <Typography component="span">{t("Win")}</Typography>
+          <tr>
+            <td>
+              <Typography component="span">{t("Win")}</Typography>
+            </td>
+            {playerOrder.map(playerID => (
+              <td key={playerID}>
+                <Dropdown
+                  value={win[playerID] == null ? "" : win[playerID]}
+                  source={winStackInput[playerID]}
+                  label={t("Win for {{name}}", { name: names[playerID] })}
+                  disabled={winDisabled}
+                  error={winErrors[playerID]}
+                  onChange={(value: number) =>
+                    setWin({ ...win, [playerID]: value })
+                  }
+                />
               </td>
-              {playerOrder.map(playerID => (
-                <td key={playerID}>
-                  <Dropdown
-                    value={win[playerID] == null ? "" : win[playerID]}
-                    source={winStackInput[playerID]}
-                    label={t("Win for {{name}}", { name: names[playerID] })}
-                    disabled={winDisabled}
-                    error={error.win[playerID]}
-                    onChange={this.setWin(playerID)}
-                  />
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-
-  private setBid = (playerID: string) => {
-    return (value: number) => {
-      const { bid, setBid } = this.props;
-      setBid({
-        ...bid,
-        [playerID]: value
-      });
-    };
-  };
-
-  private setWin = (playerID: string) => {
-    return (value: number) => {
-      const { win, setWin } = this.props;
-      setWin({
-        ...win,
-        [playerID]: value
-      });
-    };
-  };
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
-export const StackInput = flowRight(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export const StackInput = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(StackInputImpl);

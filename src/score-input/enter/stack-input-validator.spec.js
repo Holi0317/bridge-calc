@@ -1,10 +1,9 @@
-import { trans } from "../../utils/translate";
 import {
   stackInputValidator as validator,
-  isStackInputValid,
-  stackInputValidatorWithProps
+  isStackInputValid
 } from "./stack-input-validator";
 import { GameStage } from "../game-stage";
+import { tData } from "../../utils";
 
 function genMap(a, b, c, d) {
   return { a, b, c, d };
@@ -33,7 +32,7 @@ function makeTree(rest) {
 
 test("Empty value should pass validation", () => {
   const state = makeTree({});
-  const actual = validator(state, trans);
+  const actual = validator(state);
   const expected = {};
   expect(actual).toEqual(expected);
 });
@@ -44,7 +43,7 @@ test("Correct value should pass validation", () => {
     win: genMap(1, 0, 0, 0),
     stage: GameStage.waitingWin
   });
-  const actual = validator(state, trans);
+  const actual = validator(state);
   const expected = {};
   expect(actual).toEqual(expected);
 });
@@ -53,9 +52,9 @@ test("validator should fail when sum of bid equals to current round number", () 
   const state = makeTree({
     bid: genMap(0, 1, 0, 0)
   });
-  const actual = validator(state, trans);
+  const actual = validator(state);
   const expected = {
-    bid: { d: "Cannot choose that" }
+    bid: { d: tData("Cannot choose that") }
   };
   expect(actual).toEqual(expected);
 });
@@ -65,8 +64,8 @@ test("validator should fail on win when sum of stacks is smaller than current ro
     win: genMap(0, 0, 0, 0),
     stage: GameStage.waitingWin
   });
-  const actual = validator(state, trans);
-  const msg = "Too less stacks";
+  const actual = validator(state);
+  const msg = tData("Too less stacks");
   const expected = {
     win: genMap(msg, msg, msg, msg)
   };
@@ -78,8 +77,8 @@ test("validator should fail on win stacks that exceed current round number", () 
     win: genMap(1, 1, 0, 0),
     stage: GameStage.waitingWin
   });
-  const actual = validator(state, trans);
-  const msg = "Too many stacks";
+  const actual = validator(state);
+  const msg = tData("Too many stacks");
   const expected = {
     win: genMap(msg, msg, msg, msg)
   };
@@ -92,10 +91,10 @@ test("validator should fail both bid and win when both of them have error data",
     win: genMap(1, 0, 0, 1),
     stage: GameStage.waitingWin
   });
-  const actual = validator(state, trans);
-  const msg = "Too many stacks";
+  const actual = validator(state);
+  const msg = tData("Too many stacks");
   const expected = {
-    bid: { d: "Cannot choose that" },
+    bid: { d: tData("Cannot choose that") },
     win: genMap(msg, msg, msg, msg)
   };
   expect(actual).toEqual(expected);
@@ -105,7 +104,7 @@ test("validator should pass on empty bid object", () => {
   const state = makeTree({
     bid: {}
   });
-  const actual = validator(state, trans);
+  const actual = validator(state);
   const expected = {};
   expect(actual).toEqual(expected);
 });
@@ -115,7 +114,7 @@ test("validator should pass on empty win object", () => {
     win: {},
     stage: GameStage.waitingWin
   });
-  const actual = validator(state, trans);
+  const actual = validator(state);
   const expected = {};
   expect(actual).toEqual(expected);
 });
@@ -125,7 +124,7 @@ test("null currentGame should be considered as no error", () => {
     currentGame: null
   };
   const expected = {};
-  const actual = validator(state, trans);
+  const actual = validator(state);
   expect(actual).toEqual(expected);
 });
 
@@ -139,14 +138,14 @@ test("Ended currentGame should be considered as no error", () => {
     endTime: new Date(1)
   });
   const expected = {};
-  const actual = validator(state, trans);
+  const actual = validator(state);
   expect(actual).toEqual(expected);
 });
 
 test("is valid should be true for default state", () => {
   const state = makeTree({});
   const expected = true;
-  const actual = isStackInputValid(state, trans);
+  const actual = isStackInputValid(state);
   expect(actual).toEqual(expected);
 });
 
@@ -155,18 +154,6 @@ test("is valid should be false for erroneous state", () => {
     bid: genMap(0, 1, 0, 0)
   });
   const expected = false;
-  const actual = isStackInputValid(state, trans);
-  expect(actual).toEqual(expected);
-});
-
-test("with props should include empty object for no error props", () => {
-  const expected = {
-    bid: {},
-    win: {}
-  };
-  const state = {
-    currentGame: null
-  };
-  const actual = stackInputValidatorWithProps(state, trans);
+  const actual = isStackInputValid(state);
   expect(actual).toEqual(expected);
 });
