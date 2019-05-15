@@ -1,24 +1,22 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { gameTitleSelector } from "./selectors/game-title";
 import { IRootState } from "../types";
+import { trans2 } from "../utils";
 
-const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
-  title: gameTitleSelector(state, t)
+const mapStateToProps = (state: IRootState) => ({
+  title: gameTitleSelector(state)
 });
 
-export class CurrentGameTitleImpl extends React.Component {
-  public props: ReturnType<typeof mapStateToProps>;
+type stateType = ReturnType<typeof mapStateToProps>;
 
-  public render() {
-    const { title } = this.props;
-    return <span>{title}</span>;
-  }
+type CurrentGameTitleProps = stateType;
+
+export function CurrentGameTitleImpl({ title }: CurrentGameTitleProps) {
+  const { t } = useTranslation();
+
+  return <span>{trans2(t, title)}</span>;
 }
 
-export const CurrentGameTitle = flowRight(
-  withTranslation(),
-  connect(mapStateToProps)
-)(CurrentGameTitleImpl);
+export const CurrentGameTitle = connect(mapStateToProps)(CurrentGameTitleImpl);
