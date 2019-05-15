@@ -6,7 +6,7 @@ import { NameInputList } from "../name-input-list";
 import { entryOptionsValidator } from "./entry-validator";
 import { setPlayerNamesAction } from "./actions/set-entry-props";
 import { Dispatch, IRootState } from "../types";
-import { ITranslateData, trans2 } from "../utils";
+import { ITranslateData, trans } from "../utils";
 
 // Getters and setters for name input list element
 export const getter = (val: string) => val;
@@ -42,7 +42,7 @@ export function EntryPlayerListImpl({
     if (item == null) {
       return "";
     }
-    return trans2(t, item);
+    return trans(t, item);
   };
 
   return (

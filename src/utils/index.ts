@@ -12,4 +12,4 @@ export { isPlayerMapOf } from "./is-player-map-of";
 export { isArrayOf } from "./is-array-of";
 export { isArrayEqual } from "./is-array-equal";
 export { cuid, slug } from "./cuid";
-export { ITranslateData, trans2, tData } from "./translate";
+export { ITranslateData, trans, tData } from "./translate";

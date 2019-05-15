@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { entryOptionsValidator, isEntryOptionsValid } from "./entry-validator";
 import { startAction } from "../score-input/actions/start";
-import { trans2 } from "../utils";
+import { trans } from "../utils";
 import { IRootState, Dispatch } from "../types";
 import classes from "./entry.pcss";
 
@@ -47,7 +47,7 @@ export class EntryStartButtonImpl extends React.PureComponent {
           {t("Start")}
         </Button>
         {miscError != null && (
-          <Typography color="error">{trans2(t, miscError)}</Typography>
+          <Typography color="error">{trans(t, miscError)}</Typography>
         )}
       </div>
     );

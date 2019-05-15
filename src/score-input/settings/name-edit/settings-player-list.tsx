@@ -9,7 +9,7 @@ import {
 } from "../selectors/name-input-list-source";
 import { setNamesFromArrayAction } from "../actions/set-names";
 import { settingsValidator } from "../settings-validator";
-import { trans2 } from "../../../utils";
+import { trans } from "../../../utils";
 import { IRootState, Dispatch } from "../../../types";
 
 /**
@@ -56,7 +56,7 @@ export function SettingsPlayerListImpl({
       getter={getter}
       setter={setter}
       errorGetter={(error, [ID]: PlayerName) =>
-        error[ID] == null ? null : trans2(t, error[ID])
+        error[ID] == null ? null : trans(t, error[ID])
       }
       onChange={changeNames}
     />

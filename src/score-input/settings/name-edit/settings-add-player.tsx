@@ -9,7 +9,7 @@ import { addRandomNameAction } from "../actions/add-name";
 import { Dispatch, IRootState } from "../../../types";
 import { settingsValidator } from "../settings-validator";
 import Typography from "@material-ui/core/Typography";
-import { trans2 } from "../../../utils";
+import { trans } from "../../../utils";
 
 const mapStateToProps = (state: IRootState) => ({
   error: settingsValidator(state).misc
@@ -43,7 +43,7 @@ export function SettingsAddPlayerImpl({
       </Tooltip>
 
       {error != null && (
-        <Typography color="error">{trans2(t, error)}</Typography>
+        <Typography color="error">{trans(t, error)}</Typography>
       )}
     </div>
   );

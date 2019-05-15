@@ -16,7 +16,7 @@ import { bidStackInputSourceSelector } from "../selectors/bid-stack-input-source
 import { winStackInputSourceSelector } from "../selectors/win-stack-input-source";
 import { setBidAction } from "../actions/set-bid";
 import { setWinAction } from "../actions/set-win";
-import { trans2 } from "../../utils";
+import { trans } from "../../utils";
 import { IRootState, Dispatch } from "../../types";
 import classes from "./stack-input.pcss";
 
@@ -55,8 +55,8 @@ export function StackInputImpl({
 }: StackInputProps) {
   const { t } = useTranslation();
 
-  const bidErrors = mapValues(error.bid || {}, val => trans2(t, val));
-  const winErrors = mapValues(error.win || {}, val => trans2(t, val));
+  const bidErrors = mapValues(error.bid || {}, val => trans(t, val));
+  const winErrors = mapValues(error.win || {}, val => trans(t, val));
 
   return (
     <div className={classes.tableContainer}>
