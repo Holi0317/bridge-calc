@@ -1,8 +1,7 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { NameInputList } from "../../../name-input-list";
 import {
   nameInputListSourceSelector,
@@ -10,7 +9,8 @@ import {
 } from "../selectors/name-input-list-source";
 import { setNamesFromArrayAction } from "../actions/set-names";
 import { settingsValidator } from "../settings-validator";
-import { IPlayerMap, IRootState, Dispatch } from "../../../types";
+import { trans2 } from "../../../utils";
+import { IRootState, Dispatch } from "../../../types";
 
 /**
  * Get player name from PlayerName type.
@@ -24,14 +24,9 @@ const getter = ([, name]: PlayerName) => name;
  */
 const setter = (newVal: string, [ID]: PlayerName): PlayerName => [ID, newVal];
 
-/**
- * Error getter for name-input-list component
- */
-const errorGetter = (error: IPlayerMap<string>, [ID]: PlayerName) => error[ID];
-
-const mapStateToProps = (state: IRootState, { t }: WithTranslation) => ({
+const mapStateToProps = (state: IRootState) => ({
   names: nameInputListSourceSelector(state),
-  errors: settingsValidator(state, t).names
+  errors: settingsValidator(state).names
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -45,29 +40,30 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type SettingsPlayerListProps = stateType & dispatchType & WithTranslation;
+type SettingsPlayerListProps = stateType & dispatchType;
 
 export function SettingsPlayerListImpl({
   names,
   errors,
   changeNames
 }: SettingsPlayerListProps) {
+  const { t } = useTranslation();
+
   return (
     <NameInputList
       values={names}
       error={errors}
       getter={getter}
       setter={setter}
-      errorGetter={errorGetter}
+      errorGetter={(error, [ID]: PlayerName) =>
+        error[ID] == null ? null : trans2(t, error[ID])
+      }
       onChange={changeNames}
     />
   );
 }
 
-export const SettingsPlayerList = flowRight(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export const SettingsPlayerList = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(SettingsPlayerListImpl);

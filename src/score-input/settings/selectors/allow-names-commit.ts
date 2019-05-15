@@ -11,7 +11,6 @@ import { isMakerCleanSelector } from "./is-maker-clean";
  * 3. Maker chooser is clean, not touched
  *
  * If requirements are met, true will be returned.
- * Additional argument: i18next T object must be passed in as second argument.
  */
 export const allowNamesCommitSelector = createSelector(
   namesChangedSelector,

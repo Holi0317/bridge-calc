@@ -1,6 +1,5 @@
 import { genMap } from "../../../../test-fixtures/current-game-states";
 import { allowNamesCommitSelector } from "./allow-names-commit";
-import { trans } from "../../../utils/translate";
 
 /**
  * Build part of redux store tree for testing
@@ -22,7 +21,7 @@ test("it should allow change for valid and changed names", () => {
   const makerDirty = false;
   const tree = buildTree(settingsNames, names, makerDirty);
   const expected = true;
-  const actual = allowNamesCommitSelector(tree, trans);
+  const actual = allowNamesCommitSelector(tree);
   expect(actual).toEqual(expected);
 });
 
@@ -31,7 +30,7 @@ test("it should disallow change for unchanged names", () => {
   const makerDirty = false;
   const tree = buildTree(names, names, makerDirty);
   const expected = false;
-  const actual = allowNamesCommitSelector(tree, trans);
+  const actual = allowNamesCommitSelector(tree);
   expect(actual).toEqual(expected);
 });
 
@@ -41,7 +40,7 @@ test("it should disallow change for invalid names", () => {
   const makerDirty = false;
   const tree = buildTree(settingsNames, names, makerDirty);
   const expected = false;
-  const actual = allowNamesCommitSelector(tree, trans);
+  const actual = allowNamesCommitSelector(tree);
   expect(actual).toEqual(expected);
 });
 
@@ -50,7 +49,7 @@ test("it should disallow change for unchanged and invalid names (Impossible)", (
   const makerDirty = false;
   const tree = buildTree(names, names, makerDirty);
   const expected = false;
-  const actual = allowNamesCommitSelector(tree, trans);
+  const actual = allowNamesCommitSelector(tree);
   expect(actual).toEqual(expected);
 });
 
@@ -60,6 +59,6 @@ test("it should disallow change for mutated maker selector", () => {
   const makerDirty = true;
   const tree = buildTree(settingsNames, names, makerDirty);
   const expected = false;
-  const actual = allowNamesCommitSelector(tree, trans);
+  const actual = allowNamesCommitSelector(tree);
   expect(actual).toEqual(expected);
 });
