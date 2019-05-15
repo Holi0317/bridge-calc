@@ -76,7 +76,6 @@ export const entryOptionsValidator = createSelector(
 /**
  * Select validity of entry options.
  * If valid, the selected value will be true.
- * Additional argument: i18next T object must be passed in as second argument.
  */
 export const isEntryOptionsValid = createSelector(
   entryOptionsValidator,
