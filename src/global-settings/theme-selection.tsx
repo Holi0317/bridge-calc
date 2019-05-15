@@ -6,11 +6,11 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import FormGroup from "@material-ui/core/FormGroup";
 import { Dropdown } from "../material/dropdown";
-import { themeSourcesSelector } from "../theme/selectors/theme-sources";
 import { selectedThemeSelector } from "../theme/selectors/selected-theme";
 import { isDarkThemeSelector } from "../theme/selectors/is-dark-theme";
 import { setThemeAction } from "../theme/actions/set-theme";
 import { toggleDarkAction } from "../theme/actions/toggle-dark";
+import { themes } from "../theme/color-presets";
 import { IRootState, Dispatch } from "../types";
 
 const mapStateToProps = (state: IRootState) => ({
@@ -39,12 +39,16 @@ export function ThemeSelectionImpl({
   toggleDark
 }: ThemeSelectionProps) {
   const { t } = useTranslation();
+  const source = Array.from(themes.keys()).map(theme => ({
+    value: theme,
+    label: t(theme)
+  }));
 
   return (
     <>
       <Dropdown
         label={t("Change theme")}
-        source={themeSourcesSelector(t)}
+        source={source}
         value={selectedTheme}
         onChange={setTheme}
       />
