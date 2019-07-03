@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { dupe, removeUndef, isOk, ITranslateData, tData } from "../utils";
 import { IRootState } from "../types";
-import { PlayerNameEntry } from "./entry-reducer";
+import { IPlayerNameEntry } from "./entry-reducer";
 
 const playerUpperLimit = 52;
 
@@ -65,7 +65,7 @@ function validatePlayerName(
  */
 export const entryOptionsValidator = createSelector(
   (state: IRootState) => state.entry.playerNames,
-  (playerNames: PlayerNameEntry[]): IEntryError => {
+  (playerNames: IPlayerNameEntry[]): IEntryError => {
     const names = playerNames.map(entry => entry.value);
 
     const res = {

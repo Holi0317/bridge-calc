@@ -7,7 +7,7 @@ import { ActionTypes } from "../action-types";
  * Each player should have an ID associated with her.
  * However this ID is not the same as the one in a game.
  */
-export interface PlayerNameEntry {
+export interface IPlayerNameEntry {
   /**
    * Name of the player.
    */
@@ -21,7 +21,7 @@ export interface PlayerNameEntry {
 export interface IEntryState {
   rounds: number;
   startingRound: number;
-  playerNames: PlayerNameEntry[];
+  playerNames: IPlayerNameEntry[];
   importOpened: boolean;
 }
 
@@ -51,7 +51,7 @@ const defaultState: IEntryState = {
  * @param state - previous state of reducer
  * @param playerNames - original player names before updating
  */
-function playerNameAction(state: IEntryState, playerNames: PlayerNameEntry[]) {
+function playerNameAction(state: IEntryState, playerNames: IPlayerNameEntry[]) {
   const newPlayerNum = state.playerNames.length;
   const newRounds = Math.floor(52 / newPlayerNum);
   const playerNum = playerNames.length;
