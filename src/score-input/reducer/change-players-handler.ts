@@ -35,17 +35,14 @@ export function changePlayersHandler(
   // Change scores
   const oldScores = state.scores;
   const freshScores = range(state.currentRound - 1).fill(0); // Score for new players. I am terrible at naming.
-  state.scores = mapValues(
-    newNames,
-    (_: string, ID: string): number[] =>
-      ID in oldScores ? oldScores[ID] : freshScores
+  state.scores = mapValues(newNames, (_: string, ID: string): number[] =>
+    ID in oldScores ? oldScores[ID] : freshScores
   );
 
   // Change bid
   const oldBid = state.bid;
-  state.bid = mapValues(
-    newNames,
-    (_: string, ID: string): number => (ID in oldBid ? oldBid[ID] : 0)
+  state.bid = mapValues(newNames, (_: string, ID: string): number =>
+    ID in oldBid ? oldBid[ID] : 0
   );
 
   // Change names field lastly
