@@ -10,7 +10,7 @@ export const remainingRoundsSelector = createSelector(
   roundsSelector,
   currentRoundSelector,
   (rounds: number | null, currentRound: number | null): number => {
-    if (currentRound === null || rounds === null) {
+    if (currentRound == null || currentRound === 0 || rounds == null) {
       return 0;
     }
     return rounds - currentRound + 1;
