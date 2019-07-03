@@ -5,14 +5,15 @@ const { ENV } = require("./paths");
 const cssLoader = {
   loader: "css-loader",
   options: {
-    modules: true,
     sourceMap: true,
     importLoaders: 1,
-    localIdentName:
-      ENV === "production"
-        ? "[hash:base64:5]"
-        : "[name]__[local]--[hash:base64:5]",
-    camelCase: "dashesOnly"
+    modules: {
+      localIdentName:
+        ENV === "production"
+          ? "[hash:base64:5]"
+          : "[name]__[local]--[hash:base64:5]"
+    },
+    localsConvention: "dashesOnly"
   }
 };
 

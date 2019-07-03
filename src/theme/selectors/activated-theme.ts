@@ -17,10 +17,6 @@ export const activatedThemeSelector = createSelector(
 
     return createMuiTheme({
       ...options,
-      typography: {
-        ...options.typography,
-        useNextVariants: true
-      },
       palette: {
         ...options.palette,
         type

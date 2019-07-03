@@ -64,15 +64,11 @@ export class GameModalImpl extends React.Component<GameModalProps> {
               <IconButton color="inherit" onClick={close} aria-label="Close">
                 <CloseIcon />
               </IconButton>
-              <Typography
-                variant="title"
-                color="inherit"
-                className={classes.flex}
-              >
+              <Typography variant="h6" color="inherit" className={classes.flex}>
                 {t("Previous game details")}
               </Typography>
               <Button color="inherit" onClick={this.del}>
-                <Typography variant="subheading" color="inherit">
+                <Typography variant="subtitle1" color="inherit">
                   {t("Load")}
                 </Typography>
               </Button>
