@@ -5,31 +5,23 @@ import { Container } from "./container";
 import { INameInputListProps } from "./types";
 import classes from "./name-input-list.pcss";
 
+/**
+ * Create a callback for sortEnd because of change in sorting.
+ */
 function createSortEndHandler<T>(items: T[], change: (item: T[]) => void) {
   return ({ oldIndex, newIndex }: SortEnd) =>
     change(arrayMove(items, oldIndex, newIndex));
 }
 
-export function NameInputList<T, V>({
-  values,
-  onChange,
-  error,
-  getter,
-  setter,
-  errorGetter
-}: INameInputListProps<T, V>) {
+export function NameInputList({ values, onChange }: INameInputListProps) {
   return (
     <Container
       useDragHandle={true}
       lockAxis="y"
       helperClass={classes.dragging}
-      values={values}
-      error={error}
-      getter={getter}
-      setter={setter}
-      errorGetter={errorGetter}
-      onChange={onChange}
       onSortEnd={createSortEndHandler(values, onChange)}
+      values={values}
+      onChange={onChange}
     />
   );
 }

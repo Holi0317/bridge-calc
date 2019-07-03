@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SortableContainer } from "react-sortable-hoc";
-import { INameInputListProps, Setter } from "./types";
+import { INameInputListProps, NameInputEntry } from "./types";
 import { SortableItem } from "./item";
 import classes from "./name-input-list.pcss";
 
@@ -9,14 +9,16 @@ import classes from "./name-input-list.pcss";
  * This will call change handler provided with new value once the returned function of returned function is called.
  * (Yes, this curries 2 times)
  */
-function createChangeHandler<T>(
-  items: T[],
-  setter: Setter<T>,
-  change: (newItems: T[]) => void
+function createChangeHandler(
+  items: NameInputEntry[],
+  change: (newItems: NameInputEntry[]) => void
 ) {
   return (index: number) => (newValue: string) => {
     const newItems = items.slice();
-    newItems[index] = setter(newValue, items[index]);
+    newItems[index] = {
+      ...items[index],
+      value: newValue
+    };
     return change(newItems);
   };
 }
@@ -25,7 +27,10 @@ function createChangeHandler<T>(
  * Create a remove handler function.
  * This will call change handler once the second returned function is called.
  */
-function createRemoveHandler<T>(items: T[], change: (newItems: T[]) => void) {
+function createRemoveHandler(
+  items: NameInputEntry[],
+  change: (newItems: NameInputEntry[]) => void
+) {
   return (index: number) => () => {
     const newItems = items.slice();
     newItems.splice(index, 1);
@@ -33,18 +38,18 @@ function createRemoveHandler<T>(items: T[], change: (newItems: T[]) => void) {
   };
 }
 
-export function ContainerImpl<T, V>(props: INameInputListProps<T, V>) {
-  const { values, error, getter, setter, errorGetter, onChange } = props;
-  const changeHandler = createChangeHandler(values, setter, onChange);
+export function ContainerImpl({ values, onChange }: INameInputListProps) {
+  const changeHandler = createChangeHandler(values, onChange);
   const removeHandler = createRemoveHandler(values, onChange);
+
   return (
     <div className={classes.container}>
-      {values.map((value, index) => (
+      {values.map((entry, index) => (
         <SortableItem
-          key={`item-${index}`}
+          key={entry.id}
           index={index}
-          value={getter(value)}
-          error={errorGetter(error, value, index)}
+          value={entry.value}
+          error={entry.error}
           onChange={changeHandler(index)}
           remove={removeHandler(index)}
         />

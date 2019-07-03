@@ -3,7 +3,12 @@ import { deepFreeze } from "./deep-freeze";
 export const defaultState = deepFreeze({
   rounds: 13,
   startingRound: 1,
-  playerNames: ["John", "Mary", "Henry", "Joe"],
+  playerNames: [
+    { value: "John", id: "1" },
+    { value: "Mary", id: "2" },
+    { value: "Henry", id: "3" },
+    { value: "Joe", id: "4" }
+  ],
   importOpened: false
 });
 

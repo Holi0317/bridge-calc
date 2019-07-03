@@ -1,17 +1,27 @@
 import { randomName } from "../../example-names";
 import { ActionTypes } from "../../action-types";
+import { cuid } from "../../utils";
 
 export interface IAddPlayerAction {
   type: ActionTypes.ADD_PLAYER;
-  payload: string;
+  payload: {
+    value: string;
+    id: string;
+  };
 }
 
 /**
  * Add a new player for entry options.
- * @parm payload - The name of new player
+ * @parm name - The name of new player
  */
-export function addPlayerAction(payload: string): IAddPlayerAction {
-  return { type: ActionTypes.ADD_PLAYER, payload };
+export function addPlayerAction(name: string): IAddPlayerAction {
+  return {
+    type: ActionTypes.ADD_PLAYER,
+    payload: {
+      value: name,
+      id: cuid()
+    }
+  };
 }
 
 /**

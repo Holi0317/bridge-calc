@@ -5,6 +5,7 @@ import { genRandomNames } from "../example-names";
 import { setPlayerNamesAction } from "./actions/set-entry-props";
 import { resetAction } from "./actions/reset";
 import { Dispatch } from "../types";
+import { cuid } from "../utils";
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
@@ -21,7 +22,9 @@ export class InitEntryStateImpl extends React.PureComponent<
 > {
   public componentWillMount() {
     this.props.reset();
-    this.props.setPlayerNames(genRandomNames());
+    const names = genRandomNames();
+
+    this.props.setPlayerNames(names.map(name => ({ value: name, id: cuid() })));
   }
 
   public render() {

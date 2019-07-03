@@ -6,12 +6,7 @@ import { NameInputList } from "../name-input-list";
 import { entryOptionsValidator } from "./entry-validator";
 import { setPlayerNamesAction } from "./actions/set-entry-props";
 import { Dispatch, IRootState } from "../types";
-import { ITranslateData, trans } from "../utils";
-
-// Getters and setters for name input list element
-export const getter = (val: string) => val;
-
-export const setter = (newVal: string) => newVal;
+import { trans } from "../utils";
 
 const mapStateToProps = (state: IRootState) => ({
   playerNames: state.entry.playerNames,
@@ -33,28 +28,17 @@ export function EntryPlayerListImpl({
 }: EntryPlayerListProps) {
   const { t } = useTranslation();
 
-  const errorGetter = (
-    error: Array<ITranslateData | null>,
-    _: string,
-    index: number
-  ) => {
-    const item = error[index];
-    if (item == null) {
-      return "";
-    }
-    return trans(t, item);
-  };
+  const values = playerNames.map((name, index) => {
+    const error = playerNamesError == null ? null : playerNamesError[index];
 
-  return (
-    <NameInputList
-      values={playerNames}
-      error={playerNamesError || []}
-      onChange={setPlayerNames}
-      getter={getter}
-      setter={setter}
-      errorGetter={errorGetter}
-    />
-  );
+    return {
+      value: name.value,
+      error: error == null ? "" : trans(t, error),
+      id: name.id
+    };
+  });
+
+  return <NameInputList values={values} onChange={setPlayerNames} />;
 }
 
 export const EntryPlayerList = connect(

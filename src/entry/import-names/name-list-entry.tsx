@@ -11,6 +11,7 @@ import {
 } from "../actions/set-entry-props";
 import { showToastAction } from "../../toast-singleton/actions/show-toast";
 import { Dispatch } from "../../types";
+import { cuid } from "../../utils";
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
@@ -41,7 +42,7 @@ export class NameListEntryImpl extends React.Component<NameListEntryProps> {
 
   private setNames = () => {
     const { name, setImportOpen, showToast, setPlayerNames, t } = this.props;
-    setPlayerNames(name);
+    setPlayerNames(name.map(entry => ({ value: entry, id: cuid() })));
     setImportOpen(false);
     showToast(t("Imported names successfully"));
   };

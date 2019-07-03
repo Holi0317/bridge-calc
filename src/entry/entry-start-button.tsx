@@ -55,7 +55,7 @@ export class EntryStartButtonImpl extends React.PureComponent<
 
   private start = () => {
     const { rounds, playerNames, startingRound, start, history } = this.props;
-    start(rounds, playerNames, startingRound);
+    start(rounds, playerNames.map(entry => entry.value), startingRound);
     history.push("/score-input");
   };
 }

@@ -11,7 +11,7 @@ import classes from "./name-input-list.pcss";
 interface ISortableItemProps {
   value: string;
   error: string | null;
-  // Actually required by the HOC
+  // Actually index is required by the HOC
   index: number;
 
   onChange(value: string): void;
@@ -25,9 +25,11 @@ export function SortableItemImpl({
   error
 }: ISortableItemProps) {
   const { t } = useTranslation();
+
   return (
     <div className={classes.itemContainer}>
       <DragHandle />
+
       <TextField
         type="text"
         fullWidth
@@ -38,6 +40,7 @@ export function SortableItemImpl({
         helperText={error}
         onChange={event => onChange(event.target.value)}
       />
+
       <Tooltip title={t("Delete name")}>
         <IconButton onClick={remove}>
           <ActionDelete width="24px" height="24px" />

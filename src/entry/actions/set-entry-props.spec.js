@@ -36,8 +36,8 @@ test("it should produce set import open action", () => {
 test("it should produce set player names action", () => {
   const expected = {
     type: ActionTypes.SET_ENTRY_PROPS,
-    playerNames: ["John"]
+    playerNames: [{ value: "John", id: "2" }]
   };
-  const actual = setPlayerNamesAction(["John"]);
+  const actual = setPlayerNamesAction([{ value: "John", id: "2" }]);
   expect(actual).toEqual(expected);
 });

@@ -1,35 +1,31 @@
-export type Setter<DataType> = (newVal: string, oldVal: DataType) => DataType;
-export type Getter<DataType> = (data: DataType) => string;
-export type ErrorGetter<DataType, ErrorType> = (
-  error: ErrorType,
-  value: DataType,
-  index: number
-) => string | null;
+export interface NameInputEntry {
+  /**
+   * Unique identifier for this entry.
+   *
+   * This is similar to key in React. This should be unique in the list given.
+   */
+  id: string;
 
-export interface INameInputListProps<DataType, ErrorType> {
+  /**
+   * Value of the entry to be shown in the input field.
+   */
+  value: string;
+
+  /**
+   * Error (if any) for the entry.
+   *
+   * If this is null, that means the entry does not have any validation issue.
+   */
+  error: string | null;
+}
+
+export interface INameInputListProps {
   /**
    * Values of data to be filled.
    */
-  values: DataType[];
-  /**
-   * Optional. Error to be displayed under name input.
-   */
-  error: ErrorType;
-  /**
-   * Get error from given data.
-   * If returned is empty string or null, that implies no error exist.
-   */
-  errorGetter: ErrorGetter<DataType, ErrorType>;
-  /**
-   * Getter to transform data into string displayed in input field.
-   */
-  getter: Getter<DataType>;
-  /**
-   * This function transform old data to new one with given new value in input field.
-   */
-  setter: Setter<DataType>;
+  values: NameInputEntry[];
   /**
    * When data is changed (modified, renamed, deleted), this will be called with new data array.
    */
-  onChange(values: DataType[]): void;
+  onChange(values: NameInputEntry[]): void;
 }

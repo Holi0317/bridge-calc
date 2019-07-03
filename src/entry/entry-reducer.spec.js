@@ -55,12 +55,15 @@ test("Starting round should set when its action dispatched", () => {
 });
 
 test("Add player should append the new name to the last and re-compute rounds", () => {
+  const action = addPlayerAction("DPGJW");
   const expected = {
     ...defaultState,
-    playerNames: ["John", "Mary", "Henry", "Joe", "DPGJW"],
+    playerNames: [
+      ...defaultState.playerNames,
+      { value: "DPGJW", id: action.payload.id }
+    ],
     rounds: 10
   };
-  const action = addPlayerAction("DPGJW");
   const actual = reducer(undefined, action);
   expect(actual).toEqual(expected);
 });
@@ -70,12 +73,15 @@ test("Add player should not re-compute rounds when rounds < maxAvailableRounds",
     ...defaultState,
     rounds: 8
   };
+  const action = addPlayerAction("DPGJW");
   const expected = {
     ...defaultState,
-    playerNames: ["John", "Mary", "Henry", "Joe", "DPGJW"],
+    playerNames: [
+      ...defaultState.playerNames,
+      { value: "DPGJW", id: action.payload.id }
+    ],
     rounds: 8
   };
-  const action = addPlayerAction("DPGJW");
   const actual = reducer(state, action);
   expect(actual).toEqual(expected);
 });

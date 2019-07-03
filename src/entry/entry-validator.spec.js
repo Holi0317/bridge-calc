@@ -8,10 +8,16 @@ import { makeEntryTree } from "../../test-fixtures/entry-options";
 
 /**
  * Create part of redux store tree for validator to consume.
- * @param {string[]} playerNames Player names array
+ *
+ * @param {string[]} names Player names array
  * @returns {Object} Part of redux tree for consumption
  */
-function makeTree(playerNames) {
+function makeTree(names) {
+  const playerNames = names.map((name, i) => ({
+    value: name,
+    id: i
+  }));
+
   return makeEntryTree({ playerNames });
 }
 
