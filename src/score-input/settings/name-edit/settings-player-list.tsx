@@ -3,26 +3,11 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { NameInputList } from "../../../name-input-list";
-import {
-  nameInputListSourceSelector,
-  PlayerName
-} from "../selectors/name-input-list-source";
-import { setNamesFromArrayAction } from "../actions/set-names";
+import { nameInputListSourceSelector } from "../selectors/name-input-list-source";
+import { setNamesFromEntries } from "../actions/set-names";
 import { settingsValidator } from "../settings-validator";
 import { trans } from "../../../utils";
 import { IRootState, Dispatch } from "../../../types";
-
-/**
- * Get player name from PlayerName type.
- * Used as getter of name-input-list component.
- */
-const getter = ([, name]: PlayerName) => name;
-
-/**
- * Set player name for PlayerName type.
- * Used as setter of name-input-list component.
- */
-const setter = (newVal: string, [ID]: PlayerName): PlayerName => [ID, newVal];
 
 const mapStateToProps = (state: IRootState) => ({
   names: nameInputListSourceSelector(state),
@@ -32,7 +17,7 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      changeNames: setNamesFromArrayAction
+      changeNames: setNamesFromEntries
     },
     dispatch
   );
@@ -49,18 +34,17 @@ export function SettingsPlayerListImpl({
 }: SettingsPlayerListProps) {
   const { t } = useTranslation();
 
-  return (
-    <NameInputList
-      values={names}
-      error={errors}
-      getter={getter}
-      setter={setter}
-      errorGetter={(error, [ID]: PlayerName) =>
-        error[ID] == null ? null : trans(t, error[ID])
-      }
-      onChange={changeNames}
-    />
-  );
+  const values = names.map(([id, value]) => {
+    const error = errors[id];
+
+    return {
+      value,
+      id,
+      error: error == null ? null : trans(t, error)
+    };
+  });
+
+  return <NameInputList values={values} onChange={changeNames} />;
 }
 
 export const SettingsPlayerList = connect(

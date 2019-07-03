@@ -1,7 +1,7 @@
 import fromPairs from "lodash-es/fromPairs";
 import { ActionTypes } from "../../../action-types";
 import { IPlayerMap } from "../../../types";
-import { PlayerName } from "../selectors/name-input-list-source";
+import { NameInputEntry } from "../../../name-input-list/types";
 
 export interface ISetNamesAction {
   type: ActionTypes.SET_NAMES;
@@ -20,8 +20,9 @@ export function setNamesAction(newNames: IPlayerMap<string>): ISetNamesAction {
   return { type: ActionTypes.SET_NAMES, newNames };
 }
 
-export function setNamesFromArrayAction(
-  newNames: PlayerName[]
+export function setNamesFromEntries(
+  newNames: NameInputEntry[]
 ): ISetNamesAction {
-  return { type: ActionTypes.SET_NAMES, newNames: fromPairs(newNames) };
+  const names = newNames.map(entry => [entry.id, entry.value]);
+  return { type: ActionTypes.SET_NAMES, newNames: fromPairs(names) };
 }
