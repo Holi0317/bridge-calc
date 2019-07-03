@@ -1,6 +1,4 @@
 import { activatedThemeSelector } from "./activated-theme";
-import { pinkTheme } from "../color-presets";
-import { createMuiTheme } from "@material-ui/core/styles";
 
 /**
  * Make partial of redux tree for consumption.
