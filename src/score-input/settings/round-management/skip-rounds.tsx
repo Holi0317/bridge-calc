@@ -32,9 +32,9 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-export class SkipRoundsImpl extends React.Component {
-  public props: stateType & dispatchType & WithTranslation;
+type SkipRoundsProps = stateType & dispatchType & WithTranslation;
 
+export class SkipRoundsImpl extends React.Component<SkipRoundsProps> {
   public render() {
     const { remainingRounds, t } = this.props;
     return (

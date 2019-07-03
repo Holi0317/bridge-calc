@@ -41,9 +41,9 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-export class MakerEditorImpl extends React.Component {
-  public props: stateType & dispatchType & WithTranslation;
+type MakerEditorProps = stateType & dispatchType & WithTranslation;
 
+export class MakerEditorImpl extends React.Component<MakerEditorProps> {
   public render() {
     const { maker, namesSource, disabled, setMaker, t } = this.props;
 

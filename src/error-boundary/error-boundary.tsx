@@ -5,12 +5,12 @@ import { Ouch } from "./ouch";
 interface IErrorBoundaryProps extends WithTranslation {
   children: React.ReactNode;
 }
+
 interface IErrorBoundaryState {
   error: Error | null;
 }
 
-export class ErrorBoundaryImpl extends React.Component {
-  public props: IErrorBoundaryProps;
+export class ErrorBoundaryImpl extends React.Component<IErrorBoundaryProps> {
   public state: IErrorBoundaryState = {
     error: null
   };

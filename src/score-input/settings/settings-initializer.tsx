@@ -21,9 +21,9 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 type SettingsInitializerProps = stateType & dispatchType;
 
-export class SettingsInitializerImpl extends React.Component {
-  public props: SettingsInitializerProps;
-
+export class SettingsInitializerImpl extends React.Component<
+  SettingsInitializerProps
+> {
   public componentWillMount() {
     const { init, currentGame } = this.props;
     init(currentGame);

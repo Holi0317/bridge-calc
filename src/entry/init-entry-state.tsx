@@ -16,9 +16,9 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 type InitEntryStateProps = dispatchType;
 
-export class InitEntryStateImpl extends React.PureComponent {
-  public props: InitEntryStateProps;
-
+export class InitEntryStateImpl extends React.PureComponent<
+  InitEntryStateProps
+> {
   public componentWillMount() {
     this.props.reset();
     this.props.setPlayerNames(genRandomNames());

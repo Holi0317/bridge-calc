@@ -17,11 +17,13 @@ function getActive(pathname: string): number {
 }
 
 type LayoutProps = RouteComponentProps<any> & WithTranslation;
+interface ILayoutState {
+  active: number;
+}
 
-export class LayoutImpl extends React.Component {
-  public props: LayoutProps;
-  public state: {
-    active: number;
+export class LayoutImpl extends React.Component<LayoutProps> {
+  public state: ILayoutState = {
+    active: 0
   };
 
   public componentWillMount() {

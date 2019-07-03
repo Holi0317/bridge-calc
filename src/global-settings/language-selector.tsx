@@ -29,10 +29,11 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   );
 
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
+type LanguageSelectorProps = dispatchType & WithTranslation;
 
-export class LanguageSelectorImpl extends React.Component {
-  public props: dispatchType & WithTranslation;
-
+export class LanguageSelectorImpl extends React.Component<
+  LanguageSelectorProps
+> {
   public render() {
     const { i18n, t } = this.props;
 

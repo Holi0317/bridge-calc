@@ -28,9 +28,9 @@ interface INameEntryProps {
   name: string[];
 }
 
-export class NameListEntryImpl extends React.Component {
-  public props: INameEntryProps & dispatchType & WithTranslation;
+type NameListEntryProps = INameEntryProps & dispatchType & WithTranslation;
 
+export class NameListEntryImpl extends React.Component<NameListEntryProps> {
   public render() {
     return (
       <ListItem button onClick={this.setNames}>

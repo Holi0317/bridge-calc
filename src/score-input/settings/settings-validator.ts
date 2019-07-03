@@ -61,9 +61,14 @@ function validateNames(names: IPlayerMap<string>): IPlayerMap<ITranslateData> {
 
 function validateMisc(
   names: IPlayerMap<string>,
-  currentRound: number,
+  currentRound: number | null,
   expectedRounds: number
 ): ITranslateData | null {
+  // Not in a game currently. This should not happen.
+  if (currentRound == null) {
+    return null;
+  }
+
   const size = Object.keys(names).length;
   if (size < 2) {
     return tData("At least 2 players is required for a game");
@@ -90,7 +95,7 @@ export const settingsValidator = createSelector(
   expectedRoundsSelector,
   (
     names: IPlayerMap<string>,
-    currentRound: number,
+    currentRound: number | null,
     expectedRounds: number
   ): ISettingsError => ({
     names: validateNames(names),

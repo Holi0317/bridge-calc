@@ -25,8 +25,7 @@ export interface IDropdownProps<T extends number | string> {
 
 export class Dropdown<
   SourceType extends number | string
-> extends React.Component {
-  public props: IDropdownProps<SourceType>;
+> extends React.Component<IDropdownProps<SourceType>> {
   private readonly _uid = cuid();
 
   public render() {

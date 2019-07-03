@@ -42,6 +42,17 @@ describe("settingsValidator", () => {
     expect(actual).toEqual(expected);
   });
 
+  test("it should pass (as fallback measure) if game is not started", () => {
+    const names = genMap("John", "Mary", "Henry", "Joe");
+    const tree = makeTree(names, null);
+    const expected = {
+      names: {},
+      misc: null
+    };
+    const actual = settingsValidator(tree);
+    expect(actual).toEqual(expected);
+  });
+
   test("it should fail if one of the name is empty", () => {
     const names = genMap("", "Mary", "Henry", "Joe");
     const tree = makeTree(names);

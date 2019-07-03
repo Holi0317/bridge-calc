@@ -18,9 +18,7 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 type SWRegProps = dispatchType & WithTranslation;
 
-class SWRegImpl extends React.Component {
-  public props: SWRegProps;
-
+class SWRegImpl extends React.Component<SWRegProps> {
   public componentDidMount() {
     if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
       this.install();

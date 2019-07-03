@@ -30,9 +30,7 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 type ActionButtonsProps = stateType & dispatchType & WithTranslation;
 
-export class ActionButtonsImpl extends React.Component {
-  public props: ActionButtonsProps;
-
+export class ActionButtonsImpl extends React.Component<ActionButtonsProps> {
   public render() {
     const { currentGame, undo, nextDisabled, t, undoDisabled } = this.props;
     const undoHandler =

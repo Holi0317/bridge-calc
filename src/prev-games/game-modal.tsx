@@ -42,11 +42,11 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-export class GameModalImpl extends React.Component {
-  public props: stateType &
-    dispatchType & { fullScreen: boolean } & WithTranslation &
-    RouteComponentProps<any>;
+type GameModalProps = stateType &
+  dispatchType & { fullScreen: boolean } & WithTranslation &
+  RouteComponentProps<any>;
 
+export class GameModalImpl extends React.Component<GameModalProps> {
   public render() {
     const { entry, fullScreen, close, t } = this.props;
 

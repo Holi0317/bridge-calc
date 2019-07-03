@@ -33,9 +33,7 @@ type ProtectedViewProps = IProtectedViewProps &
   dispatchType &
   WithTranslation;
 
-export class ProtectedViewImpl extends React.Component {
-  public props: ProtectedViewProps;
-
+export class ProtectedViewImpl extends React.Component<ProtectedViewProps> {
   public componentWillMount() {
     this.attemptShowToast(this.props);
   }

@@ -23,9 +23,7 @@ type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
 type PurgeDataProps = dispatchType & WithTranslation;
 
-export class PurgeDataImpl extends React.Component {
-  public props: PurgeDataProps;
-
+export class PurgeDataImpl extends React.Component<PurgeDataProps> {
   public render() {
     const { t } = this.props;
     return (

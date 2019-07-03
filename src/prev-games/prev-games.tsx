@@ -38,12 +38,12 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-export class PrevGamesImpl extends React.Component {
-  public props: stateType &
-    dispatchType &
-    RouteComponentProps<any> &
-    WithTranslation;
+type PrevGamesProps = stateType &
+  dispatchType &
+  RouteComponentProps<any> &
+  WithTranslation;
 
+export class PrevGamesImpl extends React.Component<PrevGamesProps> {
   public render() {
     const { havePrevGame, prevGames, t } = this.props;
     if (havePrevGame) {

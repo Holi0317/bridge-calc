@@ -31,9 +31,9 @@ type EntryStartButtonProps = stateType &
   RouteComponentProps<any> &
   WithTranslation;
 
-export class EntryStartButtonImpl extends React.PureComponent {
-  public props: EntryStartButtonProps;
-
+export class EntryStartButtonImpl extends React.PureComponent<
+  EntryStartButtonProps
+> {
   public render() {
     const { valid, miscError, t } = this.props;
     return (

@@ -25,9 +25,9 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-export class MigrationExecImpl extends React.Component {
-  public props: dispatchType & WithTranslation;
+type MigrateExecProps = dispatchType & WithTranslation;
 
+export class MigrationExecImpl extends React.Component<MigrateExecProps> {
   public componentDidMount() {
     setTimeout(() => {
       if (hasOldData()) {

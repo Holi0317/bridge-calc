@@ -46,12 +46,14 @@ interface IMutateNameDialogProps {
 interface IMutateNameDialogState {
   chosenMaker: string;
 }
+type MutateNameDialogProps = IMutateNameDialogProps &
+  stateType &
+  dispatchType &
+  WithTranslation;
 
-export class MutateNameDialogImpl extends React.Component {
-  public props: IMutateNameDialogProps &
-    stateType &
-    dispatchType &
-    WithTranslation;
+export class MutateNameDialogImpl extends React.Component<
+  MutateNameDialogProps
+> {
   public state: IMutateNameDialogState = {
     chosenMaker: ""
   };
