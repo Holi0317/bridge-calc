@@ -1,0 +1,10 @@
+{
+  "eslint.filetypes": [
+    "javascript",
+    "javascript.jsx",
+    "typescript",
+    "typescript.jsx",
+    "typescript.tsx"
+  ],
+  "eslint.autoFixOnSave": true
+}

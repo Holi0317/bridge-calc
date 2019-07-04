@@ -1,6 +1,9 @@
+parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaVersion: 2018
   sourceType: module
+  project: ./tsconfig.json
+
 env:
   browser: true
   node: true
@@ -10,14 +13,15 @@ env:
 
 extends:
   - eslint:recommended
+  - plugin:@typescript-eslint/recommended
   - prettier
+  - prettier/@typescript-eslint
 
 rules:
   getter-return: error
   no-await-in-loop: warn
   no-prototype-builtins: error
   no-template-curly-in-string: warn
-  valid-jsdoc: error
 
   array-callback-return: error
   dot-notation: error
@@ -54,3 +58,16 @@ rules:
     - 2
     - { ignoreRestSiblings: true, argsIgnorePattern: "^_" }
   prefer-object-spread: error
+
+  "@typescript-eslint/await-thenable": error
+  "@typescript-eslint/member-naming": error
+  "@typescript-eslint/explicit-function-return-type":
+    - 1
+    - { allowExpressions: true }
+  # Turning off require() check because of webpack config
+  "@typescript-eslint/no-var-requires": off
+  "@typescript-eslint/no-non-null-assertion": off
+  "@typescript-eslint/no-explicit-any": off
+  # This is detected in tsc
+  # And linter's cannot detect implicit use of React
+  "@typescript-eslint/no-unused-vars": off
