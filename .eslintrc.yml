@@ -54,9 +54,8 @@ rules:
   spaced-comment: error
   no-floating-decimal: error
   no-console: off
-  no-unused-vars:
-    - 2
-    - { ignoreRestSiblings: true, argsIgnorePattern: "^_" }
+  # Detected in tsc
+  no-unused-vars: off
   prefer-object-spread: error
 
   "@typescript-eslint/await-thenable": error
