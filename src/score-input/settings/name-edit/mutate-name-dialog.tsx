@@ -1,8 +1,7 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -16,113 +15,63 @@ import { expectedRoundsSelector } from "../selectors/expected-rounds";
 import { changePlayersAction } from "../../actions/change-players";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { initSettingsAction } from "../actions/init-settings";
-import { RootState, Dispatch } from "../../../types";
-
-const mapStateToProps = (state: RootState) => ({
-  currentGame: state.currentGame,
-  names: namesSelector(state),
-  rounds: expectedRoundsSelector(state),
-  makers: makerSourceSelector(state)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      changePlayers: changePlayersAction,
-      init: initSettingsAction,
-      showToast: showToastAction
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+import { RootState } from "../../../types";
+import { useAction } from "../../../hooks/use-action";
 
 interface MutateNameDialogProps {
   open: boolean;
   onRequestClose(): void;
 }
 
-interface MutateNameDialogState {
-  chosenMaker: string;
-}
-type MutateNameDialogProps = MutateNameDialogProps &
-  stateType &
-  dispatchType &
-  WithTranslation;
+export function MutateNameDialog({
+  open,
+  onRequestClose
+}: MutateNameDialogProps) {
+  const { t } = useTranslation();
 
-export class MutateNameDialogImpl extends React.Component<
-  MutateNameDialogProps
-> {
-  public state: MutateNameDialogState = {
-    chosenMaker: ""
-  };
+  const currentGame = useSelector((state: RootState) => state.currentGame);
+  const names = useSelector(namesSelector);
+  const rounds = useSelector(expectedRoundsSelector);
+  const makers = useSelector(makerSourceSelector);
+  const [chosenMaker, setChosen] = useState("");
 
-  public render() {
-    const { makers, open, rounds, t } = this.props;
-    const { chosenMaker } = this.state;
+  const changePlayers = useAction(changePlayersAction);
+  const init = useAction(initSettingsAction);
+  const showToast = useAction(showToastAction);
 
-    return (
-      <Dialog onClose={this.reject} open={open}>
-        <DialogTitle>{t("Choose the maker for this round")}</DialogTitle>
-
-        <DialogContent>
-          <Dropdown
-            label={t("Maker")}
-            value={chosenMaker}
-            source={makers}
-            onChange={this.makerChanged}
-          />
-          <Typography>
-            {t("Expected rounds: {{rounds}}", { rounds })}
-          </Typography>
-        </DialogContent>
-
-        <DialogActions>
-          <Button color="primary" onClick={this.reject}>
-            {t("Cancel")}
-          </Button>
-          <Button
-            disabled={chosenMaker === ""}
-            color="primary"
-            onClick={this.confirm}
-          >
-            {t("Submit")}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
-
-  private makerChanged = (ID: string) => {
-    this.setState(() => ({
-      chosenMaker: ID
-    }));
-  };
-
-  private confirm = () => {
-    const maker = this.state.chosenMaker;
-    const { names, rounds, changePlayers } = this.props;
-    changePlayers(names, maker, rounds);
+  const confirm = () => {
+    changePlayers(names, chosenMaker, rounds);
 
     // Reset setting state after a tick
     window.setTimeout(() => {
-      const { init, currentGame, showToast, onRequestClose, t } = this.props;
       init(currentGame);
       onRequestClose();
       showToast(t("Player name changed!"));
-    }, 0);
+    });
   };
 
-  private reject = () => {
-    this.props.onRequestClose();
-  };
+  return (
+    <Dialog onClose={onRequestClose} open={open}>
+      <DialogTitle>{t("Choose the maker for this round")}</DialogTitle>
+
+      <DialogContent>
+        <Dropdown
+          label={t("Maker")}
+          value={chosenMaker}
+          source={makers}
+          onChange={(id: string) => setChosen(id)}
+        />
+        <Typography>{t("Expected rounds: {{rounds}}", { rounds })}</Typography>
+      </DialogContent>
+
+      <DialogActions>
+        <Button color="primary" onClick={onRequestClose}>
+          {t("Cancel")}
+        </Button>
+        <Button disabled={chosenMaker === ""} color="primary" onClick={confirm}>
+          {t("Submit")}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
-
-export const MutateNameDialog = flowRight(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(MutateNameDialogImpl) as React.ComponentType<MutateNameDialogProps>;
