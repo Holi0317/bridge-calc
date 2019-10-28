@@ -60,7 +60,8 @@
     "react-sortable-hoc": "1.10.1",
     "redux": "4.0.4",
     "redux-persist": "6.0.0",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "tslib": "1.10.0"
   },
   "devDependencies": {
     "@babel/preset-env": "7.6.3",
