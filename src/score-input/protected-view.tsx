@@ -1,72 +1,41 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { bindActionCreators } from "redux";
 import { Redirect, Route } from "react-router";
-import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { GameStage } from "./game-stage";
 import { stageSelector } from "./selectors/stage";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
-import { RootState, Dispatch } from "../types";
+import { useAction } from "../hooks/use-action";
+import { useCallback, useEffect } from "react";
 
 interface ProtectedViewProps {
   comp: React.ComponentType<{}>;
 }
 
-const mapStateToProps = (state: RootState) => ({
-  ended: stageSelector(state) === GameStage.ended
-});
+export function ProtectedView({ comp: Comp }: ProtectedViewProps) {
+  const { t } = useTranslation();
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      showToast: showToastAction
-    },
-    dispatch
-  );
+  const stage = useSelector(stageSelector);
+  const ended = stage === GameStage.ended;
 
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+  const showToast = useAction(showToastAction);
 
-type ProtectedViewProps = ProtectedViewProps &
-  stateType &
-  dispatchType &
-  WithTranslation;
-
-export class ProtectedViewImpl extends React.Component<ProtectedViewProps> {
-  public componentWillMount() {
-    this.attemptShowToast(this.props);
-  }
-
-  public componentWillReceiveProps(props: ProtectedViewProps) {
-    this.attemptShowToast(props);
-  }
-
-  public render() {
-    const { comp: Comp, ended } = this.props;
-    return (
-      <Route
-        render={() => {
-          if (ended) {
-            return <Redirect to="/score-input/scoreboard" />;
-          }
-          return <Comp />;
-        }}
-      />
-    );
-  }
-
-  private attemptShowToast({ ended, showToast, t }: ProtectedViewProps) {
+  const attemptShowToast = useCallback(() => {
     if (ended) {
       showToast(t("Game has ended"));
     }
-  }
-}
+  }, [ended, showToast, t]);
 
-export const ProtectedView = flowRight(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(ProtectedViewImpl) as React.ComponentType<ProtectedViewProps>;
+  useEffect(attemptShowToast);
+
+  return (
+    <Route
+      render={() => {
+        if (ended) {
+          return <Redirect to="/score-input/scoreboard" />;
+        }
+        return <Comp />;
+      }}
+    />
+  );
+}
