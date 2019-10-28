@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as Loadable from "react-loadable";
 import { hasOldData } from "./old-state-manager";
+import { useState, useEffect } from "react";
 
 const importer = () =>
   import("./migration-exec" /* webpackChunkName: "migration-exec" */).then(
@@ -13,24 +14,13 @@ const LoadableDialog = Loadable({
   loading: () => null
 });
 
-interface MigrationState {
-  hasOldState: boolean;
-}
-
-export class Migration extends React.Component {
-  public state: MigrationState = {
-    hasOldState: false
-  };
-
-  public componentDidMount() {
+export function Migration() {
+  const [hasOldState, setOldState] = useState(false);
+  useEffect(() => {
     if (hasOldData()) {
-      this.setState(() => ({
-        hasOldState: true
-      }));
+      setOldState(true);
     }
-  }
+  });
 
-  public render() {
-    return this.state.hasOldState ? <LoadableDialog /> : null;
-  }
+  return hasOldState ? <LoadableDialog /> : null;
 }
