@@ -1,8 +1,4 @@
-import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
-import { bindActionCreators } from "redux";
+import { useTranslation } from "react-i18next";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
 import {
@@ -12,35 +8,18 @@ import {
   isNotStarted
 } from "./old-state-manager";
 import { migrateOldState } from "./converter";
-import { Dispatch } from "../types";
+import { useEffect } from "react";
+import { useAction } from "../hooks/use-action";
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      showToast: showToastAction,
-      replaceCurrentGame: replaceCurrentGameAction
-    },
-    dispatch
-  );
+/**
+ * React hook that create migrate function for attempting migration
+ */
+function useMigrate() {
+  const { t } = useTranslation();
+  const replaceCurrentGame = useAction(replaceCurrentGameAction);
+  const showToast = useAction(showToastAction);
 
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type MigrateExecProps = dispatchType & WithTranslation;
-
-export class MigrationExecImpl extends React.Component<MigrateExecProps> {
-  public componentDidMount() {
-    setTimeout(() => {
-      if (hasOldData()) {
-        this.tryMigrate();
-      }
-    }, 500);
-  }
-
-  public render() {
-    return null;
-  }
-
-  private tryMigrate = () => {
+  return () => {
     try {
       const oldState = retrieveOldData();
       if (oldState == null) {
@@ -56,7 +35,6 @@ export class MigrationExecImpl extends React.Component<MigrateExecProps> {
 
       const state = migrateOldState(oldState);
 
-      const { replaceCurrentGame, showToast, t } = this.props;
       replaceCurrentGame(state);
       showToast(t("Migrated game data from old version"));
     } catch (e) {
@@ -66,10 +44,16 @@ export class MigrationExecImpl extends React.Component<MigrateExecProps> {
   };
 }
 
-export const MigrationExec = flowRight(
-  withTranslation(),
-  connect(
-    null,
-    mapDispatchToProps
-  )
-)(MigrationExecImpl);
+export function MigrationExec() {
+  const tryMigrate = useMigrate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (hasOldData()) {
+        tryMigrate();
+      }
+    }, 500);
+  });
+
+  return null;
+}
