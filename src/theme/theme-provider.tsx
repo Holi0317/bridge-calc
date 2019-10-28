@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { activatedThemeSelector } from "./selectors/activated-theme";
 import { cssPropsSelector } from "./selectors/css-props";
-import { IRootState } from "../types";
+import { RootState } from "../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   theme: activatedThemeSelector(state),
   cssProps: cssPropsSelector(state)
 });
