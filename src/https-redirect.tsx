@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 
 function isLocalHost(hostname: string) {
   return !!(
@@ -8,23 +9,32 @@ function isLocalHost(hostname: string) {
   );
 }
 
-export class HttpsRedirect extends React.Component {
-  public constructor(props: any) {
-    super(props);
-    if (
-      typeof window !== "undefined" &&
-      window.location &&
-      window.location.protocol === "http:" &&
-      !isLocalHost(window.location.hostname)
-    ) {
+function needRedirect(win: Window) {
+  return (
+    win != null &&
+    win.location != null &&
+    win.location.protocol === "http:" &&
+    !isLocalHost(win.location.hostname)
+  );
+}
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export function HttpsRedirect(props: Props) {
+  const redir = needRedirect(window);
+  useEffect(() => {
+    if (redir) {
       window.location.href = window.location.href.replace(
         /^http(?!s)/,
         "https"
       );
     }
-  }
+  });
 
-  public render() {
-    return this.props.children;
+  if (redir) {
+    return null;
   }
+  return props.children;
 }
