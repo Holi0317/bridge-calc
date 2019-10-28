@@ -1,9 +1,6 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { WithTranslation, withTranslation } from "react-i18next";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { Container } from "../material/container";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
@@ -16,89 +13,52 @@ import { deleteGameAction } from "./actions/delete-game";
 import { showGameModalAction } from "./actions/game-modal";
 import { havePrevGamesSelector } from "./selectors/have-prev-games";
 import { reversedPrevGamesSelector } from "./selectors/reversed-prev-games";
-import { RootState, Dispatch } from "../types";
+import { RootState } from "../types";
 import classes from "./prev-games.pcss";
+import { useAction } from "../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  currentGame: state.currentGame,
-  havePrevGame: havePrevGamesSelector(state),
-  prevGames: reversedPrevGamesSelector(state)
-});
+export function PrevGames() {
+  const { t } = useTranslation();
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      del: deleteGameAction,
-      show: showGameModalAction,
-      load: replaceCurrentGameAction
-    },
-    dispatch
-  );
+  const currentGame = useSelector((state: RootState) => state.currentGame);
+  const havePrevGame = useSelector(havePrevGamesSelector);
+  const prevGames = useSelector(reversedPrevGamesSelector);
 
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+  const del = useAction(deleteGameAction);
+  const show = useAction(showGameModalAction);
+  const load = useAction(replaceCurrentGameAction);
 
-type PrevGamesProps = stateType &
-  dispatchType &
-  RouteComponentProps<any> &
-  WithTranslation;
-
-export class PrevGamesImpl extends React.Component<PrevGamesProps> {
-  public render() {
-    const { havePrevGame, prevGames, t } = this.props;
-    if (havePrevGame) {
-      return (
-        <Container>
-          <div className={classes.prevGameContainer}>
-            <Typography variant="h4" gutterBottom>
-              {t("Click on an entry for details")}
-            </Typography>
-            <List>
-              {prevGames.map((prevGame, index) => (
-                <PrevGame
-                  key={`prev-game-${index}`}
-                  game={prevGame}
-                  requestDetail={this.makeDetails(index)}
-                  requestDelete={this.makeDel(index)}
-                />
-              ))}
-            </List>
-          </div>
-          <GameModal />
-          <ResetModal />
-        </Container>
-      );
-    }
-
-    return <NoPrevGamePlaceholder />;
+  if (havePrevGame) {
+    return (
+      <Container>
+        <div className={classes.prevGameContainer}>
+          <Typography variant="h4" gutterBottom>
+            {t("Click on an entry for details")}
+          </Typography>
+          <List>
+            {prevGames.map((prevGame, revIndex) => (
+              <PrevGame
+                key={`prev-game-${revIndex}`}
+                game={prevGame}
+                requestDetail={() => {
+                  show(prevGames.length - revIndex - 1);
+                }}
+                requestDelete={() => {
+                  const entry = prevGames[revIndex];
+                  if (currentGame && currentGame.id === entry.id) {
+                    load(null);
+                  }
+                  del(prevGames.length - revIndex - 1);
+                }}
+              />
+            ))}
+          </List>
+        </div>
+        <GameModal />
+        <ResetModal />
+      </Container>
+    );
   }
 
-  private makeDel(reversedIndex: number) {
-    return () => {
-      const { prevGames, del, currentGame, load } = this.props;
-      const index = prevGames.length - reversedIndex - 1;
-      const entry = prevGames[reversedIndex];
-      if (currentGame && currentGame.id === entry.id) {
-        load(null);
-      }
-      del(index);
-    };
-  }
-
-  private makeDetails(reversedIndex: number) {
-    return () => {
-      const { prevGames, show } = this.props;
-      const index = prevGames.length - reversedIndex - 1;
-      show(index);
-    };
-  }
+  return <NoPrevGamePlaceholder />;
 }
-
-export const PrevGames = flowRight(
-  withRouter,
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(PrevGamesImpl);
