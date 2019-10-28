@@ -60,9 +60,8 @@ rules:
 
   "@typescript-eslint/await-thenable": error
   "@typescript-eslint/member-naming": error
-  "@typescript-eslint/explicit-function-return-type":
-    - 1
-    - { allowExpressions: true }
+  # This is way too annoying when creating component / connectors
+  "@typescript-eslint/explicit-function-return-type": off
   # Turning off require() check because of webpack config
   "@typescript-eslint/no-var-requires": off
   "@typescript-eslint/no-non-null-assertion": off

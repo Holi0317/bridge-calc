@@ -4,7 +4,9 @@
     "javascript.jsx",
     "typescript",
     "typescript.jsx",
-    "typescript.tsx"
+    "typescript.tsx",
+    "typescriptreact",
+    "javascriptreact"
   ],
   "eslint.autoFixOnSave": true
 }
