@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { namesSelector as settingsNamesSelector } from "./names";
 import { namesSelector } from "../../selectors/names";
-import { IPlayerMap } from "../../../types";
+import { PlayerMap } from "../../../types";
 
 /**
  * Determine if settings name list has changed by doing an identity comparison (read: ===)
@@ -9,6 +9,6 @@ import { IPlayerMap } from "../../../types";
 export const namesChangedSelector = createSelector(
   settingsNamesSelector,
   namesSelector,
-  (settingsName: IPlayerMap<string>, names: IPlayerMap<string>): boolean =>
+  (settingsName: PlayerMap<string>, names: PlayerMap<string>): boolean =>
     settingsName !== names
 );

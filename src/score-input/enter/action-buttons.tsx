@@ -10,10 +10,10 @@ import { isStackInputValid } from "./stack-input-validator";
 import { bidAction } from "../actions/bid";
 import { winAction } from "../actions/win";
 import { undoAction } from "../actions/undo";
-import { IRootState, Dispatch } from "../../types";
+import { RootState, Dispatch } from "../../types";
 import classes from "./action-buttons.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   undoDisabled: stageSelector(state) !== GameStage.waitingWin,
   nextDisabled: !isStackInputValid(state),
   currentGame: state.currentGame
@@ -33,10 +33,8 @@ type ActionButtonsProps = stateType & dispatchType & WithTranslation;
 export class ActionButtonsImpl extends React.Component<ActionButtonsProps> {
   public render() {
     const { currentGame, undo, nextDisabled, t, undoDisabled } = this.props;
-    const undoHandler =
-      currentGame == null
-        ? undefined // Material-ui needs this to be undefined instead of null
-        : undo;
+    // Material-ui needs handler to be undefined instead of null
+    const undoHandler = currentGame == null ? undefined : undo;
 
     return (
       <div className={classes.btnContainer}>

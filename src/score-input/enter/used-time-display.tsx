@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { endTimeSelector, startTimeSelector } from "../selectors/time";
-import { IRootState } from "../../types";
+import { RootState } from "../../types";
 import Typography from "@material-ui/core/Typography/Typography";
 
 function msToTime(milliseconds: number): string {
@@ -37,7 +37,7 @@ function duration(
   return msToTime(largerTime - startTime.getTime());
 }
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   startTime: startTimeSelector(state),
   endTime: endTimeSelector(state)
 });

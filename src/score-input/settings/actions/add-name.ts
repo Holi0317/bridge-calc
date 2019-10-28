@@ -2,7 +2,7 @@ import { ActionTypes } from "../../../action-types";
 import { randomName } from "../../../example-names";
 import { cuid } from "../../../utils";
 
-export interface IAddNameAction {
+export interface AddNameAction {
   type: ActionTypes.ADD_NAME;
   /**
    * Name of the new player
@@ -19,10 +19,10 @@ export interface IAddNameAction {
  * This does NOT change currentGame state in the store.
  * @param name - Name of the new Player
  */
-export function addNameAction(name: string): IAddNameAction {
+export function addNameAction(name: string): AddNameAction {
   return { type: ActionTypes.ADD_NAME, name, ID: cuid() };
 }
 
-export function addRandomNameAction(): IAddNameAction {
+export function addRandomNameAction(): AddNameAction {
   return { type: ActionTypes.ADD_NAME, name: randomName(), ID: cuid() };
 }

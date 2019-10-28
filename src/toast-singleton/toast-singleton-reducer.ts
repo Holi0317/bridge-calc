@@ -1,13 +1,13 @@
 import { ToastSingletonActions } from "./actions";
 import { ActionTypes } from "../action-types";
 
-export interface IToastSingletonState {
+export interface ToastSingletonState {
   open: boolean;
   message: string;
   autoHideDuration: number;
 }
 
-const defaultState: IToastSingletonState = {
+const defaultState: ToastSingletonState = {
   open: false,
   message: "",
   autoHideDuration: 3000
@@ -16,7 +16,7 @@ const defaultState: IToastSingletonState = {
 export function toastSingletonReducer(
   state = defaultState,
   action: ToastSingletonActions
-): IToastSingletonState {
+): ToastSingletonState {
   switch (action.type) {
     case ActionTypes.SHOW_TOAST:
       return {

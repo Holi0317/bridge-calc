@@ -2,9 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { initSettingsAction } from "./actions/init-settings";
-import { IRootState, Dispatch } from "../../types";
+import { RootState, Dispatch } from "../../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   currentGame: state.currentGame
 });
 

@@ -7,9 +7,9 @@ import { nameInputListSourceSelector } from "../selectors/name-input-list-source
 import { setNamesFromEntries } from "../actions/set-names";
 import { settingsValidator } from "../settings-validator";
 import { trans } from "../../../utils";
-import { IRootState, Dispatch } from "../../../types";
+import { RootState, Dispatch } from "../../../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   names: nameInputListSourceSelector(state),
   errors: settingsValidator(state).names
 });

@@ -1,13 +1,13 @@
 import { GameState } from "../reducer";
 import { ActionTypes } from "../../action-types";
 
-export interface IReplaceCurrentGameAction {
+export interface ReplaceCurrentGameAction {
   type: ActionTypes.REPLACE_CURRENT_GAME;
   payload: GameState;
 }
 
 export function replaceCurrentGameAction(
   payload: GameState
-): IReplaceCurrentGameAction {
+): ReplaceCurrentGameAction {
   return { type: ActionTypes.REPLACE_CURRENT_GAME, payload };
 }

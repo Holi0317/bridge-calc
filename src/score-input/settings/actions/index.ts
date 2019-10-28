@@ -1,12 +1,12 @@
-import { IInitSettingsAction } from "./init-settings";
-import { ISetMakerAction } from "./set-maker";
-import { ISetNamesAction } from "./set-names";
-import { IAddNameAction } from "./add-name";
-import { IToggleExpandAction } from "./toggle-expand";
+import { InitSettingsAction } from "./init-settings";
+import { SetMakerAction } from "./set-maker";
+import { SetNamesAction } from "./set-names";
+import { AddNameAction } from "./add-name";
+import { ToggleExpandAction } from "./toggle-expand";
 
 export type GameSettingsActions =
-  | IInitSettingsAction
-  | ISetMakerAction
-  | ISetNamesAction
-  | IAddNameAction
-  | IToggleExpandAction;
+  | InitSettingsAction
+  | SetMakerAction
+  | SetNamesAction
+  | AddNameAction
+  | ToggleExpandAction;

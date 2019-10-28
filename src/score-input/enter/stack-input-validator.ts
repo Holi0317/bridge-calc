@@ -8,39 +8,39 @@ import { bidSelector } from "../selectors/bid";
 import { winSelector } from "../selectors/win";
 import { currentRoundSelector } from "../selectors/current-round";
 import { GameStage } from "../game-stage";
-import { isOk, ITranslateData, removeUndef, tData } from "../../utils";
-import { IPlayerMap } from "../../types";
+import { isOk, TranslateData, removeUndef, tData } from "../../utils";
+import { PlayerMap } from "../../types";
 
-export interface IStackInput {
-  bid?: IPlayerMap<number>;
-  win?: IPlayerMap<number>;
+export interface StackInput {
+  bid?: PlayerMap<number>;
+  win?: PlayerMap<number>;
   currentRound: number;
   lastPlayerID: string;
 }
 
-export interface IStackInputError {
+export interface StackInputError {
   /**
    * Error in bid for given input from players.
    *
    * If all player's input are valid, this property will be undefined.
    *
-   * If the player's input is invalid, then this property will be a `IPlayerMap`
+   * If the player's input is invalid, then this property will be a `PlayerMap`
    * that map player ID to error message.
    *
    * If the player's input is valid, the value of the player id will be
    * undefined.
    */
-  bid?: IPlayerMap<ITranslateData>;
+  bid?: PlayerMap<TranslateData>;
 
   /**
    * Error in win for given input from players.
    *
    * @see {IStackInputError.bid} for behaviour in returning error message
    */
-  win?: IPlayerMap<ITranslateData>;
+  win?: PlayerMap<TranslateData>;
 }
 
-function validateBid(opts: IStackInput): IPlayerMap<ITranslateData> | null {
+function validateBid(opts: StackInput): PlayerMap<TranslateData> | null {
   if (!opts.bid) {
     return null;
   }
@@ -50,7 +50,7 @@ function validateBid(opts: IStackInput): IPlayerMap<ITranslateData> | null {
     : null;
 }
 
-function validateWin(opts: IStackInput): IPlayerMap<ITranslateData> | null {
+function validateWin(opts: StackInput): PlayerMap<TranslateData> | null {
   if (!opts.win || /* Is empty? */ isOk(opts.win)) {
     return null;
   }
@@ -80,10 +80,10 @@ export const stackInputValidator = createSelector(
   (
     stage: GameStage | null,
     playerOrder: string[],
-    bid: IPlayerMap<number>,
-    win: IPlayerMap<number>,
+    bid: PlayerMap<number>,
+    win: PlayerMap<number>,
     currentRound: number
-  ): IStackInputError => {
+  ): StackInputError => {
     if (!stage || stage === GameStage.ended) {
       return {};
     }

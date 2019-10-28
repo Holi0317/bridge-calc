@@ -1,6 +1,6 @@
 import { ActionTypes } from "../../action-types";
 
-export interface IDeleteGameAction {
+export interface DeleteGameAction {
   type: ActionTypes.DELETE_GAME;
   index: number;
 }
@@ -9,6 +9,6 @@ export interface IDeleteGameAction {
  * Delete a game from previous game state tree in redux.
  * @param index - index of the game in prevGame state desired to delete.
  */
-export function deleteGameAction(index: number): IDeleteGameAction {
+export function deleteGameAction(index: number): DeleteGameAction {
   return { type: ActionTypes.DELETE_GAME, index };
 }

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SortableContainer } from "react-sortable-hoc";
-import { INameInputListProps, INameInputEntry } from "./types";
+import { NameInputListProps, NameInputEntry } from "./types";
 import { SortableItem } from "./item";
 import classes from "./name-input-list.pcss";
 
@@ -10,8 +10,8 @@ import classes from "./name-input-list.pcss";
  * (Yes, this curries 2 times)
  */
 function createChangeHandler(
-  items: INameInputEntry[],
-  change: (newItems: INameInputEntry[]) => void
+  items: NameInputEntry[],
+  change: (newItems: NameInputEntry[]) => void
 ) {
   return (index: number) => (newValue: string) => {
     const newItems = items.slice();
@@ -28,8 +28,8 @@ function createChangeHandler(
  * This will call change handler once the second returned function is called.
  */
 function createRemoveHandler(
-  items: INameInputEntry[],
-  change: (newItems: INameInputEntry[]) => void
+  items: NameInputEntry[],
+  change: (newItems: NameInputEntry[]) => void
 ) {
   return (index: number) => () => {
     const newItems = items.slice();
@@ -38,7 +38,7 @@ function createRemoveHandler(
   };
 }
 
-export function ContainerImpl({ values, onChange }: INameInputListProps) {
+export function ContainerImpl({ values, onChange }: NameInputListProps) {
   const changeHandler = createChangeHandler(values, onChange);
   const removeHandler = createRemoveHandler(values, onChange);
 

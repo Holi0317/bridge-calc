@@ -1,6 +1,6 @@
 import mapValues from "lodash-es/mapValues";
 import { calculateScore } from "./calculate-score";
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 
 /**
  * Helper function for reducer.
@@ -11,9 +11,9 @@ import { IPlayerMap } from "../../types";
  * @returns New score object that maps player id to their score array
  */
 export function computeScores(
-  bids: IPlayerMap<number>,
-  wins: IPlayerMap<number>,
-  scores: IPlayerMap<number[]>
+  bids: PlayerMap<number>,
+  wins: PlayerMap<number>,
+  scores: PlayerMap<number[]>
 ) {
   return mapValues(scores, (score, playerID) => {
     const bid = bids[playerID];

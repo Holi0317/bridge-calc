@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import { namesSelector } from "./names";
-import { IPlayerMap } from "../../../types";
+import { PlayerMap } from "../../../types";
 
 /**
  * PlayerName structure to be passed into name-input-list component.
@@ -14,5 +14,5 @@ export type PlayerName = [string, string];
  */
 export const nameInputListSourceSelector = createSelector(
   namesSelector,
-  (names: IPlayerMap<string>): PlayerName[] => Object.entries(names)
+  (names: PlayerMap<string>): PlayerName[] => Object.entries(names)
 );

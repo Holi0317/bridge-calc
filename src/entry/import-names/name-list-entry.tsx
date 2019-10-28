@@ -25,11 +25,11 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-interface INameEntryProps {
+interface NameEntryProps {
   name: string[];
 }
 
-type NameListEntryProps = INameEntryProps & dispatchType & WithTranslation;
+type NameListEntryProps = NameEntryProps & dispatchType & WithTranslation;
 
 export class NameListEntryImpl extends React.Component<NameListEntryProps> {
   public render() {
@@ -54,4 +54,4 @@ export const NameListEntry = flowRight(
     null,
     mapDispatchToProps
   )
-)(NameListEntryImpl) as React.ComponentType<INameEntryProps>;
+)(NameListEntryImpl) as React.ComponentType<NameEntryProps>;

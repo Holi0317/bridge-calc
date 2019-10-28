@@ -6,12 +6,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import ContentAdd from "@material-ui/icons/Add";
 import { addRandomNameAction } from "../actions/add-name";
-import { Dispatch, IRootState } from "../../../types";
+import { Dispatch, RootState } from "../../../types";
 import { settingsValidator } from "../settings-validator";
 import Typography from "@material-ui/core/Typography";
 import { trans } from "../../../utils";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   error: settingsValidator(state).misc
 });
 

@@ -1,9 +1,9 @@
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 
-export interface IBidAction {
+export interface BidAction {
   type: ActionTypes.BID;
-  payload?: IPlayerMap<number>;
+  payload?: PlayerMap<number>;
 }
 
 /**
@@ -11,6 +11,6 @@ export interface IBidAction {
  * @param payload - A map that maps player ID to their bid choice.
  * If undefined, bid property in currentGame state will be used
  */
-export function bidAction(payload?: IPlayerMap<number>): IBidAction {
+export function bidAction(payload?: PlayerMap<number>): BidAction {
   return { type: ActionTypes.BID, payload };
 }

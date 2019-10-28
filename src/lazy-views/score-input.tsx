@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Loadable from "react-loadable";
 import { connect } from "react-redux";
 import { Loading } from "./loading";
-import { IRootState } from "../types";
+import { RootState } from "../types";
 import { Redirect } from "react-router";
 
 const importer = () =>
@@ -15,7 +15,7 @@ export const Content = Loadable({
   loading: Loading
 });
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   gameRedirect: state.currentGame == null
 });
 

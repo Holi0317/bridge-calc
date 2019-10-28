@@ -10,19 +10,21 @@ import Paper from "@material-ui/core/Paper";
 import { ErrorBoundary } from "../error-boundary";
 
 function getActive(pathname: string): number {
-  // Create a matches array.
-  // If match, it will be marked as 1 in the array. null otherwise
+  /*
+   * Create a matches array.
+   * If match, it will be marked as 1 in the array. null otherwise
+   */
   const index = routes.findIndex(route => matchPath(pathname, route) != null);
   return index === -1 ? 0 : index;
 }
 
 type LayoutProps = RouteComponentProps<any> & WithTranslation;
-interface ILayoutState {
+interface LayoutState {
   active: number;
 }
 
 export class LayoutImpl extends React.Component<LayoutProps> {
-  public state: ILayoutState = {
+  public state: LayoutState = {
     active: 0
   };
 

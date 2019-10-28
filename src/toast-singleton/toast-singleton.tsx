@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { closeToastAction } from "./actions/close-toast";
 import Snackbar from "@material-ui/core/Snackbar";
-import { IRootState, Dispatch } from "../types";
+import { RootState, Dispatch } from "../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   param: state.toastSingleton
 });
 

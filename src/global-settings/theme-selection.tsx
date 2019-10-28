@@ -11,9 +11,9 @@ import { isDarkThemeSelector } from "../theme/selectors/is-dark-theme";
 import { setThemeAction } from "../theme/actions/set-theme";
 import { toggleDarkAction } from "../theme/actions/toggle-dark";
 import { themes } from "../theme/color-presets";
-import { IRootState, Dispatch } from "../types";
+import { RootState, Dispatch } from "../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   selectedTheme: selectedThemeSelector(state),
   dark: isDarkThemeSelector(state)
 });

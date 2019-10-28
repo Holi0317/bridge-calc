@@ -1,4 +1,4 @@
-export interface INameInputEntry {
+export interface NameInputEntry {
   /**
    * Unique identifier for this entry.
    *
@@ -19,13 +19,13 @@ export interface INameInputEntry {
   error: string | null;
 }
 
-export interface INameInputListProps {
+export interface NameInputListProps {
   /**
    * Values of data to be filled.
    */
-  values: INameInputEntry[];
+  values: NameInputEntry[];
   /**
    * When data is changed (modified, renamed, deleted), this will be called with new data array.
    */
-  onChange(values: INameInputEntry[]): void;
+  onChange(values: NameInputEntry[]): void;
 }

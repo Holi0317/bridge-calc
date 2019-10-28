@@ -1,14 +1,14 @@
 import { createSelector } from "reselect";
 import mapValues from "lodash-es/mapValues";
 import { namesSelector } from "./selectors/names";
-import { dupe, isOk, ITranslateData, removeUndef, tData } from "../../utils";
-import { IPlayerMap } from "../../types";
+import { dupe, isOk, TranslateData, removeUndef, tData } from "../../utils";
+import { PlayerMap } from "../../types";
 import { expectedRoundsSelector } from "./selectors/expected-rounds";
 import { currentRoundSelector } from "../selectors/current-round";
 
 const playerUpperLimit = 52;
 
-export interface ISettingsError {
+export interface SettingsError {
   /**
    * Error in name input.
    *
@@ -23,7 +23,7 @@ export interface ISettingsError {
    *
    * If all player's name are valid, empty object will be produced.
    */
-  names: IPlayerMap<ITranslateData>;
+  names: PlayerMap<TranslateData>;
 
   /**
    * General error that is not specific to a player.
@@ -37,13 +37,13 @@ export interface ISettingsError {
    *
    * If there is no error, null will be produced.
    */
-  misc: ITranslateData | null;
+  misc: TranslateData | null;
 }
 
-function validateNames(names: IPlayerMap<string>): IPlayerMap<ITranslateData> {
+function validateNames(names: PlayerMap<string>): PlayerMap<TranslateData> {
   const duplicates = dupe(Object.values(names));
 
-  const res: IPlayerMap<ITranslateData | null> = mapValues(
+  const res: PlayerMap<TranslateData | null> = mapValues(
     names,
     (name: string) => {
       if (name === "") {
@@ -60,10 +60,10 @@ function validateNames(names: IPlayerMap<string>): IPlayerMap<ITranslateData> {
 }
 
 function validateMisc(
-  names: IPlayerMap<string>,
+  names: PlayerMap<string>,
   currentRound: number | null,
   expectedRounds: number
-): ITranslateData | null {
+): TranslateData | null {
   // Not in a game currently. This should not happen.
   if (currentRound == null) {
     return null;
@@ -94,10 +94,10 @@ export const settingsValidator = createSelector(
   currentRoundSelector,
   expectedRoundsSelector,
   (
-    names: IPlayerMap<string>,
+    names: PlayerMap<string>,
     currentRound: number | null,
     expectedRounds: number
-  ): ISettingsError => ({
+  ): SettingsError => ({
     names: validateNames(names),
     misc: validateMisc(names, currentRound, expectedRounds)
   })
@@ -109,5 +109,5 @@ export const settingsValidator = createSelector(
  */
 export const isSettingsValid = createSelector(
   settingsValidator,
-  (error: ISettingsError): boolean => isOk(error.names) && error.misc === null
+  (error: SettingsError): boolean => isOk(error.names) && error.misc === null
 );

@@ -9,11 +9,11 @@ import { initSettingsAction } from "../actions/init-settings";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { remainingRoundsSelector } from "../../selectors/remaining-rounds";
 import { currentRoundSelector } from "../../selectors/current-round";
-import { IRootState, Dispatch } from "../../../types";
+import { RootState, Dispatch } from "../../../types";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import classes from "../settings.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   currentGame: state.currentGame,
   currentRound: currentRoundSelector(state),
   remainingRounds: remainingRoundsSelector(state)

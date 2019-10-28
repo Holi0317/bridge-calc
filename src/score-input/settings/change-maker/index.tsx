@@ -11,10 +11,10 @@ import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { toggleExpandAction } from "../actions/toggle-expand";
 import { PANEL } from "../panel";
 import { MakerEditor } from "./maker-editor";
-import { Dispatch, IRootState } from "../../../types";
+import { Dispatch, RootState } from "../../../types";
 import classes from "../settings.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   disabled: changeMakerDisabledSelector(state),
   expanded: expandedPanelSelector(state) === PANEL.CHANGE_MAKER
 });

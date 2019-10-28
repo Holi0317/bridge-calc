@@ -2,16 +2,16 @@ import mapValues from "lodash-es/mapValues";
 import { toFront } from "../../utils";
 import { toEndedState, toWaitingBidState } from "./converter";
 import { bidWinGenerator } from "./bid-win-generator";
-import { IEndedState, IWaitingBidState, IWaitingWinState } from "./types";
+import { EndedState, WaitingBidState, WaitingWinState } from "./types";
 
 /**
  * Skip n round(s) of game.
  */
 export function skip(
-  state: IWaitingBidState | IWaitingWinState,
+  state: WaitingBidState | WaitingWinState,
   n: number,
   time: number
-): IWaitingBidState | IEndedState {
+): WaitingBidState | EndedState {
   if (state.currentRound > state.rounds) {
     // Last round. Return regardless of content of n.
     return toEndedState(state, time);

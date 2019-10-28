@@ -1,9 +1,9 @@
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 
-export interface IWinAction {
+export interface WinAction {
   type: ActionTypes.WIN;
-  win?: IPlayerMap<number>;
+  win?: PlayerMap<number>;
   time: number;
 }
 
@@ -14,6 +14,6 @@ export interface IWinAction {
  * @param win - A map that maps player ID to their win choice.
  * If this is not defined, win property in currentGame state will be used as fallback.
  */
-export function winAction(win?: IPlayerMap<number>): IWinAction {
+export function winAction(win?: PlayerMap<number>): WinAction {
   return { type: ActionTypes.WIN, win, time: new Date().getTime() };
 }

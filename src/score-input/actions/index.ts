@@ -1,20 +1,20 @@
-import { IBidAction } from "./bid";
-import { IChangePlayersAction } from "./change-players";
-import { ISetBidAction } from "./set-bid";
-import { ISetWinAction } from "./set-win";
-import { ISkipAction } from "./skip";
-import { IStartAction } from "./start";
-import { IUndoAction } from "./undo";
-import { IWinAction } from "./win";
-import { IReplaceCurrentGameAction } from "./replace-current-game";
+import { BidAction } from "./bid";
+import { ChangePlayersAction } from "./change-players";
+import { SetBidAction } from "./set-bid";
+import { SetWinAction } from "./set-win";
+import { SkipAction } from "./skip";
+import { StartAction } from "./start";
+import { UndoAction } from "./undo";
+import { WinAction } from "./win";
+import { ReplaceCurrentGameAction } from "./replace-current-game";
 
 export type CurrentGameActions =
-  | IBidAction
-  | IChangePlayersAction
-  | ISetBidAction
-  | ISetWinAction
-  | ISkipAction
-  | IStartAction
-  | IUndoAction
-  | IWinAction
-  | IReplaceCurrentGameAction;
+  | BidAction
+  | ChangePlayersAction
+  | SetBidAction
+  | SetWinAction
+  | SkipAction
+  | StartAction
+  | UndoAction
+  | WinAction
+  | ReplaceCurrentGameAction;

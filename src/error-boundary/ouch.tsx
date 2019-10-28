@@ -6,11 +6,11 @@ function reload() {
   window.location.reload();
 }
 
-interface IOuchProps {
+interface OuchProps {
   error: Error;
 }
 
-export function Ouch({ error }: IOuchProps) {
+export function Ouch({ error }: OuchProps) {
   const { t } = useTranslation();
 
   return (

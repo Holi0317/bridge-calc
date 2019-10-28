@@ -8,6 +8,6 @@ const clientId = pad(
   4
 );
 
-export function fingerprint() {
+export function fingerprint(): string {
   return clientId;
 }

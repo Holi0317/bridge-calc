@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { namesSelector } from "./names";
 
 /**
@@ -8,5 +8,5 @@ import { namesSelector } from "./names";
  */
 export const playerIDSelector = createSelector(
   namesSelector,
-  (names: IPlayerMap<string>): string[] => Object.keys(names)
+  (names: PlayerMap<string>): string[] => Object.keys(names)
 );

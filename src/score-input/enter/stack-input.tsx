@@ -17,10 +17,10 @@ import { winStackInputSourceSelector } from "../selectors/win-stack-input-source
 import { setBidAction } from "../actions/set-bid";
 import { setWinAction } from "../actions/set-win";
 import { trans } from "../../utils";
-import { IRootState, Dispatch } from "../../types";
+import { RootState, Dispatch } from "../../types";
 import classes from "./stack-input.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   bidDisabled: stageSelector(state) !== GameStage.waitingBid,
   winDisabled: stageSelector(state) !== GameStage.waitingWin,
   playerOrder: playerOrderSelector(state),

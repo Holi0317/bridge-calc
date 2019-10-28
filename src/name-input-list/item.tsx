@@ -8,7 +8,7 @@ import ActionDelete from "@material-ui/icons/Delete";
 import { DragHandle } from "./drag-handle";
 import classes from "./name-input-list.pcss";
 
-interface ISortableItemProps {
+interface SortableItemProps {
   value: string;
   error: string | null;
   // Actually index is required by the HOC
@@ -23,7 +23,7 @@ export function SortableItemImpl({
   onChange,
   remove,
   error
-}: ISortableItemProps) {
+}: SortableItemProps) {
   const { t } = useTranslation();
 
   return (
@@ -52,4 +52,4 @@ export function SortableItemImpl({
 
 export const SortableItem = SortableElement(
   SortableItemImpl
-) as React.ComponentType<ISortableItemProps>;
+) as React.ComponentType<SortableItemProps>;

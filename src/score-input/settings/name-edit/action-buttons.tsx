@@ -3,19 +3,19 @@ import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
 import { allowNamesCommitSelector } from "../selectors/allow-names-commit";
-import { IRootState } from "../../../types";
+import { RootState } from "../../../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   changeDisabled: !allowNamesCommitSelector(state)
 });
 
 type stateType = ReturnType<typeof mapStateToProps>;
 
-interface IActionButtonProps {
+interface ActionButtonProps {
   requestDialog(): void;
 }
 
-type ActionButtonsProps = stateType & IActionButtonProps;
+type ActionButtonsProps = stateType & ActionButtonProps;
 
 export function ActionButtonsImpl({
   changeDisabled,
@@ -39,4 +39,4 @@ export function ActionButtonsImpl({
 
 export const ActionButtons = connect(mapStateToProps)(
   ActionButtonsImpl
-) as React.ComponentType<IActionButtonProps>;
+) as React.ComponentType<ActionButtonProps>;

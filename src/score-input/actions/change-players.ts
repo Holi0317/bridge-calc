@@ -1,9 +1,9 @@
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 
-export interface IChangePlayersAction {
+export interface ChangePlayersAction {
   type: ActionTypes.CHANGE_PLAYERS;
-  newNames: IPlayerMap<string>;
+  newNames: PlayerMap<string>;
   maker: string;
   rounds: number;
   time: number;
@@ -33,10 +33,10 @@ export interface IChangePlayersAction {
  * The above case is considered as a bug. Prevention of this should be done on the caller side.
  */
 export function changePlayersAction(
-  newNames: IPlayerMap<string>,
+  newNames: PlayerMap<string>,
   maker: string,
   rounds: number
-): IChangePlayersAction {
+): ChangePlayersAction {
   return {
     type: ActionTypes.CHANGE_PLAYERS,
     newNames,

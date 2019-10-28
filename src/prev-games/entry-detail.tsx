@@ -21,11 +21,11 @@ function gameStage(stage: GameStage, t: i18next.TFunction): string {
   }
 }
 
-interface IEntryDetailProps {
+interface EntryDetailProps {
   entry: PrevGameEntry;
 }
 
-export function EntryDetail({ entry }: IEntryDetailProps) {
+export function EntryDetail({ entry }: EntryDetailProps) {
   const { t } = useTranslation();
   return (
     <Table>

@@ -2,7 +2,7 @@ import * as React from "react";
 import { SortEnd } from "react-sortable-hoc";
 import arrayMove from "array-move";
 import { Container } from "./container";
-import { INameInputListProps } from "./types";
+import { NameInputListProps } from "./types";
 import classes from "./name-input-list.pcss";
 
 /**
@@ -13,7 +13,7 @@ function createSortEndHandler<T>(items: T[], change: (item: T[]) => void) {
     change(arrayMove(items, oldIndex, newIndex));
 }
 
-export function NameInputList({ values, onChange }: INameInputListProps) {
+export function NameInputList({ values, onChange }: NameInputListProps) {
   return (
     <Container
       useDragHandle={true}

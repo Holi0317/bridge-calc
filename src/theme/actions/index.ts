@@ -1,4 +1,4 @@
-import { ISetThemeAction } from "./set-theme";
-import { IToggleDarkAction } from "./toggle-dark";
+import { SetThemeAction } from "./set-theme";
+import { ToggleDarkAction } from "./toggle-dark";
 
-export type ThemeActions = ISetThemeAction | IToggleDarkAction;
+export type ThemeActions = SetThemeAction | ToggleDarkAction;

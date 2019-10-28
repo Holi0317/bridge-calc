@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import classes from "./tile.pcss";
 
-export interface ITileLinkProps {
+export interface TileLinkProps {
   /**
    * URL of this link pointing to.
    * If the link is point to external route path, remember to
@@ -21,7 +21,7 @@ export interface ITileLinkProps {
   children: React.ReactNode;
 }
 
-export function TileLink({ to, external, target, children }: ITileLinkProps) {
+export function TileLink({ to, external, target, children }: TileLinkProps) {
   if (external) {
     return (
       <a href={to} target={target} className={classes.link} rel="noopener">

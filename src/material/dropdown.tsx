@@ -7,14 +7,14 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import { cuid } from "../utils";
 import classes from "./dropdown.pcss";
 
-export interface IDropdownSource<T extends number | string> {
+export interface DropdownSource<T extends number | string> {
   value: T;
   label: string;
   disabled?: boolean;
 }
 
-export interface IDropdownProps<T extends number | string> {
-  source: Array<IDropdownSource<T>>;
+export interface DropdownProps<T extends number | string> {
+  source: DropdownSource<T>[];
   label: string;
   error?: string;
   value: T;
@@ -25,7 +25,7 @@ export interface IDropdownProps<T extends number | string> {
 
 export class Dropdown<
   SourceType extends number | string
-> extends React.Component<IDropdownProps<SourceType>> {
+> extends React.Component<DropdownProps<SourceType>> {
   private readonly _uid = cuid();
 
   public render() {

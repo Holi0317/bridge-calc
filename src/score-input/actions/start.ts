@@ -1,11 +1,11 @@
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 import { cuid } from "../../utils";
 
-export interface IStartAction {
+export interface StartAction {
   type: ActionTypes.START;
   rounds: number;
-  playerNames: IPlayerMap<string>;
+  playerNames: PlayerMap<string>;
   startTime: number;
   startingRound: number;
   id: string;
@@ -14,8 +14,8 @@ export interface IStartAction {
 /**
  * Helper function to Change player names array to object with random generated player ID as key.
  */
-function namesToMap(playerNames: string[]): IPlayerMap<string> {
-  const result: IPlayerMap<string> = {};
+function namesToMap(playerNames: string[]): PlayerMap<string> {
+  const result: PlayerMap<string> = {};
   playerNames.forEach(name => {
     result[cuid()] = name;
   });
@@ -34,7 +34,7 @@ export function startAction(
   rounds: number,
   playerNames: string[],
   startingRound: number
-): IStartAction {
+): StartAction {
   return {
     type: ActionTypes.START,
     rounds,

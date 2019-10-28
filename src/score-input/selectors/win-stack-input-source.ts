@@ -13,8 +13,8 @@ import { stageSelector } from "./stage";
 import { winSelector } from "./win";
 import { createSource, fillObj } from "../../utils";
 import { GameStage } from "../game-stage";
-import { IPlayerMap } from "../../types";
-import { IDropdownSource } from "../../material/dropdown";
+import { PlayerMap } from "../../types";
+import { DropdownSource } from "../../material/dropdown";
 
 /**
  * Select input source for MDC's dropdown on win stack.
@@ -30,23 +30,27 @@ export const winStackInputSourceSelector = createSelector(
     stage: GameStage | null,
     playerID: string[],
     currentRound: number,
-    winMap: IPlayerMap<number>
-  ): IPlayerMap<Array<IDropdownSource<number>>> => {
+    winMap: PlayerMap<number>
+  ): PlayerMap<DropdownSource<number>[]> => {
     if (common) {
       return common;
     }
     const defaultSrc = createSource(range(currentRound + 1));
     const winSum: number = sum(values(winMap));
 
-    // Short circuit.
-    // No-op when there is excess win
-    // Or stage is not at waitingWin
+    /*
+     * Short circuit.
+     * No-op when there is excess win
+     * Or stage is not at waitingWin
+     */
     if (stage !== GameStage.waitingWin || winSum > currentRound) {
       return fillObj({}, playerID, defaultSrc);
     }
 
-    // Surgery on win options
-    // Cannot choose a win that exceed currentRound
+    /*
+     * Surgery on win options
+     * Cannot choose a win that exceed currentRound
+     */
     const delta = currentRound - winSum;
     const head = createSource(range(delta + 1));
     const tail = range(delta + 1, currentRound + 1).map(i => ({

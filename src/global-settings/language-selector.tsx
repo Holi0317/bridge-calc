@@ -4,20 +4,23 @@ import { bindActionCreators } from "redux";
 import i18next from "i18next";
 import { connect } from "react-redux";
 import { WithTranslation, withTranslation } from "react-i18next";
-import { Dropdown, IDropdownSource } from "../material/dropdown";
+import { Dropdown, DropdownSource } from "../material/dropdown";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
 import { languages } from "../app/languages";
 import { Dispatch } from "../types";
 
 function transformLanguageArray(
   t: i18next.TFunction
-): Array<IDropdownSource<string>> {
-  return languages
-    .filter(lang => lang !== "cimode") // Filter away 'cimode' pseudo language created by i18next
-    .map(lang => ({
-      value: lang,
-      label: t(lang)
-    }));
+): DropdownSource<string>[] {
+  return (
+    languages
+      // Filter away 'cimode' pseudo language created by i18next
+      .filter(lang => lang !== "cimode")
+      .map(lang => ({
+        value: lang,
+        label: t(lang)
+      }))
+  );
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

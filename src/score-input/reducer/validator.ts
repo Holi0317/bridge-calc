@@ -5,7 +5,7 @@ import {
   whitelistKeys
 } from "../../utils";
 import { GameStage } from "../game-stage";
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 
 const BASE_PROPS = ["id", "rounds", "startTime", "names", "scores", "stage"];
 const WAITING_BID_PROPS = [
@@ -20,24 +20,10 @@ const ENDED_PROPS = [...BASE_PROPS, "endTime"];
 /**
  * Check for equality of ID in given player maps.
  *
- * @see IPlayerMap
+ * @see PlayerMap
  */
-function playerMapIDEqual(a: IPlayerMap<any>, b: IPlayerMap<any>): boolean {
+function playerMapIDEqual(a: PlayerMap<any>, b: PlayerMap<any>): boolean {
   return isArrayEqual(Object.keys(a), Object.keys(b));
-}
-
-/**
- * Validate against the given object. Check if it is GameState object or not.
- * This is an __EXPENSIVE__ operation. Do not execute this frequently.
- * @see GameState
- */
-export function isGameState(state: any): boolean {
-  return (
-    state == null ||
-    isWaitingBidState(state) ||
-    isWaitingWinState(state) ||
-    isEndedState(state)
-  );
 }
 
 /**
@@ -104,5 +90,19 @@ export function isEndedState(state: any): boolean {
     whitelistKeys(state, ENDED_PROPS) &&
     state.stage === GameStage.ended &&
     typeof state.endTime === "number"
+  );
+}
+
+/**
+ * Validate against the given object. Check if it is GameState object or not.
+ * This is an __EXPENSIVE__ operation. Do not execute this frequently.
+ * @see GameState
+ */
+export function isGameState(state: any): boolean {
+  return (
+    state == null ||
+    isWaitingBidState(state) ||
+    isWaitingWinState(state) ||
+    isEndedState(state)
   );
 }

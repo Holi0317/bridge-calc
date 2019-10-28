@@ -139,7 +139,7 @@ describe("isWaitingBidState", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("it should fail for unmatched type in IPlayerMap", () => {
+  test("it should fail for unmatched type in PlayerMap", () => {
     const state = {
       ...waitingBidState,
       scores: genMap(["10"], ["-1"], ["11"], ["10"])
@@ -149,7 +149,7 @@ describe("isWaitingBidState", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("it should fail if key of IPlayerMap is not string", () => {
+  test("it should fail if key of PlayerMap is not string", () => {
     const state = {
       ...waitingBidState,
       bid: {
@@ -251,7 +251,7 @@ describe("isWaitingWinState", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("it should fail for unmatched type in IPlayerMap", () => {
+  test("it should fail for unmatched type in PlayerMap", () => {
     const state = {
       ...waitingWinState,
       scores: genMap(["10"], ["-1"], ["11"], ["10"])
@@ -261,7 +261,7 @@ describe("isWaitingWinState", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("it should fail if key of IPlayerMap is not string", () => {
+  test("it should fail if key of PlayerMap is not string", () => {
     const state = {
       ...waitingWinState,
       bid: {
@@ -351,7 +351,7 @@ describe("isEndedState", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("it should fail for unmatched type in IPlayerMap", () => {
+  test("it should fail for unmatched type in PlayerMap", () => {
     const state = {
       ...endedState,
       scores: genMap(["10"], ["-1"], ["11"], ["10"])
@@ -361,7 +361,7 @@ describe("isEndedState", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("it should fail if key of IPlayerMap is not string", () => {
+  test("it should fail if key of PlayerMap is not string", () => {
     const state = {
       ...endedState,
       names: {

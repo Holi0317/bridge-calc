@@ -9,15 +9,16 @@ const importer = () =>
 
 const LoadableDialog = Loadable({
   loader: importer,
-  loading: () => null // Just render nothing on loading. This module is not that important
+  // Just render nothing on loading. This module is not that important
+  loading: () => null
 });
 
-interface IMigrationState {
+interface MigrationState {
   hasOldState: boolean;
 }
 
 export class Migration extends React.Component {
-  public state: IMigrationState = {
+  public state: MigrationState = {
     hasOldState: false
   };
 

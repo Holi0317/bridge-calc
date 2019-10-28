@@ -1,6 +1,6 @@
 import { ActionTypes } from "../../action-types";
 
-export interface ISkipAction {
+export interface SkipAction {
   type: ActionTypes.SKIP;
   times: number;
   time: number;
@@ -10,6 +10,6 @@ export interface ISkipAction {
  * Skip n round(s).
  * @param times - Number of rounds to be skip.
  */
-export function skipAction(times: number): ISkipAction {
+export function skipAction(times: number): SkipAction {
   return { type: ActionTypes.SKIP, times, time: new Date().getTime() };
 }

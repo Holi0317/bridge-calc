@@ -11,13 +11,13 @@ import {
 import { GameTitle } from "../score-input/title";
 import { titleAugment } from "../utils";
 
-export interface IRoute extends RouteProps {
+export interface Route extends RouteProps {
   title: React.ComponentType<any>;
   name: string;
   path?: string;
 }
 
-export const routes: IRoute[] = [
+export const routes: Route[] = [
   {
     path: "/",
     name: "root",

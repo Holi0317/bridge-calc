@@ -1,7 +1,7 @@
 import { PANEL } from "../panel";
 import { ActionTypes } from "../../../action-types";
 
-export interface IToggleExpandAction {
+export interface ToggleExpandAction {
   type: ActionTypes.TOGGLE_SETTING_PANEL;
   /**
    * The panel to be toggled.
@@ -14,6 +14,6 @@ export interface IToggleExpandAction {
  *
  * @param panel - The panel to be toggled
  */
-export function toggleExpandAction(panel: PANEL): IToggleExpandAction {
+export function toggleExpandAction(panel: PANEL): ToggleExpandAction {
   return { type: ActionTypes.TOGGLE_SETTING_PANEL, panel };
 }

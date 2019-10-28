@@ -3,8 +3,8 @@ import { stageSelector } from "./stage";
 import { playerIDSelector } from "./player-id";
 import { GameStage } from "../game-stage";
 import { fillObj } from "../../utils";
-import { IPlayerMap } from "../../types";
-import { IDropdownSource } from "../../material/dropdown";
+import { PlayerMap } from "../../types";
+import { DropdownSource } from "../../material/dropdown";
 
 /**
  * A common base for input source selector.
@@ -29,6 +29,4 @@ export const stackInputSourceCommonSelector = createSelector(
   }
 );
 
-export type StackInputSourceCommon = IPlayerMap<
-  Array<IDropdownSource<number>>
-> | null;
+export type StackInputSourceCommon = PlayerMap<DropdownSource<number>[]> | null;

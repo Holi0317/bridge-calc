@@ -1,5 +1,5 @@
 import mapValues from "lodash-es/mapValues";
-import { IOldGameData, OldState } from "./types";
+import { OldGameData, OldState } from "./types";
 
 const KEYS = {
   currentRound: "Bridge.currentRound",
@@ -15,7 +15,7 @@ const KEYS = {
  * @returns The data stored in localStorage. If not found, null is returned.
  * @throws {SyntaxError} - Invalid JSON is found in one of the key
  */
-export function retrieveOldData(): IOldGameData | null {
+export function retrieveOldData(): OldGameData | null {
   const dataMap = mapValues(KEYS, key => {
     const value = localStorage.getItem(key);
     return value != null ? JSON.parse(value) : null;
@@ -23,9 +23,8 @@ export function retrieveOldData(): IOldGameData | null {
 
   if (Object.values(dataMap).includes(null)) {
     return null;
-  } else {
-    return dataMap as any;
   }
+  return dataMap as any;
 }
 
 /**
@@ -40,7 +39,7 @@ export function hasOldData(): boolean {
  * Check if old data is on state `notStarted` or does not have the game.
  * If either one of the above condition met, false will be returned
  */
-export function isNotStarted(data: IOldGameData | null): boolean {
+export function isNotStarted(data: OldGameData | null): boolean {
   return data == null || data.state === OldState.notStarted;
 }
 

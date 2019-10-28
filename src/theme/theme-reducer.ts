@@ -1,14 +1,14 @@
 import { ThemeActions } from "./actions";
 import { ActionTypes } from "../action-types";
 
-export interface IThemeState {
+export interface ThemeState {
   /** Currently selected theme */
   theme: string;
   /** Dark */
   dark: boolean;
 }
 
-const defaultState: IThemeState = {
+const defaultState: ThemeState = {
   theme: "Pink",
   dark: false
 };
@@ -16,7 +16,7 @@ const defaultState: IThemeState = {
 export function themeReducer(
   state = defaultState,
   action: ThemeActions
-): IThemeState {
+): ThemeState {
   switch (action.type) {
     case ActionTypes.SET_THEME:
       return {

@@ -16,9 +16,9 @@ import { changePlayersAction } from "../../actions/change-players";
 import { initSettingsAction } from "../actions/init-settings";
 import { setMakerAction } from "../actions/set-maker";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
-import { IRootState, Dispatch } from "../../../types";
+import { RootState, Dispatch } from "../../../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   names: namesSelector(state),
   namesSource: makerSourceSelector(state),
   rounds: roundsSelector(state),

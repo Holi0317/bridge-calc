@@ -1,7 +1,7 @@
 declare module "*.pcss" {
-  interface IClassNames {
+  interface ClassNames {
     [className: string]: string;
   }
-  const classNames: IClassNames;
+  const classNames: ClassNames;
   export default classNames;
 }

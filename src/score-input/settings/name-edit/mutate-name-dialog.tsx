@@ -16,9 +16,9 @@ import { expectedRoundsSelector } from "../selectors/expected-rounds";
 import { changePlayersAction } from "../../actions/change-players";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { initSettingsAction } from "../actions/init-settings";
-import { IRootState, Dispatch } from "../../../types";
+import { RootState, Dispatch } from "../../../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   currentGame: state.currentGame,
   names: namesSelector(state),
   rounds: expectedRoundsSelector(state),
@@ -38,15 +38,15 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-interface IMutateNameDialogProps {
+interface MutateNameDialogProps {
   open: boolean;
   onRequestClose(): void;
 }
 
-interface IMutateNameDialogState {
+interface MutateNameDialogState {
   chosenMaker: string;
 }
-type MutateNameDialogProps = IMutateNameDialogProps &
+type MutateNameDialogProps = MutateNameDialogProps &
   stateType &
   dispatchType &
   WithTranslation;
@@ -54,7 +54,7 @@ type MutateNameDialogProps = IMutateNameDialogProps &
 export class MutateNameDialogImpl extends React.Component<
   MutateNameDialogProps
 > {
-  public state: IMutateNameDialogState = {
+  public state: MutateNameDialogState = {
     chosenMaker: ""
   };
 
@@ -125,4 +125,4 @@ export const MutateNameDialog = flowRight(
     mapStateToProps,
     mapDispatchToProps
   )
-)(MutateNameDialogImpl) as React.ComponentType<IMutateNameDialogProps>;
+)(MutateNameDialogImpl) as React.ComponentType<MutateNameDialogProps>;

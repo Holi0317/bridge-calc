@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 import { NameInputList } from "../name-input-list";
 import { entryOptionsValidator } from "./entry-validator";
 import { setPlayerNamesAction } from "./actions/set-entry-props";
-import { Dispatch, IRootState } from "../types";
+import { Dispatch, RootState } from "../types";
 import { trans } from "../utils";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   playerNames: state.entry.playerNames,
   playerNamesError: entryOptionsValidator(state).playerNames
 });

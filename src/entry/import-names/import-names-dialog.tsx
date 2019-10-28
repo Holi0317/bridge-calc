@@ -9,9 +9,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import { ImportNamesContent } from "./import-names-content";
 import { setImportOpenAction } from "../actions/set-entry-props";
-import { Dispatch, IRootState } from "../../types";
+import { Dispatch, RootState } from "../../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   open: state.entry.importOpened
 });
 

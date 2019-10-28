@@ -10,10 +10,10 @@ import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { toggleExpandAction } from "../actions/toggle-expand";
 import { PANEL } from "../panel";
 import { SkipRounds } from "./skip-rounds";
-import { IRootState, Dispatch } from "../../../types";
+import { RootState, Dispatch } from "../../../types";
 import classes from "../settings.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   expanded: expandedPanelSelector(state) === PANEL.ROUND_MANAGEMENT
 });
 

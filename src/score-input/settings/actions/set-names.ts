@@ -1,14 +1,14 @@
 import fromPairs from "lodash-es/fromPairs";
 import { ActionTypes } from "../../../action-types";
-import { IPlayerMap } from "../../../types";
-import { INameInputEntry } from "../../../name-input-list/types";
+import { PlayerMap } from "../../../types";
+import { NameInputEntry } from "../../../name-input-list/types";
 
-export interface ISetNamesAction {
+export interface SetNamesAction {
   type: ActionTypes.SET_NAMES;
   /**
    * New name map to be set.
    */
-  newNames: IPlayerMap<string>;
+  newNames: PlayerMap<string>;
 }
 
 /**
@@ -16,13 +16,13 @@ export interface ISetNamesAction {
  * This does NOT change anything in currentGame state in the store
  * @param newNames - New name map to be set.
  */
-export function setNamesAction(newNames: IPlayerMap<string>): ISetNamesAction {
+export function setNamesAction(newNames: PlayerMap<string>): SetNamesAction {
   return { type: ActionTypes.SET_NAMES, newNames };
 }
 
 export function setNamesFromEntries(
-  newNames: INameInputEntry[]
-): ISetNamesAction {
+  newNames: NameInputEntry[]
+): SetNamesAction {
   const names = newNames.map(entry => [entry.id, entry.value]);
   return { type: ActionTypes.SET_NAMES, newNames: fromPairs(names) };
 }

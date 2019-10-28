@@ -5,7 +5,7 @@ import i18next from "i18next";
  *
  * Meant to be used in validation result.
  */
-export interface ITranslateData {
+export interface TranslateData {
   /**
    * Key of the translation.
    */
@@ -20,7 +20,7 @@ export interface ITranslateData {
 /**
  * Convenient function for building ITranslateData.
  */
-export function tData(key: string, options?: any): ITranslateData {
+export function tData(key: string, options?: any): TranslateData {
   return { key, options };
 }
 
@@ -34,6 +34,6 @@ export function tData(key: string, options?: any): ITranslateData {
  * @param data Data to be translated
  * @returns formatted result
  */
-export function trans(t: i18next.TFunction, data: ITranslateData): string {
+export function trans(t: i18next.TFunction, data: TranslateData): string {
   return t(data.key, data.options);
 }

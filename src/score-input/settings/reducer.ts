@@ -1,10 +1,10 @@
 import { GameStage } from "../game-stage";
 import { GameSettingsActions } from "./actions";
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 import { PANEL } from "./panel";
 
-export interface ISettingsState {
+export interface SettingsState {
   /**
    * Player ID of currently selected maker.
    * If null, no maker is selected or the game is not running.
@@ -18,7 +18,7 @@ export interface ISettingsState {
   /**
    * New player map.
    */
-  names: IPlayerMap<string>;
+  names: PlayerMap<string>;
   /**
    * State which panel is expanded now.
    * If null, no panel is expanded.
@@ -26,7 +26,7 @@ export interface ISettingsState {
   expandedPanel: PANEL | null;
 }
 
-const defaultState: ISettingsState = {
+const defaultState: SettingsState = {
   maker: null,
   makerDirty: false,
   names: {},
@@ -34,9 +34,9 @@ const defaultState: ISettingsState = {
 };
 
 export function settingsReducer(
-  state: ISettingsState = defaultState,
+  state: SettingsState = defaultState,
   action: GameSettingsActions
-): ISettingsState {
+): SettingsState {
   switch (action.type) {
     case ActionTypes.INIT_SETTINGS: {
       const gameState = action.state;

@@ -4,7 +4,7 @@ import { expectedRoundsSelector } from "./expected-rounds";
 
 /**
  * Construct part of redux store tree for testing
- * @param {IPlayerMap<string>} names - `state.gameSettings.names`
+ * @param {PlayerMap<string>} names - `state.gameSettings.names`
  * @returns {Object} Part of redux tree for consumption
  */
 function makeTree(names) {

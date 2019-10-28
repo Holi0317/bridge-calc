@@ -1,6 +1,6 @@
 import { ActionTypes } from "../../action-types";
 
-export interface ISetGameModalAction {
+export interface SetGameModalAction {
   type: ActionTypes.SET_GAME_MODAL;
   index: number | null;
 }
@@ -9,13 +9,13 @@ export interface ISetGameModalAction {
  * Set a game modal to display
  * @param index Index of the game entry in the prevGames array
  */
-export function showGameModalAction(index: number): ISetGameModalAction {
+export function showGameModalAction(index: number): SetGameModalAction {
   return { type: ActionTypes.SET_GAME_MODAL, index };
 }
 
 /**
  * Close game modals
  */
-export function closeGameModalAction(): ISetGameModalAction {
+export function closeGameModalAction(): SetGameModalAction {
   return { type: ActionTypes.SET_GAME_MODAL, index: null };
 }

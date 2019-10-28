@@ -2,7 +2,7 @@ import { PrevGameEntry } from "./types";
 import { PrevGamesActions } from "./actions";
 import { ActionTypes } from "../action-types";
 
-export interface IPrevGamesState {
+export interface PrevGamesState {
   /**
    * Array of game entries played in the past or currently playing
    */
@@ -14,7 +14,7 @@ export interface IPrevGamesState {
   modalEntry: number | null;
 }
 
-const defaultState: IPrevGamesState = {
+const defaultState: PrevGamesState = {
   prevGames: [],
   modalEntry: null
 };
@@ -22,7 +22,7 @@ const defaultState: IPrevGamesState = {
 export function prevGamesReducer(
   state = defaultState,
   action: PrevGamesActions
-) {
+): PrevGamesState {
   switch (action.type) {
     case ActionTypes.ADD_GAME:
       return {

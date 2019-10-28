@@ -1,10 +1,10 @@
 import { GameStage } from "../game-stage";
 import { bidWinGenerator } from "./bid-win-generator";
-import { IWaitingBidState, IWaitingWinState, IEndedState } from "./types";
+import { WaitingBidState, WaitingWinState, EndedState } from "./types";
 
 export function toWaitingBidState(
-  state: IWaitingBidState | IWaitingWinState
-): IWaitingBidState {
+  state: WaitingBidState | WaitingWinState
+): WaitingBidState {
   return {
     stage: GameStage.waitingBid,
     id: state.id,
@@ -19,20 +19,20 @@ export function toWaitingBidState(
 }
 
 export function toWaitingWinState(
-  state: IWaitingBidState | IWaitingWinState
-): IWaitingWinState {
-  const newState = toWaitingBidState(state) as any; // Just to remove some whitelist boilerplate
+  state: WaitingBidState | WaitingWinState
+): WaitingWinState {
+  // Cast to any for remove some whitelist boilerplate
+  const newState = toWaitingBidState(state) as any;
   newState.stage = GameStage.waitingWin;
   newState.win =
-    (state as IWaitingWinState).win ||
-    bidWinGenerator(Object.keys(state.names));
+    (state as WaitingWinState).win || bidWinGenerator(Object.keys(state.names));
   return newState;
 }
 
 export function toEndedState(
-  state: IWaitingBidState | IWaitingWinState,
+  state: WaitingBidState | WaitingWinState,
   endTime: number
-): IEndedState {
+): EndedState {
   return {
     stage: GameStage.ended,
     endTime,

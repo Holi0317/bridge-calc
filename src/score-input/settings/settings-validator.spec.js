@@ -5,7 +5,7 @@ import { tData } from "../../utils";
 
 /**
  * Create segment of redux tree for validator to consume
- * @param {IPlayerMap<string>} names Player names inside a IPlayerMap
+ * @param {PlayerMap<string>} names Player names inside a PlayerMap
  * @param {number|null} currentRound `state.currentGame.currentRound`, pass in null to stimulate null game/ended game
  * @returns {Object} Part of redux tree to consume
  */

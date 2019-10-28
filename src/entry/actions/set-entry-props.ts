@@ -1,5 +1,5 @@
 import { ActionTypes } from "../../action-types";
-import { IPlayerNameEntry } from "../entry-reducer";
+import { PlayerNameEntry } from "../entry-reducer";
 
 /**
  * Set entry properties on entry reducer.
@@ -7,12 +7,12 @@ import { IPlayerNameEntry } from "../entry-reducer";
  * All properties are optional. If they are set, the action will
  * override value on state.
  */
-export interface ISetEntryPropsAction {
+export interface SetEntryPropsAction {
   type: ActionTypes.SET_ENTRY_PROPS;
   rounds?: number;
   startingRound?: number;
   importOpened?: boolean;
-  playerNames?: IPlayerNameEntry[];
+  playerNames?: PlayerNameEntry[];
 }
 
 /**
@@ -20,7 +20,7 @@ export interface ISetEntryPropsAction {
  *
  * @param rounds - The rounds to be set
  */
-export function setRoundsAction(rounds: number): ISetEntryPropsAction {
+export function setRoundsAction(rounds: number): SetEntryPropsAction {
   return { type: ActionTypes.SET_ENTRY_PROPS, rounds };
 }
 
@@ -31,7 +31,7 @@ export function setRoundsAction(rounds: number): ISetEntryPropsAction {
  */
 export function setStartingRoundAction(
   startingRound: number
-): ISetEntryPropsAction {
+): SetEntryPropsAction {
   return { type: ActionTypes.SET_ENTRY_PROPS, startingRound };
 }
 
@@ -42,7 +42,7 @@ export function setStartingRoundAction(
  */
 export function setImportOpenAction(
   importOpened: boolean
-): ISetEntryPropsAction {
+): SetEntryPropsAction {
   return { type: ActionTypes.SET_ENTRY_PROPS, importOpened };
 }
 
@@ -57,7 +57,7 @@ export function setImportOpenAction(
  * @param playerNames - The array of player names to be replaced
  */
 export function setPlayerNamesAction(
-  playerNames: IPlayerNameEntry[]
-): ISetEntryPropsAction {
+  playerNames: PlayerNameEntry[]
+): SetEntryPropsAction {
   return { type: ActionTypes.SET_ENTRY_PROPS, playerNames };
 }

@@ -1,7 +1,7 @@
 /**
  * Represent the data structure of a game in v1.0.0
  */
-export interface IOldGameData {
+export interface OldGameData {
   /**
    * Current round of the game
    */
@@ -13,7 +13,7 @@ export interface IOldGameData {
   /**
    * Array of players in the game
    */
-  players: IOldPlayers[];
+  players: OldPlayers[];
   /**
    * Current stage of the game
    */
@@ -27,7 +27,7 @@ export interface IOldGameData {
 /**
  * Represent the data structure of a player in v1.0.0
  */
-export interface IOldPlayers {
+export interface OldPlayers {
   /**
    * Bid for the current round.
    */
@@ -57,7 +57,7 @@ export enum OldState {
    */
   notStarted = 0,
   /**
-   * bid for stack before each round
+   * Bid for stack before each round
    */
   bid = 1,
   /**

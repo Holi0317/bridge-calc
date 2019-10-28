@@ -1,5 +1,5 @@
 /**
- * cuid.js
+ * Cuid.js
  * Collision-resistant UID generator for browsers and node.
  * Sequential for fast db lookups and recency sorting.
  * Safe for element IDs and server-side lookups.
@@ -22,12 +22,12 @@ const blockSize = 4;
 const base = 36;
 const discreteValues = Math.pow(base, blockSize);
 
-function randomBlock() {
-  // tslint:disable-next-line:no-bitwise
+function randomBlock(): string {
+  // Tslint:disable-next-line:no-bitwise
   return pad(((Math.random() * discreteValues) << 0).toString(base), blockSize);
 }
 
-function safeCounter() {
+function safeCounter(): number {
   c = c < discreteValues ? c : 0;
   c++;
   return c - 1;
@@ -48,8 +48,10 @@ export function cuid(): string {
   // Prevent same-machine collisions.
   const counter = pad(safeCounter().toString(base), blockSize);
 
-  // A few chars to generate distinct ids for different clients
-  // (so different computers are far less likely to generate the same id)
+  /*
+   * A few chars to generate distinct ids for different clients
+   * (so different computers are far less likely to generate the same id)
+   */
   const print = fingerprint();
 
   // Grab some more chars from Math.random()

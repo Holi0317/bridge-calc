@@ -1,17 +1,43 @@
-import { IOldGameData, IOldPlayers, OldState } from "./types";
+import { OldGameData, OldPlayers, OldState } from "./types";
 import { PrevGameEntry } from "../prev-games/types";
-import { IPlayerMap } from "../types";
+import { PlayerMap } from "../types";
 import zipObject from "lodash-es/zipObject";
 import mapValues from "lodash-es/mapValues";
 import { GameStage } from "../score-input/game-stage";
 import { cuid, toFront } from "../utils";
 import { bidWinGenerator } from "../score-input/reducer/bid-win-generator";
 
-interface IPlayerMaps {
-  names: IPlayerMap<string>;
-  scores: IPlayerMap<number[]>;
-  bid: IPlayerMap<number | null>;
-  win: IPlayerMap<number | null>;
+interface PlayerMaps {
+  names: PlayerMap<string>;
+  scores: PlayerMap<number[]>;
+  bid: PlayerMap<number | null>;
+  win: PlayerMap<number | null>;
+}
+
+export function numberize(obj: PlayerMap<string | null>): PlayerMap<number> {
+  return mapValues(obj, b => (b == null ? 0 : parseInt(b, 10)));
+}
+
+/**
+ * Create names, scores, bid and win maps
+ */
+function migratePlayers(players: OldPlayers[]): PlayerMaps {
+  const ids = players.map(cuid);
+  const map = {
+    names: "name",
+    scores: "score",
+    bid: "bid",
+    win: "win"
+  };
+  const res = mapValues(map, (prop: keyof OldPlayers) =>
+    zipObject(ids, players.map(player => player[prop]))
+  ) as any;
+
+  // Type convertion
+  res.bid = numberize(res.bid);
+  res.win = numberize(res.win);
+
+  return res;
 }
 
 /**
@@ -19,7 +45,7 @@ interface IPlayerMaps {
  * This function may throw error (corrupted state?).
  * Use try-catch block when trying to convert.
  */
-export function migrateOldState(oldState: IOldGameData): PrevGameEntry {
+export function migrateOldState(oldState: OldGameData): PrevGameEntry {
   if (oldState.state === OldState.notStarted) {
     throw new TypeError(
       "[Migration] Old state is at notStarted state and cannot be migrated"
@@ -39,16 +65,18 @@ export function migrateOldState(oldState: IOldGameData): PrevGameEntry {
   const currentPlayerOrder = toFront(ids, oldState.maker || 0);
 
   if (state === OldState.bid) {
+    // Cast to any for suppressing type error on some properties
     return {
       ...base,
       stage: GameStage.waitingBid,
       bid: playerProps.bid,
       currentPlayerOrder,
       currentRound: oldState.currentRound
-    } as any; // To suppress type error on some properties
+    } as any;
   }
 
   if (state === OldState.inputWin) {
+    // Cast to any for suppressing type error on some properties
     return {
       ...base,
       stage: GameStage.waitingWin,
@@ -56,7 +84,7 @@ export function migrateOldState(oldState: IOldGameData): PrevGameEntry {
       win: playerProps.win,
       currentPlayerOrder,
       currentRound: oldState.currentRound
-    } as any; // To suppress type error on some properties
+    } as any;
   }
 
   if (state === OldState.waiting) {
@@ -88,30 +116,4 @@ export function migrateOldState(oldState: IOldGameData): PrevGameEntry {
   }
 
   throw new Error("Convert of old game state failed. Unknown situation");
-}
-
-/**
- * Create names, scores, bid and win maps
- */
-function migratePlayers(players: IOldPlayers[]): IPlayerMaps {
-  const ids = players.map(cuid);
-  const map = {
-    names: "name",
-    scores: "score",
-    bid: "bid",
-    win: "win"
-  };
-  const res = mapValues(map, (prop: keyof IOldPlayers) =>
-    zipObject(ids, players.map(player => player[prop]))
-  ) as any;
-
-  // Type convertion
-  res.bid = numberize(res.bid);
-  res.win = numberize(res.win);
-
-  return res;
-}
-
-export function numberize(obj: IPlayerMap<string | null>): IPlayerMap<number> {
-  return mapValues(obj, b => (b == null ? 0 : parseInt(b, 10)));
 }

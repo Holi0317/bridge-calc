@@ -1,11 +1,11 @@
 import { createSelector } from "reselect";
-import { dupe, removeUndef, isOk, ITranslateData, tData } from "../utils";
-import { IRootState } from "../types";
-import { IPlayerNameEntry } from "./entry-reducer";
+import { dupe, removeUndef, isOk, TranslateData, tData } from "../utils";
+import { RootState } from "../types";
+import { PlayerNameEntry } from "./entry-reducer";
 
 const playerUpperLimit = 52;
 
-export interface IEntryError {
+export interface EntryError {
   /**
    * Error that should be shown in the corresponding index of player.
    *
@@ -19,7 +19,7 @@ export interface IEntryError {
    *
    * Do note that the name " " (a space) is accepted.
    */
-  playerNames?: Array<ITranslateData | null>;
+  playerNames?: (TranslateData | null)[];
 
   /**
    * Error on other issues that is not specific to a player, but to the game.
@@ -28,10 +28,10 @@ export interface IEntryError {
    * - There are at least 2 players; and
    * - Less than or equal to 52 players.
    */
-  misc?: ITranslateData;
+  misc?: TranslateData;
 }
 
-function validateMisc(playerNames: string[]): ITranslateData | null {
+function validateMisc(playerNames: string[]): TranslateData | null {
   if (playerNames.length < 2) {
     return tData("At least 2 players is required for a game")!;
   } else if (playerNames.length > playerUpperLimit) {
@@ -44,7 +44,7 @@ function validateMisc(playerNames: string[]): ITranslateData | null {
 
 function validatePlayerName(
   rawNames: string[]
-): Array<ITranslateData | null> | null {
+): (TranslateData | null)[] | null {
   const duplicates = dupe(rawNames);
   const playerNames = rawNames.map(p =>
     p == null || p === ""
@@ -64,8 +64,8 @@ function validatePlayerName(
  * See `isEntryOptionsValid` to check if there is any error during validation process.
  */
 export const entryOptionsValidator = createSelector(
-  (state: IRootState) => state.entry.playerNames,
-  (playerNames: IPlayerNameEntry[]): IEntryError => {
+  (state: RootState) => state.entry.playerNames,
+  (playerNames: PlayerNameEntry[]): EntryError => {
     const names = playerNames.map(entry => entry.value);
 
     const res = {

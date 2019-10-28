@@ -7,7 +7,7 @@ import { ActionTypes } from "../action-types";
  * Each player should have an ID associated with her.
  * However this ID is not the same as the one in a game.
  */
-export interface IPlayerNameEntry {
+export interface PlayerNameEntry {
   /**
    * Name of the player.
    */
@@ -18,14 +18,14 @@ export interface IPlayerNameEntry {
   id: string;
 }
 
-export interface IEntryState {
+export interface EntryState {
   rounds: number;
   startingRound: number;
-  playerNames: IPlayerNameEntry[];
+  playerNames: PlayerNameEntry[];
   importOpened: boolean;
 }
 
-const defaultState: IEntryState = {
+const defaultState: EntryState = {
   importOpened: false,
   // For the sake of pure function, ID here are hard-coded
   playerNames: [
@@ -51,7 +51,10 @@ const defaultState: IEntryState = {
  * @param state - previous state of reducer
  * @param playerNames - original player names before updating
  */
-function playerNameAction(state: IEntryState, playerNames: IPlayerNameEntry[]) {
+function playerNameAction(
+  state: EntryState,
+  playerNames: PlayerNameEntry[]
+): void {
   const newPlayerNum = state.playerNames.length;
   const newRounds = Math.floor(52 / newPlayerNum);
   const playerNum = playerNames.length;
@@ -67,13 +70,13 @@ function playerNameAction(state: IEntryState, playerNames: IPlayerNameEntry[]) {
 }
 
 export function entryReducer(
-  state: IEntryState = defaultState,
+  state: EntryState = defaultState,
   action: EntryActions
-) {
+): EntryState {
   switch (action.type) {
     case ActionTypes.SET_ENTRY_PROPS: {
       const { type, ...props } = action;
-      const res: IEntryState = {
+      const res: EntryState = {
         ...state,
         ...props
       };
@@ -84,7 +87,7 @@ export function entryReducer(
       return res;
     }
     case ActionTypes.ADD_PLAYER: {
-      const res: IEntryState = {
+      const res: EntryState = {
         ...state,
         playerNames: [...state.playerNames, action.payload]
       };

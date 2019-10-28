@@ -21,10 +21,10 @@ import { modalEntrySelector } from "./selectors/modal-entry";
 import { deleteGameAction } from "./actions/delete-game";
 import { closeGameModalAction } from "./actions/game-modal";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
-import { Dispatch, IRootState } from "../types";
+import { Dispatch, RootState } from "../types";
 import classes from "./prev-games.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   entry: modalEntrySelector(state),
   index: state.prevGames.modalEntry
 });

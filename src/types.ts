@@ -2,25 +2,25 @@ import { Dispatch as ReduxDispatch } from "redux";
 import { CurrentGameActions } from "./score-input/actions";
 import { EntryActions } from "./entry/actions";
 import { GameState } from "./score-input/reducer";
-import { IEntryState } from "./entry/entry-reducer";
-import { ISettingsState } from "./score-input/settings/reducer";
+import { EntryState } from "./entry/entry-reducer";
+import { SettingsState } from "./score-input/settings/reducer";
 import { GameSettingsActions } from "./score-input/settings/actions";
-import { IPrevGamesState } from "./prev-games/prev-games-reducer";
+import { PrevGamesState } from "./prev-games/prev-games-reducer";
 import { PrevGamesActions } from "./prev-games/actions";
-import { IToastSingletonState } from "./toast-singleton/toast-singleton-reducer";
-import { IThemeState } from "./theme/theme-reducer";
+import { ToastSingletonState } from "./toast-singleton/toast-singleton-reducer";
+import { ThemeState } from "./theme/theme-reducer";
 
-export interface IPlayerMap<T> {
+export interface PlayerMap<T> {
   [playerID: string]: T;
 }
 
-export interface IRootState {
+export interface RootState {
   currentGame: GameState;
-  entry: IEntryState;
-  gameSettings: ISettingsState;
-  prevGames: IPrevGamesState;
-  toastSingleton: IToastSingletonState;
-  theme: IThemeState;
+  entry: EntryState;
+  gameSettings: SettingsState;
+  prevGames: PrevGamesState;
+  toastSingleton: ToastSingletonState;
+  theme: ThemeState;
 }
 
 export type Actions =

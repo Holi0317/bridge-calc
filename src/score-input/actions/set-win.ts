@@ -1,9 +1,9 @@
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 
-export interface ISetWinAction {
+export interface SetWinAction {
   type: ActionTypes.SET_WIN;
-  payload: IPlayerMap<number>;
+  payload: PlayerMap<number>;
 }
 
 /**
@@ -12,6 +12,6 @@ export interface ISetWinAction {
  *
  * @param payload - A map that maps player ID to their win choice
  */
-export function setWinAction(payload: IPlayerMap<number>): ISetWinAction {
+export function setWinAction(payload: PlayerMap<number>): SetWinAction {
   return { type: ActionTypes.SET_WIN, payload };
 }

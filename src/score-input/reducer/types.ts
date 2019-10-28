@@ -1,11 +1,11 @@
 import { GameStage } from "../game-stage";
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 
 /**
  * States that must have regardless of current stage.
  * (Except the stage property)
  */
-interface IBaseGameState {
+interface BaseGameState {
   /** Unique identifier for the game */
   id: string;
   /** Number of rounds for this game */
@@ -14,41 +14,37 @@ interface IBaseGameState {
   startTime: number;
 
   /** Player name map */
-  names: IPlayerMap<string>;
+  names: PlayerMap<string>;
   /** Player score map */
-  scores: IPlayerMap<number[]>;
+  scores: PlayerMap<number[]>;
 }
 
-export interface IWaitingBidState extends IBaseGameState {
+export interface WaitingBidState extends BaseGameState {
   stage: typeof GameStage.waitingBid;
   /** Current bid */
-  bid: IPlayerMap<number>;
+  bid: PlayerMap<number>;
   /** Order of players for current round */
   currentPlayerOrder: string[];
   /** Current round */
   currentRound: number;
 }
 
-export interface IWaitingWinState extends IBaseGameState {
+export interface WaitingWinState extends BaseGameState {
   stage: typeof GameStage.waitingWin;
   /** Current bid */
-  bid: IPlayerMap<number>;
+  bid: PlayerMap<number>;
   /** Order of players for current round */
   currentPlayerOrder: string[];
   /** Current round */
   currentRound: number;
   /** Current win */
-  win: IPlayerMap<number>;
+  win: PlayerMap<number>;
 }
 
-export interface IEndedState extends IBaseGameState {
+export interface EndedState extends BaseGameState {
   stage: typeof GameStage.ended;
   /** Time for the game to end, in unix timestamp */
   endTime: number;
 }
 
-export type GameState =
-  | null
-  | IWaitingBidState
-  | IWaitingWinState
-  | IEndedState;
+export type GameState = null | WaitingBidState | WaitingWinState | EndedState;

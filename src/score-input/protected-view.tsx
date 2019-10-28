@@ -7,13 +7,13 @@ import { WithTranslation, withTranslation } from "react-i18next";
 import { GameStage } from "./game-stage";
 import { stageSelector } from "./selectors/stage";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
-import { IRootState, Dispatch } from "../types";
+import { RootState, Dispatch } from "../types";
 
-interface IProtectedViewProps {
+interface ProtectedViewProps {
   comp: React.ComponentType<{}>;
 }
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   ended: stageSelector(state) === GameStage.ended
 });
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 type stateType = ReturnType<typeof mapStateToProps>;
 type dispatchType = ReturnType<typeof mapDispatchToProps>;
 
-type ProtectedViewProps = IProtectedViewProps &
+type ProtectedViewProps = ProtectedViewProps &
   stateType &
   dispatchType &
   WithTranslation;
@@ -69,4 +69,4 @@ export const ProtectedView = flowRight(
     mapStateToProps,
     mapDispatchToProps
   )
-)(ProtectedViewImpl) as React.ComponentType<IProtectedViewProps>;
+)(ProtectedViewImpl) as React.ComponentType<ProtectedViewProps>;

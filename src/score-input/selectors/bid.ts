@@ -1,5 +1,5 @@
 import { GameStage } from "../game-stage";
-import { IPlayerMap, IRootState } from "../../types";
+import { PlayerMap, RootState } from "../../types";
 import { createSelector } from "reselect";
 import mapValues from "lodash-es/mapValues";
 
@@ -7,7 +7,7 @@ import mapValues from "lodash-es/mapValues";
  * Select bid object from current game.
  * If it is not available, empty object will be returned.
  */
-export function bidSelector(state: IRootState): IPlayerMap<number> {
+export function bidSelector(state: RootState): PlayerMap<number> {
   const currentGame = state.currentGame;
   if (!currentGame || currentGame.stage === GameStage.ended) {
     return {};
@@ -22,6 +22,6 @@ export function bidSelector(state: IRootState): IPlayerMap<number> {
  */
 export const strBidSelector = createSelector(
   bidSelector,
-  (bid: IPlayerMap<number>): IPlayerMap<string> =>
+  (bid: PlayerMap<number>): PlayerMap<string> =>
     mapValues(bid, value => value + "")
 );

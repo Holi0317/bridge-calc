@@ -1,6 +1,6 @@
 import { ActionTypes } from "../../action-types";
 
-export interface IShowToastAction {
+export interface ShowToastAction {
   type: ActionTypes.SHOW_TOAST;
   message: string;
   autoHideDuration: number;
@@ -9,6 +9,6 @@ export interface IShowToastAction {
 export function showToastAction(
   message: string,
   autoHideDuration = 3000
-): IShowToastAction {
+): ShowToastAction {
   return { type: ActionTypes.SHOW_TOAST, message, autoHideDuration };
 }

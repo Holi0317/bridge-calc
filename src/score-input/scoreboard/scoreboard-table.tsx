@@ -10,12 +10,12 @@ import { GameState } from "../reducer";
 import { computeData } from "./compute-data";
 import classes from "./scoreboard.pcss";
 
-interface IScoreboardTableProps {
+interface ScoreboardTableProps {
   entry: NonNullable<GameState>;
   mini: boolean;
 }
 
-export function ScoreboardTable({ entry, mini }: IScoreboardTableProps) {
+export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
   const {
     names,
     scores,

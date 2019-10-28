@@ -1,7 +1,7 @@
-import { IPlayerMap, IRootState } from "../../../types";
+import { PlayerMap, RootState } from "../../../types";
 
 /**
  * Select names property from settings state
  */
-export const namesSelector = (state: IRootState): IPlayerMap<string> =>
+export const namesSelector = (state: RootState): PlayerMap<string> =>
   state.gameSettings.names;

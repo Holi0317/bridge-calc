@@ -11,9 +11,9 @@ import ActionInfo from "@material-ui/icons/Info";
 import ActionBugReport from "@material-ui/icons/BugReport";
 import { Tile } from "./tile";
 import { showContinueSelector } from "./show-continue-selector";
-import { IRootState } from "../types";
+import { RootState } from "../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   showContinue: showContinueSelector(state)
 });
 

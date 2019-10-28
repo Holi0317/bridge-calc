@@ -9,10 +9,10 @@ import Typography from "@material-ui/core/Typography";
 import { entryOptionsValidator, isEntryOptionsValid } from "./entry-validator";
 import { startAction } from "../score-input/actions/start";
 import { trans } from "../utils";
-import { IRootState, Dispatch } from "../types";
+import { RootState, Dispatch } from "../types";
 import classes from "./entry.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   rounds: state.entry.rounds,
   playerNames: state.entry.playerNames,
   startingRound: state.entry.startingRound,

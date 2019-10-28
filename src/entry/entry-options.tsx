@@ -8,10 +8,10 @@ import {
   setStartingRoundAction
 } from "./actions/set-entry-props";
 import { optionsSourcesSelector } from "./selectors/options-sources";
-import { Dispatch, IRootState } from "../types";
+import { Dispatch, RootState } from "../types";
 import classes from "./entry.pcss";
 
-const mapStateToProps = (state: IRootState) => {
+const mapStateToProps = (state: RootState) => {
   const { entry } = state;
   return {
     sources: optionsSourcesSelector(state),

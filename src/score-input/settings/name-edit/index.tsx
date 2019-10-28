@@ -11,10 +11,10 @@ import { nameEditDisabledSelector } from "../selectors/name-edit-disabled";
 import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { PANEL } from "../panel";
 import { NameEditor } from "./name-editor";
-import { Dispatch, IRootState } from "../../../types";
+import { Dispatch, RootState } from "../../../types";
 import classes from "../settings.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   disabled: nameEditDisabledSelector(state),
   expanded: expandedPanelSelector(state) === PANEL.NAME_EDIT
 });

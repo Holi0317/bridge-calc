@@ -1,12 +1,12 @@
-import { IAddGameAction } from "./add-game";
-import { IResetGamesAction } from "./reset-games";
-import { IDeleteGameAction } from "./delete-game";
-import { ISaveGameAction } from "./save-game";
-import { ISetGameModalAction } from "./game-modal";
+import { AddGameAction } from "./add-game";
+import { ResetGamesAction } from "./reset-games";
+import { DeleteGameAction } from "./delete-game";
+import { SaveGameAction } from "./save-game";
+import { SetGameModalAction } from "./game-modal";
 
 export type PrevGamesActions =
-  | IAddGameAction
-  | IDeleteGameAction
-  | IResetGamesAction
-  | ISaveGameAction
-  | ISetGameModalAction;
+  | AddGameAction
+  | DeleteGameAction
+  | ResetGamesAction
+  | SaveGameAction
+  | SetGameModalAction;

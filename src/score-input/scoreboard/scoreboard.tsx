@@ -2,10 +2,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Container } from "../../material/container";
 import { ScoreboardTable } from "./scoreboard-table";
-import { IRootState } from "../../types";
+import { RootState } from "../../types";
 import classes from "./scoreboard.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   entry: state.currentGame
 });
 

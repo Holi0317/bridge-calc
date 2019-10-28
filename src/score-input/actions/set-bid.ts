@@ -1,9 +1,9 @@
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 
-export interface ISetBidAction {
+export interface SetBidAction {
   type: ActionTypes.SET_BID;
-  payload: IPlayerMap<number>;
+  payload: PlayerMap<number>;
 }
 
 /**
@@ -12,6 +12,6 @@ export interface ISetBidAction {
  *
  * @param payload - A map that maps player ID to their bid choice
  */
-export function setBidAction(payload: IPlayerMap<number>): ISetBidAction {
+export function setBidAction(payload: PlayerMap<number>): SetBidAction {
   return { type: ActionTypes.SET_BID, payload };
 }

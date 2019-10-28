@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import classes from "./tile.pcss";
 
-export interface ITileProps {
+export interface TileProps {
   /** Title of the tile */
   title: string;
   /** Icon for the title, in React element format */
@@ -20,7 +20,7 @@ export interface ITileProps {
 /**
  * A tile represents a block on menu
  */
-export function Tile({ title, icon, external, target, to: _to }: ITileProps) {
+export function Tile({ title, icon, external, target, to: _to }: TileProps) {
   const to = _to || "/";
 
   return (

@@ -2,10 +2,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { gameTitleSelector } from "./selectors/game-title";
-import { IRootState } from "../types";
+import { RootState } from "../types";
 import { trans } from "../utils";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   title: gameTitleSelector(state)
 });
 

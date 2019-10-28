@@ -2,7 +2,7 @@ import mapValues from "lodash-es/mapValues";
 import sum from "lodash-es/sum";
 import range from "lodash-es/range";
 import { GameState } from "../reducer";
-import { IPlayerMap } from "../../types";
+import { PlayerMap } from "../../types";
 import { toOrdinal } from "../../utils";
 import { GameStage } from "../game-stage";
 
@@ -27,7 +27,7 @@ function getEmoji(rank: number, isLast: boolean): string {
   return "";
 }
 
-function getRank(scores: IPlayerMap<number>): IPlayerMap<string> {
+function getRank(scores: PlayerMap<number>): PlayerMap<string> {
   const sortedScores: number[] = Object.values(scores).sort((a, b) => b - a);
   const lastScore = sortedScores[sortedScores.length - 1];
   return mapValues(scores, score => {
@@ -51,16 +51,16 @@ function getEndedRounds(entry: NonNullable<GameState>): number[] {
   return range(1, entry.currentRound);
 }
 
-export interface IScoreboardData {
-  names: IPlayerMap<string>;
-  scores: IPlayerMap<number[]>;
-  prevScores: IPlayerMap<number>;
-  totalScores: IPlayerMap<number>;
-  ranks: IPlayerMap<string>;
+export interface ScoreboardData {
+  names: PlayerMap<string>;
+  scores: PlayerMap<number[]>;
+  prevScores: PlayerMap<number>;
+  totalScores: PlayerMap<number>;
+  ranks: PlayerMap<string>;
   endedRounds: number[];
 }
 
-export function computeData(entry: NonNullable<GameState>): IScoreboardData {
+export function computeData(entry: NonNullable<GameState>): ScoreboardData {
   const totalScores = mapValues(entry.scores, sum);
   return {
     names: entry.names,

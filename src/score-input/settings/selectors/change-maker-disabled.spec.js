@@ -3,8 +3,8 @@ import { namesChangedSelector } from "./names-changed";
 
 /**
  * Build part of redux store tree for testing
- * @param {IPlayerMap<string>} settingsName - `state.settings.names`
- * @param {IPlayerMap<string>} names - `state.currentGame.names`
+ * @param {PlayerMap<string>} settingsName - `state.settings.names`
+ * @param {PlayerMap<string>} names - `state.currentGame.names`
  * @returns {Object} Part of redux tree for consumption
  */
 function buildTree(settingsName, names) {

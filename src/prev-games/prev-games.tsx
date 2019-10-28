@@ -16,10 +16,10 @@ import { deleteGameAction } from "./actions/delete-game";
 import { showGameModalAction } from "./actions/game-modal";
 import { havePrevGamesSelector } from "./selectors/have-prev-games";
 import { reversedPrevGamesSelector } from "./selectors/reversed-prev-games";
-import { IRootState, Dispatch } from "../types";
+import { RootState, Dispatch } from "../types";
 import classes from "./prev-games.pcss";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   currentGame: state.currentGame,
   havePrevGame: havePrevGamesSelector(state),
   prevGames: reversedPrevGamesSelector(state)

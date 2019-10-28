@@ -9,7 +9,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { PrevGameEntry } from "./types";
 
-export interface IPrevGameProps {
+export interface PrevGameProps {
   game: PrevGameEntry;
   requestDelete(): void;
   requestDetail(): void;
@@ -19,7 +19,7 @@ export function PrevGame({
   game,
   requestDelete,
   requestDetail
-}: IPrevGameProps) {
+}: PrevGameProps) {
   const { t } = useTranslation();
 
   return (

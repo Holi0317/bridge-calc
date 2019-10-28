@@ -3,7 +3,7 @@ import { PrevGameEntry } from "../types";
 import { gameStateToPrevGame } from "../converter";
 import { ActionTypes } from "../../action-types";
 
-export interface ISaveGameAction {
+export interface SaveGameAction {
   type: ActionTypes.SAVE_GAME;
   /**
    * Content of the game to be saved.
@@ -19,7 +19,7 @@ export interface ISaveGameAction {
  * If given state is null, no-op will happen.
  * @param state - Game state to be saved
  */
-export function saveGameAction(state: GameState): ISaveGameAction {
+export function saveGameAction(state: GameState): SaveGameAction {
   if (state == null) {
     return { type: ActionTypes.SAVE_GAME, entry: null };
   }

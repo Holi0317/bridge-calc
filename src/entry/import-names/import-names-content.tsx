@@ -4,9 +4,9 @@ import List from "@material-ui/core/List";
 import { NameListEntry } from "./name-list-entry";
 import { EmptyNamesPlaceholder } from "./empty-names-placeholder";
 import { prevNamesSelector } from "../../prev-games/selectors/prev-names";
-import { IRootState } from "../../types";
+import { RootState } from "../../types";
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   names: prevNamesSelector(state)
 });
 

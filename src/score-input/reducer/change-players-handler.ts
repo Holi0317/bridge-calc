@@ -2,17 +2,19 @@ import mapValues from "lodash-es/mapValues";
 import range from "lodash-es/range";
 import { toEndedState, toWaitingBidState } from "./converter";
 import { toFront } from "../../utils";
-import { IEndedState, IWaitingBidState, IWaitingWinState } from "./types";
-import { IChangePlayersAction } from "../actions/change-players";
+import { EndedState, WaitingBidState, WaitingWinState } from "./types";
+import { ChangePlayersAction } from "../actions/change-players";
 
 export function changePlayersHandler(
-  rawState: IWaitingBidState | IWaitingWinState,
-  { newNames, rounds, maker, time }: IChangePlayersAction
-): IWaitingBidState | IEndedState {
+  rawState: WaitingBidState | WaitingWinState,
+  { newNames, rounds, maker, time }: ChangePlayersAction
+): WaitingBidState | EndedState {
   // Short circuit. When action.rounds is less than current round
   if (rounds < rawState.currentRound) {
-    // Tslint false positive on shallowed variable -- Shallowed variable on the else branch
-    // tslint:disable-next-line: no-shadowed-variable
+    /*
+     * Tslint false positive on shallowed variable -- Shallowed variable on the else branch
+     * tslint:disable-next-line: no-shadowed-variable
+     */
     const state = toEndedState(rawState, time);
     state.names = newNames;
     state.rounds = rounds;
@@ -34,7 +36,8 @@ export function changePlayersHandler(
 
   // Change scores
   const oldScores = state.scores;
-  const freshScores = range(state.currentRound - 1).fill(0); // Score for new players. I am terrible at naming.
+  // Score for new players. I am terrible at naming.
+  const freshScores = range(state.currentRound - 1).fill(0);
   state.scores = mapValues(newNames, (_: string, ID: string): number[] =>
     ID in oldScores ? oldScores[ID] : freshScores
   );
