@@ -15,7 +15,7 @@
   "main": "dist/main.js",
   "scripts": {
     "test": "jest",
-    "lint": "npm run lint:js && npm run lint:ts && npm run lint:css",
+    "lint": "npm run lint:js && npm run lint:css",
     "lint:css": "stylelint --cache --ignore-path .gitignore \"**/*.{css,scss,sass,pcss}\"",
     "lint:css:fix": "npm run lint:css -- --fix",
     "lint:js": "eslint --ext .jsx,.js,.ts,.tsx --ignore-path .gitignore --cache .",
