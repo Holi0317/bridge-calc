@@ -1,8 +1,5 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {
@@ -10,48 +7,29 @@ import {
   setPlayerNamesAction
 } from "../actions/set-entry-props";
 import { showToastAction } from "../../toast-singleton/actions/show-toast";
-import { Dispatch } from "../../types";
 import { cuid } from "../../utils";
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      setImportOpen: setImportOpenAction,
-      showToast: showToastAction,
-      setPlayerNames: setPlayerNamesAction
-    },
-    dispatch
-  );
-
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+import { useAction } from "../../hooks/use-action";
+import { useCallback } from "react";
 
 interface NameEntryProps {
   name: string[];
 }
 
-type NameListEntryProps = NameEntryProps & dispatchType & WithTranslation;
+export function NameListEntry({ name }: NameEntryProps) {
+  const { t } = useTranslation();
+  const setImportOpen = useAction(setImportOpenAction);
+  const showToast = useAction(showToastAction);
+  const setPlayerNames = useAction(setPlayerNamesAction);
 
-export class NameListEntryImpl extends React.Component<NameListEntryProps> {
-  public render() {
-    return (
-      <ListItem button onClick={this.setNames}>
-        <ListItemText primary={this.props.name.join(", ")} />
-      </ListItem>
-    );
-  }
-
-  private setNames = () => {
-    const { name, setImportOpen, showToast, setPlayerNames, t } = this.props;
+  const setNames = useCallback(() => {
     setPlayerNames(name.map(entry => ({ value: entry, id: cuid() })));
     setImportOpen(false);
     showToast(t("Imported names successfully"));
-  };
-}
+  }, [name, setImportOpen, showToast, setPlayerNames, t]);
 
-export const NameListEntry = flowRight(
-  withTranslation(),
-  connect(
-    null,
-    mapDispatchToProps
-  )
-)(NameListEntryImpl) as React.ComponentType<NameEntryProps>;
+  return (
+    <ListItem button onClick={setNames}>
+      <ListItemText primary={name.join(", ")} />
+    </ListItem>
+  );
+}
