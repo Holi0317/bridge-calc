@@ -1,33 +1,15 @@
-import * as React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { useEffect } from "react";
 import { closeGameModalAction } from "./actions/game-modal";
-import { Dispatch } from "../types";
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      closeModal: closeGameModalAction
-    },
-    dispatch
-  );
-
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+import { useAction } from "../hooks/use-action";
 
 /**
  * Reset dialog when this component mounts
  */
-export class ResetModalImpl extends React.Component<dispatchType> {
-  public componentDidMount() {
-    this.props.closeModal();
-  }
+export function ResetModal() {
+  const closeModal = useAction(closeGameModalAction);
+  useEffect(() => {
+    closeModal();
+  });
 
-  public render() {
-    return null;
-  }
+  return null;
 }
-
-export const ResetModal = connect(
-  null,
-  mapDispatchToProps
-)(ResetModalImpl);
