@@ -1,10 +1,10 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { RouteComponentProps, withRouter } from "react-router";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
-import withMobileDialog from "@material-ui/core/withMobileDialog";
+import { useCallback } from "react";
+import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -21,109 +21,89 @@ import { modalEntrySelector } from "./selectors/modal-entry";
 import { deleteGameAction } from "./actions/delete-game";
 import { closeGameModalAction } from "./actions/game-modal";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
-import { Dispatch, RootState } from "../types";
+import { RootState } from "../types";
 import classes from "./prev-games.pcss";
+import { useAction } from "../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  entry: modalEntrySelector(state),
-  index: state.prevGames.modalEntry
-});
+export function GameModal() {
+  const { t } = useTranslation();
+  const history = useHistory();
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      close: closeGameModalAction,
-      load: replaceCurrentGameAction,
-      del: deleteGameAction
-    },
-    dispatch
-  );
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+  const entry = useSelector(modalEntrySelector);
+  const index = useSelector((state: RootState) => state.prevGames.modalEntry);
 
-type GameModalProps = stateType &
-  dispatchType & { fullScreen: boolean } & WithTranslation &
-  RouteComponentProps<any>;
+  const close = useAction(closeGameModalAction);
+  const replaceGame = useAction(replaceCurrentGameAction);
+  const deleteGame = useAction(deleteGameAction);
 
-export class GameModalImpl extends React.Component<GameModalProps> {
-  public render() {
-    const { entry, fullScreen, close, t } = this.props;
+  const del = useCallback(() => {
+    if (index == null) {
+      return;
+    }
 
-    return (
-      <Dialog
-        fullScreen={fullScreen}
-        open={entry != null}
-        maxWidth="md"
-        onClose={close}
-        aria-labelledby="game-modal-title"
-      >
-        {fullScreen ? (
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton color="inherit" onClick={close} aria-label="Close">
-                <CloseIcon />
-              </IconButton>
-              <Typography variant="h6" color="inherit" className={classes.flex}>
-                {t("Previous game details")}
+    close();
+    deleteGame(index);
+  }, [index, deleteGame, close]);
+
+  const load = useCallback(() => {
+    if (entry == null) {
+      return;
+    }
+
+    replaceGame(entry);
+    history.push("/score-input");
+  }, [entry, replaceGame, history]);
+
+  return (
+    <Dialog
+      fullScreen={fullScreen}
+      open={entry != null}
+      maxWidth="md"
+      onClose={close}
+      aria-labelledby="game-modal-title"
+    >
+      {fullScreen ? (
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton color="inherit" onClick={close} aria-label="Close">
+              <CloseIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" className={classes.flex}>
+              {t("Previous game details")}
+            </Typography>
+            <Button color="inherit" onClick={del}>
+              <Typography variant="subtitle1" color="inherit">
+                {t("Load")}
               </Typography>
-              <Button color="inherit" onClick={this.del}>
-                <Typography variant="subtitle1" color="inherit">
-                  {t("Load")}
-                </Typography>
-              </Button>
-            </Toolbar>
-          </AppBar>
-        ) : (
-          <DialogTitle id="game-modal-title">
-            {t("Previous game details")}
-          </DialogTitle>
-        )}
-
-        {entry != null && (
-          <DialogContent>
-            <EntryDetail entry={entry} />
-            <ScoreboardTable entry={entry} mini={false} />
-          </DialogContent>
-        )}
-
-        {!fullScreen && (
-          <DialogActions>
-            <Button onClick={this.del} color="primary">
-              {t("Delete")}
             </Button>
-            <Button onClick={this.load} color="primary" autoFocus>
-              {t("Load")}
-            </Button>
-          </DialogActions>
-        )}
-      </Dialog>
-    );
-  }
+          </Toolbar>
+        </AppBar>
+      ) : (
+        <DialogTitle id="game-modal-title">
+          {t("Previous game details")}
+        </DialogTitle>
+      )}
 
-  private del = () => {
-    const { index, del, close } = this.props;
-    if (index != null) {
-      close();
-      del(index);
-    }
-  };
+      {entry != null && (
+        <DialogContent>
+          <EntryDetail entry={entry} />
+          <ScoreboardTable entry={entry} mini={false} />
+        </DialogContent>
+      )}
 
-  private load = () => {
-    const { entry, load, history } = this.props;
-    if (entry != null) {
-      load(entry);
-      history.push("/score-input");
-    }
-  };
+      {!fullScreen && (
+        <DialogActions>
+          <Button onClick={del} color="primary">
+            {t("Delete")}
+          </Button>
+          <Button onClick={load} color="primary" autoFocus>
+            {t("Load")}
+          </Button>
+        </DialogActions>
+      )}
+    </Dialog>
+  );
 }
-
-export const GameModal = flowRight(
-  withTranslation(),
-  withRouter,
-  withMobileDialog(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(GameModalImpl);
