@@ -1,13 +1,12 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { bindActionCreators } from "redux";
+import { useCallback } from "react";
 import i18next from "i18next";
-import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Dropdown, DropdownSource } from "../material/dropdown";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
 import { languages } from "../app/languages";
-import { Dispatch } from "../types";
+import { useAction } from "../hooks/use-action";
+import { useRefT } from "../hooks/use-ref-t";
 
 function transformLanguageArray(
   t: i18next.TFunction
@@ -23,60 +22,40 @@ function transformLanguageArray(
   );
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      showToast: showToastAction
+export function LanguageSelector() {
+  const { i18n, t } = useTranslation();
+  const showToast = useAction(showToastAction);
+  const refT = useRefT();
+
+  const changeLanguage = useCallback(
+    async (lang: string) => {
+      let err = null;
+
+      try {
+        await i18n.changeLanguage(lang);
+      } catch (e) {
+        err = e;
+      }
+
+      const message =
+        err == null
+          ? refT.current("Changed language successfully")
+          : refT.current("Error when changing language. Error: {{err}}", {
+              err: err.message
+            });
+      showToast(message);
     },
-    dispatch
+    [i18n, showToast, refT]
   );
 
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-type LanguageSelectorProps = dispatchType & WithTranslation;
-
-export class LanguageSelectorImpl extends React.Component<
-  LanguageSelectorProps
-> {
-  public render() {
-    const { i18n, t } = this.props;
-
-    return (
-      <div>
-        <Dropdown
-          label={t("Change language")}
-          value={i18n.language}
-          source={transformLanguageArray(t)}
-          onChange={this.changeLanguage}
-        />
-      </div>
-    );
-  }
-
-  private changeLanguage = async (lang: string) => {
-    const { i18n } = this.props;
-    let err = null;
-
-    try {
-      await i18n.changeLanguage(lang);
-    } catch (e) {
-      err = e;
-    }
-
-    const { t, showToast } = this.props;
-    const message =
-      err == null
-        ? t("Changed language successfully")
-        : t("Error when changing language. Error: {{err}}", {
-            err: err.message
-          });
-    showToast(message);
-  };
+  return (
+    <div>
+      <Dropdown
+        label={t("Change language")}
+        value={i18n.language}
+        source={transformLanguageArray(t)}
+        onChange={changeLanguage}
+      />
+    </div>
+  );
 }
-
-export const LanguageSelector = flowRight(
-  withTranslation(),
-  connect(
-    null,
-    mapDispatchToProps
-  )
-)(LanguageSelectorImpl);
