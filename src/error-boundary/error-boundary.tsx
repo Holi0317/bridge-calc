@@ -1,8 +1,7 @@
 import * as React from "react";
-import { WithTranslation, withTranslation } from "react-i18next";
 import { Ouch } from "./ouch";
 
-interface ErrorBoundaryProps extends WithTranslation {
+interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
 
@@ -10,7 +9,7 @@ interface ErrorBoundaryState {
   error: Error | null;
 }
 
-export class ErrorBoundaryImpl extends React.Component<ErrorBoundaryProps> {
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
   public state: ErrorBoundaryState = {
     error: null
   };
@@ -30,5 +29,3 @@ export class ErrorBoundaryImpl extends React.Component<ErrorBoundaryProps> {
     return this.props.children;
   }
 }
-
-export const ErrorBoundary = withTranslation()(ErrorBoundaryImpl);
