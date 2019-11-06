@@ -1,40 +1,16 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { initSettingsAction } from "./actions/init-settings";
-import { RootState, Dispatch } from "../../types";
+import { useAction } from "../../hooks/use-action";
+import { currentGameSelector } from "../selectors/current-game";
 
-const mapStateToProps = (state: RootState) => ({
-  currentGame: state.currentGame
-});
+export function SettingsInitializer() {
+  const currentGame = useSelector(currentGameSelector);
+  const init = useAction(initSettingsAction);
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      init: initSettingsAction
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type SettingsInitializerProps = stateType & dispatchType;
-
-export class SettingsInitializerImpl extends React.Component<
-  SettingsInitializerProps
-> {
-  public componentWillMount() {
-    const { init, currentGame } = this.props;
+  useEffect(() => {
     init(currentGame);
-  }
+  }, []);
 
-  public render() {
-    return null;
-  }
+  return null;
 }
-
-export const SettingsInitializer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsInitializerImpl);
