@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as format from "date-fns/format";
+import format from "date-fns/format";
 import { useTranslation } from "react-i18next";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";

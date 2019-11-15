@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import * as format from "date-fns/format";
-import * as distanceInWords from "date-fns/distance_in_words";
+import format from "date-fns/format";
+import formatDistance from "date-fns/formatDistance";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
@@ -70,7 +70,7 @@ export function EntryDetail({ entry }: EntryDetailProps) {
           <TableRow>
             <TableCell>{t("Time used")}</TableCell>
             <TableCell>
-              {distanceInWords(entry.startTime, entry.endTime)}
+              {formatDistance(entry.startTime, entry.endTime)}
             </TableCell>
           </TableRow>
         )}
