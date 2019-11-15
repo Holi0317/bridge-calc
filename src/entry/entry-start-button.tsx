@@ -1,70 +1,51 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { bindActionCreators } from "redux";
-import { WithTranslation, withTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { entryOptionsValidator, isEntryOptionsValid } from "./entry-validator";
 import { startAction } from "../score-input/actions/start";
 import { trans } from "../utils";
-import { RootState, Dispatch } from "../types";
+import { RootState } from "../types";
 import classes from "./entry.pcss";
+import { useAction } from "../hooks/use-action";
+import { useCallback } from "react";
 
-const mapStateToProps = (state: RootState) => ({
-  rounds: state.entry.rounds,
-  playerNames: state.entry.playerNames,
-  startingRound: state.entry.startingRound,
-  valid: isEntryOptionsValid(state),
-  miscError: entryOptionsValidator(state).misc
-});
+export function EntryStartButton() {
+  const { t } = useTranslation();
+  const history = useHistory();
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ start: startAction }, dispatch);
+  const rounds = useSelector((state: RootState) => state.entry.rounds);
+  const playerNames = useSelector(
+    (state: RootState) => state.entry.playerNames
+  );
+  const startingRound = useSelector(
+    (state: RootState) => state.entry.startingRound
+  );
+  const valid = useSelector(isEntryOptionsValid);
+  const miscError = useSelector(entryOptionsValidator).misc;
 
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+  const startAct = useAction(startAction);
 
-type EntryStartButtonProps = stateType &
-  dispatchType &
-  RouteComponentProps<any> &
-  WithTranslation;
-
-export class EntryStartButtonImpl extends React.PureComponent<
-  EntryStartButtonProps
-> {
-  public render() {
-    const { valid, miscError, t } = this.props;
-    return (
-      <div className={classes.startBtnContainer}>
-        <Button
-          variant="contained"
-          color="primary"
-          disabled={!valid}
-          onClick={this.start}
-        >
-          {t("Start")}
-        </Button>
-        {miscError != null && (
-          <Typography color="error">{trans(t, miscError)}</Typography>
-        )}
-      </div>
-    );
-  }
-
-  private start = () => {
-    const { rounds, playerNames, startingRound, start, history } = this.props;
-    start(rounds, playerNames.map(entry => entry.value), startingRound);
+  const start = useCallback(() => {
+    startAct(rounds, playerNames.map(entry => entry.value), startingRound);
     history.push("/score-input");
-  };
-}
+  }, [rounds, playerNames, startingRound, startAct, history]);
 
-export const EntryStartButton = flowRight(
-  withRouter,
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(EntryStartButtonImpl);
+  return (
+    <div className={classes.startBtnContainer}>
+      <Button
+        variant="contained"
+        color="primary"
+        disabled={!valid}
+        onClick={start}
+      >
+        {t("Start")}
+      </Button>
+      {miscError != null && (
+        <Typography color="error">{trans(t, miscError)}</Typography>
+      )}
+    </div>
+  );
+}
