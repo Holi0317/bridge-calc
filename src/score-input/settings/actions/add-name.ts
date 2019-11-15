@@ -1,28 +1,21 @@
+import { createAction } from "typesafe-actions";
 import { ActionTypes } from "../../../action-types";
 import { randomName } from "../../../example-names";
 import { cuid } from "../../../utils";
-
-export interface AddNameAction {
-  type: ActionTypes.ADD_NAME;
-  /**
-   * Name of the new player
-   */
-  name: string;
-  /**
-   * A new ID for him/her.
-   */
-  ID: string;
-}
 
 /**
  * Add a name to settings UI state and append to the end of the list.
  * This does NOT change currentGame state in the store.
  * @param name - Name of the new Player
  */
-export function addNameAction(name: string): AddNameAction {
-  return { type: ActionTypes.ADD_NAME, name, ID: cuid() };
-}
+export const addNameAction = createAction(
+  ActionTypes.ADD_NAME,
+  (name: string) => ({ name, id: cuid() })
+)();
 
-export function addRandomNameAction(): AddNameAction {
-  return { type: ActionTypes.ADD_NAME, name: randomName(), ID: cuid() };
+/**
+ * Add a random name to UI state and append to the end of the list
+ */
+export function addRandomNameAction() {
+  return addNameAction(randomName());
 }

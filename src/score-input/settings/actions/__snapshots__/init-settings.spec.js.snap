@@ -2,7 +2,7 @@
 
 exports[`it should return init settings action 1`] = `
 Object {
-  "state": Object {
+  "payload": Object {
     "bid": Object {
       "a": 0,
       "b": 0,
