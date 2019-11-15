@@ -1,3 +1,5 @@
+import { TranslateData } from "./translate";
+
 export { createSource } from "./create-source";
 export { dupe } from "./dupe";
 export { fillObj } from "./fill-obj";
@@ -12,4 +14,5 @@ export { isPlayerMapOf } from "./is-player-map-of";
 export { isArrayOf } from "./is-array-of";
 export { isArrayEqual } from "./is-array-equal";
 export { cuid, slug } from "./cuid";
-export { TranslateData, trans, tData } from "./translate";
+export { trans, tData } from "./translate";
+export type TranslateData = TranslateData;

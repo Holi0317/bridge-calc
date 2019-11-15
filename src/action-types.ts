@@ -1,4 +1,4 @@
-export const enum ActionTypes {
+export enum ActionTypes {
   // Current game (score-input) module
   BID = "CURRENT_GAME/BID",
   CHANGE_PLAYERS = "CURRENT_GAME/CHANGE_PLAYERS",
