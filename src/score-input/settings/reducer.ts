@@ -1,29 +1,29 @@
 import { GameStage } from "../game-stage";
-import { GameSettingsActions } from "./actions";
 import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 import { PANEL } from "./panel";
+import { createReducer } from "typesafe-actions";
 
 export interface SettingsState {
   /**
    * Player ID of currently selected maker.
    * If null, no maker is selected or the game is not running.
    */
-  maker: string | null;
+  readonly maker: string | null;
   /**
    * If maker has changed by user or not.
    * By default, this value is false.
    */
-  makerDirty: boolean;
+  readonly makerDirty: boolean;
   /**
    * New player map.
    */
-  names: PlayerMap<string>;
+  readonly names: PlayerMap<string>;
   /**
    * State which panel is expanded now.
    * If null, no panel is expanded.
    */
-  expandedPanel: PANEL | null;
+  readonly expandedPanel: PANEL | null;
 }
 
 const defaultState: SettingsState = {
@@ -33,55 +33,33 @@ const defaultState: SettingsState = {
   expandedPanel: null
 };
 
-export function settingsReducer(
-  state: SettingsState = defaultState,
-  action: GameSettingsActions
-): SettingsState {
-  switch (action.type) {
-    case ActionTypes.INIT_SETTINGS: {
-      const gameState = action.state;
-      if (gameState == null || gameState.stage === GameStage.ended) {
-        return defaultState;
-      }
-      return {
-        ...defaultState,
-        maker: gameState.currentPlayerOrder[0],
-        names: gameState.names
-      };
-    }
-    case ActionTypes.SET_MAKER:
-      return {
-        ...state,
-        makerDirty: true,
-        maker: action.maker
-      };
-    case ActionTypes.SET_NAMES:
-      return {
-        ...state,
-        names: action.newNames
-      };
-    case ActionTypes.ADD_NAME:
-      return {
-        ...state,
-        names: {
-          ...state.names,
-          [action.ID]: action.name
+export const settingsReducer = createReducer(defaultState)
+  .handleType(ActionTypes.INIT_SETTINGS, (_, { payload }) =>
+    payload == null || payload.stage === GameStage.ended
+      ? defaultState
+      : {
+          ...defaultState,
+          maker: payload.currentPlayerOrder[0],
+          names: payload.names
         }
-      };
-    case ActionTypes.TOGGLE_SETTING_PANEL: {
-      if (action.panel === state.expandedPanel) {
-        return {
-          ...state,
-          expandedPanel: null
-        };
-      }
-      return {
-        ...state,
-        expandedPanel: action.panel
-      };
+  )
+  .handleType(ActionTypes.SET_MAKER, (state, { payload }) => ({
+    ...state,
+    makerDirty: true,
+    maker: payload
+  }))
+  .handleType(ActionTypes.SET_NAMES, (state, { payload }) => ({
+    ...state,
+    names: payload
+  }))
+  .handleType(ActionTypes.ADD_NAME, (state, { payload }) => ({
+    ...state,
+    names: {
+      ...state.names,
+      [payload.id]: payload.name
     }
-
-    default:
-      return state;
-  }
-}
+  }))
+  .handleType(ActionTypes.TOGGLE_SETTING_PANEL, (state, { payload }) => ({
+    ...state,
+    expandedPanel: payload === state.expandedPanel ? null : payload
+  }));
