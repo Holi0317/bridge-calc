@@ -1,32 +1,23 @@
+import { createAction } from "typesafe-actions";
 import { randomName } from "../../example-names";
 import { ActionTypes } from "../../action-types";
 import { cuid } from "../../utils";
-
-export interface AddPlayerAction {
-  type: ActionTypes.ADD_PLAYER;
-  payload: {
-    value: string;
-    id: string;
-  };
-}
 
 /**
  * Add a new player for entry options.
  * @parm name - The name of new player
  */
-export function addPlayerAction(name: string): AddPlayerAction {
-  return {
-    type: ActionTypes.ADD_PLAYER,
-    payload: {
-      value: name,
-      id: cuid()
-    }
-  };
-}
+export const addPlayerAction = createAction(
+  ActionTypes.ADD_PLAYER,
+  (name: string) => ({
+    value: name,
+    id: cuid()
+  })
+)();
 
 /**
  * Add a new player with random name to entry options.
  */
-export function addRandomPlayerAction(): AddPlayerAction {
+export function addRandomPlayerAction() {
   return addPlayerAction(randomName());
 }

@@ -75,10 +75,10 @@ export function entryReducer(
 ): EntryState {
   switch (action.type) {
     case ActionTypes.SET_ENTRY_PROPS: {
-      const { type, ...props } = action;
+      const { payload } = action;
       const res: EntryState = {
         ...state,
-        ...props
+        ...payload
       };
       if (res.startingRound > res.rounds) {
         res.startingRound = 1;
