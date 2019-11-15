@@ -1,14 +1,7 @@
+import { createAction } from "typesafe-actions";
 import { ActionTypes } from "../../action-types";
 
-export interface ShowToastAction {
-  type: ActionTypes.SHOW_TOAST;
-  message: string;
-  autoHideDuration: number;
-}
-
-export function showToastAction(
-  message: string,
-  autoHideDuration = 3000
-): ShowToastAction {
-  return { type: ActionTypes.SHOW_TOAST, message, autoHideDuration };
-}
+export const showToastAction = createAction(
+  ActionTypes.SHOW_TOAST,
+  (message: string, autoHideDuration = 3000) => ({ message, autoHideDuration })
+)();
