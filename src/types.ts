@@ -6,7 +6,6 @@ import { PrevGamesState } from "./prev-games/prev-games-reducer";
 import { ToastSingletonState } from "./toast-singleton/toast-singleton-reducer";
 import { ThemeState } from "./theme/theme-reducer";
 
-import { GameSettingsActions } from "./score-input/settings/actions";
 import { CurrentGameActions } from "./score-input/actions";
 import { ToastSingletonActions } from "./toast-singleton/actions";
 import { PrevGamesActions } from "./prev-games/actions";
@@ -26,7 +25,6 @@ export interface RootState {
 
 export type Actions =
   | CurrentGameActions
-  | GameSettingsActions
   | PrevGamesActions
   | ToastSingletonActions;
 
