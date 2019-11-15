@@ -1,52 +1,30 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { bindActionCreators } from "redux";
-import { WithTranslation, withTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
 import { resetGamesAtion } from "../prev-games/actions/reset-games";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
-import { Dispatch } from "../types";
+import { useCallback } from "react";
+import { useAction } from "../hooks/use-action";
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      setCurrentGame: replaceCurrentGameAction,
-      resetPrevGames: resetGamesAtion,
-      showToast: showToastAction
-    },
-    dispatch
-  );
+export function PurgeData() {
+  const { t } = useTranslation();
 
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+  const showToast = useAction(showToastAction);
+  const setCurrentGame = useAction(replaceCurrentGameAction);
+  const resetPrevGame = useAction(resetGamesAtion);
 
-type PurgeDataProps = dispatchType & WithTranslation;
-
-export class PurgeDataImpl extends React.Component<PurgeDataProps> {
-  public render() {
-    const { t } = this.props;
-    return (
-      <div>
-        <Button variant="contained" color="primary" onClick={this.clear}>
-          {t("Clear all data")}
-        </Button>
-      </div>
-    );
-  }
-
-  private clear = () => {
-    const { showToast, t, setCurrentGame, resetPrevGames } = this.props;
+  const clear = useCallback(() => {
     setCurrentGame(null);
-    resetPrevGames();
+    resetPrevGame();
     showToast(t("All data is cleared"));
-  };
-}
+  }, [t, showToast, setCurrentGame, resetPrevGame]);
 
-export const PurgeData = flowRight(
-  withTranslation(),
-  connect(
-    null,
-    mapDispatchToProps
-  )
-)(PurgeDataImpl);
+  return (
+    <div>
+      <Button variant="contained" color="primary" onClick={clear}>
+        {t("Clear all data")}
+      </Button>
+    </div>
+  );
+}
