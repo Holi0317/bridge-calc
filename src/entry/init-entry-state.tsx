@@ -1,38 +1,20 @@
-import * as React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { genRandomNames } from "../example-names";
 import { setPlayerNamesAction } from "./actions/set-entry-props";
 import { resetAction } from "./actions/reset";
-import { Dispatch } from "../types";
 import { cuid } from "../utils";
+import { useEffect } from "react";
+import { useAction } from "../hooks/use-action";
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    { reset: resetAction, setPlayerNames: setPlayerNamesAction },
-    dispatch
-  );
+export function InitEntryState() {
+  const reset = useAction(resetAction);
+  const setPlayerNames = useAction(setPlayerNamesAction);
 
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+  useEffect(() => {
+    reset();
 
-type InitEntryStateProps = dispatchType;
-
-export class InitEntryStateImpl extends React.PureComponent<
-  InitEntryStateProps
-> {
-  public componentWillMount() {
-    this.props.reset();
     const names = genRandomNames();
+    setPlayerNames(names.map(name => ({ value: name, id: cuid() })));
+  }, []);
 
-    this.props.setPlayerNames(names.map(name => ({ value: name, id: cuid() })));
-  }
-
-  public render() {
-    return null;
-  }
+  return null;
 }
-
-export const InitEntryState = connect(
-  null,
-  mapDispatchToProps
-)(InitEntryStateImpl);
