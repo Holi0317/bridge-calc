@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bridge calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Dynamic injection of base element. Minified by hand -->
+    <script>
+      (() => {
+        const hostname = location.hostname.split(".");
+        const baseEl = document.createElement("base");
+        if (
+          hostname[2] === "io" &&
+          (hostname[1] === "github" || hostname[1] === "gitlab")
+        ) {
+          baseEl.href = "/bridge-calc/";
+        } else {
+          baseEl.href = "/";
+        }
+        document.head.appendChild(baseEl);
+      })();
+    </script>
+
+    <link rel="manifest" href="manifest.json" />
+    <link rel="shortcut icon" href="icons/icon-16.png" type="image/png" />
+    <meta name="theme-color" content="#AD1457" />
+    <meta name="author" content="Holi0317 <holliswuhollis@gmail.com>" />
+    <meta name="description" content="A calculator for German Bridge game" />
+
+    <!-- If no script, hide loading spinner -->
+    <noscript
+      ><style>
+        .root {
+          display: none;
+        }
+      </style></noscript
+    >
+    <!-- Loading spinner styling -->
+    <style>
+      .splash {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 5%;
+        animation: d 2s linear;
+        text-align: center;
+        margin: 10% 0 0;
+        box-sizing: border-box;
+      }
+      .splash .loader {
+        position: relative;
+        margin: 0 auto;
+        width: 100px;
+      }
+      .splash .loader:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+      .splash .circular {
+        animation: a 2s linear infinite;
+        height: 100%;
+        transform-origin: center center;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+      .splash .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: b 1.5s ease-in-out infinite, c 6s ease-in-out infinite;
+        stroke-linecap: round;
+      }
+      @keyframes a {
+        to {
+          transform: rotate(1turn);
+        }
+      }
+      @keyframes b {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -35px;
+        }
+        to {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -124px;
+        }
+      }
+      @keyframes c {
+        0%,
+        to {
+          stroke: #d62d20;
+        }
+        40% {
+          stroke: #0057e7;
+        }
+        66% {
+          stroke: #008744;
+        }
+        80%,
+        90% {
+          stroke: #ffa700;
+        }
+      }
+      @keyframes d {
+        0%,
+        50% {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+
+    <!-- Body styling -->
+    <style>
+      body {
+        margin: 0;
+        background-color: var(--bg-color, white);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="root">
+      <div class="splash">
+        <div class="loader">
+          <svg class="circular" viewBox="25 25 50 50">
+            <circle
+              class="path"
+              cx="50"
+              cy="50"
+              r="20"
+              fill="none"
+              stroke-width="2"
+              stroke-miterlimit="10"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <p>
+        Your browser does not support JavaScipt. You must enable it to use this
+        app.
+      </p>
+      <p>
+        <a href="https://www.enable-javascript.com/" target="_blank"
+          >Click here to learn more.</a
+        >
+      </p>
+    </noscript>
+  </body>
+</html>
