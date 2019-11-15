@@ -1,10 +1,10 @@
-import { ToastSingletonActions } from "./actions";
+import { createReducer } from "typesafe-actions";
 import { ActionTypes } from "../action-types";
 
 export interface ToastSingletonState {
-  open: boolean;
-  message: string;
-  autoHideDuration: number;
+  readonly open: boolean;
+  readonly message: string;
+  readonly autoHideDuration: number;
 }
 
 const defaultState: ToastSingletonState = {
@@ -13,23 +13,12 @@ const defaultState: ToastSingletonState = {
   autoHideDuration: 3000
 };
 
-export function toastSingletonReducer(
-  state = defaultState,
-  action: ToastSingletonActions
-): ToastSingletonState {
-  switch (action.type) {
-    case ActionTypes.SHOW_TOAST:
-      return {
-        open: true,
-        message: action.message,
-        autoHideDuration: action.autoHideDuration
-      };
-    case ActionTypes.CLOSE_TOAST:
-      return {
-        ...state,
-        open: false
-      };
-    default:
-      return state;
-  }
-}
+export const toastSingletonReducer = createReducer(defaultState)
+  .handleType(ActionTypes.SHOW_TOAST, (_, { payload }) => ({
+    open: true,
+    ...payload
+  }))
+  .handleType(ActionTypes.CLOSE_TOAST, state => ({
+    ...state,
+    open: false
+  }));
