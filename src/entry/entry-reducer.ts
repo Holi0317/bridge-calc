@@ -1,5 +1,5 @@
-import { EntryActions } from "./actions";
 import { ActionTypes } from "../action-types";
+import { createReducer } from "typesafe-actions";
 
 /**
  * Represent a player name in entry view.
@@ -11,18 +11,18 @@ export interface PlayerNameEntry {
   /**
    * Name of the player.
    */
-  value: string;
+  readonly value: string;
   /**
    * Unique ID of the player in entry view.
    */
-  id: string;
+  readonly id: string;
 }
 
 export interface EntryState {
-  rounds: number;
-  startingRound: number;
-  playerNames: PlayerNameEntry[];
-  importOpened: boolean;
+  readonly rounds: number;
+  readonly startingRound: number;
+  readonly playerNames: ReadonlyArray<PlayerNameEntry>;
+  readonly importOpened: boolean;
 }
 
 const defaultState: EntryState = {
@@ -46,15 +46,13 @@ const defaultState: EntryState = {
  *
  * See test/entry-reducer.spec.js for expected result on this.
  *
- * ATTENTION: This function will mutate given state object
- *
  * @param state - previous state of reducer
  * @param playerNames - original player names before updating
  */
 function playerNameAction(
   state: EntryState,
-  playerNames: PlayerNameEntry[]
-): void {
+  playerNames: ReadonlyArray<PlayerNameEntry>
+): EntryState {
   const newPlayerNum = state.playerNames.length;
   const newRounds = Math.floor(52 / newPlayerNum);
   const playerNum = playerNames.length;
@@ -62,41 +60,39 @@ function playerNameAction(
 
   if (newPlayerNum > playerNum && newRounds <= state.rounds) {
     // Add player and currently selected rounds is too large
-    state.rounds = newRounds;
+    return {
+      ...state,
+      rounds: newRounds
+    };
   } else if (newPlayerNum < playerNum && state.rounds === oldRounds) {
     // Remove player and currently selected rounds is at maximum (i.e. default)
-    state.rounds = newRounds;
+    return {
+      ...state,
+      rounds: newRounds
+    };
   }
+
+  return state;
 }
 
-export function entryReducer(
-  state: EntryState = defaultState,
-  action: EntryActions
-): EntryState {
-  switch (action.type) {
-    case ActionTypes.SET_ENTRY_PROPS: {
-      const { payload } = action;
-      const res: EntryState = {
-        ...state,
-        ...payload
+export const entryReducer = createReducer(defaultState)
+  .handleType(ActionTypes.RESET_ENTRY, () => defaultState)
+  .handleType(ActionTypes.ADD_PLAYER, (state, action) =>
+    playerNameAction(
+      { ...state, playerNames: [...state.playerNames, action.payload] },
+      state.playerNames
+    )
+  )
+  .handleType(ActionTypes.SET_ENTRY_PROPS, (state, action) => {
+    const res = playerNameAction(
+      { ...state, ...action.payload },
+      state.playerNames
+    );
+    if (res.startingRound > res.rounds) {
+      return {
+        ...res,
+        startingRound: 1
       };
-      if (res.startingRound > res.rounds) {
-        res.startingRound = 1;
-      }
-      playerNameAction(res, state.playerNames);
-      return res;
     }
-    case ActionTypes.ADD_PLAYER: {
-      const res: EntryState = {
-        ...state,
-        playerNames: [...state.playerNames, action.payload]
-      };
-      playerNameAction(res, state.playerNames);
-      return res;
-    }
-    case ActionTypes.RESET_ENTRY:
-      return defaultState;
-    default:
-      return state;
-  }
-}
+    return res;
+  });
