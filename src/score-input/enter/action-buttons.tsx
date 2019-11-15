@@ -1,8 +1,6 @@
 import * as React from "react";
-import flowRight from "lodash-es/flowRight";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
 import { GameStage } from "../game-stage";
 import { stageSelector } from "../selectors/stage";
@@ -10,56 +8,28 @@ import { isStackInputValid } from "./stack-input-validator";
 import { bidAction } from "../actions/bid";
 import { winAction } from "../actions/win";
 import { undoAction } from "../actions/undo";
-import { RootState, Dispatch } from "../../types";
 import classes from "./action-buttons.pcss";
+import { currentGameSelector } from "../selectors/current-game";
+import { useCallback } from "react";
+import { useAction } from "../../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  undoDisabled: stageSelector(state) !== GameStage.waitingWin,
-  nextDisabled: !isStackInputValid(state),
-  currentGame: state.currentGame
-});
+export function ActionButtons() {
+  const { t } = useTranslation();
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    { bid: bidAction, win: winAction, undo: undoAction },
-    dispatch
-  );
+  const stage = useSelector(stageSelector);
+  const inputValid = useSelector(isStackInputValid);
+  const currentGame = useSelector(currentGameSelector);
 
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
+  const bid = useAction(bidAction);
+  const win = useAction(winAction);
+  const undo = useAction(undoAction);
+  // Material-ui needs handler to be undefined instead of null
+  const undoHandler = currentGame == null ? undefined : undo;
 
-type ActionButtonsProps = stateType & dispatchType & WithTranslation;
+  const undoDisabled = stage !== GameStage.waitingWin;
+  const nextDisabled = !inputValid;
 
-export class ActionButtonsImpl extends React.Component<ActionButtonsProps> {
-  public render() {
-    const { currentGame, undo, nextDisabled, t, undoDisabled } = this.props;
-    // Material-ui needs handler to be undefined instead of null
-    const undoHandler = currentGame == null ? undefined : undo;
-
-    return (
-      <div className={classes.btnContainer}>
-        <Button
-          variant="contained"
-          color="primary"
-          disabled={nextDisabled}
-          onClick={this.next}
-        >
-          {t("Next")}
-        </Button>
-        <div className={classes.stretch} />
-        <Button
-          variant="contained"
-          disabled={undoDisabled}
-          onClick={undoHandler}
-        >
-          {t("Undo")}
-        </Button>
-      </div>
-    );
-  }
-
-  private next = () => {
-    const { currentGame, bid, win } = this.props;
+  const next = useCallback(() => {
     if (!currentGame) {
       // Just to eliminate state is null case
     } else if (currentGame.stage === GameStage.waitingBid) {
@@ -67,13 +37,22 @@ export class ActionButtonsImpl extends React.Component<ActionButtonsProps> {
     } else if (currentGame.stage === GameStage.waitingWin) {
       win(currentGame.win);
     }
-  };
-}
+  }, [currentGame, bid, win]);
 
-export const ActionButtons = flowRight(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(ActionButtonsImpl);
+  return (
+    <div className={classes.btnContainer}>
+      <Button
+        variant="contained"
+        color="primary"
+        disabled={nextDisabled}
+        onClick={next}
+      >
+        {t("Next")}
+      </Button>
+      <div className={classes.stretch} />
+      <Button variant="contained" disabled={undoDisabled} onClick={undoHandler}>
+        {t("Undo")}
+      </Button>
+    </div>
+  );
+}
