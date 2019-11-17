@@ -1,15 +1,6 @@
 import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
-import { useDispatch } from "react-redux";
-import { useCallback } from "react";
-
-export interface ChangePlayersAction {
-  type: ActionTypes.CHANGE_PLAYERS;
-  newNames: PlayerMap<string>;
-  maker: string;
-  rounds: number;
-  time: number;
-}
+import { createAction } from "typesafe-actions";
 
 /**
  * Change players of current game.
@@ -34,16 +25,12 @@ export interface ChangePlayersAction {
  * If the given rounds is less than current round, the game will end immediately.
  * The above case is considered as a bug. Prevention of this should be done on the caller side.
  */
-export function changePlayersAction(
-  newNames: PlayerMap<string>,
-  maker: string,
-  rounds: number
-): ChangePlayersAction {
-  return {
-    type: ActionTypes.CHANGE_PLAYERS,
+export const changePlayersAction = createAction(
+  ActionTypes.CHANGE_PLAYERS,
+  (newNames: PlayerMap<string>, maker: string, rounds: number) => ({
     newNames,
     maker,
     rounds,
     time: new Date().getTime()
-  };
-}
+  })
+)();

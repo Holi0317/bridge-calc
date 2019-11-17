@@ -8,10 +8,12 @@ test("it should return change players action", () => {
   const newNames = genMap("John", "Mary", "Henry", "Joe");
   const expected = {
     type: ActionTypes.CHANGE_PLAYERS,
-    newNames,
-    maker: "a",
-    rounds: 13,
-    time: 0
+    payload: {
+      newNames,
+      maker: "a",
+      rounds: 13,
+      time: 0
+    }
   };
   const actual = changePlayersAction(newNames, "a", 13);
   expect(actual).toEqual(expected);

@@ -16,8 +16,10 @@ afterEach(() => {
 test("it should return win action", () => {
   const expected = {
     type: ActionTypes.WIN,
-    win: genMap(0, 0, 0, 0),
-    time: 0
+    payload: {
+      win: genMap(0, 0, 0, 0),
+      time: 0
+    }
   };
   const actual = winAction(genMap(0, 0, 0, 0));
   expect(actual).toEqual(expected);
@@ -26,7 +28,7 @@ test("it should return win action", () => {
 test("it should return win action with no payload", () => {
   const expected = {
     type: ActionTypes.WIN,
-    time: 0
+    payload: { time: 0 }
   };
   const actual = winAction();
   expect(actual).toEqual(expected);

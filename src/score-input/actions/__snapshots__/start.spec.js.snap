@@ -2,16 +2,18 @@
 
 exports[`it should returns start action 1`] = `
 Object {
-  "id": "4",
-  "playerNames": Object {
-    "0": "John",
-    "1": "Mary",
-    "2": "Henry",
-    "3": "Joe",
+  "payload": Object {
+    "id": "4",
+    "playerNames": Object {
+      "0": "John",
+      "1": "Mary",
+      "2": "Henry",
+      "3": "Joe",
+    },
+    "rounds": 13,
+    "startTime": 0,
+    "startingRound": 1,
   },
-  "rounds": 13,
-  "startTime": 0,
-  "startingRound": 1,
   "type": "CURRENT_GAME/START",
 }
 `;

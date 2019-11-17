@@ -1,15 +1,7 @@
+import { createAction } from "typesafe-actions";
 import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
 import { cuid } from "../../utils";
-
-export interface StartAction {
-  type: ActionTypes.START;
-  rounds: number;
-  playerNames: PlayerMap<string>;
-  startTime: number;
-  startingRound: number;
-  id: string;
-}
 
 /**
  * Helper function to Change player names array to object with random generated player ID as key.
@@ -30,17 +22,13 @@ function namesToMap(playerNames: string[]): PlayerMap<string> {
  * Ordering of the names will be used as the player order for first round.
  * @param startingRound - The round to start from
  */
-export function startAction(
-  rounds: number,
-  playerNames: string[],
-  startingRound: number
-): StartAction {
-  return {
-    type: ActionTypes.START,
+export const startAction = createAction(
+  ActionTypes.START,
+  (rounds: number, playerNames: string[], startingRound: number) => ({
     rounds,
     playerNames: namesToMap(playerNames),
     startTime: new Date().getTime(),
     startingRound,
     id: cuid()
-  };
-}
+  })
+)();

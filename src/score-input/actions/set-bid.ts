@@ -1,10 +1,6 @@
+import { createAction } from "typesafe-actions";
 import { PlayerMap } from "../../types";
 import { ActionTypes } from "../../action-types";
-
-export interface SetBidAction {
-  type: ActionTypes.SET_BID;
-  payload: PlayerMap<number>;
-}
 
 /**
  * Set the bid property in current game cache.
@@ -12,6 +8,7 @@ export interface SetBidAction {
  *
  * @param payload - A map that maps player ID to their bid choice
  */
-export function setBidAction(payload: PlayerMap<number>): SetBidAction {
-  return { type: ActionTypes.SET_BID, payload };
-}
+export const setBidAction = createAction(
+  ActionTypes.SET_BID,
+  (payload: PlayerMap<number>) => payload
+)();

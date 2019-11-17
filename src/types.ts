@@ -6,7 +6,6 @@ import { PrevGamesState } from "./prev-games/prev-games-reducer";
 import { ToastSingletonState } from "./toast-singleton/toast-singleton-reducer";
 import { ThemeState } from "./theme/theme-reducer";
 
-import { CurrentGameActions } from "./score-input/actions";
 import { PrevGamesActions } from "./prev-games/actions";
 
 export interface PlayerMap<T> {
@@ -22,6 +21,6 @@ export interface RootState {
   theme: ThemeState;
 }
 
-export type Actions = CurrentGameActions | PrevGamesActions;
+export type Actions = PrevGamesActions;
 
 export type Dispatch = ReduxDispatch<Actions>;

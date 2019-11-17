@@ -1,15 +1,11 @@
 import { ActionTypes } from "../../action-types";
-
-export interface SkipAction {
-  type: ActionTypes.SKIP;
-  times: number;
-  time: number;
-}
+import { createAction } from "typesafe-actions";
 
 /**
  * Skip n round(s).
  * @param times - Number of rounds to be skip.
  */
-export function skipAction(times: number): SkipAction {
-  return { type: ActionTypes.SKIP, times, time: new Date().getTime() };
-}
+export const skipAction = createAction(ActionTypes.SKIP, (times: number) => ({
+  times,
+  date: new Date().getTime()
+}))();
