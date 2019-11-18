@@ -1,4 +1,4 @@
-import { createReducer } from "typesafe-actions";
+import { createReducer, StateType } from "typesafe-actions";
 import { combineReducers } from "redux";
 import { PrevGameEntry } from "./types";
 import { ActionTypes } from "../action-types";
@@ -32,3 +32,5 @@ export const prevGamesReducer = combineReducers({
   prevGames: prevArrayReducer,
   modalEntry: modalReducer
 });
+
+export type PrevGamesState = StateType<typeof prevGamesReducer>;
