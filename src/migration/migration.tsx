@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Loadable from "react-loadable";
+import Loadable from "react-loadable";
 import { hasOldData } from "./old-state-manager";
 import { useState, useEffect } from "react";
 
@@ -20,7 +20,7 @@ export function Migration() {
     if (hasOldData()) {
       setOldState(true);
     }
-  });
+  }, []);
 
   return hasOldState ? <LoadableDialog /> : null;
 }

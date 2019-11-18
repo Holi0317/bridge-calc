@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Loadable from "react-loadable";
+import Loadable from "react-loadable";
 import { Spinner } from "../material/spinner";
 import { Ouch } from "../error-boundary/ouch";
 import classes from "./loading.pcss";

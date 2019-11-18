@@ -1,4 +1,4 @@
-import * as Loadable from "react-loadable";
+import Loadable from "react-loadable";
 import { CurrentGameTitle } from "./current-game-title";
 import { Loading } from "../lazy-views/loading";
 import { Route } from "../app/routes";
