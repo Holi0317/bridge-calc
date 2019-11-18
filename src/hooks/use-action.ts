@@ -1,4 +1,3 @@
-import { Actions } from "../types";
 import { useDispatch } from "react-redux";
 import { useCallback } from "react";
 
@@ -11,7 +10,7 @@ import { useCallback } from "react";
  * Note that the return type of the returned function is not accurate.
  * The return type should be unknown.
  */
-export function useAction<F extends (...args: any[]) => Actions>(
+export function useAction<F extends (...args: any[]) => RootActions>(
   creator: F
 ): F {
   const dispatch = useDispatch();
@@ -20,6 +19,6 @@ export function useAction<F extends (...args: any[]) => Actions>(
       const action = creator(args);
       dispatch(action);
     },
-    [dispatch]
+    [creator, dispatch]
   ) as F;
 }
