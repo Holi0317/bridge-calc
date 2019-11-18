@@ -5,8 +5,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import styled from "styled-components/macro";
 import { cuid } from "../utils";
-import classes from "./dropdown.pcss";
 
 export interface DropdownSource<T extends number | string> {
   value: T;
@@ -24,6 +24,13 @@ export interface DropdownProps<T extends number | string> {
   onChange(value: T): void;
 }
 
+const StyledSelect = styled(Select)`
+  min-width: 150px;
+  .MuiSelect-selectMenu {
+    min-width: 150px;
+  }
+`;
+
 export function Dropdown<SourceType extends number | string>({
   source,
   label,
@@ -36,13 +43,9 @@ export function Dropdown<SourceType extends number | string>({
   return (
     <FormControl error={error != null} margin="normal">
       <InputLabel htmlFor={uid}>{label}</InputLabel>
-      <Select
+      <StyledSelect
         {...rest}
         inputProps={{ name: label, id: uid }}
-        classes={{
-          root: classes.dropdownRoot,
-          selectMenu: classes.dropdownSelectMenu
-        }}
         onChange={(event: any) => onChange(event.target.value)}
       >
         {source.map(item => (
@@ -54,7 +57,7 @@ export function Dropdown<SourceType extends number | string>({
             {item.label}
           </MenuItem>
         ))}
-      </Select>
+      </StyledSelect>
       {error != null && <FormHelperText>{error}</FormHelperText>}
     </FormControl>
   );
