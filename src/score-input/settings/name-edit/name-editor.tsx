@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import { SettingsPlayerList } from "./settings-player-list";

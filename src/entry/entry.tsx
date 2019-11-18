@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import Divider from "@material-ui/core/Divider";
 import { Container } from "../material/container";

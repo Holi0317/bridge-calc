@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import flowRight from "lodash-es/flowRight";
 import { connect } from "react-redux";
 import { WithTranslation, withTranslation } from "react-i18next";

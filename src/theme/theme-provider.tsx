@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { activatedThemeSelector } from "./selectors/activated-theme";

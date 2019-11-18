@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Redirect, Route } from "react-router";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";

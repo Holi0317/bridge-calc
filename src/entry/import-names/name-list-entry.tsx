@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";

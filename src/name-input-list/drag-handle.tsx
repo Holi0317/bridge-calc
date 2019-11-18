@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { SortableHandle } from "react-sortable-hoc";
 import EditorDragHandle from "@material-ui/icons/DragHandle";
 import classes from "./name-input-list.pcss";

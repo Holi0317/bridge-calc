@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Loadable from "react-loadable";
 import { hasOldData } from "./old-state-manager";
 import { useState, useEffect } from "react";

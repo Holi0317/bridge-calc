@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { SortEnd } from "react-sortable-hoc";
 import arrayMove from "array-move";
 import { Container } from "./container";

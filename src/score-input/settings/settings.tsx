@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Container } from "../../material/container";
 import { NameEdit } from "./name-edit";
 import { RoundManagement } from "./round-management";

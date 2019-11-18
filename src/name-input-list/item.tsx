@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { SortableElement } from "react-sortable-hoc";
 import IconButton from "@material-ui/core/IconButton";

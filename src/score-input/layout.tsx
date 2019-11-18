@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Route, matchPath } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { routes } from "./routes";

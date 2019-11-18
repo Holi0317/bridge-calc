@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";

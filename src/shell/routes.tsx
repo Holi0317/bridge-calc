@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Location } from "history";
 import { ErrorBoundary } from "../error-boundary";
 import { Route, Switch } from "react-router";
