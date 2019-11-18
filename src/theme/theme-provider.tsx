@@ -1,29 +1,32 @@
-import React from "react";
-import { connect } from "react-redux";
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import {
+  StylesProvider,
+  ThemeProvider as MuiThemeProvider
+} from "@material-ui/core/styles";
+import { ThemeProvider as SSThemeProvider } from "styled-components/macro";
 import { activatedThemeSelector } from "./selectors/activated-theme";
 import { cssPropsSelector } from "./selectors/css-props";
-import { RootState } from "../types";
 
-const mapStateToProps = (state: RootState) => ({
-  theme: activatedThemeSelector(state),
-  cssProps: cssPropsSelector(state)
-});
-
-type stateType = ReturnType<typeof mapStateToProps>;
-
-type ThemeProviderProps = stateType & { children: React.ReactNode };
-
-export function ThemeProviderImpl({
-  theme,
-  cssProps,
-  children
-}: ThemeProviderProps) {
-  cssProps.forEach((value, key) => {
-    document.body.style.setProperty(key, value);
-  });
-
-  return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
+interface ThemeProviderProps {
+  children: React.ReactNode;
 }
 
-export const ThemeProvider = connect(mapStateToProps)(ThemeProviderImpl);
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  const theme = useSelector(activatedThemeSelector);
+  const cssProps = useSelector(cssPropsSelector);
+
+  useEffect(() => {
+    cssProps.forEach((value, key) => {
+      document.body.style.setProperty(key, value);
+    });
+  }, [cssProps]);
+
+  return (
+    <StylesProvider injectFirst>
+      <SSThemeProvider theme={theme}>
+        <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
+      </SSThemeProvider>
+    </StylesProvider>
+  );
+}

@@ -45,6 +45,7 @@
     "redux": "4.0.4",
     "redux-persist": "6.0.0",
     "reselect": "4.0.0",
+    "styled-components": "4.4.1",
     "tslib": "1.10.0",
     "typesafe-actions": "5.1.0"
   },
@@ -60,6 +61,7 @@
     "@types/react-router-dom": "5.1.0",
     "@types/react-sortable-hoc": "0.6.6",
     "@types/react-transition-group": "4.2.3",
+    "@types/styled-components": "4.4.0",
     "cross-env": "6.0.3",
     "del-cli": "3.0.0",
     "husky": "3.0.9",
@@ -67,9 +69,9 @@
     "lolex": "5.1.1",
     "prettier": "1.18.2",
     "pretty-quick": "2.0.0",
+    "react-scripts": "3.2.0",
     "serve": "11.2.0",
-    "typescript": "3.6.4",
-    "react-scripts": "3.2.0"
+    "typescript": "3.6.4"
   },
   "husky": {
     "hooks": {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./tile.pcss";
+import styled from "styled-components/macro";
 
 export interface TileLinkProps {
   /**
@@ -21,17 +21,27 @@ export interface TileLinkProps {
   children: React.ReactNode;
 }
 
+const StyLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;
+
+const StyA = styled.a`
+  color: inherit;
+  text-decoration: none;
+`;
+
 export function TileLink({ to, external, target, children }: TileLinkProps) {
   if (external) {
     return (
-      <a href={to} target={target} className={classes.link} rel="noopener">
+      <StyA href={to} target={target} rel="noopener">
         {children}
-      </a>
+      </StyA>
     );
   }
   return (
-    <Link to={to} target={target} className={classes.link}>
+    <StyLink to={to} target={target}>
       {children}
-    </Link>
+    </StyLink>
   );
 }

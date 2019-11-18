@@ -1,8 +1,8 @@
 import React from "react";
+import styled from "styled-components/macro";
 import { TileLink } from "./tile-link";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import classes from "./tile.pcss";
 
 export interface TileProps {
   /** Title of the tile */
@@ -17,6 +17,37 @@ export interface TileProps {
   target?: string;
 }
 
+const TilePaper = styled(Paper)`
+  width: 100%;
+  min-height: 200px;
+
+  transition: background 0.5s ease-in-out !important;
+  will-change: background;
+
+  margin: 0.5em 0 1em;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-align: center;
+
+  &:active {
+    background: ${props => props.theme.palette.action.selected};
+  }
+`;
+
+const IconContainer = styled.div`
+  margin: 0 auto;
+
+  & > svg {
+    width: 92px !important;
+    height: 92px !important;
+  }
+`;
+
+const TitleContainer = styled(Typography)`
+  display: inline-block;
+  padding: 16px;
+`;
+
 /**
  * A tile represents a block on menu
  */
@@ -25,12 +56,10 @@ export function Tile({ title, icon, external, target, to: _to }: TileProps) {
 
   return (
     <TileLink to={to} external={external} target={target}>
-      <Paper className={classes.tile} elevation={4}>
-        <div className={classes.iconContainer}>{icon}</div>
-        <Typography className={classes.titleContainer} variant="h6">
-          {title}
-        </Typography>
-      </Paper>
+      <TilePaper elevation={4}>
+        <IconContainer>{icon}</IconContainer>
+        <TitleContainer variant="h6">{title}</TitleContainer>
+      </TilePaper>
     </TileLink>
   );
 }
