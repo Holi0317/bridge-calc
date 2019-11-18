@@ -16,6 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "cp build/service-worker.js build/sw.js && cp build/index.html build/404.html",
     "test": "react-scripts test",
     "prettier": "prettier --ignore-path .gitignore -l \"**/*.{js,scss,sass,css,json,md,yml,yaml,pcss,ts,tsx}\"",
     "prettier:fix": "npm run prettier -- --write"
