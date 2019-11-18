@@ -1,12 +1,5 @@
-import { AddGameAction } from "./add-game";
-import { ResetGamesAction } from "./reset-games";
-import { DeleteGameAction } from "./delete-game";
-import { SaveGameAction } from "./save-game";
-import { SetGameModalAction } from "./game-modal";
-
-export type PrevGamesActions =
-  | AddGameAction
-  | DeleteGameAction
-  | ResetGamesAction
-  | SaveGameAction
-  | SetGameModalAction;
+export * from "./add-game";
+export * from "./reset-games";
+export * from "./delete-game";
+export * from "./save-game";
+export * from "./game-modal";

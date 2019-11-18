@@ -5,7 +5,7 @@ import { endedState } from "../../../test-fixtures/current-game-states";
 test("no entry should be populated for null game state", () => {
   const expected = {
     type: ActionTypes.SAVE_GAME,
-    entry: null
+    payload: null
   };
   const actual = saveGameAction(null);
   expect(actual).toEqual(expected);
@@ -14,7 +14,7 @@ test("no entry should be populated for null game state", () => {
 test("it should fill in entry property with PrevGame", () => {
   const expected = {
     type: ActionTypes.SAVE_GAME,
-    entry: endedState
+    payload: endedState
   };
   const actual = saveGameAction(endedState);
   expect(actual).toEqual(expected);

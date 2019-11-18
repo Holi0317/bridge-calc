@@ -4,7 +4,7 @@ import { closeGameModalAction, showGameModalAction } from "./game-modal";
 test("show modal action should be created", () => {
   const expected = {
     type: ActionTypes.SET_GAME_MODAL,
-    index: 5
+    payload: 5
   };
   const actual = showGameModalAction(5);
   expect(actual).toEqual(expected);
@@ -13,7 +13,7 @@ test("show modal action should be created", () => {
 test("close modal action should be created", () => {
   const expected = {
     type: ActionTypes.SET_GAME_MODAL,
-    index: null
+    payload: null
   };
   const actual = closeGameModalAction();
   expect(actual).toEqual(expected);

@@ -1,16 +1,7 @@
+import { createAction } from "typesafe-actions";
 import { GameState } from "../../score-input/reducer";
-import { PrevGameEntry } from "../types";
 import { gameStateToPrevGame } from "../converter";
 import { ActionTypes } from "../../action-types";
-
-export interface SaveGameAction {
-  type: ActionTypes.SAVE_GAME;
-  /**
-   * Content of the game to be saved.
-   * If undefined, no-op will be done (as to handle null in GameState).
-   */
-  entry: PrevGameEntry | null;
-}
 
 /**
  * Save current game to prevGame state.
@@ -19,9 +10,7 @@ export interface SaveGameAction {
  * If given state is null, no-op will happen.
  * @param state - Game state to be saved
  */
-export function saveGameAction(state: GameState): SaveGameAction {
-  if (state == null) {
-    return { type: ActionTypes.SAVE_GAME, entry: null };
-  }
-  return { type: ActionTypes.SAVE_GAME, entry: gameStateToPrevGame(state) };
-}
+export const saveGameAction = createAction(
+  ActionTypes.SAVE_GAME,
+  (state: GameState) => (state == null ? null : gameStateToPrevGame(state))
+)();
