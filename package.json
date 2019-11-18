@@ -12,7 +12,7 @@
     "url": "https://gitlab.com/holi0317/bridge-calc/issues"
   },
   "homepage": "https://gitlab.com/holi0317/bridge-calc",
-  "main": "dist/main.js",
+  "main": "build/main.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

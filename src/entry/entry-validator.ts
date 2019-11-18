@@ -65,7 +65,7 @@ function validatePlayerName(
  */
 export const entryOptionsValidator = createSelector(
   (state: RootState) => state.entry.playerNames,
-  (playerNames: PlayerNameEntry[]): EntryError => {
+  (playerNames: readonly PlayerNameEntry[]): EntryError => {
     const names = playerNames.map(entry => entry.value);
 
     const res = {

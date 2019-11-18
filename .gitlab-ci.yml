@@ -11,7 +11,7 @@ stages:
 lint:
   script:
     - npm install
-    - npm run lint
+    # - npm run lint
     - npm run prettier
   stage: build
 
@@ -19,18 +19,18 @@ lint:
 test:
   script:
     - npm install
-    - npm test -- --runInBand --coverage
+    - npm test -- --coverage
   stage: build
 
 # Compile assets
 build:
   script:
     - npm install
-    - npm run build:prod
+    - npm run build
   stage: build
   artifacts:
     paths:
-      - dist
+      - build
 
 # Deploy production artifact to Firebase Hosting (Master deployment)
 firebase:
@@ -51,7 +51,7 @@ firebase:
 
 # Deploy production artifact to GitLab pages (Staging deployment)
 pages:
-  script: mkdir public && cp -R dist/* public/
+  script: mkdir public && cp -R build/* public/
   stage: deploy
   artifacts:
     paths:
