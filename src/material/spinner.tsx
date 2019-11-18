@@ -1,12 +1,89 @@
 import React from "react";
-import classes from "./spinner.pcss";
+import styled, { keyframes } from "styled-components/macro";
+
+// Credit to https://codepen.io/jczimm/pen/vEBpoL
+
+const Rotate = keyframes`
+  100% {
+    transform: rotate(360deg)
+  }
+`;
+
+const Dash = keyframes`
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+`;
+
+const SplashColor = keyframes`
+  100%,
+  0% {
+    stroke: #d62d20;
+  }
+
+  40% {
+    stroke: #0057e7;
+  }
+
+  66% {
+    stroke: #008744;
+  }
+
+  80%,
+  90% {
+    stroke: #ffa700;
+  }
+`;
+
+const SpinnerDiv = styled.div`
+  position: relative;
+  margin: 0 auto;
+  width: 100px;
+
+  &::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+`;
+
+const Circular = styled.svg`
+  animation: ${Rotate} 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+`;
+
+const Circle = styled.circle`
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: ${Dash} 1.5s ease-in-out infinite,
+    ${SplashColor} 6s ease-in-out infinite;
+  stroke-linecap: round;
+`;
 
 export function Spinner() {
   return (
-    <div className={classes.spinner}>
-      <svg className={classes.circular} viewBox="25 25 50 50">
-        <circle
-          className={classes.path}
+    <SpinnerDiv>
+      <Circular viewBox="25 25 50 50">
+        <Circle
           cx="50"
           cy="50"
           r="20"
@@ -14,7 +91,7 @@ export function Spinner() {
           strokeWidth="2"
           strokeMiterlimit="10"
         />
-      </svg>
-    </div>
+      </Circular>
+    </SpinnerDiv>
   );
 }
