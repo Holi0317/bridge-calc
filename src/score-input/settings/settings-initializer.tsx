@@ -10,7 +10,7 @@ export function SettingsInitializer() {
 
   useEffect(() => {
     init(currentGame);
-  }, []);
+  }, [currentGame, init]);
 
   return null;
 }

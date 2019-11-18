@@ -31,10 +31,10 @@ function useTab(): number {
 
   useEffect(() => {
     setActive(getActive(location.pathname));
-  });
+  }, [location.pathname]);
 
   const newActive = getActive(location.pathname);
-  if (newActive != active) {
+  if (newActive !== active) {
     setActive(newActive);
   }
 
@@ -54,7 +54,7 @@ export function Layout() {
         history.push(path);
       }
     },
-    [routes, history]
+    [history]
   );
 
   return (

@@ -18,7 +18,7 @@ export function VersionDisplay() {
       <Typography variant="body1">
         <a
           href="https://gitlab.com/holi0317/bridge-calc/tags"
-          rel="noopener"
+          rel="noopener noreferrer"
           target="_blank"
         >
           {t("See Changelog")}

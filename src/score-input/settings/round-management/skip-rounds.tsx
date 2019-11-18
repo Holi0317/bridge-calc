@@ -48,7 +48,7 @@ export function SkipRounds() {
         }, 0);
       }
     },
-    [skipAct, remainingRounds, showToast, t]
+    [remainingRounds, skipAct, showToast, t, init, currentGame, currentRound]
   );
 
   return (

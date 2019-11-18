@@ -14,7 +14,7 @@ export function InitEntryState() {
 
     const names = genRandomNames();
     setPlayerNames(names.map(name => ({ value: name, id: cuid() })));
-  }, []);
+  }, [reset, setPlayerNames]);
 
   return null;
 }
