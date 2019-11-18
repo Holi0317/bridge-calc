@@ -16,7 +16,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "prettier": "prettier --ignore-path .gitignore -l \"**/*.{js,scss,sass,css,json,md,yml,yaml,pcss,ts,tsx}\"",
+    "prettier:fix": "npm run prettier -- --write"
   },
   "dependencies": {
     "@material-ui/core": "4.5.1",
