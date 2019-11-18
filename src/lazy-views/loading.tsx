@@ -1,8 +1,23 @@
 import React from "react";
 import Loadable from "react-loadable";
+import styled, { keyframes } from "styled-components/macro";
 import { Spinner } from "../material/spinner";
 import { Ouch } from "../error-boundary/ouch";
-import classes from "./loading.pcss";
+
+const Show = keyframes`
+  0%,
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
+const Container = styled.div`
+  animation: ${Show} 1s linear;
+`;
 
 export function Loading({ error, pastDelay }: Loadable.LoadingComponentProps) {
   if (error) {
@@ -11,9 +26,9 @@ export function Loading({ error, pastDelay }: Loadable.LoadingComponentProps) {
   }
   if (pastDelay) {
     return (
-      <div className={classes.container}>
+      <Container>
         <Spinner />
-      </div>
+      </Container>
     );
   }
   return null;
