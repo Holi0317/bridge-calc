@@ -31,10 +31,10 @@ export function HttpsRedirect(props: Props) {
         "https"
       );
     }
-  });
+  }, [redir]);
 
   if (redir) {
     return null;
   }
-  return props.children;
+  return <>{props.children}</>;
 }
