@@ -3,28 +3,37 @@ import range from "lodash-es/range";
 import { toEndedState, toWaitingBidState } from "./converter";
 import { toFront } from "../../utils";
 import { EndedState, WaitingBidState, WaitingWinState } from "./types";
-import { ChangePlayersAction } from "../actions/change-players";
+import { PlayerMap } from "../../types";
 
-export function changePlayersHandler(
-  rawState: WaitingBidState | WaitingWinState,
-  { newNames, rounds, maker, time }: ChangePlayersAction
-): WaitingBidState | EndedState {
-  // Short circuit. When action.rounds is less than current round
-  if (rounds < rawState.currentRound) {
-    /*
-     * Tslint false positive on shallowed variable -- Shallowed variable on the else branch
-     * tslint:disable-next-line: no-shadowed-variable
-     */
-    const state = toEndedState(rawState, time);
-    state.names = newNames;
-    state.rounds = rounds;
-    state.scores = mapValues(state.scores, (score: number[]) =>
-      score.slice(0, rounds)
-    );
-    return state;
+interface ChangeParam {
+  state: WaitingBidState | WaitingWinState;
+  newNames: PlayerMap<string>;
+  rounds: number;
+  maker: string;
+  time: number;
+}
+
+export function changePlayersHandler({
+  state: oldState,
+  newNames,
+  rounds,
+  maker,
+  time
+}: ChangeParam): WaitingBidState | EndedState {
+  if (rounds < oldState.currentRound) {
+    // Short circuit. When action.rounds is less than current round
+
+    return {
+      ...toEndedState(oldState, time),
+      names: newNames,
+      rounds,
+      scores: mapValues(oldState.scores, (score: number[]) =>
+        score.slice(0, rounds)
+      )
+    };
   }
 
-  const state = toWaitingBidState(rawState);
+  const state = toWaitingBidState(oldState);
   state.rounds = rounds;
 
   // Set currentPlayerOrder

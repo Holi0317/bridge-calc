@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Production of default basic state after start 1`] = `
+exports[`Start action should produce basic state after start 1`] = `
 Object {
   "bid": Object {
     "0": 0,
@@ -34,7 +34,7 @@ Object {
 }
 `;
 
-exports[`Start on second round should work 1`] = `
+exports[`Start action should yield correct state for starting in second round 1`] = `
 Object {
   "bid": Object {
     "5": 0,
@@ -69,6 +69,120 @@ Object {
     ],
     "8": Array [
       0,
+    ],
+  },
+  "stage": "waitingBid",
+  "startTime": 0,
+}
+`;
+
+exports[`win action should end game when it is dispatched at last round 1`] = `
+Object {
+  "endTime": 0,
+  "id": "testing",
+  "names": Object {
+    "a": "John",
+    "b": "Mary",
+    "c": "Henry",
+    "d": "Joe",
+  },
+  "rounds": 1,
+  "scores": Object {
+    "a": Array [
+      -1,
+    ],
+    "b": Array [
+      10,
+    ],
+    "c": Array [
+      10,
+    ],
+    "d": Array [
+      10,
+    ],
+  },
+  "stage": "ended",
+  "startTime": 0,
+}
+`;
+
+exports[`win action should use given win to calculate scores 1`] = `
+Object {
+  "bid": Object {
+    "a": 0,
+    "b": 0,
+    "c": 0,
+    "d": 0,
+  },
+  "currentPlayerOrder": Array [
+    "b",
+    "c",
+    "d",
+    "a",
+  ],
+  "currentRound": 2,
+  "id": "testing",
+  "names": Object {
+    "a": "John",
+    "b": "Mary",
+    "c": "Henry",
+    "d": "Joe",
+  },
+  "rounds": 13,
+  "scores": Object {
+    "a": Array [
+      10,
+    ],
+    "b": Array [
+      10,
+    ],
+    "c": Array [
+      10,
+    ],
+    "d": Array [
+      -1,
+    ],
+  },
+  "stage": "waitingBid",
+  "startTime": 0,
+}
+`;
+
+exports[`win action should use win in state object to calculate scores when win is not given 1`] = `
+Object {
+  "bid": Object {
+    "a": 0,
+    "b": 0,
+    "c": 0,
+    "d": 0,
+  },
+  "currentPlayerOrder": Array [
+    "b",
+    "c",
+    "d",
+    "a",
+  ],
+  "currentRound": 2,
+  "id": "testing",
+  "names": Object {
+    "a": "John",
+    "b": "Mary",
+    "c": "Henry",
+    "d": "Joe",
+  },
+  "rounds": 13,
+  "scores": Object {
+    "a": Array [
+      -1,
+    ],
+    "b": Array [
+      10,
+    ],
+    "c": Array [
+      10,
+    ],
+    "d": Array [
+      10,
     ],
   },
   "stage": "waitingBid",

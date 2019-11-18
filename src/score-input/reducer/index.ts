@@ -1,8 +1,11 @@
+import { GameState } from "./types";
+
 export { currentGameReducer } from "./reducer";
-export { GameState } from "./types";
 export {
   isGameState,
   isEndedState,
   isWaitingBidState,
   isWaitingWinState
 } from "./validator";
+
+export type GameState = GameState;
