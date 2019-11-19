@@ -1,47 +1,27 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Dropdown } from "../material/dropdown";
 import {
   setRoundsAction,
   setStartingRoundAction
 } from "./actions/set-entry-props";
 import { optionsSourcesSelector } from "./selectors/options-sources";
-import { Dispatch, RootState } from "../types";
+import { RootState } from "../types";
 import classes from "./entry.pcss";
+import { useAction } from "../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => {
-  const { entry } = state;
-  return {
-    sources: optionsSourcesSelector(state),
-    rounds: entry.rounds,
-    startingRound: entry.startingRound
-  };
-};
+export function EntryOptions() {
+  const { t } = useTranslation();
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      setRounds: setRoundsAction,
-      setStartingRound: setStartingRoundAction
-    },
-    dispatch
+  const sources = useSelector(optionsSourcesSelector);
+  const rounds = useSelector((state: RootState) => state.entry.rounds);
+  const startingRound = useSelector(
+    (state: RootState) => state.entry.startingRound
   );
 
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type EntryOptionsProps = stateType & dispatchType;
-
-export function EntryOptionsImpl({
-  sources,
-  rounds,
-  startingRound,
-  setRounds,
-  setStartingRound
-}: EntryOptionsProps) {
-  const { t } = useTranslation();
+  const setRounds = useAction(setRoundsAction);
+  const setStartingRound = useAction(setStartingRoundAction);
 
   return (
     <div className={classes.optionsRootContainer}>
@@ -63,8 +43,3 @@ export function EntryOptionsImpl({
     </div>
   );
 }
-
-export const EntryOptions = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EntryOptionsImpl);
