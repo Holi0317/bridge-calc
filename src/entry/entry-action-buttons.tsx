@@ -1,6 +1,4 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
@@ -8,27 +6,14 @@ import ContentAdd from "@material-ui/icons/Add";
 import GetApp from "@material-ui/icons/GetApp";
 import { addRandomPlayerAction } from "./actions/add-player";
 import { setImportOpenAction } from "./actions/set-entry-props";
-import { Dispatch } from "../types";
 import classes from "./entry.pcss";
+import { useAction } from "../hooks/use-action";
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      addRandomPlayer: addRandomPlayerAction,
-      setImportOpen: setImportOpenAction
-    },
-    dispatch
-  );
-
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type EntryActionButtonsProps = dispatchType;
-
-export function EntryActionButtonsImpl({
-  addRandomPlayer,
-  setImportOpen
-}: EntryActionButtonsProps) {
+export function EntryActionButtons() {
   const { t } = useTranslation();
+
+  const addRandomPlayer = useAction(addRandomPlayerAction);
+  const setImportOpen = useAction(setImportOpenAction);
 
   return (
     <div className={classes.actionButtonContainer}>
@@ -46,8 +31,3 @@ export function EntryActionButtonsImpl({
     </div>
   );
 }
-
-export const EntryActionButtons = connect(
-  null,
-  mapDispatchToProps
-)(EntryActionButtonsImpl);
