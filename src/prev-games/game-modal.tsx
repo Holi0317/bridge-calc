@@ -15,6 +15,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
+import styled from "styled-components/macro";
 import { ScoreboardTable } from "../score-input/scoreboard/scoreboard-table";
 import { EntryDetail } from "./entry-detail";
 import { modalEntrySelector } from "./selectors/modal-entry";
@@ -22,8 +23,15 @@ import { deleteGameAction } from "./actions/delete-game";
 import { closeGameModalAction } from "./actions/game-modal";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
 import { RootState } from "../types";
-import classes from "./prev-games.pcss";
 import { useAction } from "../hooks/use-action";
+
+const StyledAppBar = styled(AppBar)`
+  position: relative;
+`;
+
+const StyledTypo = styled(Typography)`
+  flex: 1;
+`;
 
 export function GameModal() {
   const { t } = useTranslation();
@@ -66,21 +74,21 @@ export function GameModal() {
       aria-labelledby="game-modal-title"
     >
       {fullScreen ? (
-        <AppBar className={classes.appBar}>
+        <StyledAppBar>
           <Toolbar>
             <IconButton color="inherit" onClick={close} aria-label="Close">
               <CloseIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.flex}>
+            <StyledTypo variant="h6" color="inherit">
               {t("Previous game details")}
-            </Typography>
+            </StyledTypo>
             <Button color="inherit" onClick={del}>
               <Typography variant="subtitle1" color="inherit">
                 {t("Load")}
               </Typography>
             </Button>
           </Toolbar>
-        </AppBar>
+        </StyledAppBar>
       ) : (
         <DialogTitle id="game-modal-title">
           {t("Previous game details")}
