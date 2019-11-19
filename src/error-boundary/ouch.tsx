@@ -1,6 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import classes from "./ouch.pcss";
+import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
+import styled from "styled-components/macro";
 
 function reload() {
   window.location.reload();
@@ -10,19 +12,44 @@ interface OuchProps {
   error: Error;
 }
 
+const Container = styled.div`
+  height: 100%;
+  margin: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  text-align: center;
+`;
+
+const SadFace = styled.div`
+  color: ${props => props.theme.palette.text.primary};
+  font-weight: 700;
+  font-size: 72px;
+  padding-bottom: 1em;
+`;
+
+const ErrorMessage = styled.div`
+  color: ${props => props.theme.palette.text.primary};
+  font-weight: 200;
+  font-size: 12px;
+`;
+
 export function Ouch({ error }: OuchProps) {
   const { t } = useTranslation();
 
   return (
-    <div className={classes.centerContainer}>
-      <div className={classes.sadFace}>:-(</div>
-      <div className={classes.text}>{t("Ouch! An error has occurred.")}</div>
-      <div className={classes.reloadLink} onClick={reload}>
+    <Container>
+      <SadFace>:-(</SadFace>
+      <Typography variant="body1">
+        {t("Ouch! An error has occurred.")}
+      </Typography>
+      <Link href="#" variant="body2" onClick={reload}>
         {t("Hopefully your data is safe. Refresh page may fix the problem.")}
-      </div>
-      <div className={classes.errorMessage}>
+      </Link>
+      <ErrorMessage>
         {t("Error message: {{message}}", { message: error.message })}
-      </div>
-    </div>
+      </ErrorMessage>
+    </Container>
   );
 }
