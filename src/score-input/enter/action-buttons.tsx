@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
+import styled from "styled-components/macro";
 import { GameStage } from "../game-stage";
 import { stageSelector } from "../selectors/stage";
 import { isStackInputValid } from "./stack-input-validator";
 import { bidAction } from "../actions/bid";
 import { winAction } from "../actions/win";
 import { undoAction } from "../actions/undo";
-import classes from "./action-buttons.pcss";
 import { currentGameSelector } from "../selectors/current-game";
-import { useCallback } from "react";
 import { useAction } from "../../hooks/use-action";
+
+const BtnContainer = styled.div`
+  margin-top: 0.5em;
+  padding-top: 0.5em;
+  display: flex;
+`;
+
+const FlexStretch = styled.div`
+  flex-grow: 1;
+`;
 
 export function ActionButtons() {
   const { t } = useTranslation();
@@ -40,7 +49,7 @@ export function ActionButtons() {
   }, [currentGame, bid, win]);
 
   return (
-    <div className={classes.btnContainer}>
+    <BtnContainer>
       <Button
         variant="contained"
         color="primary"
@@ -49,10 +58,10 @@ export function ActionButtons() {
       >
         {t("Next")}
       </Button>
-      <div className={classes.stretch} />
+      <FlexStretch />
       <Button variant="contained" disabled={undoDisabled} onClick={undoHandler}>
         {t("Undo")}
       </Button>
-    </div>
+    </BtnContainer>
   );
 }
