@@ -1,24 +1,38 @@
 import React from "react";
-import { Container } from "../../material/container";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
+import styled from "styled-components/macro";
+import { Container } from "../../material/container";
 import { UsedTimeDisplay } from "./used-time-display";
 import { StackInput } from "./stack-input";
 import { ActionButtons } from "./action-buttons";
 import { MiniScoreboard } from "./mini-scoreboard";
 import { ProtectedView } from "../protected-view";
-import classes from "./enter.pcss";
+
+const ActionContainer = styled(Paper)`
+  padding: 1em;
+  margin-bottom: 1em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  min-height: 200px;
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
+`;
 
 export function EnterImpl() {
   return (
     <Container>
       <UsedTimeDisplay />
 
-      <Paper className={classes.actionContainer}>
+      <ActionContainer>
         <StackInput />
         <Divider />
         <ActionButtons />
-      </Paper>
+      </ActionContainer>
 
       <MiniScoreboard />
     </Container>
