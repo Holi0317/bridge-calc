@@ -16,7 +16,7 @@ export function useAction<F extends (...args: any[]) => RootActions>(
   const dispatch = useDispatch();
   return useCallback(
     (...args: any[]) => {
-      const action = creator(args);
+      const action = creator(...args);
       dispatch(action);
     },
     [creator, dispatch]
