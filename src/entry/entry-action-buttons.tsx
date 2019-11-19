@@ -4,10 +4,15 @@ import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import ContentAdd from "@material-ui/icons/Add";
 import GetApp from "@material-ui/icons/GetApp";
+import styled from "styled-components/macro";
 import { addRandomPlayerAction } from "./actions/add-player";
 import { setImportOpenAction } from "./actions/set-entry-props";
-import classes from "./entry.pcss";
 import { useAction } from "../hooks/use-action";
+
+const BtnContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export function EntryActionButtons() {
   const { t } = useTranslation();
@@ -16,7 +21,7 @@ export function EntryActionButtons() {
   const setImportOpen = useAction(setImportOpenAction);
 
   return (
-    <div className={classes.actionButtonContainer}>
+    <BtnContainer>
       <Tooltip title={t("Add player")}>
         <IconButton onClick={addRandomPlayer}>
           <ContentAdd width="28px" height="28px" />
@@ -28,6 +33,6 @@ export function EntryActionButtons() {
           <GetApp width="28px" height="28px" />
         </IconButton>
       </Tooltip>
-    </div>
+    </BtnContainer>
   );
 }

@@ -2,25 +2,29 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
+import styled from "styled-components/macro";
 import { EntryOptions } from "./entry-options";
-import classes from "./entry.pcss";
+
+const OptionsSelection = styled.div`
+  margin-top: 1em;
+`;
+
+const OptionsBtn = styled(Button)`
+  width: 100%;
+`;
 
 export function CollapsedEntryOptions() {
   const [expanded, setExpanded] = React.useState(false);
   const { t } = useTranslation();
 
   return (
-    <div className={classes.optionsSection}>
-      <Button
-        variant="contained"
-        onClick={() => setExpanded(!expanded)}
-        className={classes.optionsBtn}
-      >
+    <OptionsSelection>
+      <OptionsBtn variant="contained" onClick={() => setExpanded(!expanded)}>
         {t("Options")}
-      </Button>
+      </OptionsBtn>
       <Collapse in={expanded}>
         <EntryOptions />
       </Collapse>
-    </div>
+    </OptionsSelection>
   );
 }

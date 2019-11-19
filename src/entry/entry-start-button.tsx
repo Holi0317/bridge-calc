@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import styled from "styled-components/macro";
 import { entryOptionsValidator, isEntryOptionsValid } from "./entry-validator";
 import { startAction } from "../score-input/actions/start";
 import { trans } from "../utils";
 import { RootState } from "../types";
-import classes from "./entry.pcss";
 import { useAction } from "../hooks/use-action";
-import { useCallback } from "react";
+
+const BtnContainer = styled.div`
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 
 export function EntryStartButton() {
   const { t } = useTranslation();
@@ -34,7 +40,7 @@ export function EntryStartButton() {
   }, [rounds, playerNames, startingRound, startAct, history]);
 
   return (
-    <div className={classes.startBtnContainer}>
+    <BtnContainer>
       <Button
         variant="contained"
         color="primary"
@@ -46,6 +52,6 @@ export function EntryStartButton() {
       {miscError != null && (
         <Typography color="error">{trans(t, miscError)}</Typography>
       )}
-    </div>
+    </BtnContainer>
   );
 }

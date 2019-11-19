@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import styled from "styled-components/macro";
 import { Dropdown } from "../material/dropdown";
 import {
   setRoundsAction,
@@ -8,8 +9,16 @@ import {
 } from "./actions/set-entry-props";
 import { optionsSourcesSelector } from "./selectors/options-sources";
 import { RootState } from "../types";
-import classes from "./entry.pcss";
 import { useAction } from "../hooks/use-action";
+
+const OptionsRoot = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const OptionsDropdown = styled(Dropdown)`
+  width: 100% !important;
+`;
 
 export function EntryOptions() {
   const { t } = useTranslation();
@@ -24,22 +33,20 @@ export function EntryOptions() {
   const setStartingRound = useAction(setStartingRoundAction);
 
   return (
-    <div className={classes.optionsRootContainer}>
-      <Dropdown
+    <OptionsRoot>
+      <OptionsDropdown
         label={t("Number of rounds")}
-        className={classes.optionsDropdown}
         value={rounds}
         source={sources.rounds}
         onChange={setRounds}
       />
 
-      <Dropdown
+      <OptionsDropdown
         label={t("Starting round")}
-        className={classes.optionsDropdown}
         value={startingRound}
         source={sources.startingRound}
         onChange={setStartingRound}
       />
-    </div>
+    </OptionsRoot>
   );
 }
