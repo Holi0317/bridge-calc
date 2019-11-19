@@ -1,6 +1,5 @@
 import React from "react";
-import { RouteComponentProps } from "react-router";
-import { withRouter } from "react-router-dom";
+import { useHistory, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,10 +11,11 @@ import NavigationArrowBack from "@material-ui/icons/ArrowBack";
 import { Titles } from "./titles";
 import classes from "./navbar.pcss";
 
-type NavbarProps = RouteComponentProps<any>;
-
-export function NavbarImpl({ history, location }: NavbarProps) {
+export function Navbar() {
   const { t } = useTranslation();
+  const history = useHistory();
+  const location = useLocation();
+
   const hasBackBtn = location.pathname !== "/";
 
   return (
@@ -49,5 +49,3 @@ export function NavbarImpl({ history, location }: NavbarProps) {
     </AppBar>
   );
 }
-
-export const Navbar = withRouter(NavbarImpl);
