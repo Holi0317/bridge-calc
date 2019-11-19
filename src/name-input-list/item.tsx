@@ -5,8 +5,8 @@ import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import ActionDelete from "@material-ui/icons/Delete";
+import styled from "styled-components/macro";
 import { DragHandle } from "./drag-handle";
-import classes from "./name-input-list.pcss";
 
 interface SortableItemProps {
   value: string;
@@ -18,6 +18,12 @@ interface SortableItemProps {
   remove(): void;
 }
 
+const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export function SortableItemImpl({
   value,
   onChange,
@@ -27,7 +33,7 @@ export function SortableItemImpl({
   const { t } = useTranslation();
 
   return (
-    <div className={classes.itemContainer}>
+    <ItemContainer>
       <DragHandle />
 
       <TextField
@@ -46,7 +52,7 @@ export function SortableItemImpl({
           <ActionDelete width="24px" height="24px" />
         </IconButton>
       </Tooltip>
-    </div>
+    </ItemContainer>
   );
 }
 

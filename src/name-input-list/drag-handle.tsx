@@ -1,8 +1,19 @@
 import React from "react";
 import { SortableHandle } from "react-sortable-hoc";
 import EditorDragHandle from "@material-ui/icons/DragHandle";
-import classes from "./name-input-list.pcss";
+import styled from "styled-components/macro";
 
-export const DragHandle = SortableHandle(() => (
-  <EditorDragHandle color="action" className={classes.handle} />
-));
+const StyledHandle = styled(EditorDragHandle)`
+  width: 42px;
+  height: 24px;
+  cursor: move;
+  cursor: grab;
+
+  .sortable-hoc__dragging & {
+    cursor: move;
+    cursor: grabbing;
+    pointer-events: auto !important;
+  }
+`;
+
+export const DragHandle = SortableHandle(() => <StyledHandle color="action" />);

@@ -3,7 +3,6 @@ import { SortEnd } from "react-sortable-hoc";
 import arrayMove from "array-move";
 import { Container } from "./container";
 import { NameInputListProps } from "./types";
-import classes from "./name-input-list.pcss";
 
 /**
  * Create a callback for sortEnd because of change in sorting.
@@ -18,7 +17,7 @@ export function NameInputList({ values, onChange }: NameInputListProps) {
     <Container
       useDragHandle={true}
       lockAxis="y"
-      helperClass={classes.dragging}
+      helperClass="sortable-hoc__dragging"
       onSortEnd={createSortEndHandler(values, onChange)}
       values={values}
       onChange={onChange}

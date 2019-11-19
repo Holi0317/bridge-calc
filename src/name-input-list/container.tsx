@@ -1,8 +1,8 @@
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
+import styled from "styled-components/macro";
 import { NameInputListProps, NameInputEntry } from "./types";
 import { SortableItem } from "./item";
-import classes from "./name-input-list.pcss";
 
 /**
  * Create a change handler for change in input.
@@ -38,12 +38,16 @@ function createRemoveHandler(
   };
 }
 
+const Root = styled.div`
+  width: 100%;
+`;
+
 export function ContainerImpl({ values, onChange }: NameInputListProps) {
   const changeHandler = createChangeHandler(values, onChange);
   const removeHandler = createRemoveHandler(values, onChange);
 
   return (
-    <div className={classes.container}>
+    <Root>
       {values.map((entry, index) => (
         <SortableItem
           key={entry.id}
@@ -54,7 +58,7 @@ export function ContainerImpl({ values, onChange }: NameInputListProps) {
           remove={removeHandler(index)}
         />
       ))}
-    </div>
+    </Root>
   );
 }
 
