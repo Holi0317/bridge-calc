@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
-import { default as MaterialLink } from "@material-ui/core/Link";
+import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components/macro";
 import { JokerIcon } from "./joker-icon";
@@ -23,10 +23,6 @@ const StyledJoker = styled(JokerIcon)`
   fill: rgba(0, 0, 0, 0.66);
 `;
 
-const StartLink = styled(MaterialLink)`
-  color: #428bca;
-` as React.ComponentType<any>;
-
 export function NoPrevGamePlaceholder() {
   const { t } = useTranslation();
 
@@ -34,9 +30,9 @@ export function NoPrevGamePlaceholder() {
     <Container>
       <StyledJoker />
       <Typography>{t("You have not played any game yet.")}</Typography>
-      <StartLink component={RouterLink} to="/entry">
+      <Link component={RouterLink} to="/entry">
         {t("Click here to start a new game")}
-      </StartLink>
+      </Link>
     </Container>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 import styled from "styled-components/macro";
 import AlertError from "@material-ui/icons/Error";
 
@@ -26,10 +27,6 @@ const TextContainer = styled.div`
   color: ${props => props.theme.palette.text.primary};
 `;
 
-const StyledLink = styled(Link)`
-  color: #428bca;
-`;
-
 export function NotFound() {
   const { t } = useTranslation();
 
@@ -37,7 +34,9 @@ export function NotFound() {
     <Container>
       <StyledIcon />
       <TextContainer>{t("Page not found!")}</TextContainer>
-      <StyledLink to="/">{t("Click here to return to main menu")}</StyledLink>
+      <Link component={RouterLink} to="/">
+        {t("Click here to return to main menu")}
+      </Link>
     </Container>
   );
 }
