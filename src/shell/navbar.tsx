@@ -8,8 +8,21 @@ import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import ActionHelp from "@material-ui/icons/Help";
 import NavigationArrowBack from "@material-ui/icons/ArrowBack";
+import styled from "styled-components/macro";
 import { Titles } from "./titles";
-import classes from "./navbar.pcss";
+
+const StyledToolbar = styled(Toolbar)`
+  flex-grow: 1;
+`;
+
+const BackIconBtn = styled(IconButton)`
+  margin-left: -12px;
+  margin-right: 20px;
+`;
+
+const TitleContainer = styled(Typography)`
+  flex-grow: 1;
+`;
 
 export function Navbar() {
   const { t } = useTranslation();
@@ -20,21 +33,18 @@ export function Navbar() {
 
   return (
     <AppBar position="static">
-      <Toolbar className={classes.toolbar}>
+      <StyledToolbar>
         {hasBackBtn && (
           <Tooltip title={t("Back to menu")}>
-            <IconButton
-              className={classes.backBtn}
-              onClick={() => history.push("/")}
-            >
+            <BackIconBtn onClick={() => history.push("/")}>
               <NavigationArrowBack width="24px" height="24px" />
-            </IconButton>
+            </BackIconBtn>
           </Tooltip>
         )}
 
-        <Typography variant="h6" color="inherit" className={classes.title}>
+        <TitleContainer variant="h6" color="inherit">
           <Titles />
-        </Typography>
+        </TitleContainer>
 
         <Tooltip title={t("Help")}>
           <IconButton
@@ -45,7 +55,7 @@ export function Navbar() {
             <ActionHelp width="24px" height="24px" />
           </IconButton>
         </Tooltip>
-      </Toolbar>
+      </StyledToolbar>
     </AppBar>
   );
 }
