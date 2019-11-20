@@ -1,7 +1,7 @@
 import { GameStage } from "../game-stage";
 import { PlayerMap, RootState } from "../../types";
 import { createSelector } from "reselect";
-import mapValues from "lodash-es/mapValues";
+import { mapValues } from "lodash-es";
 
 /**
  * Select bid object from current game.

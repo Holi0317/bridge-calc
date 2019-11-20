@@ -1,5 +1,4 @@
-import mapValues from "lodash-es/mapValues";
-import range from "lodash-es/range";
+import { mapValues, range } from "lodash-es";
 import { toEndedState, toWaitingBidState } from "./converter";
 import { toFront } from "../../utils";
 import { EndedState, WaitingBidState, WaitingWinState } from "./types";

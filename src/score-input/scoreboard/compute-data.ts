@@ -1,6 +1,4 @@
-import mapValues from "lodash-es/mapValues";
-import sum from "lodash-es/sum";
-import range from "lodash-es/range";
+import { mapValues, sum, range } from "lodash-es";
 import { GameState } from "../reducer";
 import { PlayerMap } from "../../types";
 import { toOrdinal } from "../../utils";

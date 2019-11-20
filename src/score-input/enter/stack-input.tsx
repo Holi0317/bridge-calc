@@ -1,5 +1,5 @@
 import React from "react";
-import mapValues from "lodash-es/mapValues";
+import { mapValues } from "lodash-es";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components/macro";

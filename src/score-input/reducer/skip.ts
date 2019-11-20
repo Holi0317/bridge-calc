@@ -1,4 +1,4 @@
-import mapValues from "lodash-es/mapValues";
+import { mapValues } from "lodash-es";
 import { toFront } from "../../utils";
 import { toEndedState, toWaitingBidState } from "./converter";
 import { bidWinGenerator } from "./bid-win-generator";

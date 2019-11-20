@@ -1,7 +1,5 @@
 import { createSelector } from "reselect";
-import sumBy from "lodash-es/sumBy";
-import mapValues from "lodash-es/mapValues";
-import last from "lodash-es/last";
+import { sumBy, mapValues, last } from "lodash-es";
 import { stageSelector } from "../selectors/stage";
 import { playerOrderSelector } from "../selectors/player-order";
 import { bidSelector } from "../selectors/bid";

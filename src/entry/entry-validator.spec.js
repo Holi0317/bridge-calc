@@ -2,7 +2,7 @@ import {
   entryOptionsValidator as validator,
   isEntryOptionsValid
 } from "./entry-validator";
-import range from "lodash-es/range";
+import { range } from "lodash-es";
 import { tData } from "../utils/translate";
 import { makeEntryTree } from "../../test-fixtures/entry-options";
 

@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import mapValues from "lodash-es/mapValues";
+import { mapValues } from "lodash-es";
 import { namesSelector } from "./selectors/names";
 import { dupe, isOk, TranslateData, removeUndef, tData } from "../../utils";
 import { PlayerMap } from "../../types";

@@ -1,5 +1,5 @@
 import { createAction } from "typesafe-actions";
-import fromPairs from "lodash-es/fromPairs";
+import { fromPairs } from "lodash-es";
 import { ActionTypes } from "../../../action-types";
 import { PlayerMap } from "../../../types";
 import { NameInputEntry } from "../../../name-input-list/types";

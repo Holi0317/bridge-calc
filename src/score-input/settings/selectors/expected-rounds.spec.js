@@ -1,4 +1,4 @@
-import range from "lodash-es/range";
+import { range } from "lodash-es";
 import { genMap } from "../../../../test-fixtures/current-game-states";
 import { expectedRoundsSelector } from "./expected-rounds";
 

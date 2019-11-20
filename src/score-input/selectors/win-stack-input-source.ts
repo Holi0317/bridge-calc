@@ -1,8 +1,5 @@
 import { createSelector } from "reselect";
-import range from "lodash-es/range";
-import sum from "lodash-es/sum";
-import values from "lodash-es/values";
-import fromPairs from "lodash-es/fromPairs";
+import { range, sum, values, fromPairs } from "lodash-es";
 import {
   StackInputSourceCommon,
   stackInputSourceCommonSelector

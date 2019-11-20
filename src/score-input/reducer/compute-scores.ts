@@ -1,4 +1,4 @@
-import mapValues from "lodash-es/mapValues";
+import { mapValues } from "lodash-es";
 import { calculateScore } from "./calculate-score";
 import { PlayerMap } from "../../types";
 

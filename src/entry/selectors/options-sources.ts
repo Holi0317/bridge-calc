@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import range from "lodash-es/range";
+import { range } from "lodash-es";
 import { createSource } from "../../utils";
 import { RootState } from "../../types";
 import { DropdownSource } from "../../material/dropdown";

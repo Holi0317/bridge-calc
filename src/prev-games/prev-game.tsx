@@ -1,5 +1,5 @@
 import React from "react";
-import format from "date-fns/format";
+import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { PrevGameEntry } from "./types";

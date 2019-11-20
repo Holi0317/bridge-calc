@@ -1,8 +1,7 @@
 import { OldGameData, OldPlayers, OldState } from "./types";
 import { PrevGameEntry } from "../prev-games/types";
 import { PlayerMap } from "../types";
-import zipObject from "lodash-es/zipObject";
-import mapValues from "lodash-es/mapValues";
+import { mapValues, zipObject } from "lodash-es";
 import { GameStage } from "../score-input/game-stage";
 import { cuid, toFront } from "../utils";
 import { bidWinGenerator } from "../score-input/reducer/bid-win-generator";
