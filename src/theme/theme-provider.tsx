@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import {
   ThemeProvider as MuiThemeProvider,
@@ -6,7 +6,6 @@ import {
 } from "@material-ui/core/styles";
 import { ThemeProvider as SSThemeProvider } from "styled-components/macro";
 import { activatedThemeSelector } from "./selectors/activated-theme";
-import { cssPropsSelector } from "./selectors/css-props";
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -14,13 +13,6 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const theme = useSelector(activatedThemeSelector);
-  const cssProps = useSelector(cssPropsSelector);
-
-  useEffect(() => {
-    cssProps.forEach((value, key) => {
-      document.body.style.setProperty(key, value);
-    });
-  }, [cssProps]);
 
   return (
     <StylesProvider injectFirst>
