@@ -1,7 +1,6 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
@@ -10,31 +9,16 @@ import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { toggleExpandAction } from "../actions/toggle-expand";
 import { PANEL } from "../panel";
 import { SkipRounds } from "./skip-rounds";
-import { RootState, Dispatch } from "../../../types";
 import classes from "../settings.pcss";
+import { useAction } from "../../../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  expanded: expandedPanelSelector(state) === PANEL.ROUND_MANAGEMENT
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      toggleExpand: toggleExpandAction
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type RoundManagementProps = stateType & dispatchType;
-
-export function RoundManagementImpl({
-  expanded,
-  toggleExpand
-}: RoundManagementProps) {
+export function RoundManagement() {
   const { t } = useTranslation();
+
+  const expandedPanel = useSelector(expandedPanelSelector);
+  const expanded = expandedPanel === PANEL.ROUND_MANAGEMENT;
+
+  const toggleExpand = useAction(toggleExpandAction);
 
   return (
     <ExpansionPanel
@@ -61,8 +45,3 @@ export function RoundManagementImpl({
     </ExpansionPanel>
   );
 }
-
-export const RoundManagement = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RoundManagementImpl);
