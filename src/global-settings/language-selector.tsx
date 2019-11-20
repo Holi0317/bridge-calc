@@ -1,6 +1,6 @@
 import React from "react";
 import { useCallback } from "react";
-import i18next from "i18next";
+import { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { Dropdown, DropdownSource } from "../material/dropdown";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
@@ -8,9 +8,7 @@ import { languages } from "../app/languages";
 import { useAction } from "../hooks/use-action";
 import { useRefT } from "../hooks/use-ref-t";
 
-function transformLanguageArray(
-  t: i18next.TFunction
-): DropdownSource<string>[] {
+function transformLanguageArray(t: TFunction): DropdownSource<string>[] {
   return (
     languages
       // Filter away 'cimode' pseudo language created by i18next

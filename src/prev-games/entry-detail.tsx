@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
+import { TFunction } from "i18next";
 import format from "date-fns/format";
 import formatDistance from "date-fns/formatDistance";
 import Table from "@material-ui/core/Table";
@@ -10,7 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 import { GameStage } from "../score-input/game-stage";
 import { PrevGameEntry } from "./types";
 
-function gameStage(stage: GameStage, t: i18next.TFunction): string {
+function gameStage(stage: GameStage, t: TFunction): string {
   switch (stage) {
     case GameStage.waitingBid:
       return t("Waiting for Bid stack");

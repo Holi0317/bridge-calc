@@ -1,4 +1,4 @@
-import { TranslateData } from "./translate";
+import { TranslateData as TD } from "./translate";
 
 export { createSource } from "./create-source";
 export { dupe } from "./dupe";
@@ -15,4 +15,4 @@ export { isArrayOf } from "./is-array-of";
 export { isArrayEqual } from "./is-array-equal";
 export { cuid, slug } from "./cuid";
 export { trans, tData } from "./translate";
-export type TranslateData = TranslateData;
+export type TranslateData = TD;

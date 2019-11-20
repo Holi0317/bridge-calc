@@ -1,4 +1,4 @@
-import i18next from "i18next";
+import { TFunction } from "i18next";
 
 /**
  * Arguments for translating using `i18next.t` function.
@@ -34,6 +34,6 @@ export function tData(key: string, options?: any): TranslateData {
  * @param data Data to be translated
  * @returns formatted result
  */
-export function trans(t: i18next.TFunction, data: TranslateData): string {
+export function trans(t: TFunction, data: TranslateData): string {
   return t(data.key, data.options);
 }

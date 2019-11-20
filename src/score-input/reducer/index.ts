@@ -1,4 +1,4 @@
-import { GameState } from "./types";
+import { GameState as GS } from "./types";
 
 export { currentGameReducer } from "./reducer";
 export {
@@ -8,4 +8,4 @@ export {
   isWaitingWinState
 } from "./validator";
 
-export type GameState = GameState;
+export type GameState = GS;
