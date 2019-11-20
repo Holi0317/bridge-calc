@@ -1,38 +1,21 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { NameInputList } from "../../../name-input-list";
 import { nameInputListSourceSelector } from "../selectors/name-input-list-source";
 import { setNamesFromEntries } from "../actions/set-names";
 import { settingsValidator } from "../settings-validator";
 import { trans } from "../../../utils";
-import { RootState, Dispatch } from "../../../types";
+import { useAction } from "../../../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  names: nameInputListSourceSelector(state),
-  errors: settingsValidator(state).names
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      changeNames: setNamesFromEntries
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type SettingsPlayerListProps = stateType & dispatchType;
-
-export function SettingsPlayerListImpl({
-  names,
-  errors,
-  changeNames
-}: SettingsPlayerListProps) {
+export function SettingsPlayerList() {
   const { t } = useTranslation();
+
+  const names = useSelector(nameInputListSourceSelector);
+  const settingError = useSelector(settingsValidator);
+  const errors = settingError.names;
+
+  const changeNames = useAction(setNamesFromEntries);
 
   const values = names.map(([id, value]) => {
     const error = errors[id];
@@ -46,8 +29,3 @@ export function SettingsPlayerListImpl({
 
   return <NameInputList values={values} onChange={changeNames} />;
 }
-
-export const SettingsPlayerList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsPlayerListImpl);

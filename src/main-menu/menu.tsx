@@ -1,28 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { Container } from "../material/container";
+import { useSelector } from "react-redux";
+import { Grid } from "@material-ui/core";
 import AvPlayArrow from "@material-ui/icons/PlayArrow";
 import AvFiberNew from "@material-ui/icons/FiberNew";
 import AvSkipPrevious from "@material-ui/icons/SkipPrevious";
 import ActionSettings from "@material-ui/icons/SettingsRounded";
 import ActionInfo from "@material-ui/icons/Info";
 import ActionBugReport from "@material-ui/icons/BugReport";
+import { Container } from "../material/container";
 import { Tile } from "./tile";
 import { showContinueSelector } from "./show-continue-selector";
-import { RootState } from "../types";
-import { Grid } from "@material-ui/core";
 
-const mapStateToProps = (state: RootState) => ({
-  showContinue: showContinueSelector(state)
-});
-
-type stateType = ReturnType<typeof mapStateToProps>;
-
-type MenuProps = stateType;
-
-export function MenuImpl({ showContinue }: MenuProps) {
+export function Menu() {
   const { t } = useTranslation();
+
+  const showContinue = useSelector(showContinueSelector);
 
   return (
     <Container>
@@ -83,5 +76,3 @@ export function MenuImpl({ showContinue }: MenuProps) {
     </Container>
   );
 }
-
-export const Menu = connect(mapStateToProps)(MenuImpl);

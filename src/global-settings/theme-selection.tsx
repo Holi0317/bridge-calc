@@ -1,6 +1,5 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Dropdown } from "../material/dropdown";
 import { selectedThemeSelector } from "../theme/selectors/selected-theme";
@@ -8,36 +7,18 @@ import { isDarkThemeSelector } from "../theme/selectors/is-dark-theme";
 import { setThemeAction } from "../theme/actions/set-theme";
 import { toggleDarkAction } from "../theme/actions/toggle-dark";
 import { themes } from "../theme/color-presets";
-import { RootState, Dispatch } from "../types";
-
 import { FormControlLabel, Switch, FormGroup } from "@material-ui/core";
+import { useAction } from "../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  selectedTheme: selectedThemeSelector(state),
-  dark: isDarkThemeSelector(state)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      setTheme: setThemeAction,
-      toggleDark: toggleDarkAction
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type ThemeSelectionProps = stateType & dispatchType;
-
-export function ThemeSelectionImpl({
-  selectedTheme,
-  dark,
-  setTheme,
-  toggleDark
-}: ThemeSelectionProps) {
+export function ThemeSelection() {
   const { t } = useTranslation();
+
+  const selectedTheme = useSelector(selectedThemeSelector);
+  const dark = useSelector(isDarkThemeSelector);
+
+  const setTheme = useAction(setThemeAction);
+  const toggleDark = useAction(toggleDarkAction);
+
   const source = Array.from(themes.keys()).map(theme => ({
     value: theme,
     label: t(theme)
@@ -62,8 +43,3 @@ export function ThemeSelectionImpl({
     </>
   );
 }
-
-export const ThemeSelection = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ThemeSelectionImpl);

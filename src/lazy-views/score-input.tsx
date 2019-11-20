@@ -1,9 +1,9 @@
 import React from "react";
 import Loadable from "react-loadable";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Loading } from "./loading";
-import { RootState } from "../types";
 import { Redirect } from "react-router";
+import { currentGameSelector } from "../score-input/selectors/current-game";
 
 const importer = () =>
   import(
@@ -15,14 +15,9 @@ export const Content = Loadable({
   loading: Loading
 });
 
-const mapStateToProps = (state: RootState) => ({
-  gameRedirect: state.currentGame == null
-});
+export function ScoreInputView() {
+  const currentGame = useSelector(currentGameSelector);
+  const gameRedirect = currentGame == null;
 
-type LayoutProps = ReturnType<typeof mapStateToProps>;
-
-export function LayoutImpl({ gameRedirect }: LayoutProps) {
   return gameRedirect ? <Redirect to="/entry" /> : <Content />;
 }
-
-export const ScoreInputView = connect(mapStateToProps)(LayoutImpl);

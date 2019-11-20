@@ -1,32 +1,23 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { NameInputList } from "../name-input-list";
 import { entryOptionsValidator } from "./entry-validator";
 import { setPlayerNamesAction } from "./actions/set-entry-props";
-import { Dispatch, RootState } from "../types";
+import { RootState } from "../types";
 import { trans } from "../utils";
+import { useAction } from "../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  playerNames: state.entry.playerNames,
-  playerNamesError: entryOptionsValidator(state).playerNames
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ setPlayerNames: setPlayerNamesAction }, dispatch);
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type EntryPlayerListProps = stateType & dispatchType;
-
-export function EntryPlayerListImpl({
-  playerNames,
-  playerNamesError,
-  setPlayerNames
-}: EntryPlayerListProps) {
+export function EntryPlayerList() {
   const { t } = useTranslation();
+
+  const playerNames = useSelector(
+    (state: RootState) => state.entry.playerNames
+  );
+  const errors = useSelector(entryOptionsValidator);
+  const playerNamesError = errors.playerNames;
+
+  const setPlayerNames = useAction(setPlayerNamesAction);
 
   const values = playerNames.map((name, index) => {
     const error = playerNamesError == null ? null : playerNamesError[index];
@@ -40,8 +31,3 @@ export function EntryPlayerListImpl({
 
   return <NameInputList values={values} onChange={setPlayerNames} />;
 }
-
-export const EntryPlayerList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EntryPlayerListImpl);

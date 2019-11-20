@@ -1,11 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { bindActionCreators } from "redux";
 import { ImportNamesContent } from "./import-names-content";
 import { setImportOpenAction } from "../actions/set-entry-props";
-import { Dispatch, RootState } from "../../types";
-
+import { RootState } from "../../types";
 import {
   Button,
   Dialog,
@@ -13,29 +11,14 @@ import {
   DialogContent,
   DialogActions
 } from "@material-ui/core";
+import { useAction } from "../../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  open: state.entry.importOpened
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      setImportOpen: setImportOpenAction
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type ImportNamesDialogProps = stateType & dispatchType;
-
-export function ImportNamesDialogImpl({
-  open,
-  setImportOpen
-}: ImportNamesDialogProps) {
+export function ImportNamesDialog() {
   const { t } = useTranslation();
+
+  const open = useSelector((state: RootState) => state.entry.importOpened);
+
+  const setImportOpen = useAction(setImportOpenAction);
 
   return (
     <Dialog open={open} onClose={() => setImportOpen(false)}>
@@ -51,8 +34,3 @@ export function ImportNamesDialogImpl({
     </Dialog>
   );
 }
-
-export const ImportNamesDialog = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ImportNamesDialogImpl);

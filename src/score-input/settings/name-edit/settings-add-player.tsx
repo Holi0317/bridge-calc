@@ -1,37 +1,20 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { IconButton, Tooltip, Typography } from "@material-ui/core";
 import ContentAdd from "@material-ui/icons/Add";
 import { addRandomNameAction } from "../actions/add-name";
-import { Dispatch, RootState } from "../../../types";
 import { settingsValidator } from "../settings-validator";
 import { trans } from "../../../utils";
+import { useAction } from "../../../hooks/use-action";
 
-import { IconButton, Tooltip, Typography } from "@material-ui/core";
-
-const mapStateToProps = (state: RootState) => ({
-  error: settingsValidator(state).misc
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      addPlayer: addRandomNameAction
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type SettingsAddPlayerProps = stateType & dispatchType;
-
-export function SettingsAddPlayerImpl({
-  error,
-  addPlayer
-}: SettingsAddPlayerProps) {
+export function SettingsAddPlayer() {
   const { t } = useTranslation();
+
+  const settingsErrors = useSelector(settingsValidator);
+  const error = settingsErrors.misc;
+
+  const addPlayer = useAction(addRandomNameAction);
 
   return (
     <div>
@@ -47,8 +30,3 @@ export function SettingsAddPlayerImpl({
     </div>
   );
 }
-
-export const SettingsAddPlayer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsAddPlayerImpl);

@@ -1,18 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { List } from "@material-ui/core";
 import { NameListEntry } from "./name-list-entry";
 import { EmptyNamesPlaceholder } from "./empty-names-placeholder";
 import { prevNamesSelector } from "../../prev-games/selectors/prev-names";
-import { RootState } from "../../types";
-import { List } from "@material-ui/core";
 
-const mapStateToProps = (state: RootState) => ({
-  names: prevNamesSelector(state)
-});
+export function ImportNamesContent() {
+  const names = useSelector(prevNamesSelector);
 
-type ImportNamesContentProps = ReturnType<typeof mapStateToProps>;
-
-export function ImportNamesContentImpl({ names }: ImportNamesContentProps) {
   if (names.length === 0) {
     return <EmptyNamesPlaceholder />;
   }
@@ -24,7 +19,3 @@ export function ImportNamesContentImpl({ names }: ImportNamesContentProps) {
     </List>
   );
 }
-
-export const ImportNamesContent = connect(mapStateToProps)(
-  ImportNamesContentImpl
-);

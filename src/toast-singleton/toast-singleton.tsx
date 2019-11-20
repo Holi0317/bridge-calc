@@ -1,28 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { closeToastAction } from "./actions/close-toast";
-import { RootState, Dispatch } from "../types";
+import { useSelector } from "react-redux";
 import { Snackbar } from "@material-ui/core";
+import { closeToastAction } from "./actions/close-toast";
+import { RootState } from "../types";
+import { useAction } from "../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  param: state.toastSingleton
-});
+export function ToastSingleton() {
+  const param = useSelector((state: RootState) => state.toastSingleton);
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      close: closeToastAction
-    },
-    dispatch
-  );
+  const close = useAction(closeToastAction);
 
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type ToastSingletonProps = stateType & dispatchType;
-
-export function ToastSingletonImpl({ param, close }: ToastSingletonProps) {
   return (
     <Snackbar
       {...param}
@@ -31,8 +18,3 @@ export function ToastSingletonImpl({ param, close }: ToastSingletonProps) {
     />
   );
 }
-
-export const ToastSingleton = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ToastSingletonImpl);
