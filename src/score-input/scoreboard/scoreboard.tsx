@@ -1,17 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Container } from "../../material/container";
 import { ScoreboardTable } from "./scoreboard-table";
-import { RootState } from "../../types";
 import classes from "./scoreboard.pcss";
+import { currentGameSelector } from "../selectors/current-game";
 
-const mapStateToProps = (state: RootState) => ({
-  entry: state.currentGame
-});
+export function Scoreboard() {
+  const entry = useSelector(currentGameSelector);
 
-type stateType = ReturnType<typeof mapStateToProps>;
-
-export function ScoreboardImpl({ entry }: stateType) {
   return (
     <Container>
       {entry && (
@@ -22,5 +18,3 @@ export function ScoreboardImpl({ entry }: stateType) {
     </Container>
   );
 }
-
-export const Scoreboard = connect(mapStateToProps)(ScoreboardImpl);
