@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SortableElement } from "react-sortable-hoc";
-import ActionDelete from "@material-ui/icons/Delete";
+import { Delete as DeleteIcon } from "@material-ui/icons";
 import styled from "styled-components/macro";
 import { DragHandle } from "./drag-handle";
 
@@ -48,7 +48,7 @@ export function SortableItemImpl({
 
       <Tooltip title={t("Delete name")}>
         <IconButton onClick={remove}>
-          <ActionDelete width="24px" height="24px" />
+          <DeleteIcon width="24px" height="24px" />
         </IconButton>
       </Tooltip>
     </ItemContainer>

@@ -2,12 +2,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
-import AvPlayArrow from "@material-ui/icons/PlayArrow";
-import AvFiberNew from "@material-ui/icons/FiberNew";
-import AvSkipPrevious from "@material-ui/icons/SkipPrevious";
-import ActionSettings from "@material-ui/icons/SettingsRounded";
-import ActionInfo from "@material-ui/icons/Info";
-import ActionBugReport from "@material-ui/icons/BugReport";
+import {
+  PlayArrow,
+  FiberNew,
+  SkipPrevious,
+  SettingsRounded,
+  Info,
+  BugReport
+} from "@material-ui/icons";
 import { Container } from "../material/container";
 import { Tile } from "./tile";
 import { showContinueSelector } from "./show-continue-selector";
@@ -22,7 +24,7 @@ export function Menu() {
       {showContinue ? (
         <Grid>
           <Tile
-            icon={<AvPlayArrow color="action" />}
+            icon={<PlayArrow color="action" />}
             title={t("Continue")}
             to="/score-input"
           />
@@ -32,14 +34,14 @@ export function Menu() {
       <Grid container spacing={8}>
         <Grid item md={6} xs={12}>
           <Tile
-            icon={<AvFiberNew color="action" />}
+            icon={<FiberNew color="action" />}
             title={t("New Game")}
             to="/entry"
           />
         </Grid>
         <Grid item md={6} xs={12}>
           <Tile
-            icon={<AvSkipPrevious color="action" />}
+            icon={<SkipPrevious color="action" />}
             title={t("Previous games")}
             to="/prev-games"
           />
@@ -49,14 +51,14 @@ export function Menu() {
       <Grid container spacing={8}>
         <Grid item md={4} xs={12}>
           <Tile
-            icon={<ActionSettings color="action" />}
+            icon={<SettingsRounded color="action" />}
             title={t("Settings")}
             to="/global-settings"
           />
         </Grid>
         <Grid item md={4} xs={12}>
           <Tile
-            icon={<ActionInfo color="action" />}
+            icon={<Info color="action" />}
             title={t("Information")}
             to="https://gitlab.com/holi0317/bridge-calc/wikis/home"
             external={true}
@@ -65,7 +67,7 @@ export function Menu() {
         </Grid>
         <Grid item md={4} xs={12}>
           <Tile
-            icon={<ActionBugReport color="action" />}
+            icon={<BugReport color="action" />}
             title={t("Support/bug")}
             to="https://gitlab.com/holi0317/bridge-calc/issues"
             external={true}

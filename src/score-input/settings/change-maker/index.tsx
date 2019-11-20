@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { ExpandMore } from "@material-ui/icons";
 import { changeMakerDisabledSelector } from "../selectors/change-maker-disabled";
 import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { toggleExpandAction } from "../actions/toggle-expand";
@@ -35,7 +35,7 @@ export function ChangeMaker() {
       disabled={disabled}
       onChange={() => toggleExpand(PANEL.CHANGE_MAKER)}
     >
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+      <ExpansionPanelSummary expandIcon={<ExpandMore />}>
         <PanelHeading>
           <Typography>{t("Change maker")}</Typography>
         </PanelHeading>

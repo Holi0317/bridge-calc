@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { ExpandMore } from "@material-ui/icons";
 import { toggleExpandAction } from "../actions/toggle-expand";
 import { nameEditDisabledSelector } from "../selectors/name-edit-disabled";
 import { expandedPanelSelector } from "../selectors/expanded-panel";
@@ -35,7 +35,7 @@ export function NameEdit() {
       disabled={disabled}
       onChange={() => toggleExpand(PANEL.NAME_EDIT)}
     >
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+      <ExpansionPanelSummary expandIcon={<ExpandMore />}>
         <PanelHeading>
           <Typography>{t("Edit players")}</Typography>
         </PanelHeading>

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { IconButton, Tooltip, Typography } from "@material-ui/core";
-import ContentAdd from "@material-ui/icons/Add";
+import { Add as AddIcon } from "@material-ui/icons";
 import { addRandomNameAction } from "../actions/add-name";
 import { settingsValidator } from "../settings-validator";
 import { trans } from "../../../utils";
@@ -20,7 +20,7 @@ export function SettingsAddPlayer() {
     <div>
       <Tooltip title={t("Add player")}>
         <IconButton onClick={addPlayer}>
-          <ContentAdd width="28px" height="28px" />
+          <AddIcon width="28px" height="28px" />
         </IconButton>
       </Tooltip>
 

@@ -1,8 +1,7 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
-import ActionHelp from "@material-ui/icons/Help";
-import NavigationArrowBack from "@material-ui/icons/ArrowBack";
+import { Help, ArrowBack } from "@material-ui/icons";
 import styled from "styled-components/macro";
 import { Titles } from "./titles";
 
@@ -40,7 +39,7 @@ export function Navbar() {
         {hasBackBtn && (
           <Tooltip title={t("Back to menu")}>
             <BackIconBtn onClick={() => history.push("/")}>
-              <NavigationArrowBack width="24px" height="24px" />
+              <ArrowBack width="24px" height="24px" />
             </BackIconBtn>
           </Tooltip>
         )}
@@ -55,7 +54,7 @@ export function Navbar() {
             target="_blank"
             href="https://gitlab.com/holi0317/bridge-calc/wikis/home"
           >
-            <ActionHelp width="24px" height="24px" />
+            <Help width="24px" height="24px" />
           </IconButton>
         </Tooltip>
       </StyledToolbar>

@@ -1,7 +1,7 @@
 import React from "react";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Delete as DeleteIcon } from "@material-ui/icons";
 import { PrevGameEntry } from "./types";
 
 import {

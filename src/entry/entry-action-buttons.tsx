@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ContentAdd from "@material-ui/icons/Add";
-import GetApp from "@material-ui/icons/GetApp";
+import { Add, GetApp } from "@material-ui/icons";
 import styled from "styled-components/macro";
 import { addRandomPlayerAction } from "./actions/add-player";
 import { setImportOpenAction } from "./actions/set-entry-props";
@@ -24,7 +23,7 @@ export function EntryActionButtons() {
     <BtnContainer>
       <Tooltip title={t("Add player")}>
         <IconButton onClick={addRandomPlayer}>
-          <ContentAdd width="28px" height="28px" />
+          <Add width="28px" height="28px" />
         </IconButton>
       </Tooltip>
 

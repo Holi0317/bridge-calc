@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
 import styled from "styled-components/macro";
-import AlertError from "@material-ui/icons/Error";
+import { Error as ErrorIcon } from "@material-ui/icons";
 import { Link } from "@material-ui/core";
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const StyledIcon = styled(AlertError)`
+const StyledIcon = styled(ErrorIcon)`
   width: 8em !important;
   height: 8em !important;
   margin-bottom: 1em !important;

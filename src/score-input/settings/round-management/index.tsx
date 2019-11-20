@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { ExpandMore } from "@material-ui/icons";
 import { PanelHeading, PanelSubheading } from "../styled";
 import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { toggleExpandAction } from "../actions/toggle-expand";
@@ -28,7 +28,7 @@ export function RoundManagement() {
       expanded={expanded}
       onChange={() => toggleExpand(PANEL.ROUND_MANAGEMENT)}
     >
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+      <ExpansionPanelSummary expandIcon={<ExpandMore />}>
         <PanelHeading>
           <Typography>{t("Skip rounds")}</Typography>
         </PanelHeading>

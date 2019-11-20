@@ -1,9 +1,9 @@
 import React from "react";
 import { SortableHandle } from "react-sortable-hoc";
-import EditorDragHandle from "@material-ui/icons/DragHandle";
+import { DragHandle as DragHandleIcon } from "@material-ui/icons";
 import styled from "styled-components/macro";
 
-const StyledHandle = styled(EditorDragHandle)`
+const StyledHandle = styled(DragHandleIcon)`
   width: 42px;
   height: 24px;
   cursor: move;
