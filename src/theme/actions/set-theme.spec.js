@@ -4,7 +4,7 @@ import { setThemeAction } from "./set-theme";
 test("it should return set theme action", () => {
   const expected = {
     type: ActionTypes.SET_THEME,
-    theme: "default"
+    payload: "default"
   };
   const actual = setThemeAction("default");
   expect(actual).toEqual(expected);

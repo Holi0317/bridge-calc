@@ -1,14 +1,13 @@
+import { createAction } from "typesafe-actions";
 import { ActionTypes } from "../../action-types";
-
-export interface SetThemeAction {
-  type: ActionTypes.SET_THEME;
-  theme: string;
-}
 
 /**
  * Set theme of the app.
  * See theme-sources.ts for available themes.
+ *
+ * @param theme Name of the theme to be set
  */
-export function setThemeAction(theme: string): SetThemeAction {
-  return { type: ActionTypes.SET_THEME, theme };
-}
+export const setThemeAction = createAction(
+  ActionTypes.SET_THEME,
+  (theme: string) => theme
+)();

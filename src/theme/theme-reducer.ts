@@ -1,5 +1,6 @@
-import { ThemeActions } from "./actions";
 import { ActionTypes } from "../action-types";
+import { createReducer } from "typesafe-actions";
+import { combineReducers } from "redux";
 
 export interface ThemeState {
   /** Currently selected theme */
@@ -8,27 +9,17 @@ export interface ThemeState {
   dark: boolean;
 }
 
-const defaultState: ThemeState = {
-  theme: "Pink",
-  dark: false
-};
+const activeThemeReducer = createReducer("Pink").handleType(
+  ActionTypes.SET_THEME,
+  (_, { payload }) => payload
+);
 
-export function themeReducer(
-  state = defaultState,
-  action: ThemeActions
-): ThemeState {
-  switch (action.type) {
-    case ActionTypes.SET_THEME:
-      return {
-        ...state,
-        theme: action.theme
-      };
-    case ActionTypes.TOGGLE_DARK:
-      return {
-        ...state,
-        dark: !state.dark
-      };
-    default:
-      return state;
-  }
-}
+const darkReducer = createReducer(false).handleType(
+  ActionTypes.TOGGLE_DARK,
+  state => !state
+);
+
+export const themeReducer = combineReducers({
+  theme: activeThemeReducer,
+  dark: darkReducer
+});
