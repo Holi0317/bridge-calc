@@ -29,7 +29,7 @@ export function EntryDetail({ entry }: EntryDetailProps) {
         <TableRow>
           <TableCell>{t("Starting time")}</TableCell>
           <TableCell>
-            {format(entry.startTime, "DD MMM YYYY HH:mm:ss")}
+            {format(entry.startTime, "MMM dd, yyyy kk:mm:ss")}
           </TableCell>
         </TableRow>
 
@@ -52,7 +52,7 @@ export function EntryDetail({ entry }: EntryDetailProps) {
           <TableRow>
             <TableCell>{t("Ending time")}</TableCell>
             <TableCell>
-              {format(entry.endTime, "DD MMM YYYY HH:mm:ss")}
+              {format(entry.endTime, "MMM dd, yyyy kk:mm:ss")}
             </TableCell>
           </TableRow>
         ) : (

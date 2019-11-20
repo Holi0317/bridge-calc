@@ -3,7 +3,6 @@ import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { Delete as DeleteIcon } from "@material-ui/icons";
 import { PrevGameEntry } from "./types";
-
 import {
   ListItem,
   ListItemText,
@@ -29,7 +28,7 @@ export function PrevGame({
     <ListItem button onClick={requestDetail}>
       <ListItemText
         primary={t("Game on {{date}}", {
-          date: format(game.startTime, "DD MMM YYYY")
+          date: format(game.startTime, "MMM dd, yyyy")
         })}
         secondary={t("With {{players}}", {
           players: Object.values(game.names).join(", ")
