@@ -1,6 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import { RouteComponentProps } from "react-router";
+import { useLocation } from "react-router";
 import { ToastSingleton } from "../toast-singleton";
 import { SWReg } from "../sw-reg";
 import { Migration } from "../migration";
@@ -8,9 +7,9 @@ import { Routes } from "./routes";
 import { Navbar } from "./navbar";
 import { CssBaseline } from "@material-ui/core";
 
-type AppProps = RouteComponentProps<any>;
+export function Shell() {
+  const location = useLocation();
 
-export function ShellImpl({ location }: AppProps) {
   return (
     <div>
       <Navbar />
@@ -25,5 +24,3 @@ export function ShellImpl({ location }: AppProps) {
     </div>
   );
 }
-
-export const Shell = withRouter(ShellImpl);
