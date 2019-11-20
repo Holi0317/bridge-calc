@@ -5,11 +5,11 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { PanelHeading, PanelSubheading } from "../styled";
 import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { toggleExpandAction } from "../actions/toggle-expand";
 import { PANEL } from "../panel";
 import { SkipRounds } from "./skip-rounds";
-import classes from "../settings.pcss";
 import { useAction } from "../../../hooks/use-action";
 
 export function RoundManagement() {
@@ -26,19 +26,14 @@ export function RoundManagement() {
       onChange={() => toggleExpand(PANEL.ROUND_MANAGEMENT)}
     >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <div className={classes.panelHeading}>
-          <Typography className={classes.heading}>
-            {t("Skip rounds")}
-          </Typography>
-        </div>
-        <div className={classes.panelSubheading}>
-          <Typography
-            className={classes.secondaryHeading}
-            color="textSecondary"
-          >
+        <PanelHeading>
+          <Typography>{t("Skip rounds")}</Typography>
+        </PanelHeading>
+        <PanelSubheading>
+          <Typography color="textSecondary">
             {t("Jump to other rounds")}
           </Typography>
-        </div>
+        </PanelSubheading>
       </ExpansionPanelSummary>
 
       <SkipRounds />

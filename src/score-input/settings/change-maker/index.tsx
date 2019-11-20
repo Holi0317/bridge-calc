@@ -10,8 +10,8 @@ import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { toggleExpandAction } from "../actions/toggle-expand";
 import { PANEL } from "../panel";
 import { MakerEditor } from "./maker-editor";
-import classes from "../settings.pcss";
 import { useAction } from "../../../hooks/use-action";
+import { PanelHeading, PanelSubheading } from "../styled";
 
 export function ChangeMaker() {
   const { t } = useTranslation();
@@ -33,19 +33,12 @@ export function ChangeMaker() {
       onChange={() => toggleExpand(PANEL.CHANGE_MAKER)}
     >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <div className={classes.panelHeading}>
-          <Typography className={classes.heading}>
-            {t("Change maker")}
-          </Typography>
-        </div>
-        <div className={classes.panelSubheading}>
-          <Typography
-            className={classes.secondaryHeading}
-            color="textSecondary"
-          >
-            {subHeading}
-          </Typography>
-        </div>
+        <PanelHeading>
+          <Typography>{t("Change maker")}</Typography>
+        </PanelHeading>
+        <PanelSubheading>
+          <Typography color="textSecondary">{subHeading}</Typography>
+        </PanelSubheading>
       </ExpansionPanelSummary>
 
       <MakerEditor />

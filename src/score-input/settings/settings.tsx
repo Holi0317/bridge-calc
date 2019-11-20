@@ -1,20 +1,24 @@
 import React from "react";
+import styled from "styled-components/macro";
 import { Container } from "../../material/container";
 import { NameEdit } from "./name-edit";
 import { RoundManagement } from "./round-management";
 import { SettingsInitializer } from "./settings-initializer";
 import { ChangeMaker } from "./change-maker";
 import { ProtectedView } from "../protected-view";
-import classes from "./settings.pcss";
+
+const PanelContainer = styled.div`
+  padding-top: 1em;
+`;
 
 export function SettingsImpl() {
   return (
     <Container>
-      <div className={classes.panelContainer}>
+      <PanelContainer>
         <NameEdit />
         <ChangeMaker />
         <RoundManagement />
-      </div>
+      </PanelContainer>
 
       <SettingsInitializer />
     </Container>

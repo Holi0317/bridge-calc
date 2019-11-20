@@ -12,7 +12,7 @@ import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { PANEL } from "../panel";
 import { NameEditor } from "./name-editor";
 import { Dispatch, RootState } from "../../../types";
-import classes from "../settings.pcss";
+import { PanelHeading, PanelSubheading } from "../styled";
 
 const mapStateToProps = (state: RootState) => ({
   disabled: nameEditDisabledSelector(state),
@@ -50,19 +50,12 @@ export function NameEditImpl({
       onChange={() => toggleExpand(PANEL.NAME_EDIT)}
     >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <div className={classes.panelHeading}>
-          <Typography className={classes.heading}>
-            {t("Edit players")}
-          </Typography>
-        </div>
-        <div className={classes.panelSubheading}>
-          <Typography
-            className={classes.secondaryHeading}
-            color="textSecondary"
-          >
-            {subHeading}
-          </Typography>
-        </div>
+        <PanelHeading>
+          <Typography>{t("Edit players")}</Typography>
+        </PanelHeading>
+        <PanelSubheading>
+          <Typography color="textSecondary">{subHeading}</Typography>
+        </PanelSubheading>
       </ExpansionPanelSummary>
 
       <NameEditor />

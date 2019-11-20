@@ -2,16 +2,24 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import styled from "styled-components/macro";
 import { skipAction } from "../../actions/skip";
 import { initSettingsAction } from "../actions/init-settings";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { remainingRoundsSelector } from "../../selectors/remaining-rounds";
 import { currentRoundSelector } from "../../selectors/current-round";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import classes from "../settings.pcss";
 import { useAction } from "../../../hooks/use-action";
 import { useCallback } from "react";
 import { currentGameSelector } from "../../selectors/current-game";
+
+const SkipRoundsBtn = styled(Button)`
+  margin-right: 1em !important;
+
+  &:last-child {
+    margin-right: 0 !important;
+  }
+`;
 
 export function SkipRounds() {
   const { t } = useTranslation();
@@ -53,28 +61,19 @@ export function SkipRounds() {
 
   return (
     <ExpansionPanelDetails>
-      <Button
-        variant="outlined"
-        className={classes.skipRoundsBtn}
-        onClick={() => skip(1)}
-      >
+      <SkipRoundsBtn variant="outlined" onClick={() => skip(1)}>
         {t("Skip this round")}
-      </Button>
-      <Button
+      </SkipRoundsBtn>
+      <SkipRoundsBtn
         variant="outlined"
-        className={classes.skipRoundsBtn}
         disabled={remainingRounds <= 1}
         onClick={() => skip(remainingRounds - 1)}
       >
         {t("Skip to last round")}
-      </Button>
-      <Button
-        variant="outlined"
-        className={classes.skipRoundsBtn}
-        onClick={() => skip(remainingRounds)}
-      >
+      </SkipRoundsBtn>
+      <SkipRoundsBtn variant="outlined" onClick={() => skip(remainingRounds)}>
         {t("End game")}
-      </Button>
+      </SkipRoundsBtn>
     </ExpansionPanelDetails>
   );
 }
