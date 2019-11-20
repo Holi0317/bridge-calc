@@ -35,7 +35,11 @@ export function EntryStartButton() {
   const startAct = useAction(startAction);
 
   const start = useCallback(() => {
-    startAct(rounds, playerNames.map(entry => entry.value), startingRound);
+    startAct(
+      rounds,
+      playerNames.map(entry => entry.value),
+      startingRound
+    );
     history.push("/score-input");
   }, [rounds, playerNames, startingRound, startAct, history]);
 

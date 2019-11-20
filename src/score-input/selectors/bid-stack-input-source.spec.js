@@ -32,7 +32,10 @@ test("Sources for 1st round", () => {
       ...waitingBidState
     }
   };
-  const source = [{ value: 0, label: "0" }, { value: 1, label: "1" }];
+  const source = [
+    { value: 0, label: "0" },
+    { value: 1, label: "1" }
+  ];
   const lastBid = [
     { value: 0, label: "0" },
     { value: 1, label: "1", disabled: true }
@@ -73,7 +76,10 @@ test("Invalid bid should be disabled for last player", () => {
       bid: genMap(0, 1, 0, 0)
     }
   };
-  const source = [{ value: 0, label: "0" }, { value: 1, label: "1" }];
+  const source = [
+    { value: 0, label: "0" },
+    { value: 1, label: "1" }
+  ];
   const lastBid = [
     { value: 0, label: "0", disabled: true },
     { value: 1, label: "1" }

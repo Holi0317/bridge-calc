@@ -80,7 +80,4 @@ export const entryOptionsValidator = createSelector(
  * Select validity of entry options.
  * If valid, the selected value will be true.
  */
-export const isEntryOptionsValid = createSelector(
-  entryOptionsValidator,
-  isOk
-);
+export const isEntryOptionsValid = createSelector(entryOptionsValidator, isOk);

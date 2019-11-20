@@ -107,7 +107,4 @@ export const stackInputValidator = createSelector(
  * Select if current stack input state is valid or not.
  * If true, the current state is valid. False if otherwise.
  */
-export const isStackInputValid = createSelector(
-  stackInputValidator,
-  isOk
-);
+export const isStackInputValid = createSelector(stackInputValidator, isOk);

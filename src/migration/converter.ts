@@ -30,7 +30,10 @@ function migratePlayers(players: OldPlayers[]): PlayerMaps {
     win: "win"
   };
   const res = mapValues(map, (prop: keyof OldPlayers) =>
-    zipObject(ids, players.map(player => player[prop]))
+    zipObject(
+      ids,
+      players.map(player => player[prop])
+    )
   ) as any;
 
   // Type convertion

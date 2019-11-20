@@ -33,7 +33,10 @@ test("Sources for 1st round", () => {
       ...waitingBidState
     }
   };
-  const source = [{ value: 0, label: "0" }, { value: 1, label: "1" }];
+  const source = [
+    { value: 0, label: "0" },
+    { value: 1, label: "1" }
+  ];
   const expected = genMap(source, source, source, source);
   const actual = winStackInputSourceSelector(state);
   expect(actual).toEqual(expected);
@@ -66,7 +69,10 @@ test("Win should be disabled if selections that will exceed win", () => {
       win: genMap(1, 0, 0, 0)
     }
   };
-  const source = [{ value: 0, label: "0" }, { value: 1, label: "1" }];
+  const source = [
+    { value: 0, label: "0" },
+    { value: 1, label: "1" }
+  ];
   const restWin = [
     { value: 0, label: "0" },
     { value: 1, label: "1", disabled: true }

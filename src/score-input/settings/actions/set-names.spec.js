@@ -13,7 +13,10 @@ test("it should return set names action", () => {
 });
 
 test("from entries form should set names", () => {
-  const input = [{ value: "John", id: "a" }, { value: "Joe", id: "b" }];
+  const input = [
+    { value: "John", id: "a" },
+    { value: "Joe", id: "b" }
+  ];
   const expected = {
     type: ActionTypes.SET_NAMES,
     payload: {

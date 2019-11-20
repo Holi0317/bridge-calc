@@ -14,7 +14,12 @@ test("Array of player names should be selected from settings state", () => {
     names: genMap("John", "Mary", "Henry", "Joe"),
     maker: "a"
   });
-  const expected = [["a", "John"], ["b", "Mary"], ["c", "Henry"], ["d", "Joe"]];
+  const expected = [
+    ["a", "John"],
+    ["b", "Mary"],
+    ["c", "Henry"],
+    ["d", "Joe"]
+  ];
   const actual = nameInputListSourceSelector(state);
   expect(actual).toEqual(expected);
 });
