@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import styled from "styled-components/macro";
+import { ScoreCell } from "./score-cell";
 import { GameState } from "../reducer";
 import { computeData } from "./compute-data";
 
@@ -21,17 +22,6 @@ const TableContainer = styled(Paper)`
 
 const StyledTable = styled(Table)`
   white-space: nowrap;
-`;
-
-const StyledTableCell = styled(TableCell)<{ error: boolean }>`
-  color: ${props =>
-    props.error ? props.theme.palette.error.main : "inherit"} !important;
-`;
-
-const TotalScoreRow = styled(TableRow)`
-  td {
-    font-weight: bold;
-  }
 `;
 
 export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
@@ -63,9 +53,7 @@ export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
             <TableRow>
               <TableCell>{t("Previous round score")}</TableCell>
               {Object.entries(prevScores).map(([playerID, score]) => (
-                <StyledTableCell align="right" key={playerID} error={score < 0}>
-                  {score}
-                </StyledTableCell>
+                <ScoreCell key={playerID}>{score}</ScoreCell>
               ))}
             </TableRow>
           ) : (
@@ -73,27 +61,21 @@ export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
               <TableRow key={i}>
                 <TableCell>{t("Round {{n}}", { n: i })}</TableCell>
                 {Object.entries(scores).map(([playerID, score]) => (
-                  <StyledTableCell
-                    align="right"
-                    key={playerID}
-                    error={score[i - 1] < 0}
-                  >
-                    {score[i - 1]}
-                  </StyledTableCell>
+                  <ScoreCell key={playerID}>{score[i - 1]}</ScoreCell>
                 ))}
               </TableRow>
             ))
           )}
 
           {/* Total scores */}
-          <TotalScoreRow>
+          <TableRow>
             <TableCell>{t("Total score")}</TableCell>
             {Object.entries(totalScores).map(([playerID, total]) => (
-              <StyledTableCell align="right" key={playerID} error={total < 0}>
+              <ScoreCell bold key={playerID}>
                 {total}
-              </StyledTableCell>
+              </ScoreCell>
             ))}
-          </TotalScoreRow>
+          </TableRow>
 
           {/* Rank */}
           <TableRow>

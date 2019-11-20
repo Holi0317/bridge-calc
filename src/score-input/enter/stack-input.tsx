@@ -33,7 +33,7 @@ const StyledTable = styled.table`
   }
 `;
 
-const StyledTHead = styled.th`
+const StyledTHead = styled.thead`
   th {
     text-align: left;
     width: 300px;
