@@ -1,27 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { allowNamesCommitSelector } from "../selectors/allow-names-commit";
-import { RootState } from "../../../types";
 import { Button } from "@material-ui/core";
+import { allowNamesCommitSelector } from "../selectors/allow-names-commit";
 
-const mapStateToProps = (state: RootState) => ({
-  changeDisabled: !allowNamesCommitSelector(state)
-});
-
-type stateType = ReturnType<typeof mapStateToProps>;
-
-interface ActionButtonProps {
+interface Props {
   requestDialog(): void;
 }
 
-type ActionButtonsProps = stateType & ActionButtonProps;
-
-export function ActionButtonsImpl({
-  changeDisabled,
-  requestDialog
-}: ActionButtonsProps) {
+export function ActionButtons({ requestDialog }: Props) {
   const { t } = useTranslation();
+
+  const changeDisabled = !useSelector(allowNamesCommitSelector);
 
   return (
     <>
@@ -36,7 +26,3 @@ export function ActionButtonsImpl({
     </>
   );
 }
-
-export const ActionButtons = connect(mapStateToProps)(
-  ActionButtonsImpl
-) as React.ComponentType<ActionButtonProps>;
