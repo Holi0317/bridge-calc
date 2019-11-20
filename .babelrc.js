@@ -13,7 +13,10 @@ const plugins = [
         preventFullImport: true
       },
       "lodash-es$": {
-        transform: "lodash-es/${member}",
+        transform:
+          process.env.NODE_ENV === "test"
+            ? "lodash/${member}"
+            : "lodash-es/${member}",
         preventFullImport: true
       },
       "date-fns$": {
