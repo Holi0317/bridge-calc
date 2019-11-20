@@ -6,14 +6,33 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
+import styled from "styled-components/macro";
 import { GameState } from "../reducer";
 import { computeData } from "./compute-data";
-import classes from "./scoreboard.pcss";
 
 interface ScoreboardTableProps {
   entry: NonNullable<GameState>;
   mini: boolean;
 }
+
+const TableContainer = styled(Paper)`
+  overflow-x: auto;
+`;
+
+const StyledTable = styled(Table)`
+  white-space: nowrap;
+`;
+
+const StyledTableCell = styled(TableCell)<{ error: boolean }>`
+  color: ${props =>
+    props.error ? props.theme.palette.error.main : "inherit"} !important;
+`;
+
+const TotalScoreRow = styled(TableRow)`
+  td {
+    font-weight: bold;
+  }
+`;
 
 export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
   const {
@@ -27,8 +46,8 @@ export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
   const { t } = useTranslation();
 
   return (
-    <Paper className={classes.tableContainer}>
-      <Table className={classes.table}>
+    <TableContainer>
+      <StyledTable>
         <TableHead>
           {/* Player names */}
           <TableRow>
@@ -44,13 +63,9 @@ export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
             <TableRow>
               <TableCell>{t("Previous round score")}</TableCell>
               {Object.entries(prevScores).map(([playerID, score]) => (
-                <TableCell
-                  align="right"
-                  key={playerID}
-                  className={score < 0 ? classes.errorText : ""}
-                >
+                <StyledTableCell align="right" key={playerID} error={score < 0}>
                   {score}
-                </TableCell>
+                </StyledTableCell>
               ))}
             </TableRow>
           ) : (
@@ -58,31 +73,27 @@ export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
               <TableRow key={i}>
                 <TableCell>{t("Round {{n}}", { n: i })}</TableCell>
                 {Object.entries(scores).map(([playerID, score]) => (
-                  <TableCell
+                  <StyledTableCell
                     align="right"
                     key={playerID}
-                    className={score[i - 1] < 0 ? classes.errorText : ""}
+                    error={score[i - 1] < 0}
                   >
                     {score[i - 1]}
-                  </TableCell>
+                  </StyledTableCell>
                 ))}
               </TableRow>
             ))
           )}
 
           {/* Total scores */}
-          <TableRow className={classes.totalScore}>
+          <TotalScoreRow>
             <TableCell>{t("Total score")}</TableCell>
             {Object.entries(totalScores).map(([playerID, total]) => (
-              <TableCell
-                align="right"
-                key={playerID}
-                className={total < 0 ? classes.errorText : ""}
-              >
+              <StyledTableCell align="right" key={playerID} error={total < 0}>
                 {total}
-              </TableCell>
+              </StyledTableCell>
             ))}
-          </TableRow>
+          </TotalScoreRow>
 
           {/* Rank */}
           <TableRow>
@@ -94,7 +105,7 @@ export function ScoreboardTable({ entry, mini }: ScoreboardTableProps) {
             ))}
           </TableRow>
         </TableBody>
-      </Table>
-    </Paper>
+      </StyledTable>
+    </TableContainer>
   );
 }
