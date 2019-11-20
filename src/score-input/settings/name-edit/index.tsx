@@ -1,7 +1,6 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
@@ -11,33 +10,17 @@ import { nameEditDisabledSelector } from "../selectors/name-edit-disabled";
 import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { PANEL } from "../panel";
 import { NameEditor } from "./name-editor";
-import { Dispatch, RootState } from "../../../types";
 import { PanelHeading, PanelSubheading } from "../styled";
+import { useAction } from "../../../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  disabled: nameEditDisabledSelector(state),
-  expanded: expandedPanelSelector(state) === PANEL.NAME_EDIT
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      toggleExpand: toggleExpandAction
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type NameEditProps = stateType & dispatchType;
-
-export function NameEditImpl({
-  expanded,
-  disabled,
-  toggleExpand
-}: NameEditProps) {
+export function NameEdit() {
   const { t } = useTranslation();
+
+  const disabled = useSelector(nameEditDisabledSelector);
+  const expandedPanel = useSelector(expandedPanelSelector);
+  const expanded = expandedPanel === PANEL.NAME_EDIT;
+
+  const toggleExpand = useAction(toggleExpandAction);
 
   const subHeading = disabled
     ? t("Player name edit is disabled when editing maker")
@@ -62,8 +45,3 @@ export function NameEditImpl({
     </ExpansionPanel>
   );
 }
-
-export const NameEdit = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NameEditImpl);
