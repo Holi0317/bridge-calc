@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
-import Link from "@material-ui/core/Link";
 import styled from "styled-components/macro";
 import AlertError from "@material-ui/icons/Error";
+import { Link } from "@material-ui/core";
 
 const Container = styled.div`
   height: 100%;

@@ -2,7 +2,6 @@ import React from "react";
 import mapValues from "lodash-es/mapValues";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Typography from "@material-ui/core/Typography";
 import styled from "styled-components/macro";
 import { Dropdown } from "../../material/dropdown";
 import { GameStage } from "../game-stage";
@@ -18,6 +17,7 @@ import { setBidAction } from "../actions/set-bid";
 import { setWinAction } from "../actions/set-win";
 import { trans } from "../../utils";
 import { useAction } from "../../hooks/use-action";
+import { Typography } from "@material-ui/core";
 
 const TableContainer = styled.div`
   overflow-x: auto;

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import Button from "@material-ui/core/Button";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import { Button, ExpansionPanelDetails } from "@material-ui/core";
 import styled from "styled-components/macro";
 import { skipAction } from "../../actions/skip";
 import { initSettingsAction } from "../actions/init-settings";
@@ -10,7 +9,6 @@ import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { remainingRoundsSelector } from "../../selectors/remaining-rounds";
 import { currentRoundSelector } from "../../selectors/current-round";
 import { useAction } from "../../../hooks/use-action";
-import { useCallback } from "react";
 import { currentGameSelector } from "../../selectors/current-game";
 
 const SkipRoundsBtn = styled(Button)`

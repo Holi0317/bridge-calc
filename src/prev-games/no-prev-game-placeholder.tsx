@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
 import styled from "styled-components/macro";
 import { JokerIcon } from "./joker-icon";
+
+import { Link, Typography } from "@material-ui/core";
 
 const Container = styled.div`
   height: 100%;

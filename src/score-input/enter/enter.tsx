@@ -1,6 +1,4 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
 import styled from "styled-components/macro";
 import { Container } from "../../material/container";
 import { UsedTimeDisplay } from "./used-time-display";
@@ -8,6 +6,8 @@ import { StackInput } from "./stack-input";
 import { ActionButtons } from "./action-buttons";
 import { MiniScoreboard } from "./mini-scoreboard";
 import { ProtectedView } from "../protected-view";
+
+import { Paper, Divider } from "@material-ui/core";
 
 const ActionContainer = styled(Paper)`
   padding: 1em;

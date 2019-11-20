@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import { activatedThemeSelector } from "./activated-theme";
-import { Theme } from "@material-ui/core/styles";
+import { Theme } from "@material-ui/core";
 
 /**
  * Select a mapping of css properties to values according to selected theme.

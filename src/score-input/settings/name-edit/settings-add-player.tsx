@@ -2,14 +2,13 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
 import ContentAdd from "@material-ui/icons/Add";
 import { addRandomNameAction } from "../actions/add-name";
 import { Dispatch, RootState } from "../../../types";
 import { settingsValidator } from "../settings-validator";
-import Typography from "@material-ui/core/Typography";
 import { trans } from "../../../utils";
+
+import { IconButton, Tooltip, Typography } from "@material-ui/core";
 
 const mapStateToProps = (state: RootState) => ({
   error: settingsValidator(state).misc

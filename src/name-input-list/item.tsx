@@ -1,12 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SortableElement } from "react-sortable-hoc";
-import IconButton from "@material-ui/core/IconButton";
-import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
 import ActionDelete from "@material-ui/icons/Delete";
 import styled from "styled-components/macro";
 import { DragHandle } from "./drag-handle";
+
+import { IconButton, TextField, Tooltip } from "@material-ui/core";
 
 interface SortableItemProps {
   value: string;

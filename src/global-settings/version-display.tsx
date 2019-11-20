@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Typography from "@material-ui/core/Typography";
 import styled from "styled-components/macro";
+import { Typography } from "@material-ui/core";
 
 const Container = styled.div`
   padding-top: 0.5em;

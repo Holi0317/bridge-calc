@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
-  StylesProvider,
-  ThemeProvider as MuiThemeProvider
+  ThemeProvider as MuiThemeProvider,
+  StylesProvider
 } from "@material-ui/core/styles";
 import { ThemeProvider as SSThemeProvider } from "styled-components/macro";
 import { activatedThemeSelector } from "./selectors/activated-theme";

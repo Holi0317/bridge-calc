@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 import styled from "styled-components/macro";
+
+import { Typography, Link } from "@material-ui/core";
 
 function reload() {
   window.location.reload();

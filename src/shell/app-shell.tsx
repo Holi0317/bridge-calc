@@ -5,8 +5,8 @@ import { ToastSingleton } from "../toast-singleton";
 import { SWReg } from "../sw-reg";
 import { Migration } from "../migration";
 import { Routes } from "./routes";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import { Navbar } from "./navbar";
+import { CssBaseline } from "@material-ui/core";
 
 type AppProps = RouteComponentProps<any>;
 

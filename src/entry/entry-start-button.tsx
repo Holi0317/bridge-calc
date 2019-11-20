@@ -2,14 +2,14 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import styled from "styled-components/macro";
 import { entryOptionsValidator, isEntryOptionsValid } from "./entry-validator";
 import { startAction } from "../score-input/actions/start";
 import { trans } from "../utils";
 import { RootState } from "../types";
 import { useAction } from "../hooks/use-action";
+
+import { Button, Typography } from "@material-ui/core";
 
 const BtnContainer = styled.div`
   margin-top: 1em;

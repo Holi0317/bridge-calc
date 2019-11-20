@@ -5,11 +5,13 @@
  */
 
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme";
-import pink from "@material-ui/core/colors/pink";
-import teal from "@material-ui/core/colors/teal";
-import lightBlue from "@material-ui/core/colors/lightBlue";
-import blueGrey from "@material-ui/core/colors/blueGrey";
-import indigo from "@material-ui/core/colors/indigo";
+import {
+  pink,
+  teal,
+  lightBlue,
+  blueGrey,
+  indigo
+} from "@material-ui/core/colors";
 
 export const pinkTheme: ThemeOptions = {
   palette: {

@@ -2,12 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Dialog from "@material-ui/core/Dialog";
-import Button from "@material-ui/core/Button";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import Typography from "@material-ui/core/Typography";
 import { Dropdown } from "../../../material/dropdown";
 import { makerSourceSelector } from "../selectors/maker-source";
 import { namesSelector } from "../selectors/names";
@@ -17,6 +11,15 @@ import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { initSettingsAction } from "../actions/init-settings";
 import { RootState } from "../../../types";
 import { useAction } from "../../../hooks/use-action";
+
+import {
+  Dialog,
+  Button,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+  Typography
+} from "@material-ui/core";
 
 interface MutateNameDialogProps {
   open: boolean;

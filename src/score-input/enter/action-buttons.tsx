@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Button from "@material-ui/core/Button";
 import styled from "styled-components/macro";
 import { GameStage } from "../game-stage";
 import { stageSelector } from "../selectors/stage";
@@ -11,6 +10,7 @@ import { winAction } from "../actions/win";
 import { undoAction } from "../actions/undo";
 import { currentGameSelector } from "../selectors/current-game";
 import { useAction } from "../../hooks/use-action";
+import { Button } from "@material-ui/core";
 
 const BtnContainer = styled.div`
   margin-top: 0.5em;

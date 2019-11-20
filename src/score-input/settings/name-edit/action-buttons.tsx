@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Button from "@material-ui/core/Button";
 import { allowNamesCommitSelector } from "../selectors/allow-names-commit";
 import { RootState } from "../../../types";
+import { Button } from "@material-ui/core";
 
 const mapStateToProps = (state: RootState) => ({
   changeDisabled: !allowNamesCommitSelector(state)

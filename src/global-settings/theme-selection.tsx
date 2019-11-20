@@ -2,9 +2,6 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import FormGroup from "@material-ui/core/FormGroup";
 import { Dropdown } from "../material/dropdown";
 import { selectedThemeSelector } from "../theme/selectors/selected-theme";
 import { isDarkThemeSelector } from "../theme/selectors/is-dark-theme";
@@ -12,6 +9,8 @@ import { setThemeAction } from "../theme/actions/set-theme";
 import { toggleDarkAction } from "../theme/actions/toggle-dark";
 import { themes } from "../theme/color-presets";
 import { RootState, Dispatch } from "../types";
+
+import { FormControlLabel, Switch, FormGroup } from "@material-ui/core";
 
 const mapStateToProps = (state: RootState) => ({
   selectedTheme: selectedThemeSelector(state),

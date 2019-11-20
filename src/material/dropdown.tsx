@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import styled from "styled-components/macro";
 import { cuid } from "../utils";
+
+import {
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  FormHelperText
+} from "@material-ui/core";
 
 export interface DropdownSource<T extends number | string> {
   value: T;

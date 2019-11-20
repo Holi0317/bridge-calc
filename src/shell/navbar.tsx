@@ -1,15 +1,18 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
 import ActionHelp from "@material-ui/icons/Help";
 import NavigationArrowBack from "@material-ui/icons/ArrowBack";
 import styled from "styled-components/macro";
 import { Titles } from "./titles";
+
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Tooltip
+} from "@material-ui/core";
 
 const StyledToolbar = styled(Toolbar)`
   flex-grow: 1;

@@ -1,12 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { TFunction } from "i18next";
-import format from "date-fns/format";
-import formatDistance from "date-fns/formatDistance";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
+import { format, formatDistance } from "date-fns";
+import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import { GameStage } from "../score-input/game-stage";
 import { PrevGameEntry } from "./types";
 

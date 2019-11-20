@@ -1,7 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import {
   setImportOpenAction,
   setPlayerNamesAction
@@ -10,6 +8,8 @@ import { showToastAction } from "../../toast-singleton/actions/show-toast";
 import { cuid } from "../../utils";
 import { useAction } from "../../hooks/use-action";
 import { useCallback } from "react";
+
+import { ListItem, ListItemText } from "@material-ui/core";
 
 interface NameEntryProps {
   name: string[];

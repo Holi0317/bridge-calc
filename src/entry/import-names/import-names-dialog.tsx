@@ -2,14 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { bindActionCreators } from "redux";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
 import { ImportNamesContent } from "./import-names-content";
 import { setImportOpenAction } from "../actions/set-entry-props";
 import { Dispatch, RootState } from "../../types";
+
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions
+} from "@material-ui/core";
 
 const mapStateToProps = (state: RootState) => ({
   open: state.entry.importOpened

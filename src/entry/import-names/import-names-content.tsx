@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import List from "@material-ui/core/List";
 import { NameListEntry } from "./name-list-entry";
 import { EmptyNamesPlaceholder } from "./empty-names-placeholder";
 import { prevNamesSelector } from "../../prev-games/selectors/prev-names";
 import { RootState } from "../../types";
+import { List } from "@material-ui/core";
 
 const mapStateToProps = (state: RootState) => ({
   names: prevNamesSelector(state)

@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import Grid from "@material-ui/core/Grid";
 import { Container } from "../material/container";
 import AvPlayArrow from "@material-ui/icons/PlayArrow";
 import AvFiberNew from "@material-ui/icons/FiberNew";
@@ -12,6 +11,7 @@ import ActionBugReport from "@material-ui/icons/BugReport";
 import { Tile } from "./tile";
 import { showContinueSelector } from "./show-continue-selector";
 import { RootState } from "../types";
+import { Grid } from "@material-ui/core";
 
 const mapStateToProps = (state: RootState) => ({
   showContinue: showContinueSelector(state)

@@ -1,9 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { toggleExpandAction } from "../actions/toggle-expand";
 import { nameEditDisabledSelector } from "../selectors/name-edit-disabled";
@@ -12,6 +9,12 @@ import { PANEL } from "../panel";
 import { NameEditor } from "./name-editor";
 import { PanelHeading, PanelSubheading } from "../styled";
 import { useAction } from "../../../hooks/use-action";
+
+import {
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  Typography
+} from "@material-ui/core";
 
 export function NameEdit() {
   const { t } = useTranslation();

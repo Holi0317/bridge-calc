@@ -2,8 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Container } from "../material/container";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import styled from "styled-components/macro";
 import { NoPrevGamePlaceholder } from "./no-prev-game-placeholder";
 import { PrevGame } from "./prev-game";
@@ -16,6 +14,8 @@ import { havePrevGamesSelector } from "./selectors/have-prev-games";
 import { reversedPrevGamesSelector } from "./selectors/reversed-prev-games";
 import { RootState } from "../types";
 import { useAction } from "../hooks/use-action";
+
+import { List, Typography } from "@material-ui/core";
 
 const Root = styled.div`
   margin-top: 1em;

@@ -1,15 +1,18 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
 import styled from "styled-components/macro";
 import { ScoreCell } from "./score-cell";
 import { GameState } from "../reducer";
 import { computeData } from "./compute-data";
+
+import {
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody
+} from "@material-ui/core";
 
 interface ScoreboardTableProps {
   entry: NonNullable<GameState>;

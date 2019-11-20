@@ -3,11 +3,10 @@ import { Route, matchPath } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { routes } from "./routes";
 import { useLocation, useHistory } from "react-router";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import Paper from "@material-ui/core/Paper";
 import { ErrorBoundary } from "../error-boundary";
 import { useState, useEffect, useCallback } from "react";
+
+import { Tab, Tabs, Paper } from "@material-ui/core";
 
 function getActive(pathname: string): number {
   /*

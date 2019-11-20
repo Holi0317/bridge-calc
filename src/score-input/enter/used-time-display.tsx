@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { endTimeSelector, startTimeSelector } from "../selectors/time";
 import { RootState } from "../../types";
-import Typography from "@material-ui/core/Typography/Typography";
+import { Typography } from "@material-ui/core";
 
 function msToTime(milliseconds: number): string {
   // Get hours from milliseconds

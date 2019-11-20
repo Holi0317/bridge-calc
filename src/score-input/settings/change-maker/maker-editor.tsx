@@ -1,9 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import Button from "@material-ui/core/Button";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import { Dropdown } from "../../../material/dropdown";
 import { namesSelector } from "../../selectors/names";
 import { roundsSelector } from "../../selectors/rounds";
@@ -16,6 +13,12 @@ import { setMakerAction } from "../actions/set-maker";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { RootState } from "../../../types";
 import { useAction } from "../../../hooks/use-action";
+
+import {
+  Button,
+  ExpansionPanelDetails,
+  ExpansionPanelActions
+} from "@material-ui/core";
 
 export function MakerEditor() {
   const { t } = useTranslation();

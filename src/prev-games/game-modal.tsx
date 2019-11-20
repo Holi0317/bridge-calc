@@ -3,17 +3,6 @@ import { useCallback } from "react";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
-import AppBar from "@material-ui/core/AppBar";
-import IconButton from "@material-ui/core/IconButton";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import styled from "styled-components/macro";
 import { ScoreboardTable } from "../score-input/scoreboard/scoreboard-table";
@@ -24,6 +13,19 @@ import { closeGameModalAction } from "./actions/game-modal";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
 import { RootState } from "../types";
 import { useAction } from "../hooks/use-action";
+import { useTheme } from "@material-ui/core/styles";
+import {
+  useMediaQuery,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  AppBar,
+  IconButton,
+  Toolbar,
+  Typography
+} from "@material-ui/core";
 
 const StyledAppBar = styled(AppBar)`
   position: relative;

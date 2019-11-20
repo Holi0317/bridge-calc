@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Button from "@material-ui/core/Button";
-import Collapse from "@material-ui/core/Collapse";
 import styled from "styled-components/macro";
 import { EntryOptions } from "./entry-options";
+
+import { Button, Collapse } from "@material-ui/core";
 
 const OptionsSelection = styled.div`
   margin-top: 1em;
