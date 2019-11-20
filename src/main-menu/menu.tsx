@@ -31,7 +31,7 @@ export function Menu() {
         </Grid>
       ) : null}
 
-      <Grid container spacing={8}>
+      <Grid container spacing={2}>
         <Grid item md={6} xs={12}>
           <Tile
             icon={<FiberNew color="action" />}
@@ -48,7 +48,7 @@ export function Menu() {
         </Grid>
       </Grid>
 
-      <Grid container spacing={8}>
+      <Grid container spacing={2}>
         <Grid item md={4} xs={12}>
           <Tile
             icon={<SettingsRounded color="action" />}
