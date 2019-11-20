@@ -1,7 +1,6 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
@@ -11,33 +10,18 @@ import { expandedPanelSelector } from "../selectors/expanded-panel";
 import { toggleExpandAction } from "../actions/toggle-expand";
 import { PANEL } from "../panel";
 import { MakerEditor } from "./maker-editor";
-import { Dispatch, RootState } from "../../../types";
 import classes from "../settings.pcss";
+import { useAction } from "../../../hooks/use-action";
 
-const mapStateToProps = (state: RootState) => ({
-  disabled: changeMakerDisabledSelector(state),
-  expanded: expandedPanelSelector(state) === PANEL.CHANGE_MAKER
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      toggleExpand: toggleExpandAction
-    },
-    dispatch
-  );
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type ChangeMakerProps = stateType & dispatchType;
-
-export function ChangeMakerImpl({
-  expanded,
-  disabled,
-  toggleExpand
-}: ChangeMakerProps) {
+export function ChangeMaker() {
   const { t } = useTranslation();
+
+  const disabled = useSelector(changeMakerDisabledSelector);
+  const expandedPanel = useSelector(expandedPanelSelector);
+  const expanded = expandedPanel === PANEL.CHANGE_MAKER;
+
+  const toggleExpand = useAction(toggleExpandAction);
+
   const subHeading = disabled
     ? t("Maker edit is disabled when editing player names")
     : t("Change maker of current round");
@@ -68,8 +52,3 @@ export function ChangeMakerImpl({
     </ExpansionPanel>
   );
 }
-
-export const ChangeMaker = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChangeMakerImpl);
