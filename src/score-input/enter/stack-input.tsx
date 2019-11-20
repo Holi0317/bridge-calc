@@ -1,7 +1,6 @@
 import React from "react";
 import mapValues from "lodash-es/mapValues";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Typography from "@material-ui/core/Typography";
 import { Dropdown } from "../../material/dropdown";
@@ -17,43 +16,25 @@ import { winStackInputSourceSelector } from "../selectors/win-stack-input-source
 import { setBidAction } from "../actions/set-bid";
 import { setWinAction } from "../actions/set-win";
 import { trans } from "../../utils";
-import { RootState, Dispatch } from "../../types";
+import { useAction } from "../../hooks/use-action";
 import classes from "./stack-input.pcss";
 
-const mapStateToProps = (state: RootState) => ({
-  bidDisabled: stageSelector(state) !== GameStage.waitingBid,
-  winDisabled: stageSelector(state) !== GameStage.waitingWin,
-  playerOrder: playerOrderSelector(state),
-  bid: bidSelector(state),
-  win: winSelector(state),
-  names: namesSelector(state),
-  error: stackInputValidator(state),
-  bidStackInput: bidStackInputSourceSelector(state),
-  winStackInput: winStackInputSourceSelector(state)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ setBid: setBidAction, setWin: setWinAction }, dispatch);
-
-type stateType = ReturnType<typeof mapStateToProps>;
-type dispatchType = ReturnType<typeof mapDispatchToProps>;
-
-type StackInputProps = stateType & dispatchType;
-
-export function StackInputImpl({
-  bidDisabled,
-  winDisabled,
-  playerOrder,
-  names,
-  bid,
-  win,
-  error,
-  bidStackInput,
-  winStackInput,
-  setBid,
-  setWin
-}: StackInputProps) {
+export function StackInput() {
   const { t } = useTranslation();
+
+  const stage = useSelector(stageSelector);
+  const bidDisabled = stage !== GameStage.waitingBid;
+  const winDisabled = stage !== GameStage.waitingWin;
+  const playerOrder = useSelector(playerOrderSelector);
+  const bid = useSelector(bidSelector);
+  const win = useSelector(winSelector);
+  const names = useSelector(namesSelector);
+  const error = useSelector(stackInputValidator);
+  const bidStackInput = useSelector(bidStackInputSourceSelector);
+  const winStackInput = useSelector(winStackInputSourceSelector);
+
+  const setBid = useAction(setBidAction);
+  const setWin = useAction(setWinAction);
 
   const bidErrors = mapValues(error.bid || {}, val => trans(t, val));
   const winErrors = mapValues(error.win || {}, val => trans(t, val));
@@ -116,8 +97,3 @@ export function StackInputImpl({
     </div>
   );
 }
-
-export const StackInput = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StackInputImpl);
