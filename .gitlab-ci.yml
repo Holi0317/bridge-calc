@@ -21,6 +21,9 @@ test:
     - npm install
     - npm test -- --coverage
   stage: build
+  artifacts:
+    paths:
+      - coverage
 
 # Compile assets
 build:
