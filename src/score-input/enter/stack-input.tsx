@@ -3,6 +3,7 @@ import mapValues from "lodash-es/mapValues";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Typography from "@material-ui/core/Typography";
+import styled from "styled-components/macro";
 import { Dropdown } from "../../material/dropdown";
 import { GameStage } from "../game-stage";
 import { stageSelector } from "../selectors/stage";
@@ -17,7 +18,46 @@ import { setBidAction } from "../actions/set-bid";
 import { setWinAction } from "../actions/set-win";
 import { trans } from "../../utils";
 import { useAction } from "../../hooks/use-action";
-import classes from "./stack-input.pcss";
+
+const TableContainer = styled.div`
+  overflow-x: auto;
+  overflow-y: hidden;
+`;
+
+const StyledTable = styled.table`
+  table-layout: fixed;
+  white-space: nowrap;
+
+  tr {
+    height: 3.5em;
+  }
+`;
+
+const StyledTHead = styled.th`
+  th {
+    text-align: left;
+    width: 300px;
+    min-width: 100px;
+    display: table-cell;
+    font-weight: bold;
+    font-size: 16px;
+  }
+`;
+
+const StyledTBody = styled.tbody`
+  td {
+    width: 300px;
+    min-width: 100px;
+
+    /* Caption styling */
+    &:first-of-type {
+      padding-right: 0.5em;
+      display: table-cell;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+`;
 
 export function StackInput() {
   const { t } = useTranslation();
@@ -40,9 +80,9 @@ export function StackInput() {
   const winErrors = mapValues(error.win || {}, val => trans(t, val));
 
   return (
-    <div className={classes.tableContainer}>
-      <table className={classes.table}>
-        <thead className={classes.head}>
+    <TableContainer>
+      <StyledTable>
+        <StyledTHead>
           <tr>
             <th />
             {playerOrder.map(playerID => (
@@ -51,8 +91,8 @@ export function StackInput() {
               </th>
             ))}
           </tr>
-        </thead>
-        <tbody className={classes.body}>
+        </StyledTHead>
+        <StyledTBody>
           <tr>
             <td>
               <Typography component="span">{t("Bid")}</Typography>
@@ -92,8 +132,8 @@ export function StackInput() {
               </td>
             ))}
           </tr>
-        </tbody>
-      </table>
-    </div>
+        </StyledTBody>
+      </StyledTable>
+    </TableContainer>
   );
 }
