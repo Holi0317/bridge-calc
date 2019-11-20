@@ -54,7 +54,7 @@ firebase:
 
 # Deploy production artifact to GitLab pages (Staging deployment)
 pages:
-  script: mkdir public && cp -R build/* public/
+  script: rm -rf public && mkdir public && cp -R build/* public/
   stage: deploy
   artifacts:
     paths:
