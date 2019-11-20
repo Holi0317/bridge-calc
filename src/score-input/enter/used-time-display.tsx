@@ -1,9 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { endTimeSelector, startTimeSelector } from "../selectors/time";
-import { RootState } from "../../types";
+import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
+import { endTimeSelector, startTimeSelector } from "../selectors/time";
+import { useTime } from "../../hooks/useTime";
 
 function msToTime(milliseconds: number): string {
   // Get hours from milliseconds
@@ -37,23 +37,12 @@ function duration(
   return msToTime(largerTime - startTime.getTime());
 }
 
-const mapStateToProps = (state: RootState) => ({
-  startTime: startTimeSelector(state),
-  endTime: endTimeSelector(state)
-});
-
-type stateType = ReturnType<typeof mapStateToProps>;
-
-export function UsedTimeDisplayImpl({ startTime, endTime }: stateType) {
+export function UsedTimeDisplay() {
   const { t } = useTranslation();
-  const [currTime, setCurrTime] = React.useState(() => new Date().getTime());
-  React.useEffect(() => {
-    const timer = window.setInterval(() => {
-      setCurrTime(new Date().getTime());
-    }, 1000);
+  const currTime = useTime();
 
-    return () => window.clearInterval(timer);
-  }, []);
+  const startTime = useSelector(startTimeSelector);
+  const endTime = useSelector(endTimeSelector);
 
   const time = duration(startTime, endTime, currTime);
   return (
@@ -62,5 +51,3 @@ export function UsedTimeDisplayImpl({ startTime, endTime }: stateType) {
     </Typography>
   );
 }
-
-export const UsedTimeDisplay = connect(mapStateToProps)(UsedTimeDisplayImpl);
