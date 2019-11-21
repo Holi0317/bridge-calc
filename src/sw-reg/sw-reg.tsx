@@ -17,7 +17,9 @@ export function SWReg() {
         showToast(t("This app is now available offline"));
       }
     });
-  }, [showToast, t]);
+    // Only run this effect once only. Regardless of dep t and showToast
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return null;
 }

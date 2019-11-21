@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { showToastAction } from "../toast-singleton/actions/show-toast";
 import { replaceCurrentGameAction } from "../score-input/actions/replace-current-game";
@@ -8,7 +9,6 @@ import {
   isNotStarted
 } from "./old-state-manager";
 import { migrateOldState } from "./converter";
-import { useEffect } from "react";
 import { useAction } from "../hooks/use-action";
 
 /**
