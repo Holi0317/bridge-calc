@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { JokerIcon } from "./joker-icon";
 
 import { Link, Typography } from "@material-ui/core";

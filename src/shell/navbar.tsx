@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Help, ArrowBack } from "@material-ui/icons";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { Titles } from "./titles";
 
 import {

@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Button, ExpansionPanelDetails } from "@material-ui/core";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { skipAction } from "../../actions/skip";
 import { initSettingsAction } from "../actions/init-settings";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";

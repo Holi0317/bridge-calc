@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Add, GetApp } from "@material-ui/icons";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { addRandomPlayerAction } from "./actions/add-player";
 import { setImportOpenAction } from "./actions/set-entry-props";
 import { useAction } from "../hooks/use-action";

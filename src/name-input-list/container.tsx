@@ -1,6 +1,6 @@
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { NameInputListProps, NameInputEntry } from "./types";
 import { SortableItem } from "./item";
 

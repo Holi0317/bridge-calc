@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components/macro";
+import styled, { keyframes } from "styled-components";
 
 // Credit to https://codepen.io/jczimm/pen/vEBpoL
 

@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { entryOptionsValidator, isEntryOptionsValid } from "./entry-validator";
 import { startAction } from "../score-input/actions/start";
 import { trans } from "../utils";

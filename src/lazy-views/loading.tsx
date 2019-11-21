@@ -1,6 +1,6 @@
 import React from "react";
 import Loadable from "react-loadable";
-import styled, { keyframes } from "styled-components/macro";
+import styled, { keyframes } from "styled-components";
 import { Spinner } from "../material/spinner";
 import { Ouch } from "../error-boundary/ouch";
 

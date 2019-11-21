@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Close as CloseIcon } from "@material-ui/icons";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { ScoreboardTable } from "../score-input/scoreboard/scoreboard-table";
 import { EntryDetail } from "./entry-detail";
 import { modalEntrySelector } from "./selectors/modal-entry";

@@ -2,7 +2,6 @@ const { DefinePlugin } = require("webpack");
 const {
   override,
   useBabelRc,
-  useEslintRc,
   addBundleVisualizer,
   addWebpackAlias,
   addWebpackPlugin
@@ -20,7 +19,6 @@ const definePlugin = new DefinePlugin({
 
 module.exports = override(
   useBabelRc(),
-  useEslintRc(),
   process.env.NODE_ENV === "production" && addBundleVisualizer(),
   addWebpackAlias({ lodash: "lodash-es" }),
   addWebpackPlugin(definePlugin)

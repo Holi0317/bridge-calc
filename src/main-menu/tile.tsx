@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { TileLink } from "./tile-link";
 import { Paper, Typography } from "@material-ui/core";
 

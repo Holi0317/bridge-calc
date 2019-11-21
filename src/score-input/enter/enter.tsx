@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { Container } from "../../material/container";
 import { UsedTimeDisplay } from "./used-time-display";
 import { StackInput } from "./stack-input";

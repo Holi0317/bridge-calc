@@ -62,6 +62,7 @@
     "@types/react-sortable-hoc": "0.7.1",
     "@types/react-transition-group": "4.2.3",
     "@types/styled-components": "4.4.0",
+    "babel-plugin-styled-components": "1.10.6",
     "babel-plugin-transform-imports": "2.0.0",
     "customize-cra": "0.9.1",
     "del-cli": "3.0.0",

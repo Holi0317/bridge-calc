@@ -1,5 +1,11 @@
 const plugins = [
   [
+    "babel-plugin-styled-components",
+    {
+      pure: true
+    }
+  ],
+  [
     "babel-plugin-transform-imports",
     {
       "@material-ui/core$": {

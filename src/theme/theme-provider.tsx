@@ -4,7 +4,7 @@ import {
   ThemeProvider as MuiThemeProvider,
   StylesProvider
 } from "@material-ui/core/styles";
-import { ThemeProvider as SSThemeProvider } from "styled-components/macro";
+import { ThemeProvider as SSThemeProvider } from "styled-components";
 import { activatedThemeSelector } from "./selectors/activated-theme";
 
 interface ThemeProviderProps {

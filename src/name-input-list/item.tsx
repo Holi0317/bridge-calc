@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { SortableElement } from "react-sortable-hoc";
 import { Delete as DeleteIcon } from "@material-ui/icons";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { DragHandle } from "./drag-handle";
 
 import { IconButton, TextField, Tooltip } from "@material-ui/core";

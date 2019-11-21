@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { EntryOptions } from "./entry-options";
 
 import { Button, Collapse } from "@material-ui/core";

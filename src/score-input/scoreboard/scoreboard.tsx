@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { Container } from "../../material/container";
 import { ScoreboardTable } from "./scoreboard-table";
 import { currentGameSelector } from "../selectors/current-game";

@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Container } from "../material/container";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { NoPrevGamePlaceholder } from "./no-prev-game-placeholder";
 import { PrevGame } from "./prev-game";
 import { ResetModal } from "./reset-modal";

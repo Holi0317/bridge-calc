@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { Container } from "../material/container";
 import { EntryPlayerList } from "./entry-player-list";
 import { InitEntryState } from "./init-entry-state";

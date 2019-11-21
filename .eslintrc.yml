@@ -1,16 +1,2 @@
 extends:
   - react-app
-
-rules:
-  no-restricted-imports:
-    - error
-    - {
-        paths:
-          [
-            {
-              name: styled-components,
-              message: "Please use styled-components/macro instead",
-            },
-          ],
-        patterns: ["!styled-components/macro"],
-      }

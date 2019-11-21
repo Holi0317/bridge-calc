@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { GameStage } from "../game-stage";
 import { stageSelector } from "../selectors/stage";
 import { isStackInputValid } from "./stack-input-validator";
