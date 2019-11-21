@@ -19,7 +19,7 @@ const StyledLink = styled.a`
 export function VersionDisplay() {
   const { t } = useTranslation();
 
-  const version = `${process.env.REACT_APP_VERSION}-${process.env.REACT_APP_GIT_SHA}`;
+  const version = `${VERSION}-${HASH}`;
 
   return (
     <Container>
