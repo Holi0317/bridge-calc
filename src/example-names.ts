@@ -1,3 +1,5 @@
+import { sample, sampleSize } from "lodash-es";
+
 export const PLAYER_NAME = [
   "John",
   "Thomas",
@@ -103,12 +105,12 @@ export const PLAYER_NAME = [
  * Return 1 random name
  */
 export function randomName(): string {
-  return PLAYER_NAME[Math.floor(Math.random() * PLAYER_NAME.length)];
+  return sample(PLAYER_NAME)!;
 }
 
 /**
  * Return an array with exactly 4 random names
  */
 export function genRandomNames(): string[] {
-  return [randomName(), randomName(), randomName(), randomName()];
+  return sampleSize(PLAYER_NAME, 4);
 }
