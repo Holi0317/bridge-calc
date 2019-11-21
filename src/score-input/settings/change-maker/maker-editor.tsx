@@ -8,10 +8,8 @@ import { makerSelector } from "../selectors/maker";
 import { namesChangedSelector } from "../selectors/names-changed";
 import { makerSourceSelector } from "../selectors/maker-source";
 import { changePlayersAction } from "../../actions/change-players";
-import { initSettingsAction } from "../actions/init-settings";
 import { setMakerAction } from "../actions/set-maker";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
-import { RootState } from "../../../types";
 import { useAction } from "../../../hooks/use-action";
 
 import {
@@ -28,21 +26,14 @@ export function MakerEditor() {
   const rounds = useSelector(roundsSelector);
   const maker = useSelector(makerSelector);
   const disabled = useSelector(namesChangedSelector);
-  const currentGame = useSelector((state: RootState) => state.currentGame);
 
   const changePlayers = useAction(changePlayersAction);
-  const init = useAction(initSettingsAction);
   const setMaker = useAction(setMakerAction);
   const showToast = useAction(showToastAction);
 
   const commit = () => {
     changePlayers(names, maker!, rounds!);
     showToast(t("Maker changed!"));
-
-    // Reset game settings in next tick
-    window.setTimeout(() => {
-      init(currentGame);
-    }, 0);
   };
 
   return (

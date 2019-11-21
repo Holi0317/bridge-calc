@@ -4,12 +4,10 @@ import { useSelector } from "react-redux";
 import { Button, ExpansionPanelDetails } from "@material-ui/core";
 import styled from "styled-components";
 import { skipAction } from "../../actions/skip";
-import { initSettingsAction } from "../actions/init-settings";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
 import { remainingRoundsSelector } from "../../selectors/remaining-rounds";
 import { currentRoundSelector } from "../../selectors/current-round";
 import { useAction } from "../../../hooks/use-action";
-import { currentGameSelector } from "../../selectors/current-game";
 
 const SkipRoundsBtn = styled(Button)`
   margin-right: 1em !important;
@@ -22,12 +20,10 @@ const SkipRoundsBtn = styled(Button)`
 export function SkipRounds() {
   const { t } = useTranslation();
 
-  const currentGame = useSelector(currentGameSelector);
   const currentRound = useSelector(currentRoundSelector);
   const remainingRounds = useSelector(remainingRoundsSelector);
 
   const skipAct = useAction(skipAction);
-  const init = useAction(initSettingsAction);
   const showToast = useAction(showToastAction);
 
   const skip = useCallback(
@@ -41,20 +37,16 @@ export function SkipRounds() {
       skipAct(n);
 
       if (!isEndGame) {
-        window.setTimeout(() => {
-          init(currentGame);
-
-          if (currentRound !== null) {
-            const msg = t(
-              "Skipped round(s). You are now playing round {{round}}",
-              { round: currentRound }
-            );
-            showToast(msg);
-          }
-        }, 0);
+        if (currentRound !== null) {
+          const msg = t(
+            "Skipped round(s). You are now playing round {{round}}",
+            { round: currentRound + n }
+          );
+          showToast(msg);
+        }
       }
     },
-    [remainingRounds, skipAct, showToast, t, init, currentGame, currentRound]
+    [remainingRounds, skipAct, showToast, t, currentRound]
   );
 
   return (

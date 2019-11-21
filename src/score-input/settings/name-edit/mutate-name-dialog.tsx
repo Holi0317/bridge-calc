@@ -8,8 +8,6 @@ import { namesSelector } from "../selectors/names";
 import { expectedRoundsSelector } from "../selectors/expected-rounds";
 import { changePlayersAction } from "../../actions/change-players";
 import { showToastAction } from "../../../toast-singleton/actions/show-toast";
-import { initSettingsAction } from "../actions/init-settings";
-import { RootState } from "../../../types";
 import { useAction } from "../../../hooks/use-action";
 
 import {
@@ -32,25 +30,18 @@ export function MutateNameDialog({
 }: MutateNameDialogProps) {
   const { t } = useTranslation();
 
-  const currentGame = useSelector((state: RootState) => state.currentGame);
   const names = useSelector(namesSelector);
   const rounds = useSelector(expectedRoundsSelector);
   const makers = useSelector(makerSourceSelector);
   const [chosenMaker, setChosen] = useState("");
 
   const changePlayers = useAction(changePlayersAction);
-  const init = useAction(initSettingsAction);
   const showToast = useAction(showToastAction);
 
   const confirm = () => {
     changePlayers(names, chosenMaker, rounds);
-
-    // Reset setting state after a tick
-    window.setTimeout(() => {
-      init(currentGame);
-      onRequestClose();
-      showToast(t("Player name changed!"));
-    });
+    onRequestClose();
+    showToast(t("Player name changed!"));
   };
 
   return (
